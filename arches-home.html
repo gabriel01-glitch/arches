@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ARCHES · Práctica</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#fbf7f0; --surface:#fffdf9; --ink:#2c2722; --muted:#9a8f83;
+    --line:#e9e0d3; --terra:#bf5a36; --terra-dark:#9f4528; --terra-tint:#f4e4d9;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  html,body{margin:0;padding:0;}
+  body{background:var(--cream);color:var(--ink);font-family:'Nunito',sans-serif;-webkit-font-smoothing:antialiased;min-height:100vh;}
+  .wrap{max-width:560px;margin:0 auto;padding:34px 20px 60px;}
+
+  header{text-align:center;padding:14px 0 6px;}
+  .logo{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:52px;letter-spacing:3px;line-height:1;color:var(--ink);}
+  .logo .a{color:var(--terra);}
+  .rule{width:54px;height:3px;background:var(--terra);border-radius:2px;margin:16px auto 0;}
+  .sub{font-size:15px;color:var(--muted);font-weight:600;margin-top:16px;line-height:1.45;}
+  .live{font-size:12px;text-transform:uppercase;letter-spacing:1.4px;color:var(--terra);font-weight:800;margin-top:18px;}
+
+  .list{margin-top:30px;}
+  a.card{display:flex;align-items:center;gap:16px;text-decoration:none;background:var(--surface);border:1.5px solid var(--line);border-radius:18px;padding:18px 18px;margin-bottom:13px;transition:transform .08s ease,border-color .15s ease;}
+  a.card:active{transform:scale(.99);}
+  a.card:hover{border-color:var(--terra);}
+  .card .initial{flex:none;width:52px;height:52px;border-radius:50%;background:var(--terra-tint);color:var(--terra-dark);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-weight:700;font-size:26px;}
+  .card .body{flex:1;min-width:0;}
+  .card .nm{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:25px;color:var(--ink);line-height:1.1;}
+  .card .fo{font-size:13.5px;color:var(--muted);font-weight:600;margin-top:3px;}
+  .card .arrow{flex:none;color:var(--terra);font-size:24px;font-weight:800;}
+
+  .soon{display:flex;align-items:center;gap:16px;background:transparent;border:1.5px dashed var(--line);border-radius:18px;padding:18px;margin-bottom:13px;opacity:.7;}
+  .soon .initial{flex:none;width:52px;height:52px;border-radius:50%;background:var(--cream);color:var(--muted);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-weight:700;font-size:26px;border:1px solid var(--line);}
+  .soon .body{flex:1;}
+  .soon .nm{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:25px;color:var(--muted);line-height:1.1;}
+  .soon .tag{font-size:11.5px;text-transform:uppercase;letter-spacing:1.2px;color:var(--muted);font-weight:800;margin-top:4px;}
+
+  .foot{text-align:center;color:#c9bdac;font-size:12px;font-weight:700;margin-top:40px;letter-spacing:.5px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="logo"><span class="a">A</span>RCHES</div>
+    <div class="rule"></div>
+    <div class="sub">Práctica de inglés personalizada.<br>Toca tu nombre para empezar.</div>
+    <div class="live" id="liveCount"></div>
+  </header>
+  <div class="list" id="list"></div>
+  <div class="foot">ARCHES Language School</div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* =========================================================
+     STUDENTS  (the only block you edit)
+     To add a student: copy a line, set slug = the folder name
+     you upload, and ready:true once their app is live.
+     ========================================================= */
+  const STUDENTS = [
+    { name:"Eydel",       slug:"eydel",  focus:"Pre-A1 · el sujeto it, tercera persona", ready:true  },
+    { name:"Mavic",       slug:"mavic",  focus:"B1 · claridad bajo presión",             ready:false },
+    { name:"Gloria Fors", slug:"gloria", focus:"B1-B2 · be able to, transliteración",     ready:false },
+    { name:"Joanna",      slug:"joanna", focus:"miércoles",                                ready:false },
+    { name:"Ruben",       slug:"ruben",  focus:"",                                        ready:false },
+    { name:"Jaime",       slug:"jaime",  focus:"",                                        ready:false }
+  ];
+  /* ===================  end of edit zone  ================== */
+
+  const list = document.getElementById("list");
+  function esc(s){ return (s==null?"":""+s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+  function initial(n){ return (n||"?").trim().charAt(0).toUpperCase(); }
+
+  let liveN = 0;
+  STUDENTS.forEach(s=>{
+    if(s.ready){
+      liveN++;
+      const a = document.createElement("a");
+      a.className = "card";
+      a.href = s.slug + "/";
+      a.innerHTML = '<div class="initial">'+esc(initial(s.name))+'</div>'+
+        '<div class="body"><div class="nm">'+esc(s.name)+'</div>'+
+        (s.focus?'<div class="fo">'+esc(s.focus)+'</div>':'')+'</div>'+
+        '<div class="arrow">&rsaquo;</div>';
+      list.appendChild(a);
+    } else {
+      const d = document.createElement("div");
+      d.className = "soon";
+      d.innerHTML = '<div class="initial">'+esc(initial(s.name))+'</div>'+
+        '<div class="body"><div class="nm">'+esc(s.name)+'</div>'+
+        '<div class="tag">Pronto</div></div>';
+      list.appendChild(d);
+    }
+  });
+
+  const lc = document.getElementById("liveCount");
+  lc.textContent = liveN === 1 ? "1 app lista" : liveN + " apps listas";
+})();
+</script>
+</body>
+</html>
