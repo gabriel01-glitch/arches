@@ -118,204 +118,412 @@
      Swap this object, redeploy, done. Schema v2.
      ========================================================= */
   const STUDENT = {
-  "student": {
-    "name": "Ruben",
-    "level": "A1+",
-    "l1": "Spanish",
-    "context": "Trabaja en una clínica privada",
-    "greeting": "Hola Ruben. Tus errores reales de clase, listos para pulir.",
-    "version": "2026-06-18"
-  },
-  "tracks": [
+ "student": {
+  "name": "Ruben",
+  "level": "A1+",
+  "l1": "Spanish",
+  "context": "Trabaja en una clínica privada",
+  "greeting": "Hola Ruben. Tus errores reales de clase, listos para pulir. Versión ampliada.",
+  "version": "2026-07-03"
+ },
+ "tracks": [
+  {
+   "id": "hoy",
+   "title": "Repaso de hoy",
+   "note": "Lo que salió en la clase de hoy, fresco.",
+   "items": [
     {
-      "id": "prep",
-      "title": "Preposiciones de tiempo y lugar",
-      "note": "Tu patrón número uno. El español las arrastra al inglés.",
-      "items": [
-        {
-          "type": "fix",
-          "wrong": "I work the Saturday.",
-          "right": "I work on Saturdays.",
-          "note": "Días de la semana: on.",
-          "say": "I work on Saturdays."
-        },
-        {
-          "type": "fix",
-          "wrong": "I rest the weekday.",
-          "right": "I rest on weekdays.",
-          "note": "Mismo patrón: on.",
-          "say": "I rest on weekdays."
-        },
-        {
-          "type": "fix",
-          "wrong": "I wake up around at 6.",
-          "right": "I wake up around 6.",
-          "note": "Elige una: around o at, nunca las dos.",
-          "say": "I wake up around 6."
-        },
-        {
-          "type": "fix",
-          "wrong": "I get at home.",
-          "right": "I get home.",
-          "note": "get home no lleva preposición.",
-          "say": "I get home."
-        },
-        {
-          "type": "fix",
-          "wrong": "I finish about at 5.",
-          "right": "I finish about 5.",
-          "note": "Una sola palabra para la hora.",
-          "say": "I finish about 5."
-        },
-        {
-          "type": "choice",
-          "prompt": "I work ___ Saturdays.",
-          "options": [
-            "the",
-            "on",
-            "in"
-          ],
-          "answer": "on",
-          "say": "I work on Saturdays."
-        },
-        {
-          "type": "dictate",
-          "say": "I get home around 5.",
-          "note": "Escucha y escribe. Cuidado con get home."
-        }
-      ]
+     "type": "fix",
+     "wrong": "I have 25 years.",
+     "right": "I am 25 years old.",
+     "note": "La edad en inglés va con be, no con have.",
+     "say": "I am 25 years old."
     },
     {
-      "id": "art",
-      "title": "Artículos y palabras gemelas",
-      "note": "Te comes el 'a' y mezclas palabras parecidas.",
-      "items": [
-        {
-          "type": "fix",
-          "wrong": "I work at private clinical.",
-          "right": "I work at a private clinic.",
-          "note": "Falta 'a'. Y es clinic (el lugar), no clinical.",
-          "say": "I work at a private clinic."
-        },
-        {
-          "type": "fix",
-          "wrong": "My work isn't officer work.",
-          "right": "My job isn't an office job.",
-          "note": "job, no work. office, no officer.",
-          "say": "My job isn't an office job."
-        },
-        {
-          "type": "choice",
-          "prompt": "She is ___ doctor.",
-          "options": [
-            "—",
-            "a",
-            "the"
-          ],
-          "answer": "a",
-          "say": "She is a doctor."
-        },
-        {
-          "type": "translate",
-          "es": "Trabajo en una clínica.",
-          "en": "I work at a clinic.",
-          "alts": [
-            "I work in a clinic"
-          ],
-          "say": "I work at a clinic."
-        }
-      ]
+     "type": "translate",
+     "es": "Tengo 25 años.",
+     "en": "I am 25 years old.",
+     "alts": [
+      "I'm 25 years old",
+      "I am 25",
+      "I'm 25"
+     ],
+     "say": "I am 25 years old."
     },
     {
-      "id": "third",
-      "title": "Él, ella: la -s y doesn't",
-      "note": "La lección de hoy. He, she, it llevan -s. doesn't ya la carga.",
-      "items": [
-        {
-          "type": "fix",
-          "wrong": "He work at a private clinic.",
-          "right": "He works at a private clinic.",
-          "note": "Tercera persona: works.",
-          "say": "He works at a private clinic."
-        },
-        {
-          "type": "fix",
-          "wrong": "She wake up around 6.",
-          "right": "She wakes up around 6.",
-          "say": "She wakes up around 6."
-        },
-        {
-          "type": "fix",
-          "wrong": "He get home around 5.",
-          "right": "He gets home around 5.",
-          "say": "He gets home around 5."
-        },
-        {
-          "type": "fix",
-          "wrong": "He don't have an office job.",
-          "right": "He doesn't have an office job.",
-          "note": "he, she: doesn't.",
-          "say": "He doesn't have an office job."
-        },
-        {
-          "type": "fix",
-          "wrong": "He doesn't works on Sunday.",
-          "right": "He doesn't work on Sunday.",
-          "note": "doesn't ya lleva la -s, el verbo no.",
-          "say": "He doesn't work on Sunday."
-        },
-        {
-          "type": "choice",
-          "prompt": "She ___ on Saturdays.",
-          "options": [
-            "work",
-            "works",
-            "working"
-          ],
-          "answer": "works",
-          "say": "She works on Saturdays."
-        },
-        {
-          "type": "scramble",
-          "answer": "He doesn't have an office job.",
-          "note": "doesn't y el verbo sin -s.",
-          "say": "He doesn't have an office job."
-        }
-      ]
+     "type": "fix",
+     "wrong": "There are many peoples at the clinic.",
+     "right": "There are many people at the clinic.",
+     "note": "people ya es plural. Nunca lleva -s.",
+     "say": "There are many people at the clinic."
     },
     {
-      "id": "pron",
-      "title": "Pronunciación",
-      "note": "Las que te pasé por WhatsApp.",
-      "items": [
-        {
-          "type": "pron",
-          "word": "comprehension",
-          "arches": "kom-pre-HEN-sion",
-          "note": "La fuerza en HEN.",
-          "say": "comprehension"
-        },
-        {
-          "type": "pron",
-          "word": "I'm",
-          "arches": "AIM",
-          "say": "I'm"
-        },
-        {
-          "type": "pron",
-          "word": "I'll",
-          "arches": "AIL",
-          "note": "Una sílaba, como 'ail'.",
-          "say": "I'll"
-        },
-        {
-          "type": "dictate",
-          "say": "comprehension",
-          "note": "Escucha y escríbela."
-        }
-      ]
+     "type": "choice",
+     "prompt": "How old are you? I ___ 25 years old.",
+     "options": [
+      "have",
+      "am",
+      "has"
+     ],
+     "answer": "am",
+     "say": "I am 25 years old."
+    },
+    {
+     "type": "scramble",
+     "answer": "One is always on Sunday.",
+     "note": "always va después de is.",
+     "say": "One is always on Sunday."
+    },
+    {
+     "type": "fix",
+     "wrong": "One always is on Sunday.",
+     "right": "One is always on Sunday.",
+     "note": "Con be, always va después: is always.",
+     "say": "One is always on Sunday."
     }
-  ]
+   ]
+  },
+  {
+   "id": "be",
+   "title": "Be, no have: edad y estados",
+   "note": "El español dice tengo, el inglés dice I am. Patrón clave.",
+   "items": [
+    {
+     "type": "fix",
+     "wrong": "She has 30 years.",
+     "right": "She is 30 years old.",
+     "say": "She is 30 years old."
+    },
+    {
+     "type": "fix",
+     "wrong": "I have hungry.",
+     "right": "I am hungry.",
+     "note": "tengo hambre = I am hungry.",
+     "say": "I am hungry."
+    },
+    {
+     "type": "translate",
+     "es": "Él tiene 40 años.",
+     "en": "He is 40 years old.",
+     "alts": [
+      "He's 40 years old",
+      "He is 40",
+      "He's 40"
+     ],
+     "say": "He is 40 years old."
+    },
+    {
+     "type": "choice",
+     "prompt": "My daughter ___ 5 years old.",
+     "options": [
+      "has",
+      "have",
+      "is"
+     ],
+     "answer": "is",
+     "say": "My daughter is 5 years old."
+    },
+    {
+     "type": "dictate",
+     "say": "I am 25 years old.",
+     "note": "Escucha y escribe. Ojo con am."
+    }
+   ]
+  },
+  {
+   "id": "prep",
+   "title": "Preposiciones de tiempo y lugar",
+   "note": "Tu patrón número uno. El español las arrastra al inglés.",
+   "items": [
+    {
+     "type": "fix",
+     "wrong": "I work the Saturday.",
+     "right": "I work on Saturdays.",
+     "note": "Días de la semana: on.",
+     "say": "I work on Saturdays."
+    },
+    {
+     "type": "fix",
+     "wrong": "I rest the weekday.",
+     "right": "I rest on weekdays.",
+     "note": "Mismo patrón: on.",
+     "say": "I rest on weekdays."
+    },
+    {
+     "type": "fix",
+     "wrong": "I wake up around at 6.",
+     "right": "I wake up around 6.",
+     "note": "Elige una: around o at, nunca las dos.",
+     "say": "I wake up around 6."
+    },
+    {
+     "type": "fix",
+     "wrong": "I get at home.",
+     "right": "I get home.",
+     "note": "get home no lleva preposición.",
+     "say": "I get home."
+    },
+    {
+     "type": "fix",
+     "wrong": "I finish about at 5.",
+     "right": "I finish about 5.",
+     "note": "Una sola palabra para la hora.",
+     "say": "I finish about 5."
+    },
+    {
+     "type": "choice",
+     "prompt": "I work ___ Saturdays.",
+     "options": [
+      "the",
+      "on",
+      "in"
+     ],
+     "answer": "on",
+     "say": "I work on Saturdays."
+    },
+    {
+     "type": "choice",
+     "prompt": "I wake up ___ the morning.",
+     "options": [
+      "on",
+      "in",
+      "at"
+     ],
+     "answer": "in",
+     "say": "I wake up in the morning."
+    },
+    {
+     "type": "choice",
+     "prompt": "I sleep ___ night.",
+     "options": [
+      "in",
+      "on",
+      "at"
+     ],
+     "answer": "at",
+     "say": "I sleep at night."
+    },
+    {
+     "type": "translate",
+     "es": "Llego a casa a las 5.",
+     "en": "I get home at 5.",
+     "alts": [
+      "I get home at 5:00",
+      "I get home at five"
+     ],
+     "say": "I get home at 5."
+    },
+    {
+     "type": "dictate",
+     "say": "I get home around 5.",
+     "note": "Escucha y escribe. Cuidado con get home."
+    }
+   ]
+  },
+  {
+   "id": "art",
+   "title": "Artículos y palabras gemelas",
+   "note": "Te comes el 'a' y mezclas palabras parecidas.",
+   "items": [
+    {
+     "type": "fix",
+     "wrong": "I work at private clinical.",
+     "right": "I work at a private clinic.",
+     "note": "Falta 'a'. Y es clinic (el lugar), no clinical.",
+     "say": "I work at a private clinic."
+    },
+    {
+     "type": "fix",
+     "wrong": "My work isn't officer work.",
+     "right": "My job isn't an office job.",
+     "note": "job, no work. office, no officer.",
+     "say": "My job isn't an office job."
+    },
+    {
+     "type": "fix",
+     "wrong": "She is nurse.",
+     "right": "She is a nurse.",
+     "note": "Profesiones siempre con a o an.",
+     "say": "She is a nurse."
+    },
+    {
+     "type": "choice",
+     "prompt": "She is ___ doctor.",
+     "options": [
+      "—",
+      "a",
+      "the"
+     ],
+     "answer": "a",
+     "say": "She is a doctor."
+    },
+    {
+     "type": "choice",
+     "prompt": "He is ___ engineer.",
+     "options": [
+      "a",
+      "an",
+      "the"
+     ],
+     "answer": "an",
+     "say": "He is an engineer."
+    },
+    {
+     "type": "translate",
+     "es": "Trabajo en una clínica.",
+     "en": "I work at a clinic.",
+     "alts": [
+      "I work in a clinic"
+     ],
+     "say": "I work at a clinic."
+    },
+    {
+     "type": "scramble",
+     "answer": "I have a good job at a clinic.",
+     "note": "job, no work.",
+     "say": "I have a good job at a clinic."
+    }
+   ]
+  },
+  {
+   "id": "third",
+   "title": "Él, ella: la -s y doesn't",
+   "note": "He, she, it llevan -s. doesn't ya la carga.",
+   "items": [
+    {
+     "type": "fix",
+     "wrong": "He work at a private clinic.",
+     "right": "He works at a private clinic.",
+     "note": "Tercera persona: works.",
+     "say": "He works at a private clinic."
+    },
+    {
+     "type": "fix",
+     "wrong": "She wake up around 6.",
+     "right": "She wakes up around 6.",
+     "say": "She wakes up around 6."
+    },
+    {
+     "type": "fix",
+     "wrong": "He get home around 5.",
+     "right": "He gets home around 5.",
+     "say": "He gets home around 5."
+    },
+    {
+     "type": "fix",
+     "wrong": "He don't have an office job.",
+     "right": "He doesn't have an office job.",
+     "note": "he, she: doesn't.",
+     "say": "He doesn't have an office job."
+    },
+    {
+     "type": "fix",
+     "wrong": "He doesn't works on Sunday.",
+     "right": "He doesn't work on Sunday.",
+     "note": "doesn't ya lleva la -s, el verbo no.",
+     "say": "He doesn't work on Sunday."
+    },
+    {
+     "type": "fix",
+     "wrong": "She go to the clinic on weekdays.",
+     "right": "She goes to the clinic on weekdays.",
+     "note": "go, goes. Irregular en la escritura.",
+     "say": "She goes to the clinic on weekdays."
+    },
+    {
+     "type": "choice",
+     "prompt": "She ___ on Saturdays.",
+     "options": [
+      "work",
+      "works",
+      "working"
+     ],
+     "answer": "works",
+     "say": "She works on Saturdays."
+    },
+    {
+     "type": "choice",
+     "prompt": "He ___ two days off.",
+     "options": [
+      "haves",
+      "have",
+      "has"
+     ],
+     "answer": "has",
+     "say": "He has two days off."
+    },
+    {
+     "type": "scramble",
+     "answer": "He doesn't have an office job.",
+     "note": "doesn't y el verbo sin -s.",
+     "say": "He doesn't have an office job."
+    },
+    {
+     "type": "dictate",
+     "say": "She works at a private clinic.",
+     "note": "Escucha la -s de works."
+    }
+   ]
+  },
+  {
+   "id": "pron",
+   "title": "Pronunciación",
+   "note": "Las de WhatsApp y las nuevas de hoy.",
+   "items": [
+    {
+     "type": "pron",
+     "word": "comprehension",
+     "arches": "kom-pre-HEN-sion",
+     "note": "La fuerza en HEN.",
+     "say": "comprehension"
+    },
+    {
+     "type": "pron",
+     "word": "I'm",
+     "arches": "AIM",
+     "say": "I'm"
+    },
+    {
+     "type": "pron",
+     "word": "I'll",
+     "arches": "AIL",
+     "note": "Una sílaba, como 'ail'.",
+     "say": "I'll"
+    },
+    {
+     "type": "pron",
+     "word": "years",
+     "arches": "YIRS",
+     "note": "Una sílaba. No yi-ars.",
+     "say": "years"
+    },
+    {
+     "type": "pron",
+     "word": "people",
+     "arches": "PI-pol",
+     "note": "La fuerza en PI.",
+     "say": "people"
+    },
+    {
+     "type": "pron",
+     "word": "clinic",
+     "arches": "KLI-nik",
+     "note": "La fuerza en KLI.",
+     "say": "clinic"
+    },
+    {
+     "type": "dictate",
+     "say": "comprehension",
+     "note": "Escucha y escríbela."
+    },
+    {
+     "type": "dictate",
+     "say": "There are many people at the clinic.",
+     "note": "people, sin -s."
+    }
+   ]
+  }
+ ]
 };
 
   /* ===================  end content  ====================== */
