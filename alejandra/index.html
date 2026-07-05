@@ -663,11 +663,139 @@
           "say": "I want to reach my goals."
         }
       ]
+    },
+    {
+      "id": "nivel",
+      "title": "Reto B1",
+      "note": "Lo universal de tu nivel, para jugar.",
+      "items": [
+        {
+          "type": "translate",
+          "es": "Nunca he estado en Japón.",
+          "en": "I have never been to Japan.",
+          "alts": [
+            "I've never been to Japan"
+          ],
+          "note": "experiencia: have + been to.",
+          "say": "I have never been to Japan."
+        },
+        {
+          "type": "fix",
+          "wrong": "I have seen him last week.",
+          "right": "I saw him last week.",
+          "note": "'last week' pide pasado simple.",
+          "say": "I saw him last week."
+        },
+        {
+          "type": "choice",
+          "prompt": "We ___ each other for ten years.",
+          "options": [
+            "know",
+            "have known",
+            "are knowing"
+          ],
+          "answer": "have known",
+          "note": "for + tiempo vigente: present perfect.",
+          "say": "We have known each other for ten years."
+        },
+        {
+          "type": "translate",
+          "es": "Si hubiera sabido, te habría llamado.",
+          "en": "If I had known, I would have called you.",
+          "alts": [
+            "If I had known, I'd have called you"
+          ],
+          "note": "tercer condicional: had known + would have.",
+          "say": "If I had known, I would have called you."
+        },
+        {
+          "type": "fix",
+          "wrong": "If I was you, I would rest.",
+          "right": "If I were you, I would rest.",
+          "note": "consejo: 'if I were you'.",
+          "say": "If I were you, I would rest."
+        },
+        {
+          "type": "choice",
+          "prompt": "Please ___ me a story.",
+          "options": [
+            "say",
+            "tell",
+            "speak"
+          ],
+          "answer": "tell",
+          "note": "tell a story.",
+          "say": "Please tell me a story."
+        },
+        {
+          "type": "translate",
+          "es": "Ella siempre dice la verdad.",
+          "en": "She always tells the truth.",
+          "alts": [
+            "She always tells the truth"
+          ],
+          "note": "tell the truth.",
+          "say": "She always tells the truth."
+        },
+        {
+          "type": "fix",
+          "wrong": "He make me happy.",
+          "right": "He makes me happy.",
+          "note": "make + persona + adjetivo, y la -s de él.",
+          "say": "He makes me happy."
+        },
+        {
+          "type": "translate",
+          "es": "Hice mi mejor esfuerzo.",
+          "en": "I did my best.",
+          "alts": [
+            "I tried my best"
+          ],
+          "note": "do your best.",
+          "say": "I did my best."
+        },
+        {
+          "type": "scramble",
+          "answer": "Have you finished yet?",
+          "extra": [
+            "already"
+          ],
+          "note": "'yet' en preguntas.",
+          "say": "Have you finished yet?"
+        },
+        {
+          "type": "dictate",
+          "say": "I would rather stay home tonight.",
+          "note": "would rather + verbo base."
+        },
+        {
+          "type": "pron",
+          "word": "iron",
+          "arches": "AI-ern",
+          "note": "la 'r' casi no suena.",
+          "say": "iron"
+        }
+      ]
+    }
+  ],
+  "links": [
+    {
+      "title": "Oído",
+      "note": "Entrenamiento auditivo completo, con audio real.",
+      "url": "https://gabriel01-glitch.github.io/oido/?name=Alejandra"
+    },
+    {
+      "title": "Past Tense",
+      "note": "Verbos en pasado, con audio y quiz.",
+      "url": "../apps/englishpast/?name=Alejandra"
+    },
+    {
+      "title": "Sonidos -ED",
+      "note": "La -ed del pasado: /t/, /d/ o /id/.",
+      "url": "../apps/ed-sounds/"
     }
   ]
 };
-  
-  
   /* ====================  end content  ====================== */
 
 
@@ -788,6 +916,15 @@
       card.onclick=()=>startTrack(t);
       app.appendChild(card);
     });
+    if(STUDENT.links && STUDENT.links.length){
+      app.appendChild(el('<div class="tracks-label">Tus otras apps</div>'));
+      STUDENT.links.forEach(function(L){
+        const a=el('<a class="track" style="display:block;text-decoration:none" href="'+L.url+'">'+
+          '<div class="track-head"><div class="track-title">'+esc(L.title)+'</div><div class="track-count">›</div></div>'+
+          (L.note?'<div class="track-note">'+esc(L.note)+'</div>':'')+'</a>');
+        app.appendChild(a);
+      });
+    }
     app.appendChild(el('<div class="credit">ARCHES · '+esc(STUDENT.student.name)+' · v'+esc(STUDENT.student.version||'1')+'</div>'));
   }
 
