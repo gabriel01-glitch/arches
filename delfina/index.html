@@ -681,11 +681,140 @@
           "note": "needed suena /NII-red/."
         }
       ]
+    },
+    {
+      "id": "nivel",
+      "title": "Reto B1",
+      "note": "Lo universal de tu nivel, para jugar.",
+      "items": [
+        {
+          "type": "translate",
+          "es": "He trabajado aquí desde 2018.",
+          "en": "I have worked here since 2018.",
+          "alts": [
+            "I've worked here since 2018"
+          ],
+          "note": "since + present perfect.",
+          "say": "I have worked here since 2018."
+        },
+        {
+          "type": "fix",
+          "wrong": "She has arrived two hours ago.",
+          "right": "She arrived two hours ago.",
+          "note": "'ago' pide pasado simple.",
+          "say": "She arrived two hours ago."
+        },
+        {
+          "type": "choice",
+          "prompt": "I ___ my keys. I can't find them.",
+          "options": [
+            "lost",
+            "have lost",
+            "lose"
+          ],
+          "answer": "have lost",
+          "note": "resultado que sigue ahora: present perfect.",
+          "say": "I have lost my keys."
+        },
+        {
+          "type": "translate",
+          "es": "Si fuera rica, viajaría por todo el mundo.",
+          "en": "If I were rich, I would travel all over the world.",
+          "alts": [
+            "If I was rich, I would travel around the world",
+            "If I were rich, I'd travel all over the world"
+          ],
+          "note": "segundo condicional: were + would.",
+          "say": "If I were rich, I would travel all over the world."
+        },
+        {
+          "type": "fix",
+          "wrong": "If it rains tomorrow, we stayed home.",
+          "right": "If it rains tomorrow, we will stay home.",
+          "note": "primer condicional: will.",
+          "say": "If it rains tomorrow, we will stay home."
+        },
+        {
+          "type": "choice",
+          "prompt": "She didn't ___ a word.",
+          "options": [
+            "tell",
+            "say",
+            "speak"
+          ],
+          "answer": "say",
+          "note": "say a word (sin decir a quién).",
+          "say": "She didn't say a word."
+        },
+        {
+          "type": "translate",
+          "es": "Me hizo reír.",
+          "en": "It made me laugh.",
+          "alts": [
+            "That made me laugh"
+          ],
+          "note": "make + persona + verbo base.",
+          "say": "It made me laugh."
+        },
+        {
+          "type": "fix",
+          "wrong": "I need to do a decision.",
+          "right": "I need to make a decision.",
+          "note": "make a decision, no 'do'.",
+          "say": "I need to make a decision."
+        },
+        {
+          "type": "translate",
+          "es": "¿Alguna vez has probado sushi?",
+          "en": "Have you ever tried sushi?",
+          "alts": [
+            "Have you tried sushi before?"
+          ],
+          "note": "experiencia: have you ever.",
+          "say": "Have you ever tried sushi?"
+        },
+        {
+          "type": "scramble",
+          "answer": "I have already eaten.",
+          "extra": [
+            "yet"
+          ],
+          "note": "ya: already, en afirmativo.",
+          "say": "I have already eaten."
+        },
+        {
+          "type": "dictate",
+          "say": "He hasn't called me back yet.",
+          "note": "'yet' al final en negativo."
+        },
+        {
+          "type": "pron",
+          "word": "vegetable",
+          "arches": "VEJ-tuh-bul",
+          "note": "tres sílabas, no cuatro.",
+          "say": "vegetable"
+        }
+      ]
+    }
+  ],
+  "links": [
+    {
+      "title": "Oído",
+      "note": "Entrenamiento auditivo completo, con audio real.",
+      "url": "https://gabriel01-glitch.github.io/oido/?name=Delfina"
+    },
+    {
+      "title": "Past Tense",
+      "note": "Verbos en pasado, con audio y quiz.",
+      "url": "../apps/englishpast/?name=Delfina"
+    },
+    {
+      "title": "Sonidos -ED",
+      "note": "La -ed del pasado: /t/, /d/ o /id/.",
+      "url": "../apps/ed-sounds/"
     }
   ]
 };
-  
-  
   /* ====================  end content  ====================== */
 
 
@@ -806,6 +935,15 @@
       card.onclick=()=>startTrack(t);
       app.appendChild(card);
     });
+    if(STUDENT.links && STUDENT.links.length){
+      app.appendChild(el('<div class="tracks-label">Tus otras apps</div>'));
+      STUDENT.links.forEach(function(L){
+        const a=el('<a class="track" style="display:block;text-decoration:none" href="'+L.url+'">'+
+          '<div class="track-head"><div class="track-title">'+esc(L.title)+'</div><div class="track-count">›</div></div>'+
+          (L.note?'<div class="track-note">'+esc(L.note)+'</div>':'')+'</a>');
+        app.appendChild(a);
+      });
+    }
     app.appendChild(el('<div class="credit">ARCHES · '+esc(STUDENT.student.name)+' · v'+esc(STUDENT.student.version||'1')+'</div>'));
   }
 
