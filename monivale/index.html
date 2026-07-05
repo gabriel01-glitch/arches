@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Moni & Vale · ARCHES</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#fbf7f0; --surface:#fffdf9; --ink:#2c2722; --muted:#9a8f83;
+    --line:#e9e0d3; --terra:#bf5a36; --terra-dark:#9f4528; --terra-tint:#f4e4d9;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  html,body{margin:0;padding:0;}
+  body{background:var(--cream);color:var(--ink);font-family:'Nunito',sans-serif;-webkit-font-smoothing:antialiased;min-height:100vh;}
+  .wrap{max-width:560px;margin:0 auto;padding:34px 20px 60px;}
+  header{text-align:center;padding:14px 0 6px;}
+  .names{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:44px;line-height:1.05;color:var(--ink);}
+  .names .amp{color:var(--terra);}
+  .rule{width:54px;height:3px;background:var(--terra);border-radius:2px;margin:16px auto 0;}
+  .sub{font-size:15px;color:var(--muted);font-weight:600;margin-top:16px;line-height:1.45;}
+  .list{margin-top:30px;}
+  a.card{display:flex;align-items:center;gap:16px;text-decoration:none;background:var(--surface);border:1.5px solid var(--line);border-radius:18px;padding:18px;margin-bottom:13px;transition:transform .08s ease,border-color .15s ease;}
+  a.card:active{transform:scale(.99);}
+  a.card:hover{border-color:var(--terra);}
+  .card .em{flex:none;width:52px;height:52px;border-radius:50%;background:var(--terra-tint);display:flex;align-items:center;justify-content:center;font-size:24px;}
+  .card .body{flex:1;min-width:0;}
+  .card .nm{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:24px;color:var(--ink);line-height:1.1;}
+  .card .fo{font-size:13.5px;color:var(--muted);font-weight:600;margin-top:3px;}
+  .card .arrow{flex:none;color:var(--terra);font-size:24px;font-weight:800;}
+  .featured{border-color:var(--terra);border-width:2px;}
+  .foot{text-align:center;color:#c9bdac;font-size:12px;font-weight:700;margin-top:40px;letter-spacing:.5px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="names">Moni <span class="amp">&amp;</span> Vale</div>
+    <div class="rule"></div>
+    <div class="sub">Su rincón de inglés. B1-B2, la misma clase, el mismo equipo.</div>
+  </header>
+  <div class="list">
+    <a class="card featured" href="court/">
+      <div class="em">⚖️</div>
+      <div class="body"><div class="nm">The English Court</div>
+      <div class="fo">Cinco casos, cinco crímenes contra el inglés. ¿Cómo se declaran?</div></div>
+      <div class="arrow">›</div>
+    </a>
+    <a class="card" href="../apps/moniandvale/">
+      <div class="em">✨</div>
+      <div class="body"><div class="nm">A Pulir</div>
+      <div class="fo">Su práctica de siempre: 4 pistas, 99 ejercicios.</div></div>
+      <div class="arrow">›</div>
+    </a>
+    <a class="card" href="https://gabriel01-glitch.github.io/oido/">
+      <div class="em">🎧</div>
+      <div class="body"><div class="nm">Oído</div>
+      <div class="fo">Entrenamiento auditivo completo, con audio real.</div></div>
+      <div class="arrow">›</div>
+    </a>
+    <a class="card" href="../apps/englishpast/">
+      <div class="em">⏳</div>
+      <div class="body"><div class="nm">Past Tense</div>
+      <div class="fo">Verbos en pasado, con audio y quiz.</div></div>
+      <div class="arrow">›</div>
+    </a>
+  </div>
+  <div class="foot">ARCHES Language School · Teacher Gabriel</div>
+</div>
+</body>
+</html>
