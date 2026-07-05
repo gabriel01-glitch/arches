@@ -630,6 +630,144 @@
           "say": "audit"
         }
       ]
+    },
+    {
+      "id": "nivel",
+      "title": "Reto B1-B2",
+      "note": "Lo universal de tu nivel, para jugar.",
+      "items": [
+        {
+          "type": "translate",
+          "es": "Dijo que estaba cansada.",
+          "en": "She said she was tired.",
+          "alts": [
+            "She said that she was tired"
+          ],
+          "note": "estilo indirecto: said (that) + pasado.",
+          "say": "She said she was tired."
+        },
+        {
+          "type": "fix",
+          "wrong": "He told that he would come.",
+          "right": "He said that he would come.",
+          "alts": [
+            "He said he would come"
+          ],
+          "note": "'told' necesita a quién; si no, usa 'said'.",
+          "say": "He said that he would come."
+        },
+        {
+          "type": "choice",
+          "prompt": "She asked me where I ___.",
+          "options": [
+            "live",
+            "lived",
+            "do live"
+          ],
+          "answer": "lived",
+          "note": "pregunta reportada: sin 'do', verbo un paso atrás.",
+          "say": "She asked me where I lived."
+        },
+        {
+          "type": "translate",
+          "es": "El informe fue enviado ayer.",
+          "en": "The report was sent yesterday.",
+          "alts": [
+            "The report was sent out yesterday"
+          ],
+          "note": "voz pasiva: was + participio.",
+          "say": "The report was sent yesterday."
+        },
+        {
+          "type": "fix",
+          "wrong": "The house was build in 1990.",
+          "right": "The house was built in 1990.",
+          "note": "participio: built, no 'build'.",
+          "say": "The house was built in 1990."
+        },
+        {
+          "type": "translate",
+          "es": "El inglés se habla en muchos países.",
+          "en": "English is spoken in many countries.",
+          "alts": [
+            "English is spoken in a lot of countries"
+          ],
+          "note": "pasiva en presente: is + spoken.",
+          "say": "English is spoken in many countries."
+        },
+        {
+          "type": "fix",
+          "wrong": "Actually, I live in Miami now.",
+          "right": "Currently, I live in Miami now.",
+          "note": "'actually' = en realidad; 'actualmente' = currently.",
+          "say": "Currently, I live in Miami now."
+        },
+        {
+          "type": "choice",
+          "prompt": "She is very ___ about other people's feelings.",
+          "options": [
+            "sensible",
+            "sensitive",
+            "sensable"
+          ],
+          "answer": "sensitive",
+          "note": "'sensitive' = sensible (emocional); 'sensible' = razonable.",
+          "say": "She is very sensitive about other people's feelings."
+        },
+        {
+          "type": "translate",
+          "es": "Tomé una decisión difícil.",
+          "en": "I made a difficult decision.",
+          "alts": [
+            "I made a hard decision"
+          ],
+          "note": "make a decision, no 'take'.",
+          "say": "I made a difficult decision."
+        },
+        {
+          "type": "translate",
+          "es": "Presta atención, por favor.",
+          "en": "Pay attention, please.",
+          "alts": [
+            "Pay attention please"
+          ],
+          "note": "pay attention (colocación fija).",
+          "say": "Pay attention, please."
+        },
+        {
+          "type": "scramble",
+          "answer": "He told me he was busy.",
+          "extra": [
+            "said"
+          ],
+          "note": "told + me (a quién).",
+          "say": "He told me he was busy."
+        },
+        {
+          "type": "pron",
+          "word": "genuine",
+          "arches": "JEN-yoo-in",
+          "note": "no 'jen-yoo-ain'.",
+          "say": "genuine"
+        }
+      ]
+    }
+  ],
+  "links": [
+    {
+      "title": "Oído",
+      "note": "Entrenamiento auditivo completo, con audio real.",
+      "url": "https://gabriel01-glitch.github.io/oido/?name=Carlenis"
+    },
+    {
+      "title": "Past Tense",
+      "note": "Verbos en pasado, con audio y quiz.",
+      "url": "../apps/englishpast/?name=Carlenis"
+    },
+    {
+      "title": "Sonidos -ED",
+      "note": "La -ed del pasado: /t/, /d/ o /id/.",
+      "url": "../apps/ed-sounds/"
     }
   ]
 };
@@ -753,6 +891,15 @@
       card.onclick=()=>startTrack(t);
       app.appendChild(card);
     });
+    if(STUDENT.links && STUDENT.links.length){
+      app.appendChild(el('<div class="tracks-label">Tus otras apps</div>'));
+      STUDENT.links.forEach(function(L){
+        const a=el('<a class="track" style="display:block;text-decoration:none" href="'+L.url+'">'+
+          '<div class="track-head"><div class="track-title">'+esc(L.title)+'</div><div class="track-count">›</div></div>'+
+          (L.note?'<div class="track-note">'+esc(L.note)+'</div>':'')+'</a>');
+        app.appendChild(a);
+      });
+    }
     app.appendChild(el('<div class="credit">ARCHES · '+esc(STUDENT.student.name)+' · v'+esc(STUDENT.student.version||'1')+'</div>'));
   }
 
