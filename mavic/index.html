@@ -124,7 +124,24 @@
     "l1": "Spanish",
     "context": "Venezolana. Project coordinator en Epsylon, proyecto One Tampa.",
     "greeting": "Tu inglés de reuniones, Mavic. Frases reales de One Tampa, un poquito cada día.",
-    "version": "2026-07-01"
+    "version": "2026-07-01",
+    "links": [
+      {
+        "title": "Oído",
+        "note": "Entrenamiento auditivo completo, con audio real.",
+        "url": "https://gabriel01-glitch.github.io/oido/?name=Mavic"
+      },
+      {
+        "title": "Past Tense",
+        "note": "Verbos en pasado, con audio y quiz.",
+        "url": "../apps/englishpast/?name=Mavic"
+      },
+      {
+        "title": "Sonidos -ED",
+        "note": "La -ed del pasado: /t/, /d/ o /id/.",
+        "url": "../apps/ed-sounds/"
+      }
+    ]
   },
   "tracks": [
     {
@@ -690,10 +707,130 @@
           "say": "What is the E T A?"
         }
       ]
+    },
+    {
+      "id": "nivel",
+      "title": "Reto B1",
+      "note": "Lo universal de tu nivel, para jugar.",
+      "items": [
+        {
+          "type": "translate",
+          "es": "Ya he terminado el reporte.",
+          "en": "I have already finished the report.",
+          "alts": [
+            "I've already finished the report",
+            "I have finished the report already"
+          ],
+          "note": "present perfect: ya + participio.",
+          "say": "I have already finished the report."
+        },
+        {
+          "type": "fix",
+          "wrong": "I have finished it yesterday.",
+          "right": "I finished it yesterday.",
+          "note": "con 'yesterday' va pasado simple, no present perfect.",
+          "say": "I finished it yesterday."
+        },
+        {
+          "type": "choice",
+          "prompt": "We ___ this client for three years.",
+          "options": [
+            "know",
+            "have known",
+            "knew"
+          ],
+          "answer": "have known",
+          "note": "'for + tiempo' que sigue vigente: present perfect.",
+          "say": "We have known this client for three years."
+        },
+        {
+          "type": "translate",
+          "es": "Si tuviera más tiempo, aprendería alemán.",
+          "en": "If I had more time, I would learn German.",
+          "alts": [
+            "If I had more time, I'd learn German"
+          ],
+          "note": "segundo condicional: had + would.",
+          "say": "If I had more time, I would learn German."
+        },
+        {
+          "type": "fix",
+          "wrong": "If I will see him, I tell him.",
+          "right": "If I see him, I will tell him.",
+          "note": "primer condicional: presente + will.",
+          "say": "If I see him, I will tell him."
+        },
+        {
+          "type": "choice",
+          "prompt": "Can you ___ me the truth?",
+          "options": [
+            "say",
+            "tell",
+            "talk"
+          ],
+          "answer": "tell",
+          "note": "'tell' lleva a quién: tell me.",
+          "say": "Can you tell me the truth?"
+        },
+        {
+          "type": "translate",
+          "es": "No me digas.",
+          "en": "Don't tell me.",
+          "alts": [
+            "Do not tell me"
+          ],
+          "note": "sorpresa: usa tell.",
+          "say": "Don't tell me."
+        },
+        {
+          "type": "fix",
+          "wrong": "He said me that he was tired.",
+          "right": "He told me that he was tired.",
+          "note": "decir a alguien: tell someone.",
+          "say": "He told me that he was tired."
+        },
+        {
+          "type": "translate",
+          "es": "Hice una reserva para las ocho.",
+          "en": "I made a reservation for eight.",
+          "alts": [
+            "I made a booking for eight"
+          ],
+          "note": "make a reservation, no 'do'.",
+          "say": "I made a reservation for eight."
+        },
+        {
+          "type": "choice",
+          "prompt": "I need to ___ a decision today.",
+          "options": [
+            "do",
+            "make",
+            "take"
+          ],
+          "answer": "make",
+          "note": "make a decision.",
+          "say": "I need to make a decision today."
+        },
+        {
+          "type": "scramble",
+          "answer": "Have you ever been to Canada?",
+          "extra": [
+            "did"
+          ],
+          "note": "experiencia de vida: have you ever.",
+          "say": "Have you ever been to Canada?"
+        },
+        {
+          "type": "pron",
+          "word": "recipe",
+          "arches": "RES-uh-pee",
+          "note": "no se dice 'ri-SAIP'.",
+          "say": "recipe"
+        }
+      ]
     }
   ]
 };
-  
   /* ====================  end content  ====================== */
 
 
@@ -749,7 +886,7 @@
     try{
       speechSynthesis.cancel();
       const u=new SpeechSynthesisUtterance(text);
-      u.lang="en-US"; u.rate=rate||0.92; if(voice) u.voice=voice;
+      u.lang="en-US"; u.rate=rate||0.95; if(voice) u.voice=voice;
       speechSynthesis.speak(u);
     }catch(e){}
   }
@@ -814,6 +951,15 @@
       card.onclick=()=>startTrack(t);
       app.appendChild(card);
     });
+    if(STUDENT.links && STUDENT.links.length){
+      app.appendChild(el('<div class="tracks-label">Tus otras apps</div>'));
+      STUDENT.links.forEach(function(L){
+        const a=el('<a class="track" style="display:block;text-decoration:none" href="'+L.url+'">'+
+          '<div class="track-head"><div class="track-title">'+esc(L.title)+'</div><div class="track-count">›</div></div>'+
+          (L.note?'<div class="track-note">'+esc(L.note)+'</div>':'')+'</a>');
+        app.appendChild(a);
+      });
+    }
     app.appendChild(el('<div class="credit">ARCHES · '+esc(STUDENT.student.name)+' · v'+esc(STUDENT.student.version||'1')+'</div>'));
   }
 
