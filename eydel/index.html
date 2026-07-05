@@ -118,61 +118,160 @@
      Swap this object, redeploy, done. Schema v2.
      ========================================================= */
   const STUDENT = {
-    "student": {
-      "name": "Eydel",
-      "level": "Pre-A1",
-      "l1": "Spanish",
-      "context": "Works in construction, travels often",
-      "greeting": "Estas son tus frases reales. A pulirlas.",
-      "version": "2026-06-18"
+  "student": {
+    "name": "Eydel",
+    "level": "Pre-A1",
+    "l1": "Spanish",
+    "context": "Works in construction, travels often",
+    "greeting": "Estas son tus frases reales. A pulirlas.",
+    "version": "2026-06-18"
+  },
+  "tracks": [
+    {
+      "id": "elit",
+      "title": "El sujeto 'it'",
+      "note": "El español esconde el 'it'. El inglés siempre lo dice.",
+      "items": [
+        {
+          "type": "fix",
+          "wrong": "Is raining today.",
+          "right": "It's raining today.",
+          "alts": [
+            "It is raining today"
+          ],
+          "note": "Añade 'it'.",
+          "say": "It's raining today."
+        },
+        {
+          "type": "fix",
+          "wrong": "Is hot today.",
+          "right": "It's hot today.",
+          "alts": [
+            "It is hot today"
+          ],
+          "say": "It's hot today."
+        },
+        {
+          "type": "dictate",
+          "say": "It's cloudy today.",
+          "alts": [
+            "It is cloudy today"
+          ],
+          "note": "Escucha y escribe lo que oigas."
+        }
+      ]
     },
-    "tracks": [
-      {
-        "id": "elit",
-        "title": "El sujeto 'it'",
-        "note": "El español esconde el 'it'. El inglés siempre lo dice.",
-        "items": [
-          { "type": "fix", "wrong": "Is raining today.", "right": "It's raining today.", "alts": ["It is raining today"], "note": "Añade 'it'.", "say": "It's raining today." },
-          { "type": "fix", "wrong": "Is hot today.", "right": "It's hot today.", "alts": ["It is hot today"], "say": "It's hot today." },
-          { "type": "dictate", "say": "It's cloudy today.", "alts": ["It is cloudy today"], "note": "Escucha y escribe lo que oigas." }
-        ]
-      },
-      {
-        "id": "thirdperson",
-        "title": "La -s de tercera persona",
-        "note": "He, she, it llevan -s en el verbo.",
-        "items": [
-          { "type": "fix", "wrong": "He say hello every morning.", "right": "He says hello every morning.", "note": "says suena /sez/.", "say": "He says hello every morning." },
-          { "type": "fix", "wrong": "She have a dog.", "right": "She has a dog.", "say": "She has a dog." },
-          { "type": "choice", "prompt": "She ___ at the clinic.", "options": ["work", "works", "working"], "answer": "works", "say": "She works at the clinic." }
-        ]
-      },
-      {
-        "id": "dosupport",
-        "title": "Preguntas y doesn't",
-        "note": "El 'do' carga la pregunta y la negación.",
-        "items": [
-          { "type": "scramble", "answer": "Do you have a car?", "extra": ["Are"], "note": "Las preguntas empiezan con Do.", "say": "Do you have a car?" },
-          { "type": "fix", "wrong": "It doesn't works.", "right": "It doesn't work.", "note": "doesn't ya lleva la -s, el verbo no.", "say": "It doesn't work." },
-          { "type": "scramble", "answer": "It doesn't work.", "note": "doesn't ya carga la -s.", "say": "It doesn't work." }
-        ]
-      },
-      {
-        "id": "numbers",
-        "title": "13 o 30",
-        "note": "Solo cambia el acento. Escucha dónde cae la fuerza.",
-        "items": [
-          { "type": "pron", "word": "thirteen", "arches": "thir-TEEN", "note": "Fuerza al final.", "say": "thirteen" },
-          { "type": "pron", "word": "thirty", "arches": "THIR-ty", "note": "Fuerza al principio.", "say": "thirty" },
-          { "type": "dictate", "say": "fifteen", "note": "13, 14, 15... ¿oyes el final fuerte?" },
-          { "type": "dictate", "say": "fifty", "note": "50. La fuerza va al principio." }
-        ]
-      }
-    ]
-    /* Optional: "audio": { "It's raining today.": "data:audio/mp3;base64,..." }
-       If present, baked audio is used instead of the device voice. */
-  };
-  /* ===================  end content  ====================== */
+    {
+      "id": "thirdperson",
+      "title": "La -s de tercera persona",
+      "note": "He, she, it llevan -s en el verbo.",
+      "items": [
+        {
+          "type": "fix",
+          "wrong": "He say hello every morning.",
+          "right": "He says hello every morning.",
+          "note": "says suena /sez/.",
+          "say": "He says hello every morning."
+        },
+        {
+          "type": "fix",
+          "wrong": "She have a dog.",
+          "right": "She has a dog.",
+          "say": "She has a dog."
+        },
+        {
+          "type": "choice",
+          "prompt": "She ___ at the clinic.",
+          "options": [
+            "work",
+            "works",
+            "working"
+          ],
+          "answer": "works",
+          "say": "She works at the clinic."
+        }
+      ]
+    },
+    {
+      "id": "dosupport",
+      "title": "Preguntas y doesn't",
+      "note": "El 'do' carga la pregunta y la negación.",
+      "items": [
+        {
+          "type": "scramble",
+          "answer": "Do you have a car?",
+          "extra": [
+            "Are"
+          ],
+          "note": "Las preguntas empiezan con Do.",
+          "say": "Do you have a car?"
+        },
+        {
+          "type": "fix",
+          "wrong": "It doesn't works.",
+          "right": "It doesn't work.",
+          "note": "doesn't ya lleva la -s, el verbo no.",
+          "say": "It doesn't work."
+        },
+        {
+          "type": "scramble",
+          "answer": "It doesn't work.",
+          "note": "doesn't ya carga la -s.",
+          "say": "It doesn't work."
+        }
+      ]
+    },
+    {
+      "id": "numbers",
+      "title": "13 o 30",
+      "note": "Solo cambia el acento. Escucha dónde cae la fuerza.",
+      "items": [
+        {
+          "type": "pron",
+          "word": "thirteen",
+          "arches": "thir-TEEN",
+          "note": "Fuerza al final.",
+          "say": "thirteen"
+        },
+        {
+          "type": "pron",
+          "word": "thirty",
+          "arches": "THIR-ty",
+          "note": "Fuerza al principio.",
+          "say": "thirty"
+        },
+        {
+          "type": "dictate",
+          "say": "fifteen",
+          "note": "13, 14, 15... ¿oyes el final fuerte?"
+        },
+        {
+          "type": "dictate",
+          "say": "fifty",
+          "note": "50. La fuerza va al principio."
+        }
+      ]
+    }
+  ],
+  "links": [
+    {
+      "title": "Oído",
+      "note": "Entrenamiento auditivo completo, con audio real.",
+      "url": "https://gabriel01-glitch.github.io/oido/?name=Eydel"
+    },
+    {
+      "title": "Past Tense",
+      "note": "Verbos en pasado, con audio y quiz.",
+      "url": "../apps/englishpast/?name=Eydel"
+    },
+    {
+      "title": "Sonidos -ED",
+      "note": "La -ed del pasado: /t/, /d/ o /id/.",
+      "url": "../apps/ed-sounds/"
+    }
+  ]
+};
+  /* ====================  end content  ====================== */
 
 
   // ---------- setup ----------
@@ -219,7 +318,7 @@
   }
   document.addEventListener("touchstart", unlockAudio, {once:true});
   document.addEventListener("click", unlockAudio, {once:true});
-  function speak(text){
+  function speak(text, rate){
     if(!text) return;
     const baked = STUDENT.audio && STUDENT.audio[text];
     if(baked){ try{ new Audio(baked).play(); return; }catch(e){} }
@@ -227,7 +326,7 @@
     try{
       speechSynthesis.cancel();
       const u=new SpeechSynthesisUtterance(text);
-      u.lang="en-US"; u.rate=0.95; if(voice) u.voice=voice;
+      u.lang="en-US"; u.rate=rate||0.95; if(voice) u.voice=voice;
       speechSynthesis.speak(u);
     }catch(e){}
   }
@@ -238,7 +337,7 @@
   const CMAP = {"it's":"it is","i'm":"i am","don't":"do not","doesn't":"does not","didn't":"did not","isn't":"is not","aren't":"are not","wasn't":"was not","weren't":"were not","can't":"cannot","won't":"will not","i'll":"i will","she's":"she is","he's":"he is","they're":"they are","you're":"you are","we're":"we are","that's":"that is","what's":"what is","there's":"there is","let's":"let us","i've":"i have","you've":"you have","we've":"we have","they've":"they have","hasn't":"has not","haven't":"have not","hadn't":"had not","wouldn't":"would not","couldn't":"could not","shouldn't":"should not","she'll":"she will","he'll":"he will","you'll":"you will","we'll":"we will","they'll":"they will",
     "dont":"do not","doesnt":"does not","didnt":"did not","isnt":"is not","arent":"are not","wasnt":"was not","werent":"were not","cant":"cannot","wont":"will not","hasnt":"has not","havent":"have not","hadnt":"had not","wouldnt":"would not","couldnt":"could not","shouldnt":"should not"};
   function norm(s){
-    s=(s||"").toLowerCase().replace(/[\u2018\u2019\u02bc`]/g,"'").trim();
+    s=(s||"").toLowerCase().replace(/[‘’ʼ`]/g,"'").trim();
     Object.keys(CMAP).forEach(k=>{ s=s.replace(new RegExp("\\b"+k.replace(/'/g,"'")+"\\b","g"), CMAP[k]); });
     s=s.replace(/[^a-z0-9 ]/g,"").replace(/\s+/g," ").trim();
     return s;
@@ -292,6 +391,15 @@
       card.onclick=()=>startTrack(t);
       app.appendChild(card);
     });
+    if(STUDENT.links && STUDENT.links.length){
+      app.appendChild(el('<div class="tracks-label">Tus otras apps</div>'));
+      STUDENT.links.forEach(function(L){
+        const a=el('<a class="track" style="display:block;text-decoration:none" href="'+L.url+'">'+
+          '<div class="track-head"><div class="track-title">'+esc(L.title)+'</div><div class="track-count">›</div></div>'+
+          (L.note?'<div class="track-note">'+esc(L.note)+'</div>':'')+'</a>');
+        app.appendChild(a);
+      });
+    }
     app.appendChild(el('<div class="credit">ARCHES · '+esc(STUDENT.student.name)+' · v'+esc(STUDENT.student.version||'1')+'</div>'));
   }
 
@@ -375,6 +483,7 @@
     let revealed=false;
     practiceShell('<div class="kicker">Escucha y escribe</div><div class="card">'+
       '<button class="speaker" id="play">'+speakerSVG+'Escuchar</button>'+
+      '<button class="speaker" id="slowp" style="margin-top:10px">'+speakerSVG+'Escuchar despacio</button>'+
       (it.note?'<div class="hint">'+esc(it.note)+'</div>':'')+
       '<input class="field" id="inp" placeholder="Escribe lo que oigas" autocomplete="off" autocapitalize="sentences">'+
       '<div id="fb"></div>'+
@@ -382,6 +491,7 @@
       '<div class="row2"><button class="btn btn-ghost full" id="show">Ver respuesta</button></div></div>');
     const inp=document.getElementById("inp"), fb=document.getElementById("fb"), go=document.getElementById("go");
     document.getElementById("play").onclick=()=>speak(it.say);
+    document.getElementById("slowp").onclick=()=>speak(it.say, 0.68);
     setTimeout(()=>speak(it.say), 350);
     inp.addEventListener("keydown",e=>{ if(e.key==="Enter"){ e.preventDefault(); go.click(); }});
     document.getElementById("show").onclick=()=>{
@@ -484,8 +594,10 @@
       '<div class="pron-arch">'+archHTML(it.arches)+'</div>'+
       (it.note?'<div class="hint" style="text-align:center">'+esc(it.note)+'</div>':'')+
       '<button class="speaker" id="play">'+speakerSVG+'Escuchar y repetir</button>'+
+      '<button class="speaker" id="slowp" style="margin-top:10px">'+speakerSVG+'Escuchar despacio</button>'+
       '<div class="row2"><button class="btn btn-ghost" id="again">Otra vez</button><button class="btn btn-primary" id="got" style="margin-top:0">Lo tengo</button></div></div>');
     document.getElementById("play").onclick=()=>speak(it.say||it.word);
+    document.getElementById("slowp").onclick=()=>speak(it.say||it.word, 0.68);
     setTimeout(()=>speak(it.say||it.word), 350);
     document.getElementById("again").onclick=()=>advance(false);
     document.getElementById("got").onclick=()=>advance(true);
