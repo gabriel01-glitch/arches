@@ -677,6 +677,136 @@
           "say": "water"
         }
       ]
+    },
+    {
+      "id": "nivel",
+      "title": "Reto B1",
+      "note": "Lo universal de tu nivel, para jugar.",
+      "items": [
+        {
+          "type": "choice",
+          "prompt": "I have to ___ my homework.",
+          "options": [
+            "make",
+            "do",
+            "take"
+          ],
+          "answer": "do",
+          "note": "do homework.",
+          "say": "I have to do my homework."
+        },
+        {
+          "type": "fix",
+          "wrong": "He said me the address.",
+          "right": "He told me the address.",
+          "note": "decir a alguien: tell.",
+          "say": "He told me the address."
+        },
+        {
+          "type": "translate",
+          "es": "Si ganara la lotería, dejaría de trabajar.",
+          "en": "If I won the lottery, I would stop working.",
+          "alts": [
+            "If I won the lottery, I'd stop working"
+          ],
+          "note": "segundo condicional.",
+          "say": "If I won the lottery, I would stop working."
+        },
+        {
+          "type": "fix",
+          "wrong": "If it will rain, we cancel.",
+          "right": "If it rains, we will cancel.",
+          "note": "primer condicional.",
+          "say": "If it rains, we will cancel."
+        },
+        {
+          "type": "translate",
+          "es": "La tubería fue reparada esta mañana.",
+          "en": "The pipe was repaired this morning.",
+          "alts": [
+            "The pipe was fixed this morning"
+          ],
+          "note": "voz pasiva: was + participio.",
+          "say": "The pipe was repaired this morning."
+        },
+        {
+          "type": "choice",
+          "prompt": "Don't ___ anything to anyone.",
+          "options": [
+            "say",
+            "tell",
+            "speak"
+          ],
+          "answer": "say",
+          "note": "say something (sin decir a quién).",
+          "say": "Don't say anything to anyone."
+        },
+        {
+          "type": "translate",
+          "es": "Hice una promesa.",
+          "en": "I made a promise.",
+          "alts": [
+            "I made a promise to her"
+          ],
+          "note": "make a promise.",
+          "say": "I made a promise."
+        },
+        {
+          "type": "translate",
+          "es": "¿Has terminado ya?",
+          "en": "Have you finished yet?",
+          "alts": [
+            "Are you done yet?"
+          ],
+          "note": "'yet' en preguntas.",
+          "say": "Have you finished yet?"
+        },
+        {
+          "type": "fix",
+          "wrong": "I am knowing the answer.",
+          "right": "I know the answer.",
+          "note": "'know' no va en -ing.",
+          "say": "I know the answer."
+        },
+        {
+          "type": "scramble",
+          "answer": "It was made in Mexico.",
+          "extra": [
+            "make"
+          ],
+          "note": "pasiva: was made.",
+          "say": "It was made in Mexico."
+        },
+        {
+          "type": "dictate",
+          "say": "I would rather do it myself.",
+          "note": "would rather + verbo base."
+        },
+        {
+          "type": "pron",
+          "word": "receipt",
+          "arches": "ri-SEET",
+          "note": "la 'p' es muda.",
+          "say": "receipt"
+        }
+      ]
+    }
+  ],
+  "links": [
+    {
+      "title": "Oído",
+      "note": "Entrenamiento auditivo completo, con audio real.",
+      "url": "https://gabriel01-glitch.github.io/oido/?name=Wilfredo"
+    },
+    {
+      "title": "Past Tense",
+      "note": "Verbos en pasado, con audio y quiz.",
+      "url": "../apps/englishpast/?name=Wilfredo"
+    },
+    {
+      "title": "Sonidos -ED",
+      "note": "La -ed del pasado: /t/, /d/ o /id/.",
+      "url": "../apps/ed-sounds/"
     }
   ]
 };
@@ -727,7 +857,7 @@
   }
   document.addEventListener("touchstart", unlockAudio, {once:true});
   document.addEventListener("click", unlockAudio, {once:true});
-  function speak(text){
+  function speak(text, rate){
     if(!text) return;
     const baked = STUDENT.audio && STUDENT.audio[text];
     if(baked){ try{ new Audio(baked).play(); return; }catch(e){} }
@@ -735,7 +865,7 @@
     try{
       speechSynthesis.cancel();
       const u=new SpeechSynthesisUtterance(text);
-      u.lang="en-US"; u.rate=0.95; if(voice) u.voice=voice;
+      u.lang="en-US"; u.rate=rate||0.95; if(voice) u.voice=voice;
       speechSynthesis.speak(u);
     }catch(e){}
   }
@@ -800,6 +930,15 @@
       card.onclick=()=>startTrack(t);
       app.appendChild(card);
     });
+    if(STUDENT.links && STUDENT.links.length){
+      app.appendChild(el('<div class="tracks-label">Tus otras apps</div>'));
+      STUDENT.links.forEach(function(L){
+        const a=el('<a class="track" style="display:block;text-decoration:none" href="'+L.url+'">'+
+          '<div class="track-head"><div class="track-title">'+esc(L.title)+'</div><div class="track-count">›</div></div>'+
+          (L.note?'<div class="track-note">'+esc(L.note)+'</div>':'')+'</a>');
+        app.appendChild(a);
+      });
+    }
     app.appendChild(el('<div class="credit">ARCHES · '+esc(STUDENT.student.name)+' · v'+esc(STUDENT.student.version||'1')+'</div>'));
   }
 
@@ -883,6 +1022,7 @@
     let revealed=false;
     practiceShell('<div class="kicker">Escucha y escribe</div><div class="card">'+
       '<button class="speaker" id="play">'+speakerSVG+'Escuchar</button>'+
+      '<button class="speaker" id="slowp" style="margin-top:10px">'+speakerSVG+'Escuchar despacio</button>'+
       (it.note?'<div class="hint">'+esc(it.note)+'</div>':'')+
       '<input class="field" id="inp" placeholder="Escribe lo que oigas" autocomplete="off" autocapitalize="sentences">'+
       '<div id="fb"></div>'+
@@ -890,6 +1030,7 @@
       '<div class="row2"><button class="btn btn-ghost full" id="show">Ver respuesta</button></div></div>');
     const inp=document.getElementById("inp"), fb=document.getElementById("fb"), go=document.getElementById("go");
     document.getElementById("play").onclick=()=>speak(it.say);
+    document.getElementById("slowp").onclick=()=>speak(it.say, 0.68);
     setTimeout(()=>speak(it.say), 350);
     inp.addEventListener("keydown",e=>{ if(e.key==="Enter"){ e.preventDefault(); go.click(); }});
     document.getElementById("show").onclick=()=>{
@@ -992,8 +1133,10 @@
       '<div class="pron-arch">'+archHTML(it.arches)+'</div>'+
       (it.note?'<div class="hint" style="text-align:center">'+esc(it.note)+'</div>':'')+
       '<button class="speaker" id="play">'+speakerSVG+'Escuchar y repetir</button>'+
+      '<button class="speaker" id="slowp" style="margin-top:10px">'+speakerSVG+'Escuchar despacio</button>'+
       '<div class="row2"><button class="btn btn-ghost" id="again">Otra vez</button><button class="btn btn-primary" id="got" style="margin-top:0">Lo tengo</button></div></div>');
     document.getElementById("play").onclick=()=>speak(it.say||it.word);
+    document.getElementById("slowp").onclick=()=>speak(it.say||it.word, 0.68);
     setTimeout(()=>speak(it.say||it.word), 350);
     document.getElementById("again").onclick=()=>advance(false);
     document.getElementById("got").onclick=()=>advance(true);
