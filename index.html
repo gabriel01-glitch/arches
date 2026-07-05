@@ -24,6 +24,7 @@
   .sub{font-size:15px;color:var(--muted);font-weight:600;margin-top:16px;line-height:1.45;}
   .live{font-size:12px;text-transform:uppercase;letter-spacing:1.4px;color:var(--terra);font-weight:800;margin-top:18px;}
 
+  .sect{font-size:12px;text-transform:uppercase;letter-spacing:1.6px;color:var(--muted);font-weight:800;margin:34px 4px 14px;}
   .list{margin-top:30px;}
   a.card{display:flex;align-items:center;gap:16px;text-decoration:none;background:var(--surface);border:1.5px solid var(--line);border-radius:18px;padding:18px 18px;margin-bottom:13px;transition:transform .08s ease,border-color .15s ease;}
   a.card:active{transform:scale(.99);}
@@ -33,6 +34,10 @@
   .card .nm{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:25px;color:var(--ink);line-height:1.1;}
   .card .fo{font-size:13.5px;color:var(--muted);font-weight:600;margin-top:3px;}
   .card .arrow{flex:none;color:var(--terra);font-size:24px;font-weight:800;}
+
+  a.card.tool{padding:14px 18px;}
+  a.card.tool .initial{width:44px;height:44px;font-size:21px;border-radius:14px;}
+  a.card.tool .nm{font-size:21px;}
 
   .soon{display:flex;align-items:center;gap:16px;background:transparent;border:1.5px dashed var(--line);border-radius:18px;padding:18px;margin-bottom:13px;opacity:.7;}
   .soon .initial{flex:none;width:52px;height:52px;border-radius:50%;background:var(--cream);color:var(--muted);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-weight:700;font-size:26px;border:1px solid var(--line);}
@@ -51,7 +56,10 @@
     <div class="sub">Práctica de inglés personalizada.<br>Toca tu nombre para empezar.</div>
     <div class="live" id="liveCount"></div>
   </header>
-  <div class="list" id="list"></div>
+  <div class="sect">Estudiantes</div>
+  <div class="list" id="list" style="margin-top:0"></div>
+  <div class="sect">Herramientas · para todos</div>
+  <div class="list" id="tools" style="margin-top:0"></div>
   <div class="foot">ARCHES Language School</div>
 </div>
 
@@ -65,16 +73,34 @@
      you upload, and ready:true once their app is live.
      ========================================================= */
   const STUDENTS = [
-    { name:"Eydel",       slug:"eydel",  focus:"Pre-A1 · el sujeto it, tercera persona", ready:true  },
-    { name:"Mavic",       slug:"mavic",  focus:"B1 · claridad bajo presión",             ready:false },
-    { name:"Gloria Fors", slug:"gloria", focus:"B1-B2 · be able to, transliteración",     ready:false },
-    { name:"Joanna",      slug:"joanna", focus:"miércoles",                                ready:false },
-    { name:"Ruben",       slug:"ruben",  focus:"A1+ · preposiciones, artículos, tercera persona", ready:true  },
-    { name:"Andres",      slug:"andres", focus:"",                                        ready:false }
+    { name:"Alejandra",  slug:"alejandra",  focus:"B1 · el 'it' y el inglés de maestra",              ready:true  },
+    { name:"Andres",     slug:"andres",     focus:"Entrenamiento auditivo · sound by sound",          ready:true  },
+    { name:"Carlenis",   slug:"carlenis",   focus:"B1-B2 · del error a la fluidez",                   ready:true  },
+    { name:"Delfina",    slug:"delfina",    focus:"B1 · inglés de enfermera",                         ready:true  },
+    { name:"Eydel",      slug:"eydel",      focus:"Pre-A1 · el sujeto it, tercera persona",           ready:true  },
+    { name:"Gloria F.",  slug:"gloria",     focus:"B1-B2 · be able to, transliteración",              ready:true  },
+    { name:"Joanna",     slug:"joanna",     focus:"miércoles",                                        ready:false },
+    { name:"Luisamelia", slug:"luisamelia", focus:"A2 · el pasado de verdad",                         ready:true  },
+    { name:"Mavic",      slug:"mavic",      focus:"B1 · claridad bajo presión",                       ready:true  },
+    { name:"Roxana",     slug:"roxana",     focus:"A2 · conversación real",                           ready:true  },
+    { name:"Ruben",      slug:"ruben",      focus:"A1+ · preposiciones, artículos, tercera persona",  ready:true  },
+    { name:"Wilfredo",   slug:"wilfredo",   focus:"B1 · del taller a la fluidez",                     ready:true  }
+  ];
+
+  /* Tools shared by everyone. url can be a folder here (apps/...)
+     or a full address anywhere else. */
+  const TOOLS = [
+    { name:"Oído",               focus:"Entrenamiento auditivo",          url:"https://gabriel01-glitch.github.io/oido/" },
+    { name:"Past Tense",         focus:"Verbos en pasado, con audio",     url:"apps/englishpast/" },
+    { name:"Stress Trainer",     focus:"El acento de las palabras",       url:"apps/stress-trainer/" },
+    { name:"Sonidos -ED",        focus:"/t/, /d/ o /ɪd/",                 url:"apps/ed-sounds/" },
+    { name:"A Pulir",            focus:"Moni & Vale",                     url:"apps/moniandvale/" },
+    { name:"The Playbook",       focus:"Frases para la vida real",        url:"apps/playbook/" }
   ];
   /* ===================  end of edit zone  ================== */
 
   const list = document.getElementById("list");
+  const tools = document.getElementById("tools");
   function esc(s){ return (s==null?"":""+s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
   function initial(n){ return (n||"?").trim().charAt(0).toUpperCase(); }
 
@@ -98,6 +124,17 @@
         '<div class="tag">Pronto</div></div>';
       list.appendChild(d);
     }
+  });
+
+  TOOLS.forEach(t=>{
+    const a = document.createElement("a");
+    a.className = "card tool";
+    a.href = t.url;
+    a.innerHTML = '<div class="initial">'+esc(initial(t.name))+'</div>'+
+      '<div class="body"><div class="nm">'+esc(t.name)+'</div>'+
+      (t.focus?'<div class="fo">'+esc(t.focus)+'</div>':'')+'</div>'+
+      '<div class="arrow">&rsaquo;</div>';
+    tools.appendChild(a);
   });
 
   const lc = document.getElementById("liveCount");

@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Para Gloria · English Practice</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FBF7EF;
+    --cream-deep:#F4ECDD;
+    --paper:#FFFFFF;
+    --terra:#C5603F;
+    --terra-deep:#A84B2F;
+    --terra-soft:#E8A07E;
+    --olive:#7A7A53;
+    --ink:#3A322B;
+    --ink-soft:#6E6256;
+    --gold:#D6A642;
+    --green:#5E8C5A;
+    --line:rgba(58,50,43,.12);
+    --shadow:0 8px 30px rgba(120,80,50,.10);
+    --radius:20px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  html,body{height:100%}
+  body{
+    font-family:'Nunito',sans-serif;
+    background:
+      radial-gradient(1200px 600px at 80% -10%, #FBEFE0 0%, transparent 55%),
+      radial-gradient(900px 500px at -10% 110%, #F1ECE0 0%, transparent 50%),
+      var(--cream);
+    color:var(--ink);
+    min-height:100%;
+    padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:760px;margin:0 auto;padding:26px 20px 90px}
+  .serif{font-family:'Cormorant Garamond',serif}
+
+  /* ---------- HEADER ---------- */
+  header{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:8px}
+  .brand{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+  .brand h1{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:clamp(30px,7vw,46px);line-height:1;color:var(--ink)}
+  .brand .accent{color:var(--terra);font-style:italic}
+  .streak{
+    display:flex;align-items:center;gap:7px;background:var(--paper);
+    border:1px solid var(--line);border-radius:999px;padding:8px 14px;
+    font-weight:700;font-size:14px;color:var(--terra-deep);box-shadow:var(--shadow);white-space:nowrap
+  }
+  .sub{color:var(--ink-soft);font-size:15px;margin:2px 2px 22px;max-width:54ch;line-height:1.5}
+
+  /* ---------- TRACK CARDS ---------- */
+  .tracks{display:grid;gap:14px}
+  .track{
+    position:relative;text-align:left;width:100%;cursor:pointer;
+    background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);
+    padding:18px 18px 16px;box-shadow:var(--shadow);
+    transition:transform .16s ease, box-shadow .16s ease;overflow:hidden;
+  }
+  .track:hover{transform:translateY(-2px);box-shadow:0 14px 36px rgba(120,80,50,.16)}
+  .track:focus-visible{outline:3px solid var(--terra-soft);outline-offset:2px}
+  .track .num{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:20px;color:var(--terra-soft)}
+  .track h3{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:25px;margin:1px 0 3px;letter-spacing:.2px}
+  .track p{color:var(--ink-soft);font-size:14px;line-height:1.45;margin-bottom:13px}
+  .track .es{font-style:italic;color:var(--olive)}
+  .bar{height:8px;border-radius:999px;background:var(--cream-deep);overflow:hidden}
+  .bar > i{display:block;height:100%;background:linear-gradient(90deg,var(--terra-soft),var(--terra));border-radius:999px;transition:width .5s ease}
+  .meta{display:flex;justify-content:space-between;align-items:center;margin-top:8px;font-size:12.5px;color:var(--ink-soft);font-weight:600}
+  .pill{position:absolute;top:16px;right:16px;font-size:11px;font-weight:800;letter-spacing:.4px;text-transform:uppercase;color:var(--terra-deep);background:#F7E4D8;border-radius:999px;padding:4px 10px}
+
+  /* ---------- PRACTICE VIEW ---------- */
+  .screen{display:none}
+  .screen.on{display:block;animation:rise .3s ease}
+  @keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  .topbar{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+  .back{background:var(--paper);border:1px solid var(--line);border-radius:999px;width:42px;height:42px;font-size:19px;color:var(--ink);cursor:pointer;flex:none;box-shadow:var(--shadow);transition:transform .15s}
+  .back:active{transform:scale(.92)}
+  .topbar .tt{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:23px;line-height:1.05;flex:1}
+  .progress{height:6px;border-radius:999px;background:var(--cream-deep);overflow:hidden;margin-bottom:22px}
+  .progress > i{display:block;height:100%;background:var(--gold);width:0;transition:width .4s ease}
+
+  .card{
+    background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);
+    padding:24px 22px;box-shadow:var(--shadow);min-height:240px;display:flex;flex-direction:column
+  }
+  .tag{font-size:12px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;color:var(--terra);margin-bottom:14px}
+  .prompt-es{font-family:'Cormorant Garamond',serif;font-size:clamp(24px,5.5vw,32px);font-weight:500;line-height:1.18;color:var(--ink)}
+  .prompt-sub{color:var(--ink-soft);font-size:15px;margin-top:10px;line-height:1.45}
+  .wrong-line{font-size:17px;color:var(--terra-deep);background:#FBEAE2;border-left:3px solid var(--terra);padding:11px 14px;border-radius:0 12px 12px 0;margin-top:6px;font-weight:600}
+  .wrong-line .x{font-weight:800;margin-right:6px}
+
+  .opts{display:grid;gap:10px;margin-top:18px}
+  .opt{
+    text-align:left;background:var(--cream);border:1.5px solid var(--line);border-radius:14px;
+    padding:13px 15px;font-size:16px;font-weight:600;color:var(--ink);cursor:pointer;font-family:inherit;
+    transition:border-color .15s, background .15s, transform .1s
+  }
+  .opt:hover{border-color:var(--terra-soft)}
+  .opt:active{transform:scale(.99)}
+  .opt.right{border-color:var(--green);background:#EAF2E6;color:#33572f}
+  .opt.wrong{border-color:var(--terra);background:#FBE7DE;color:var(--terra-deep)}
+  .opt:disabled{cursor:default}
+
+  .answerbox{margin-top:20px}
+  textarea, input.typed{
+    width:100%;font-family:inherit;font-size:17px;color:var(--ink);background:var(--cream);
+    border:1.5px solid var(--line);border-radius:14px;padding:13px 15px;resize:none;line-height:1.4
+  }
+  textarea:focus, input.typed:focus{outline:none;border-color:var(--terra-soft);background:var(--paper)}
+
+  .reveal{
+    margin-top:18px;background:#EFF3EA;border:1px solid #CFE0C5;border-radius:14px;
+    padding:16px 16px;display:none;animation:rise .25s ease
+  }
+  .reveal.on{display:block}
+  .reveal .answer{font-family:'Cormorant Garamond',serif;font-size:25px;font-weight:600;color:#33572f;line-height:1.2}
+  .reveal .note{font-size:14.5px;color:var(--ink-soft);margin-top:9px;line-height:1.5}
+  .reveal .note b{color:var(--terra-deep)}
+  .reveal .es-note{font-style:italic;color:var(--olive);margin-top:6px;font-size:14px}
+
+  .feedback{margin-top:16px;font-weight:700;font-size:15px;display:none}
+  .feedback.on{display:block}
+  .feedback.ok{color:var(--green)}
+  .feedback.close{color:var(--gold)}
+  .feedback.no{color:var(--terra-deep)}
+
+  .row{display:flex;gap:10px;margin-top:auto;padding-top:20px;flex-wrap:wrap}
+  .btn{
+    flex:1;min-width:120px;font-family:inherit;font-weight:800;font-size:15.5px;letter-spacing:.2px;
+    border:none;border-radius:14px;padding:14px 16px;cursor:pointer;transition:transform .12s, filter .15s
+  }
+  .btn:active{transform:scale(.97)}
+  .btn-primary{background:var(--terra);color:#fff}
+  .btn-primary:hover{filter:brightness(1.05)}
+  .btn-ghost{background:var(--cream-deep);color:var(--ink)}
+  .btn-audio{flex:none;width:54px;background:var(--cream-deep);color:var(--terra-deep);font-size:20px}
+  .btn-audio.playing{background:var(--terra);color:#fff}
+
+  .modeline{display:flex;align-items:center;gap:8px;margin-top:14px;font-size:13px;color:var(--ink-soft)}
+  .toggle{display:inline-flex;background:var(--cream-deep);border-radius:999px;padding:3px;gap:2px}
+  .toggle button{border:none;background:transparent;font-family:inherit;font-weight:700;font-size:13px;color:var(--ink-soft);padding:6px 13px;border-radius:999px;cursor:pointer}
+  .toggle button.sel{background:var(--paper);color:var(--terra-deep);box-shadow:0 1px 4px rgba(0,0,0,.08)}
+
+  /* ---------- DONE ---------- */
+  .done{text-align:center;padding:30px 10px}
+  .done .big{font-family:'Cormorant Garamond',serif;font-size:54px;color:var(--terra);line-height:1}
+  .done h2{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:32px;margin:14px 0 6px}
+  .done p{color:var(--ink-soft);font-size:16px;line-height:1.5;max-width:42ch;margin:0 auto 22px}
+
+  footer{text-align:center;margin-top:34px;color:var(--ink-soft);font-size:13px;line-height:1.6}
+  footer .heart{color:var(--terra)}
+
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- HOME -->
+  <section id="home" class="screen on">
+    <header>
+      <div class="brand">
+        <h1>Para <span class="accent" id="nameHi">Gloria</span></h1>
+      </div>
+      <div class="streak" id="streakChip">🔥 <span id="streakNum">0</span>‑day streak</div>
+    </header>
+    <p class="sub">Built from our real classes together. Every exercise here comes from something we actually worked on — your own sentences, the idioms we collected, and the little words that trip us up. Pick a track and let's polish. <span class="es">Elige una sección y a pulir.</span></p>
+    <div class="tracks" id="trackList"></div>
+    <footer>
+      Hecho con <span class="heart">♥</span> por tu profesor Gabriel · ARCHES Language School<br>
+      Tip: add <b>?name=Gloria</b> to the link to personalize it.
+    </footer>
+  </section>
+
+  <!-- PRACTICE -->
+  <section id="practice" class="screen">
+    <div class="topbar">
+      <button class="back" id="backBtn" aria-label="Back to home">←</button>
+      <div class="tt" id="practiceTitle">Track</div>
+    </div>
+    <div class="progress"><i id="progBar"></i></div>
+    <div id="cardHost"></div>
+  </section>
+
+</div>
+
+<script>
+/* =========================================================================
+   PARA GLORIA — single-file practice app
+   Content sourced from 3 years of real WhatsApp classes (Jan 2023 – 2026).
+   Design system: Cormorant Garamond + Nunito, cream & terracotta.
+   Audio: Web Speech API now, with a `say` field on every item so Gabriel
+   can later bake in OpenAI TTS base64 with his Python script.
+   ========================================================================= */
+
+/* ---------- personalization ---------- */
+const params = new URLSearchParams(location.search);
+const NAME = (params.get('name') || 'Gloria').replace(/[<>]/g,'').slice(0,24);
+document.getElementById('nameHi').textContent = NAME;
+const forcedMode = params.get('mode'); // 'type' forces typing mode
+
+/* ---------- storage ---------- */
+const KEY = 'paraGloria_' + NAME.toLowerCase();
+function load(){ try{ return JSON.parse(localStorage.getItem(KEY)) || {}; }catch(e){ return {}; } }
+function save(s){ try{ localStorage.setItem(KEY, JSON.stringify(s)); }catch(e){} }
+let state = load();
+if(!state.mastery) state.mastery = {};   // trackId -> count of correct
+if(!state.streak)  state.streak  = {count:0, last:null};
+
+/* streak (counts a day where any exercise was answered) */
+function todayStr(){ const d=new Date(); return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate(); }
+function bumpStreak(){
+  const t = todayStr();
+  if(state.streak.last === t) return;
+  const y = new Date(); y.setDate(y.getDate()-1);
+  const yStr = y.getFullYear()+'-'+(y.getMonth()+1)+'-'+y.getDate();
+  state.streak.count = (state.streak.last === yStr) ? state.streak.count+1 : 1;
+  state.streak.last = t;
+  save(state); renderStreak();
+}
+function renderStreak(){
+  document.getElementById('streakNum').textContent = state.streak.count || 0;
+  document.getElementById('streakChip').style.display = (state.streak.count>0)?'flex':'flex';
+}
+
+/* =========================================================================
+   THE CONTENT — Gloria's real material
+   types: 'fix'  (her own sentence, corrected)
+          'translate' (ES -> EN)
+          'mc'   (multiple choice)
+          'card' (idiom / expression flashcard, reveal only)
+   ========================================================================= */
+const TRACKS = [
+{
+  id:'patterns',
+  badge:'Tus frases',
+  title:'Your own sentences',
+  blurb:'Real messages you sent me — gently corrected. These are the patterns that come back most often.',
+  es:'Tus propias frases, pulidas.',
+  items:[
+    { type:'fix', wrong:"I'm not be able to make the class today.",
+      answer:"I won't be able to make the class today.",
+      say:"I won't be able to make the class today.",
+      note:"<b>be able</b> takes <b>will / won't</b> in the future — never <i>am / is</i>. Say <b>“I won't be able to…”</b>",
+      esNote:"“No podré…” → I won’t be able to…", alts:["I will not be able to make the class today."] },
+
+    { type:'fix', wrong:"I won't be able for our class.",
+      answer:"I won't be able to attend our class.",
+      say:"I won't be able to attend our class.",
+      note:"After <b>be able</b> we need <b>to + verb</b>: <i>to attend</i>, <i>to make it to</i>, <i>to take</i>. Not <i>“able for.”</i>",
+      esNote:"able + to + verbo (no “able for”).", alts:["I won't be able to make it to our class.","I won't be able to take our class."] },
+
+    { type:'fix', wrong:"I will back on July 19th.",
+      answer:"I will be back on July 19th.",
+      say:"I will be back on July nineteenth.",
+      note:"<b>back</b> is not a verb here — you need <b>be</b>: <i>I will be back.</i>",
+      esNote:"“Regresaré” → I will be back (con “be”).", alts:["I'll be back on July 19th."] },
+
+    { type:'fix', wrong:"Yes, I'm.",
+      answer:"Yes, I am.",
+      say:"Yes, I am.",
+      note:"Don't end a sentence with a contraction. <i>I'm, you're, he's</i> need a word after them. Alone, use the full form: <b>Yes, I am.</b>",
+      esNote:"Una contracción nunca cierra la frase.", alts:["Yes, I am ready.","Yes, I am here."] },
+
+    { type:'fix', wrong:"You arrived late? — Yes, I do.",
+      answer:"Yes, I did.",
+      say:"Yes, I did.",
+      note:"You arrived = past. So the short answer is past too: <b>Yes, I did.</b> (Present would be “Yes, I do.”)",
+      esNote:"Acción en pasado → did.", alts:["Yes, I did arrive late.","I did."] },
+
+    { type:'fix', wrong:"I almost forget our class.",
+      answer:"I almost forgot our class.",
+      say:"I almost forgot our class.",
+      note:"It already happened, so use the past: <b>forget → forgot</b>.",
+      esNote:"forget → forgot (irregular).", alts:["I almost forgot about our class."] },
+
+    { type:'fix', wrong:"I disconnect the thing, but I don't think it's working.",
+      answer:"I disconnected it, but I don't think it's working.",
+      say:"I disconnected it, but I don't think it's working.",
+      note:"You did it a moment ago → past tense, add <b>-ed</b>: <i>disconnected</i>. And <b>it</b> is more natural than “the thing.”",
+      esNote:"Pasado regular: verbo + -ed.", alts:["I unplugged it, but I don't think it's working.","I disconnected it but it's not working."] },
+
+    { type:'fix', wrong:"I'm in my mother in law house.",
+      answer:"I'm at my mother-in-law's house.",
+      say:"I'm at my mother-in-law's house.",
+      note:"Two fixes: <b>at</b> a house (not <i>in</i>), and the owner takes <b>'s</b> — <i>my mother-in-law's house</i>.",
+      esNote:"at + casa · posesión con ’s.", alts:["I'm at my mother in law's house."] },
+
+    { type:'fix', wrong:"I think it is because the lightings.",
+      answer:"I think it's because of the lightning.",
+      say:"I think it's because of the lightning.",
+      note:"<b>because of</b> + noun. And <b>lightning</b> (los rayos) has no plural — never <i>lightnings</i>.",
+      esNote:"because of + sustantivo · lightning = rayos (incontable).", alts:["I think it's because of the lightning storm."] },
+
+    { type:'fix', wrong:"I was trying to connect me by my phone.",
+      answer:"I was trying to connect through my phone.",
+      say:"I was trying to connect through my phone.",
+      note:"English drops the reflexive “me” here. We just <b>connect</b> — <i>through / on / with</i> my phone.",
+      esNote:"“conectarme” → to connect (sin “me”).", alts:["I was trying to connect on my phone.","I was trying to connect with my phone."] },
+
+    { type:'fix', wrong:"I haven't been filling well.",
+      answer:"I haven't been feeling well.",
+      say:"I haven't been feeling well.",
+      note:"<b>feeling</b> (sentir), not <i>filling</i> (llenar). Easy to mix — watch the <i>ee</i> sound: f<b>ee</b>l.",
+      esNote:"feel = sentir · fill = llenar.", alts:["I haven't been feeling well lately."] },
+
+    { type:'fix', wrong:"They are measurement the intelligence with numbers.",
+      answer:"They measure intelligence with numbers.",
+      say:"They measure intelligence with numbers.",
+      note:"<b>measure</b> is the verb; <i>measurement</i> is the noun. Also: intelligence here needs no “the.”",
+      esNote:"measure (verbo) ≠ measurement (sustantivo).", alts:["They measure intelligence using numbers."] },
+  ]
+},
+{
+  id:'past',
+  badge:'Pretérito',
+  title:'Past tense & irregular verbs',
+  blurb:'The verbs that slip into present when we speak fast. Translate or pick the right past form.',
+  es:'Los verbos que se nos escapan al presente.',
+  items:[
+    { type:'mc', q:"He ___ asleep on the sofa.", say:"He fell asleep on the sofa.",
+      options:["fall","felt","fell","falled"], answerIndex:2,
+      note:"<b>fall → fell</b>. (And remember: <i>feel → felt</i> is a different verb.)" },
+    { type:'mc', q:"I ___ my keys at the restaurant yesterday.", say:"I forgot my keys at the restaurant yesterday.",
+      options:["forget","forgot","forgetted","forgotten"], answerIndex:1,
+      note:"<b>forget → forgot</b> for simple past. (<i>forgotten</i> is for “have forgotten.”)" },
+    { type:'translate', es:"Me sentí muy bien después de la clase.",
+      answer:"I felt very good after the class.",
+      say:"I felt very good after the class.",
+      note:"<b>feel → felt</b>.", alts:["I felt really good after the class.","I felt great after the class.","I felt very well after class."] },
+    { type:'translate', es:"Ayer me encontré con mi vecino.",
+      answer:"Yesterday I ran into my neighbor.",
+      say:"Yesterday I ran into my neighbor.",
+      note:"<b>run into</b> = encontrarse con alguien por casualidad. Past: <b>ran</b>.",
+      alts:["I ran into my neighbor yesterday.","Yesterday, I ran into my neighbor."] },
+    { type:'mc', q:"She ___ the offer to move into the new office.", say:"She turned down the offer to move into the new office.",
+      options:["turn down","turned down","turn off","turned off"], answerIndex:1,
+      note:"<b>turn down</b> = rechazar. Past: <b>turned down</b>." },
+    { type:'translate', es:"Pensé en ti todo el día.",
+      answer:"I thought about you all day.",
+      say:"I thought about you all day.",
+      note:"<b>think → thought</b>. We <i>think about</i> someone.",
+      alts:["I thought of you all day.","I was thinking about you all day."] },
+    { type:'mc', q:"I accidentally ___ orange juice into my cereal.", say:"I accidentally poured orange juice into my cereal.",
+      options:["pour","poured","pull","pulled"], answerIndex:1,
+      note:"<b>pour → poured</b> (regular: + ed)." },
+    { type:'translate', es:"Lo resolvimos con el tiempo.",
+      answer:"As time passed, we figured it out.",
+      say:"As time passed, we figured it out.",
+      note:"<b>figure out</b> = resolver/entender. <b>as time passed</b> = con el tiempo.",
+      alts:["We figured it out as time passed.","Over time, we figured it out.","We figured it out over time."] },
+  ]
+},
+{
+  id:'idioms',
+  badge:'Modismos',
+  title:'Idioms & expressions',
+  blurb:'The whole collection we gathered over the years — with the Spanish. Read it, say it, then flip to check.',
+  es:'Toda nuestra colección de modismos.',
+  items:[
+    { type:'card', front:"No podría estar más de acuerdo.", answer:"I couldn't agree more.", say:"I couldn't agree more.", note:"Total agreement — stronger than “I agree.”" },
+    { type:'card', front:"Es más fácil decirlo que hacerlo.", answer:"That's easier said than done.", say:"That's easier said than done." },
+    { type:'card', front:"Estoy teniendo dudas sobre esto.", answer:"I'm having second thoughts about this.", say:"I'm having second thoughts about this." },
+    { type:'card', front:"No es tan complicado.", answer:"It's not rocket science.", say:"It's not rocket science.", note:"Literally “no es ciencia espacial.”" },
+    { type:'card', front:"Las apariencias engañan.", answer:"You can't judge a book by its cover.", say:"You can't judge a book by its cover." },
+    { type:'card', front:"Cruzo los dedos.", answer:"I'm keeping my fingers crossed.", say:"I'm keeping my fingers crossed." },
+    { type:'card', front:"Eso es música para mis oídos.", answer:"That's music to my ears.", say:"That's music to my ears." },
+    { type:'card', front:"Estoy al límite de mi paciencia.", answer:"I'm at my wit's end.", say:"I'm at my wit's end." },
+    { type:'card', front:"No es lo mío.", answer:"It's not my cup of tea.", say:"It's not my cup of tea." },
+    { type:'card', front:"Ya cruzaremos ese puente cuando lleguemos.", answer:"Let's cross that bridge when we come to it.", say:"Let's cross that bridge when we come to it." },
+    { type:'card', front:"Estoy entre la espada y la pared.", answer:"I'm caught between a rock and a hard place.", say:"I'm caught between a rock and a hard place." },
+    { type:'card', front:"Esa es la gota que colmó el vaso.", answer:"That's the last straw.", say:"That's the last straw." },
+    { type:'card', front:"Me siento un poco enfermo.", answer:"I'm feeling under the weather.", say:"I'm feeling under the weather." },
+    { type:'card', front:"Costó un ojo de la cara.", answer:"It cost an arm and a leg.", say:"It cost an arm and a leg.", note:"= muy caro." },
+    { type:'card', front:"Justo a tiempo.", answer:"In the nick of time.", say:"In the nick of time." },
+    { type:'card', front:"Dar en el clavo.", answer:"To hit the nail on the head.", say:"To hit the nail on the head.", note:"= acertar exactamente." },
+    { type:'card', front:"Pan comido / muy fácil.", answer:"A piece of cake.", say:"A piece of cake." },
+    { type:'card', front:"¡Mucha suerte! (antes de actuar)", answer:"Break a leg!", say:"Break a leg!", note:"Used to wish good luck before a performance." },
+    { type:'card', front:"Revelar un secreto.", answer:"To spill the beans.", say:"To spill the beans." },
+    { type:'card', front:"Armarse de valor / hacer de tripas corazón.", answer:"To bite the bullet.", say:"To bite the bullet." },
+    { type:'card', front:"Matar dos pájaros de un tiro.", answer:"To kill two birds with one stone.", say:"To kill two birds with one stone." },
+    { type:'card', front:"Llover a cántaros.", answer:"It's raining cats and dogs.", say:"It's raining cats and dogs." },
+    { type:'card', front:"Acobardarse a último momento.", answer:"To get cold feet.", say:"To get cold feet." },
+    { type:'card', front:"Una bendición disfrazada.", answer:"A blessing in disguise.", say:"A blessing in disguise.", note:"Algo bueno que al inicio parecía malo." },
+    /* meeting idioms — definition flip */
+    { type:'card', front:"To bring something to the table", answer:"To contribute something useful (to a meeting).", say:"To bring something to the table.", note:"Meeting idiom." },
+    { type:'card', front:"To be on the same page", answer:"To be in agreement with others.", say:"To be on the same page.", note:"Meeting idiom." },
+    { type:'card', front:"To get down to business", answer:"To start with the important matters.", say:"To get down to business.", note:"Meeting idiom." },
+    { type:'card', front:"To touch base", answer:"To check in briefly with someone.", say:"To touch base.", note:"Meeting idiom." },
+    { type:'card', front:"To beat around the bush", answer:"To avoid the main topic.", say:"To beat around the bush.", note:"Meeting idiom." },
+  ]
+},
+{
+  id:'prepositions',
+  badge:'Palabritas',
+  title:'Prepositions & small words',
+  blurb:'on, at, to, for — the tiny words that change everything. Pick the one that fits.',
+  es:'Las palabritas que lo cambian todo.',
+  items:[
+    { type:'mc', q:"I live ___ Sunrise Blvd.", say:"I live on Sunrise Boulevard.",
+      options:["in","on","at","to"], answerIndex:1,
+      note:"Streets take <b>on</b>: <i>on Sunrise Blvd, on Elm Street.</i>" },
+    { type:'mc', q:"Turn left ___ the corner.", say:"Turn left at the corner.",
+      options:["in","on","at","by"], answerIndex:2,
+      note:"A point/spot takes <b>at</b>: <i>at the corner.</i>" },
+    { type:'mc', q:"I won't be able ___ attend the class.", say:"I won't be able to attend the class.",
+      options:["for","to","of","at"], answerIndex:1,
+      note:"Always <b>be able to</b> + verb. Never “able for.”" },
+    { type:'mc', q:"I bought some brushes ___ art.", say:"I bought some brushes to make art.",
+      options:["to make","for make","for making","to making"], answerIndex:0,
+      note:"Purpose with a verb = <b>to + verb</b>: <i>to make art</i> (Para + verbo)." },
+    { type:'mc', q:"This studio is ___ art.", say:"This studio is for making art.",
+      options:["to make","for make","for making","to making"], answerIndex:2,
+      note:"After <i>is for</i>, use <b>for + -ing</b>: <i>for making art</i> (Para + uso)." },
+    { type:'mc', q:"I feel more ___ when I speak slowly.", say:"I feel more confident when I speak slowly.",
+      options:["confidence","confident","confidently","confide"], answerIndex:1,
+      note:"After <i>be / feel</i> use the adjective <b>confident</b>. (“I have more <i>confidence</i>” uses the noun.)" },
+    { type:'mc', q:"___ you make it quick, please? (most polite)", say:"Could you make it quick, please?",
+      options:["Can","Could","Will","Do"], answerIndex:1,
+      note:"<b>Could</b> is softer and more polite than <i>Can</i> for requests." },
+    { type:'mc', q:"I ___ my neighbor at the store yesterday.", say:"I ran into my neighbor at the store yesterday.",
+      options:["ran into","ran in","run into","ran on"], answerIndex:0,
+      note:"<b>run into someone</b> = encontrarse por casualidad. Past: <i>ran into.</i>" },
+  ]
+},
+{
+  id:'pronunciation',
+  badge:'Pronunciación',
+  title:'Tricky pronunciation',
+  blurb:'Words that look one way and sound another. Tap the speaker, repeat, then reveal the trick.',
+  es:'Palabras que se leen de una forma y suenan de otra.',
+  items:[
+    { type:'card', front:"comfortable", answer:"KOMF-tre-bel", say:"comfortable", note:"3 syllables, not 4. Swallow the “or”: <b>KOMF-tre-bel</b>." },
+    { type:'card', front:"papier‑mâché", answer:"pay-per ma-SHAY", say:"papier mache", note:"From French. <b>pay-per ma-SHAY</b> — like “paper ma-shay.”" },
+    { type:'card', front:"environment", answer:"en-VAI-ron-ment", say:"environment", note:"Don't drop the <i>n</i>: <b>en-VAI-ron-ment</b>." },
+    { type:'card', front:"revenue", answer:"RE-ve-nyoo", say:"revenue", note:"First syllable is the strongest: <b>RE-ve-nyoo</b>." },
+    { type:'card', front:"uncertainty", answer:"an-SER-ten-ti", say:"uncertainty", note:"Strongest on the second part: <b>an-SER-ten-ti</b>." },
+    { type:'card', front:"Three thin thinkers thinking thick thoughts.", answer:"Tongue twister — the “th” drill", say:"Three thin thinkers thinking thick thoughts.", note:"Tip of the tongue lightly between the teeth for every <b>th</b>." },
+  ]
+},
+];
+
+/* =========================================================================
+   RENDER — HOME
+   ========================================================================= */
+const trackList = document.getElementById('trackList');
+function renderHome(){
+  renderStreak();
+  trackList.innerHTML = '';
+  TRACKS.forEach((t,i)=>{
+    const total = t.items.length;
+    const done = Math.min(state.mastery[t.id]||0, total);
+    const pct = Math.round(done/total*100);
+    const el = document.createElement('button');
+    el.className = 'track';
+    el.setAttribute('aria-label', t.title);
+    el.innerHTML = `
+      <span class="pill">${t.badge}</span>
+      <span class="num">${String(i+1).padStart(2,'0')}</span>
+      <h3>${t.title}</h3>
+      <p>${t.blurb} <span class="es">${t.es}</span></p>
+      <div class="bar"><i style="width:${pct}%"></i></div>
+      <div class="meta"><span>${done} / ${total} mastered</span><span>${pct}%</span></div>`;
+    el.addEventListener('click', ()=> openTrack(t.id));
+    trackList.appendChild(el);
+  });
+}
+
+/* =========================================================================
+   AUDIO — Web Speech API with iOS first-gesture unlock
+   ========================================================================= */
+let voicesReady=false, audioUnlocked=false, chosenVoice=null;
+function pickVoice(){
+  const vs = speechSynthesis.getVoices();
+  if(!vs.length) return;
+  chosenVoice =
+    vs.find(v=>/en-US/i.test(v.lang) && /female|samantha|victoria|google us/i.test(v.name)) ||
+    vs.find(v=>/en-US/i.test(v.lang)) ||
+    vs.find(v=>/^en/i.test(v.lang)) || vs[0];
+  voicesReady=true;
+}
+if('speechSynthesis' in window){
+  pickVoice();
+  speechSynthesis.onvoiceschanged = pickVoice;
+}
+function unlockAudio(){
+  if(audioUnlocked || !('speechSynthesis' in window)) return;
+  try{
+    const u = new SpeechSynthesisUtterance(' ');
+    u.volume = 0; speechSynthesis.speak(u);
+    audioUnlocked = true;
+  }catch(e){}
+}
+document.addEventListener('touchstart', unlockAudio, {once:true});
+document.addEventListener('click', unlockAudio, {once:true});
+
+function speak(text, btn){
+  if(!('speechSynthesis' in window) || !text) return;
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  if(chosenVoice) u.voice = chosenVoice;
+  u.lang = (chosenVoice && chosenVoice.lang) || 'en-US';
+  u.rate = 0.92; u.pitch = 1.0;
+  if(btn){
+    btn.classList.add('playing');
+    u.onend = ()=> btn.classList.remove('playing');
+    u.onerror = ()=> btn.classList.remove('playing');
+  }
+  speechSynthesis.speak(u);
+}
+
+/* =========================================================================
+   PRACTICE ENGINE
+   ========================================================================= */
+let cur = { track:null, queue:[], idx:0, answeredThisCard:false, typingMode:false };
+const practice = document.getElementById('practice');
+const home = document.getElementById('home');
+const cardHost = document.getElementById('cardHost');
+const progBar = document.getElementById('progBar');
+
+function shuffle(a){ for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+
+function openTrack(id){
+  const t = TRACKS.find(x=>x.id===id);
+  cur.track = t;
+  cur.queue = shuffle(t.items.map((it,n)=>({it,n})));
+  cur.idx = 0;
+  cur.typingMode = forcedMode==='type';
+  document.getElementById('practiceTitle').textContent = t.title;
+  home.classList.remove('on'); practice.classList.add('on');
+  window.scrollTo(0,0);
+  renderCard();
+}
+function goHome(){
+  speechSynthesis && speechSynthesis.cancel();
+  practice.classList.remove('on'); home.classList.add('on');
+  renderHome(); window.scrollTo(0,0);
+}
+document.getElementById('backBtn').addEventListener('click', goHome);
+
+function setProgress(){
+  const pct = Math.round(cur.idx / cur.queue.length * 100);
+  progBar.style.width = pct + '%';
+}
+
+/* answer normalization + Levenshtein */
+function norm(s){
+  return (s||'').toLowerCase().trim()
+    .replace(/[.,!?;:"“”']/g,'')
+    .replace(/\bi['’]m\b/g,'i am').replace(/\bdon['’]t\b/g,'do not')
+    .replace(/\bdoesn['’]t\b/g,'does not').replace(/\bdidn['’]t\b/g,'did not')
+    .replace(/\bwon['’]t\b/g,'will not').replace(/\bcan['’]t\b/g,'cannot')
+    .replace(/\bisn['’]t\b/g,'is not').replace(/\baren['’]t\b/g,'are not')
+    .replace(/\bit['’]s\b/g,'it is').replace(/\bthat['’]s\b/g,'that is')
+    .replace(/\bi['’]ll\b/g,'i will').replace(/\byou['’]re\b/g,'you are')
+    .replace(/\bwe['’]re\b/g,'we are').replace(/\bi['’]ve\b/g,'i have')
+    .replace(/\bmother-in-law/g,'mother in law')
+    .replace(/\s+/g,' ').trim();
+}
+function lev(a,b){
+  const m=a.length,n=b.length,d=Array.from({length:m+1},(_,i)=>[i,...Array(n).fill(0)]);
+  for(let j=0;j<=n;j++) d[0][j]=j;
+  for(let i=1;i<=m;i++)for(let j=1;j<=n;j++)
+    d[i][j]=Math.min(d[i-1][j]+1,d[i][j-1]+1,d[i-1][j-1]+(a[i-1]===b[j-1]?0:1));
+  return d[m][n];
+}
+function checkTyped(input, item){
+  const cands=[item.answer, ...(item.alts||[])].map(norm);
+  const got=norm(input);
+  if(cands.includes(got)) return 'ok';
+  const best=Math.min(...cands.map(c=>lev(got,c)));
+  if(best<=2 && got.length>4) return 'close';
+  return 'no';
+}
+
+function renderCard(){
+  cur.answeredThisCard=false;
+  setProgress();
+  if(cur.idx >= cur.queue.length){ return renderDone(); }
+  const item = cur.queue[cur.idx].it;
+  const total = cur.queue.length;
+  const showTypeToggle = (item.type==='fix' || item.type==='translate');
+
+  let body='';
+  const tagText = {fix:'Fix your sentence', translate:'Translate to English', mc:'Choose the right word', card:'Flashcard'}[item.type];
+
+  if(item.type==='fix'){
+    body = `
+      <div class="tag">${tagText}</div>
+      <div class="wrong-line"><span class="x">✕</span>${escapeHtml(item.wrong)}</div>
+      <div class="prompt-sub">How would you say this correctly?</div>`;
+  } else if(item.type==='translate'){
+    body = `
+      <div class="tag">${tagText}</div>
+      <div class="prompt-es">${escapeHtml(item.es)}</div>`;
+  } else if(item.type==='mc'){
+    body = `
+      <div class="tag">${tagText}</div>
+      <div class="prompt-es">${escapeHtml(item.q).replace('___','<span style="color:var(--terra)">______</span>')}</div>`;
+  } else if(item.type==='card'){
+    body = `
+      <div class="tag">${tagText}</div>
+      <div class="prompt-es">${escapeHtml(item.front)}</div>`;
+  }
+
+  const wrap=document.createElement('div');
+  wrap.className='card';
+  wrap.innerHTML = body;
+
+  /* interactive area */
+  if(item.type==='mc'){
+    const opts=document.createElement('div'); opts.className='opts';
+    item.options.forEach((o,i)=>{
+      const b=document.createElement('button'); b.className='opt'; b.textContent=o;
+      b.addEventListener('click', ()=>{
+        if(cur.answeredThisCard) return;
+        cur.answeredThisCard=true;
+        const correct = i===item.answerIndex;
+        b.classList.add(correct?'right':'wrong');
+        if(!correct) opts.children[item.answerIndex].classList.add('right');
+        Array.from(opts.children).forEach(c=>c.disabled=true);
+        if(correct){ registerCorrect(); }
+        showReveal(wrap, item, correct?'ok':'no');
+        speak(item.say, audioBtn);
+      });
+      opts.appendChild(b);
+    });
+    wrap.appendChild(opts);
+  } else if(item.type==='card'){
+    /* reveal-only flashcard */
+  } else {
+    const box=document.createElement('div'); box.className='answerbox';
+    const ta=document.createElement('textarea');
+    ta.rows=2; ta.placeholder='Type your answer in English…'; ta.setAttribute('inputmode','text');
+    box.appendChild(ta); wrap.appendChild(box);
+    if(!cur.typingMode){ box.style.display='none'; }
+    wrap._textarea=ta;
+  }
+
+  /* reveal block */
+  const reveal=document.createElement('div'); reveal.className='reveal';
+  reveal.innerHTML = `
+    <div class="answer">${escapeHtml(item.answer)}</div>
+    ${item.note?`<div class="note">${item.note}</div>`:''}
+    ${item.esNote?`<div class="es-note">${item.esNote}</div>`:''}`;
+  wrap.appendChild(reveal);
+  wrap._reveal=reveal;
+
+  const fb=document.createElement('div'); fb.className='feedback'; wrap.appendChild(fb); wrap._fb=fb;
+
+  /* button row */
+  const row=document.createElement('div'); row.className='row';
+  const audioBtn=document.createElement('button');
+  audioBtn.className='btn btn-audio'; audioBtn.innerHTML='🔊'; audioBtn.setAttribute('aria-label','Hear it');
+  audioBtn.addEventListener('click', ()=> speak(item.say, audioBtn));
+
+  const mainBtn=document.createElement('button');
+  mainBtn.className='btn btn-primary';
+
+  if(item.type==='card'){
+    mainBtn.textContent='Reveal';
+    mainBtn.addEventListener('click', ()=>{
+      if(!cur.answeredThisCard){
+        reveal.classList.add('on'); cur.answeredThisCard=true;
+        mainBtn.textContent='Next →'; registerCorrect(); speak(item.say, audioBtn);
+      } else { next(); }
+    });
+  } else if(item.type==='mc'){
+    mainBtn.textContent='Next →';
+    mainBtn.addEventListener('click', ()=>{
+      if(!cur.answeredThisCard){
+        showReveal(wrap,item,'no'); cur.answeredThisCard=true;
+      } else next();
+    });
+  } else {
+    /* fix / translate */
+    mainBtn.textContent = cur.typingMode ? 'Check' : 'Reveal';
+    mainBtn.addEventListener('click', ()=>{
+      if(cur.answeredThisCard){ next(); return; }
+      if(cur.typingMode){
+        const val=wrap._textarea.value;
+        if(!val.trim()){ wrap._textarea.focus(); return; }
+        const res=checkTyped(val,item);
+        fb.className='feedback on '+res;
+        fb.textContent = res==='ok' ? '✓ Exact — beautiful, '+NAME+'!'
+                        : res==='close' ? '≈ So close! Compare with the answer below.'
+                        : 'Not quite — here\'s the natural version:';
+        reveal.classList.add('on'); cur.answeredThisCard=true;
+        if(res!=='no') registerCorrect();
+        mainBtn.textContent='Next →';
+        speak(item.say, audioBtn);
+      } else {
+        reveal.classList.add('on'); cur.answeredThisCard=true;
+        registerCorrect(); mainBtn.textContent='Next →';
+        speak(item.say, audioBtn);
+      }
+    });
+  }
+
+  row.appendChild(audioBtn); row.appendChild(mainBtn);
+  wrap.appendChild(row);
+
+  /* mode toggle for fix/translate */
+  if(showTypeToggle){
+    const ml=document.createElement('div'); ml.className='modeline';
+    ml.innerHTML='<span>Mode:</span>';
+    const tg=document.createElement('div'); tg.className='toggle';
+    const bR=document.createElement('button'); bR.textContent='Reveal';
+    const bT=document.createElement('button'); bT.textContent='Type it';
+    (cur.typingMode?bT:bR).classList.add('sel');
+    bR.addEventListener('click', ()=>{ cur.typingMode=false; renderCard(); });
+    bT.addEventListener('click', ()=>{ cur.typingMode=true; renderCard(); });
+    tg.appendChild(bR); tg.appendChild(bT); ml.appendChild(tg);
+    wrap.appendChild(ml);
+  }
+
+  cardHost.innerHTML=''; cardHost.appendChild(wrap);
+  if(cur.typingMode && wrap._textarea){ setTimeout(()=>wrap._textarea.focus(),60); }
+
+  /* keyboard: Enter advances / checks; number keys for MC */
+  cardHost.onkeydown = (e)=>{
+    if(item.type!=='mc' && e.key==='Enter' && !e.shiftKey){
+      e.preventDefault(); mainBtn.click();
+    }
+  };
+  if(item.type==='mc'){
+    document.onkeydown=(e)=>{
+      const n=parseInt(e.key,10);
+      if(n>=1 && n<=item.options.length && !cur.answeredThisCard){ wrap.querySelectorAll('.opt')[n-1].click(); }
+      else if(e.key==='Enter' && cur.answeredThisCard){ next(); }
+    };
+  } else { document.onkeydown=null; }
+}
+
+function showReveal(wrap,item,res){
+  wrap._reveal.classList.add('on');
+  if(res==='ok'){ wrap._fb.className='feedback on ok'; wrap._fb.textContent='✓ Correct!'; }
+}
+function registerCorrect(){
+  const id=cur.track.id;
+  state.mastery[id]=Math.min((state.mastery[id]||0)+1, cur.track.items.length);
+  save(state); bumpStreak();
+}
+function next(){ cur.idx++; window.scrollTo(0,0); renderCard(); }
+
+function renderDone(){
+  setProgress();
+  document.onkeydown=null;
+  const t=cur.track;
+  const wrap=document.createElement('div');
+  wrap.className='card done';
+  wrap.innerHTML=`
+    <div class="big">✦</div>
+    <h2>¡Excelente, ${escapeHtml(NAME)}!</h2>
+    <p>You finished <b>${escapeHtml(t.title)}</b>. Your English keeps getting more natural — I'm proud of you.</p>
+    <div class="row" style="max-width:420px;margin:0 auto">
+      <button class="btn btn-ghost" id="againBtn">Practice again</button>
+      <button class="btn btn-primary" id="homeBtn">Pick another track</button>
+    </div>`;
+  cardHost.innerHTML=''; cardHost.appendChild(wrap);
+  document.getElementById('againBtn').addEventListener('click', ()=>openTrack(t.id));
+  document.getElementById('homeBtn').addEventListener('click', goHome);
+}
+
+function escapeHtml(s){ return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+/* ---------- boot ---------- */
+renderHome();
+</script>
+</body>
+</html>

@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>My English Practice • Wilfredo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#fbf7f0; --surface:#fffdf9; --ink:#2c2722; --muted:#9a8f83;
+    --line:#e9e0d3; --terra:#bf5a36; --terra-dark:#9f4528; --terra-tint:#f4e4d9;
+    --good:#5a7d5a; --good-tint:#e6efe2; --bad-tint:#f6e2da;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  html,body{margin:0;padding:0;}
+  body{background:var(--cream);color:var(--ink);font-family:'Nunito',sans-serif;-webkit-font-smoothing:antialiased;min-height:100vh;}
+  .wrap{max-width:540px;margin:0 auto;padding:22px 18px 48px;}
+
+  /* Home */
+  .hero{padding:10px 2px 4px;}
+  .hello{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:40px;line-height:1.02;color:var(--ink);}
+  .hello .nm{color:var(--terra);}
+  .sub{font-size:14.5px;color:var(--muted);font-weight:600;margin-top:8px;line-height:1.4;}
+  .streak{display:inline-flex;align-items:center;gap:9px;background:var(--surface);border:1px solid var(--line);border-radius:30px;padding:9px 16px;margin-top:18px;}
+  .streak svg{display:block;}
+  .streak .num{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:24px;color:var(--terra);line-height:1;}
+  .streak .lab{font-size:12.5px;color:var(--muted);font-weight:700;}
+
+  .tracks-label{font-size:11.5px;text-transform:uppercase;letter-spacing:1.4px;color:var(--muted);font-weight:800;margin:30px 4px 14px;}
+  .track{background:var(--surface);border:1.5px solid var(--line);border-radius:18px;padding:18px;margin-bottom:13px;cursor:pointer;transition:transform .08s ease,border-color .15s ease;}
+  .track:active{transform:scale(.985);border-color:var(--terra);}
+  .track-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;}
+  .track-title{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:25px;color:var(--ink);line-height:1.1;}
+  .track-count{font-size:12.5px;color:var(--muted);font-weight:700;white-space:nowrap;}
+  .track-note{font-size:14px;color:var(--muted);font-weight:600;margin-top:5px;line-height:1.4;}
+  .bar{height:7px;background:var(--terra-tint);border-radius:4px;margin-top:14px;overflow:hidden;}
+  .bar > i{display:block;height:100%;background:var(--terra);border-radius:4px;transition:width .5s ease;}
+
+  /* Practice */
+  .ptop{display:flex;align-items:center;gap:14px;padding:6px 0 18px;}
+  .pback{background:none;border:none;color:var(--terra);font-weight:800;font-size:15px;cursor:pointer;font-family:'Nunito',sans-serif;padding:6px 2px;}
+  .pbar{flex:1;height:7px;background:var(--line);border-radius:4px;overflow:hidden;}
+  .pbar > i{display:block;height:100%;background:var(--terra);transition:width .35s ease;}
+  .pcount{font-size:13px;color:var(--muted);font-weight:800;white-space:nowrap;}
+
+  .kicker{font-size:11.5px;text-transform:uppercase;letter-spacing:1.4px;color:var(--terra);font-weight:800;margin-bottom:14px;}
+  .card{background:var(--surface);border:1.5px solid var(--line);border-radius:20px;padding:24px 20px;}
+  .prompt-es{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:30px;line-height:1.18;color:var(--ink);}
+  .prompt-wrong{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:27px;line-height:1.2;color:var(--ink);}
+  .prompt-wrong .mark{color:var(--terra);text-decoration:line-through;text-decoration-color:var(--terra);text-decoration-thickness:2px;}
+  .hint{font-size:14px;color:var(--muted);font-weight:600;margin-top:12px;line-height:1.4;}
+
+  .field{width:100%;margin-top:18px;background:var(--cream);border:1.5px solid var(--line);border-radius:14px;padding:15px 16px;font-family:'Nunito',sans-serif;font-size:19px;color:var(--ink);outline:none;}
+  .field:focus{border-color:var(--terra);}
+  .field::placeholder{color:#c4baac;}
+
+  .btn{border:none;border-radius:14px;font-family:'Nunito',sans-serif;font-weight:800;font-size:16px;padding:16px;cursor:pointer;transition:transform .08s ease,background .15s ease;}
+  .btn:active{transform:scale(.98);}
+  .btn-primary{background:var(--terra);color:#fff;width:100%;margin-top:14px;}
+  .btn-primary:active{background:var(--terra-dark);}
+  .row2{display:flex;gap:10px;margin-top:14px;}
+  .btn-ghost{background:var(--cream);color:var(--ink);border:1.5px solid var(--line);flex:1;}
+  .btn-ghost.full{width:100%;flex:none;}
+
+  /* choice options */
+  .opts{display:flex;flex-direction:column;gap:10px;margin-top:20px;}
+  .opt{background:var(--cream);border:1.5px solid var(--line);border-radius:14px;padding:16px;font-size:18px;font-weight:700;color:var(--ink);cursor:pointer;text-align:left;font-family:'Nunito',sans-serif;transition:transform .08s ease,border-color .12s;}
+  .opt:active{transform:scale(.98);}
+  .opt.ok{background:var(--good-tint);border-color:var(--good);color:var(--good);}
+  .opt.no{background:var(--bad-tint);border-color:var(--terra);color:var(--terra-dark);}
+
+  /* scramble */
+  .answer-row{min-height:58px;display:flex;flex-wrap:wrap;gap:8px;align-content:flex-start;margin-top:20px;padding:12px;background:var(--cream);border:1.5px dashed var(--line);border-radius:14px;}
+  .pool{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;}
+  .tile{background:var(--surface);border:1.5px solid var(--terra);color:var(--ink);border-radius:11px;padding:11px 14px;font-size:17px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;transition:transform .08s ease;}
+  .tile:active{transform:scale(.95);}
+  .tile.placed{background:var(--terra);color:#fff;border-color:var(--terra);}
+  .answer-row .empty{color:#c4baac;font-style:italic;font-size:15px;align-self:center;}
+
+  /* pron */
+  .pron-word{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:46px;text-align:center;color:var(--ink);margin-top:8px;line-height:1;}
+  .pron-arch{text-align:center;font-size:24px;font-weight:800;color:var(--terra);letter-spacing:1px;margin-top:14px;}
+  .pron-arch .up{}
+
+  .speaker{display:inline-flex;align-items:center;justify-content:center;gap:9px;background:var(--cream);border:1.5px solid var(--line);border-radius:30px;padding:12px 20px;font-weight:800;font-size:15px;color:var(--ink);cursor:pointer;font-family:'Nunito',sans-serif;margin:18px auto 0;width:100%;}
+  .speaker:active{border-color:var(--terra);}
+  .speaker svg{display:block;}
+
+  /* feedback */
+  .fb{margin-top:16px;border-radius:14px;padding:15px 16px;font-weight:700;font-size:15.5px;line-height:1.4;}
+  .fb.ok{background:var(--good-tint);color:var(--good);}
+  .fb.close{background:#f7eede;color:#9a6b1e;}
+  .fb.no{background:var(--bad-tint);color:var(--terra-dark);}
+  .fb .ans{display:block;font-family:'Cormorant Garamond',serif;font-weight:700;font-size:22px;margin-top:6px;color:var(--ink);}
+
+  /* summary */
+  .done{text-align:center;padding:30px 10px;}
+  .done h2{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:34px;color:var(--ink);margin:0 0 6px;}
+  .done .score{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:64px;color:var(--terra);line-height:1;margin:14px 0;}
+  .done p{color:var(--muted);font-weight:600;font-size:15px;margin:0 0 24px;}
+
+  .credit{text-align:center;color:#c9bdac;font-size:11.5px;font-weight:700;margin-top:34px;letter-spacing:.5px;}
+
+  @media (prefers-reduced-motion: reduce){*{transition:none !important;}}
+</style>
+</head>
+<body>
+<div class="wrap" id="app"></div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* =========================================================
+     STUDENT CONTENT  (the only block that changes per student)
+     Swap this object, redeploy, done. Schema v2.
+     ========================================================= */
+  const STUDENT = {
+  "student": {
+    "name": "Wilfredo",
+    "level": "B1",
+    "l1": "Spanish",
+    "context": "Cubano en Tampa. Plomero. Familia en Cuba. Inglés para el trabajo y la vida.",
+    "greeting": "Tus frases reales, Wilfredo. Del taller a la fluidez, un poco cada día.",
+    "version": "2026-06-22"
+  },
+  "tracks": [
+    {
+      "id": "phrasal",
+      "title": "Phrasal verbs en la obra",
+      "note": "verbo + partícula = un solo significado. Los que ya manejas.",
+      "items": [
+        {
+          "type": "translate",
+          "es": "Tuvimos que posponer la reunión.",
+          "en": "We had to put off the meeting.",
+          "note": "put off = posponer.",
+          "say": "We had to put off the meeting."
+        },
+        {
+          "type": "translate",
+          "es": "No puedo tolerar su mal comportamiento.",
+          "en": "I can't put up with his bad behavior.",
+          "alts": [
+            "I cannot put up with his bad behavior"
+          ],
+          "note": "put up with = tolerar.",
+          "say": "I can't put up with his bad behavior."
+        },
+        {
+          "type": "translate",
+          "es": "Por favor apaga el fuego.",
+          "en": "Please put out the fire.",
+          "alts": [
+            "Please put out the campfire"
+          ],
+          "note": "put out = apagar (un fuego).",
+          "say": "Please put out the fire."
+        },
+        {
+          "type": "translate",
+          "es": "Ella decidió empezar a pintar.",
+          "en": "She decided to take up painting.",
+          "note": "take up = empezar (un hobby).",
+          "say": "She decided to take up painting."
+        },
+        {
+          "type": "translate",
+          "es": "Se parece a su padre.",
+          "en": "He takes after his father.",
+          "note": "take after = parecerse a.",
+          "say": "He takes after his father."
+        },
+        {
+          "type": "translate",
+          "es": "El avión despegará en diez minutos.",
+          "en": "The plane will take off in ten minutes.",
+          "note": "take off = despegar.",
+          "say": "The plane will take off in ten minutes."
+        },
+        {
+          "type": "translate",
+          "es": "Necesito buscar la dirección.",
+          "en": "I need to look up the address.",
+          "note": "look up = buscar información.",
+          "say": "I need to look up the address."
+        },
+        {
+          "type": "translate",
+          "es": "Espero conocerte.",
+          "en": "I look forward to meeting you.",
+          "note": "look forward to = esperar con ganas.",
+          "say": "I look forward to meeting you."
+        },
+        {
+          "type": "translate",
+          "es": "¿Puedes cuidar a mi perro?",
+          "en": "Can you look after my dog?",
+          "note": "look after = cuidar.",
+          "say": "Can you look after my dog?"
+        },
+        {
+          "type": "translate",
+          "es": "Me topé con un viejo amigo.",
+          "en": "I ran into an old friend.",
+          "note": "run into = encontrarse por casualidad.",
+          "say": "I ran into an old friend."
+        },
+        {
+          "type": "translate",
+          "es": "Se le ocurrió una solución brillante.",
+          "en": "He came up with a brilliant solution.",
+          "note": "come up with = idear.",
+          "say": "He came up with a brilliant solution."
+        },
+        {
+          "type": "translate",
+          "es": "Encontré este libro por casualidad.",
+          "en": "I came across this book.",
+          "note": "come across = encontrar por casualidad.",
+          "say": "I came across this book."
+        },
+        {
+          "type": "translate",
+          "es": "Rechazó la oferta de trabajo.",
+          "en": "He turned down the job offer.",
+          "note": "turn down = rechazar.",
+          "say": "He turned down the job offer."
+        },
+        {
+          "type": "translate",
+          "es": "Ella llegó tarde a la reunión.",
+          "en": "She turned up late to the meeting.",
+          "note": "turn up = aparecer/llegar.",
+          "say": "She turned up late to the meeting."
+        },
+        {
+          "type": "choice",
+          "prompt": "manejar o sobrevivir con dificultad (phrasal):",
+          "options": [
+            "get by",
+            "get along",
+            "get over"
+          ],
+          "answer": "get by",
+          "say": "We get by."
+        },
+        {
+          "type": "choice",
+          "prompt": "llevarse bien (phrasal):",
+          "options": [
+            "get along",
+            "get by",
+            "take after"
+          ],
+          "answer": "get along",
+          "say": "They get along."
+        }
+      ]
+    },
+    {
+      "id": "tiempos",
+      "title": "Doce tiempos, un control",
+      "note": "del presente al futuro perfecto. Lo que ya practicas.",
+      "items": [
+        {
+          "type": "translate",
+          "es": "Hablo inglés todos los días.",
+          "en": "I speak English every day.",
+          "say": "I speak English every day."
+        },
+        {
+          "type": "translate",
+          "es": "Hablé inglés cuando visité Nueva York.",
+          "en": "I spoke English when I visited New York.",
+          "say": "I spoke English when I visited New York."
+        },
+        {
+          "type": "translate",
+          "es": "Hablaré inglés cuando conozca a mi cantante favorito.",
+          "en": "I will speak English when I meet my favorite singer.",
+          "note": "después de 'when', presente: meet.",
+          "say": "I will speak English when I meet my favorite singer."
+        },
+        {
+          "type": "translate",
+          "es": "He hablado inglés por años.",
+          "en": "I have spoken English for years.",
+          "note": "present perfect.",
+          "say": "I have spoken English for years."
+        },
+        {
+          "type": "translate",
+          "es": "Había hablado inglés por años antes de mudarme.",
+          "en": "I had spoken English for years before I moved.",
+          "alts": [
+            "I had spoken English for years before moving"
+          ],
+          "note": "pasado perfecto.",
+          "say": "I had spoken English for years before I moved."
+        },
+        {
+          "type": "translate",
+          "es": "Estoy hablando inglés ahora mismo.",
+          "en": "I am speaking English right now.",
+          "alts": [
+            "I'm speaking English right now"
+          ],
+          "say": "I am speaking English right now."
+        },
+        {
+          "type": "translate",
+          "es": "He estado estudiando inglés desde el año pasado.",
+          "en": "I have been studying English since last year.",
+          "note": "present perfect continuous.",
+          "say": "I have been studying English since last year."
+        },
+        {
+          "type": "translate",
+          "es": "Para cuando me gradúe, habré hablado inglés con fluidez.",
+          "en": "By the time I graduate, I will have spoken English fluently.",
+          "note": "futuro perfecto.",
+          "say": "By the time I graduate, I will have spoken English fluently."
+        },
+        {
+          "type": "translate",
+          "es": "Nunca he visto un paisaje tan hermoso.",
+          "en": "I have never seen such a beautiful landscape.",
+          "alts": [
+            "I've never seen such a beautiful landscape"
+          ],
+          "say": "I have never seen such a beautiful landscape."
+        },
+        {
+          "type": "translate",
+          "es": "He visto esa película tres veces.",
+          "en": "I have seen that movie three times.",
+          "alts": [
+            "I've seen that movie three times"
+          ],
+          "say": "I have seen that movie three times."
+        },
+        {
+          "type": "translate",
+          "es": "Su mamá sigue viviendo en Cuba.",
+          "en": "Her mom still lives in Cuba.",
+          "alts": [
+            "Her mom is still living in Cuba"
+          ],
+          "say": "Her mom still lives in Cuba."
+        },
+        {
+          "type": "fix",
+          "wrong": "The people was angry.",
+          "right": "The people were angry.",
+          "note": "people → were.",
+          "say": "The people were angry."
+        },
+        {
+          "type": "fix",
+          "wrong": "There were many peoples.",
+          "right": "There were many people.",
+          "note": "'people' ya es plural, sin 's'.",
+          "say": "There were many people."
+        },
+        {
+          "type": "translate",
+          "es": "Cuando era niño, visitaba a mis abuelos cada verano.",
+          "en": "When I was a child, I visited my grandparents every summer.",
+          "alts": [
+            "When I was a child, I used to visit my grandparents every summer"
+          ],
+          "say": "When I was a child, I visited my grandparents every summer."
+        },
+        {
+          "type": "translate",
+          "es": "Estábamos a punto de salir cuando empezó a llover.",
+          "en": "We were about to leave when it started raining.",
+          "alts": [
+            "We were about to leave when it started to rain"
+          ],
+          "say": "We were about to leave when it started raining."
+        },
+        {
+          "type": "dictate",
+          "say": "I have been speaking English all day.",
+          "note": "present perfect continuous."
+        }
+      ]
+    },
+    {
+      "id": "idioms",
+      "title": "Idioms que suenan a nativo",
+      "note": "no se traducen palabra por palabra. Significan otra cosa.",
+      "items": [
+        {
+          "type": "choice",
+          "prompt": "muy feliz (idiom):",
+          "options": [
+            "over the moon",
+            "hit the hay",
+            "a dime a dozen"
+          ],
+          "answer": "over the moon",
+          "say": "I'm over the moon."
+        },
+        {
+          "type": "choice",
+          "prompt": "irse a dormir (idiom):",
+          "options": [
+            "hit the hay",
+            "break a leg",
+            "spill the beans"
+          ],
+          "answer": "hit the hay",
+          "say": "Let's hit the hay."
+        },
+        {
+          "type": "choice",
+          "prompt": "buena suerte (idiom):",
+          "options": [
+            "break a leg",
+            "when pigs fly",
+            "beat around the bush"
+          ],
+          "answer": "break a leg",
+          "say": "Break a leg!"
+        },
+        {
+          "type": "choice",
+          "prompt": "muy caro (idiom):",
+          "options": [
+            "costs an arm and a leg",
+            "a dime a dozen",
+            "when pigs fly"
+          ],
+          "answer": "costs an arm and a leg",
+          "say": "It costs an arm and a leg."
+        },
+        {
+          "type": "choice",
+          "prompt": "revelar un secreto (idiom):",
+          "options": [
+            "spill the beans",
+            "hit the hay",
+            "keep your cool"
+          ],
+          "answer": "spill the beans",
+          "say": "Don't spill the beans."
+        },
+        {
+          "type": "choice",
+          "prompt": "algo que nunca pasará (idiom):",
+          "options": [
+            "when pigs fly",
+            "the ball is in your court",
+            "break a leg"
+          ],
+          "answer": "when pigs fly",
+          "say": "When pigs fly."
+        },
+        {
+          "type": "choice",
+          "prompt": "buscar en el lugar equivocado (idiom):",
+          "options": [
+            "barking up the wrong tree",
+            "beat around the bush",
+            "a dime a dozen"
+          ],
+          "answer": "barking up the wrong tree",
+          "say": "You're barking up the wrong tree."
+        },
+        {
+          "type": "choice",
+          "prompt": "no es complicado (idiom):",
+          "options": [
+            "it's not rocket science",
+            "the ball is in your court",
+            "hit the hay"
+          ],
+          "answer": "it's not rocket science",
+          "say": "It's not rocket science."
+        },
+        {
+          "type": "choice",
+          "prompt": "muy común (idiom):",
+          "options": [
+            "a dime a dozen",
+            "over the moon",
+            "break a leg"
+          ],
+          "answer": "a dime a dozen",
+          "say": "They're a dime a dozen."
+        },
+        {
+          "type": "choice",
+          "prompt": "evitar el tema (idiom):",
+          "options": [
+            "beat around the bush",
+            "spill the beans",
+            "hit the hay"
+          ],
+          "answer": "beat around the bush",
+          "say": "Stop beating around the bush."
+        },
+        {
+          "type": "choice",
+          "prompt": "te toca decidir a ti (idiom):",
+          "options": [
+            "the ball is in your court",
+            "when pigs fly",
+            "break a leg"
+          ],
+          "answer": "the ball is in your court",
+          "say": "The ball is in your court."
+        },
+        {
+          "type": "choice",
+          "prompt": "mantener la calma (idiom):",
+          "options": [
+            "keep your cool",
+            "blow hot and cold",
+            "hit the hay"
+          ],
+          "answer": "keep your cool",
+          "say": "Keep your cool."
+        },
+        {
+          "type": "translate",
+          "es": "Deja de andarte por las ramas.",
+          "en": "Stop beating around the bush.",
+          "note": "beat around the bush = irse por las ramas.",
+          "say": "Stop beating around the bush."
+        },
+        {
+          "type": "translate",
+          "es": "Reveló el secreto sin querer.",
+          "en": "She let the cat out of the bag.",
+          "note": "let the cat out of the bag = revelar un secreto sin querer.",
+          "say": "She let the cat out of the bag."
+        },
+        {
+          "type": "translate",
+          "es": "Estaba feliz por el ascenso.",
+          "en": "He was over the moon about the promotion.",
+          "alts": [
+            "He was over the moon about his promotion"
+          ],
+          "note": "over the moon = feliz.",
+          "say": "He was over the moon about the promotion."
+        }
+      ]
+    },
+    {
+      "id": "plomero",
+      "title": "Inglés del plomero",
+      "note": "tu terreno: la obra, las herramientas y el cliente.",
+      "items": [
+        {
+          "type": "translate",
+          "es": "Hay una fuga en el sótano.",
+          "en": "There's a leak in the basement.",
+          "alts": [
+            "There is a leak in the basement"
+          ],
+          "say": "There's a leak in the basement."
+        },
+        {
+          "type": "translate",
+          "es": "Necesito reemplazar la tubería vieja.",
+          "en": "I need to replace the old pipe.",
+          "say": "I need to replace the old pipe."
+        },
+        {
+          "type": "translate",
+          "es": "Pásame la llave inglesa.",
+          "en": "Pass me the wrench.",
+          "say": "Pass me the wrench."
+        },
+        {
+          "type": "translate",
+          "es": "El desagüe está tapado.",
+          "en": "The drain is clogged.",
+          "alts": [
+            "The drain is blocked"
+          ],
+          "say": "The drain is clogged."
+        },
+        {
+          "type": "translate",
+          "es": "Cierra la válvula principal.",
+          "en": "Shut off the main valve.",
+          "alts": [
+            "Turn off the main valve"
+          ],
+          "say": "Shut off the main valve."
+        },
+        {
+          "type": "translate",
+          "es": "El calentador de agua no funciona.",
+          "en": "The water heater isn't working.",
+          "alts": [
+            "The water heater is not working"
+          ],
+          "say": "The water heater isn't working."
+        },
+        {
+          "type": "translate",
+          "es": "El sótano está inundado.",
+          "en": "The basement is flooded.",
+          "say": "The basement is flooded."
+        },
+        {
+          "type": "translate",
+          "es": "Lo arreglaremos enseguida.",
+          "en": "We'll fix it right away.",
+          "alts": [
+            "We will fix it right away"
+          ],
+          "say": "We'll fix it right away."
+        },
+        {
+          "type": "translate",
+          "es": "Voy a revisar la presión del agua.",
+          "en": "I'm going to check the water pressure.",
+          "alts": [
+            "I am going to check the water pressure"
+          ],
+          "say": "I'm going to check the water pressure."
+        },
+        {
+          "type": "translate",
+          "es": "Soldé la unión para sellarla.",
+          "en": "I soldered the joint to seal it.",
+          "note": "solder = soldar (la 'l' casi no suena).",
+          "say": "I soldered the joint to seal it."
+        },
+        {
+          "type": "scramble",
+          "answer": "Shut off the main valve.",
+          "note": "primero, lo primero.",
+          "say": "Shut off the main valve."
+        },
+        {
+          "type": "translate",
+          "es": "tubería",
+          "en": "pipe",
+          "say": "pipe"
+        },
+        {
+          "type": "translate",
+          "es": "caldera",
+          "en": "boiler",
+          "say": "boiler"
+        },
+        {
+          "type": "pron",
+          "word": "plumber",
+          "arches": "PLO-mer",
+          "note": "la 'b' es muda.",
+          "say": "plumber"
+        },
+        {
+          "type": "pron",
+          "word": "wrench",
+          "arches": "rench",
+          "note": "la 'w' es muda.",
+          "say": "wrench"
+        },
+        {
+          "type": "pron",
+          "word": "water",
+          "arches": "WA-rer",
+          "note": "la 't' suena suave, como 'r'.",
+          "say": "water"
+        }
+      ]
+    }
+  ]
+};
+  /* ====================  end content  ====================== */
+
+
+  // ---------- setup ----------
+  const params = new URLSearchParams(location.search);
+  const displayName = params.get("name") || STUDENT.student.name;
+  const sKey = "arches_" + (STUDENT.student.name||"x").toLowerCase().replace(/\s+/g,"");
+  const app = document.getElementById("app");
+  let view = "home", track = null, queue = [], qi = 0, sessionRight = 0, sessionTotal = 0;
+
+  // storage with fallback
+  const mem = {};
+  const store = {
+    get(k,d){ try{ const v=localStorage.getItem(k); return v?JSON.parse(v):d; }catch(e){ return (k in mem)?mem[k]:d; } },
+    set(k,v){ try{ localStorage.setItem(k,JSON.stringify(v)); }catch(e){ mem[k]=v; } }
+  };
+  let mastery = store.get(sKey+"_mastery", {});
+  function itemKey(tid,i){ return tid+"#"+i; }
+  function saveMastery(){ store.set(sKey+"_mastery", mastery); }
+
+  // streak
+  function todayStr(){ const d=new Date(); return d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate(); }
+  function yestStr(){ const d=new Date(Date.now()-86400000); return d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate(); }
+  function bumpStreak(){
+    const s = store.get(sKey+"_streak", {last:null,count:0});
+    const t = todayStr();
+    if(s.last===t){ /* already counted today */ }
+    else if(s.last===yestStr()){ s.count+=1; s.last=t; }
+    else { s.count=1; s.last=t; }
+    store.set(sKey+"_streak", s);
+    return s.count;
+  }
+  function streakCount(){ return store.get(sKey+"_streak", {count:0}).count; }
+
+  // ---------- audio ----------
+  let voice=null, audioReady=false;
+  function loadVoice(){
+    const vs = window.speechSynthesis ? speechSynthesis.getVoices() : [];
+    voice = vs.find(v=>/en[-_]US/i.test(v.lang)) || vs.find(v=>/^en/i.test(v.lang)) || null;
+  }
+  if(window.speechSynthesis){ loadVoice(); speechSynthesis.onvoiceschanged = loadVoice; }
+  function unlockAudio(){
+    if(audioReady || !window.speechSynthesis) return;
+    try{ const u=new SpeechSynthesisUtterance(""); u.volume=0; speechSynthesis.speak(u); audioReady=true; }catch(e){}
+  }
+  document.addEventListener("touchstart", unlockAudio, {once:true});
+  document.addEventListener("click", unlockAudio, {once:true});
+  function speak(text){
+    if(!text) return;
+    const baked = STUDENT.audio && STUDENT.audio[text];
+    if(baked){ try{ new Audio(baked).play(); return; }catch(e){} }
+    if(!window.speechSynthesis) return;
+    try{
+      speechSynthesis.cancel();
+      const u=new SpeechSynthesisUtterance(text);
+      u.lang="en-US"; u.rate=0.95; if(voice) u.voice=voice;
+      speechSynthesis.speak(u);
+    }catch(e){}
+  }
+  const speakerSVG = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="M19 5a9 9 0 0 1 0 14"/><path d="M15.5 8.5a4 4 0 0 1 0 7"/></svg>';
+  const flameSVG = '<svg width="20" height="20" viewBox="0 0 24 24" fill="#bf5a36" stroke="none"><path d="M12 2c1 3-1 4-2 6-1 1.6-1 3 0 4 .8.8 2 1 2-1 .6 1 1 2 1 3a3 3 0 0 1-6 0c0-1 .3-2 1-3-2 .4-3 2-3 4a5 5 0 0 0 10 0c0-4-3-6-4-9-.5-1.6-.3-3 1-4z"/></svg>';
+
+  // ---------- text matching ----------
+  const CMAP = {"it's":"it is","i'm":"i am","don't":"do not","doesn't":"does not","didn't":"did not","isn't":"is not","aren't":"are not","wasn't":"was not","weren't":"were not","can't":"cannot","won't":"will not","i'll":"i will","she's":"she is","he's":"he is","they're":"they are","you're":"you are","we're":"we are","that's":"that is","what's":"what is","there's":"there is","let's":"let us","i've":"i have","you've":"you have","we've":"we have","they've":"they have","hasn't":"has not","haven't":"have not","hadn't":"had not","wouldn't":"would not","couldn't":"could not","shouldn't":"should not","she'll":"she will","he'll":"he will","you'll":"you will","we'll":"we will","they'll":"they will",
+    "dont":"do not","doesnt":"does not","didnt":"did not","isnt":"is not","arent":"are not","wasnt":"was not","werent":"were not","cant":"cannot","wont":"will not","hasnt":"has not","havent":"have not","hadnt":"had not","wouldnt":"would not","couldnt":"could not","shouldnt":"should not"};
+  function norm(s){
+    s=(s||"").toLowerCase().replace(/[‘’ʼ`]/g,"'").trim();
+    Object.keys(CMAP).forEach(k=>{ s=s.replace(new RegExp("\\b"+k.replace(/'/g,"'")+"\\b","g"), CMAP[k]); });
+    s=s.replace(/[^a-z0-9 ]/g,"").replace(/\s+/g," ").trim();
+    return s;
+  }
+  function lev(a,b){
+    const m=a.length,n=b.length; if(!m)return n; if(!n)return m;
+    let prev=Array.from({length:n+1},(_,i)=>i), cur=new Array(n+1);
+    for(let i=1;i<=m;i++){ cur[0]=i;
+      for(let j=1;j<=n;j++){ cur[j]=Math.min(prev[j]+1,cur[j-1]+1,prev[j-1]+(a[i-1]===b[j-1]?0:1)); }
+      [prev,cur]=[cur,prev];
+    }
+    return prev[n];
+  }
+  // returns "ok" | "close" | "no"
+  function check(input, answer, alts){
+    const ni=norm(input); if(!ni) return "no";
+    const targets=[answer].concat(alts||[]).map(norm);
+    if(targets.indexOf(ni)>=0) return "ok";
+    let best=99; targets.forEach(t=>{ best=Math.min(best, lev(ni,t)); });
+    const tol=Math.max(1, Math.floor(answer.length*0.12));
+    return best<=tol ? "close" : "no";
+  }
+
+  // ---------- helpers ----------
+  function shuffle(a){ a=a.slice(); for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+  function el(html){ const d=document.createElement("div"); d.innerHTML=html.trim(); return d.firstChild; }
+  function trackMastery(t){
+    const total=t.items.length; if(!total) return 0;
+    let done=0; t.items.forEach((_,i)=>{ if(mastery[itemKey(t.id,i)]) done++; });
+    return Math.round(done/total*100);
+  }
+  function archHTML(s){ return (s||"").split("-").map(p=> p===p.toUpperCase() && /[A-Z]/.test(p) ? '<b>'+p+'</b>' : p).join("-"); }
+
+  // ---------- views ----------
+  function renderHome(){
+    view="home";
+    let html='<div class="hero">';
+    html+='<div class="hello">Hola <span class="nm">'+esc(displayName)+'</span></div>';
+    if(STUDENT.student.greeting) html+='<div class="sub">'+esc(STUDENT.student.greeting)+'</div>';
+    const sc=streakCount();
+    if(sc>0) html+='<div class="streak">'+flameSVG+'<span class="num">'+sc+'</span><span class="lab">'+(sc===1?'día seguido':'días seguidos')+'</span></div>';
+    html+='</div>';
+    html+='<div class="tracks-label">Tus temas</div>';
+    app.innerHTML=html;
+    STUDENT.tracks.forEach(t=>{
+      const pct=trackMastery(t);
+      const card=el('<div class="track">'+
+        '<div class="track-head"><div class="track-title">'+esc(t.title)+'</div><div class="track-count">'+t.items.length+' · '+pct+'%</div></div>'+
+        (t.note?'<div class="track-note">'+esc(t.note)+'</div>':'')+
+        '<div class="bar"><i style="width:'+pct+'%"></i></div></div>');
+      card.onclick=()=>startTrack(t);
+      app.appendChild(card);
+    });
+    app.appendChild(el('<div class="credit">ARCHES · '+esc(STUDENT.student.name)+' · v'+esc(STUDENT.student.version||'1')+'</div>'));
+  }
+
+  function startTrack(t){
+    track=t; queue=shuffle(t.items.map((it,i)=>({it,i}))); qi=0; sessionRight=0; sessionTotal=0;
+    renderCard();
+  }
+
+  function practiceShell(inner){
+    const pct=Math.round(qi/queue.length*100);
+    let html='<div class="ptop">'+
+      '<button class="pback" id="pb">‹ Temas</button>'+
+      '<div class="pbar"><i style="width:'+pct+'%"></i></div>'+
+      '<div class="pcount">'+(qi+1)+' / '+queue.length+'</div></div>';
+    html+=inner;
+    app.innerHTML=html;
+    document.getElementById("pb").onclick=renderHome;
+  }
+
+  function renderCard(){
+    if(qi>=queue.length){ return renderSummary(); }
+    const {it,i}=queue[qi];
+    const t=track;
+    const advance=(correct)=>{
+      sessionTotal++;
+      if(correct){ sessionRight++; mastery[itemKey(t.id,i)]=true; }
+      else { delete mastery[itemKey(t.id,i)]; }
+      saveMastery();
+      qi++;
+      renderCard();
+    };
+
+    if(it.type==="fix")      return cardTyped(it, "Corrige la frase", '<div class="prompt-wrong">'+wrongHTML(it.wrong)+'</div>', it.right, advance);
+    if(it.type==="translate")return cardTyped(it, "Traduce", '<div class="prompt-es">'+esc(it.es)+'</div>', it.en, advance);
+    if(it.type==="dictate")  return cardDictate(it, advance);
+    if(it.type==="choice")   return cardChoice(it, advance);
+    if(it.type==="scramble") return cardScramble(it, advance);
+    if(it.type==="pron")     return cardPron(it, advance);
+    // unknown type, skip
+    advance(true);
+  }
+
+  function wrongHTML(s){ return '<span class="mark">'+esc(s)+'</span>'; }
+
+  // typed cards (fix, translate)
+  function cardTyped(it, kicker, promptHTML, answer, advance){
+    let revealed=false;
+    practiceShell('<div class="kicker">'+kicker+'</div><div class="card">'+promptHTML+
+      (it.note?'<div class="hint">'+esc(it.note)+'</div>':'')+
+      '<input class="field" id="inp" placeholder="Escribe en inglés" autocomplete="off" autocapitalize="sentences">'+
+      '<div id="fb"></div>'+
+      '<button class="btn btn-primary" id="go">Revisar</button>'+
+      '<div class="row2"><button class="btn btn-ghost full" id="show">Ver respuesta</button></div></div>');
+    const inp=document.getElementById("inp"), fb=document.getElementById("fb"), go=document.getElementById("go");
+    inp.focus();
+    inp.addEventListener("keydown",e=>{ if(e.key==="Enter"){ e.preventDefault(); go.click(); }});
+    document.getElementById("show").onclick=()=>{
+      revealed=true;
+      fb.innerHTML='<div class="fb no">La respuesta es:<span class="ans">'+esc(answer)+'</span></div>';
+      speak(it.say||answer);
+      go.textContent="Siguiente"; go.onclick=()=>advance(false);
+    };
+    go.onclick=()=>{
+      if(revealed) return advance(false);
+      const r=check(inp.value, answer, it.alts);
+      if(r==="ok"){
+        fb.innerHTML='<div class="fb ok">Correcto.<span class="ans">'+esc(answer)+'</span></div>';
+        speak(it.say||answer);
+        go.textContent="Siguiente"; go.onclick=()=>advance(true);
+      } else if(r==="close"){
+        fb.innerHTML='<div class="fb close">Casi. Revisa la ortografía o la contracción e intenta otra vez.</div>';
+      } else {
+        fb.innerHTML='<div class="fb no">Todavía no. Inténtalo otra vez o mira la respuesta.</div>';
+      }
+    };
+  }
+
+  // dictate
+  function cardDictate(it, advance){
+    const answer = it.answer || it.say;
+    let revealed=false;
+    practiceShell('<div class="kicker">Escucha y escribe</div><div class="card">'+
+      '<button class="speaker" id="play">'+speakerSVG+'Escuchar</button>'+
+      (it.note?'<div class="hint">'+esc(it.note)+'</div>':'')+
+      '<input class="field" id="inp" placeholder="Escribe lo que oigas" autocomplete="off" autocapitalize="sentences">'+
+      '<div id="fb"></div>'+
+      '<button class="btn btn-primary" id="go">Revisar</button>'+
+      '<div class="row2"><button class="btn btn-ghost full" id="show">Ver respuesta</button></div></div>');
+    const inp=document.getElementById("inp"), fb=document.getElementById("fb"), go=document.getElementById("go");
+    document.getElementById("play").onclick=()=>speak(it.say);
+    setTimeout(()=>speak(it.say), 350);
+    inp.addEventListener("keydown",e=>{ if(e.key==="Enter"){ e.preventDefault(); go.click(); }});
+    document.getElementById("show").onclick=()=>{
+      revealed=true;
+      fb.innerHTML='<div class="fb no">Era:<span class="ans">'+esc(answer)+'</span></div>';
+      speak(it.say);
+      go.textContent="Siguiente"; go.onclick=()=>advance(false);
+    };
+    go.onclick=()=>{
+      if(revealed) return advance(false);
+      const r=check(inp.value, answer, it.alts);
+      if(r==="ok"){
+        fb.innerHTML='<div class="fb ok">Eso es.<span class="ans">'+esc(answer)+'</span></div>';
+        go.textContent="Siguiente"; go.onclick=()=>advance(true);
+      } else if(r==="close"){
+        fb.innerHTML='<div class="fb close">Muy cerca. Escucha otra vez y ajusta.</div>';
+        speak(it.say);
+      } else {
+        fb.innerHTML='<div class="fb no">Todavía no. Vuelve a escuchar.</div>';
+      }
+    };
+  }
+
+  // choice
+  function cardChoice(it, advance){
+    practiceShell('<div class="kicker">Elige la correcta</div><div class="card">'+
+      '<div class="prompt-es">'+esc(it.prompt)+'</div>'+
+      (it.note?'<div class="hint">'+esc(it.note)+'</div>':'')+
+      '<div class="opts" id="opts"></div><div id="fb"></div></div>');
+    const opts=document.getElementById("opts"), fb=document.getElementById("fb");
+    let done=false;
+    shuffle(it.options).forEach(o=>{
+      const b=el('<button class="opt">'+esc(o)+'</button>');
+      b.onclick=()=>{
+        if(done) return;
+        if(norm(o)===norm(it.answer)){
+          done=true; b.classList.add("ok");
+          fb.innerHTML='<div class="fb ok">Correcto.</div>';
+          speak(it.say||it.answer);
+          const n=el('<button class="btn btn-primary">Siguiente</button>'); n.onclick=()=>advance(true);
+          fb.appendChild(n);
+        } else {
+          b.classList.add("no"); b.disabled=true;
+          fb.innerHTML='<div class="fb no">Esa no. Prueba otra.</div>';
+        }
+      };
+      opts.appendChild(b);
+    });
+  }
+
+  // scramble
+  function cardScramble(it, advance){
+    const correct = it.answer.trim().split(/\s+/);
+    const tiles = shuffle(correct.concat(it.extra||[]));
+    let placed=[]; // indexes into a tile model
+    const model = tiles.map((w,idx)=>({w,idx,used:false}));
+    practiceShell('<div class="kicker">Ordena la frase</div><div class="card">'+
+      (it.note?'<div class="hint" style="margin-top:0">'+esc(it.note)+'</div>':'')+
+      '<div class="answer-row" id="ans"></div>'+
+      '<div class="pool" id="pool"></div>'+
+      '<div id="fb"></div>'+
+      '<button class="btn btn-primary" id="go">Revisar</button>'+
+      '<div class="row2"><button class="btn btn-ghost full" id="reset">Reiniciar</button></div></div>');
+    const ansRow=document.getElementById("ans"), pool=document.getElementById("pool"), fb=document.getElementById("fb"), go=document.getElementById("go");
+    function draw(){
+      ansRow.innerHTML=""; pool.innerHTML="";
+      if(!placed.length){ ansRow.appendChild(el('<span class="empty">Toca las palabras en orden</span>')); }
+      placed.forEach(mi=>{
+        const tile=el('<button class="tile placed">'+esc(model[mi].w)+'</button>');
+        tile.onclick=()=>{ model[mi].used=false; placed=placed.filter(x=>x!==mi); fb.innerHTML=""; go.textContent="Revisar"; go.onclick=submit; draw(); };
+        ansRow.appendChild(tile);
+      });
+      model.forEach((m,mi)=>{
+        if(m.used) return;
+        const tile=el('<button class="tile">'+esc(m.w)+'</button>');
+        tile.onclick=()=>{ m.used=true; placed.push(mi); fb.innerHTML=""; draw(); };
+        pool.appendChild(tile);
+      });
+    }
+    function submit(){
+      const built=placed.map(mi=>model[mi].w);
+      const ok = built.length===correct.length && built.every((w,k)=>norm(w)===norm(correct[k]));
+      if(ok){
+        fb.innerHTML='<div class="fb ok">Perfecto.<span class="ans">'+esc(it.answer)+'</span></div>';
+        speak(it.say||it.answer);
+        go.textContent="Siguiente"; go.onclick=()=>advance(true);
+      } else {
+        fb.innerHTML='<div class="fb no">Ese orden no. Ajusta las palabras.</div>';
+      }
+    }
+    document.getElementById("reset").onclick=()=>{ placed=[]; model.forEach(m=>m.used=false); fb.innerHTML=""; go.textContent="Revisar"; go.onclick=submit; draw(); };
+    go.onclick=submit;
+    draw();
+  }
+
+  // pron (self-assessed)
+  function cardPron(it, advance){
+    practiceShell('<div class="kicker">Pronunciación</div><div class="card">'+
+      '<div class="pron-word">'+esc(it.word)+'</div>'+
+      '<div class="pron-arch">'+archHTML(it.arches)+'</div>'+
+      (it.note?'<div class="hint" style="text-align:center">'+esc(it.note)+'</div>':'')+
+      '<button class="speaker" id="play">'+speakerSVG+'Escuchar y repetir</button>'+
+      '<div class="row2"><button class="btn btn-ghost" id="again">Otra vez</button><button class="btn btn-primary" id="got" style="margin-top:0">Lo tengo</button></div></div>');
+    document.getElementById("play").onclick=()=>speak(it.say||it.word);
+    setTimeout(()=>speak(it.say||it.word), 350);
+    document.getElementById("again").onclick=()=>advance(false);
+    document.getElementById("got").onclick=()=>advance(true);
+  }
+
+  // summary
+  function renderSummary(){
+    const count=bumpStreak();
+    const pct = sessionTotal? Math.round(sessionRight/sessionTotal*100):0;
+    let line;
+    if(pct===100) line="Todo limpio. Excelente.";
+    else if(pct>=70) line="Buen trabajo. Casi todo dominado.";
+    else line="Buen comienzo. Repite el tema para fijarlo.";
+    app.innerHTML='<div class="done">'+
+      '<h2>'+esc(track.title)+'</h2>'+
+      '<div class="score">'+sessionRight+'/'+sessionTotal+'</div>'+
+      '<p>'+line+'</p>'+
+      '<div class="streak" style="margin-bottom:22px">'+flameSVG+'<span class="num">'+count+'</span><span class="lab">'+(count===1?'día seguido':'días seguidos')+'</span></div>'+
+      '<button class="btn btn-primary" id="again">Repetir tema</button>'+
+      '<div class="row2"><button class="btn btn-ghost full" id="home">Volver a temas</button></div></div>';
+    document.getElementById("again").onclick=()=>startTrack(track);
+    document.getElementById("home").onclick=renderHome;
+  }
+
+  function esc(s){ return (s==null?"":""+s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+
+  renderHome();
+})();
+</script>
+</body>
+</html>
