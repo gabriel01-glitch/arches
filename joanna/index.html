@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+<title>My English Practice • Joanna</title>
+<style>
+  :root{
+    --bg1:#2a1430; --bg2:#3d1d49; --bg3:#5b2a4e;
+    --card:#fff8f3; --card2:#fdeee6;
+    --ink:#241420; --muted:#7a6b75; --line:#ecdcd4;
+    --plum:#8e3b86; --plum-d:#5e2360; --plum-s:#f6e6f4;
+    --rose:#c8527d; --rose-s:#fbe7ee;
+    --gold:#e3a72e; --gold-d:#9a6a00; --gold-s:#fff2d6;
+    --green:#1f9d65; --green-s:#e6f6ee;
+    --red:#c94a4a; --red-s:#ffe9e9;
+    --teal:#1f9d8f; --teal-s:#e2f6f3;
+    --cream:#fff2cc;
+    --shadow:0 18px 50px rgba(0,0,0,.34); --r:22px;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;}
+  body{
+    min-height:100vh; color:var(--ink);
+    font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+    background:linear-gradient(160deg,var(--bg1) 0%,var(--bg2) 55%,var(--bg3) 100%);
+    background-attachment:fixed;
+    padding:14px 12px 60px;
+    -webkit-text-size-adjust:100%;
+  }
+  .shell{max-width:580px;margin:0 auto;}
+  .hero{text-align:center;color:#fff8f3;padding:6px 4px 10px;}
+  .eyebrow{display:inline-flex;gap:7px;align-items:center;border:1px solid rgba(255,248,243,.22);
+    background:rgba(255,255,255,.08);color:#ffd9a5;border-radius:999px;padding:6px 12px;
+    font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;}
+  h1{margin:10px 0 4px;font-size:clamp(28px,8vw,40px);line-height:1;letter-spacing:-.03em;color:#fff8f3;}
+  .hero .sub{margin:0;color:rgba(255,248,243,.74);font-size:14px;font-weight:600;}
+  .topbar{display:flex;gap:8px;justify-content:center;margin-top:12px;flex-wrap:wrap;}
+  .tbtn{border:1px solid rgba(255,248,243,.22);background:rgba(255,255,255,.09);color:#fff8f3;
+    border-radius:13px;padding:9px 13px;font-weight:800;font-size:13px;cursor:pointer;}
+  .tbtn:hover{background:rgba(255,255,255,.18);}
+  .progwrap{margin:14px 0 4px;}
+  .progress{height:9px;background:rgba(255,255,255,.14);border-radius:999px;overflow:hidden;border:1px solid rgba(255,255,255,.12);}
+  .bar{height:100%;width:0%;background:linear-gradient(90deg,#ffd36d,#e26ca5);transition:width .4s ease;}
+  .progtxt{text-align:center;color:rgba(255,248,243,.72);font-size:11.5px;font-weight:700;margin-top:6px;letter-spacing:.04em;}
+
+  nav.tabs{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin:14px 0 12px;}
+  .tab{background:rgba(255,248,243,.10);border:1px solid rgba(255,248,243,.16);color:#fff8f3;
+    border-radius:14px;padding:9px 3px;text-align:center;cursor:pointer;font-weight:800;font-size:11px;line-height:1.2;}
+  .tab .ic{display:block;font-size:18px;margin-bottom:3px;}
+  .tab.active{background:var(--card);color:var(--ink);border-color:var(--card);box-shadow:0 8px 20px rgba(0,0,0,.2);}
+
+  .panel{display:none;}
+  .panel.active{display:block;animation:fade .25s ease;}
+  @keyframes fade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+
+  .card{background:var(--card);border:1px solid rgba(255,255,255,.6);border-radius:var(--r);
+    box-shadow:var(--shadow);padding:18px 16px;margin-bottom:14px;}
+  .card h2{margin:0 0 3px;font-size:19px;letter-spacing:-.01em;}
+  .card .hint{margin:0 0 12px;color:var(--muted);font-size:13px;font-weight:600;}
+
+  .wrow{display:flex;align-items:center;gap:10px;background:var(--card2);border:1px solid var(--line);
+    border-radius:14px;padding:10px 12px;margin-bottom:8px;}
+  .wrow .en{font-weight:800;font-size:15.5px;line-height:1.25;}
+  .wrow .resp{color:var(--plum);font-style:italic;font-weight:700;font-size:13.5px;margin-top:2px;}
+  .wrow .es{color:var(--muted);font-size:12.5px;font-weight:600;margin-top:2px;}
+  .wrow .note{color:var(--gold-d);font-size:12px;font-weight:600;margin-top:3px;line-height:1.35;}
+  .wrow .txtcol{flex:1;min-width:0;}
+  .play{flex:none;width:42px;height:42px;border-radius:50%;border:0;cursor:pointer;
+    background:var(--plum);color:#fff;font-size:18px;font-weight:900;box-shadow:0 6px 14px rgba(142,59,134,.4);}
+  .play:active{transform:scale(.94);}
+
+  .catbar{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;}
+  .chip{border:1px solid var(--line);background:#fff;color:var(--muted);border-radius:999px;
+    padding:5px 11px;font-weight:800;font-size:12px;cursor:pointer;}
+  .chip.on{background:var(--plum);color:#fff;border-color:var(--plum);}
+  .flash{perspective:1200px;margin-bottom:10px;}
+  .flash .inner{position:relative;min-height:210px;cursor:pointer;transition:transform .5s;transform-style:preserve-3d;}
+  .flash.flipped .inner{transform:rotateY(180deg);}
+  .face{position:absolute;inset:0;backface-visibility:hidden;border-radius:18px;display:flex;
+    flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px 18px;}
+  .face.front{background:linear-gradient(150deg,#fff,#fdeee6);border:1px solid var(--line);}
+  .face.back{background:linear-gradient(150deg,var(--plum-s),#e9f5ff);border:1px solid #e3c9e0;transform:rotateY(180deg);overflow:auto;}
+  .face .big{font-size:26px;font-weight:900;letter-spacing:-.02em;line-height:1.15;}
+  .face .defb{font-size:15px;font-weight:600;line-height:1.5;color:var(--ink);white-space:pre-line;}
+  .face .tag{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--plum-d);margin-bottom:8px;}
+  .flashbar{display:flex;gap:8px;}
+  .fbtn{flex:1;border:0;border-radius:13px;padding:12px;font-weight:800;font-size:14px;cursor:pointer;}
+  .fbtn.prev{background:#ece0d9;color:#5a4f53;}
+  .fbtn.hear{background:var(--plum);color:#fff;}
+  .fbtn.know{background:var(--rose);color:#fff;}
+  .fbtn:active{transform:scale(.97);}
+  .counter{text-align:center;font-weight:800;color:var(--muted);font-size:13px;margin:6px 0 10px;}
+
+  .qtop{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
+  .qtop .qn{font-size:12px;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);}
+  .qtop .acc{font-size:12px;font-weight:800;color:var(--plum-d);}
+  .qlabel{display:inline-block;font-size:11px;font-weight:900;letter-spacing:.06em;text-transform:uppercase;
+    border-radius:999px;padding:3px 10px;margin-bottom:8px;}
+  .qlabel.bad{background:var(--red-s);color:var(--red);}
+  .qlabel.es{background:var(--teal-s);color:var(--teal);}
+  .prompt{font-size:20px;font-weight:800;line-height:1.4;margin:2px 0 4px;}
+  .prompt.strike{color:#a23434;}
+  .qes{color:var(--muted);font-size:13.5px;font-weight:600;margin:2px 0 12px;}
+  .answer-in{width:100%;border:2px solid var(--line);border-radius:14px;padding:13px 14px;font-size:17px;
+    font-weight:700;outline:none;background:#fff;color:var(--ink);}
+  .answer-in:focus{border-color:var(--plum);}
+  .qbtns{display:flex;gap:8px;margin-top:10px;}
+  .qbtn{flex:1;border:0;border-radius:14px;padding:13px;font-weight:900;font-size:15px;cursor:pointer;}
+  .qbtn.check{background:var(--plum);color:#fff;}
+  .qbtn.show{background:#ece0d9;color:#5a4f53;flex:none;padding:13px 16px;}
+  .qbtn:active{transform:scale(.98);}
+  .fb{margin-top:12px;border-radius:14px;padding:12px 14px;font-weight:700;font-size:14.5px;display:none;}
+  .fb.show{display:block;}
+  .fb.good{background:var(--green-s);border:1px solid #b9e6cd;color:#14744a;}
+  .fb.bad{background:var(--red-s);border:1px solid #f3c3c3;color:#a23434;}
+  .fb.almost{background:var(--gold-s);border:1px solid #ecd58a;color:#8a6400;}
+  .fb .ln{display:block;margin-top:5px;font-weight:600;}
+  .fb .sol{font-weight:900;color:var(--ink);font-size:16px;}
+  .fb .nt{display:block;margin-top:7px;font-weight:600;color:#4a5560;white-space:pre-line;font-size:13.5px;}
+  .hearfull{margin-top:9px;background:var(--rose);color:#fff;border:0;border-radius:11px;padding:9px 13px;font-weight:800;font-size:13px;cursor:pointer;}
+
+  .verse{background:var(--card2);border:1px solid var(--line);border-radius:15px;padding:13px 14px;margin-bottom:10px;}
+  .verse .es{color:var(--muted);font-size:13.5px;font-weight:600;font-style:italic;white-space:pre-line;line-height:1.5;}
+  .verse .en{font-weight:800;font-size:15.5px;white-space:pre-line;line-height:1.55;margin-top:8px;display:none;}
+  .verse .en.show{display:block;}
+  .verse .vnote{margin-top:8px;font-size:12.5px;color:var(--gold-d);font-weight:600;line-height:1.4;display:none;}
+  .verse .vnote.show{display:block;}
+  .verse .vbtns{display:flex;gap:8px;margin-top:10px;}
+  .vbtn{border:0;border-radius:11px;padding:9px 12px;font-weight:800;font-size:13px;cursor:pointer;}
+  .vbtn.r{background:#ece0d9;color:#5a4f53;}
+  .vbtn.h{background:var(--plum);color:#fff;}
+  .songhead{text-align:center;margin-bottom:12px;}
+  .songhead .t{font-weight:900;font-size:17px;}
+  .songhead .a{color:var(--muted);font-size:13px;font-weight:600;}
+  .songhead .listen{display:inline-flex;align-items:center;gap:6px;margin-top:10px;text-decoration:none;
+    background:var(--rose);color:#fff;border-radius:11px;padding:8px 14px;font-weight:800;font-size:13px;}
+  .songhead .listen:active{transform:scale(.97);}
+
+  .winbanner{display:none;background:linear-gradient(150deg,#fff7e0,#f6e6f4);border:1px solid #e6cfe2;
+    border-radius:16px;padding:14px;text-align:center;font-weight:800;color:#5e2360;margin-bottom:12px;}
+  .winbanner.show{display:block;}
+
+  .footer{text-align:center;color:rgba(255,248,243,.6);font-size:11.5px;margin-top:18px;line-height:1.6;}
+  .reset{margin-top:8px;background:transparent;border:1px solid rgba(255,248,243,.22);color:rgba(255,248,243,.72);
+    border-radius:10px;padding:7px 12px;font-weight:700;font-size:12px;cursor:pointer;}
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="hero">
+    <span class="eyebrow" id="eyebrow">ARCHES • Advanced</span>
+    <h1 id="title">My English Practice</h1>
+    <p class="sub" id="subtitle">Joanna · Pronunciation, corrections, idioms &amp; more</p>
+    <div class="topbar">
+      <button class="tbtn" id="langBtn">Español</button>
+      <button class="tbtn" id="ttsBtn">🔊 Sound: ON</button>
+    </div>
+    <div class="progwrap">
+      <div class="progress"><div class="bar" id="bar"></div></div>
+      <div class="progtxt" id="progtxt"></div>
+    </div>
+  </div>
+
+  <nav class="tabs">
+    <div class="tab active" data-tab="sounds"><span class="ic">🔊</span><span data-i="tab_sounds">Sounds</span></div>
+    <div class="tab" data-tab="fix"><span class="ic">✍️</span><span data-i="tab_fix">Fix It</span></div>
+    <div class="tab" data-tab="words"><span class="ic">🃏</span><span data-i="tab_words">Words</span></div>
+    <div class="tab" data-tab="translate"><span class="ic">🔁</span><span data-i="tab_translate">Translate</span></div>
+    <div class="tab" data-tab="songs"><span class="ic">🎵</span><span data-i="tab_songs">Songs</span></div>
+  </nav>
+
+  <section class="panel active" id="panel-sounds">
+    <div class="card">
+      <h2 data-i="sounds_title">Pronunciation</h2>
+      <p class="hint" data-i="sounds_hint">Tap 🔊 to hear each one. CAPS = strong syllable.</p>
+      <div id="soundsList"></div>
+    </div>
+  </section>
+
+  <section class="panel" id="panel-fix">
+    <div class="winbanner" id="winBanner"></div>
+    <div class="card">
+      <div class="qtop">
+        <span class="qn" id="fNum"></span>
+        <span class="acc" id="fAcc"></span>
+      </div>
+      <span class="qlabel bad" data-i="fix_label">Fix this</span>
+      <div class="prompt strike" id="fPrompt"></div>
+      <input class="answer-in" id="fInput" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="Type the correct version…" />
+      <div class="qbtns">
+        <button class="qbtn check" id="fCheck" data-i="check">Check</button>
+        <button class="qbtn show" id="fShow" data-i="show">Answer</button>
+      </div>
+      <div class="fb" id="fFb"></div>
+    </div>
+  </section>
+
+  <section class="panel" id="panel-words">
+    <div class="card">
+      <h2 data-i="words_title">Words &amp; idioms</h2>
+      <p class="hint" data-i="words_hint">Tap a card to flip. Filter by type below.</p>
+      <div class="catbar" id="catBar"></div>
+      <div class="counter" id="wCounter"></div>
+      <div class="flash" id="flash">
+        <div class="inner" id="flashInner">
+          <div class="face front"><span class="tag" id="wTag"></span><span class="big" id="wFront"></span></div>
+          <div class="face back"><span class="tag" data-i="meaning">Meaning</span><span class="defb" id="wBack"></span></div>
+        </div>
+      </div>
+      <div class="flashbar">
+        <button class="fbtn prev" id="wPrev" data-i="prev">Back</button>
+        <button class="fbtn hear" id="wHear">🔊</button>
+        <button class="fbtn know" id="wNext" data-i="next">Next</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel" id="panel-translate">
+    <div class="card">
+      <div class="qtop">
+        <span class="qn" id="tNum"></span>
+        <span class="acc" id="tAcc"></span>
+      </div>
+      <span class="qlabel es" data-i="tr_label">Translate to English</span>
+      <div class="prompt" id="tPrompt"></div>
+      <input class="answer-in" id="tInput" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="Type in English…" />
+      <div class="qbtns">
+        <button class="qbtn check" id="tCheck" data-i="check">Check</button>
+        <button class="qbtn show" id="tShow" data-i="show">Answer</button>
+      </div>
+      <div class="fb" id="tFb"></div>
+    </div>
+  </section>
+
+  <section class="panel" id="panel-songs">
+    <div class="card">
+      <div class="songhead">
+        <div class="t">Carry On Wayward Son</div>
+        <div class="a">Kansas · 1976</div>
+        <a class="listen" id="songLink" data-i="listen_original" href="https://www.youtube.com/watch?v=P5ZJui3aPoQ" target="_blank" rel="noopener noreferrer">▶ Listen to the original</a>
+      </div>
+      <p class="hint" data-i="songs_hint">Read the Spanish, guess the English, then reveal &amp; listen.</p>
+      <div id="songList"></div>
+    </div>
+  </section>
+
+  <div class="footer">
+    <div data-i="foot">A little every day, Joanna. 💪</div>
+    <button class="reset" id="resetBtn" data-i="reset">Reset progress</button>
+  </div>
+</div>
+
+<script>
+"use strict";
+
+function escapeHTML(s){
+  if(s===null||s===undefined) return "";
+  return String(s).replace(/[&<>"']/g,function(c){
+    return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c];
+  });
+}
+function norm(s){
+  return String(s||"").toLowerCase().trim()
+    .replace(/[’‘ʼ`]/g,"'")
+    .replace(/[“”]/g,'"')
+    .replace(/[.,!?;:"]/g,"")
+    .replace(/\(.*?\)/g," ")
+    .replace(/\s+/g," ").trim();
+}
+function lev(a,b){
+  a=a||"";b=b||"";
+  var m=a.length,n=b.length,d=[];
+  for(var i=0;i<=m;i++)d[i]=[i];
+  for(var j=0;j<=n;j++)d[0][j]=j;
+  for(i=1;i<=m;i++)for(j=1;j<=n;j++){
+    d[i][j]=Math.min(d[i-1][j]+1,d[i][j-1]+1,d[i-1][j-1]+(a[i-1]===b[j-1]?0:1));
+  }
+  return d[m][n];
+}
+function ratio(a,b){
+  a=norm(a);b=norm(b);
+  var L=Math.max(a.length,b.length);
+  if(L===0) return 1;
+  return 1-(lev(a,b)/L);
+}
+function speakable(s){
+  return String(s||"")
+    .replace(/\/[^\/]*\//g," ")
+    .replace(/\([^)]*\)/g," ")
+    .replace(/[“”"]/g,"")
+    .replace(/(\w+)\/(\w+)/g,"$1")
+    .replace(/\s+/g," ").trim();
+}
+
+var SOUNDS=[
+  {en:"valuable", resp:"/'VAAL-iu-bel/", es:"valioso", note:"invaluable = /in-'VAAL-iu-bel/ (también: muy valioso)"},
+  {en:"pandemic", resp:"/paan-'DEM-ik/", es:"pandemia", note:""},
+  {en:"uncertain", resp:"/on-'SIR-ten/", es:"incierto / inseguro", note:""},
+  {en:"peripheral", resp:"/pe-'RI-fe-rel/", es:"periférico", note:""},
+  {en:"diagnose", resp:"/'DAI-ig-nos/", es:"diagnosticar", note:""},
+  {en:"literally", resp:"/'LI-re-li/", es:"literalmente", note:"the 't' relaxes into a soft 'r'"},
+  {en:"profitable", resp:"/'PRA-fi-re-bel/", es:"rentable", note:"'t' → soft 'r'"},
+  {en:"motivated", resp:"/'MO-ri-vei-red/", es:"motivado", note:"'t' between vowels → soft 'r'"},
+  {en:"protocols", resp:"/'PRO-te-kolz/", es:"protocolos", note:""},
+  {en:"stabilize", resp:"/'STEI-be-laiz/", es:"estabilizar", note:""},
+  {en:"squeeze", resp:"/skuiiz/", es:"apretar / hacer un hueco", note:"e.g. \"I can squeeze in a short meeting before lunch.\""},
+  {en:"pushed", resp:"/pusht/", es:"empujó / empujado", note:"-ed after /sh/ sounds like /t/"},
+  {en:"tear (a rip)", resp:"/ter/", es:"desgarrón / rotura", note:"\"There's a tear in my jacket.\" — different from tear /tir/ (lágrima)"},
+  {en:"fit · feet · feature", resp:"/fit/ · /fiit/ · /'FII-tiur/", es:"corto /i/ vs largo /ii/", note:""},
+  {en:"He's · He is · His", resp:"/jiiz/ · /ji-iz/ · /jiz/", es:"contrasta los sonidos", note:""},
+  {en:"I went to Barcelona in 2019.", resp:"I /uent/ to Barcelona…", es:"Fui a Barcelona en 2019.", note:"\"went\" = /uent/"},
+  {en:"I don't live close to him.", resp:"…I don't /liv/ close to him.", es:"No vivo cerca de él.", note:"live = /liv/ (short i). You sounded /liiv/ like \"leave\"."},
+  {en:"I visited my grandma.", resp:"I /vi-si-red/ my grandma.", es:"Visité a mi abuela.", note:"-ed → /d/; the 't' relaxes into a soft 'r'"},
+  {en:"He needed money.", resp:"He /nii-red/ money.", es:"Él necesitaba dinero.", note:"needed → /nii-did/ → /nii-red/"}
+];
+
+var FIX=[
+  {id:"f1", bad:"Everybody have their own life.", good:"Everybody has their own life.", acc:["everybody has their own life","everyone has their own life","everybody has their own path"], note:"Everybody / everyone is singular → has."},
+  {id:"f2", bad:"Maybe in Germany it's a little hard than here.", good:"Maybe in Germany it's a little harder than here.", acc:["maybe in germany it's a little harder than here","it's a little harder than here","a little harder than here"], note:"Comparative: hard → harder."},
+  {id:"f3", bad:"My first therapist recommend me that I do Mandalas.", good:"My first therapist recommended that I do Mandalas.", acc:["my first therapist recommended that i do mandalas"], note:"recommended (past) + recommend that someone do — no \"me\"."},
+  {id:"f4", bad:"The main idea of the movie are relating to women.", good:"The main idea of the movie relates to women.", acc:["the main idea of the movie relates to women","the main idea of the movie is about women","the main idea of the movie is related to women"], note:"Singular subject (the main idea) → relates / is. Plural: \"the main ideas… relate.\""},
+  {id:"f5", bad:"We need to storage all that in one place.", good:"We need to store all that in one place.", acc:["we need to store all that in one place"], note:"storage = noun; store = verb."},
+  {id:"f6", bad:"the more you are old", good:"the older you are", acc:["the older you are"], note:"Comparative, not \"more old.\""},
+  {id:"f7", bad:"Company who sells tickets.", good:"Company that sells tickets.", acc:["company that sells tickets","a company that sells tickets"], note:"Use \"that\" for a company/thing; \"who\" for people. sells = /sels/."},
+  {id:"f8", bad:"People with money is little.", good:"Few people have money.", acc:["few people have money","people with money are few"], note:"Rephrase for natural English."},
+  {id:"f9", bad:"They helped to make Chavez won the government.", good:"They helped Chavez win the government.", acc:["they helped chavez win the government"], note:"help someone + base verb (win)."},
+  {id:"f10", bad:"to your question", good:"In response to your question", acc:["in response to your question","to answer your question","regarding your question","as to your question","back to your question"], note:"Several natural options: to answer / regarding / in response to your question."},
+  {id:"f11", bad:"I'm going call the superintendent after our class.", good:"I'm going to call the superintendent after our class.", acc:["i'm going to call the superintendent after our class","i'm gonna call the superintendent after our class","im going to call the superintendent after our class"], note:"going TO + verb (gonna in speech)."},
+  {id:"f12", bad:"here in Canada are artists that I know", good:"Here in Canada there are artists that I know.", acc:["here in canada there are artists that i know","in canada there are artists that i know"], note:"\"hay\" → there are."},
+  {id:"f13", bad:"how can I explain you (that)", good:"How can I explain that to you?", acc:["how can i explain that to you","how can i explain to you that","how can i explain it to you"], note:"explain something TO someone."},
+  {id:"f14", bad:"Clem not even wore the leggings", good:"Clem didn't even wear the leggings.", acc:["clem didn't even wear the leggings","clem did not even wear the leggings"], note:"Negative past → didn't + base verb (wear)."},
+  {id:"f15", bad:"Clem knows more about museums than me.", good:"Clem knows more about museums than I do.", acc:["clem knows more about museums than i do","clem knows more about museums than i"], note:"\"than I (do)\" is more formal/precise; \"than me\" is common in casual speech."},
+  {id:"f16", bad:"None of them is my passion.", good:"None of them are my passion.", acc:["none of them are my passion"], note:"\"none of them\" → are (here)."},
+  {id:"f17", bad:"She's very interested on marketing.", good:"She's very interested in marketing.", acc:["she's very interested in marketing","she is very interested in marketing"], note:"interested IN."},
+  {id:"f18", bad:"Why we don't partner with this type of app.", good:"Why don't we partner with this type of app?", acc:["why don't we partner with this type of app","why dont we partner with this type of app"], note:"Question word order: Why + don't + we…?"},
+  {id:"f19", bad:"She took some pictures from insects.", good:"She took some pictures of insects.", acc:["she took some pictures of insects"], note:"pictures OF."},
+  {id:"f20", bad:"I'd like to pick the VHS cassettes next time I go.", good:"I'd like to bring back the VHS cassettes next time I go.", acc:["i'd like to bring back the vhs cassettes next time i go","id like to bring back the vhs cassettes next time i go"], note:"\"bring back\" fits the meaning better than \"pick.\""},
+  {id:"f21", bad:"It's someone I already went, a family doctor.", good:"It's someone I already went with, a family doctor.", acc:["it's someone i already went with a family doctor","its someone i already went with a family doctor"], note:"went WITH."},
+  {id:"f22", bad:"I didn't know what was that", good:"I didn't know what that was.", acc:["i didn't know what that was","i did not know what that was"], note:"Embedded question: subject + verb (what that was)."},
+  {id:"f23", bad:"Why I have to do that?", good:"Why do I have to do that?", acc:["why do i have to do that"], note:"Question needs the auxiliary \"do.\""},
+  {id:"f24", bad:"My tooth are.", good:"My teeth are.", acc:["my teeth are"], note:"Plural of tooth = teeth."},
+  {id:"f25", bad:"which is the case of us", good:"which is our case", acc:["which is our case"], note:"More natural phrasing."},
+  {id:"f26", bad:"Why you did that?", good:"Why did you do that?", acc:["why did you do that"], note:"Question word order with \"did\" + base verb."},
+  {id:"f27", bad:"When the house don't have a pool", good:"When the house doesn't have a pool", acc:["when the house doesn't have a pool","when the house does not have a pool","when houses don't have a pool"], note:"the house → doesn't. (Plural: houses → don't.)"},
+  {id:"f28", bad:"He is going to extract me the tooth.", good:"He is going to extract my tooth.", acc:["he is going to extract my tooth","he's going to extract my tooth"], note:"extract my tooth (no \"me\")."},
+  {id:"f29", bad:"I can't do any force.", good:"I can't make any effort.", acc:["i can't make any effort","i cant make any effort"], note:"make an effort (not \"do force\")."},
+  {id:"f30", bad:"I don't like when people is like.", good:"I don't like when people are like…", acc:["i don't like when people are like","i dont like when people are like"], note:"people ARE (plural)."},
+  {id:"f31", bad:"people who is", good:"people who are", acc:["people who are","people that are"], note:"people → are."},
+  {id:"f32", bad:"other dogs that needs love", good:"other dogs that need love", acc:["other dogs that need love"], note:"dogs → need (plural)."},
+  {id:"f33", bad:"I talked to somebody to made the fish tanks.", good:"I talked to somebody to make the fish tanks.", acc:["i talked to somebody to make the fish tanks"], note:"to + base verb (make)."},
+  {id:"f34", bad:"that much people", good:"that many people", acc:["that many people"], note:"many for countable nouns; much for uncountable."},
+  {id:"f35", bad:"He helped people to organize their money.", good:"He helped people organize their money.", acc:["he helped people organize their money"], note:"help someone organize — drop \"to.\" helped = /helpt/."},
+  {id:"f36", bad:"What else I did?", good:"What else did I do?", acc:["what else did i do"], note:"Question: did + I + base verb."}
+];
+
+var TRANSLATE=[
+  {id:"t1", es:"Visité a una amiga ayer en la noche.", good:"I visited a friend last night.", acc:["i visited a friend last night","i visited a friend yesterday","i visited a friend yesterday night"], note:"\"last night\" sounds the most natural."},
+  {id:"t2", es:"¿Y qué hice?", good:"What did I do?", acc:["what did i do","and what did i do"], note:"Question order: did + I + base verb. (Not \"What I did?\")"},
+  {id:"t3", es:"increíblemente ocupada", good:"incredibly busy", acc:["incredibly busy"], note:"incredibly = /in-'KRED-ib-li/."},
+  {id:"t4", es:"Es difícil ponernos de acuerdo en un lugar.", good:"It's difficult for us to agree on a place.", acc:["it's difficult for us to agree on a place","it's difficult to agree on a place","its difficult for us to agree on a place"], note:"agree ON a place (not \"in\")."},
+  {id:"t5", es:"Las mujeres fueron oprimidas.", good:"Women were oppressed.", acc:["women were oppressed","women were suppressed","women were repressed"], note:"oppressed / suppressed / repressed all work."},
+  {id:"t6", es:"Estaba bajo estrés.", good:"I was under stress.", acc:["i was under stress"], note:"under stress (not \"under stressed\")."},
+  {id:"t7", es:"Me resfrié.", good:"I caught a cold.", acc:["i caught a cold","i got a cold"], note:""},
+  {id:"t8", es:"plano", good:"flat", acc:["flat"], note:""},
+  {id:"t9", es:"apretado", good:"cramped", acc:["cramped"], note:"\"I'm cramped in this room.\""},
+  {id:"t10", es:"haciendo un mayor esfuerzo", good:"making a greater effort", acc:["making a greater effort","making a bigger effort"], note:""},
+  {id:"t11", es:"Cuando comencé la universidad…", good:"When I started university", acc:["when i started university","when i started college"], note:""},
+  {id:"t12", es:"estaba regresando de la universidad", good:"I was coming back from uni", acc:["i was coming back from uni","i was returning from university","i was coming back from university"], note:""},
+  {id:"t13", es:"tendrás la cirugía", good:"you'll have the surgery", acc:["you'll have the surgery","you will have the surgery"], note:""},
+  {id:"t14", es:"Me gusta ponerme en situaciones estresantes.", good:"I like to put myself in stressful situations.", acc:["i like to put myself in stressful situations"], note:""},
+  {id:"t15", es:"salir de la casa", good:"to leave the house", acc:["to leave the house","to come out of the house","leave the house"], note:"salí = I left; sal = leave (command)."},
+  {id:"t16", es:"firmar", good:"to sign", acc:["to sign","sign"], note:"firma = signature."},
+  {id:"t17", es:"el mayor de los hermanos", good:"the eldest", acc:["the eldest","the eldest sibling","the oldest"], note:"eldest (siblings) vs oldest (e.g. oldest living person)."},
+  {id:"t18", es:"No es como si pudiera olvidarme de esto y dedicarme a lo otro.", good:"It's not like I could forget about this and focus on something else.", acc:["it's not like i could forget about this and focus on something else","its not like i could forget about this and focus on something else"], note:""}
+];
+
+var WORDS=[
+  {cat:"idiom", front:"Bend over backwards", back:"Make a great effort to help or please someone.\n\"The manager bent over backwards to accommodate the request.\"\n(esforzarse al máximo / hacer lo imposible)"},
+  {cat:"idiom", front:"Beat around the bush", back:"Avoid getting to the point.\n(andarse por las ramas)"},
+  {cat:"idiom", front:"Let the cat out of the bag", back:"Reveal a secret.\n(revelar el secreto)"},
+  {cat:"idiom", front:"Take its toll", back:"Cause gradual harm or damage.\n\"The stress has taken its toll on his health.\"\n(pasar factura / cobrar su precio)"},
+  {cat:"idiom", front:"To be of two minds", back:"To be undecided; torn between options.\n(estar indeciso / tener dudas)"},
+  {cat:"vocab", front:"petrichor", back:"/'PE-tri-kor/ — the smell of rain on dry earth.\n\"The petrichor never fails to take me back to my childhood.\""},
+  {cat:"vocab", front:"hone", back:"To sharpen or perfect (a skill).\n\"I need to hone my English.\""},
+  {cat:"vocab", front:"supercilious", back:"Behaving as though one is superior; haughty, condescending."},
+  {cat:"vocab", front:"poignant", back:"Emotionally moving or touching; bittersweet."},
+  {cat:"vocab", front:"cramped", back:"Too small / not enough space.\n\"I'm cramped in this room.\" (apretado)"},
+  {cat:"vocab", front:"eldest vs oldest", back:"eldest — among siblings: \"I am the eldest child.\"\noldest — in general: \"He is the oldest living person.\""},
+  {cat:"vocab", front:"Pick up ↔ Drop off", back:"Pick (someone) up = recoger.\nDrop (someone) off = dejar.\n\"Pick you up / drop you off at the airport.\""},
+  {cat:"office", front:"Hit the nail on the head", back:"Correctly identify or address a problem.\n(dar en el clavo)"},
+  {cat:"office", front:"Take the bull by the horns", back:"Face a difficult or risky situation bravely and decisively.\n\"Kathryn took the bull by the horns and sorted out the paperwork.\""},
+  {cat:"office", front:"Ahead of the curve", back:"Ahead of trends; leading your peers.\n\"We'll have to stay ahead of the curve.\""},
+  {cat:"office", front:"(Not) going to fly", back:"Won't be effective, permissible, or well received. Usually future tense.\n\"That behavior isn't going to fly here.\""},
+  {cat:"office", front:"On the back burner", back:"Paused so you can focus on something more urgent.\n\"She put hiring an intern on the back burner.\""},
+  {cat:"office", front:"Off the cuff", back:"Without preparation; improvised.\n\"He had to do the presentation off the cuff.\""},
+  {cat:"office", front:"There's the rub", back:"That's the crux of the problem (literary; from Hamlet).\n\"How to boost marketing without spending more? There's the rub.\""},
+  {cat:"office", front:"Take the wind out of someone's sails", back:"Discourage them; deflate their confidence (similar to \"burst one's bubble\").\n\"A lukewarm review took the wind out of his sails.\""},
+  {cat:"office", front:"Up to snuff", back:"Satisfactory; meets expectations (= \"cut the mustard\").\n\"It just isn't up to snuff.\""},
+  {cat:"art", front:"Abstract art", back:"Art that uses shapes, colors and forms instead of realistic depiction.\nEx: Mondrian, Composition with Red, Blue, and Yellow (1930)."},
+  {cat:"art", front:"Foreground", back:"The part of a painting closest to the viewer; creates depth/perspective.\nEx: Velázquez, Las Meninas (1656)."},
+  {cat:"art", front:"Background", back:"The part farthest from the viewer; creates context, depth, contrast.\nEx: Van Gogh, The Starry Night (1889)."},
+  {cat:"art", front:"Balance", back:"Arranging elements so they appear symmetrical or asymmetrical in design and proportion.\nEx: Picasso, Les Demoiselles d'Avignon (1907)."},
+  {cat:"art", front:"Expressionism", back:"A style emphasizing emotion via distorted forms, exaggerated color, expressive brushstrokes.\nEx: Munch, The Scream (1893)."},
+  {cat:"grammar", front:"Lay vs. lie", back:"lie = recline yourself (no object): \"I lie down.\"\nlay = place something else (needs an object): \"I lay the book down.\"\nTip: lay = pLAce, lie = recLIne."},
+  {cat:"grammar", front:"Past tense: lie (recline)", back:"Present: lie → Past: lay.\n\"Yesterday, he lay down to sleep at ten.\""},
+  {cat:"grammar", front:"Past tense: lie (tell an untruth)", back:"lie → lied.\n\"Sometimes children lie to get out of trouble.\""},
+  {cat:"grammar", front:"Past tense: lay (place)", back:"lay → laid.\n\"I laid the book down.\" (use a 'd' — there's a direct object.)"},
+  {cat:"grammar", front:"laying vs. lying", back:"laying = placing something: \"laying each newspaper on the stoop.\"\nlying = reclining OR telling untruths: \"lying on my couch.\""},
+  {cat:"grammar", front:"Transitive vs. intransitive", back:"Transitive = takes a direct object: \"Please bring coffee.\"\nIntransitive = no object: \"They jumped.\"\nSome verbs work both ways."}
+];
+
+var SONG=[
+  {es:"Sigue adelante, mi hijo descarriado,\nhabrá paz cuando hayas terminado.\nDeja que tu cabeza agotada repose,\nya no llores más.",
+   en:"Carry on my wayward son,\nthere'll be peace when you are done.\nLay your weary head to rest,\ndon't you cry no more.", note:""},
+  {es:"Una vez me alcé sobre el ruido y la confusión,\nsolo para vislumbrar más allá de esta ilusión.\nMe elevaba cada vez más alto,\npero volé demasiado alto.",
+   en:"Once I rose above the noise and confusion,\njust to get a glimpse beyond this illusion.\nI was soaring ever higher,\nbut I flew too high.", note:"\"Fly too close to the sun\" — the Icarus myth: he ignored Daedalus, the wax in his wings melted, and he fell into the sea."},
+  {es:"Aunque mis ojos podían ver,\nyo aún era un hombre ciego.\nAunque mi mente podía pensar,\nyo aún era un hombre loco.\nOigo las voces cuando estoy soñando,\npuedo oírles decir…",
+   en:"Though my eyes could see,\nI still was a blind man.\nThough my mind could think,\nI still was a mad man.\nI hear the voices when I'm dreaming,\nI can hear them say…", note:""},
+  {es:"Disfrazado de un hombre con una razón,\nmi farsa es el acontecimiento de la temporada.\nY si afirmo ser un hombre sabio,\nseguramente significa que no lo sé.",
+   en:"Masquerading as a man with a reason,\nmy charade is the event of the season.\nAnd if I claim to be a wise man,\nwell, it surely means that I don't know.", note:""},
+  {es:"En un mar tormentoso de emociones cambiantes,\narrojado de un lado a otro, soy como un barco en el océano.\nFijo un rumbo en busca de vientos de fortuna,\npero oigo a las voces decir…",
+   en:"On a stormy sea of moving emotion,\ntossed about, I'm like a ship on the ocean.\nI set a course for winds of fortune,\nbut I hear the voices say…", note:"winds = /uinds/"},
+  {es:"Sigue adelante,\nsiempre lo recordarás.\nSigue adelante,\nnada se equipara al esplendor.\nAhora tu vida ya no está vacía,\nseguramente el paraíso te espera.",
+   en:"Carry on,\nyou will always remember.\nCarry on,\nnothing equals the splendor.\nNow your life's no longer empty,\nsurely heaven waits for you.", note:"heaven / paradise"}
+];
+
+var I18N={
+  en:{
+    eyebrow:"ARCHES • Advanced", title:"My English Practice", subtitle:"Joanna · Pronunciation, corrections, idioms & more",
+    langBtn:"Español",
+    tab_sounds:"Sounds", tab_fix:"Fix It", tab_words:"Words", tab_translate:"Translate", tab_songs:"Songs",
+    sounds_title:"Pronunciation", sounds_hint:"Tap 🔊 to hear each one. CAPS = strong syllable.",
+    fix_label:"Fix this", tr_label:"Translate to English",
+    words_title:"Words & idioms", words_hint:"Tap a card to flip. Filter by type below.", meaning:"Meaning",
+    songs_hint:"Read the Spanish, guess the English, then reveal & listen.",
+    listen_original:"▶ Listen to the original",
+    prev:"Back", next:"Next", check:"Check", show:"Answer",
+    reveal:"Reveal", hide:"Hide", hear:"Hear it",
+    foot:"A little every day, Joanna. 💪", reset:"Reset progress",
+    correct:"Correct! 🎉", almost:"So close — check spelling and try again.", tryagain:"Not yet — try again, or tap Answer.",
+    youwrote:"You wrote:", answeris:"Answer:", hearfull:"🔊 Hear it",
+    qof:function(a,b){return "Item "+a+" of "+b;}, acc:function(p){return p+"% correct";},
+    win:"🎉 You corrected them all, Joanna. Beautiful work.", soundon:"🔊 Sound: ON", soundoff:"🔇 Sound: OFF",
+    cardof:function(a,b){return "Card "+a+" of "+b;},
+    cat_all:"All", cat_idiom:"Idioms", cat_vocab:"Vocab", cat_office:"Office", cat_art:"Art", cat_grammar:"Grammar"
+  },
+  es:{
+    eyebrow:"ARCHES • Avanzado", title:"Mi práctica de inglés", subtitle:"Joanna · Pronunciación, correcciones, modismos y más",
+    langBtn:"English",
+    tab_sounds:"Sonidos", tab_fix:"Corrige", tab_words:"Palabras", tab_translate:"Traduce", tab_songs:"Canción",
+    sounds_title:"Pronunciación", sounds_hint:"Toca 🔊 para escuchar. MAYÚS = sílaba fuerte.",
+    fix_label:"Corrige esto", tr_label:"Traduce al inglés",
+    words_title:"Palabras y modismos", words_hint:"Toca una tarjeta para voltear. Filtra por tipo abajo.", meaning:"Significado",
+    songs_hint:"Lee el español, adivina el inglés, luego revela y escucha.",
+    listen_original:"▶ Escuchar la original",
+    prev:"Atrás", next:"Siguiente", check:"Revisar", show:"Respuesta",
+    reveal:"Mostrar", hide:"Ocultar", hear:"Escuchar",
+    foot:"Un poco cada día, Joanna. 💪", reset:"Reiniciar progreso",
+    correct:"¡Correcto! 🎉", almost:"Casi — revisa la ortografía e inténtalo otra vez.", tryagain:"Todavía no — inténtalo de nuevo, o toca Respuesta.",
+    youwrote:"Escribiste:", answeris:"Respuesta:", hearfull:"🔊 Escuchar",
+    qof:function(a,b){return "Ítem "+a+" de "+b;}, acc:function(p){return p+"% correctas";},
+    win:"🎉 Las corregiste todas, Joanna. Excelente trabajo.", soundon:"🔊 Sonido: SÍ", soundoff:"🔇 Sonido: NO",
+    cardof:function(a,b){return "Tarjeta "+a+" de "+b;},
+    cat_all:"Todas", cat_idiom:"Modismos", cat_vocab:"Vocabulario", cat_office:"Oficina", cat_art:"Arte", cat_grammar:"Gramática"
+  }
+};
+
+var KEY="joanna_practice_v1";
+var state={ lang:"en", sound:true, wIdx:0, wCat:"all", fIdx:0, tIdx:0,
+  fAtt:0, fCor:0, tAtt:0, tCor:0, fMast:{}, tMast:{} };
+function load(){
+  try{ var raw=localStorage.getItem(KEY); if(raw){ var s=JSON.parse(raw); if(s&&typeof s==="object") Object.assign(state,s); } }catch(e){}
+}
+function save(){ try{ localStorage.setItem(KEY,JSON.stringify(state)); }catch(e){} }
+
+var enVoice=null;
+function pickVoice(){
+  if(typeof speechSynthesis==="undefined") return;
+  var vs=speechSynthesis.getVoices()||[];
+  enVoice = vs.find(function(v){return /en[-_]US/i.test(v.lang)&&/female|samantha|zira|aria|jenny/i.test(v.name);})
+         || vs.find(function(v){return /en[-_]US/i.test(v.lang);})
+         || vs.find(function(v){return /^en/i.test(v.lang);}) || null;
+}
+function speak(text){
+  if(!state.sound) return;
+  if(typeof speechSynthesis==="undefined") return;
+  try{
+    speechSynthesis.cancel();
+    var u=new SpeechSynthesisUtterance(speakable(text));
+    u.lang="en-US"; u.rate=.9; u.pitch=1;
+    if(enVoice) u.voice=enVoice;
+    speechSynthesis.speak(u);
+  }catch(e){}
+}
+
+function t(){ return I18N[state.lang]; }
+function $(id){ return document.getElementById(id); }
+
+function applyLang(){
+  document.documentElement.lang=state.lang;
+  var d=t();
+  document.querySelectorAll("[data-i]").forEach(function(el){
+    var k=el.getAttribute("data-i");
+    if(d[k]!==undefined && typeof d[k]!=="function") el.textContent=d[k];
+  });
+  $("eyebrow").textContent=d.eyebrow;
+  $("title").textContent=d.title;
+  $("subtitle").textContent=d.subtitle;
+  $("langBtn").textContent=d.langBtn;
+  $("ttsBtn").textContent=state.sound?d.soundon:d.soundoff;
+  renderSounds(); renderCatBar(); renderWords(); renderFix(); renderTranslate(); renderSongs(); updateProgress();
+}
+
+function renderSounds(){
+  var html="";
+  SOUNDS.forEach(function(p,i){
+    html+='<div class="wrow"><div class="txtcol"><div class="en">'+escapeHTML(p.en)+'</div>'+
+      '<div class="resp">'+escapeHTML(p.resp)+'</div>'+
+      (p.es?'<div class="es">'+escapeHTML(p.es)+'</div>':'')+
+      (p.note?'<div class="note">'+escapeHTML(p.note)+'</div>':'')+
+      '</div><button class="play" data-si="'+i+'" aria-label="play">🔊</button></div>';
+  });
+  $("soundsList").innerHTML=html;
+  $("soundsList").querySelectorAll(".play").forEach(function(b){
+    b.addEventListener("click",function(){ speak(SOUNDS[+b.getAttribute("data-si")].en); });
+  });
+}
+
+function wordList(){
+  if(state.wCat==="all") return WORDS;
+  return WORDS.filter(function(w){return w.cat===state.wCat;});
+}
+function renderCatBar(){
+  var d=t();
+  var cats=["all","idiom","vocab","office","art","grammar"];
+  var labels={all:d.cat_all,idiom:d.cat_idiom,vocab:d.cat_vocab,office:d.cat_office,art:d.cat_art,grammar:d.cat_grammar};
+  var html="";
+  cats.forEach(function(c){
+    html+='<button class="chip'+(state.wCat===c?' on':'')+'" data-cat="'+c+'">'+escapeHTML(labels[c])+'</button>';
+  });
+  $("catBar").innerHTML=html;
+  $("catBar").querySelectorAll(".chip").forEach(function(b){
+    b.addEventListener("click",function(){ state.wCat=b.getAttribute("data-cat"); state.wIdx=0; save(); renderCatBar(); renderWords(); });
+  });
+}
+function renderWords(){
+  var list=wordList();
+  if(list.length===0){ $("wFront").textContent="—"; $("wBack").textContent=""; $("wCounter").textContent=""; return; }
+  if(state.wIdx>=list.length) state.wIdx=0;
+  var w=list[state.wIdx];
+  $("wTag").textContent=t()["cat_"+w.cat]||w.cat;
+  $("wFront").textContent=w.front;
+  $("wBack").textContent=w.back;
+  $("wCounter").textContent=t().cardof(state.wIdx+1,list.length);
+  $("flash").classList.remove("flipped");
+}
+function flipCard(){ $("flash").classList.toggle("flipped"); }
+function wNext(){ var L=wordList().length; if(!L)return; state.wIdx=(state.wIdx+1)%L; save(); renderWords(); }
+function wPrev(){ var L=wordList().length; if(!L)return; state.wIdx=(state.wIdx-1+L)%L; save(); renderWords(); }
+
+function isAccepted(input,item){
+  var a=norm(input);
+  if(!a) return false;
+  var list=(item.acc||[]).concat([item.good]);
+  for(var i=0;i<list.length;i++){ if(a===norm(list[i])) return true; }
+  return false;
+}
+function bestRatio(input,item){
+  var list=(item.acc||[]).concat([item.good]);
+  var best=0;
+  for(var i=0;i<list.length;i++){ var r=ratio(input,list[i]); if(r>best)best=r; }
+  return best;
+}
+
+function curFix(){ return FIX[state.fIdx]; }
+function renderFix(){
+  var d=t(), q=curFix();
+  $("fPrompt").textContent=q.bad;
+  $("fNum").textContent=d.qof(state.fIdx+1,FIX.length);
+  var pct=state.fAtt?Math.round(100*state.fCor/state.fAtt):0;
+  $("fAcc").textContent=d.acc(pct);
+  $("fInput").value=""; $("fInput").disabled=false; $("fCheck").disabled=false;
+  var fb=$("fFb"); fb.className="fb"; fb.innerHTML="";
+  var all=FIX.every(function(g){return state.fMast[g.id];});
+  var wb=$("winBanner");
+  if(all){ wb.textContent=d.win; wb.classList.add("show"); } else wb.classList.remove("show");
+}
+function nextFix(){
+  var n=FIX.length, start=state.fIdx;
+  for(var step=1;step<=n;step++){ var idx=(start+step)%n; if(!state.fMast[FIX[idx].id]){ state.fIdx=idx; save(); renderFix(); return; } }
+  state.fIdx=(start+1)%n; save(); renderFix();
+}
+function feedbackBox(boxId, ok, item, typedVal, isShow){
+  var d=t(), fb=$(boxId), btnId=boxId+"_hf";
+  if(ok==="good"){
+    fb.className="fb good show";
+    fb.innerHTML='<span class="sol">'+escapeHTML(d.correct)+'</span>'+
+      '<span class="ln">'+escapeHTML(item.good)+'</span>'+
+      (item.note?'<span class="nt">'+escapeHTML(item.note)+'</span>':'')+
+      '<button class="hearfull" id="'+btnId+'">'+escapeHTML(d.hearfull)+'</button>';
+  } else if(ok==="show"){
+    fb.className="fb good show";
+    fb.innerHTML='<span class="sol">'+escapeHTML(d.answeris)+' '+escapeHTML(item.good)+'</span>'+
+      (item.note?'<span class="nt">'+escapeHTML(item.note)+'</span>':'')+
+      '<button class="hearfull" id="'+btnId+'">'+escapeHTML(d.hearfull)+'</button>';
+  } else if(ok==="almost"){
+    fb.className="fb almost show";
+    fb.innerHTML=escapeHTML(d.almost)+'<span class="ln">'+escapeHTML(d.youwrote)+' '+escapeHTML(typedVal)+'</span>';
+    return;
+  } else {
+    fb.className="fb bad show";
+    fb.innerHTML=escapeHTML(d.tryagain)+'<span class="ln">'+escapeHTML(d.youwrote)+' '+escapeHTML(typedVal)+'</span>';
+    return;
+  }
+  var hb=$(btnId); if(hb) hb.addEventListener("click",function(){ speak(item.good); });
+  speak(item.good);
+}
+function checkFix(){
+  var q=curFix(), val=$("fInput").value;
+  if(!norm(val)) return;
+  state.fAtt++;
+  if(isAccepted(val,q)){
+    state.fCor++; state.fMast[q.id]=true; save(); updateProgress();
+    feedbackBox("fFb","good",q,val,false);
+    $("fInput").disabled=true; $("fCheck").disabled=true;
+    setTimeout(nextFix,1700);
+  } else if(bestRatio(val,q)>=0.82){
+    save(); updateProgress(); feedbackBox("fFb","almost",q,val,false);
+  } else {
+    save(); updateProgress(); feedbackBox("fFb","bad",q,val,false);
+  }
+}
+function showFix(){
+  var q=curFix();
+  feedbackBox("fFb","show",q,"",true);
+  $("fInput").disabled=true; $("fCheck").disabled=true;
+  setTimeout(nextFix,1900);
+}
+
+function curT(){ return TRANSLATE[state.tIdx]; }
+function renderTranslate(){
+  var d=t(), q=curT();
+  $("tPrompt").textContent=q.es;
+  $("tNum").textContent=d.qof(state.tIdx+1,TRANSLATE.length);
+  var pct=state.tAtt?Math.round(100*state.tCor/state.tAtt):0;
+  $("tAcc").textContent=d.acc(pct);
+  $("tInput").value=""; $("tInput").disabled=false; $("tCheck").disabled=false;
+  var fb=$("tFb"); fb.className="fb"; fb.innerHTML="";
+}
+function nextT(){
+  var n=TRANSLATE.length, start=state.tIdx;
+  for(var step=1;step<=n;step++){ var idx=(start+step)%n; if(!state.tMast[TRANSLATE[idx].id]){ state.tIdx=idx; save(); renderTranslate(); return; } }
+  state.tIdx=(start+1)%n; save(); renderTranslate();
+}
+function checkT(){
+  var q=curT(), val=$("tInput").value;
+  if(!norm(val)) return;
+  state.tAtt++;
+  if(isAccepted(val,q)){
+    state.tCor++; state.tMast[q.id]=true; save(); updateProgress();
+    feedbackBox("tFb","good",q,val,false);
+    $("tInput").disabled=true; $("tCheck").disabled=true;
+    setTimeout(nextT,1700);
+  } else if(bestRatio(val,q)>=0.82){
+    save(); updateProgress(); feedbackBox("tFb","almost",q,val,false);
+  } else {
+    save(); updateProgress(); feedbackBox("tFb","bad",q,val,false);
+  }
+}
+function showT(){
+  var q=curT();
+  feedbackBox("tFb","show",q,"",true);
+  $("tInput").disabled=true; $("tCheck").disabled=true;
+  setTimeout(nextT,1900);
+}
+
+function renderSongs(){
+  var d=t(), html="";
+  SONG.forEach(function(s,i){
+    html+='<div class="verse"><div class="es">'+escapeHTML(s.es)+'</div>'+
+      '<div class="en" id="ven'+i+'">'+escapeHTML(s.en)+'</div>'+
+      (s.note?'<div class="vnote" id="vn'+i+'">'+escapeHTML(s.note)+'</div>':'')+
+      '<div class="vbtns"><button class="vbtn r" data-vr="'+i+'">'+escapeHTML(d.reveal)+'</button>'+
+      '<button class="vbtn h" data-vh="'+i+'">🔊 '+escapeHTML(d.hear)+'</button></div></div>';
+  });
+  $("songList").innerHTML=html;
+  $("songList").querySelectorAll("[data-vr]").forEach(function(b){
+    b.addEventListener("click",function(){
+      var i=b.getAttribute("data-vr"); var en=$("ven"+i); var vn=$("vn"+i);
+      var shown=en.classList.toggle("show"); if(vn) vn.classList.toggle("show",shown);
+      b.textContent=shown?t().hide:t().reveal;
+    });
+  });
+  $("songList").querySelectorAll("[data-vh]").forEach(function(b){
+    b.addEventListener("click",function(){ speak(SONG[+b.getAttribute("data-vh")].en); });
+  });
+}
+
+function updateProgress(){
+  var total=FIX.length+TRANSLATE.length;
+  var done=FIX.filter(function(g){return state.fMast[g.id];}).length
+          +TRANSLATE.filter(function(g){return state.tMast[g.id];}).length;
+  var pct=total?Math.round(100*done/total):0;
+  $("bar").style.width=pct+"%";
+  $("progtxt").textContent=done+" / "+total+" ✓";
+}
+
+function switchTab(name){
+  document.querySelectorAll(".tab").forEach(function(tb){ tb.classList.toggle("active",tb.getAttribute("data-tab")===name); });
+  document.querySelectorAll(".panel").forEach(function(p){ p.classList.toggle("active",p.id==="panel-"+name); });
+}
+
+function init(){
+  load();
+  if(typeof speechSynthesis!=="undefined"){
+    pickVoice();
+    if(speechSynthesis.onvoiceschanged!==undefined) speechSynthesis.onvoiceschanged=pickVoice;
+  }
+  applyLang();
+
+  document.querySelectorAll(".tab").forEach(function(tb){
+    tb.addEventListener("click",function(){ switchTab(tb.getAttribute("data-tab")); });
+  });
+  $("langBtn").addEventListener("click",function(){ state.lang=state.lang==="en"?"es":"en"; save(); applyLang(); });
+  $("ttsBtn").addEventListener("click",function(){ state.sound=!state.sound; save(); $("ttsBtn").textContent=state.sound?t().soundon:t().soundoff; });
+
+  $("flashInner").addEventListener("click",flipCard);
+  $("wHear").addEventListener("click",function(e){ e.stopPropagation(); var L=wordList(); if(L.length) speak(L[state.wIdx].front); });
+  $("wNext").addEventListener("click",wNext);
+  $("wPrev").addEventListener("click",wPrev);
+
+  $("fCheck").addEventListener("click",checkFix);
+  $("fShow").addEventListener("click",showFix);
+  $("fInput").addEventListener("keydown",function(e){ if(e.key==="Enter") checkFix(); });
+
+  $("tCheck").addEventListener("click",checkT);
+  $("tShow").addEventListener("click",showT);
+  $("tInput").addEventListener("keydown",function(e){ if(e.key==="Enter") checkT(); });
+
+  $("resetBtn").addEventListener("click",function(){
+    state.wIdx=0; state.wCat="all"; state.fIdx=0; state.tIdx=0;
+    state.fAtt=0; state.fCor=0; state.tAtt=0; state.tCor=0; state.fMast={}; state.tMast={};
+    save(); applyLang(); switchTab("sounds");
+  });
+}
+
+if(typeof document!=="undefined" && typeof window!=="undefined"){
+  if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",init);
+  else init();
+}
+
+if(typeof module!=="undefined" && module.exports){
+  module.exports={norm:norm,lev:lev,ratio:ratio,speakable:speakable,isAccepted:isAccepted,bestRatio:bestRatio,
+    SOUNDS:SOUNDS,FIX:FIX,TRANSLATE:TRANSLATE,WORDS:WORDS,SONG:SONG,I18N:I18N};
+}
+</script>
+</body>
+</html>
