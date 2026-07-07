@@ -1,0 +1,24 @@
+{
+  "student": "Rubén",
+  "updated": "7 de julio de 2026",
+  "cards": [
+    {
+      "wrong": "I see all my friends yesterday.",
+      "right": "I saw all my friends yesterday.",
+      "hint": "En español a veces el contexto deja claro el pasado, pero en inglés el verbo debe cambiar de forma. 'See' se convierte en 'saw' para indicar que la acción ya ocurrió.",
+      "date": "7 de julio de 2026"
+    },
+    {
+      "wrong": "I went party.",
+      "right": "I went to the party.",
+      "hint": "En español decimos 'fui a la fiesta' pero la preposición 'a' se omite al traducir. En inglés siempre se necesita 'to' para indicar destino, y el artículo 'the' da contexto específico.",
+      "date": "7 de julio de 2026"
+    },
+    {
+      "wrong": "I went party.",
+      "right": "I went partying.",
+      "hint": "En español decimos 'fui a fiesta' usando un sustantivo, pero en inglés la expresión natural usa el verbo en gerundio: 'go partying'. Sin el -ing suena incompleto.",
+      "date": "7 de julio de 2026"
+    }
+  ]
+}
