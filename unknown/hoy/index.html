@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unknown · Tu repaso</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--cream:#fbf7f0;--terra:#bf5a36;--ink:#3d3428;--soft:#8a7d6b;--line:#e8dfd2;--green:#6f8f5f;--gold:#c9a04e}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{background:var(--cream);color:var(--ink);font-family:'Nunito',sans-serif;font-size:16px;line-height:1.55;padding-bottom:50px}
+header{text-align:center;padding:30px 18px 8px}
+h1{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:32px;color:var(--terra)}
+header p{color:var(--soft);font-size:13.5px;margin-top:4px}
+.count{display:inline-block;margin-top:10px;background:#fff;border:1px solid var(--line);border-radius:99px;padding:6px 16px;font-weight:800;font-size:13px;color:var(--terra)}
+main{max-width:620px;margin:0 auto;padding:16px}
+.progress{height:6px;background:var(--line);border-radius:99px;overflow:hidden;margin-bottom:16px}
+.progress div{height:100%;background:var(--terra);width:0%;transition:width .3s ease}
+.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:22px 18px}
+.daytag{font-size:11.5px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.kicker{font-size:11.5px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--terra);margin-bottom:8px}
+.prompt{font-family:'Cormorant Garamond',serif;font-size:23px;font-weight:600;line-height:1.35;margin-bottom:6px}
+.hint{color:var(--soft);font-size:13.5px;font-style:italic;margin-bottom:14px}
+input[type=text]{width:100%;background:var(--cream);border:1.5px solid var(--line);border-radius:10px;padding:12px;font-size:16px;font-family:'Nunito',sans-serif;color:var(--ink)}
+input:focus{outline:none;border-color:var(--terra)}
+.dots{margin:10px 0 2px}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--line);margin-right:5px}
+.dot.on{background:var(--green)}
+.row{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
+button{font-family:'Nunito',sans-serif;font-weight:800;font-size:14px;border:none;border-radius:10px;padding:12px 18px;cursor:pointer}
+button:active{transform:scale(.96)}
+.main-btn{background:var(--terra);color:#fff}
+.ghost{background:transparent;color:var(--soft);border:1.5px solid var(--line)}
+.audio{background:var(--gold);color:#fff}
+.fb{margin-top:14px;font-weight:800;display:none}
+.fb.ok{color:var(--green);display:block}.fb.close{color:var(--gold);display:block}.fb.no{color:#a34a2b;display:block}
+.answer{display:none;margin-top:10px;padding:12px;border-radius:10px;background:var(--cream);border:1px dashed var(--terra);font-weight:700}
+.answer small{display:block;font-weight:600;color:var(--soft);margin-top:4px}
+.fin{text-align:center;padding:26px 10px}
+.fin h2{font-family:'Cormorant Garamond',serif;font-size:30px;color:var(--terra)}
+.fin p{color:var(--soft);margin-top:8px}
+.shelf{margin-top:22px;text-align:center;color:var(--soft);font-size:13px}
+.backlink{display:block;text-align:center;margin-top:18px;color:var(--terra);font-weight:800;text-decoration:none;font-size:13.5px}
+footer{text-align:center;color:var(--soft);font-size:12px;padding:22px 16px 8px}
+</style>
+</head>
+<body>
+<header>
+  <h1>Tu repaso</h1>
+  <p>Unknown · tus propias frases de clase</p>
+  <div class="count" id="count">Cargando...</div>
+</header>
+<main>
+  <div class="progress"><div id="bar"></div></div>
+  <div class="card" id="card"></div>
+  <div class="shelf" id="shelf"></div>
+  <a class="backlink" href="../">← Volver a tu pagina</a>
+</main>
+<footer>A Tu Medida · Teacher Gabriel · ARCHES</footer>
+<script>
+var SLUG = "unknown";
+var MASTER_AT = 3; // correct answers needed to retire a card
+var cards = [], queue = [], idx = 0, mastery = {};
+var cardEl = document.getElementById("card");
+var barEl = document.getElementById("bar");
+
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
+function normalize(s){return s.toLowerCase().replace(/[\u2019']/g,"'").replace(/[.,!?;:]/g,"").replace(/\s+/g," ").trim().replace(/\bi'm\b/g,"i am").replace(/\bit's\b/g,"it is").replace(/\bcan't\b/g,"cannot").replace(/\bdon't\b/g,"do not");}
+function lev(a,b){var m=[];for(var i=0;i<=b.length;i++){m[i]=[i];}for(var j=0;j<=a.length;j++){m[0][j]=j;}for(i=1;i<=b.length;i++){for(j=1;j<=a.length;j++){m[i][j]=b.charAt(i-1)===a.charAt(j-1)?m[i-1][j-1]:Math.min(m[i-1][j-1]+1,m[i][j-1]+1,m[i-1][j]+1);}}return m[b.length][a.length];}
+function cid(c){return (c.wrong+"||"+c.right).toLowerCase().replace(/\s+/g," ").trim();}
+function speak(t){try{var u=new SpeechSynthesisUtterance(t);u.lang="en-US";u.rate=0.9;speechSynthesis.cancel();speechSynthesis.speak(u);}catch(e){}}
+function loadMastery(){try{mastery=JSON.parse(localStorage.getItem("cv_mastery_"+SLUG))||{};}catch(e){mastery={};}}
+function saveMastery(){try{localStorage.setItem("cv_mastery_"+SLUG,JSON.stringify(mastery));}catch(e){}}
+
+fetch("../cards.json?ts="+Date.now()).then(function(r){return r.json();}).then(function(data){
+  cards = (data && data.cards) ? data.cards : [];
+  loadMastery();
+  rebuildQueue();
+}).catch(function(){
+  cardEl.innerHTML='<div class="fin"><h2>Aun no hay repaso</h2><p>Tu maestro publicara tus frases despues de clase.</p></div>';
+  document.getElementById("count").textContent="0 tarjetas";
+});
+
+function scoreOf(c){var m=mastery[cid(c)];return (m&&m.score)||0;}
+function rebuildQueue(){
+  queue = cards.filter(function(c){return scoreOf(c)<MASTER_AT;});
+  // newest class first
+  queue.sort(function(a,b){return (b.date||"").localeCompare(a.date||"");});
+  var mastered = cards.length - queue.length;
+  document.getElementById("count").textContent = queue.length+" por dominar · "+mastered+" dominadas";
+  document.getElementById("shelf").textContent = mastered ? ("Dominadas: "+mastered+" de "+cards.length) : "";
+  idx = 0;
+  render();
+}
+
+function render(){
+  barEl.style.width = queue.length ? (idx/queue.length*100)+"%" : "100%";
+  if(idx>=queue.length){ return done(); }
+  var it = queue[idx];
+  var sc = scoreOf(it);
+  var dots="";for(var k=0;k<MASTER_AT;k++){dots+='<span class="dot'+(k<sc?" on":"")+'"></span>';}
+  cardEl.innerHTML=
+    '<div class="daytag">'+esc(it.date||"")+'</div>'+
+    '<div class="kicker">Corrige la frase · '+(idx+1)+' de '+queue.length+'</div>'+
+    '<div class="prompt">"'+esc(it.wrong)+'"</div>'+
+    '<div class="hint">'+esc(it.hint||"")+'</div>'+
+    '<div class="dots">'+dots+'</div>'+
+    '<input type="text" id="ans" placeholder="Escribela bien..." autocomplete="off">'+
+    '<div class="row"><button class="main-btn" onclick="check()">Revisar</button>'+
+    '<button class="ghost" onclick="reveal()">Ver respuesta</button>'+
+    '<button class="audio" onclick="speak(queue['+idx+'].right)">Escuchar</button></div>'+
+    '<div class="fb" id="fb"></div>'+
+    '<div class="answer" id="answer">'+esc(it.right)+'<small>'+esc(it.hint||"")+'</small></div>'+
+    '<div class="row"><button class="ghost" id="next" style="display:none" onclick="next()">Siguiente →</button></div>';
+  var inp=document.getElementById("ans");
+  inp.addEventListener("keydown",function(e){if(e.key==="Enter")check();});
+  inp.focus();
+}
+function check(){
+  var it=queue[idx];
+  var val=normalize(document.getElementById("ans").value);
+  if(!val)return;
+  var d=lev(val,normalize(it.right));
+  var fb=document.getElementById("fb");
+  if(d===0){
+    fb.className="fb ok";fb.textContent="Perfecto.";
+    var id=cid(it);var m=mastery[id]||{score:0};m.score=Math.min(MASTER_AT,(m.score||0)+1);mastery[id]=m;saveMastery();
+    show();
+  } else if(d<=3){ fb.className="fb close";fb.textContent="Casi. Un detalle pequeno."; }
+  else { fb.className="fb no";fb.textContent="Todavia no. Mira la pista."; }
+}
+function reveal(){
+  // Seeing the answer resets this card's streak so it comes back
+  var it=queue[idx];var id=cid(it);mastery[id]={score:0};saveMastery();
+  show();
+}
+function show(){document.getElementById("answer").style.display="block";document.getElementById("next").style.display="inline-block";}
+function next(){idx++; if(idx>=queue.length){rebuildQueue();} else {render();}}
+function done(){
+  barEl.style.width="100%";
+  if(!cards.length){ cardEl.innerHTML='<div class="fin"><h2>Aun no hay repaso</h2></div>'; return; }
+  cardEl.innerHTML='<div class="fin"><h2>Todo dominado</h2><p>Dominaste tus '+cards.length+' frases. Cuando tengas clase nueva, aqui apareceran mas.</p>'+
+    '<div class="row" style="justify-content:center;margin-top:16px"><button class="main-btn" onclick="resetMastery()">Repasar de nuevo</button></div></div>';
+}
+function resetMastery(){ mastery={}; saveMastery(); rebuildQueue(); }
+</script>
+</body>
+</html>
