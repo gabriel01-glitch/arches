@@ -19,6 +19,30 @@
       "right": "I went partying.",
       "hint": "En español decimos 'fui a fiesta' usando un sustantivo, pero en inglés la expresión natural usa el verbo en gerundio: 'go partying'. Sin el -ing suena incompleto.",
       "date": "7 de julio de 2026"
+    },
+    {
+      "wrong": "Tira el ancla!",
+      "right": "Drop the anchor!",
+      "hint": "En ingles se usa 'drop' para soltar el ancla, no un verbo de lanzar. Es una expresion fija del mundo nautico.",
+      "date": "7 de julio de 2026"
+    },
+    {
+      "wrong": "People is on the vacation.",
+      "right": "People are on vacation.",
+      "hint": "'People' es plural en inglés, por eso necesita 'are'. Además, 'on vacation' no lleva artículo 'the', a diferencia del español donde decimos 'de vacaciones' con artículo implícito.",
+      "date": "7 de julio de 2026"
+    },
+    {
+      "wrong": "Usualmente during the months of January, February and March.",
+      "right": "Usually during the months of January, February and March.",
+      "hint": "'Usualmente' se traduce como 'usually', no 'usualmente'. Es un falso cognado parcial; en ingles la forma correcta es 'usually'.",
+      "date": "7 de julio de 2026"
+    },
+    {
+      "wrong": "more faster",
+      "right": "faster",
+      "hint": "'Fast' ya es un adjetivo corto, así que el comparativo se forma solo agregando '-er'. Usar 'more' y '-er' juntos es doble comparativo, un error muy común por traducir 'más' directamente del español.",
+      "date": "7 de julio de 2026"
     }
   ]
 }
