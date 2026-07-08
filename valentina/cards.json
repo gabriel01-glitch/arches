@@ -1,0 +1,66 @@
+{
+  "student": "Valentina",
+  "updated": "7 de julio de 2026",
+  "cards": [
+    {
+      "wrong": "I can saw my friend.",
+      "right": "I can see my friend.",
+      "hint": "Después de verbos modales como 'can', el verbo siempre va en infinitivo (forma base), nunca en pasado.",
+      "date": "7 de julio de 2026"
+    },
+    {
+      "wrong": "How long didn't you see your friend?",
+      "right": "How long had it been since you last saw your friend?",
+      "hint": "En español usamos 'no veías' pero en inglés las preguntas sobre tiempo transcurrido desde la última vez que ocurrió algo usan la estructura 'How long had it been since...' con pasado perfecto.",
+      "date": "7 de julio de 2026"
+    },
+    {
+      "wrong": "",
+      "right": "",
+      "hint": "No se detectó ningún error en inglés. La entrada está en español y no contiene producción de un estudiante para corregir.",
+      "date": "7 de julio de 2026"
+    },
+    {
+      "wrong": "He has lived there five years ago.",
+      "right": "He lived there five years ago.",
+      "hint": "'Ago' indica un momento específico en el pasado, así que necesita simple past, no present perfect. El present perfect se usa para experiencias o acciones conectadas al presente, nunca con marcadores de tiempo terminado como 'ago'.",
+      "date": "7 de julio de 2026"
+    },
+    {
+      "wrong": "Has he lived there since 5 years?",
+      "right": "Has he lived there for 5 years?",
+      "hint": "En español usamos 'desde hace' para periodos de tiempo, pero en inglés la diferencia es clara: 'since' es para un punto específico en el tiempo (since 2019, since Monday) y 'for' es para una duración (for 5 years, for a long time).",
+      "date": "7 de julio de 2026"
+    },
+    {
+      "wrong": "He will return in the month of July.",
+      "right": "He will return in July.",
+      "hint": "En inglés no se dice 'in the month of July', solo se usa 'in July'. La frase 'en el mes de' no se traduce literalmente.",
+      "date": "7 de julio de 2026"
+    },
+    {
+      "wrong": "We left for the mall.",
+      "right": "We left for the mall.",
+      "hint": "No hay error detectado. Esta oracion es correcta en ingles.",
+      "date": "7 de julio de 2026"
+    },
+    {
+      "wrong": "No te gusta el fútbol.",
+      "right": "Don't you like football?",
+      "hint": "El español puede negar una preferencia con declaración, pero en inglés se usa una pregunta tag o una pregunta directa para expresar sorpresa o invitar confirmación.",
+      "date": "7 de julio de 2026"
+    },
+    {
+      "wrong": "When I was a child, I visited to my grandfathers.",
+      "right": "When I was a child, I visited my grandparents.",
+      "hint": "Dos errores aquí: 'visit' es un verbo transitivo en inglés y no lleva 'to' después (interferencia del español 'visitar a'). Además, 'abuelos' en inglés se dice 'grandparents', que incluye a ambos sexos, no 'grandfathers' que solo significa abuelos varones.",
+      "date": "7 de julio de 2026"
+    },
+    {
+      "wrong": "I hope tomorrow come.",
+      "right": "I hope tomorrow comes.",
+      "hint": "Después de 'I hope', el verbo necesita concordar con el sujeto en tercera persona o usar la estructura correcta. En este caso, 'tomorrow' como sujeto requiere 's' en el verbo.",
+      "date": "7 de julio de 2026"
+    }
+  ]
+}
