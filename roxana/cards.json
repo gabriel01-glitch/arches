@@ -1,0 +1,12 @@
+{
+  "student": "Roxana",
+  "updated": "8 de julio de 2026",
+  "cards": [
+    {
+      "wrong": "There are very people in the party.",
+      "right": "There are many people at the party.",
+      "hint": "'Mucha' no se traduce como 'very' sino como 'many' (con sustantivos contables plurales como people) o 'much' (incontables). Además, para eventos se usa 'at' en lugar de 'in'.",
+      "date": "8 de julio de 2026"
+    }
+  ]
+}
