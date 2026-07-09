@@ -20,7 +20,7 @@ h1{font-family:'Cormorant Garamond',serif;font-size:34px;margin:0;} h1 .nm{color
 </style></head><body>
 <header>
   <h1>Galeria de <span class="nm">Carlenis</span></h1>
-  <div class="sub">22 laminas de tus clases &middot; toca para ampliar</div>
+  <div class="sub">25 laminas de tus clases &middot; toca para ampliar</div>
   <a class="back" href="../">&larr; Volver a tu pagina</a>
 </header>
 <div class="grid">
@@ -46,10 +46,13 @@ h1{font-family:'Cormorant Garamond',serif;font-size:34px;margin:0;} h1 .nm{color
     <a class="card" href="20.jpg" data-i="19"><img loading="lazy" src="20.jpg" alt="Lamina 20"></a>
     <a class="card" href="21.jpg" data-i="20"><img loading="lazy" src="21.jpg" alt="Lamina 21"></a>
     <a class="card" href="22.jpg" data-i="21"><img loading="lazy" src="22.jpg" alt="Lamina 22"></a>
+    <a class="card" href="23.jpg" data-i="22"><img loading="lazy" src="23.jpg" alt="Lamina 23"></a>
+    <a class="card" href="24.jpg" data-i="23"><img loading="lazy" src="24.jpg" alt="Lamina 24"></a>
+    <a class="card" href="25.jpg" data-i="24"><img loading="lazy" src="25.jpg" alt="Lamina 25"></a>
 </div>
 <div class="lb" id="lb"><span class="x" onclick="close_()">&times;</span><span class="nav prev" onclick="nav(-1)">&#8249;</span><img id="lbi" src=""><span class="nav next" onclick="nav(1)">&#8250;</span><span class="cnt" id="cnt"></span></div>
 <script>
-var N=22,cur=0,lb=document.getElementById('lb'),lbi=document.getElementById('lbi'),cnt=document.getElementById('cnt');
+var N=25,cur=0,lb=document.getElementById('lb'),lbi=document.getElementById('lbi'),cnt=document.getElementById('cnt');
 function show(i){cur=(i+N)%N;lbi.src=String(cur+1).padStart(2,'0')+'.jpg';cnt.textContent=(cur+1)+' / '+N;lb.classList.add('on');}
 function nav(d){show(cur+d);} function close_(){lb.classList.remove('on');}
 document.querySelectorAll('.card').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();show(parseInt(a.dataset.i));});});
