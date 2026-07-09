@@ -1,0 +1,12 @@
+{
+  "student": "Andres",
+  "updated": "9 de julio de 2026",
+  "cards": [
+    {
+      "wrong": "I go to the bank to pay the rent.",
+      "right": "I went to the bank to pay the rent.",
+      "hint": "La accion ocurrio en el pasado, asi que necesitas el pasado simple 'went', no el presente 'go'. En español a veces contamos historias pasadas en presente, pero en ingles hay que cambiar al pasado.",
+      "date": "9 de julio de 2026"
+    }
+  ]
+}
