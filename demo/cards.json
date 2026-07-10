@@ -1,0 +1,12 @@
+{
+  "student": "Demo",
+  "updated": "10 de julio de 2026",
+  "cards": [
+    {
+      "wrong": "I have hungry.",
+      "right": "I am hungry.",
+      "hint": "En español decimos 'tener hambre', pero en inglés se usa el verbo 'to be' (ser/estar) para describir sensaciones físicas como el hambre. 'Have' no funciona aquí.",
+      "date": "10 de julio de 2026"
+    }
+  ]
+}
