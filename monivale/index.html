@@ -48,9 +48,9 @@
       <div class="fo">Cinco casos, cinco crímenes contra el inglés. ¿Cómo se declaran?</div></div>
       <div class="arrow">›</div>
     </a>
-    <a class="card" href="hoy/">
+    <a class="card" href="hoy/" id="detusclases" style="display:none">
       <div class="em">📝</div>
-      <div class="body"><div class="nm">Repaso de hoy</div> <div class="fo">Los errores de su última clase, para practicar.</div></div>
+      <div class="body"><div class="nm">De sus clases</div> <div class="fo" id="detusclases-sub">Los errores que capturamos en clase, para practicar.</div></div>
       <div class="arrow">›</div>
     </a>
     <a class="card" href="../apps/moniandvale/">
@@ -74,5 +74,22 @@
   </div>
   <div class="foot">ARCHES Language School · Teacher Gabriel</div>
 </div>
+<script>
+(function(){
+  var SLUG = "monivale";
+  fetch("cards.json?ts="+Date.now()).then(function(r){return r.json();}).then(function(data){
+    var cards=(data&&data.cards)?data.cards:[];
+    if(!cards.length) return;
+    var mastery={};
+    try{ mastery=JSON.parse(localStorage.getItem("cv_mastery_"+SLUG))||{}; }catch(e){}
+    function cid(c){return (c.wrong+"||"+c.right).toLowerCase().replace(/\s+/g," ").trim();}
+    var mastered=cards.filter(function(c){var m=mastery[cid(c)];return (m&&m.score)>=3;}).length;
+    var pending=cards.length-mastered;
+    document.getElementById("detusclases-sub").textContent =
+      pending>0 ? (pending+" por dominar · "+mastered+" dominadas") : ("Todo dominado: "+cards.length+" frases");
+    document.getElementById("detusclases").style.display="flex";
+  }).catch(function(){ /* sin cards.json todavia: no mostrar nada */ });
+})();
+</script>
 </body>
 </html>
