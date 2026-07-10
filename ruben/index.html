@@ -485,11 +485,6 @@
       "url": "../apps/ed-sounds/"
     },
     {
-      "title": "Repaso de hoy",
-      "note": "Lo último que capturamos en clase.",
-      "url": "hoy/"
-    },
-    {
       "title": "Esencial",
       "note": "Los errores típicos del español al inglés.",
       "url": "../esencial/"
@@ -855,6 +850,31 @@
   function esc(s){ return (s==null?"":""+s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
 
   renderHome();
+})();
+</script>
+<section id="detusclases" style="max-width:640px;margin:18px auto;padding:0 16px;display:none">
+  <h2 style="font-family:'Cormorant Garamond',serif;font-weight:700;font-size:22px;color:#bf5a36;margin-bottom:4px">De tus clases</h2>
+  <p style="color:#8a7d6b;font-size:13.5px;margin-bottom:10px">Los errores que capturamos en clase. Practica hasta dominarlos.</p>
+  <a id="detusclases-link" href="hoy/" style="display:block;text-decoration:none;background:#fff;border:1px solid #e8dfd2;border-left:4px solid #bf5a36;border-radius:14px;padding:16px">
+    <span style="font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;color:#3d3428" id="detusclases-title">Tu repaso vivo</span>
+    <span style="display:block;color:#8a7d6b;font-size:13px;margin-top:2px" id="detusclases-sub">Cargando...</span>
+  </a>
+</section>
+<script>
+(function(){
+  var SLUG = "ruben";
+  fetch("cards.json?ts="+Date.now()).then(function(r){return r.json();}).then(function(data){
+    var cards=(data&&data.cards)?data.cards:[];
+    if(!cards.length) return;
+    var mastery={};
+    try{ mastery=JSON.parse(localStorage.getItem("cv_mastery_"+SLUG))||{}; }catch(e){}
+    function cid(c){return (c.wrong+"||"+c.right).toLowerCase().replace(/\s+/g," ").trim();}
+    var mastered=cards.filter(function(c){var m=mastery[cid(c)];return (m&&m.score)>=3;}).length;
+    var pending=cards.length-mastered;
+    document.getElementById("detusclases-sub").textContent =
+      pending>0 ? (pending+" por dominar · "+mastered+" dominadas") : ("Todo dominado: "+cards.length+" frases");
+    document.getElementById("detusclases").style.display="block";
+  }).catch(function(){ /* sin cards.json todavia: no mostrar nada */ });
 })();
 </script>
 </body>
