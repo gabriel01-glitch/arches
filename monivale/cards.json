@@ -1,0 +1,73 @@
+{
+  "student": "Moni & Vale",
+  "updated": "10 de julio de 2026",
+  "cards": [
+    {
+      "wrong": "I can saw my friend.",
+      "right": "I can see my friend.",
+      "alts": [],
+      "hint": "Después de un modal (can, could, will) el verbo va en forma base: can see. 'Saw' es pasado y no puede seguir a 'can'.",
+      "date": "7 de julio de 2026"
+    },
+    {
+      "wrong": "How long didn't you see your friend?",
+      "right": "How long has it been since you saw your friend?",
+      "alts": [
+        "How long had it been since you last saw your friend?"
+      ],
+      "hint": "En español preguntamos '¿cuánto tiempo sin verlo?' sin negación. En inglés la fórmula es 'How long has it been since...?'. El 'didn't' no va en esta pregunta.",
+      "date": "7 de julio de 2026"
+    },
+    {
+      "wrong": "He has lived there five years ago.",
+      "right": "He lived there five years ago.",
+      "alts": [],
+      "hint": "'Ago' clava la acción en un punto terminado del pasado: pasado simple. El present perfect nunca se combina con 'ago'.",
+      "date": "7 de julio de 2026"
+    },
+    {
+      "wrong": "Has he lived there since 5 years?",
+      "right": "Has he lived there for 5 years?",
+      "alts": [
+        "Has he been living there for 5 years?"
+      ],
+      "hint": "'For' + duración (for 5 years); 'since' + punto de inicio (since 2021). El 'desde hace' del español mezcla los dos, por eso confunde.",
+      "date": "7 de julio de 2026"
+    },
+    {
+      "wrong": "He will return in the month of July.",
+      "right": "He will return in July.",
+      "alts": [
+        "He'll return in July.",
+        "He will come back in July."
+      ],
+      "hint": "'In the month of July' es calco de 'en el mes de julio'. En inglés natural basta 'in July'.",
+      "date": "7 de julio de 2026"
+    },
+    {
+      "wrong": "No te gusta el fútbol.",
+      "right": "Don't you like football?",
+      "alts": [
+        "Don't you like soccer?"
+      ],
+      "hint": "Pregunta negativa: el auxiliar negativo abre la frase (Don't you...?). En español lo marca la entonación; en inglés lo marca el 'don't'.",
+      "date": "7 de julio de 2026"
+    },
+    {
+      "wrong": "When I was a child, I visited to my grandfathers.",
+      "right": "When I was a child, I visited my grandparents.",
+      "alts": [
+        "When I was a kid, I used to visit my grandparents."
+      ],
+      "hint": "'Visit' no lleva 'to': visit someone. Y la pareja de abuelos es 'grandparents'; 'grandfathers' serían dos abuelos varones.",
+      "date": "7 de julio de 2026"
+    },
+    {
+      "wrong": "I hope tomorrow come.",
+      "right": "I hope tomorrow comes.",
+      "alts": [],
+      "hint": "'Tomorrow' actúa como 'it': tercera persona con -s (comes). El subjuntivo español ('que venga') esconde esa -s.",
+      "date": "7 de julio de 2026"
+    }
+  ]
+}
