@@ -1,12 +1,31 @@
 {
   "student": "Roxana",
-  "updated": "8 de julio de 2026",
+  "updated": "10 de julio de 2026",
   "cards": [
+    {
+      "wrong": "I losted the game.",
+      "right": "I lost the game.",
+      "alts": [],
+      "hint": "'Lose' es irregular: lost en pasado. La terminación -ed no aplica a los verbos irregulares.",
+      "date": "6 de julio de 2026"
+    },
+    {
+      "wrong": "I am the beach.",
+      "right": "I am at the beach.",
+      "alts": [
+        "I'm at the beach."
+      ],
+      "hint": "Falta 'at' para la ubicación: at the beach. El 'estoy en la playa' del español esconde esa preposición.",
+      "date": "6 de julio de 2026"
+    },
     {
       "wrong": "There are very people in the party.",
       "right": "There are many people at the party.",
-      "hint": "'Mucha' no se traduce como 'very' sino como 'many' (con sustantivos contables plurales como people) o 'much' (incontables). Además, para eventos se usa 'at' en lugar de 'in'.",
-      "date": "8 de julio de 2026"
+      "alts": [
+        "There are a lot of people at the party."
+      ],
+      "hint": "'Very' no acompaña sustantivos: es 'many people' (o a lot of people). Y las fiestas usan 'at', no 'in'.",
+      "date": "7 de julio de 2026"
     }
   ]
 }
