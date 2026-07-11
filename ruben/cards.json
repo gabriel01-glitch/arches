@@ -1,47 +1,73 @@
 {
   "student": "Rubén",
-  "updated": "7 de julio de 2026",
+  "updated": "10 de julio de 2026",
   "cards": [
+    {
+      "wrong": "I have 25 years.",
+      "right": "I am 25 years old.",
+      "alts": [
+        "I'm 25 years old.",
+        "I'm 25."
+      ],
+      "hint": "La edad va con 'to be', no con 'have': tengo 25 años = I am 25 years old. El 'tener' del español es la trampa.",
+      "date": "3 de julio de 2026"
+    },
+    {
+      "wrong": "peoples",
+      "right": "people",
+      "alts": [],
+      "hint": "'People' ya es plural (gente, personas). 'Peoples' solo existe para hablar de pueblos o naciones.",
+      "date": "3 de julio de 2026"
+    },
     {
       "wrong": "I see all my friends yesterday.",
       "right": "I saw all my friends yesterday.",
-      "hint": "En español a veces el contexto deja claro el pasado, pero en inglés el verbo debe cambiar de forma. 'See' se convierte en 'saw' para indicar que la acción ya ocurrió.",
+      "alts": [
+        "Yesterday I saw all my friends."
+      ],
+      "hint": "'Yesterday' exige pasado: see cambia a saw. En español el contexto perdona; en inglés el verbo debe cambiar.",
       "date": "7 de julio de 2026"
     },
     {
       "wrong": "I went party.",
       "right": "I went to the party.",
-      "hint": "En español decimos 'fui a la fiesta' pero la preposición 'a' se omite al traducir. En inglés siempre se necesita 'to' para indicar destino, y el artículo 'the' da contexto específico.",
-      "date": "7 de julio de 2026"
-    },
-    {
-      "wrong": "I went party.",
-      "right": "I went partying.",
-      "hint": "En español decimos 'fui a fiesta' usando un sustantivo, pero en inglés la expresión natural usa el verbo en gerundio: 'go partying'. Sin el -ing suena incompleto.",
+      "alts": [
+        "I went to a party.",
+        "I went partying."
+      ],
+      "hint": "El destino lleva 'to' más artículo: I went to the party. Para salir de fiesta en general, el inglés usa gerundio: I went partying.",
       "date": "7 de julio de 2026"
     },
     {
       "wrong": "Tira el ancla!",
       "right": "Drop the anchor!",
-      "hint": "En ingles se usa 'drop' para soltar el ancla, no un verbo de lanzar. Es una expresion fija del mundo nautico.",
+      "alts": [],
+      "hint": "En inglés el ancla se suelta con 'drop', no con un verbo de lanzar. Expresión fija del mundo náutico.",
       "date": "7 de julio de 2026"
     },
     {
       "wrong": "People is on the vacation.",
       "right": "People are on vacation.",
-      "hint": "'People' es plural en inglés, por eso necesita 'are'. Además, 'on vacation' no lleva artículo 'the', a diferencia del español donde decimos 'de vacaciones' con artículo implícito.",
+      "alts": [],
+      "hint": "'People' es plural: are. Y 'on vacation' va sin 'the'; ese artículo es calco de 'de vacaciones'.",
       "date": "7 de julio de 2026"
     },
     {
       "wrong": "Usualmente during the months of January, February and March.",
       "right": "Usually during the months of January, February and March.",
-      "hint": "'Usualmente' se traduce como 'usually', no 'usualmente'. Es un falso cognado parcial; en ingles la forma correcta es 'usually'.",
+      "alts": [
+        "Usually in January, February and March."
+      ],
+      "hint": "'Usualmente' no existe en inglés: es 'usually'. Ojo con los casi cognados.",
       "date": "7 de julio de 2026"
     },
     {
       "wrong": "more faster",
       "right": "faster",
-      "hint": "'Fast' ya es un adjetivo corto, así que el comparativo se forma solo agregando '-er'. Usar 'more' y '-er' juntos es doble comparativo, un error muy común por traducir 'más' directamente del español.",
+      "alts": [
+        "much faster"
+      ],
+      "hint": "'Fast' es corto: el comparativo se forma con -er (faster). 'More faster' duplica el comparativo; para énfasis: much faster.",
       "date": "7 de julio de 2026"
     }
   ]
