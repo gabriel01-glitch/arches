@@ -1,0 +1,76 @@
+{
+  "student": "Mavic",
+  "updated": "13 de julio de 2026",
+  "cards": [
+    {
+      "wrong": "I have many preocupaciones.",
+      "right": "I have many worries.",
+      "hint": "'Preocupaciones' se traduce como 'worries' o 'concerns'. Es una palabra que los hispanohablantes suelen dejar en español porque no viene a la mente fácilmente en inglés.",
+      "alts": [
+        "I have many concerns.",
+        "I have a lot of worries.",
+        "I have a lot of concerns."
+      ],
+      "date": "13 de julio de 2026"
+    },
+    {
+      "wrong": "That's can help you.",
+      "right": "That can help you.",
+      "hint": "\"That's\" es una contraccion de \"that is\". No se puede combinar con otro verbo auxiliar como \"can\". Elige uno: \"that is\" o \"that can\", no los dos juntos.",
+      "alts": [
+        "That could help you."
+      ],
+      "date": "13 de julio de 2026"
+    },
+    {
+      "wrong": "My daughter do everything she says.",
+      "right": "My daughter does everything she says.",
+      "hint": "En español el verbo no cambia según la persona ('ella hace' suena igual que 'yo hago' en estructura), pero en inglés la tercera persona singular (he/she/it) necesita una 's' al final del verbo en presente simple.",
+      "alts": [],
+      "date": "13 de julio de 2026"
+    },
+    {
+      "wrong": "I prefer die in Venezuela.",
+      "right": "I prefer to die in Venezuela.",
+      "hint": "En español 'prefiero morir' usa infinitivo directamente, pero en inglés 'prefer' exige 'to + verbo'. Regla: prefer + to + infinitivo.",
+      "alts": [
+        "I'd rather die in Venezuela."
+      ],
+      "date": "13 de julio de 2026"
+    },
+    {
+      "wrong": "He don't do that.",
+      "right": "He doesn't do that.",
+      "hint": "En español el verbo no cambia según la persona ('él no hace'), pero en inglés el auxiliar negativo en presente simple con he/she/it siempre lleva 's': doesn't.",
+      "alts": [],
+      "date": "13 de julio de 2026"
+    },
+    {
+      "wrong": "He leave me.",
+      "right": "He left me.",
+      "hint": "En inglés el pasado simple requiere cambiar el verbo, no solo el contexto. 'Leave' es irregular: leave -> left. No hay una palabra separada para indicar pasado como en español.",
+      "alts": [],
+      "date": "13 de julio de 2026"
+    },
+    {
+      "wrong": "We were doing a lot of damage to each other.",
+      "right": "We were hurting each other a lot.",
+      "hint": "El verbo 'hurt' en inglés es la forma más natural y directa de expresar daño emocional o físico entre personas. 'Hacer daño' se traduce literalmente como 'do damage', pero los angloparlantes prefieren 'hurt each other' para relaciones personales. 'Each other' es clave para expresar la reciprocidad de 'nos' en este contexto.",
+      "alts": [
+        "We were doing each other a lot of harm.",
+        "We were causing each other a lot of damage."
+      ],
+      "date": "13 de julio de 2026"
+    },
+    {
+      "wrong": "All people is in the water.",
+      "right": "All the people are in the water.",
+      "hint": "'People' es plural en inglés (significa 'personas' como grupo), así que necesita verbo plural 'are', no 'is'. También se usa 'all the people' cuando hablas de un grupo específico. En español decimos 'la gente es' con verbo singular, pero en inglés 'people are' siempre va en plural.",
+      "alts": [
+        "Everyone is in the water.",
+        "Everybody is in the water."
+      ],
+      "date": "13 de julio de 2026"
+    }
+  ]
+}
