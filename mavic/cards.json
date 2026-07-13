@@ -71,6 +71,15 @@
         "Everybody is in the water."
       ],
       "date": "13 de julio de 2026"
+    },
+    {
+      "wrong": "This tool can be help somebody else.",
+      "right": "This tool can help somebody else.",
+      "hint": "Después de un verbo modal (can, could, will, should...) el siguiente verbo va en forma base, sin 'be'. 'Can be help' mezcla dos estructuras distintas.",
+      "alts": [
+        "This tool could help somebody else."
+      ],
+      "date": "13 de julio de 2026"
     }
   ]
 }
