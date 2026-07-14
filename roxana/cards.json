@@ -1,6 +1,6 @@
 {
   "student": "Roxana",
-  "updated": "10 de julio de 2026",
+  "updated": "13 de julio de 2026",
   "cards": [
     {
       "wrong": "I losted the game.",
@@ -26,6 +26,26 @@
       ],
       "hint": "'Very' no acompaña sustantivos: es 'many people' (o a lot of people). Y las fiestas usan 'at', no 'in'.",
       "date": "7 de julio de 2026"
+    },
+    {
+      "wrong": "The hot was too much.",
+      "right": "The heat was too much.",
+      "hint": "'Hot' en inglés es adjetivo, no sustantivo. El sustantivo equivalente a 'el calor' es 'heat'. En español decimos 'el calor' y eso lleva a usar 'hot' como si fuera sustantivo.",
+      "alts": [
+        "It was too hot.",
+        "The heat was unbearable."
+      ],
+      "date": "13 de julio de 2026"
+    },
+    {
+      "wrong": "We went to Naples no swim.",
+      "right": "We went to Naples but didn't swim.",
+      "hint": "En español es natural omitir el verbo auxiliar y usar 'no' como negación directa ('fuimos pero no nadamos'). En inglés necesitas el auxiliar 'didn't' y una conjunción como 'but' para conectar las dos ideas.",
+      "alts": [
+        "We went to Naples and didn't swim.",
+        "We went to Naples but we didn't swim."
+      ],
+      "date": "13 de julio de 2026"
     }
   ]
 }
