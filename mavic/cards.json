@@ -3,6 +3,13 @@
   "updated": "13 de julio de 2026",
   "cards": [
     {
+      "wrong": "Stay in home.",
+      "right": "Stay at home.",
+      "hint": "Usamos 'at home', no 'in home'. 'At' es la preposicion correcta para casa.",
+      "alts": [],
+      "date": "6 de julio de 2026"
+    },
+    {
       "wrong": "I have many preocupaciones.",
       "right": "I have many worries.",
       "hint": "'Preocupaciones' se traduce como 'worries' o 'concerns'. Es una palabra que los hispanohablantes suelen dejar en español porque no viene a la mente fácilmente en inglés.",
