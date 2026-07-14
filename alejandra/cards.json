@@ -53,6 +53,36 @@
         "I spent a lot of time reading about that."
       ],
       "date": "14 de julio de 2026"
+    },
+    {
+      "wrong": "She didn't know how do it.",
+      "right": "She didn't know how to do it.",
+      "hint": "Después de 'how', se necesita el infinitivo con 'to'. En español no hay una partícula equivalente visible ('cómo hacerlo'), así que el 'to' se omite por interferencia.",
+      "alts": [],
+      "date": "14 de julio de 2026"
+    },
+    {
+      "wrong": "I don't want anybody knows.",
+      "right": "I don't want anybody to know.",
+      "hint": "Después de 'want' con un objeto (anybody, someone, him, etc.) se usa el infinitivo con 'to', no una conjugación. En español decimos 'no quiero que nadie sepa' con subjuntivo, pero en inglés la estructura es 'want + objeto + to + verbo base'.",
+      "alts": [
+        "I don't want anyone to know."
+      ],
+      "date": "14 de julio de 2026"
+    },
+    {
+      "wrong": "I am working in that.",
+      "right": "I am working on that.",
+      "hint": "En español decimos 'trabajar en algo', pero en inglés el proyecto o tema en el que trabajas usa la preposición 'on', no 'in'. 'In' se reserva para lugares físicos o contextos donde estás dentro de algo.",
+      "alts": [],
+      "date": "14 de julio de 2026"
+    },
+    {
+      "wrong": "I changes some paragraphs.",
+      "right": "I changed some paragraphs.",
+      "hint": "El verbo en pasado simple no lleva 's' al final. 'Changes' es la tercera persona del presente ('he changes'). Para hablar de algo que ya hiciste, usa el pasado: 'changed'.",
+      "alts": [],
+      "date": "14 de julio de 2026"
     }
   ]
 }
