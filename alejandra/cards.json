@@ -1,0 +1,23 @@
+{
+  "student": "Alejandra",
+  "updated": "14 de julio de 2026",
+  "cards": [
+    {
+      "wrong": "No lo puedo dejar pasar",
+      "right": "I can't let it go.",
+      "hint": "'Dejar pasar' en este sentido figurado se traduce como 'let it go' o 'let it slide', no es una traduccion palabra por palabra. El sujeto en ingles siempre debe estar presente.",
+      "alts": [
+        "I can't let that slide.",
+        "I cannot let it go."
+      ],
+      "date": "14 de julio de 2026"
+    },
+    {
+      "wrong": "People is crazy.",
+      "right": "People are crazy.",
+      "hint": "'People' es un sustantivo plural en inglés (significa 'las personas'), así que necesita verbo plural. La confusión viene de que en español 'la gente' es singular y se dice 'la gente está loca'.",
+      "alts": [],
+      "date": "14 de julio de 2026"
+    }
+  ]
+}
