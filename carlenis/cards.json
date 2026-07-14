@@ -1,0 +1,23 @@
+{
+  "student": "Carlenis",
+  "updated": "13 de julio de 2026",
+  "cards": [
+    {
+      "wrong": "It's necessary to him to assume the consequences.",
+      "right": "It's necessary for him to assume the consequences.",
+      "hint": "En español decimos 'necesario para él' pero en inglés la estructura fija es 'necessary for someone to do something', no 'to him'. La preposición cambia.",
+      "alts": [
+        "He needs to assume the consequences.",
+        "He has to assume the consequences."
+      ],
+      "date": "13 de julio de 2026"
+    },
+    {
+      "wrong": "You only have to ensemble the gazebo.",
+      "right": "You only have to assemble the gazebo.",
+      "hint": "'Ensemble' en inglés es un sustantivo (grupo musical, conjunto de ropa). El verbo correcto es 'assemble' (armar, montar). En español 'ensamblar' existe, pero en inglés el falso cognado 'ensemble' no funciona como verbo.",
+      "alts": [],
+      "date": "13 de julio de 2026"
+    }
+  ]
+}
