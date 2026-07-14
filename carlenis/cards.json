@@ -3,6 +3,13 @@
   "updated": "13 de julio de 2026",
   "cards": [
     {
+      "wrong": "I want to be a psicologist.",
+      "right": "I want to be a psychologist.",
+      "hint": "Se escribe 'psychologist' con 'psy' al inicio. La 'p' es silenciosa y se pronuncia 'sai-col-o-yist'.",
+      "alts": [],
+      "date": "6 de julio de 2026"
+    },
+    {
       "wrong": "It's necessary to him to assume the consequences.",
       "right": "It's necessary for him to assume the consequences.",
       "hint": "En español decimos 'necesario para él' pero en inglés la estructura fija es 'necessary for someone to do something', no 'to him'. La preposición cambia.",
