@@ -1,0 +1,16 @@
+{
+  "student": "Delfina",
+  "updated": "13 de julio de 2026",
+  "cards": [
+    {
+      "wrong": "I was unable to make that other person understand me.",
+      "right": "I was unable to make myself understood.",
+      "hint": "En ingles es mas natural usar 'make myself understood' para expresar que no lograste comunicarte. La estructura 'make someone understand me' suena torpe; el reflex con 'myself' es la forma idiomatica establecida.",
+      "alts": [
+        "I couldn't get my point across.",
+        "I wasn't able to make myself understood."
+      ],
+      "date": "13 de julio de 2026"
+    }
+  ]
+}
