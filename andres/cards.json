@@ -1,12 +1,75 @@
 {
   "student": "Andres",
-  "updated": "9 de julio de 2026",
+  "updated": "14 de julio de 2026",
   "cards": [
     {
       "wrong": "I go to the bank to pay the rent.",
       "right": "I went to the bank to pay the rent.",
       "hint": "La accion ocurrio en el pasado, asi que necesitas el pasado simple 'went', no el presente 'go'. En español a veces contamos historias pasadas en presente, pero en ingles hay que cambiar al pasado.",
       "date": "9 de julio de 2026"
+    },
+    {
+      "wrong": "Anyone wanted to pay.",
+      "right": "Nobody wanted to pay.",
+      "hint": "'Anyone' es para preguntas o frases condicionales. Para decir 'nadie' en una afirmación se usa 'nobody' o 'no one'. Interferencia del español: 'nadie' a veces se traduce literalmente como 'anyone' pero el sentido negativo cambia la palabra en inglés.",
+      "alts": [
+        "No one wanted to pay."
+      ],
+      "date": "14 de julio de 2026"
+    },
+    {
+      "wrong": "I don't know how to say tratamiento.",
+      "right": "I don't know the word for treatment.",
+      "hint": "Cuando no recuerdas una palabra en inglés, lo más natural es decir 'I don't know the word for...' o 'I'm not sure how to say...'. En español decimos 'no sé cómo decir tratamiento' y esa estructura se transfiere directamente, pero en inglés suena más natural nombrar la palabra o el concepto directamente.",
+      "alts": [
+        "I'm not sure how to say treatment.",
+        "I don't know how to say 'treatment' in English."
+      ],
+      "date": "14 de julio de 2026"
+    },
+    {
+      "wrong": "Why that, we couldn't finish on time.",
+      "right": "Because of that, we couldn't finish on time.",
+      "hint": "'Why that' no funciona como conector causal en inglés. 'Because of that' es la forma correcta para decir 'por eso' o 'por esa razón'. El error viene de intentar traducir literalmente 'por qué eso' o 'por eso'.",
+      "alts": [],
+      "date": "14 de julio de 2026"
+    },
+    {
+      "wrong": "In the end of the month",
+      "right": "At the end of the month",
+      "hint": "En español decimos 'en el final del mes', pero en inglés la expresión fija para hablar del final de un período de tiempo usa 'at', no 'in'. Es una colocación fija: 'at the end of'.",
+      "alts": [],
+      "date": "14 de julio de 2026"
+    },
+    {
+      "wrong": "I need to cumplir with everything.",
+      "right": "I need to comply with everything.",
+      "hint": "'Cumplir' se traduce como 'to comply with' o 'to fulfill' segun el contexto. Es un falso amigo de estructura: en ingles el verbo cambia completamente, no se puede insertar la palabra en espanol.",
+      "alts": [
+        "I need to fulfill everything.",
+        "I need to meet all the requirements."
+      ],
+      "date": "14 de julio de 2026"
+    },
+    {
+      "wrong": "I need to cumplir everything at work.",
+      "right": "I need to fulfill everything at work.",
+      "hint": "El verbo 'cumplir' no existe en inglés. El equivalente más directo es 'fulfill' (nota: una sola 'l' al inicio). También puedes usar 'meet' con sustantivos como 'deadlines' o 'responsibilities', según el contexto.",
+      "alts": [
+        "I need to meet all my obligations at work.",
+        "I need to get everything done at work."
+      ],
+      "date": "14 de julio de 2026"
+    },
+    {
+      "wrong": "I need to cumplir a budget.",
+      "right": "I need to meet a budget.",
+      "hint": "En inglés el verbo para 'cumplir' con un presupuesto es 'meet a budget'. 'Reach' no funciona aquí porque 'reach a budget' no es una combinación natural en inglés. 'Meet', 'stick to' o 'keep to' son las opciones correctas.",
+      "alts": [
+        "I need to stick to a budget.",
+        "I need to keep to a budget."
+      ],
+      "date": "14 de julio de 2026"
     }
   ]
 }
