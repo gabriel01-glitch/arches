@@ -18,6 +18,41 @@
       "hint": "'People' es un sustantivo plural en inglés (significa 'las personas'), así que necesita verbo plural. La confusión viene de que en español 'la gente' es singular y se dice 'la gente está loca'.",
       "alts": [],
       "date": "14 de julio de 2026"
+    },
+    {
+      "wrong": "I need to desahogarme.",
+      "right": "I need to vent.",
+      "hint": "El verbo 'desahogarse' no tiene traduccion directa palabra por palabra. En ingles la expresion natural es 'to vent'. Es un vocabulario que hay que aprender como bloque, no traducir del espanol.",
+      "alts": [
+        "I need to let it all out.",
+        "I need to get this off my chest."
+      ],
+      "date": "14 de julio de 2026"
+    },
+    {
+      "wrong": "You was very beautiful.",
+      "right": "You were very beautiful.",
+      "hint": "El verbo 'to be' tiene formas distintas según el sujeto: 'was' va con I, he, she, it, pero con 'you' (singular o plural) siempre se usa 'were'.",
+      "alts": [],
+      "date": "14 de julio de 2026"
+    },
+    {
+      "wrong": "I dedicar a lot of time to reading about that.",
+      "right": "I dedicate a lot of time to reading about that.",
+      "hint": "El verbo debe conjugarse en presente simple para 'I': 'dedicate', no el infinitivo en español 'dedicar'. En inglés el verbo cambia de forma según el tiempo verbal, no se usa la raíz suelta.",
+      "alts": [
+        "I spend a lot of time reading about that."
+      ],
+      "date": "14 de julio de 2026"
+    },
+    {
+      "wrong": "I dedicar a lot of time to reading about that.",
+      "right": "I dedicated a lot of time to reading about that.",
+      "hint": "El verbo debe conjugarse en pasado simple. 'Dedicar' es el infinitivo en español; en inglés hay que usar la forma conjugada 'dedicated'. Recuerda: verbo en tiempo pasado, no infinitivo.",
+      "alts": [
+        "I spent a lot of time reading about that."
+      ],
+      "date": "14 de julio de 2026"
     }
   ]
 }
