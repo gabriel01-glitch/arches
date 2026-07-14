@@ -83,6 +83,40 @@
       "hint": "El verbo en pasado simple no lleva 's' al final. 'Changes' es la tercera persona del presente ('he changes'). Para hablar de algo que ya hiciste, usa el pasado: 'changed'.",
       "alts": [],
       "date": "14 de julio de 2026"
+    },
+    {
+      "wrong": "I wanted stay alone.",
+      "right": "I wanted to stay alone.",
+      "hint": "En español 'quería quedarme' conecta dos verbos directamente, pero en inglés 'want' necesita 'to' antes del siguiente verbo: want + to + infinitivo.",
+      "alts": [],
+      "date": "14 de julio de 2026"
+    },
+    {
+      "wrong": "I need my husband leaves.",
+      "right": "I needed my husband to leave.",
+      "hint": "'Need' en pasado es 'needed'. Además, después de 'need + objeto', el verbo siguiente va en infinitivo con 'to' (need someone to do something), no en tercera persona del presente.",
+      "alts": [
+        "I needed my husband to go."
+      ],
+      "date": "14 de julio de 2026"
+    },
+    {
+      "wrong": "I don't like to move to other house.",
+      "right": "I don't like to move to another house.",
+      "hint": "'Other' sin artículo no funciona con sustantivos singulares en inglés. Cuando hablas de una cosa indefinida singular, usa 'another' (an + other fusionados). En español decimos 'otra casa' sin artículo, pero en inglés el artículo está integrado en la palabra 'another'.",
+      "alts": [
+        "I don't like moving to another house."
+      ],
+      "date": "14 de julio de 2026"
+    },
+    {
+      "wrong": "cojines",
+      "right": "cushions",
+      "hint": "'Cojines' se traduce como 'cushions' (cojines decorativos o de sofá). 'Pillows' también es válido pero se usa más para almohadas de cama. No hay una palabra parecida en inglés, así que hay que memorizarla.",
+      "alts": [
+        "pillows"
+      ],
+      "date": "14 de julio de 2026"
     }
   ]
 }
