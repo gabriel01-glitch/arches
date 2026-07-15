@@ -1,6 +1,6 @@
 {
   "student": "Mavic",
-  "updated": "13 de julio de 2026",
+  "updated": "15 de julio de 2026",
   "cards": [
     {
       "wrong": "Stay in home.",
@@ -87,6 +87,78 @@
         "This tool could help somebody else."
       ],
       "date": "13 de julio de 2026"
+    },
+    {
+      "wrong": "I try to ponerme al día.",
+      "right": "I'm trying to catch up.",
+      "hint": "En español usamos el presente simple para acciones que pasan ahora mismo, pero en inglés eso requiere el presente continuo (am/is/are + verbo-ing). Además, 'ponerme al día' se dice 'catch up' en inglés.",
+      "alts": [
+        "I need to catch up.",
+        "I'm trying to get up to date."
+      ],
+      "date": "15 de julio de 2026"
+    },
+    {
+      "wrong": "us",
+      "right": "us",
+      "hint": "La palabra 'us' se pronuncia /ʌs/ (como la 'a' en 'mama' pero mas corta y central), no como la 'u' del español. Es un error de pronunciacion, no de escritura.",
+      "alts": [],
+      "date": "15 de julio de 2026"
+    },
+    {
+      "wrong": "I feel bad that I can't understand.",
+      "right": "I felt bad that I couldn't understand.",
+      "hint": "Cuando el verbo principal está en pasado ('felt'), los verbos que dependen de él también van en pasado ('couldn't' en vez de 'can't'). En español a veces se deja el presente aunque el contexto sea pasado, pero en inglés la concordancia de tiempos es obligatoria.",
+      "alts": [
+        "I felt bad because I couldn't understand."
+      ],
+      "date": "15 de julio de 2026"
+    },
+    {
+      "wrong": "delayed",
+      "right": "delayed",
+      "hint": "La pronunciacion correcta es /dɪˈleɪd/: la 'e' de la primera silaba suena como la 'i' en 'did', y el acento cae en la segunda silaba. En español tendemos a pronunciar todas las letras tal como se ven, pero en inglés la ortografia y el sonido no siempre coinciden.",
+      "alts": [],
+      "date": "15 de julio de 2026"
+    },
+    {
+      "wrong": "That can help to you.",
+      "right": "That can help you.",
+      "hint": "En español decimos 'ayudarte a ti', con preposición, pero en inglés el verbo 'help' va directo al objeto sin 'to'. No se usa preposición entre 'help' y la persona.",
+      "alts": [],
+      "date": "15 de julio de 2026"
+    },
+    {
+      "wrong": "I tried to call to Marcos.",
+      "right": "I tried to call Marcos.",
+      "hint": "En español decimos 'llamar a alguien', pero en inglés el verbo 'call' es transitivo directo: no necesita preposición antes del objeto. El 'to' extra es interferencia del español.",
+      "alts": [],
+      "date": "15 de julio de 2026"
+    },
+    {
+      "wrong": "I am realize that Kasia is upset with me.",
+      "right": "I realize that Kasia is upset with me.",
+      "hint": "'Am' es auxiliar del presente continuo y se usa con el verbo en -ing. 'Realize' es un verbo de estado (stative verb) que normalmente no se usa en continuo, asi que va en simple presente o present perfect sin auxiliar.",
+      "alts": [
+        "I've realized that Kasia is upset with me."
+      ],
+      "date": "15 de julio de 2026"
+    },
+    {
+      "wrong": "Don't amenazarme.",
+      "right": "Don't threaten me.",
+      "hint": "El verbo 'amenazar' en inglés es 'threaten'. Mezclar español e inglés en la misma oración es una señal de que la palabra no está aún automatizada. Practica: 'threaten, threatened, threatening'.",
+      "alts": [],
+      "date": "15 de julio de 2026"
+    },
+    {
+      "wrong": "I passed my vacation with my daughter worried.",
+      "right": "I spent my vacation worried about my daughter.",
+      "hint": "En español 'pasar' sirve para el tiempo ('pasé mis vacaciones'), pero en inglés ese uso es 'spend/spent'. Además, 'worried' necesita conectarse claramente al sujeto que siente la preocupación, no dejarlo flotando al final.",
+      "alts": [
+        "I spent my holidays worried about my daughter."
+      ],
+      "date": "15 de julio de 2026"
     }
   ]
 }
