@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alfabeto Telefónico | Delfina · ARCHES</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FAF5EC;
+    --card:#FFFDF8;
+    --terracotta:#C1633C;
+    --terracotta-dark:#9E4E2D;
+    --ink:#3B2F2A;
+    --soft:#8A756A;
+    --line:#E8DCCC;
+    --danger:#B3452F;
+    --ok:#5F7A4E;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Nunito',sans-serif;
+    padding:20px 14px 60px;
+    max-width:760px;
+    margin:0 auto;
+  }
+  header{text-align:center;margin-bottom:26px;}
+  .eyebrow{
+    font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--terracotta);font-weight:800;
+  }
+  h1{
+    font-family:'Cormorant Garamond',serif;
+    font-size:2.3rem;line-height:1.1;font-weight:700;margin:6px 0 8px;
+  }
+  .sub{color:var(--soft);font-size:.95rem;max-width:34em;margin:0 auto;}
+
+  .howto{
+    background:var(--card);border:1.5px solid var(--line);border-radius:16px;
+    padding:16px 18px;margin-bottom:22px;
+  }
+  .howto h2, section h2{
+    font-family:'Cormorant Garamond',serif;font-size:1.45rem;margin-bottom:8px;
+  }
+  .howto p{font-size:.95rem;margin-bottom:6px;}
+  .pattern{
+    font-weight:800;color:var(--terracotta-dark);font-size:1.05rem;
+    background:#F6E9DD;border-radius:10px;padding:8px 12px;display:inline-block;
+    margin-top:4px;
+  }
+
+  .grid{
+    display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));
+    gap:10px;margin-bottom:28px;
+  }
+  .cardL{
+    background:var(--card);border:1.5px solid var(--line);border-radius:14px;
+    padding:12px 12px 10px;position:relative;display:flex;flex-direction:column;gap:2px;
+  }
+  .cardL.watch{border-color:#E3B7A4;background:#FFF9F3;}
+  .row1{display:flex;align-items:baseline;gap:8px;}
+  .letter{
+    font-family:'Cormorant Garamond',serif;font-weight:700;
+    font-size:2rem;color:var(--terracotta);line-height:1;
+  }
+  .saydice{font-size:.78rem;color:var(--soft);font-weight:700;}
+  .saydice b{color:var(--ink);}
+  .word{font-size:1.02rem;font-weight:800;margin-top:2px;}
+  .word .emoji{font-size:1.15rem;margin-right:4px;}
+  .wordsay{font-size:.75rem;color:var(--soft);}
+  .badge{
+    position:absolute;top:8px;right:8px;font-size:.6rem;font-weight:800;
+    color:#fff;background:var(--danger);border-radius:8px;padding:2px 6px;
+    letter-spacing:.05em;
+  }
+  .listen{
+    margin-top:8px;border:none;border-radius:10px;cursor:pointer;
+    background:var(--terracotta);color:#fff;font-family:'Nunito',sans-serif;
+    font-weight:800;font-size:.78rem;padding:7px 0;width:100%;
+  }
+  .listen:active{background:var(--terracotta-dark);}
+
+  section{margin-bottom:26px;}
+  .pairs{display:grid;gap:10px;}
+  .pair{
+    background:var(--card);border:1.5px solid var(--line);border-radius:14px;
+    padding:12px 14px;font-size:.92rem;
+  }
+  .pair .tag{
+    font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:700;
+    color:var(--danger);margin-bottom:2px;
+  }
+  .pair b{color:var(--terracotta-dark);}
+
+  .phrases{display:grid;gap:8px;}
+  .phrase{
+    background:var(--card);border:1.5px solid var(--line);border-radius:12px;
+    padding:10px 14px;font-size:.92rem;display:flex;justify-content:space-between;
+    gap:10px;align-items:center;flex-wrap:wrap;
+  }
+  .phrase .en{font-weight:800;}
+  .phrase .es{color:var(--soft);font-size:.82rem;}
+  .mini{
+    border:none;background:#F0E4D4;color:var(--terracotta-dark);border-radius:8px;
+    font-weight:800;font-size:.72rem;padding:5px 10px;cursor:pointer;
+    font-family:'Nunito',sans-serif;
+  }
+
+  footer{
+    text-align:center;color:var(--soft);font-size:.78rem;margin-top:34px;
+    border-top:1.5px solid var(--line);padding-top:14px;
+  }
+
+  @media print{
+    .listen,.mini{display:none;}
+    body{padding:0;background:#fff;}
+    .grid{grid-template-columns:repeat(4,1fr);gap:6px;}
+    .cardL{break-inside:avoid;}
+    section,.howto{break-inside:avoid;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">ARCHES · Práctica de teléfono</div>
+  <h1>El Alfabeto Telefónico de Delfina</h1>
+  <p class="sub">Para deletrear tu nombre, tu correo o una dirección por teléfono en inglés, sin repetir tres veces. Palabras que ya conoces, con la pronunciación de cada letra.</p>
+</header>
+
+<div class="howto">
+  <h2>Cómo se usa</h2>
+  <p>En inglés se deletrea con esta fórmula mágica:</p>
+  <p class="pattern">"D as in Doctor" &nbsp;=&nbsp; "D de Doctor"</p>
+  <p style="margin-top:8px;">Ejemplo con tu nombre: <b>D as in Doctor, E as in Elephant, L as in Lemon, F as in Family, I as in Internet, N as in November, A as in Apple.</b></p>
+  <p style="color:var(--soft);font-size:.85rem;margin-top:6px;">Las tarjetas con etiqueta roja son las letras que más confunden a los hispanohablantes. Practica esas primero.</p>
+</div>
+
+<div class="grid" id="grid"></div>
+
+<section>
+  <h2>⚠️ Las parejas peligrosas</h2>
+  <div class="pairs">
+    <div class="pair"><div class="tag">A · E · I</div>
+      Los nombres de las vocales están "corridos": <b>A se dice "ei"</b> (como rey), <b>E se dice "i"</b> (como sí), <b>I se dice "ai"</b> (como hay). Si dudas, di la palabra: Apple, Elephant, Internet.</div>
+    <div class="pair"><div class="tag">G · J</div>
+      Empiezan casi igual: <b>G = "yi"</b>, <b>J = "yei"</b>. Por teléfono, mejor "G as in Golf" y "J as in Juice".</div>
+    <div class="pair"><div class="tag">B · V</div>
+      En español suenan igual; en inglés no. Para la <b>V</b>, muerde suavemente el labio de abajo: "Vvvideo". Y en el teléfono: "B as in Banana", "V as in Video".</div>
+    <div class="pair"><div class="tag">M · N</div>
+      <b>M = "em"</b> (labios cerrados), <b>N = "en"</b> (lengua arriba). Palabras: Mexico y November.</div>
+  </div>
+</section>
+
+<section>
+  <h2>📧 Para correos y direcciones</h2>
+  <div class="phrases" id="extras"></div>
+</section>
+
+<section>
+  <h2>🗣️ Frases de supervivencia</h2>
+  <div class="phrases" id="phrases"></div>
+</section>
+
+<footer>Hecho con cariño para Delfina · ARCHES Language School</footer>
+
+<script>
+const alphabet=[
+ ["A","ei","Apple","🍎","ápol",true],
+ ["B","bi","Banana","🍌","banána",true],
+ ["C","si","Coffee","☕","cófi",false],
+ ["D","di","Doctor","🩺","dóctor",false],
+ ["E","i","Elephant","🐘","élefant",true],
+ ["F","ef","Family","👪","fámili",false],
+ ["G","yi","Golf","⛳","golf",true],
+ ["H","eich","Hotel","🏨","jou-tél",false],
+ ["I","ai","Internet","💻","ínter-net",true],
+ ["J","yei","Juice","🧃","yus",true],
+ ["K","kei","Kilo","⚖️","kílo",false],
+ ["L","el","Lemon","🍋","lémon",false],
+ ["M","em","Mexico","🇲🇽","méxi-cou",true],
+ ["N","en","November","📅","no-vémber",true],
+ ["O","ou","Orange","🍊","óranch",false],
+ ["P","pi","Piano","🎹","pi-áno",false],
+ ["Q","kiu","Queen","👑","kuín",false],
+ ["R","ar","Radio","📻","réi-dio",false],
+ ["S","es","Sun","☀️","san",false],
+ ["T","ti","Taxi","🚕","táxi",false],
+ ["U","iu","Uniform","👮","iúni-form",false],
+ ["V","vi","Video","📹","vídeo",true],
+ ["W","dábol-iu","WhatsApp","📱","guáts-ap",false],
+ ["X","ex","X-ray","🩻","éx-rei",false],
+ ["Y","uai","Yoga","🧘","yóga",false],
+ ["Z","zi","Zero","0️⃣","zíro",false]
+];
+
+const extras=[
+ ["@","at","arroba"],
+ [".","dot","punto"],
+ ["-","dash","guión"],
+ ["_","underscore","guión bajo"],
+ ["Capital A","capital A","A mayúscula"],
+ ["Lowercase a","lowercase a","a minúscula"],
+ ["LL","double L","doble ele"],
+ [".com","dot com","punto com"]
+];
+
+const phrases=[
+ ["Can I spell that for you?","¿Se lo deletreo?"],
+ ["Let me spell it: ...","Se lo deletreo: ..."],
+ ["Could you spell that, please?","¿Me lo deletrea, por favor?"],
+ ["Sorry, was that B as in Banana or V as in Video?","¿Era B de Banana o V de Video?"],
+ ["Did you get that?","¿Lo anotó bien?"],
+ ["Let me repeat that.","Se lo repito."]
+];
+
+function speak(text){
+  if(!("speechSynthesis" in window)) return;
+  speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(text);
+  u.lang="en-US";u.rate=0.85;
+  speechSynthesis.speak(u);
+}
+
+const grid=document.getElementById("grid");
+alphabet.forEach(([L,dice,word,emoji,wsay,watch])=>{
+  const d=document.createElement("div");
+  d.className="cardL"+(watch?" watch":"");
+  d.innerHTML=`
+    ${watch?'<span class="badge">OJO</span>':""}
+    <div class="row1"><span class="letter">${L}</span>
+    <span class="saydice">se dice <b>"${dice}"</b></span></div>
+    <div class="word"><span class="emoji">${emoji}</span>${word}</div>
+    <div class="wordsay">suena: ${wsay}</div>
+    <button class="listen">🔊 ${L} as in ${word}</button>`;
+  d.querySelector(".listen").onclick=()=>speak(`${L}. ${L} as in ${word}.`);
+  grid.appendChild(d);
+});
+
+const ex=document.getElementById("extras");
+extras.forEach(([sym,en,es])=>{
+  const d=document.createElement("div");
+  d.className="phrase";
+  d.innerHTML=`<span><span class="en">${sym} → "${en}"</span><br><span class="es">${es}</span></span>
+  <button class="mini">🔊</button>`;
+  d.querySelector(".mini").onclick=()=>speak(en);
+  ex.appendChild(d);
+});
+
+const ph=document.getElementById("phrases");
+phrases.forEach(([en,es])=>{
+  const d=document.createElement("div");
+  d.className="phrase";
+  d.innerHTML=`<span><span class="en">${en}</span><br><span class="es">${es}</span></span>
+  <button class="mini">🔊</button>`;
+  d.querySelector(".mini").onclick=()=>speak(en);
+  ph.appendChild(d);
+});
+</script>
+</body>
+</html>
