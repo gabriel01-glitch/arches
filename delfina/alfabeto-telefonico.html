@@ -217,11 +217,27 @@ const phrases=[
  ["Let me repeat that.","Se lo repito."]
 ];
 
+let enVoice=null;
+function pickVoice(){
+  const vs=speechSynthesis.getVoices();
+  enVoice=vs.find(v=>v.lang==="en-US"&&v.localService)
+        ||vs.find(v=>v.lang==="en-US")
+        ||vs.find(v=>v.lang&&v.lang.startsWith("en"))
+        ||null;
+}
+if("speechSynthesis" in window){
+  pickVoice();
+  if(speechSynthesis.onvoiceschanged!==undefined){
+    speechSynthesis.onvoiceschanged=pickVoice;
+  }
+}
 function speak(text){
   if(!("speechSynthesis" in window)) return;
   speechSynthesis.cancel();
+  if(!enVoice) pickVoice();
   const u=new SpeechSynthesisUtterance(text);
   u.lang="en-US";u.rate=0.85;
+  if(enVoice) u.voice=enVoice;
   speechSynthesis.speak(u);
 }
 
