@@ -169,6 +169,15 @@
     </header>
     <p class="sub">Built from our real classes together. Every exercise here comes from something we actually worked on — your own sentences, the idioms we collected, and the little words that trip us up. Pick a track and let's polish. <span class="es">Elige una sección y a pulir.</span></p>
     <div class="tracks" id="trackList"></div>
+    <a id="detusclases" href="hoy/" style="display:none;background:var(--paper);color:inherit;border:1.5px solid var(--cream-deep);border-radius:16px;padding:16px 18px;margin:4px 0 14px;text-decoration:none;align-items:center;gap:12px;">
+      <span style="font-size:22px;">&#128221;</span>
+      <span style="flex:1;">
+        <b style="display:block;font-size:16px;">De tus clases</b>
+        <small style="color:#8a7d6b;font-weight:600;">Los errores que capturamos en clase, para practicar.</small>
+      </span>
+      <span style="color:var(--terra);font-weight:800;font-size:20px;">&rsaquo;</span>
+    </a>
+
     <footer>
       Hecho con <span class="heart">♥</span> por tu profesor Gabriel · ARCHES Language School<br>
       Tip: add <b>?name=Gloria</b> to the link to personalize it.
@@ -769,6 +778,16 @@ function escapeHtml(s){ return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;'
 
 /* ---------- boot ---------- */
 renderHome();
+
+// De tus clases (Captura Viva): aparece solo si hay cards.json
+(function(){
+  fetch("cards.json?ts="+Date.now()).then(function(r){return r.json();}).then(function(data){
+    var cards=(data&&data.cards)?data.cards:[];
+    if(!cards.length) return;
+    var el=document.getElementById("detusclases");
+    if(el) el.style.display="flex";
+  }).catch(function(){});
+})();
 </script>
 </body>
 </html>
