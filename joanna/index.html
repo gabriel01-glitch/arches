@@ -245,6 +245,15 @@
     </div>
   </section>
 
+  <a id="detusclases" href="hoy/" style="display:none;background:var(--card);color:var(--ink);border-radius:16px;padding:16px 18px;margin:6px 0 14px;text-decoration:none;box-shadow:0 8px 20px rgba(0,0,0,.2);align-items:center;gap:12px;">
+    <span style="font-size:22px;">&#128221;</span>
+    <span style="flex:1;">
+      <b style="display:block;font-size:16px;">De tus clases</b>
+      <small style="color:var(--muted);font-weight:600;">Los errores que capturamos en clase, para practicar.</small>
+    </span>
+    <span style="color:var(--plum);font-weight:800;font-size:20px;">&rsaquo;</span>
+  </a>
+
   <div class="footer">
     <div data-i="foot">A little every day, Joanna. 💪</div>
     <button class="reset" id="resetBtn" data-i="reset">Reset progress</button>
@@ -754,6 +763,16 @@ if(typeof module!=="undefined" && module.exports){
   module.exports={norm:norm,lev:lev,ratio:ratio,speakable:speakable,isAccepted:isAccepted,bestRatio:bestRatio,
     SOUNDS:SOUNDS,FIX:FIX,TRANSLATE:TRANSLATE,WORDS:WORDS,SONG:SONG,I18N:I18N};
 }
+</script>
+<script>
+(function(){
+  fetch("cards.json?ts="+Date.now()).then(function(r){return r.json();}).then(function(data){
+    var cards=(data&&data.cards)?data.cards:[];
+    if(!cards.length) return;
+    var el=document.getElementById("detusclases");
+    if(el) el.style.display="flex";
+  }).catch(function(){});
+})();
 </script>
 </body>
 </html>
