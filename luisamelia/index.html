@@ -1200,6 +1200,17 @@
   function esc(s){ return (s==null?"":""+s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
 
   renderHome();
+
+  // De tus clases (Captura Viva): aparece solo si hay cards.json
+  fetch("cards.json?ts="+Date.now()).then(function(r){return r.json();}).then(function(data){
+    var cards=(data&&data.cards)?data.cards:[];
+    if(!cards.length) return;
+    var already=(STUDENT.links||[]).some(function(L){return /hoy\/?$/.test(L.url||"");});
+    if(already) return;
+    STUDENT.links=STUDENT.links||[];
+    STUDENT.links.push({title:"De tus clases",note:"Los errores que capturamos en clase, para practicar.",url:"hoy/"});
+    if(view==="home") renderHome();
+  }).catch(function(){});
 })();
 </script>
 </body>
