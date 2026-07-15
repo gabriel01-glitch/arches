@@ -1,0 +1,13 @@
+{
+  "student": "Eydel",
+  "updated": "14 de julio de 2026",
+  "cards": [
+    {
+      "wrong": "I enjoy my son very much.",
+      "right": "I enjoyed my son very much.",
+      "hint": "En inglés el tiempo pasado simple requiere cambiar el verbo: 'enjoy' se convierte en 'enjoyed'. En español a veces el contexto deja claro que es pasado sin cambiar la forma del verbo, pero en inglés el cambio es obligatorio.",
+      "alts": [],
+      "date": "14 de julio de 2026"
+    }
+  ]
+}
