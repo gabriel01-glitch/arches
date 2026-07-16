@@ -165,7 +165,7 @@
   <div class="phrases" id="phrases"></div>
 </section>
 
-<footer>Hecho con cariño para Delfina · ARCHES Language School</footer>
+<footer>Hecho con cariño para Delfina · ARCHES Language School · v3</footer>
 
 <script>
 const alphabet=[
@@ -217,6 +217,7 @@ const phrases=[
  ["Let me repeat that.","Se lo repito."]
 ];
 
+const LETTERSAY={A:"ay",B:"bee",C:"see",D:"dee",E:"ee",F:"eff",G:"jee",H:"aitch",I:"eye",J:"jay",K:"kay",L:"el",M:"em",N:"en",O:"oh",P:"pee",Q:"cue",R:"are",S:"ess",T:"tee",U:"you",V:"vee",W:"double you",X:"ex",Y:"why",Z:"zee"};
 let enVoice=null;
 function pickVoice(){
   const vs=speechSynthesis.getVoices();
@@ -252,7 +253,7 @@ alphabet.forEach(([L,dice,word,emoji,wsay,watch])=>{
     <div class="word"><span class="emoji">${emoji}</span>${word}</div>
     <div class="wordsay">suena: ${wsay}</div>
     <button class="listen">🔊 ${L} as in ${word}</button>`;
-  d.querySelector(".listen").onclick=()=>speak(`${L}. ${L} as in ${word}.`);
+  d.querySelector(".listen").onclick=()=>speak(`${LETTERSAY[L]||L}. ${LETTERSAY[L]||L} as in ${word}.`);
   grid.appendChild(d);
 });
 
