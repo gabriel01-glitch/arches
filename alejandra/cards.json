@@ -1,6 +1,6 @@
 {
   "student": "Alejandra",
-  "updated": "14 de julio de 2026",
+  "updated": "17 de julio de 2026",
   "cards": [
     {
       "wrong": "No lo puedo dejar pasar",
@@ -117,6 +117,13 @@
         "pillows"
       ],
       "date": "14 de julio de 2026"
+    },
+    {
+      "wrong": "It was on Netflix.",
+      "right": "It was on Netflix.",
+      "hint": "Esta oración es correcta: la serie ya no está disponible en Netflix, así que el pasado 'was' es la opción adecuada.",
+      "alts": [],
+      "date": "17 de julio de 2026"
     }
   ]
 }
