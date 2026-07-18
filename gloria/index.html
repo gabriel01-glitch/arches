@@ -167,14 +167,22 @@
       </div>
       <div class="streak" id="streakChip">🔥 <span id="streakNum">0</span>‑day streak</div>
     </header>
-    <p class="sub">Built from our real classes together. Every exercise here comes from something we actually worked on — your own sentences, the idioms we collected, and the little words that trip us up. Pick a track and let's polish. <span class="es">Elige una sección y a pulir.</span></p>
+    <p class="sub">Built from our real classes together. Every exercise here comes from something we actually worked on: your own sentences, the idioms we collected, and the little words that trip us up. Pick a track and let's polish. <span class="es">Elige una sección y a pulir.</span></p>
     <div class="tracks" id="trackList"></div>
-  <a href="../alfabeto/?name=Gloria" style="display:block;background:var(--paper);color:inherit;border:1.5px solid var(--cream-deep);border-radius:16px;padding:16px 18px;margin:14px 0;text-decoration:none;font-weight:700">🔤 Alfabeto Telefónico · Deletrea tu nombre y tu correo por teléfono</a>
     <a id="detusclases" href="hoy/" style="display:none;background:var(--paper);color:inherit;border:1.5px solid var(--cream-deep);border-radius:16px;padding:16px 18px;margin:4px 0 14px;text-decoration:none;align-items:center;gap:12px;">
       <span style="font-size:22px;">&#128221;</span>
       <span style="flex:1;">
         <b style="display:block;font-size:16px;">De tus clases</b>
         <small style="color:#8a7d6b;font-weight:600;">Los errores que capturamos en clase, para practicar.</small>
+      </span>
+      <span style="color:var(--terra);font-weight:800;font-size:20px;">&rsaquo;</span>
+    </a>
+
+    <a href="../alfabeto/?name=Gloria" style="display:flex;background:var(--paper);color:inherit;border:1.5px solid var(--cream-deep);border-radius:16px;padding:16px 18px;margin:4px 0 14px;text-decoration:none;align-items:center;gap:12px;">
+      <span style="font-size:22px;">&#128222;</span>
+      <span style="flex:1;">
+        <b style="display:block;font-size:16px;">Alfabeto Telef&oacute;nico</b>
+        <small style="color:#8a7d6b;font-weight:600;">Deletrea tu nombre y tu correo por tel&eacute;fono, letra por letra.</small>
       </span>
       <span style="color:var(--terra);font-weight:800;font-size:20px;">&rsaquo;</span>
     </a>
@@ -199,7 +207,7 @@
 
 <script>
 /* =========================================================================
-   PARA GLORIA — single-file practice app
+   PARA GLORIA: single-file practice app
    Content sourced from 3 years of real WhatsApp classes (Jan 2023 – 2026).
    Design system: Cormorant Garamond + Nunito, cream & terracotta.
    Audio: Web Speech API now, with a `say` field on every item so Gabriel
@@ -237,7 +245,7 @@ function renderStreak(){
 }
 
 /* =========================================================================
-   THE CONTENT — Gloria's real material
+   THE CONTENT: Gloria's real material
    types: 'fix'  (her own sentence, corrected)
           'translate' (ES -> EN)
           'mc'   (multiple choice)
@@ -248,13 +256,13 @@ const TRACKS = [
   id:'patterns',
   badge:'Tus frases',
   title:'Your own sentences',
-  blurb:'Real messages you sent me — gently corrected. These are the patterns that come back most often.',
+  blurb:'Real messages you sent me, gently corrected. These are the patterns that come back most often.',
   es:'Tus propias frases, pulidas.',
   items:[
     { type:'fix', wrong:"I'm not be able to make the class today.",
       answer:"I won't be able to make the class today.",
       say:"I won't be able to make the class today.",
-      note:"<b>be able</b> takes <b>will / won't</b> in the future — never <i>am / is</i>. Say <b>“I won't be able to…”</b>",
+      note:"<b>be able</b> takes <b>will / won't</b> in the future, never <i>am / is</i>. Say <b>“I won't be able to…”</b>",
       esNote:"“No podré…” → I won’t be able to…", alts:["I will not be able to make the class today."] },
 
     { type:'fix', wrong:"I won't be able for our class.",
@@ -266,7 +274,7 @@ const TRACKS = [
     { type:'fix', wrong:"I will back on July 19th.",
       answer:"I will be back on July 19th.",
       say:"I will be back on July nineteenth.",
-      note:"<b>back</b> is not a verb here — you need <b>be</b>: <i>I will be back.</i>",
+      note:"<b>back</b> is not a verb here, you need <b>be</b>: <i>I will be back.</i>",
       esNote:"“Regresaré” → I will be back (con “be”).", alts:["I'll be back on July 19th."] },
 
     { type:'fix', wrong:"Yes, I'm.",
@@ -275,7 +283,7 @@ const TRACKS = [
       note:"Don't end a sentence with a contraction. <i>I'm, you're, he's</i> need a word after them. Alone, use the full form: <b>Yes, I am.</b>",
       esNote:"Una contracción nunca cierra la frase.", alts:["Yes, I am ready.","Yes, I am here."] },
 
-    { type:'fix', wrong:"You arrived late? — Yes, I do.",
+    { type:'fix', wrong:"You arrived late? Yes, I do.",
       answer:"Yes, I did.",
       say:"Yes, I did.",
       note:"You arrived = past. So the short answer is past too: <b>Yes, I did.</b> (Present would be “Yes, I do.”)",
@@ -296,25 +304,25 @@ const TRACKS = [
     { type:'fix', wrong:"I'm in my mother in law house.",
       answer:"I'm at my mother-in-law's house.",
       say:"I'm at my mother-in-law's house.",
-      note:"Two fixes: <b>at</b> a house (not <i>in</i>), and the owner takes <b>'s</b> — <i>my mother-in-law's house</i>.",
+      note:"Two fixes: <b>at</b> a house (not <i>in</i>), and the owner takes <b>'s</b>: <i>my mother-in-law's house</i>.",
       esNote:"at + casa · posesión con ’s.", alts:["I'm at my mother in law's house."] },
 
     { type:'fix', wrong:"I think it is because the lightings.",
       answer:"I think it's because of the lightning.",
       say:"I think it's because of the lightning.",
-      note:"<b>because of</b> + noun. And <b>lightning</b> (los rayos) has no plural — never <i>lightnings</i>.",
+      note:"<b>because of</b> + noun. And <b>lightning</b> (los rayos) has no plural, never <i>lightnings</i>.",
       esNote:"because of + sustantivo · lightning = rayos (incontable).", alts:["I think it's because of the lightning storm."] },
 
     { type:'fix', wrong:"I was trying to connect me by my phone.",
       answer:"I was trying to connect through my phone.",
       say:"I was trying to connect through my phone.",
-      note:"English drops the reflexive “me” here. We just <b>connect</b> — <i>through / on / with</i> my phone.",
+      note:"English drops the reflexive “me” here. We just <b>connect</b>: <i>through / on / with</i> my phone.",
       esNote:"“conectarme” → to connect (sin “me”).", alts:["I was trying to connect on my phone.","I was trying to connect with my phone."] },
 
     { type:'fix', wrong:"I haven't been filling well.",
       answer:"I haven't been feeling well.",
       say:"I haven't been feeling well.",
-      note:"<b>feeling</b> (sentir), not <i>filling</i> (llenar). Easy to mix — watch the <i>ee</i> sound: f<b>ee</b>l.",
+      note:"<b>feeling</b> (sentir), not <i>filling</i> (llenar). Easy to mix, watch the <i>ee</i> sound: f<b>ee</b>l.",
       esNote:"feel = sentir · fill = llenar.", alts:["I haven't been feeling well lately."] },
 
     { type:'fix', wrong:"They are measurement the intelligence with numbers.",
@@ -368,10 +376,10 @@ const TRACKS = [
   id:'idioms',
   badge:'Modismos',
   title:'Idioms & expressions',
-  blurb:'The whole collection we gathered over the years — with the Spanish. Read it, say it, then flip to check.',
+  blurb:'The whole collection we gathered over the years, with the Spanish. Read it, say it, then flip to check.',
   es:'Toda nuestra colección de modismos.',
   items:[
-    { type:'card', front:"No podría estar más de acuerdo.", answer:"I couldn't agree more.", say:"I couldn't agree more.", note:"Total agreement — stronger than “I agree.”" },
+    { type:'card', front:"No podría estar más de acuerdo.", answer:"I couldn't agree more.", say:"I couldn't agree more.", note:"Total agreement, stronger than “I agree.”" },
     { type:'card', front:"Es más fácil decirlo que hacerlo.", answer:"That's easier said than done.", say:"That's easier said than done." },
     { type:'card', front:"Estoy teniendo dudas sobre esto.", answer:"I'm having second thoughts about this.", say:"I'm having second thoughts about this." },
     { type:'card', front:"No es tan complicado.", answer:"It's not rocket science.", say:"It's not rocket science.", note:"Literally “no es ciencia espacial.”" },
@@ -395,7 +403,7 @@ const TRACKS = [
     { type:'card', front:"Llover a cántaros.", answer:"It's raining cats and dogs.", say:"It's raining cats and dogs." },
     { type:'card', front:"Acobardarse a último momento.", answer:"To get cold feet.", say:"To get cold feet." },
     { type:'card', front:"Una bendición disfrazada.", answer:"A blessing in disguise.", say:"A blessing in disguise.", note:"Algo bueno que al inicio parecía malo." },
-    /* meeting idioms — definition flip */
+    /* meeting idioms: definition flip */
     { type:'card', front:"To bring something to the table", answer:"To contribute something useful (to a meeting).", say:"To bring something to the table.", note:"Meeting idiom." },
     { type:'card', front:"To be on the same page", answer:"To be in agreement with others.", say:"To be on the same page.", note:"Meeting idiom." },
     { type:'card', front:"To get down to business", answer:"To start with the important matters.", say:"To get down to business.", note:"Meeting idiom." },
@@ -407,7 +415,7 @@ const TRACKS = [
   id:'prepositions',
   badge:'Palabritas',
   title:'Prepositions & small words',
-  blurb:'on, at, to, for — the tiny words that change everything. Pick the one that fits.',
+  blurb:'on, at, to, for: the tiny words that change everything. Pick the one that fits.',
   es:'Las palabritas que lo cambian todo.',
   items:[
     { type:'mc', q:"I live ___ Sunrise Blvd.", say:"I live on Sunrise Boulevard.",
@@ -444,17 +452,17 @@ const TRACKS = [
   es:'Palabras que se leen de una forma y suenan de otra.',
   items:[
     { type:'card', front:"comfortable", answer:"KOMF-tre-bel", say:"comfortable", note:"3 syllables, not 4. Swallow the “or”: <b>KOMF-tre-bel</b>." },
-    { type:'card', front:"papier‑mâché", answer:"pay-per ma-SHAY", say:"papier mache", note:"From French. <b>pay-per ma-SHAY</b> — like “paper ma-shay.”" },
+    { type:'card', front:"papier‑mâché", answer:"pay-per ma-SHAY", say:"papier mache", note:"From French. <b>pay-per ma-SHAY</b>, like “paper ma-shay.”" },
     { type:'card', front:"environment", answer:"en-VAI-ron-ment", say:"environment", note:"Don't drop the <i>n</i>: <b>en-VAI-ron-ment</b>." },
     { type:'card', front:"revenue", answer:"RE-ve-nyoo", say:"revenue", note:"First syllable is the strongest: <b>RE-ve-nyoo</b>." },
     { type:'card', front:"uncertainty", answer:"an-SER-ten-ti", say:"uncertainty", note:"Strongest on the second part: <b>an-SER-ten-ti</b>." },
-    { type:'card', front:"Three thin thinkers thinking thick thoughts.", answer:"Tongue twister — the “th” drill", say:"Three thin thinkers thinking thick thoughts.", note:"Tip of the tongue lightly between the teeth for every <b>th</b>." },
+    { type:'card', front:"Three thin thinkers thinking thick thoughts.", answer:"Tongue twister: the “th” drill", say:"Three thin thinkers thinking thick thoughts.", note:"Tip of the tongue lightly between the teeth for every <b>th</b>." },
   ]
 },
 ];
 
 /* =========================================================================
-   RENDER — HOME
+   RENDER: HOME
    ========================================================================= */
 const trackList = document.getElementById('trackList');
 function renderHome(){
@@ -480,7 +488,7 @@ function renderHome(){
 }
 
 /* =========================================================================
-   AUDIO — Web Speech API with iOS first-gesture unlock
+   AUDIO: Web Speech API with iOS first-gesture unlock
    ========================================================================= */
 let voicesReady=false, audioUnlocked=false, chosenVoice=null;
 function pickVoice(){
@@ -695,9 +703,9 @@ function renderCard(){
         if(!val.trim()){ wrap._textarea.focus(); return; }
         const res=checkTyped(val,item);
         fb.className='feedback on '+res;
-        fb.textContent = res==='ok' ? '✓ Exact — beautiful, '+NAME+'!'
+        fb.textContent = res==='ok' ? '✓ Exact! Beautiful, '+NAME+'!'
                         : res==='close' ? '≈ So close! Compare with the answer below.'
-                        : 'Not quite — here\'s the natural version:';
+                        : 'Not quite, here\'s the natural version:';
         reveal.classList.add('on'); cur.answeredThisCard=true;
         if(res!=='no') registerCorrect();
         mainBtn.textContent='Next →';
@@ -765,7 +773,7 @@ function renderDone(){
   wrap.innerHTML=`
     <div class="big">✦</div>
     <h2>¡Excelente, ${escapeHtml(NAME)}!</h2>
-    <p>You finished <b>${escapeHtml(t.title)}</b>. Your English keeps getting more natural — I'm proud of you.</p>
+    <p>You finished <b>${escapeHtml(t.title)}</b>. Your English keeps getting more natural. I'm proud of you.</p>
     <div class="row" style="max-width:420px;margin:0 auto">
       <button class="btn btn-ghost" id="againBtn">Practice again</button>
       <button class="btn btn-primary" id="homeBtn">Pick another track</button>
