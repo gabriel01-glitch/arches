@@ -1,6 +1,6 @@
 {
   "student": "Mavic",
-  "updated": "15 de julio de 2026",
+  "updated": "20 de julio de 2026",
   "cards": [
     {
       "wrong": "Stay in home.",
@@ -159,6 +159,81 @@
         "I spent my holidays worried about my daughter."
       ],
       "date": "15 de julio de 2026"
+    },
+    {
+      "wrong": "I couldn't swimming.",
+      "right": "I couldn't swim.",
+      "hint": "Despues de 'could/couldn't' siempre va el verbo en su forma base (infinitivo sin 'to'), no el gerundio (-ing). Es como 'poder nadar', no 'poder nadando'.",
+      "alts": [
+        "I wasn't able to swim."
+      ],
+      "date": "20 de julio de 2026"
+    },
+    {
+      "wrong": "My plan was went to swimming.",
+      "right": "My plan was to go swimming.",
+      "hint": "Después de 'was' necesitamos un infinitivo ('to go'), no un pasado. Además, 'go swimming' es la expresión natural en inglés, sin 'went' ni doble preposición.",
+      "alts": [
+        "My plan was to go to the pool.",
+        "I was planning to go swimming."
+      ],
+      "date": "20 de julio de 2026"
+    },
+    {
+      "wrong": "I went to take the lunch.",
+      "right": "I went to have lunch.",
+      "hint": "En español decimos 'tomar el almuerzo' pero en inglés 'take' no funciona aquí. El verbo natural es 'have' o 'eat'. Además, 'lunch' no lleva artículo 'the' cuando hablas de la comida en general.",
+      "alts": [
+        "I went to eat lunch.",
+        "I went to get lunch."
+      ],
+      "date": "20 de julio de 2026"
+    },
+    {
+      "wrong": "Always I think on food.",
+      "right": "I always think about food.",
+      "hint": "En español el adverbio 'siempre' puede ir al inicio de la oración, pero en inglés los adverbios de frecuencia normalmente van antes del verbo principal, no al principio. Además, 'pensar en algo' se traduce como 'think about', no 'think on'.",
+      "alts": [],
+      "date": "20 de julio de 2026"
+    },
+    {
+      "wrong": "Newman woke up me.",
+      "right": "Newman woke me up.",
+      "hint": "Con verbos frasales separables como 'wake up', el pronombre objeto (me, him, her) siempre va entre el verbo y la partícula, nunca después. En español no existe esta estructura, así que el orden causa confusión.",
+      "alts": [],
+      "date": "20 de julio de 2026"
+    },
+    {
+      "wrong": "more smaller",
+      "right": "smaller",
+      "hint": "En español decimos 'más pequeño', pero en inglés los adjetivos cortos forman el comparativo con el sufijo -er, no con 'more'. Usar ambos a la vez es redundante.",
+      "alts": [],
+      "date": "20 de julio de 2026"
+    },
+    {
+      "wrong": "since",
+      "right": "since",
+      "hint": "Se pronuncia 'sins' (rima con 'hints'). En español la 'c' antes de 'e' suena como 's' suave, pero aquí el error más común es pronunciarla como 'saince' o 'sinse'. La vocal es una 'i' corta y la 's' final es clara.",
+      "alts": [],
+      "date": "20 de julio de 2026"
+    },
+    {
+      "wrong": "I need to redrawing.",
+      "right": "I need to redraw.",
+      "hint": "Después de 'need to' siempre va el verbo en infinitivo (forma base), no en gerundio (-ing). En español decimos 'necesito + infinitivo' y en inglés la estructura es la misma: 'need to + verbo base'.",
+      "alts": [
+        "I need to redo the drawing."
+      ],
+      "date": "20 de julio de 2026"
+    },
+    {
+      "wrong": "Where we can go to see the final?",
+      "right": "Where can we go to see the final?",
+      "hint": "En preguntas con 'where', 'when', 'what', etc., el auxiliar (can, do, will) va ANTES del sujeto. En español decimos '¿Dónde podemos ir?' sin invertir nada, pero en inglés la inversión es obligatoria.",
+      "alts": [
+        "Where can we go to watch the final?"
+      ],
+      "date": "20 de julio de 2026"
     }
   ]
 }
