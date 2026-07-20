@@ -1,0 +1,25 @@
+{
+  "student": "Luisamelia y Roxana",
+  "updated": "20 de julio de 2026",
+  "cards": [
+    {
+      "wrong": "I couldn't at the gym.",
+      "right": "I couldn't go to the gym.",
+      "hint": "En ingles 'couldn't' necesita un verbo principal despues. Para decir que no pudiste ir a un lugar, el verbo que sigue es simplemente 'go'. 'Couldn't' solo no puede funcionar sin ese verbo.",
+      "alts": [
+        "I wasn't able to go to the gym.",
+        "I didn't go to the gym."
+      ],
+      "date": "20 de julio de 2026"
+    },
+    {
+      "wrong": "He just turned eleven.",
+      "right": "She just turned eleven.",
+      "hint": "En español 'él' y 'ella' se distinguen claramente, pero en inglés el pronombre de género está en la palabra misma: 'he' es masculino y 'she' es femenino. Como Luisamelia es mujer, el pronombre correcto es 'she'.",
+      "alts": [
+        "She just turned 11."
+      ],
+      "date": "20 de julio de 2026"
+    }
+  ]
+}
