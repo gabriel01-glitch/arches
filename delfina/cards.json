@@ -1,6 +1,6 @@
 {
   "student": "Delfina",
-  "updated": "13 de julio de 2026",
+  "updated": "22 de julio de 2026",
   "cards": [
     {
       "wrong": "I was unable to make that other person understand me.",
@@ -11,6 +11,32 @@
         "I wasn't able to make myself understood."
       ],
       "date": "13 de julio de 2026"
+    },
+    {
+      "wrong": "My daughter was near to me.",
+      "right": "My daughter was near me.",
+      "hint": "'Near' en inglés no necesita preposición cuando indica proximidad física. El 'to' que se agrega viene de pensar en 'cerca de' en español, pero 'near' ya funciona solo como preposición.",
+      "alts": [
+        "My daughter was close to me."
+      ],
+      "date": "22 de julio de 2026"
+    },
+    {
+      "wrong": "My daughter was far for home.",
+      "right": "My daughter was far from home.",
+      "hint": "La preposición correcta con 'far' es 'from', no 'for'. En español decimos 'lejos de casa' y ese 'de' se traduce como 'from' en este contexto.",
+      "alts": [],
+      "date": "22 de julio de 2026"
+    },
+    {
+      "wrong": "The patient have breathing difficulty.",
+      "right": "The patient has breathing difficulty.",
+      "hint": "En inglés, los sujetos en tercera persona del singular (he, she, it, o un sustantivo singular como 'the patient') requieren el verbo con -s en el presente simple. En español no cambiamos la terminación del verbo de esta forma, lo que causa interferencia.",
+      "alts": [
+        "The patient is having difficulty breathing.",
+        "The patient is experiencing breathing difficulties."
+      ],
+      "date": "22 de julio de 2026"
     }
   ]
 }
