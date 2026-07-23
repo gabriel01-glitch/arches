@@ -1,6 +1,6 @@
 {
   "student": "Carlenis",
-  "updated": "13 de julio de 2026",
+  "updated": "22 de julio de 2026",
   "cards": [
     {
       "wrong": "I want to be a psicologist.",
@@ -25,6 +25,69 @@
       "hint": "'Ensemble' en inglés es un sustantivo (grupo musical, conjunto de ropa). El verbo correcto es 'assemble' (armar, montar). En español 'ensamblar' existe, pero en inglés el falso cognado 'ensemble' no funciona como verbo.",
       "alts": [],
       "date": "13 de julio de 2026"
+    },
+    {
+      "wrong": "There are too many information.",
+      "right": "There is too much information.",
+      "hint": "'Information' es incontable en inglés, no se puede pluralizar ni contar como objeto individual. Por eso usamos 'much' (no 'many') y el verbo 'is' (no 'are'). En español a veces decimos 'muchas informaciones', pero en inglés la palabra no tiene plural.",
+      "alts": [],
+      "date": "22 de julio de 2026"
+    },
+    {
+      "wrong": "She asked me for a resume of the day.",
+      "right": "She asked me for a summary of the day.",
+      "hint": "'Resume' en inglés significa reanudar o el documento de trabajo (CV). El falso cognado aquí es 'resumen', que se traduce como 'summary' o 'recap'.",
+      "alts": [
+        "She asked me for a recap of the day.",
+        "She asked me for an overview of the day."
+      ],
+      "date": "22 de julio de 2026"
+    },
+    {
+      "wrong": "They sent a solicitation for an investigation.",
+      "right": "They sent a request for an investigation.",
+      "hint": "\"Solicitation\" existe en inglés pero significa algo muy distinto (como solicitar donaciones o servicios de manera comercial). El falso amigo aquí es \"solicitud\" en español, cuya traducción correcta al inglés es \"request\" o \"application\".",
+      "alts": [
+        "They submitted a request for an investigation.",
+        "They filed a request for an investigation."
+      ],
+      "date": "22 de julio de 2026"
+    },
+    {
+      "wrong": "We need to ensemble this.",
+      "right": "We need to assemble this.",
+      "hint": "\"Ensemble\" es un sustantivo en inglés (grupo musical, conjunto de ropa), no un verbo. El verbo que buscas es \"assemble\" (armar, montar). El error viene de que en español \"ensamblar\" sí existe como verbo.",
+      "alts": [
+        "We need to put this together."
+      ],
+      "date": "22 de julio de 2026"
+    },
+    {
+      "wrong": "She needs to be more ordenada.",
+      "right": "She needs to be more organized.",
+      "hint": "'Ordenada' en español abarca tanto 'tidy/neat' (físicamente organizado) como 'organized' (metódico). Elige la palabra inglesa según el contexto exacto que quieres expresar.",
+      "alts": [
+        "She needs to be tidier.",
+        "She needs to be neater."
+      ],
+      "date": "22 de julio de 2026"
+    },
+    {
+      "wrong": "None of them is repeating the pattern.",
+      "right": "None of them are repeating the pattern.",
+      "hint": "'None of them' casi siempre lleva verbo plural en inglés moderno porque el énfasis está en 'them' (un grupo). Usar 'is' suena anticuado o incorrecto en este contexto.",
+      "alts": [],
+      "date": "22 de julio de 2026"
+    },
+    {
+      "wrong": "How could do it AI?",
+      "right": "How could AI do it?",
+      "hint": "En preguntas con auxiliar modal (could, would, can...), el orden es: auxiliar + sujeto + verbo principal. En español el sujeto puede ir al final sin problema, pero en inglés la estructura es fija.",
+      "alts": [
+        "How could it be done by AI?",
+        "How would AI do it?"
+      ],
+      "date": "22 de julio de 2026"
     }
   ]
 }
