@@ -124,9 +124,174 @@
     "l1": "Spanish",
     "context": "Cubano en Tampa. Plomero. Familia en Cuba. Inglés para el trabajo y la vida.",
     "greeting": "Tus frases reales, Wilfredo. Del taller a la fluidez, un poco cada día.",
-    "version": "2026-06-22"
+    "version": "2026-07-23"
   },
   "tracks": [
+    {
+      "id": "mision",
+      "title": "Misión: cliente difícil",
+      "note": "Nivel jefe. Un cliente exigente en Tampa: explica, negocia y cierra el trabajo como un pro.",
+      "items": [
+        {
+          "type": "translate",
+          "es": "¿Podría decirme dónde está la fuga?",
+          "en": "Could you tell me where the leak is?",
+          "note": "pregunta indirecta: 'where the leak is', sin invertir.",
+          "say": "Could you tell me where the leak is?"
+        },
+        {
+          "type": "fix",
+          "wrong": "Can you explain me the problem?",
+          "right": "Can you explain the problem to me?",
+          "note": "explain something TO someone (nunca 'explain me').",
+          "say": "Can you explain the problem to me?"
+        },
+        {
+          "type": "translate",
+          "es": "El cliente dijo que llamaría mañana.",
+          "en": "The client said he would call tomorrow.",
+          "alts": [
+            "The customer said he would call tomorrow",
+            "The client said that he would call tomorrow"
+          ],
+          "note": "reported speech: will → would.",
+          "say": "The client said he would call tomorrow."
+        },
+        {
+          "type": "choice",
+          "prompt": "The price depends ___ the materials.",
+          "options": [
+            "on",
+            "of",
+            "in"
+          ],
+          "answer": "on",
+          "note": "depend ON (no 'depend of').",
+          "say": "The price depends on the materials."
+        },
+        {
+          "type": "translate",
+          "es": "Si hubiera revisado la válvula, no se habría inundado.",
+          "en": "If I had checked the valve, it wouldn't have flooded.",
+          "alts": [
+            "If I had checked the valve, it would not have flooded"
+          ],
+          "note": "tercer condicional: had + participio, would have + participio.",
+          "say": "If I had checked the valve, it wouldn't have flooded."
+        },
+        {
+          "type": "fix",
+          "wrong": "I am agree with the customer.",
+          "right": "I agree with the customer.",
+          "note": "'agree' es verbo: I agree (sin 'am').",
+          "say": "I agree with the customer."
+        },
+        {
+          "type": "translate",
+          "es": "Voy a hacer que revisen el calentador.",
+          "en": "I'm going to have the heater checked.",
+          "alts": [
+            "I am going to have the heater checked",
+            "I'm going to get the heater checked"
+          ],
+          "note": "causativo: have + objeto + participio.",
+          "say": "I'm going to have the heater checked."
+        },
+        {
+          "type": "scramble",
+          "answer": "Could you tell me how much it costs?",
+          "extra": [
+            "does"
+          ],
+          "note": "pregunta indirecta: sin 'does'.",
+          "say": "Could you tell me how much it costs?"
+        },
+        {
+          "type": "choice",
+          "prompt": "Llevo tres años trabajando aquí:",
+          "options": [
+            "I have been working here for three years.",
+            "I am working here since three years.",
+            "I have three years working here."
+          ],
+          "answer": "I have been working here for three years.",
+          "note": "present perfect continuous + for.",
+          "say": "I have been working here for three years."
+        },
+        {
+          "type": "dictate",
+          "say": "If I were you, I would replace the whole pipe.",
+          "note": "segundo condicional para dar consejo."
+        },
+        {
+          "type": "fix",
+          "wrong": "He asked me where did I learn English.",
+          "right": "He asked me where I learned English.",
+          "note": "pregunta reportada: sin 'did'.",
+          "say": "He asked me where I learned English."
+        },
+        {
+          "type": "translate",
+          "es": "Debí haber cerrado la válvula primero.",
+          "en": "I should have shut off the valve first.",
+          "alts": [
+            "I should have closed the valve first",
+            "I should have turned off the valve first"
+          ],
+          "note": "should have + participio = arrepentimiento.",
+          "say": "I should have shut off the valve first."
+        },
+        {
+          "type": "choice",
+          "prompt": "We look forward to ___ from you.",
+          "options": [
+            "hearing",
+            "hear",
+            "heard"
+          ],
+          "answer": "hearing",
+          "note": "aquí 'to' es preposición: + -ing.",
+          "say": "We look forward to hearing from you."
+        },
+        {
+          "type": "fix",
+          "wrong": "She has lived here since three years.",
+          "right": "She has lived here for three years.",
+          "note": "for + período, since + punto en el tiempo.",
+          "say": "She has lived here for three years."
+        },
+        {
+          "type": "translate",
+          "es": "Cuanto antes empecemos, antes terminamos.",
+          "en": "The sooner we start, the sooner we finish.",
+          "alts": [
+            "The sooner we start, the faster we finish"
+          ],
+          "note": "the + comparativo, dos veces.",
+          "say": "The sooner we start, the sooner we finish."
+        },
+        {
+          "type": "scramble",
+          "answer": "I'll let you know as soon as it's ready.",
+          "note": "la frase que cierra cualquier trabajo.",
+          "say": "I'll let you know as soon as it's ready."
+        },
+        {
+          "type": "pron",
+          "word": "estimate",
+          "arches": "ES-ti-met",
+          "note": "el sustantivo (presupuesto) termina en /met/, no /meit/.",
+          "say": "estimate"
+        },
+        {
+          "type": "pron",
+          "word": "clogged",
+          "arches": "CLOGD",
+          "note": "una sola sílaba: la -ed suena /d/.",
+          "say": "clogged"
+        }
+      ]
+    },
     {
       "id": "phrasal",
       "title": "Phrasal verbs en la obra",
@@ -798,7 +963,6 @@
       "note": "Deletrea tu nombre y tu correo por teléfono, letra por letra.",
       "url": "../alfabeto/?name=Wilfredo"
     },
-    { "title": "Alfabeto Telefónico", "note": "Deletrea tu nombre y tu correo por teléfono, letra por letra.", "url": "../alfabeto/?name=Wilfredo" },
     {
       "title": "Oído",
       "note": "Entrenamiento auditivo completo, con audio real.",
