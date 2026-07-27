@@ -1,0 +1,98 @@
+{
+  "student": "Victoria",
+  "updated": "27 de julio de 2026",
+  "cards": [
+    {
+      "wrong": "It was too much noisy.",
+      "right": "It was too noisy.",
+      "hint": "'Too much' se usa con sustantivos (too much noise), pero con adjetivos solo se usa 'too' sin 'much' (too noisy). Interferencia del español: 'demasiado ruidoso' suena como si hubiera dos palabras, pero en inglés el adjetivo solo necesita 'too'.",
+      "alts": [
+        "It was so noisy.",
+        "It was really noisy."
+      ],
+      "date": "27 de julio de 2026"
+    },
+    {
+      "wrong": "I left her and I picked them up at the airport.",
+      "right": "I dropped her off and picked them up at the airport.",
+      "hint": "'Dejar' a alguien en un lugar se dice 'drop off', no 'leave'. 'Leave' implica abandonar, no dar un aventón. 'Recoger' a alguien se dice 'pick up', que es el equivalente directo en este contexto de transporte.",
+      "alts": [
+        "I dropped her off and I picked them up at the airport."
+      ],
+      "date": "27 de julio de 2026"
+    },
+    {
+      "wrong": "Sometimes I am a little shiny.",
+      "right": "Sometimes I am a little shy.",
+      "hint": "'Shiny' significa brillante o reluciente (como un objeto). 'Shy' significa tímido/a. Son palabras que suenan parecido pero tienen significados muy distintos, es fácil confundirlas al principio.",
+      "alts": [],
+      "date": "27 de julio de 2026"
+    },
+    {
+      "wrong": "Sometimes rest in home looks like the best option.",
+      "right": "Sometimes resting at home looks like the best option.",
+      "hint": "Dos errores de interferencia del español: 1) El verbo después de 'sometimes' al inicio necesita forma -ing cuando actúa como sujeto (en español 'descansar' funciona igual como infinitivo o sustantivo, pero en inglés se usa el gerundio). 2) 'In home' no existe en inglés; el lugar donde uno está en casa siempre lleva 'at home', sin artículo.",
+      "alts": [
+        "Sometimes resting at home seems like the best option.",
+        "Sometimes staying at home looks like the best option."
+      ],
+      "date": "27 de julio de 2026"
+    },
+    {
+      "wrong": "I would like to went to do some exercise.",
+      "right": "I would have liked to go do some exercise.",
+      "hint": "Cuando hablamos de algo que queríamos hacer en el pasado pero no sucedió, usamos 'would have liked to + infinitivo'. 'Went' es pasado simple y no puede ir después de 'to'; el infinitivo es 'go'.",
+      "alts": [
+        "I would have liked to go and do some exercise.",
+        "I would have liked to have done some exercise."
+      ],
+      "date": "27 de julio de 2026"
+    },
+    {
+      "wrong": "I try to don't feel sad.",
+      "right": "I try not to feel sad.",
+      "hint": "En español 'no' va antes del verbo principal, pero en inglés la negación del infinitivo se forma poniendo 'not' justo antes de 'to': 'try not to'. Nunca se usa 'don't' dentro de un infinitivo.",
+      "alts": [
+        "I try to avoid feeling sad."
+      ],
+      "date": "27 de julio de 2026"
+    },
+    {
+      "wrong": "I went to home.",
+      "right": "I went home.",
+      "hint": "'Home' funciona como adverbio de lugar despues de verbos de movimiento, no necesita preposicion. En espanol decimos 'fui a casa', pero en ingles la preposicion 'to' sobra cuando 'home' sigue directamente al verbo.",
+      "alts": [
+        "I came home."
+      ],
+      "date": "27 de julio de 2026"
+    },
+    {
+      "wrong": "Victoria need to went to check something about her phone.",
+      "right": "Victoria needed to go to check something about her phone.",
+      "hint": "Dos errores en uno: el verbo modal 'need' debe ir en pasado ('needed'), y después de 'to' siempre va el infinitivo base, nunca el pasado. En español conjugamos un solo verbo ('necesitaba ir'), pero en inglés cada pieza tiene su forma correcta.",
+      "alts": [
+        "Victoria needed to check something about her phone."
+      ],
+      "date": "27 de julio de 2026"
+    },
+    {
+      "wrong": "She is feeling justificate.",
+      "right": "She is feeling justified.",
+      "hint": "En español existe 'justificado', pero en inglés el participio pasado es 'justified', no 'justificate'. El adjetivo viene del participio del verbo 'to justify', así que siempre termina en -ed.",
+      "alts": [
+        "She feels justified."
+      ],
+      "date": "27 de julio de 2026"
+    },
+    {
+      "wrong": "When to call it?",
+      "right": "When should we call it?",
+      "hint": "En español a veces omitimos el sujeto y el auxiliar ('¿Cuándo llamarlo?'), pero en inglés una pregunta directa necesita sujeto y auxiliar explícitos.",
+      "alts": [
+        "When do we call it?",
+        "When is it called?"
+      ],
+      "date": "27 de julio de 2026"
+    }
+  ]
+}
