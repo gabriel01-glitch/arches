@@ -326,6 +326,16 @@
         "When is it called?"
       ],
       "date": "27 de julio de 2026"
+    },
+    {
+      "wrong": "All will be solded.",
+      "right": "Everything will be sold.",
+      "hint": "'Sell' es irregular: sell / sold / sold. No existe 'solded'. Ademas, en pasiva con 'all' como sujeto general, lo mas natural en ingles es usar 'everything' o restructurar la oracion.",
+      "alts": [
+        "It will all be sold.",
+        "All of it will be sold."
+      ],
+      "date": "27 de julio de 2026"
     }
   ]
 }
