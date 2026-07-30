@@ -124,7 +124,7 @@
     "l1": "Spanish",
     "context": "Trabaja en una clínica privada",
     "greeting": "Hola Ruben. Tus errores reales de clase, listos para pulir. Versión ampliada.",
-    "version": "2026-07-03"
+    "version": "2026-07-30"
   },
   "tracks": [
     {
@@ -464,6 +464,115 @@
           "type": "dictate",
           "say": "There are many people at the clinic.",
           "note": "people, sin -s."
+        }
+      ]
+    },
+    {
+      "id": "equipo",
+      "title": "Equipo de la clínica",
+      "note": "Los aparatos de tu trabajo y las frases para hablar de ellos.",
+      "items": [
+        {
+          "type": "pron",
+          "word": "defibrillator",
+          "arches": "dii-FAI-bri-lei-ter",
+          "note": "Como en tu cartoon: la fuerza en FAI.",
+          "say": "defibrillator"
+        },
+        {
+          "type": "choice",
+          "prompt": "Silla de ruedas = ___.",
+          "options": [
+            "wheelchair",
+            "stretcher",
+            "crutches"
+          ],
+          "answer": "wheelchair",
+          "say": "wheelchair"
+        },
+        {
+          "type": "translate",
+          "es": "La camilla está en el pasillo.",
+          "en": "The stretcher is in the hallway.",
+          "alts": [
+            "The stretcher's in the hallway",
+            "The gurney is in the hallway",
+            "The stretcher is in the corridor"
+          ],
+          "say": "The stretcher is in the hallway."
+        },
+        {
+          "type": "fix",
+          "wrong": "The machine no work.",
+          "right": "The machine doesn't work.",
+          "note": "no work ✗ → doesn't work ✓",
+          "say": "The machine doesn't work."
+        },
+        {
+          "type": "choice",
+          "prompt": "I need ___ check the monitor.",
+          "options": [
+            "to",
+            "for",
+            "at"
+          ],
+          "answer": "to",
+          "say": "I need to check the monitor."
+        },
+        {
+          "type": "translate",
+          "es": "La batería está baja.",
+          "en": "The battery is low.",
+          "alts": [
+            "The battery's low"
+          ],
+          "say": "The battery is low."
+        },
+        {
+          "type": "scramble",
+          "answer": "Can you bring me a wheelchair, please?",
+          "note": "bring me = tráeme.",
+          "say": "Can you bring me a wheelchair, please?"
+        },
+        {
+          "type": "fix",
+          "wrong": "Where is the syringes?",
+          "right": "Where are the syringes?",
+          "note": "syringes es plural → are.",
+          "say": "Where are the syringes?"
+        },
+        {
+          "type": "dictate",
+          "say": "Please don't unplug the machine.",
+          "note": "unplug = desconectar."
+        },
+        {
+          "type": "pron",
+          "word": "stretcher",
+          "arches": "STRE-cher",
+          "note": "Dos sílabas, fuerza en STRE.",
+          "say": "stretcher"
+        },
+        {
+          "type": "translate",
+          "es": "El doctor necesita guantes.",
+          "en": "The doctor needs gloves.",
+          "alts": [
+            "The doctor needs the gloves",
+            "The doctor needs some gloves"
+          ],
+          "say": "The doctor needs gloves."
+        },
+        {
+          "type": "choice",
+          "prompt": "Necesito un termómetro. = I need ___ thermometer.",
+          "options": [
+            "a",
+            "an",
+            "the"
+          ],
+          "answer": "a",
+          "say": "I need a thermometer."
         }
       ]
     }
