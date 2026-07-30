@@ -1,6 +1,6 @@
 {
   "student": "Alejandra",
-  "updated": "17 de julio de 2026",
+  "updated": "30 de julio de 2026",
   "cards": [
     {
       "wrong": "No lo puedo dejar pasar",
@@ -124,6 +124,74 @@
       "hint": "Esta oración es correcta: la serie ya no está disponible en Netflix, así que el pasado 'was' es la opción adecuada.",
       "alts": [],
       "date": "17 de julio de 2026"
+    },
+    {
+      "wrong": "We was talking",
+      "right": "We were talking",
+      "hint": "En español el verbo 'ser/estar' no cambia tanto según el sujeto en el pasado ('éramos', 'estábamos'), pero en inglés 'was' solo va con I/he/she/it. Con we/you/they siempre se usa 'were'.",
+      "alts": [],
+      "date": "30 de julio de 2026"
+    },
+    {
+      "wrong": "We see frequently.",
+      "right": "We see each other frequently.",
+      "hint": "En español 'nos vemos' ya incluye la reciprocidad, pero en inglés hay que expresarla con 'each other'. Sin esa frase, 'we see' queda incompleto.",
+      "alts": [
+        "We frequently see each other."
+      ],
+      "date": "30 de julio de 2026"
+    },
+    {
+      "wrong": "She go to another school.",
+      "right": "She went to another school.",
+      "hint": "En pasado, los verbos irregulares cambian de forma: 'go' se convierte en 'went'. No se agrega 'ed' ni se usa la forma base.",
+      "alts": [],
+      "date": "30 de julio de 2026"
+    },
+    {
+      "wrong": "What I did on Saturday?",
+      "right": "What did I do on Saturday?",
+      "hint": "En preguntas directas en inglés, el auxiliar va antes del sujeto. En español puedes decir '¿Qué hice el sábado?' sin invertir nada, pero en inglés la inversión es obligatoria: 'What did I do?'",
+      "alts": [],
+      "date": "30 de julio de 2026"
+    },
+    {
+      "wrong": "Tomorrow I don't go to wake up early",
+      "right": "Tomorrow I'm not going to wake up early",
+      "hint": "En español decimos 'no voy a...' para el futuro, pero en inglés 'don't go to' no funciona. El futuro con intención se forma con 'am/is/are going to', y la negación es 'I'm not going to...', no 'I don't go to...'",
+      "alts": [
+        "Tomorrow I won't wake up early",
+        "I don't have to wake up early tomorrow"
+      ],
+      "date": "30 de julio de 2026"
+    },
+    {
+      "wrong": "12 page",
+      "right": "12 pages",
+      "hint": "En español a veces omitimos el plural cuando ya hay un número ('12 página' suena raro pero el error viene de no marcar el plural en inglés). Después de cualquier número mayor que 1, el sustantivo siempre lleva 's'.",
+      "alts": [],
+      "date": "30 de julio de 2026"
+    },
+    {
+      "wrong": "My daughter didn't went.",
+      "right": "My daughter didn't go.",
+      "hint": "Con 'did' (auxiliar de pasado), el verbo principal vuelve a su forma base. 'Went' ya es pasado por sí solo, así que no se usa junto con 'did'.",
+      "alts": [],
+      "date": "30 de julio de 2026"
+    },
+    {
+      "wrong": "I'm working in that.",
+      "right": "I'm working on that.",
+      "hint": "En español decimos 'trabajar en algo', pero en inglés el phrasal verb es 'work on something'. La preposición 'in' no funciona aquí; 'on' es la que acompaña a 'work' cuando hablas de una tarea o proyecto.",
+      "alts": [],
+      "date": "30 de julio de 2026"
+    },
+    {
+      "wrong": "I sended more letters yesterday.",
+      "right": "I sent more letters yesterday.",
+      "hint": "'Send' es un verbo irregular: su pasado es 'sent', no 'sended'. En español los verbos regulares siempre añaden una terminación fija (-é, -aste...), pero en inglés muchos verbos forman el pasado cambiando la vocal o la palabra entera. Vale la pena memorizar los más comunes.",
+      "alts": [],
+      "date": "30 de julio de 2026"
     }
   ]
 }
