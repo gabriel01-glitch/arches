@@ -1,0 +1,22 @@
+{
+  "student": "Johanna",
+  "updated": "30 de julio de 2026",
+  "cards": [
+    {
+      "wrong": "They bring the cat.",
+      "right": "They brought the cat.",
+      "hint": "En inglés el pasado simple requiere cambiar el verbo, no es igual al presente como a veces pasa en español informal. 'Bring' es irregular: su pasado es 'brought'.",
+      "alts": [],
+      "date": "30 de julio de 2026"
+    },
+    {
+      "wrong": "Everything changing with the time.",
+      "right": "Everything changes with time.",
+      "hint": "Dos errores en uno: en inglés el presente continuo solo no puede ser la forma principal del verbo sin el auxiliar 'is' (o usa 'changes' para algo general/permanente). Además, 'the time' en este contexto no lleva artículo en inglés, a diferencia del español donde decimos 'con el tiempo'.",
+      "alts": [
+        "Everything is changing with time."
+      ],
+      "date": "30 de julio de 2026"
+    }
+  ]
+}
