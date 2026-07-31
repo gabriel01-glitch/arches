@@ -1,6 +1,6 @@
 {
   "student": "Mavic",
-  "updated": "27 de julio de 2026",
+  "updated": "31 de julio de 2026",
   "cards": [
     {
       "wrong": "Stay in home.",
@@ -336,6 +336,40 @@
         "All of it will be sold."
       ],
       "date": "27 de julio de 2026"
+    },
+    {
+      "wrong": "I decided to went.",
+      "right": "I decided to go.",
+      "hint": "Despues de 'decide to' siempre va el infinitivo base del verbo, no el pasado. En espanol conjugamos ambos verbos, pero en ingles el segundo verbo se queda en su forma base sin conjugar.",
+      "alts": [],
+      "date": "31 de julio de 2026"
+    },
+    {
+      "wrong": "Is too much people.",
+      "right": "There are too many people.",
+      "hint": "Dos errores clásicos: 1) En inglés se usa 'there is/are' para hablar de existencia, no se puede omitir el sujeto como a veces se hace en español. 2) 'People' es contable en inglés, así que se usa 'many', no 'much' (que es para incontables como water o money).",
+      "alts": [
+        "There's too many people."
+      ],
+      "date": "31 de julio de 2026"
+    },
+    {
+      "wrong": "Today I go into the meeting.",
+      "right": "Today I went into the meeting.",
+      "hint": "'Today' aqui describe algo que ya paso, asi que necesitas el pasado simple 'went'. En ingles, el presente simple 'go' no se usa para acciones completadas, aunque en español a veces decimos 'hoy entro a la reunion' con presente.",
+      "alts": [
+        "Today I went to the meeting."
+      ],
+      "date": "31 de julio de 2026"
+    },
+    {
+      "wrong": "I'll pay more attention to improve my understand.",
+      "right": "I'll pay more attention to improve my understanding.",
+      "hint": "Después de un posesivo (my, your, his...) necesitas un sustantivo, no un verbo. 'Understand' es verbo; la forma sustantivo es 'understanding'. En español a veces usamos el infinitivo como sustantivo ('mejorar mi entender'), pero en inglés debes usar la forma '-ing'.",
+      "alts": [
+        "I'll pay more attention in order to improve my understanding."
+      ],
+      "date": "31 de julio de 2026"
     }
   ]
 }
