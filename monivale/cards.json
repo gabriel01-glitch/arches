@@ -1,6 +1,6 @@
 {
   "student": "Moni & Vale",
-  "updated": "10 de julio de 2026",
+  "updated": "2 de agosto de 2026",
   "cards": [
     {
       "wrong": "I can saw my friend.",
@@ -68,6 +68,15 @@
       "alts": [],
       "hint": "'Tomorrow' actúa como 'it': tercera persona con -s (comes). El subjuntivo español ('que venga') esconde esa -s.",
       "date": "7 de julio de 2026"
+    },
+    {
+      "wrong": "My left shoe is on the side of the table.",
+      "right": "My left shoe is next to the table.",
+      "hint": "'On the side of' suena como una descripcion de ubicacion fisica de la mesa misma. Para decir que algo esta junto a un objeto, usamos 'next to' o 'beside'. Es una interferencia del espanol 'al lado de', que se traduce directamente como 'next to', no 'on the side of'.",
+      "alts": [
+        "My left shoe is beside the table."
+      ],
+      "date": "2 de agosto de 2026"
     }
   ]
 }
