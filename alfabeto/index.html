@@ -179,7 +179,7 @@
 </section>
 
 <footer>Hecho con <span class="heart">♥</span> por tu profesor Gabriel · ARCHES Language School<br>
-Tip: agrega <b>?name=TuNombre</b> al link para personalizarlo.</footer>
+Tip: agrega <b>?name=TuNombre</b> al link para personalizarlo. · v2026-08-03</footer>
 
 <script>
 (function(){
@@ -266,11 +266,43 @@ document.getElementById("drillbtn").onclick=function(){
   speak(letters.map(function(L){return wordFor[L]? (L+", as in "+wordFor[L]) : L;}).join(". ")+".");
 };
 
+// ---- voice: pick a real English voice (iPhone otherwise falls back to the
+// system voice or one of Apple's novelty/robot voices like "Albert"/"Zarvox") ----
+var voice=null;
+function loadVoice(){
+  if(!("speechSynthesis" in window)) return;
+  var vs=speechSynthesis.getVoices();
+  var NOV=/albert|bad news|bahh|bells|boing|bubbles|cellos|good news|jester|organ|superstar|trinoids|whisper|wobble|zarvox|junior|kathy|ralph|fred|eddy|flo|grandma|grandpa|reed|rocko|sandy|shelley/i;
+  var en=vs.filter(function(v){return /^en[-_]/i.test(v.lang)&&!NOV.test(v.name);});
+  var pref=["Samantha","Google US English","Microsoft Aria","Microsoft Jenny","Microsoft Zira","Alex","Karen","Daniel"];
+  voice=null;
+  for(var i=0;i<pref.length;i++){
+    for(var j=0;j<en.length;j++){ if(en[j].name.indexOf(pref[i])===0){voice=en[j];break;} }
+    if(voice) break;
+  }
+  if(!voice){
+    for(var k=0;k<en.length;k++){ if(/en[-_]US/i.test(en[k].lang)){voice=en[k];break;} }
+  }
+  if(!voice) voice=en[0]||null;
+}
+if("speechSynthesis" in window){ loadVoice(); speechSynthesis.onvoiceschanged=loadVoice; }
+
+// iOS: audio must be unlocked by a user gesture once
+var audioReady=false;
+function unlockAudio(){
+  if(audioReady||!("speechSynthesis" in window)) return;
+  try{ var u=new SpeechSynthesisUtterance(" "); u.volume=0; speechSynthesis.speak(u); audioReady=true; }catch(e){}
+}
+document.addEventListener("touchstart",unlockAudio,{once:true});
+document.addEventListener("click",unlockAudio,{once:true});
+
 function speak(text){
   if(!("speechSynthesis" in window)) return;
+  if(!voice) loadVoice();
   speechSynthesis.cancel();
   var u=new SpeechSynthesisUtterance(text);
   u.lang="en-US";u.rate=0.85;
+  if(voice) u.voice=voice;
   speechSynthesis.speak(u);
 }
 
