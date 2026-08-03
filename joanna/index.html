@@ -124,7 +124,7 @@
     "l1": "es",
     "context": "Vocabulario avanzado, pronunciación y correcciones de sus propias frases.",
     "greeting": "Tus sonidos, tus correcciones, tu vocabulario y tu canción. Todo tuyo.",
-    "version": "2026-08-03b"
+    "version": "2026-08-03c"
   },
   "links": [
     {
@@ -315,8 +315,7 @@
           "right": "Everybody has their own life.",
           "alts": [
             "everybody has their own life",
-            "everyone has their own life",
-            "everybody has their own path"
+            "everyone has their own life"
           ],
           "note": "Everybody / everyone is singular → has.",
           "say": "Everybody has their own life."
@@ -336,12 +335,12 @@
         {
           "type": "fix",
           "wrong": "My first therapist recommend me that I do Mandalas.",
-          "right": "My first therapist recommended that I do Mandalas.",
+          "right": "My first therapist recommended that I do mandalas.",
           "alts": [
             "my first therapist recommended that i do mandalas"
           ],
           "note": "recommended (past) + recommend that someone do - no \"me\".",
-          "say": "My first therapist recommended that I do Mandalas."
+          "say": "My first therapist recommended that I do mandalas."
         },
         {
           "type": "fix",
@@ -378,13 +377,13 @@
         {
           "type": "fix",
           "wrong": "Company who sells tickets.",
-          "right": "Company that sells tickets.",
+          "right": "A company that sells tickets.",
           "alts": [
-            "company that sells tickets",
-            "a company that sells tickets"
+            "a company that sells tickets",
+            "company that sells tickets"
           ],
-          "note": "Use \"that\" for a company/thing; \"who\" for people. sells = /sels/.",
-          "say": "Company that sells tickets."
+          "note": "con artículo: A company. 'that' para empresas/cosas, 'who' para personas. sells = /sels/.",
+          "say": "A company that sells tickets."
         },
         {
           "type": "fix",
@@ -524,13 +523,14 @@
         {
           "type": "fix",
           "wrong": "I'd like to pick the VHS cassettes next time I go.",
-          "right": "I'd like to bring back the VHS cassettes next time I go.",
+          "right": "I'd like to pick up the VHS cassettes next time I go.",
           "alts": [
-            "i'd like to bring back the vhs cassettes next time i go",
-            "id like to bring back the vhs cassettes next time i go"
+            "i'd like to pick up the vhs cassettes next time i go",
+            "id like to pick up the vhs cassettes next time i go",
+            "i'd like to pick up the vhs tapes next time i go"
           ],
-          "note": "\"bring back\" fits the meaning better than \"pick.\"",
-          "say": "I'd like to bring back the VHS cassettes next time I go."
+          "note": "pick UP = recoger. (bring back = devolverlos.)",
+          "say": "I'd like to pick up the VHS cassettes next time I go."
         },
         {
           "type": "fix",
@@ -567,23 +567,24 @@
         },
         {
           "type": "fix",
-          "wrong": "My tooth are.",
-          "right": "My teeth are.",
+          "wrong": "My tooth are white.",
+          "right": "My teeth are white.",
           "alts": [
-            "my teeth are"
+            "my teeth are white"
           ],
-          "note": "Plural of tooth = teeth.",
-          "say": "My teeth are."
+          "note": "Plural de tooth = teeth.",
+          "say": "My teeth are white."
         },
         {
           "type": "fix",
           "wrong": "which is the case of us",
-          "right": "which is our case",
+          "right": "which is the case for us",
           "alts": [
-            "which is our case"
+            "which is the case for us",
+            "which applies to us"
           ],
-          "note": "More natural phrasing.",
-          "say": "which is our case"
+          "note": "the case FOR us / it applies to us.",
+          "say": "which is the case for us"
         },
         {
           "type": "fix",
@@ -597,15 +598,15 @@
         },
         {
           "type": "fix",
-          "wrong": "When the house don't have a pool",
-          "right": "When the house doesn't have a pool",
+          "wrong": "When the house don't have a pool, it is cheaper.",
+          "right": "When the house doesn't have a pool, it is cheaper.",
           "alts": [
-            "when the house doesn't have a pool",
-            "when the house does not have a pool",
-            "when houses don't have a pool"
+            "when the house doesn't have a pool, it is cheaper",
+            "when the house does not have a pool it is cheaper",
+            "when the house doesn't have a pool it's cheaper"
           ],
           "note": "the house → doesn't. (Plural: houses → don't.)",
-          "say": "When the house doesn't have a pool"
+          "say": "When the house doesn't have a pool, it is cheaper."
         },
         {
           "type": "fix",
@@ -613,9 +614,11 @@
           "right": "He is going to extract my tooth.",
           "alts": [
             "he is going to extract my tooth",
-            "he's going to extract my tooth"
+            "he's going to extract my tooth",
+            "he is going to pull my tooth",
+            "the dentist is going to pull my tooth"
           ],
-          "note": "extract my tooth (no \"me\").",
+          "note": "extract my tooth (sin 'me'). Más natural: pull my tooth.",
           "say": "He is going to extract my tooth."
         },
         {
@@ -1404,10 +1407,32 @@
   function el(html){ const d=document.createElement("div"); d.innerHTML=html.trim(); return d.firstChild; }
   function trackMastery(t){
     const total=t.items.length; if(!total) return 0;
-    let done=0; t.items.forEach((_,i)=>{ if(mastery[itemKey(t.id,i)]) done++; });
+    let done=0; t.items.forEach((_,i)=>{ const k=(t._map&&t._map[i])?(t._map[i].tid+"#"+t._map[i].i):itemKey(t.id,i); if(mastery[k]) done++; });
     return Math.round(done/total*100);
   }
   function archHTML(s){ return (s||"").split("-").map(p=> p===p.toUpperCase() && /[A-Z]/.test(p) ? '<b>'+p+'</b>' : p).join("-"); }
+
+  // ---------- Práctica de hoy (daily mix, deterministic per day) ----------
+  function buildDaily(){
+    const plan=[["fix",3],["translate",2],["words",2],["sounds",2]];
+    const byId={}; STUDENT.tracks.forEach(t=>byId[t.id]=t);
+    let seed=0; const ds=todayStr(); for(let c=0;c<ds.length;c++) seed=((seed*31)+ds.charCodeAt(c))>>>0;
+    function rnd(){ seed=((seed*1664525)+1013904223)>>>0; return seed/4294967296; }
+    const items=[], map=[];
+    plan.forEach(function(p){
+      const t=byId[p[0]]; if(!t) return;
+      const idxs=t.items.map(function(_,i){return i;});
+      const un=idxs.filter(function(i){return !mastery[p[0]+"#"+i];});
+      const pool=(un.length>=p[1]? un : idxs).slice();
+      for(let k=0;k<p[1] && pool.length;k++){
+        const j=Math.floor(rnd()*pool.length);
+        items.push(t.items[pool[j]]); map.push({tid:p[0], i:pool[j]});
+        pool.splice(j,1);
+      }
+    });
+    return {id:"hoy", title:"Práctica de hoy", note:"Tu dosis de hoy: "+items.length+" preguntas mezcladas de todos los temas. Lo que falles vuelve a salir.", items:items, _map:map};
+  }
+  const DAILY = buildDaily();
 
   // ---------- views ----------
   function renderHome(){
@@ -1420,7 +1445,7 @@
     html+='</div>';
     html+='<div class="tracks-label">Tus temas</div>';
     app.innerHTML=html;
-    STUDENT.tracks.forEach(t=>{
+    [DAILY].concat(STUDENT.tracks).forEach(t=>{
       const pct=trackMastery(t);
       const card=el('<div class="track">'+
         '<div class="track-head"><div class="track-title">'+esc(t.title)+'</div><div class="track-count">'+t.items.length+' · '+pct+'%</div></div>'+
@@ -1463,8 +1488,13 @@
     const t=track;
     const advance=(correct)=>{
       sessionTotal++;
-      if(correct){ sessionRight++; mastery[itemKey(t.id,i)]=true; }
-      else { delete mastery[itemKey(t.id,i)]; }
+      const mkey = (t._map && t._map[i]) ? (t._map[i].tid+"#"+t._map[i].i) : itemKey(t.id,i);
+      if(correct){ sessionRight++; mastery[mkey]=true; }
+      else {
+        delete mastery[mkey];
+        const cur=queue[qi];
+        if(cur && !cur.re){ cur.re=true; queue.splice(Math.min(qi+4, queue.length), 0, cur); }
+      }
       saveMastery();
       qi++;
       renderCard();
