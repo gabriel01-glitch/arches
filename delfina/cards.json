@@ -1,6 +1,6 @@
 {
   "student": "Delfina",
-  "updated": "22 de julio de 2026",
+  "updated": "3 de agosto de 2026",
   "cards": [
     {
       "wrong": "I was unable to make that other person understand me.",
@@ -37,6 +37,22 @@
         "The patient is experiencing breathing difficulties."
       ],
       "date": "22 de julio de 2026"
+    },
+    {
+      "wrong": "My left shoe is to the right of the table.",
+      "right": "My left shoe is beside the table.",
+      "hint": "'To the right of' significa que algo está a la derecha de otro objeto, no simplemente cerca. Para indicar proximidad sin dirección específica, usamos 'beside' o 'next to'. Interferencia del español: 'al lado' a veces se confunde con expresiones de posición relativa.",
+      "alts": [
+        "My left shoe is next to the table."
+      ],
+      "date": "3 de agosto de 2026"
+    },
+    {
+      "wrong": "If you want to pursue a career",
+      "right": "If you wanted to pursue a career",
+      "hint": "En oraciones condicionales de tipo 2 (situaciones hipoteticas), el verbo en la clausula con 'if' va en pasado simple, no en presente. En espanol a veces se usa el presente o el subjuntivo, lo que puede causar confusion con la estructura en ingles.",
+      "alts": [],
+      "date": "3 de agosto de 2026"
     }
   ]
 }
