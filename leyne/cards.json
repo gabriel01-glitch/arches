@@ -1,0 +1,56 @@
+{
+  "student": "Leyne",
+  "updated": "3 de agosto de 2026",
+  "cards": [
+    {
+      "wrong": "I am going the beach.",
+      "right": "I am going to the beach.",
+      "hint": "En español puedes decir 'voy a la playa' y el 'a' a veces se olvida en inglés. El verbo 'go' necesita la preposición 'to' antes del destino.",
+      "alts": [
+        "I'm going to the beach."
+      ],
+      "date": "3 de agosto de 2026"
+    },
+    {
+      "wrong": "This is them car.",
+      "right": "This is their car.",
+      "hint": "'Them' es pronombre objeto (lo usamos después de un verbo: 'give them'). Para mostrar posesión antes de un sustantivo se usa 'their'. En español un solo pronombre 'les/los' a veces confunde estos roles.",
+      "alts": [],
+      "date": "3 de agosto de 2026"
+    },
+    {
+      "wrong": "Just we.",
+      "right": "Just us.",
+      "hint": "En inglés, después de un verbo o preposición (incluso cuando está implícita), los pronombres van en forma de objeto: us, me, him, her, them. 'We' es sujeto, pero aquí la frase funciona como complemento, así que se usa 'us'.",
+      "alts": [],
+      "date": "3 de agosto de 2026"
+    },
+    {
+      "wrong": "I am in the beach.",
+      "right": "I am at the beach.",
+      "hint": "En español decimos 'en la playa' con 'en', pero en inglés se usa 'at' para lugares específicos como la playa, el aeropuerto o el trabajo. 'In' se reserva para espacios cerrados o áreas geográficas grandes.",
+      "alts": [
+        "I'm at the beach."
+      ],
+      "date": "3 de agosto de 2026"
+    },
+    {
+      "wrong": "I am learning the idiom.",
+      "right": "I am learning the language.",
+      "hint": "En español 'idioma' significa 'language' en inglés. La palabra inglesa 'idiom' significa una expresión fija como 'it's raining cats and dogs', no el idioma en sí.",
+      "alts": [
+        "I am learning the tongue."
+      ],
+      "date": "3 de agosto de 2026"
+    },
+    {
+      "wrong": "How many years you lived in Florida?",
+      "right": "How many years have you lived in Florida?",
+      "hint": "En preguntas con 'how many/how long' sobre experiencias o periodos que conectan el pasado con el presente, el ingles usa present perfect (have + participio). Ademas, en preguntas el auxiliar debe ir antes del sujeto: 'have you', no 'you lived'.",
+      "alts": [
+        "How long have you lived in Florida?"
+      ],
+      "date": "3 de agosto de 2026"
+    }
+  ]
+}
