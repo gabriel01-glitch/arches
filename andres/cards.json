@@ -1,6 +1,6 @@
 {
   "student": "Andres",
-  "updated": "14 de julio de 2026",
+  "updated": "4 de agosto de 2026",
   "cards": [
     {
       "wrong": "I go to the bank to pay the rent.",
@@ -70,6 +70,31 @@
         "I need to keep to a budget."
       ],
       "date": "14 de julio de 2026"
+    },
+    {
+      "wrong": "sales",
+      "right": "sales",
+      "hint": "La palabra 'sales' se pronuncia /seɪlz/, no como 'sales' en español. El sonido de la 'a' es largo, como en 'say'. Cuidado con palabras que se escriben igual o parecido en ambos idiomas pero suenan muy diferente.",
+      "alts": [],
+      "date": "4 de agosto de 2026"
+    },
+    {
+      "wrong": "I loved to training people.",
+      "right": "I loved training people.",
+      "hint": "Después de 'love' (y verbos como enjoy, hate, miss) se usa el gerundio (-ing), no 'to + infinitivo'. Además, 'loved' sugiere pasado puntual, así que si la idea es un hábito pasado, 'used to love' puede sonar más natural.",
+      "alts": [
+        "I used to love training people."
+      ],
+      "date": "4 de agosto de 2026"
+    },
+    {
+      "wrong": "Have you ever to travel in Colombia.",
+      "right": "Have you ever traveled to Colombia?",
+      "hint": "Con 'have you ever', el verbo que sigue va en participio pasado (traveled), no en infinitivo (to travel). Además, 'viajar a un lugar' en inglés usa 'to', no 'in', y la oración es pregunta, así que lleva signo de interrogación.",
+      "alts": [
+        "Have you ever been to Colombia?"
+      ],
+      "date": "4 de agosto de 2026"
     }
   ]
 }
