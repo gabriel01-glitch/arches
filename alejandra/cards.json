@@ -1,6 +1,6 @@
 {
   "student": "Alejandra",
-  "updated": "30 de julio de 2026",
+  "updated": "4 de agosto de 2026",
   "cards": [
     {
       "wrong": "No lo puedo dejar pasar",
@@ -192,6 +192,39 @@
       "hint": "'Send' es un verbo irregular: su pasado es 'sent', no 'sended'. En español los verbos regulares siempre añaden una terminación fija (-é, -aste...), pero en inglés muchos verbos forman el pasado cambiando la vocal o la palabra entera. Vale la pena memorizar los más comunes.",
       "alts": [],
       "date": "30 de julio de 2026"
+    },
+    {
+      "wrong": "We received a call for three journalists.",
+      "right": "We received a call from three journalists.",
+      "hint": "En español usamos 'para' en muchos contextos, pero en inglés 'a call from someone' indica el origen de la llamada. 'For' indica destino o propósito, no quien llama.",
+      "alts": [],
+      "date": "4 de agosto de 2026"
+    },
+    {
+      "wrong": "denuncia",
+      "right": "complaint",
+      "hint": "'Denuncia' tiene varios equivalentes en inglés según el contexto: 'complaint' es la queja o denuncia formal general, 'report' se usa cuando se reporta algo a una autoridad (policía, empresa), y 'formal complaint' enfatiza el carácter oficial. No es un error de alumno sino una consulta de vocabulario.",
+      "alts": [
+        "report",
+        "formal complaint"
+      ],
+      "date": "4 de agosto de 2026"
+    },
+    {
+      "wrong": "denuncia",
+      "right": "formal complaint",
+      "hint": "'Denuncia' en español cubre tanto quejas formales como reportes a autoridades. En inglés se distingue: 'formal complaint' es una queja oficial, mientras que 'report' se usa cuando se notifica a la policía u otra autoridad.",
+      "alts": [],
+      "date": "4 de agosto de 2026"
+    },
+    {
+      "wrong": "She say us.",
+      "right": "She told us.",
+      "hint": "En español usamos 'decir' para todo, pero en inglés 'say' y 'tell' no son intercambiables. Cuando mencionas a quien recibe el mensaje, usa 'tell' seguido de la persona (tell us, tell me, tell him). Además, recuerda la tercera persona singular en presente añade -s (says), y aquí el contexto pasado pide 'told'.",
+      "alts": [
+        "She said it to us."
+      ],
+      "date": "4 de agosto de 2026"
     }
   ]
 }
