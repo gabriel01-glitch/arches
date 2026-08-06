@@ -1,6 +1,6 @@
 {
   "student": "Andres",
-  "updated": "4 de agosto de 2026",
+  "updated": "6 de agosto de 2026",
   "cards": [
     {
       "wrong": "I go to the bank to pay the rent.",
@@ -95,6 +95,25 @@
         "Have you ever been to Colombia?"
       ],
       "date": "4 de agosto de 2026"
+    },
+    {
+      "wrong": "When do you need days off?",
+      "right": "When do you need a day off?",
+      "hint": "En ingles se dice 'a day off' (un dia libre especifico) o 'time off' (tiempo libre en general). En espanol decimos 'dias libres' en plural de forma natural, pero en ingles la expresion mas comun usa el singular 'a day off'.",
+      "alts": [
+        "When do you need time off?"
+      ],
+      "date": "6 de agosto de 2026"
+    },
+    {
+      "wrong": "When do you need days off you need to speak with me.",
+      "right": "When you need days off, you need to speak with me.",
+      "hint": "En inglés, las cláusulas subordinadas con 'when' en función de condición no usan el orden de pregunta (When do you...?). Se usa el orden afirmativo: 'When you need...'. Es interferencia del español cuando se confunde la forma interrogativa con la condicional.",
+      "alts": [
+        "If you need days off, you need to speak with me.",
+        "Whenever you need days off, you need to speak with me."
+      ],
+      "date": "6 de agosto de 2026"
     }
   ]
 }
