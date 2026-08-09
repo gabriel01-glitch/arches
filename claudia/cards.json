@@ -1,0 +1,25 @@
+{
+  "student": "Claudia",
+  "updated": "9 de agosto de 2026",
+  "cards": [
+    {
+      "wrong": "I sent it for Amazon.",
+      "right": "I sent it through Amazon.",
+      "hint": "'For' indica beneficio o propósito ('lo hice para ti'). Cuando describes el medio o canal por donde pasa algo, en inglés se usa 'through' o 'via', igual que en español dices 'lo mandé a través de Amazon'.",
+      "alts": [
+        "I ordered it through Amazon.",
+        "I sent it via Amazon."
+      ],
+      "date": "9 de agosto de 2026"
+    },
+    {
+      "wrong": "Claudia bought too a gift.",
+      "right": "Claudia also bought a gift.",
+      "hint": "'Too' con el significado de 'también' casi siempre va al final de la oración o justo antes del verbo principal, nunca entre el verbo y el objeto. 'Also' es más flexible y suele ir antes del verbo principal.",
+      "alts": [
+        "Claudia bought a gift too."
+      ],
+      "date": "9 de agosto de 2026"
+    }
+  ]
+}
