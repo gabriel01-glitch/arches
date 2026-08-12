@@ -1,6 +1,6 @@
 {
   "student": "Leyne",
-  "updated": "3 de agosto de 2026",
+  "updated": "12 de agosto de 2026",
   "cards": [
     {
       "wrong": "I am going the beach.",
@@ -51,6 +51,45 @@
         "How long have you lived in Florida?"
       ],
       "date": "3 de agosto de 2026"
+    },
+    {
+      "wrong": "Today I no work.",
+      "right": "Today I didn't work.",
+      "hint": "En español negamos con 'no' directamente antes del verbo, pero en inglés el pasado negativo necesita el auxiliar 'did not' (didn't) + el verbo en forma base. Sin ese auxiliar, la oración no funciona.",
+      "alts": [
+        "I didn't work today."
+      ],
+      "date": "12 de agosto de 2026"
+    },
+    {
+      "wrong": "It's very stressing.",
+      "right": "It's very stressful.",
+      "hint": "'Stressing' es el participio activo (algo que causa estrés en ese momento), mientras que 'stressful' es el adjetivo que describe algo como una característica. En español no hacemos esta distinción de forma, así que es fácil confundirlos.",
+      "alts": [],
+      "date": "12 de agosto de 2026"
+    },
+    {
+      "wrong": "She don't take the medicine.",
+      "right": "She doesn't take the medicine.",
+      "hint": "En español el verbo no cambia según la persona ('ella no toma'), pero en inglés la tercera persona singular (he/she/it) necesita 'doesn't' en negaciones, no 'don't'.",
+      "alts": [],
+      "date": "12 de agosto de 2026"
+    },
+    {
+      "wrong": "At the end she take the medicine.",
+      "right": "In the end, she took the medicine.",
+      "hint": "En pasado, los verbos regulares e irregulares cambian de forma. 'Take' es irregular: su pasado es 'took'. Además, para decir 'al final' en el sentido de 'después de todo', lo más natural en inglés es 'in the end'.",
+      "alts": [
+        "At the end, she took the medicine."
+      ],
+      "date": "12 de agosto de 2026"
+    },
+    {
+      "wrong": "She don't like it.",
+      "right": "She doesn't like it.",
+      "hint": "En español el verbo no cambia con 'ella' ('ella no le gusta'), pero en inglés la tercera persona singular (he/she/it) necesita 'does/doesn't' en el presente simple.",
+      "alts": [],
+      "date": "12 de agosto de 2026"
     }
   ]
 }
