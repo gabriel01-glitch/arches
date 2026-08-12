@@ -90,6 +90,13 @@
       "hint": "En español el verbo no cambia con 'ella' ('ella no le gusta'), pero en inglés la tercera persona singular (he/she/it) necesita 'does/doesn't' en el presente simple.",
       "alts": [],
       "date": "12 de agosto de 2026"
+    },
+    {
+      "wrong": "sin estudiar",
+      "right": "without studying",
+      "hint": "La preposición 'sin' en español va seguida de infinitivo, pero en inglés 'without' requiere gerundio (-ing). Recuerda: preposición + verbo en -ing.",
+      "alts": [],
+      "date": "12 de agosto de 2026"
     }
   ]
 }
