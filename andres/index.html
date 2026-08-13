@@ -101,6 +101,23 @@
   .done .score{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:64px;color:var(--terra);line-height:1;margin:14px 0;}
   .done p{color:var(--muted);font-weight:600;font-size:15px;margin:0 0 24px;}
 
+  .info-card{background:var(--surface);border:1.5px solid var(--line);border-radius:20px;padding:22px 18px;}
+  .ix-h{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:28px;color:var(--ink);line-height:1.1;margin-bottom:14px;}
+  .ix-p{font-size:14.5px;color:var(--muted);font-weight:600;line-height:1.55;margin-top:14px;}
+  .ix-bad{color:var(--terra);font-weight:800;text-decoration:line-through;text-decoration-thickness:2px;}
+  .ix-good{color:var(--good);font-weight:800;}
+  .ix-machine{display:flex;align-items:stretch;gap:8px;}
+  .ix-part{flex:1;background:var(--cream);border:1.5px solid var(--line);border-radius:14px;padding:12px 8px;text-align:center;}
+  .ix-part b{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);margin-bottom:8px;}
+  .ix-part span{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:22px;color:var(--terra);line-height:1.25;}
+  .ix-part.ix-p3 span{font-size:17px;}
+  .ix-plus{align-self:center;font-weight:800;color:var(--muted);font-size:18px;}
+  .ix-t{width:100%;border-collapse:collapse;margin-top:4px;}
+  .ix-t th{font-size:10.5px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);text-align:left;padding:6px 6px;border-bottom:1.5px solid var(--line);}
+  .ix-t td{font-size:15px;font-weight:700;color:var(--ink);padding:6px 6px;border-bottom:1px solid var(--line);}
+  .ix-t td.ix-c3{color:var(--terra);}
+  .ix-rowx{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:12px;background:var(--cream);border-radius:12px;padding:10px 12px;font-size:14.5px;}
+  .ix-arrow{color:var(--muted);font-weight:800;}
   .credit{text-align:center;color:#c9bdac;font-size:11.5px;font-weight:700;margin-top:34px;letter-spacing:.5px;}
 
   @media (prefers-reduced-motion: reduce){*{transition:none !important;}}
@@ -123,8 +140,8 @@
     "level": "A2-B1",
     "l1": "Spanish",
     "context": "Estudiante de ARCHES. Español L1. Base de clase mientras llega su mazo.",
-    "greeting": "Tus frases de clase, Andres. Un poco cada día y se quedan.",
-    "version": "2026-07-04"
+    "greeting": "Nuevo tema: have / has + participio. Empieza por ahí, Andres.",
+    "version": "2026-08-13"
   },
   "links": [
     {
@@ -164,6 +181,256 @@
     }
   ],
   "tracks": [
+    {
+      "id": "perfecto",
+      "title": "Have / Has + participio",
+      "note": "el presente perfecto: la maquina de 3 piezas. Empieza por las tarjetas verdes.",
+      "items": [
+        {
+          "type": "info",
+          "html": "<div class='ix-h'>La maquina de 3 piezas</div><div class='ix-machine'><div class='ix-part'><b>I / You / We / They</b><span>HAVE</span></div><div class='ix-plus'>+</div><div class='ix-part'><b>He / She / It</b><span>HAS</span></div><div class='ix-plus'>+</div><div class='ix-part ix-p3'><b>participio</b><span>eaten<br>worked<br>gone</span></div></div><div class='ix-p'>Siempre las 3 piezas. Si falta una, la frase se rompe.<br><span class='ix-bad'>I have go.</span> &nbsp;&rarr;&nbsp; <span class='ix-good'>I have gone.</span></div>"
+        },
+        {
+          "type": "info",
+          "html": "<div class='ix-h'>Las 3 columnas (el mapa)</div><table class='ix-t'><tr><th>base</th><th>pasado</th><th>participio</th></tr><tr><td>go</td><td>went</td><td class='ix-c3'>gone</td></tr><tr><td>eat</td><td>ate</td><td class='ix-c3'>eaten</td></tr><tr><td>see</td><td>saw</td><td class='ix-c3'>seen</td></tr><tr><td>do</td><td>did</td><td class='ix-c3'>done</td></tr><tr><td>be</td><td>was/were</td><td class='ix-c3'>been</td></tr><tr><td>take</td><td>took</td><td class='ix-c3'>taken</td></tr><tr><td>write</td><td>wrote</td><td class='ix-c3'>written</td></tr><tr><td>speak</td><td>spoke</td><td class='ix-c3'>spoken</td></tr><tr><td>buy</td><td>bought</td><td class='ix-c3'>bought</td></tr><tr><td>make</td><td>made</td><td class='ix-c3'>made</td></tr><tr><td>work</td><td>worked</td><td class='ix-c3'>worked</td></tr><tr><td>live</td><td>lived</td><td class='ix-c3'>lived</td></tr></table><div class='ix-p'>Despues de <b>have/has</b> siempre va la <b>tercera</b> columna. Nunca la segunda.<br><span class='ix-bad'>I have went.</span> &nbsp;&rarr;&nbsp; <span class='ix-good'>I have gone.</span></div>"
+        },
+        {
+          "type": "info",
+          "html": "<div class='ix-h'>La trampa del espanol</div><div class='ix-p'>En espanol dices el tiempo con <i>tener</i> o con presente. En ingles se dice con <b>have/has + participio</b>.</div><div class='ix-rowx'><span class='ix-bad'>I have 3 years living here.</span><span class='ix-arrow'>&rarr;</span><span class='ix-good'>I have lived here for 3 years.</span></div><div class='ix-rowx'><span class='ix-bad'>I work here since 2020.</span><span class='ix-arrow'>&rarr;</span><span class='ix-good'>I have worked here since 2020.</span></div><div class='ix-p'><b>for</b> = duracion (for 3 years). <b>since</b> = punto de inicio (since 2020).</div>"
+        },
+        {
+          "type": "choice",
+          "prompt": "She ___ finished her homework.",
+          "options": ["have", "has", "haves"],
+          "answer": "has",
+          "note": "he / she / it: has.",
+          "say": "She has finished her homework."
+        },
+        {
+          "type": "fix",
+          "wrong": "He have finished the report.",
+          "right": "He has finished the report.",
+          "note": "el: has, no have.",
+          "say": "He has finished the report."
+        },
+        {
+          "type": "fix",
+          "wrong": "I have go to the bank.",
+          "right": "I have gone to the bank.",
+          "note": "tercera columna: go, went, gone.",
+          "say": "I have gone to the bank."
+        },
+        {
+          "type": "fix",
+          "wrong": "I have went to the bank.",
+          "right": "I have gone to the bank.",
+          "note": "went es pasado, gone es participio.",
+          "say": "I have gone to the bank."
+        },
+        {
+          "type": "choice",
+          "prompt": "I have ___ that movie twice.",
+          "options": ["saw", "seen", "see"],
+          "answer": "seen",
+          "note": "see, saw, seen.",
+          "say": "I have seen that movie twice."
+        },
+        {
+          "type": "translate",
+          "es": "He terminado mi trabajo.",
+          "en": "I have finished my work.",
+          "alts": ["I've finished my work"],
+          "say": "I have finished my work."
+        },
+        {
+          "type": "translate",
+          "es": "Ella ha comido ya.",
+          "en": "She has already eaten.",
+          "alts": ["She has eaten already", "She's already eaten"],
+          "note": "already va antes del participio.",
+          "say": "She has already eaten."
+        },
+        {
+          "type": "fix",
+          "wrong": "I have ate breakfast.",
+          "right": "I have eaten breakfast.",
+          "note": "ate es pasado, eaten es participio.",
+          "say": "I have eaten breakfast."
+        },
+        {
+          "type": "scramble",
+          "answer": "I have lived here for three years",
+          "extra": ["living", "since"],
+          "note": "for = duracion.",
+          "say": "I have lived here for three years."
+        },
+        {
+          "type": "fix",
+          "wrong": "I have three years living here.",
+          "right": "I have lived here for three years.",
+          "note": "la trampa clasica del espanol.",
+          "say": "I have lived here for three years."
+        },
+        {
+          "type": "translate",
+          "es": "Trabajo aqui desde 2020.",
+          "en": "I have worked here since 2020.",
+          "alts": ["I've worked here since 2020", "I have worked here since two thousand twenty"],
+          "note": "since + punto de inicio.",
+          "say": "I have worked here since 2020."
+        },
+        {
+          "type": "choice",
+          "prompt": "___ you ever been to Canada?",
+          "options": ["Do", "Have", "Are"],
+          "answer": "Have",
+          "note": "la pregunta empieza con Have/Has, no con Do.",
+          "say": "Have you ever been to Canada?"
+        },
+        {
+          "type": "fix",
+          "wrong": "Do you have finished?",
+          "right": "Have you finished?",
+          "note": "no se mezcla do con have + participio.",
+          "say": "Have you finished?"
+        },
+        {
+          "type": "fix",
+          "wrong": "Have you ever eat sushi?",
+          "right": "Have you ever eaten sushi?",
+          "note": "ever + participio.",
+          "say": "Have you ever eaten sushi?"
+        },
+        {
+          "type": "translate",
+          "es": "Nunca he estado en Nueva York.",
+          "en": "I have never been to New York.",
+          "alts": ["I've never been to New York"],
+          "note": "been, no gone, para experiencias.",
+          "say": "I have never been to New York."
+        },
+        {
+          "type": "choice",
+          "prompt": "She isn't home. She has ___ to the store.",
+          "options": ["been", "gone", "go"],
+          "answer": "gone",
+          "note": "gone = se fue y sigue alla. been = fue y ya volvio.",
+          "say": "She has gone to the store."
+        },
+        {
+          "type": "dictate",
+          "say": "I have already sent the email.",
+          "note": "already: entre have y el participio."
+        },
+        {
+          "type": "fix",
+          "wrong": "She has wrote three emails.",
+          "right": "She has written three emails.",
+          "note": "write, wrote, written.",
+          "say": "She has written three emails."
+        },
+        {
+          "type": "translate",
+          "es": "Hemos hecho todo el trabajo.",
+          "en": "We have done all the work.",
+          "alts": ["We've done all the work"],
+          "note": "do, did, done.",
+          "say": "We have done all the work."
+        },
+        {
+          "type": "fix",
+          "wrong": "We have did all the work.",
+          "right": "We have done all the work.",
+          "note": "did es pasado, done es participio.",
+          "say": "We have done all the work."
+        },
+        {
+          "type": "choice",
+          "prompt": "Yesterday I ___ to the market.",
+          "options": ["have gone", "went", "have went"],
+          "answer": "went",
+          "note": "con yesterday se usa pasado simple, no perfecto.",
+          "say": "Yesterday I went to the market."
+        },
+        {
+          "type": "fix",
+          "wrong": "Yesterday I have gone to the market.",
+          "right": "Yesterday I went to the market.",
+          "note": "yesterday cierra el tiempo: pasado simple.",
+          "say": "Yesterday I went to the market."
+        },
+        {
+          "type": "translate",
+          "es": "El no ha llamado todavia.",
+          "en": "He hasn't called yet.",
+          "alts": ["He has not called yet"],
+          "note": "yet al final, en negativos y preguntas.",
+          "say": "He hasn't called yet."
+        },
+        {
+          "type": "scramble",
+          "answer": "Have you finished the report yet",
+          "extra": ["do", "finish"],
+          "note": "yet va al final de la pregunta.",
+          "say": "Have you finished the report yet?"
+        },
+        {
+          "type": "translate",
+          "es": "Acabo de hablar con ella.",
+          "en": "I have just spoken with her.",
+          "alts": ["I've just spoken with her", "I have just spoken to her", "I've just spoken to her"],
+          "note": "acabo de = have just + participio.",
+          "say": "I have just spoken with her."
+        },
+        {
+          "type": "fix",
+          "wrong": "It have been a long day.",
+          "right": "It has been a long day.",
+          "note": "it: has. Y no se borra el 'it'.",
+          "say": "It has been a long day."
+        },
+        {
+          "type": "fix",
+          "wrong": "Has been a long day.",
+          "right": "It has been a long day.",
+          "note": "en ingles el sujeto nunca se borra.",
+          "say": "It has been a long day."
+        },
+        {
+          "type": "translate",
+          "es": "Ellos han comprado una casa nueva.",
+          "en": "They have bought a new house.",
+          "alts": ["They've bought a new house"],
+          "note": "buy, bought, bought.",
+          "say": "They have bought a new house."
+        },
+        {
+          "type": "dictate",
+          "say": "She has taken the wrong bus.",
+          "note": "take, took, taken."
+        },
+        {
+          "type": "choice",
+          "prompt": "How long ___ you known him?",
+          "options": ["did", "have", "are"],
+          "answer": "have",
+          "note": "how long + have + participio.",
+          "say": "How long have you known him?"
+        },
+        {
+          "type": "translate",
+          "es": "Ya he visto esa pelicula.",
+          "en": "I have already seen that movie.",
+          "alts": ["I've already seen that movie", "I have seen that movie already"],
+          "say": "I have already seen that movie."
+        },
+        {
+          "type": "dictate",
+          "say": "I have never spoken to a native speaker before.",
+          "note": "never + participio."
+        }
+      ]
+    },
     {
       "id": "presente",
       "title": "Presente y rutina",
@@ -751,7 +1018,12 @@
   let voice=null, audioReady=false;
   function loadVoice(){
     const vs = window.speechSynthesis ? speechSynthesis.getVoices() : [];
-    voice = vs.find(v=>/en[-_]US/i.test(v.lang)) || vs.find(v=>/^en/i.test(v.lang)) || null;
+    if(!vs.length) return;
+    const BAD=/(albert|zarvox|bad news|good news|bahh|bells|boing|bubbles|cellos|deranged|hysterical|jester|junior|kathy|organ|pipe organ|princess|ralph|superstar|trinoids|whisper|wobble|eloquence|eddy|flo|grandma|grandpa|reed|rocko|sandy|shelley|glados|novelty)/i;
+    const en=vs.filter(v=>/^en/i.test(v.lang) && !BAD.test(v.name||""));
+    const us=en.filter(v=>/en[-_]US/i.test(v.lang));
+    const pick=arr=>arr.find(v=>/samantha/i.test(v.name))||arr.find(v=>/google us english|google/i.test(v.name))||arr.find(v=>/microsoft/i.test(v.name))||arr.find(v=>v.localService)||arr[0];
+    voice = pick(us) || pick(en) || vs.find(v=>/^en/i.test(v.lang)) || null;
   }
   if(window.speechSynthesis){ loadVoice(); speechSynthesis.onvoiceschanged = loadVoice; }
   function unlockAudio(){
@@ -846,7 +1118,10 @@
   }
 
   function startTrack(t){
-    track=t; queue=shuffle(t.items.map((it,i)=>({it,i}))); qi=0; sessionRight=0; sessionTotal=0;
+    track=t;
+    const all=t.items.map((it,i)=>({it,i}));
+    queue=all.filter(x=>x.it.type==="info").concat(shuffle(all.filter(x=>x.it.type!=="info")));
+    qi=0; sessionRight=0; sessionTotal=0;
     renderCard();
   }
 
@@ -880,6 +1155,10 @@
     if(it.type==="choice")   return cardChoice(it, advance);
     if(it.type==="scramble") return cardScramble(it, advance);
     if(it.type==="pron")     return cardPron(it, advance);
+    if(it.type==="info"){
+      mastery[itemKey(t.id,i)]=true; saveMastery();
+      return cardInfo(it, ()=>{ qi++; renderCard(); });
+    }
     // unknown type, skip
     advance(true);
   }
@@ -1030,6 +1309,13 @@
   }
 
   // pron (self-assessed)
+  // info (explicacion visual, no puntua)
+  function cardInfo(it, next){
+    practiceShell('<div class="kicker">Explicación</div><div class="info-card">'+it.html+
+      '<button class="btn btn-primary" id="ok">Entendido, vamos</button></div>');
+    document.getElementById("ok").onclick=next;
+  }
+
   function cardPron(it, advance){
     practiceShell('<div class="kicker">Pronunciación</div><div class="card">'+
       '<div class="pron-word">'+esc(it.word)+'</div>'+
