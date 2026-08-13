@@ -1,6 +1,6 @@
 {
-  "student": "Rubén",
-  "updated": "10 de julio de 2026",
+  "student": "Ruben",
+  "updated": "13 de agosto de 2026",
   "cards": [
     {
       "wrong": "I have 25 years.",
@@ -69,6 +69,15 @@
       ],
       "hint": "'Fast' es corto: el comparativo se forma con -er (faster). 'More faster' duplica el comparativo; para énfasis: much faster.",
       "date": "7 de julio de 2026"
+    },
+    {
+      "wrong": "She don't to dance.",
+      "right": "She doesn't dance.",
+      "hint": "En español el infinitivo lleva 'no' directo ('ella no baila'), pero en inglés la tercera persona singular necesita el auxiliar 'does' en negativo: 'doesn't'. Además el verbo principal va sin 'to' cuando usas un auxiliar.",
+      "alts": [
+        "She does not dance."
+      ],
+      "date": "13 de agosto de 2026"
     }
   ]
 }
