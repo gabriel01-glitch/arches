@@ -141,7 +141,7 @@
     "l1": "Spanish",
     "context": "Estudiante de ARCHES. Español L1. Base de clase mientras llega su mazo.",
     "greeting": "Nuevo tema: have / has + participio. Empieza por ahí, Andres.",
-    "version": "2026-08-13"
+    "version": "2026-08-13b"
   },
   "links": [
     {
@@ -300,6 +300,30 @@
           "right": "Have you ever eaten sushi?",
           "note": "ever + participio.",
           "say": "Have you ever eaten sushi?"
+        },
+        {
+          "type": "fix",
+          "wrong": "Have you ever to travel in Colombia?",
+          "right": "Have you ever traveled to Colombia?",
+          "alts": ["Have you ever been to Colombia?"],
+          "note": "de tu clase: despues de have you ever va el participio, y se viaja TO un lugar.",
+          "say": "Have you ever traveled to Colombia?"
+        },
+        {
+          "type": "translate",
+          "es": "\u00bfAlguna vez has viajado a Estados Unidos?",
+          "en": "Have you ever traveled to the United States?",
+          "alts": ["Have you ever been to the United States?", "Have you ever travelled to the United States?"],
+          "note": "misma estructura que tu frase de clase.",
+          "say": "Have you ever traveled to the United States?"
+        },
+        {
+          "type": "choice",
+          "prompt": "Yesterday I ___ to the bank to pay the rent.",
+          "options": ["go", "went", "have gone"],
+          "answer": "went",
+          "note": "de tu clase: la historia es pasada, no presente. Con yesterday: went.",
+          "say": "Yesterday I went to the bank to pay the rent."
         },
         {
           "type": "translate",
