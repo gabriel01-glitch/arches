@@ -135,6 +135,15 @@
         "He is correct."
       ],
       "date": "15 de agosto de 2026"
+    },
+    {
+      "wrong": "She always wants to have the reason.",
+      "right": "She always wants to be right.",
+      "hint": "En español decimos 'tener la razón', pero en inglés no se 'tiene' la razón, se 'es' correcto. El verbo cambia: to be right, no to have the reason.",
+      "alts": [
+        "She always thinks she's right."
+      ],
+      "date": "15 de agosto de 2026"
     }
   ]
 }
