@@ -1,6 +1,6 @@
 {
   "student": "Moni & Vale",
-  "updated": "2 de agosto de 2026",
+  "updated": "15 de agosto de 2026",
   "cards": [
     {
       "wrong": "I can saw my friend.",
@@ -77,6 +77,64 @@
         "My left shoe is beside the table."
       ],
       "date": "2 de agosto de 2026"
+    },
+    {
+      "wrong": "I'm in a waiting list.",
+      "right": "I'm on a waiting list.",
+      "hint": "En español decimos 'en una lista', pero en inglés se usa 'on' con listas. Piensa en 'on a list' como estar encima de algo escrito, igual que 'on a menu' o 'on the agenda'.",
+      "alts": [],
+      "date": "15 de agosto de 2026"
+    },
+    {
+      "wrong": "It don't does sense.",
+      "right": "It doesn't make sense.",
+      "hint": "El verbo 'make' fue omitido. Ademas, con 'it' (tercera persona singular) el auxiliar negativo es 'doesn't', no 'don't'. En espanol no necesitamos un verbo equivalente a 'make' en esta expresion, de ahi la omision.",
+      "alts": [
+        "It does not make sense."
+      ],
+      "date": "15 de agosto de 2026"
+    },
+    {
+      "wrong": "He has right.",
+      "right": "He is right.",
+      "hint": "En español decimos 'tener razón', pero en inglés 'right' no es un sustantivo que se 'tiene', sino un adjetivo que se 'es'. El verbo correcto es 'to be'.",
+      "alts": [],
+      "date": "15 de agosto de 2026"
+    },
+    {
+      "wrong": "What we can do to clarify my hair.",
+      "right": "What can we do to lighten my hair?",
+      "hint": "Dos cosas aqui: en preguntas directas el auxiliar va antes del sujeto ('can we', no 'we can'), y 'clarify' es un falso amigo de 'aclarar el cabello'. En ingles se dice 'lighten' para el color del pelo.",
+      "alts": [
+        "How can we lighten my hair?",
+        "What can we do to make my hair lighter?"
+      ],
+      "date": "15 de agosto de 2026"
+    },
+    {
+      "wrong": "I'm a just people.",
+      "right": "I'm just a person.",
+      "hint": "'People' es plural (personas/gente), no se usa para referirse a uno mismo. Además, el adverbio 'just' va antes del artículo 'a', no después.",
+      "alts": [
+        "I'm just an ordinary person."
+      ],
+      "date": "15 de agosto de 2026"
+    },
+    {
+      "wrong": "discuss",
+      "right": "discuss",
+      "hint": "La pronunciacion correcta es 'dis-CUSS' (el acento va en la segunda silaba, no en la primera). En espanol tendemos a acentuar la primera silaba de palabras largas, pero en ingles muchos verbos de dos silabas llevan el acento al final.",
+      "alts": [],
+      "date": "15 de agosto de 2026"
+    },
+    {
+      "wrong": "He has the reason.",
+      "right": "He is right.",
+      "hint": "En español decimos 'tener razón', pero en inglés no se usa 'have' para esto. La expresión equivalente usa el verbo 'to be': ser/estar correcto/en lo cierto.",
+      "alts": [
+        "He is correct."
+      ],
+      "date": "15 de agosto de 2026"
     }
   ]
 }
