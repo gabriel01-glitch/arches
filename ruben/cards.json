@@ -1,6 +1,6 @@
 {
   "student": "Ruben",
-  "updated": "13 de agosto de 2026",
+  "updated": "18 de agosto de 2026",
   "cards": [
     {
       "wrong": "I have 25 years.",
@@ -78,6 +78,26 @@
         "She does not dance."
       ],
       "date": "13 de agosto de 2026"
+    },
+    {
+      "wrong": "I can't fix it.",
+      "right": "I couldn't fix it.",
+      "hint": "En español a veces contamos anécdotas del pasado usando el presente, pero en inglés hay que usar el pasado (couldn't) para acciones que ya ocurrieron.",
+      "alts": [
+        "I wasn't able to fix it.",
+        "I couldn't solve it."
+      ],
+      "date": "18 de agosto de 2026"
+    },
+    {
+      "wrong": "I get to my job by bicycle.",
+      "right": "I get to work by bicycle.",
+      "hint": "En inglés se dice 'go to work' o 'get to work', no 'go to my job'. 'Job' se refiere al puesto o empleo en sí, no al lugar físico al que vas cada día.",
+      "alts": [
+        "I go to work by bicycle.",
+        "I ride my bike to work."
+      ],
+      "date": "18 de agosto de 2026"
     }
   ]
 }
