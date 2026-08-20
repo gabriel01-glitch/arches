@@ -123,8 +123,8 @@
     "level": "Pre-A1",
     "l1": "Spanish",
     "context": "Works in construction, travels often",
-    "greeting": "Estas son tus frases reales. A pulirlas.",
-    "version": "2026-06-18"
+    "greeting": "Hoy: La Barra. IT, la -s y DO. Los compuestos. Cada semana, aunque ya los sepas.",
+    "version": "2026-08-20"
   },
   "tracks": [
     {
@@ -254,6 +254,11 @@
     }
   ],
   "links": [
+    {
+      "title": "La Barra",
+      "note": "Los tres compuestos del inglés. Sentadilla, press, peso muerto. Los básicos que te hacen hablar rápido.",
+      "url": "barra/?name=Eydel"
+    },
     {
       "title": "Rutina de Articulación",
       "note": "Calentamiento de 72 segundos con la voz de Teacher Gabriel. Cada mañana, antes de hablar inglés.",
@@ -400,8 +405,16 @@
     const sc=streakCount();
     if(sc>0) html+='<div class="streak">'+flameSVG+'<span class="num">'+sc+'</span><span class="lab">'+(sc===1?'día seguido':'días seguidos')+'</span></div>';
     html+='</div>';
-    html+='<div class="tracks-label">Tus temas</div>';
+    html+='<div class="tracks-label">Hoy</div>';
     app.innerHTML=html;
+    if(STUDENT.links && STUDENT.links[0] && STUDENT.links[0].title==="La Barra"){
+      const L=STUDENT.links[0];
+      const feat=el('<a class="track" style="display:block;text-decoration:none;border-color:var(--terra)" href="'+L.url+'">'+
+        '<div class="track-head"><div class="track-title">'+esc(L.title)+'</div><div class="track-count">hoy</div></div>'+
+        (L.note?'<div class="track-note">'+esc(L.note)+'</div>':'')+'</a>');
+      app.appendChild(feat);
+    }
+    app.appendChild(el('<div class="tracks-label">Tus temas</div>'));
     STUDENT.tracks.forEach(t=>{
       const pct=trackMastery(t);
       const card=el('<div class="track">'+
@@ -414,6 +427,7 @@
     if(STUDENT.links && STUDENT.links.length){
       app.appendChild(el('<div class="tracks-label">Tus otras apps</div>'));
       STUDENT.links.forEach(function(L){
+        if(L.title==="La Barra") return;
         const a=el('<a class="track" style="display:block;text-decoration:none" href="'+L.url+'">'+
           '<div class="track-head"><div class="track-title">'+esc(L.title)+'</div><div class="track-count">›</div></div>'+
           (L.note?'<div class="track-note">'+esc(L.note)+'</div>':'')+'</a>');
