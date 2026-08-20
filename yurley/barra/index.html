@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>La Barra · Eydel y Yurley</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#fbf7f0; --surface:#fffdf9; --ink:#1c1814; --muted:#8a8074;
+    --line:#e6dccf; --terra:#bf5a36; --terra-dark:#9f4528; --terra-tint:#f4e4d9;
+    --steel:#3a3530; --good:#4e7a52; --good-tint:#e6efe2; --bad:#c45c3e; --bad-tint:#f6e2da;
+    --gold:#9a6b1e; --gold-tint:#f7eede;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  html,body{margin:0;padding:0;}
+  body{background:var(--cream);color:var(--ink);font-family:'Nunito',sans-serif;-webkit-font-smoothing:antialiased;min-height:100vh;}
+  .wrap{max-width:540px;margin:0 auto;padding:0 0 64px;}
+  .iron{background:var(--steel);color:#f6efe6;padding:28px 20px 22px;}
+  .iron a{color:#e8b48a;text-decoration:none;font-weight:800;font-size:13px;}
+  .kicker{font-size:11px;letter-spacing:1.6px;text-transform:uppercase;color:#e8b48a;font-weight:800;}
+  .hello{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:40px;line-height:1.02;margin:8px 0 6px;}
+  .hello .nm{color:#e8b48a;}
+  .lead{font-size:14.5px;line-height:1.45;color:#d8cfc4;font-weight:600;}
+  .who{display:flex;gap:8px;margin-top:16px;flex-wrap:wrap;}
+  .who b{flex:1;min-width:90px;text-align:center;border:1.5px solid rgba(255,255,255,.18);background:transparent;color:#f6efe6;border-radius:12px;padding:10px 8px;font-weight:800;font-size:14px;font-family:'Nunito',sans-serif;cursor:pointer;}
+  .who b.on{background:#e8b48a;color:var(--steel);border-color:#e8b48a;}
+  .pad{padding:18px 20px;}
+  .plate{background:var(--surface);border:1.5px solid var(--line);border-radius:18px;padding:16px 16px 14px;margin-bottom:12px;}
+  .plate h3{font-family:'Cormorant Garamond',serif;font-size:26px;margin:0 0 4px;line-height:1.1;}
+  .plate .cue{font-size:13.5px;color:var(--muted);font-weight:600;line-height:1.4;}
+  .plate .lift{font-size:11px;letter-spacing:1.3px;text-transform:uppercase;color:var(--terra);font-weight:800;margin-bottom:6px;}
+  .btn{border:none;border-radius:14px;font-family:'Nunito',sans-serif;font-weight:800;font-size:16px;padding:15px;cursor:pointer;width:100%;}
+  .btn-primary{background:var(--terra);color:#fff;margin-top:10px;}
+  .btn-primary:active{background:var(--terra-dark);}
+  .btn-good{background:var(--good);color:#fff;margin-top:10px;}
+  .btn-steel{background:var(--steel);color:#f6efe6;margin-top:10px;}
+  .row2{display:flex;gap:8px;margin-top:10px;}
+  .btn-ghost{background:var(--cream);color:var(--ink);border:1.5px solid var(--line);flex:1;border-radius:14px;font-weight:800;font-size:14px;padding:13px;cursor:pointer;font-family:'Nunito',sans-serif;}
+  .ptop{display:flex;align-items:center;gap:10px;padding:14px 20px 8px;}
+  .pback{background:none;border:none;color:var(--terra);font-weight:800;font-size:15px;cursor:pointer;font-family:'Nunito',sans-serif;}
+  .pbar{flex:1;height:7px;background:var(--line);border-radius:4px;overflow:hidden;}
+  .pbar i{display:block;height:100%;background:var(--terra);}
+  .pcount{font-size:12.5px;font-weight:800;color:var(--muted);white-space:nowrap;}
+  .card{background:var(--surface);border:1.5px solid var(--line);border-radius:20px;padding:20px 18px;margin:0 20px;}
+  .tag{display:inline-block;font-size:11px;letter-spacing:1.2px;text-transform:uppercase;color:var(--terra);font-weight:800;margin-bottom:8px;}
+  .tag.ego{color:var(--gold);}
+  .q-es{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:28px;line-height:1.18;}
+  .q-wrong{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:24px;line-height:1.2;}
+  .q-wrong s{text-decoration-color:var(--terra);text-decoration-thickness:2px;}
+  .hint{font-size:14px;color:var(--muted);font-weight:600;margin-top:10px;line-height:1.4;}
+  .arch{font-size:15px;font-weight:800;color:var(--terra);margin-top:8px;letter-spacing:.3px;}
+  .arch b{font-weight:800;}
+  .field{width:100%;margin-top:14px;background:var(--cream);border:1.5px solid var(--line);border-radius:14px;padding:14px 14px;font-family:'Nunito',sans-serif;font-size:18px;color:var(--ink);outline:none;}
+  .field:focus{border-color:var(--terra);}
+  .speaker{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;margin-top:10px;background:var(--cream);border:1.5px solid var(--line);border-radius:30px;padding:12px;font-weight:800;font-size:15px;cursor:pointer;font-family:'Nunito',sans-serif;}
+  .fb{margin-top:12px;border-radius:14px;padding:14px;font-weight:700;font-size:15px;line-height:1.4;}
+  .fb.ok{background:var(--good-tint);color:var(--good);}
+  .fb.no{background:var(--bad-tint);color:var(--terra-dark);}
+  .fb.warn{background:var(--gold-tint);color:var(--gold);}
+  .fb .ans{display:block;font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;color:var(--ink);margin-top:6px;}
+  .fb .why{display:block;font-size:13.5px;font-weight:600;color:var(--muted);margin-top:6px;}
+  .opts{display:flex;flex-direction:column;gap:8px;margin-top:12px;}
+  .opt{background:var(--cream);border:1.5px solid var(--line);border-radius:14px;padding:14px;font-size:16.5px;font-weight:700;text-align:left;font-family:'Nunito',sans-serif;cursor:pointer;}
+  .opt.ok{background:var(--good-tint);border-color:var(--good);color:var(--good);}
+  .opt.no{background:var(--bad-tint);border-color:var(--bad);color:var(--terra-dark);}
+  .board{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:14px 0 4px;}
+  .cell{background:var(--surface);border:1.5px solid var(--line);border-radius:14px;padding:12px 8px;text-align:center;}
+  .cell .n{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:700;color:var(--terra);line-height:1;}
+  .cell .l{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:4px;}
+  .spot{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px;}
+  .done{text-align:center;padding:20px 8px;}
+  .done h2{font-family:'Cormorant Garamond',serif;font-size:32px;margin:0 0 8px;}
+  .done .score{font-family:'Cormorant Garamond',serif;font-size:56px;color:var(--terra);line-height:1;margin:8px 0;}
+  .done p{color:var(--muted);font-weight:600;}
+  .teacher{margin:16px 20px 0;background:var(--surface);border:1.5px dashed var(--line);border-radius:16px;padding:14px 16px;}
+  .teacher summary{cursor:pointer;font-weight:800;color:var(--muted);font-size:13px;list-style:none;}
+  .teacher summary::-webkit-details-marker{display:none;}
+  .teacher .body{font-size:13.5px;font-weight:600;line-height:1.5;margin-top:10px;}
+  .teacher li{margin:6px 0;}
+  .credit{text-align:center;color:#c9bdac;font-size:11.5px;font-weight:700;margin-top:22px;letter-spacing:.5px;}
+  @media (prefers-reduced-motion: reduce){*{transition:none !important;}}
+</style>
+</head>
+<body>
+<div class="wrap" id="app"></div>
+<script>
+(function(){
+  "use strict";
+  const params = new URLSearchParams(location.search);
+  const KEY = "arches-barra-v1-" + ((params.get("name")==="Yurley")?"Yurley":"Eydel");
+  const NAMES = ["Eydel","Yurley"];
+  function load(){ try{ return JSON.parse(localStorage.getItem(KEY))||{}; }catch(e){ return {}; } }
+  function save(s){ try{ localStorage.setItem(KEY, JSON.stringify(s)); }catch(e){} }
+  function st(){
+    const s=load();
+    const qn = params.get("name");
+    if(!s.picked && (qn==="Yurley" || qn==="Eydel")) s.who = qn;
+    if(!s.who) s.who = "Eydel";
+    if(!NAMES.includes(s.who)) s.who="Eydel";
+    if(!s.spot) s.spot=false;
+    if(!s.stats) s.stats={it:0,s:0,do:0,to:0,miss:0,sessions:0};
+    return s;
+  }
+
+  const WHO = {
+    Eydel:  { job:"an engineer", place:"the USA", other:"Yurley", otherJob:"a dentist", otherPlace:"Colombia" },
+    Yurley: { job:"a dentist", place:"Colombia", other:"Eydel", otherJob:"an engineer", otherPlace:"the USA" }
+  };
+
+  // Each item: lift, kind (say|fix|choice), es or wrong, right, alts, miss (it|s|do|to), cue, ego?
+  function bank(who){
+    const w=WHO[who];
+    const other=w.other;
+    return [
+      // IT = squat
+      { lift:"it", kind:"fix", tag:"Sentadilla · IT", wrong:"Is raining today.", right:"It's raining today.", alts:["It is raining today"], miss:"it", cue:"Sin sujeto la barra se cae. Español esconde el it. Inglés nunca." },
+      { lift:"it", kind:"fix", tag:"Sentadilla · IT", wrong:"Is heavy.", right:"It's heavy.", alts:["It is heavy"], miss:"it", cue:"La máquina. El peso. El clima. Siempre IT." },
+      { lift:"it", kind:"say", tag:"Sentadilla · IT", es:"Está cerrado hoy.", right:"It's closed today.", alts:["It is closed today"], miss:"it", cue:"El gimnasio, la clínica, la tienda: IT is closed." },
+      { lift:"it", kind:"fix", tag:"Sentadilla · IT", wrong:"Doesn't work.", right:"It doesn't work.", alts:["It does not work"], miss:"it", cue:"Faltaba IT y el DO. Dos agujeros. Empieza por IT." },
+      { lift:"it", kind:"choice", tag:"Sentadilla · IT", es:"Hace calor.", options:["Is hot.","It's hot.","Has hot."], right:"It's hot.", miss:"it", cue:"Estados del tiempo: IT + is." },
+      { lift:"it", kind:"say", tag:"Ego lift", es:"La máquina del gym no sirve.", right:"It doesn't work.", alts:["The machine doesn't work","It does not work"], miss:"it", ego:true, cue:"Suena avanzado. El fallo es IT + doesn't. No el vocabulario." },
+
+      // -S = bench / lockout
+      { lift:"s", kind:"fix", tag:"Press · HE / SHE + S", wrong:"He go to the gym.", right:"He goes to the gym.", miss:"s", cue:"He y she cierran con -s. Sin -s no hay lockout." },
+      { lift:"s", kind:"fix", tag:"Press · HE / SHE + S", wrong:"She have a patient.", right:"She has a patient.", miss:"s", cue:"have → has. Es la -s disfrazada." },
+      { lift:"s", kind:"fix", tag:"Press · HE / SHE + S", wrong:"He need pay the box.", right:"He needs to pay for the box.", alts:["He needs to pay for it"], miss:"s", cue:"Error real de clase: needs + to + pay for. Tres básicos a la vez." },
+      { lift:"s", kind:"say", tag:"Press · HE / SHE + S", es: other+" trabaja como "+(who==="Eydel"?"dentista.":"ingeniero."), right: other+" works as "+w.otherJob+".", alts:[other+" is "+w.otherJob, other+" works as "+w.otherJob.replace(/^an /,"")], miss:"s", cue:"Habla de la otra persona. Ahí vive la -s." },
+      { lift:"s", kind:"choice", tag:"Press · HE / SHE + S", es:"Ella va al gimnasio.", options:["She go to the gym.","She goes to the gym.","She going to the gym."], right:"She goes to the gym.", miss:"s", cue:"goes. Una sílaba extra: /GOUZ/." },
+      { lift:"s", kind:"say", tag:"Ego lift", es:"Él levanta todos los días.", right:"He lifts every day.", alts:["He works out every day","He goes to the gym every day"], miss:"s", ego:true, cue:"Quieres decir lifts, PR, deadlift. El fallo sigue siendo la -s." },
+
+      // DO = deadlift
+      { lift:"do", kind:"fix", tag:"Peso muerto · DO / DOES", wrong:"You have a car?", right:"Do you have a car?", miss:"do", cue:"La pregunta no empieza con you. Empieza con DO." },
+      { lift:"do", kind:"fix", tag:"Peso muerto · DO / DOES", wrong:"It doesn't works.", right:"It doesn't work.", alts:["It does not work"], miss:"do", cue:"doesn't ya carga la -s. El verbo se queda quieto." },
+      { lift:"do", kind:"fix", tag:"Peso muerto · DO / DOES", wrong:"He don't go to the gym.", right:"He doesn't go to the gym.", alts:["He does not go to the gym"], miss:"do", cue:"He/she: doesn't. No don't." },
+      { lift:"do", kind:"say", tag:"Peso muerto · DO / DOES", es:"¿Vas al gimnasio?", right:"Do you go to the gym?", alts:["Do you work out?"], miss:"do", cue:"Do + sujeto + verbo. El verbo no se mueve." },
+      { lift:"do", kind:"choice", tag:"Peso muerto · DO / DOES", es:"Él no trabaja los domingos.", options:["He don't work on Sundays.","He doesn't works on Sundays.","He doesn't work on Sundays."], right:"He doesn't work on Sundays.", miss:"do", cue:"doesn't + work. Nunca doesn't works." },
+      { lift:"do", kind:"say", tag:"Ego lift", es:"¿Funciona esa máquina?", right:"Does it work?", alts:["Does that machine work?"], miss:"do", ego:true, cue:"Pregunta de ingeniero. El peso muerto es DOES + IT." },
+
+      // TO = accessory
+      { lift:"to", kind:"fix", tag:"Accesorio · TO", wrong:"I go the gym.", right:"I go to the gym.", miss:"to", cue:"TO es la dirección. Sin TO no hay destino." },
+      { lift:"to", kind:"fix", tag:"Accesorio · TO", wrong:"I need talk to you.", right:"I need to talk to you.", alts:["I need to talk with you"], miss:"to", cue:"need TO + verbo. Clase real: Necesito hablar contigo." },
+      { lift:"to", kind:"say", tag:"Accesorio · TO", es:"Fui a comprar leche.", right:"I went to buy milk.", alts:["I went to buy some milk"], miss:"to", cue:"went TO buy. Dos TO: dirección e infinitivo, aquí el del verbo." },
+      { lift:"to", kind:"choice", tag:"Accesorio · TO", es:"Voy a Miami.", options:["I go Miami.","I go to Miami.","I go at Miami."], right:"I go to Miami.", miss:"to", cue:"Ciudad, gym, clínica: TO." },
+      { lift:"to", kind:"say", tag:"Ego lift", es:"Le dije a mi hijo que se acostara.", right:"I told my son to go to bed.", alts:["I told my son to go to sleep"], miss:"to", ego:true, cue:"Frase de adulto. El básico es told + TO. No el vocabulario." }
+    ];
+  }
+
+  let voice=null, audioReady=false;
+  function loadVoice(){
+    const vs=window.speechSynthesis?speechSynthesis.getVoices():[];
+    voice=vs.find(v=>/en[-_]US/i.test(v.lang))||vs.find(v=>/^en/i.test(v.lang))||null;
+  }
+  if(window.speechSynthesis){ loadVoice(); speechSynthesis.onvoiceschanged=loadVoice; }
+  function unlock(){ if(audioReady||!window.speechSynthesis) return; try{ const u=new SpeechSynthesisUtterance(""); u.volume=0; speechSynthesis.speak(u); audioReady=true; }catch(e){} }
+  document.addEventListener("touchstart", unlock, {once:true});
+  document.addEventListener("click", unlock, {once:true});
+  function speak(t, rate){
+    if(!t||!window.speechSynthesis) return;
+    try{ speechSynthesis.cancel(); const u=new SpeechSynthesisUtterance(t); u.lang="en-US"; u.rate=rate||0.92; if(voice) u.voice=voice; speechSynthesis.speak(u); }catch(e){}
+  }
+  const speakerSVG='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="M19 5a9 9 0 0 1 0 14"/><path d="M15.5 8.5a4 4 0 0 1 0 7"/></svg>';
+
+  const CMAP={"it's":"it is","i'm":"i am","don't":"do not","doesn't":"does not","didn't":"did not","isn't":"is not","he's":"he is","she's":"she is"};
+  function norm(s){
+    s=(s||"").toLowerCase().replace(/['\u2018\u2019]/g,"'").trim();
+    Object.keys(CMAP).forEach(k=>{ s=s.replace(new RegExp("\\b"+k+"\\b","g"), CMAP[k]); });
+    return s.replace(/[^a-z0-9 ]/g,"").replace(/\s+/g," ").trim();
+  }
+  function lev(a,b){
+    const m=a.length,n=b.length; if(!m)return n; if(!n)return m;
+    let p=Array.from({length:n+1},(_,i)=>i), c=new Array(n+1);
+    for(let i=1;i<=m;i++){ c[0]=i; for(let j=1;j<=n;j++) c[j]=Math.min(p[j]+1,c[j-1]+1,p[j-1]+(a[i-1]===b[j-1]?0:1)); [p,c]=[c,p]; }
+    return p[n];
+  }
+  function grade(input, right, alts){
+    const ni=norm(input); if(!ni) return "no";
+    const t=[right].concat(alts||[]).map(norm);
+    if(t.indexOf(ni)>=0) return "ok";
+    let best=99; t.forEach(x=>best=Math.min(best, lev(ni,x)));
+    return best<=Math.max(1, Math.floor(right.length*0.12)) ? "close" : "no";
+  }
+  function esc(s){ return (s==null?"":""+s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+  function shuffle(a){ a=a.slice(); for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+  function el(h){ const d=document.createElement("div"); d.innerHTML=h.trim(); return d.firstChild; }
+  const app=document.getElementById("app");
+
+  function renderHome(){
+    const s=st();
+    const stats=s.stats;
+    app.innerHTML=
+      '<div class="iron">'+
+        '<a href="../">‹ Tu página</a>'+
+        '<div class="kicker" style="margin-top:14px">Los tres compuestos</div>'+
+        '<div class="hello">Hola <span class="nm">'+esc(s.who)+'</span></div>'+
+        '<div class="lead">El inglés avanzado sin básicos es isolation. Se ve en el espejo. Se cae bajo la barra. IT, la -s, y DO son sentadilla, press y peso muerto. Se entrenan cada semana. Aunque ya los “sepas”.</div>'+
+        '<div class="who">'+
+          '<b data-n="Eydel" class="'+(s.who==="Eydel"?"on":"")+'">Eydel</b>'+
+          '<b data-n="Yurley" class="'+(s.who==="Yurley"?"on":"")+'">Yurley</b>'+
+          '<b data-s="1" class="'+(s.spot?"on":"")+'">Compañero</b>'+
+        '</div>'+
+      '</div>'+
+      '<div class="pad">'+
+        '<div class="board">'+
+          '<div class="cell"><div class="n">'+stats.it+'</div><div class="l">IT</div></div>'+
+          '<div class="cell"><div class="n">'+stats.s+'</div><div class="l">-S</div></div>'+
+          '<div class="cell"><div class="n">'+stats.do+'</div><div class="l">DO</div></div>'+
+        '</div>'+
+        '<div class="plate" data-g="it"><div class="lift">1 · Sentadilla</div><h3>IT</h3><div class="cue">Si no hay sujeto, la frase no existe. Is raining no es una oración. It\'s raining sí.</div></div>'+
+        '<div class="plate" data-g="s"><div class="lift">2 · Press</div><h3>He / she + s</h3><div class="cue">El lockout. He go no cierra. He goes cierra. She has, no she have.</div></div>'+
+        '<div class="plate" data-g="do"><div class="lift">3 · Peso muerto</div><h3>Do / does / don\'t</h3><div class="cue">La pregunta y el no viven en DO. El verbo se queda quieto. Doesn\'t work, nunca doesn\'t works.</div></div>'+
+        '<div class="plate" data-g="to"><div class="lift">Accesorio</div><h3>TO</h3><div class="cue">Dirección e infinitivo. I go TO the gym. I need TO talk. Sin TO no hay destino.</div></div>'+
+        '<button class="btn btn-steel" id="full">Sesión completa · 12 reps</button>'+
+        '<button class="btn btn-primary" id="ego">Solo ego lifts · donde duele</button>'+
+      '</div>'+
+      '<details class="teacher"><summary>Notas para Gabriel</summary><div class="body">Eydel no es lento. Es un lifter que salta la sentadilla porque ya “sabe”. El ego lift es el truco: una frase de adulto (hijo, máquina, pagar) cuyo fallo es siempre un básico. No corrijas el vocabulario primero. Señala el básico que se cayó.<ol><li>Elige quién levanta (Eydel / Yurley). Compañero = Yurley u otra persona en clase hace de spotter: Bien / Faltó IT / Faltó -S / Faltó DO / Faltó TO.</li><li>No digas “esto es Pre-A1”. Di: “esto es lo que hacen los que quieren hablar rápido.”</li><li>Si se resiste: “Nadie en el gym deja la sentadilla porque ya la hizo el año pasado.”</li><li>Yurley entra a veces. No es un app de pareja. Es un app de dos que van al gym. Frases de él, de ella, de he/she. Nada de relación.</li><li>Errores reales horneados: He need pay the box · I need talk to you · I go the gym · It doesn\'t works · I told my son to go to bed.</li></ol></div></details>'+
+      '<div class="credit">ARCHES · La Barra · v2026-08-20</div>';
+
+    app.querySelectorAll(".who b[data-n]").forEach(b=>b.onclick=()=>{ const x=st(); x.who=b.getAttribute("data-n"); x.picked=true; save(x); renderHome(); });
+    app.querySelector(".who b[data-s]").onclick=()=>{ const x=st(); x.spot=!x.spot; save(x); renderHome(); };
+    app.querySelectorAll(".plate[data-g]").forEach(p=>p.onclick=()=>startSession(p.getAttribute("data-g")));
+    document.getElementById("full").onclick=()=>startSession("full");
+    document.getElementById("ego").onclick=()=>startSession("ego");
+  }
+
+  function startSession(mode){
+    const who=st().who;
+    let items=bank(who);
+    if(mode==="ego") items=items.filter(x=>x.ego);
+    else if(mode!=="full") items=items.filter(x=>x.lift===mode);
+    items=shuffle(items);
+    if(mode==="full") items=items.slice(0,12);
+    run(items, 0, {ok:0, miss:{it:0,s:0,do:0,to:0}});
+  }
+
+  function shell(pct, count, inner){
+    app.innerHTML='<div class="ptop"><button class="pback" id="pb">‹ Barra</button><div class="pbar"><i style="width:'+pct+'%"></i></div><div class="pcount">'+esc(count)+'</div></div>'+inner;
+    document.getElementById("pb").onclick=renderHome;
+  }
+
+  function run(queue, qi, score){
+    if(qi>=queue.length) return finish(queue, score);
+    const it=queue[qi];
+    const pct=Math.round(qi/queue.length*100);
+    const count=(qi+1)+" / "+queue.length;
+    if(it.kind==="fix") return cardFix(queue, qi, score, it, pct, count);
+    if(it.kind==="choice") return cardChoice(queue, qi, score, it, pct, count);
+    return cardSay(queue, qi, score, it, pct, count);
+  }
+
+  function after(ok, it, queue, qi, score){
+    const s=st();
+    if(ok){ score.ok++; s.stats[it.lift]=(s.stats[it.lift]||0)+1; }
+    else { score.miss[it.miss]=(score.miss[it.miss]||0)+1; s.stats.miss++; }
+    save(s);
+    const go=()=>run(queue, qi+1, score);
+    if(!st().spot) return setTimeout(go, 50);
+    // spotter gate
+    const box=document.getElementById("fb")||app.querySelector(".card");
+    const spot=el('<div class="hint">El compañero decide:</div>');
+    const row=el('<div class="spot"></div>');
+    [["Bien","ok"],["Faltó IT","it"],["Faltó -S","s"],["Faltó DO","do"],["Faltó TO","to"]].forEach(pair=>{
+      const b=el('<button class="btn-ghost">'+pair[0]+'</button>');
+      b.onclick=go;
+      row.appendChild(b);
+    });
+    box.appendChild(spot); box.appendChild(row);
+  }
+
+  function cardSay(queue, qi, score, it, pct, count){
+    let revealed=false;
+    shell(pct, count,
+      '<div class="card">'+
+        '<div class="tag'+(it.ego?" ego":"")+'">'+esc(it.tag)+(it.ego?" · ego":"")+'</div>'+
+        '<div class="q-es">'+esc(it.es)+'</div>'+
+        '<div class="hint">Dilo en voz alta. Luego escríbelo. El básico es '+esc(it.miss.toUpperCase()==="S"?"la -S":it.miss.toUpperCase())+'.</div>'+
+        '<button class="speaker" id="hear">'+speakerSVG+'Oír el modelo después</button>'+
+        '<input class="field" id="inp" placeholder="Escríbelo en inglés" autocomplete="off" autocapitalize="sentences">'+
+        '<div id="fb"></div>'+
+        '<button class="btn btn-primary" id="go">Revisar</button>'+
+        '<div class="row2"><button class="btn-ghost" id="show">Ver respuesta</button></div>'+
+      '</div>');
+    const inp=document.getElementById("inp"), fb=document.getElementById("fb"), go=document.getElementById("go");
+    document.getElementById("hear").onclick=()=>speak(it.right);
+    document.getElementById("show").onclick=()=>{
+      revealed=true;
+      fb.innerHTML='<div class="fb no">Modelo:<span class="ans">'+esc(it.right)+'</span><span class="why">'+esc(it.cue)+'</span></div>';
+      speak(it.right);
+      go.textContent="Siguiente"; go.onclick=()=>after(false,it,queue,qi,score);
+    };
+    go.onclick=()=>{
+      if(revealed) return after(false,it,queue,qi,score);
+      const r=grade(inp.value, it.right, it.alts);
+      if(r==="ok"){
+        fb.innerHTML='<div class="fb ok">Lockout.<span class="ans">'+esc(it.right)+'</span><span class="why">'+esc(it.cue)+'</span></div>';
+        speak(it.right);
+        go.textContent="Siguiente"; go.onclick=()=>after(true,it,queue,qi,score);
+      } else if(r==="close"){
+        fb.innerHTML='<div class="fb warn">Casi. Revisa una letra o una contracción.</div>';
+      } else {
+        fb.innerHTML='<div class="fb no">La barra se movió. El básico que falló: <b>'+esc(it.miss==="s"?"la -s":it.miss)+'</b>.<span class="why">'+esc(it.cue)+'</span></div>';
+      }
+    };
+    inp.addEventListener("keydown",e=>{ if(e.key==="Enter"){ e.preventDefault(); go.click(); }});
+  }
+
+  function cardFix(queue, qi, score, it, pct, count){
+    let revealed=false;
+    shell(pct, count,
+      '<div class="card">'+
+        '<div class="tag'+(it.ego?" ego":"")+'">'+esc(it.tag)+(it.ego?" · ego":"")+'</div>'+
+        '<div class="q-wrong">No: <s>'+esc(it.wrong)+'</s></div>'+
+        '<div class="hint">'+esc(it.cue)+'</div>'+
+        '<input class="field" id="inp" placeholder="La frase correcta" autocomplete="off" autocapitalize="sentences">'+
+        '<div id="fb"></div>'+
+        '<button class="btn btn-primary" id="go">Revisar</button>'+
+        '<div class="row2"><button class="btn-ghost" id="show">Ver respuesta</button><button class="btn-ghost" id="hear">Oír</button></div>'+
+      '</div>');
+    const inp=document.getElementById("inp"), fb=document.getElementById("fb"), go=document.getElementById("go");
+    document.getElementById("hear").onclick=()=>speak(it.right);
+    document.getElementById("show").onclick=()=>{
+      revealed=true;
+      fb.innerHTML='<div class="fb no">Modelo:<span class="ans">'+esc(it.right)+'</span></div>';
+      speak(it.right);
+      go.textContent="Siguiente"; go.onclick=()=>after(false,it,queue,qi,score);
+    };
+    go.onclick=()=>{
+      if(revealed) return after(false,it,queue,qi,score);
+      const r=grade(inp.value, it.right, it.alts);
+      if(r==="ok"){
+        fb.innerHTML='<div class="fb ok">Eso es peso. Eso es básico.<span class="ans">'+esc(it.right)+'</span></div>';
+        speak(it.right);
+        go.textContent="Siguiente"; go.onclick=()=>after(true,it,queue,qi,score);
+      } else if(r==="close"){
+        fb.innerHTML='<div class="fb warn">Casi. Un detalle.</div>';
+      } else {
+        fb.innerHTML='<div class="fb no">Todavía no. El básico: <b>'+esc(it.miss==="s"?"la -s":it.miss)+'</b>.</div>';
+      }
+    };
+    inp.addEventListener("keydown",e=>{ if(e.key==="Enter"){ e.preventDefault(); go.click(); }});
+  }
+
+  function cardChoice(queue, qi, score, it, pct, count){
+    let locked=false;
+    shell(pct, count,
+      '<div class="card">'+
+        '<div class="tag">'+esc(it.tag)+'</div>'+
+        '<div class="q-es">'+esc(it.es)+'</div>'+
+        '<div class="hint">'+esc(it.cue)+'</div>'+
+        '<div class="opts" id="opts"></div><div id="fb"></div>'+
+      '</div>');
+    const opts=document.getElementById("opts"), fb=document.getElementById("fb");
+    shuffle(it.options).forEach(o=>{
+      const b=el('<button class="opt">'+esc(o)+'</button>');
+      b.onclick=()=>{
+        if(locked) return; locked=true;
+        const ok=norm(o)===norm(it.right);
+        b.className="opt "+(ok?"ok":"no");
+        fb.innerHTML= ok
+          ? '<div class="fb ok">Lockout.<span class="ans">'+esc(it.right)+'</span></div>'
+          : '<div class="fb no">Esa es isolation. El básico: <b>'+esc(it.miss==="s"?"la -s":it.miss)+'</b>.<span class="ans">'+esc(it.right)+'</span></div>';
+        speak(it.right);
+        const n=el('<button class="btn btn-primary">Siguiente</button>');
+        n.onclick=()=>after(ok,it,queue,qi,score);
+        fb.appendChild(n);
+      };
+      opts.appendChild(b);
+    });
+  }
+
+  function finish(queue, score){
+    const s=st(); s.stats.sessions++; save(s);
+    const total=queue.length;
+    const worst=Object.keys(score.miss).sort((a,b)=>score.miss[b]-score.miss[a])[0];
+    const label={it:"IT",s:"la -s",do:"DO / DOES",to:"TO"}[worst]||"el básico";
+    const msg = score.ok===total ? "La barra salió limpia." :
+                score.ok>=total*0.7 ? "Buenas reps. El que falló, se entrena mañana." :
+                "Normal. Los compuestos duelen al principio. Mañana, la misma barra.";
+    app.innerHTML='<div class="pad"><div class="done">'+
+      '<div class="kicker" style="color:var(--terra)">Fin de sesión</div>'+
+      '<h2>'+msg+'</h2>'+
+      '<div class="score">'+score.ok+'/'+total+'</div>'+
+      '<p>Hoy el agujero más grande fue <b>'+esc(label)+'</b>. No es vergüenza. Es el lift de mañana.</p>'+
+      '<button class="btn btn-primary" id="again">Otra sesión</button>'+
+      '<div class="row2"><button class="btn-ghost" id="home">La barra</button></div>'+
+    '</div></div>';
+    document.getElementById("again").onclick=()=>startSession("full");
+    document.getElementById("home").onclick=renderHome;
+  }
+
+  renderHome();
+})();
+</script>
+</body>
+</html>
