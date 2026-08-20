@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>La Entrevista · Ruben</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#fbf7f0; --surface:#fffdf9; --ink:#2c2722; --muted:#9a8f83;
+    --line:#e9e0d3; --terra:#bf5a36; --terra-dark:#9f4528; --terra-tint:#f4e4d9;
+    --good:#5a7d5a; --good-tint:#e6efe2; --bad-tint:#f6e2da; --gold:#9a6b1e; --gold-tint:#f7eede;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  html,body{margin:0;padding:0;}
+  body{background:var(--cream);color:var(--ink);font-family:'Nunito',sans-serif;-webkit-font-smoothing:antialiased;min-height:100vh;}
+  .wrap{max-width:540px;margin:0 auto;padding:22px 18px 64px;}
+
+  .hello{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:40px;line-height:1.02;color:var(--ink);}
+  .hello .nm{color:var(--terra);}
+  .sub{font-size:14.5px;color:var(--muted);font-weight:600;margin-top:8px;line-height:1.45;}
+  .streak{display:inline-flex;align-items:center;gap:9px;background:var(--surface);border:1px solid var(--line);border-radius:30px;padding:9px 16px;margin-top:16px;}
+  .streak .num{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:24px;color:var(--terra);line-height:1;}
+  .streak .lab{font-size:12.5px;color:var(--muted);font-weight:700;}
+
+  .muscle{margin-top:16px;background:var(--surface);border:1.5px solid var(--line);border-radius:16px;padding:14px 16px;}
+  .muscle .lab{font-size:11.5px;text-transform:uppercase;letter-spacing:1.3px;color:var(--muted);font-weight:800;}
+  .muscle .row{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-top:4px;}
+  .muscle .big{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:28px;color:var(--terra);line-height:1;}
+  .muscle .hint{font-size:13px;color:var(--muted);font-weight:600;margin-top:6px;line-height:1.4;}
+  .bar{height:7px;background:var(--terra-tint);border-radius:4px;margin-top:10px;overflow:hidden;}
+  .bar > i{display:block;height:100%;background:var(--terra);border-radius:4px;transition:width .45s ease;}
+
+  .tracks-label{font-size:11.5px;text-transform:uppercase;letter-spacing:1.4px;color:var(--muted);font-weight:800;margin:28px 4px 12px;}
+  .track{background:var(--surface);border:1.5px solid var(--line);border-radius:18px;padding:18px;margin-bottom:12px;cursor:pointer;transition:transform .08s ease,border-color .15s ease;text-align:left;width:100%;font-family:'Nunito',sans-serif;color:inherit;}
+  .track:active{transform:scale(.985);border-color:var(--terra);}
+  .track-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;}
+  .track-title{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:24px;color:var(--ink);line-height:1.1;}
+  .track-count{font-size:12.5px;color:var(--muted);font-weight:700;white-space:nowrap;}
+  .track-note{font-size:14px;color:var(--muted);font-weight:600;margin-top:5px;line-height:1.4;}
+  .stepnum{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:var(--terra-tint);color:var(--terra-dark);font-weight:800;font-size:13px;margin-right:8px;flex:none;}
+
+  .ptop{display:flex;align-items:center;gap:12px;padding:6px 0 16px;}
+  .pback{background:none;border:none;color:var(--terra);font-weight:800;font-size:15px;cursor:pointer;font-family:'Nunito',sans-serif;padding:6px 2px;}
+  .pbar{flex:1;height:7px;background:var(--line);border-radius:4px;overflow:hidden;}
+  .pbar > i{display:block;height:100%;background:var(--terra);transition:width .35s ease;}
+  .pcount{font-size:13px;color:var(--muted);font-weight:800;white-space:nowrap;}
+
+  .kicker{font-size:11.5px;text-transform:uppercase;letter-spacing:1.4px;color:var(--terra);font-weight:800;margin-bottom:12px;}
+  .card{background:var(--surface);border:1.5px solid var(--line);border-radius:20px;padding:22px 18px;}
+  .q-en{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:28px;line-height:1.18;color:var(--ink);}
+  .q-es{font-size:14.5px;color:var(--muted);font-weight:600;margin-top:8px;line-height:1.4;}
+  .answer{font-size:18.5px;font-weight:700;line-height:1.45;color:var(--ink);margin-top:4px;}
+  .answer .line{display:block;padding:8px 0;border-bottom:1px dashed var(--line);}
+  .answer .line:last-child{border-bottom:none;}
+  .answer .line.on{color:var(--terra-dark);background:var(--terra-tint);margin:4px -8px;padding:10px 8px;border-radius:10px;border:none;}
+  .hint{font-size:14px;color:var(--muted);font-weight:600;margin-top:10px;line-height:1.4;}
+  .arch{font-size:15px;font-weight:800;color:var(--terra);letter-spacing:.4px;margin-top:8px;}
+  .arch b{font-weight:800;}
+
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;}
+  .chip{background:var(--terra-tint);color:var(--terra-dark);border-radius:999px;padding:7px 12px;font-weight:800;font-size:13px;}
+
+  .btn{border:none;border-radius:14px;font-family:'Nunito',sans-serif;font-weight:800;font-size:16px;padding:15px;cursor:pointer;transition:transform .08s ease,background .15s ease;}
+  .btn:active{transform:scale(.98);}
+  .btn-primary{background:var(--terra);color:#fff;width:100%;margin-top:12px;}
+  .btn-primary:active{background:var(--terra-dark);}
+  .btn-good{background:var(--good);color:#fff;width:100%;margin-top:12px;}
+  .row2{display:flex;gap:10px;margin-top:10px;}
+  .btn-ghost{background:var(--cream);color:var(--ink);border:1.5px solid var(--line);flex:1;}
+  .btn-ghost.full{width:100%;flex:none;}
+  .btn-danger{background:var(--bad-tint);color:var(--terra-dark);border:1.5px solid #e8c4b6;flex:1;}
+
+  .speaker{display:inline-flex;align-items:center;justify-content:center;gap:9px;background:var(--cream);border:1.5px solid var(--line);border-radius:30px;padding:12px 18px;font-weight:800;font-size:15px;color:var(--ink);cursor:pointer;font-family:'Nunito',sans-serif;margin-top:12px;width:100%;}
+  .speaker:active{border-color:var(--terra);}
+  .speaker.small{margin-top:8px;}
+
+  .life{background:var(--cream);border:1.5px solid var(--line);border-radius:16px;padding:16px;margin-bottom:10px;cursor:pointer;text-align:left;width:100%;font-family:'Nunito',sans-serif;color:inherit;}
+  .life:active{border-color:var(--terra);transform:scale(.99);}
+  .life .en{font-weight:800;font-size:17px;line-height:1.3;}
+  .life .es{font-size:13.5px;color:var(--muted);font-weight:600;margin-top:4px;}
+  .life .when{font-size:12.5px;color:var(--terra-dark);font-weight:700;margin-top:6px;}
+
+  .opt{background:var(--cream);border:1.5px solid var(--line);border-radius:14px;padding:14px 16px;font-size:16.5px;font-weight:700;color:var(--ink);cursor:pointer;text-align:left;font-family:'Nunito',sans-serif;width:100%;margin-top:10px;}
+  .opt:active{transform:scale(.98);}
+  .opt.ok{background:var(--good-tint);border-color:var(--good);color:var(--good);}
+  .opt.no{background:var(--bad-tint);border-color:var(--terra);color:var(--terra-dark);}
+
+  .fb{margin-top:14px;border-radius:14px;padding:14px 16px;font-weight:700;font-size:15px;line-height:1.4;}
+  .fb.ok{background:var(--good-tint);color:var(--good);}
+  .fb.no{background:var(--bad-tint);color:var(--terra-dark);}
+  .fb.warn{background:var(--gold-tint);color:var(--gold);}
+  .fb .ans{display:block;font-family:'Cormorant Garamond',serif;font-weight:700;font-size:21px;margin-top:6px;color:var(--ink);}
+  .fb .why{display:block;font-weight:600;font-size:13.5px;margin-top:6px;color:var(--muted);}
+
+  .breathe{width:78px;height:78px;border-radius:50%;background:var(--terra-tint);margin:18px auto 8px;animation:breathe 3s ease-in-out 1;}
+  .breathe-lab{text-align:center;font-weight:800;color:var(--terra);font-size:13px;letter-spacing:.08em;text-transform:uppercase;}
+  @keyframes breathe{0%,100%{transform:scale(.82);opacity:.55;}50%{transform:scale(1.12);opacity:1;}}
+
+  .stage{background:linear-gradient(160deg,#3a2a24,#5a3a32);color:#fff8f3;border-radius:20px;padding:22px 18px;margin-bottom:12px;}
+  .stage .who{font-size:11.5px;font-weight:800;letter-spacing:1.3px;text-transform:uppercase;color:#e8b48a;margin-bottom:8px;}
+  .stage .q{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:26px;line-height:1.18;}
+  .stage .qes{font-size:14px;opacity:.72;font-weight:600;margin-top:8px;}
+
+  .done{text-align:center;padding:24px 8px;}
+  .done h2{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:34px;margin:0 0 6px;}
+  .done .score{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:60px;color:var(--terra);line-height:1;margin:12px 0;}
+  .done p{color:var(--muted);font-weight:600;font-size:15px;margin:0 0 18px;line-height:1.45;}
+
+  .teacher{margin-top:22px;background:var(--surface);border:1.5px dashed var(--line);border-radius:16px;padding:14px 16px;}
+  .teacher summary{cursor:pointer;font-weight:800;color:var(--muted);font-size:13px;list-style:none;}
+  .teacher summary::-webkit-details-marker{display:none;}
+  .teacher .body{font-size:13.5px;color:var(--ink);font-weight:600;line-height:1.5;margin-top:10px;}
+  .teacher .body ol{margin:8px 0 0;padding-left:18px;}
+  .teacher .body li{margin:6px 0;}
+
+  .credit{text-align:center;color:#c9bdac;font-size:11.5px;font-weight:700;margin-top:28px;letter-spacing:.5px;}
+  .ready{color:var(--good);font-weight:800;font-size:12.5px;}
+  @media (prefers-reduced-motion: reduce){*{transition:none !important;animation:none !important;}}
+</style>
+</head>
+<body>
+<div class="wrap" id="app"></div>
+<script>
+(function(){
+  "use strict";
+
+  const NAME = (new URLSearchParams(location.search).get("name") || "Ruben").trim() || "Ruben";
+  const KEY = "arches-ruben-entrevista-v1";
+
+  const BANK = [
+    {
+      id:"about",
+      q:"Tell me about yourself.",
+      qes:"Cuéntame de ti.",
+      lines:[
+        "My name is Ruben.",
+        "I am an electrical engineer from Cuba.",
+        "I work at a private clinic.",
+        "I take care of hospital equipment."
+      ],
+      phon:"mai-NEIM-iz RU-ben. ai-am an i-lek-tri-kal en-ji-NIIR from KYU-ba.",
+      chips:["Ruben","engineer","Cuba","clinic","equipment"],
+      why:"Tu carta de presentación. Cuatro oraciones. No más."
+    },
+    {
+      id:"do",
+      q:"What do you do at work?",
+      qes:"¿Qué haces en el trabajo?",
+      lines:[
+        "I check, repair, and install equipment.",
+        "I work with machines in the clinic.",
+        "It is not an office job.",
+        "It is stressful, but I love it."
+      ],
+      phon:"ai-CHEK ri-PER and in-STOL i-KWIP-mant.",
+      chips:["check","repair","install","not an office job"],
+      why:"Esto es lo que te contratan a hacer. Di las tres acciones."
+    },
+    {
+      id:"why",
+      q:"Why do you want this job?",
+      qes:"¿Por qué quieres este trabajo?",
+      lines:[
+        "I have experience with hospital equipment.",
+        "I am responsible.",
+        "I like to solve problems.",
+        "I want to grow in my career."
+      ],
+      phon:"ai-hav ek-SPII-ri-ans with HOS-pi-tal i-KWIP-mant.",
+      chips:["experience","responsible","solve problems"],
+      why:"No digas 'because I need a job'. Di lo que tú aportas."
+    },
+    {
+      id:"strengths",
+      q:"What are your strengths?",
+      qes:"¿Cuáles son tus fortalezas?",
+      lines:[
+        "I am an electrical engineer.",
+        "I am careful with safety.",
+        "I can fix problems.",
+        "I work hard."
+      ],
+      phon:"ai-am KEIR-ful with SEIF-tii. ai-kan-FIKS PRO-blems.",
+      chips:["engineer","safety","fix","work hard"],
+      why:"Fortalezas concretas, no adjetivos vacíos."
+    },
+    {
+      id:"problem",
+      q:"Tell me about a problem at work.",
+      qes:"Cuéntame un problema en el trabajo.",
+      lines:[
+        "Sometimes a machine does not work.",
+        "I check the problem.",
+        "I repair it.",
+        "Then the doctors can use it again."
+      ],
+      phon:"SAM-taimz a ma-SHIIN daz-not-WERK. ai-CHEK. ai-ri-PER-it.",
+      chips:["machine","check","repair","doctors"],
+      why:"Problema, acción, resultado. Tres pasos. Suficiente para A1."
+    },
+    {
+      id:"schedule",
+      q:"What is your schedule?",
+      qes:"¿Cuál es tu horario?",
+      lines:[
+        "On weekdays I start around 7:00 am.",
+        "I get home around 5:00.",
+        "On Saturdays I work from 9:00 to 2:00.",
+        "I get up around 6:00 am."
+      ],
+      phon:"on-WEEK-deiz ai-start a-RAUND SE-ven. ai-get-HOUM a-RAUND faiv.",
+      chips:["on weekdays","get home","on Saturdays","around"],
+      why:"Tus trampas de siempre: on Saturdays, get home, around (no around at)."
+    },
+    {
+      id:"english",
+      q:"How is your English?",
+      qes:"¿Cómo está tu inglés?",
+      lines:[
+        "I am studying English every week.",
+        "I understand more and more.",
+        "I can do this job.",
+        "Please speak slowly, and I will answer clearly."
+      ],
+      phon:"ai-am STA-dii-ing ING-glish EV-rii WEEK. ai-kan-DU this-JOB.",
+      chips:["studying","I can do this job","speak slowly"],
+      why:"El inglés no es un secreto. Es honestidad + capacidad. Eso se respeta."
+    },
+    {
+      id:"ask",
+      q:"Do you have any questions for us?",
+      qes:"¿Tienes alguna pregunta para nosotros?",
+      lines:[
+        "What equipment do you use here?",
+        "What is a typical day in this job?"
+      ],
+      phon:"wat i-KWIP-mant du-yu-YUZ hiir. wat-iz a TI-pi-kal DEI.",
+      chips:["equipment","typical day"],
+      why:"Siempre pregunta algo. Silencio al final parece desinterés."
+    }
+  ];
+
+  const LIFELINES = [
+    {
+      en:"Could you repeat that, please?",
+      es:"¿Puede repetir, por favor?",
+      phon:"ku-yu-ri-PIIT-that-pliiz",
+      when:"No entendiste la pregunta."
+    },
+    {
+      en:"Could you speak more slowly, please?",
+      es:"¿Puede hablar más despacio, por favor?",
+      phon:"ku-yu-spiik-mor-SLOU-lii-pliiz",
+      when:"Habla demasiado rápido."
+    },
+    {
+      en:"That's a good question. Let me think.",
+      es:"Buena pregunta. Déjeme pensar.",
+      phon:"thats-a-gud KWES-chan. let-mii-THINK.",
+      when:"Te quedaste en blanco. Di esto primero. Luego tu respuesta."
+    },
+    {
+      en:"Sorry, I don't know that word.",
+      es:"Perdón, no conozco esa palabra.",
+      phon:"SO-rii ai-dount-nou that-WERD",
+      when:"Una palabra te bloqueó."
+    },
+    {
+      en:"I am studying English. I can do this job.",
+      es:"Estoy estudiando inglés. Puedo hacer este trabajo.",
+      phon:"ai-am STA-dii-ing ING-glish. ai-kan-DU this-JOB.",
+      when:"Preguntan por tu inglés o te sientes juzgado."
+    },
+    {
+      en:"Can you say that in a simpler way?",
+      es:"¿Lo puede decir más simple?",
+      phon:"kan-yu-SEI that in a SIM-pler WEI",
+      when:"La pregunta es larga o difícil."
+    }
+  ];
+
+  const TRAPS = [
+    {
+      wrong:"I work at private clinical.",
+      right:"I work at a private clinic.",
+      why:"Falta a. Clinic es el lugar. Clinical es adjetivo."
+    },
+    {
+      wrong:"I am electrical engineer.",
+      right:"I am an electrical engineer.",
+      why:"Profesión con a o an. Engineer empieza por vocal: an."
+    },
+    {
+      wrong:"I have 53 years.",
+      right:"I am 53 years old.",
+      why:"En inglés la edad es I am, no I have."
+    },
+    {
+      wrong:"I work the Saturday.",
+      right:"I work on Saturdays.",
+      why:"Días: on. El sábado de hábito es on Saturdays."
+    },
+    {
+      wrong:"The weekday I get up around at 6.",
+      right:"On weekdays I get up around 6.",
+      why:"On weekdays. Elige around o at, nunca las dos."
+    },
+    {
+      wrong:"I get at home about at 5.",
+      right:"I get home around 5.",
+      why:"get home no lleva preposición. Una sola palabra de tiempo."
+    },
+    {
+      wrong:"My work isn't officer work.",
+      right:"My job isn't an office job.",
+      why:"job = tu puesto. office = oficina. officer = oficial."
+    },
+    {
+      wrong:"I check the machines the weekday.",
+      right:"I check the machines on weekdays.",
+      why:"Misma trampa: on weekdays."
+    }
+  ];
+
+  const CURVE = [
+    { q:"Are you an engineer?", qes:"¿Eres ingeniero?", bank:"about", hint:"Di quién eres en una oración." },
+    { q:"Can you work on Saturdays?", qes:"¿Puedes trabajar los sábados?", bank:"schedule", hint:"Usa on Saturdays." },
+    { q:"Is this an office job?", qes:"¿Este es un trabajo de oficina?", bank:"do", hint:"It is not an office job." },
+    { q:"Why should we hire you?", qes:"¿Por qué deberíamos contratarte?", bank:"strengths", hint:"Ingeniero + seguridad + problemas." },
+    { q:"Where are you from?", qes:"¿De dónde eres?", bank:"about", hint:"I am from Cuba." },
+    { q:"What time do you start?", qes:"¿A qué hora empiezas?", bank:"schedule", hint:"around 7:00, no around at." }
+  ];
+
+  const speakerSVG = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="M19 5a9 9 0 0 1 0 14"/><path d="M15.5 8.5a4 4 0 0 1 0 7"/></svg>';
+  const flameSVG = '<svg width="20" height="20" viewBox="0 0 24 24" fill="#bf5a36" stroke="none"><path d="M12 2c1 3-1 4-2 6-1 1.6-1 3 0 4 .8.8 2 1 2-1 .6 1 1 2 1 3a3 3 0 0 1-6 0c0-1 .3-2 1-3-2 .4-3 2-3 4a5 5 0 0 0 10 0c0-4-3-6-4-9-.5-1.6-.3-3 1-4z"/></svg>';
+
+  let voice=null, audioReady=false;
+  function loadVoice(){
+    const vs = window.speechSynthesis ? speechSynthesis.getVoices() : [];
+    voice = vs.find(v=>/en[-_]US/i.test(v.lang)) || vs.find(v=>/^en/i.test(v.lang)) || null;
+  }
+  if(window.speechSynthesis){ loadVoice(); speechSynthesis.onvoiceschanged = loadVoice; }
+  function unlockAudio(){
+    if(audioReady || !window.speechSynthesis) return;
+    try{ const u=new SpeechSynthesisUtterance(""); u.volume=0; speechSynthesis.speak(u); audioReady=true; }catch(e){}
+  }
+  document.addEventListener("touchstart", unlockAudio, {once:true});
+  document.addEventListener("click", unlockAudio, {once:true});
+  function speak(text, rate){
+    if(!text || !window.speechSynthesis) return;
+    try{
+      speechSynthesis.cancel();
+      const u=new SpeechSynthesisUtterance(text);
+      u.lang="en-US"; u.rate = rate || 0.9; if(voice) u.voice=voice;
+      speechSynthesis.speak(u);
+    }catch(e){}
+  }
+  function speakLines(lines, rate){ speak(lines.join(" "), rate); }
+
+  function load(){
+    try{ return JSON.parse(localStorage.getItem(KEY)) || {}; }catch(e){ return {}; }
+  }
+  function save(data){ try{ localStorage.setItem(KEY, JSON.stringify(data)); }catch(e){} }
+  function state(){
+    const s = load();
+    if(!s.ready) s.ready = {};
+    if(!s.life) s.life = {};
+    if(!s.days) s.days = [];
+    if(!s.interviews) s.interviews = 0;
+    return s;
+  }
+  function markDay(){
+    const s=state();
+    const d=new Date(); const key=d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+    if(s.days.indexOf(key)<0) s.days.push(key);
+    if(s.days.length>60) s.days=s.days.slice(-60);
+    save(s);
+  }
+  function streakCount(){
+    const days=state().days.slice().sort();
+    if(!days.length) return 0;
+    let n=0; const today=new Date(); today.setHours(0,0,0,0);
+    for(let i=0;i<40;i++){
+      const d=new Date(today); d.setDate(today.getDate()-i);
+      const key=d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+      if(days.indexOf(key)>=0) n++; else { if(i===0) continue; break; }
+    }
+    return n;
+  }
+  function readyCount(){ return BANK.filter(b=>state().ready[b.id]).length; }
+
+  function esc(s){ return (s==null?"":""+s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+  function archHTML(s){ return (s||"").split("-").map(p=> p===p.toUpperCase() && /[A-Z]/.test(p) ? "<b>"+esc(p)+"</b>" : esc(p)).join("-"); }
+  const app=document.getElementById("app");
+  function el(html){ const d=document.createElement("div"); d.innerHTML=html.trim(); return d.firstChild; }
+
+  function shell(backLabel, backFn, pct, count, inner){
+    let html='<div class="ptop"><button class="pback" id="pb">‹ '+esc(backLabel)+'</button>';
+    if(pct!=null) html+='<div class="pbar"><i style="width:'+pct+'%"></i></div>';
+    if(count) html+='<div class="pcount">'+esc(count)+'</div>';
+    html+='</div>'+inner;
+    app.innerHTML=html;
+    document.getElementById("pb").onclick=backFn;
+  }
+
+  function renderHome(){
+    markDay();
+    const sc=streakCount();
+    const ready=readyCount();
+    const pct=Math.round(ready/BANK.length*100);
+    let html='<a class="pback" href="../" style="display:inline-block;margin-bottom:8px;text-decoration:none">‹ Tu página</a>';
+    html+='<div class="hello">Hola <span class="nm">'+esc(NAME)+'</span></div>';
+    html+='<div class="sub">El miedo a la entrevista se va cuando las respuestas ya están en la boca. Ocho respuestas. Las mismas. Hasta que sean aburridas.</div>';
+    if(sc>0) html+='<div class="streak">'+flameSVG+'<span class="num">'+sc+'</span><span class="lab">'+(sc===1?"día seguido":"días seguidos")+'</span></div>';
+    html+='<div class="muscle"><div class="lab">Músculo de entrevista</div><div class="row"><div class="big">'+ready+' / '+BANK.length+'</div><div class="hint">respuestas listas</div></div><div class="bar"><i style="width:'+pct+'%"></i></div><div class="hint">Listo = las puedes decir sin mirar. Reusa esto cada semana.</div></div>';
+
+    html+='<div class="tracks-label">El gimnasio</div>';
+    app.innerHTML=html;
+
+    const rooms=[
+      { title:"1. Mis 8 respuestas", note:"Escucha. Repite. Tápate. El corazón del ejercicio.", go:renderBankList, count:ready+" listas" },
+      { title:"2. Frases de rescate", note:"Qué decir cuando te quedas en blanco. Más importante que la gramática.", go:renderLifelines, count:LIFELINES.length },
+      { title:"3. Trampas de entrevista", note:"Tus errores reales, ahora en frases de entrevista.", go:()=>startTraps(), count:TRAPS.length },
+      { title:"4. La entrevista", note:"Simulacro. El entrevistador pregunta. Tú hablas. Si te congelas, hay rescate.", go:()=>startInterview(), count:(state().interviews||0)+" hechas" }
+    ];
+    rooms.forEach(r=>{
+      const card=el('<button class="track"><div class="track-head"><div class="track-title">'+esc(r.title)+'</div><div class="track-count">'+esc(""+r.count)+'</div></div><div class="track-note">'+esc(r.note)+'</div></button>');
+      card.onclick=r.go;
+      app.appendChild(card);
+    });
+
+    const teach=el('<details class="teacher"><summary>Notas para Gabriel · cómo usarlo en clase</summary><div class="body">El miedo de Ruben no es el inglés. Es el segundo vacío: traducir 20 años de ingeniería en tres segundos. La cura es un banco de 8 respuestas a su nivel, dichas hasta el aburrimiento. Aburrido = el miedo se fue.<ol><li>Calentamiento (3 min): una frase de rescate en voz alta. Hoy: <i>That\'s a good question. Let me think.</i></li><li>Banco (12 min): dos respuestas. Escucha, línea por línea, luego tápate. Sin español.</li><li>Simulacro (10 min): tú eres RR.HH. de un hospital. 4 preguntas. Si se congela, primero la frase de rescate, después la respuesta. Nunca saltar al español.</li><li>Follow-up: <i>Can you give me an example?</i> Lo obliga a flexionar el banco, no a recitar.</li><li>Un error vivo, una corrección, de vuelta al inglés.</li><li>Tarea: las 8 en modo tápate, una vez, en la tablet.</li></ol>Nivel A1+. Oraciones cortas. Presente simple. Honestidad sobre el inglés como fortaleza, no como secreto. Recicla on Saturdays, get home, a private clinic, an electrical engineer, job / office.</div></details>');
+    app.appendChild(teach);
+    app.appendChild(el('<div class="credit">ARCHES · Ruben · La Entrevista · v2026-08-20</div>'));
+  }
+
+  function renderBankList(){
+    shell("Inicio", renderHome, null, null, '<div class="kicker">Paso 1</div><div class="q-en" style="font-size:32px;margin-bottom:8px">Mis 8 respuestas</div><div class="sub" style="margin:0 0 16px">Las mismas ocho. Cada vez. Cuando te las sabes sin mirar, la entrevista deja de ser un examen.</div>');
+    BANK.forEach(b=>{
+      const ok=!!state().ready[b.id];
+      const card=el('<button class="track"><div class="track-head"><div class="track-title" style="font-size:20px">'+esc(b.q)+'</div><div class="track-count">'+(ok?'<span class="ready">lista</span>':'practicar')+'</div></div><div class="track-note">'+esc(b.qes)+'</div></button>');
+      card.onclick=()=>openBank(b, 1);
+      app.appendChild(card);
+    });
+  }
+
+  function openBank(b, step){
+    const total=3;
+    const pct=Math.round((step-1)/total*100);
+    const count=step+" / "+total;
+    if(step===1) return bankListen(b, pct, count);
+    if(step===2) return bankShadow(b, pct, count);
+    return bankHide(b, pct, count);
+  }
+
+  function bankListen(b, pct, count){
+    shell("Respuestas", renderBankList, pct, count,
+      '<div class="kicker">Escucha</div><div class="card">'+
+      '<div class="q-en">'+esc(b.q)+'</div>'+
+      '<div class="q-es">'+esc(b.qes)+'</div>'+
+      '<div class="answer" style="margin-top:14px">'+b.lines.map(l=>'<span class="line">'+esc(l)+'</span>').join("")+'</div>'+
+      '<div class="arch">'+archHTML(b.phon)+'</div>'+
+      '<div class="hint">'+esc(b.why)+'</div>'+
+      '<button class="speaker" id="play">'+speakerSVG+'Escuchar</button>'+
+      '<button class="speaker small" id="slow">'+speakerSVG+'Escuchar despacio</button>'+
+      '<button class="btn btn-primary" id="go">Ya la oí · repetir conmigo</button></div>');
+    document.getElementById("play").onclick=()=>speakLines(b.lines);
+    document.getElementById("slow").onclick=()=>speakLines(b.lines, 0.68);
+    document.getElementById("go").onclick=()=>openBank(b, 2);
+    setTimeout(()=>speakLines(b.lines), 280);
+  }
+
+  function bankShadow(b, pct, count){
+    let i=0;
+    function draw(){
+      const line=b.lines[i];
+      shell("Respuestas", renderBankList, pct, count,
+        '<div class="kicker">Repite conmigo · línea '+(i+1)+' de '+b.lines.length+'</div><div class="card">'+
+        '<div class="answer">'+b.lines.map((l,idx)=>'<span class="line'+(idx===i?' on':'')+'">'+esc(l)+'</span>').join("")+'</div>'+
+        '<div class="hint">Escucha. Di la línea en voz alta. No leas en silencio.</div>'+
+        '<button class="speaker" id="play">'+speakerSVG+'Oír esta línea</button>'+
+        '<button class="btn btn-primary" id="go">'+(i<b.lines.length-1?'Siguiente línea':'Tápate y dilo solo')+'</button>'+
+        '<div class="row2"><button class="btn btn-ghost full" id="again">Repetir esta línea</button></div></div>');
+      const play=()=>speak(line);
+      document.getElementById("play").onclick=play;
+      document.getElementById("again").onclick=play;
+      document.getElementById("go").onclick=()=>{
+        if(i<b.lines.length-1){ i++; draw(); }
+        else openBank(b, 3);
+      };
+      setTimeout(play, 220);
+    }
+    draw();
+  }
+
+  function bankHide(b, pct, count){
+    let revealed=false;
+    shell("Respuestas", renderBankList, Math.min(92,pct+30), count,
+      '<div class="kicker">Tápate</div><div class="card">'+
+      '<div class="q-en">'+esc(b.q)+'</div>'+
+      '<div class="q-es">'+esc(b.qes)+'</div>'+
+      '<div class="chips">'+b.chips.map(c=>'<span class="chip">'+esc(c)+'</span>').join("")+'</div>'+
+      '<div class="hint">Mira solo las palabras. Di las oraciones en voz alta. Luego destapa.</div>'+
+      '<div id="hidden"></div>'+
+      '<button class="btn btn-primary" id="go">Ya la dije · destapar</button>'+
+      '<div class="row2"><button class="btn btn-ghost" id="hear">Oír modelo</button><button class="btn btn-good" id="ready">Ya lo digo sin mirar</button></div></div>');
+    document.getElementById("hear").onclick=()=>speakLines(b.lines);
+    document.getElementById("go").onclick=()=>{
+      if(!revealed){
+        revealed=true;
+        document.getElementById("hidden").innerHTML='<div class="fb ok">Modelo:<span class="ans">'+esc(b.lines.join(" "))+'</span></div>';
+        speakLines(b.lines);
+        document.getElementById("go").textContent="Otra vez";
+      } else openBank(b, 1);
+    };
+    document.getElementById("ready").onclick=()=>{
+      const s=state(); s.ready[b.id]=true; save(s); markDay();
+      renderBankList();
+    };
+  }
+
+  function renderLifelines(){
+    shell("Inicio", renderHome, null, null,
+      '<div class="kicker">Paso 2</div><div class="q-en" style="font-size:32px;margin-bottom:8px">Frases de rescate</div><div class="sub" style="margin:0 0 16px">Cuando el cerebro se vacía, no improvises. Di una de estas. Ganas tres segundos. Eso basta.</div>');
+    LIFELINES.forEach((L,idx)=>{
+      const card=el('<button class="life"><div class="en">'+esc(L.en)+'</div><div class="arch" style="margin-top:6px">'+archHTML(L.phon)+'</div><div class="es">'+esc(L.es)+'</div><div class="when">Úsala cuando: '+esc(L.when)+'</div></button>');
+      card.onclick=()=>{
+        speak(L.en);
+        const s=state(); s.life[idx]=(s.life[idx]||0)+1; save(s);
+      };
+      app.appendChild(card);
+    });
+    const drill=el('<button class="btn btn-primary" style="margin-top:8px">Ensayar las 6 seguidas</button>');
+    drill.onclick=()=>drillLifelines(0);
+    app.appendChild(drill);
+  }
+
+  function drillLifelines(i){
+    if(i>=LIFELINES.length){
+      shell("Rescate", renderLifelines, 100, "listo",
+        '<div class="done"><h2>Seis anclas</h2><p>En la entrevista real, la número 3 es oro: That\'s a good question. Let me think.</p><button class="btn btn-primary" id="home">Volver</button></div>');
+      document.getElementById("home").onclick=renderLifelines;
+      return;
+    }
+    const L=LIFELINES[i];
+    let hidden=true;
+    shell("Rescate", renderLifelines, Math.round(i/LIFELINES.length*100), (i+1)+" / "+LIFELINES.length,
+      '<div class="kicker">Di esto en voz alta</div><div class="card">'+
+      '<div class="q-es">'+esc(L.when)+'</div>'+
+      '<div class="q-en" id="shown" style="margin-top:12px">'+esc(L.en)+'</div>'+
+      '<div class="arch">'+archHTML(L.phon)+'</div>'+
+      '<button class="speaker" id="play">'+speakerSVG+'Escuchar y repetir</button>'+
+      '<button class="btn btn-primary" id="go">Siguiente</button>'+
+      '<div class="row2"><button class="btn btn-ghost full" id="hide">Ocultar / ver</button></div></div>');
+    document.getElementById("play").onclick=()=>speak(L.en);
+    document.getElementById("go").onclick=()=>drillLifelines(i+1);
+    document.getElementById("hide").onclick=()=>{
+      hidden=!hidden;
+      document.getElementById("shown").textContent = hidden ? L.en : "···";
+    };
+    setTimeout(()=>speak(L.en), 240);
+  }
+
+  function startTraps(){
+    const queue=TRAPS.map((t,i)=>({t,i}));
+    for(let i=queue.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [queue[i],queue[j]]=[queue[j],queue[i]]; }
+    runTrap(queue, 0, 0);
+  }
+  function runTrap(queue, qi, score){
+    if(qi>=queue.length){
+      shell("Inicio", renderHome, 100, "listo",
+        '<div class="done"><h2>Trampas listas</h2><div class="score">'+score+'/'+queue.length+'</div><p>Estas frases salen solas bajo presión. Por eso se practican aquí, no en la entrevista.</p>'+
+        '<button class="btn btn-primary" id="again">Otra ronda</button>'+
+        '<div class="row2"><button class="btn btn-ghost full" id="home">Inicio</button></div></div>');
+      document.getElementById("again").onclick=startTraps;
+      document.getElementById("home").onclick=renderHome;
+      return;
+    }
+    const {t}=queue[qi];
+    const opts=shuffle([t.right, t.wrong]);
+    let locked=false;
+    shell("Inicio", renderHome, Math.round(qi/queue.length*100), (qi+1)+" / "+queue.length,
+      '<div class="kicker">Corrige · como en una entrevista</div><div class="card">'+
+      '<div class="q-es">El entrevistador no quiere oír esto:</div>'+
+      '<div class="q-en" style="font-size:24px;margin-top:8px"><s style="text-decoration-color:var(--terra);text-decoration-thickness:2px">'+esc(t.wrong)+'</s></div>'+
+      '<div class="hint">¿Cuál dices?</div>'+
+      '<div id="opts"></div><div id="fb"></div></div>');
+    const box=document.getElementById("opts");
+    opts.forEach(o=>{
+      const b=el('<button class="opt">'+esc(o)+'</button>');
+      b.onclick=()=>{
+        if(locked) return; locked=true;
+        const ok=o===t.right;
+        b.className="opt "+(ok?"ok":"no");
+        document.getElementById("fb").innerHTML = ok
+          ? '<div class="fb ok">Eso es.<span class="ans">'+esc(t.right)+'</span><span class="why">'+esc(t.why)+'</span></div>'
+          : '<div class="fb no">Cuidado. Esa es la trampa.<span class="ans">'+esc(t.right)+'</span><span class="why">'+esc(t.why)+'</span></div>';
+        speak(t.right);
+        const next=el('<button class="btn btn-primary">Siguiente</button>');
+        next.onclick=()=>runTrap(queue, qi+1, score+(ok?1:0));
+        document.getElementById("fb").appendChild(next);
+      };
+      box.appendChild(b);
+    });
+  }
+  function shuffle(a){ a=a.slice(); for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+
+  function startInterview(){
+    const core=shuffle(BANK).slice(0,6).map(b=>({kind:"bank", b}));
+    const extra=shuffle(CURVE).slice(0,2).map(c=>({kind:"curve", c, b: BANK.find(x=>x.id===c.bank)}));
+    const queue=shuffle(core.concat(extra));
+    runInterview(queue, 0, {good:0, mid:0, freeze:0});
+  }
+
+  function runInterview(queue, qi, score){
+    if(qi>=queue.length){
+      const s=state(); s.interviews=(s.interviews||0)+1; save(s); markDay();
+      const total=queue.length;
+      const muscle=score.good;
+      shell("Inicio", renderHome, 100, "fin",
+        '<div class="done"><h2>'+(muscle>=6?"Ya no es miedo. Es práctica.":(muscle>=3?"Vas. Otra ronda.":"Bien. El hielo se rompe así."))+'</h2>'+
+        '<div class="score">'+muscle+'/'+total+'</div>'+
+        '<p>Bien dichas: '+score.good+' · Más o menos: '+score.mid+' · En blanco: '+score.freeze+'</p>'+
+        '<p>El número que importa: cuántas puedes decir sin mirar. Vuelve mañana a las que congelaron.</p>'+
+        '<button class="btn btn-primary" id="again">Otra entrevista</button>'+
+        '<div class="row2"><button class="btn btn-ghost full" id="home">Inicio</button></div></div>');
+      document.getElementById("again").onclick=startInterview;
+      document.getElementById("home").onclick=renderHome;
+      return;
+    }
+    const item=queue[qi];
+    const b=item.b;
+    const q = item.kind==="curve" ? item.c.q : b.q;
+    const qes = item.kind==="curve" ? item.c.qes : b.qes;
+    const hint = item.kind==="curve" ? item.c.hint : "Tres o cuatro oraciones. Luego para.";
+
+    function ask(){
+      shell("Inicio", renderHome, Math.round(qi/queue.length*100), (qi+1)+" / "+queue.length,
+        '<div class="stage"><div class="who">Entrevistador · clínica</div><div class="q">'+esc(q)+'</div><div class="qes">'+esc(qes)+'</div></div>'+
+        '<div class="card">'+
+        '<div class="breathe" id="br"></div>'+
+        '<div class="breathe-lab">Respira · luego habla</div>'+
+        '<div class="hint" style="text-align:center">'+esc(hint)+'</div>'+
+        '<button class="speaker" id="hearq">'+speakerSVG+'Oír la pregunta otra vez</button>'+
+        '<button class="btn btn-primary" id="spoke">Ya contesté</button>'+
+        '<div class="row2">'+
+          '<button class="btn btn-danger" id="freeze">Me quedé en blanco</button>'+
+          '<button class="btn btn-ghost" id="life">Frase de rescate</button>'+
+        '</div></div>');
+      document.getElementById("hearq").onclick=()=>speak(q);
+      document.getElementById("spoke").onclick=()=>reveal("spoke");
+      document.getElementById("freeze").onclick=()=>freezeFlow();
+      document.getElementById("life").onclick=()=>lifeFlow();
+      setTimeout(()=>speak(q), 260);
+    }
+
+    function lifeFlow(){
+      const L=LIFELINES[2];
+      shell("Inicio", renderHome, Math.round(qi/queue.length*100), (qi+1)+" / "+queue.length,
+        '<div class="kicker">Rescate</div><div class="card">'+
+        '<div class="q-en">'+esc(L.en)+'</div>'+
+        '<div class="arch">'+archHTML(L.phon)+'</div>'+
+        '<div class="hint">Dilo en voz alta. Ganas tres segundos. Luego tu respuesta, aunque sea una sola oración.</div>'+
+        '<button class="speaker" id="play">'+speakerSVG+'Oír el rescate</button>'+
+        '<button class="btn btn-primary" id="go">Ya la dije · ahora mi respuesta</button></div>');
+      document.getElementById("play").onclick=()=>speak(L.en);
+      document.getElementById("go").onclick=ask;
+      speak(L.en);
+    }
+
+    function freezeFlow(){
+      const first=b.lines[0];
+      shell("Inicio", renderHome, Math.round(qi/queue.length*100), (qi+1)+" / "+queue.length,
+        '<div class="kicker">Protocolo anti-hielo</div><div class="card">'+
+        '<div class="fb warn">Está bien. Nadie espera inglés perfecto. Esperan que no te calles.</div>'+
+        '<div class="q-en" style="font-size:22px;margin-top:14px">1. That\'s a good question. Let me think.</div>'+
+        '<div class="q-en" style="font-size:22px;margin-top:10px">2. '+esc(first)+'</div>'+
+        '<div class="hint">Di esas dos. Para. Eso ya es una respuesta.</div>'+
+        '<button class="speaker" id="play">'+speakerSVG+'Oír las dos líneas</button>'+
+        '<button class="btn btn-primary" id="go">Ver el modelo completo</button></div>');
+      const two="That's a good question. Let me think. "+first;
+      document.getElementById("play").onclick=()=>speak(two);
+      document.getElementById("go").onclick=()=>reveal("freeze");
+      speak(two);
+    }
+
+    function reveal(how){
+      shell("Inicio", renderHome, Math.round((qi+0.5)/queue.length*100), (qi+1)+" / "+queue.length,
+        '<div class="kicker">Modelo · no tiene que ser idéntico</div><div class="card">'+
+        '<div class="q-en" style="font-size:22px">'+esc(q)+'</div>'+
+        '<div class="answer" style="margin-top:12px">'+b.lines.map(l=>'<span class="line">'+esc(l)+'</span>').join("")+'</div>'+
+        '<div class="hint">¿Qué tan cerca estuviste, en voz alta?</div>'+
+        '<button class="speaker" id="play">'+speakerSVG+'Oír el modelo</button>'+
+        '<button class="btn btn-good" id="good">La dije bien</button>'+
+        '<div class="row2"><button class="btn btn-ghost" id="mid">Más o menos</button><button class="btn btn-danger" id="no">No salió</button></div></div>');
+      document.getElementById("play").onclick=()=>speakLines(b.lines);
+      const bump=(k)=>{
+        score[k]++;
+        if(k==="good"){ const s=state(); s.ready[b.id]=true; save(s); }
+        runInterview(queue, qi+1, score);
+      };
+      document.getElementById("good").onclick=()=>bump("good");
+      document.getElementById("mid").onclick=()=>bump("mid");
+      document.getElementById("no").onclick=()=>bump("freeze");
+      if(how!=="freeze") speakLines(b.lines);
+    }
+
+    ask();
+  }
+
+  renderHome();
+})();
+</script>
+</body>
+</html>
