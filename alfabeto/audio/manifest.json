@@ -31,7 +31,6 @@
       "P as in Piano.": "audio/nova/p_as_in_piano.mp3",
       "Q as in Queen.": "audio/nova/q_as_in_queen.mp3",
       "R as in Radio.": "audio/nova/r_as_in_radio.mp3",
-      "S as in Sun.": "audio/nova/s_as_in_sun.mp3",
       "T as in Taxi.": "audio/nova/t_as_in_taxi.mp3",
       "U as in Uniform.": "audio/nova/u_as_in_uniform.mp3",
       "V as in Video.": "audio/nova/v_as_in_video.mp3",
@@ -52,7 +51,8 @@
       "Could you spell that, please?": "audio/nova/could_you_spell_that_please.mp3",
       "Sorry, was that B as in Banana or V as in Video?": "audio/nova/sorry_was_that_b_as_in_banana_or_v_as_in_video.mp3",
       "Did you get that?": "audio/nova/did_you_get_that.mp3",
-      "Let me repeat that.": "audio/nova/let_me_repeat_that.mp3"
+      "Let me repeat that.": "audio/nova/let_me_repeat_that.mp3",
+      "Ess as in Sun.": "audio/nova/ess_as_in_sun.mp3"
     },
     "onyx": {
       "A as in Apple.": "audio/onyx/a_as_in_apple.mp3",
@@ -73,7 +73,6 @@
       "P as in Piano.": "audio/onyx/p_as_in_piano.mp3",
       "Q as in Queen.": "audio/onyx/q_as_in_queen.mp3",
       "R as in Radio.": "audio/onyx/r_as_in_radio.mp3",
-      "S as in Sun.": "audio/onyx/s_as_in_sun.mp3",
       "T as in Taxi.": "audio/onyx/t_as_in_taxi.mp3",
       "U as in Uniform.": "audio/onyx/u_as_in_uniform.mp3",
       "V as in Video.": "audio/onyx/v_as_in_video.mp3",
@@ -94,7 +93,8 @@
       "Could you spell that, please?": "audio/onyx/could_you_spell_that_please.mp3",
       "Sorry, was that B as in Banana or V as in Video?": "audio/onyx/sorry_was_that_b_as_in_banana_or_v_as_in_video.mp3",
       "Did you get that?": "audio/onyx/did_you_get_that.mp3",
-      "Let me repeat that.": "audio/onyx/let_me_repeat_that.mp3"
+      "Let me repeat that.": "audio/onyx/let_me_repeat_that.mp3",
+      "Ess as in Sun.": "audio/onyx/ess_as_in_sun.mp3"
     }
   }
 }
