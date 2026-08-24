@@ -230,7 +230,7 @@ Tip: agrega <b>?name=TuNombre</b> al link para personalizarlo. · v2026-08-24e</
   "P as in Piano.",
   "Q as in Queen.",
   "R as in Radio.",
-  "S as in Sun.",
+  "Ess as in Sun.",
   "T as in Taxi.",
   "U as in Uniform.",
   "V as in Video.",
@@ -310,7 +310,10 @@ var phrases=[
  ["Let me repeat that.","Se lo repito."]
 ];
 
-function letterKey(L, word){ return L+" as in "+word+"."; }
+function letterKey(L, word){
+  if(L==="S") return "Ess as in Sun.";
+  return L+" as in "+word+".";
+}
 
 // ?name= personalization (letters only, accents stripped, ñ -> n)
 function cleanName(raw){
