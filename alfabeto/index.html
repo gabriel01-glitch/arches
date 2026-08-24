@@ -57,10 +57,29 @@
   .namedrill b{color:var(--terracotta-dark);}
   .drillbtn{
     margin-top:8px;border:none;border-radius:10px;cursor:pointer;
-    background:var(--terracotta);color:#fff;font-family:'Nunito',sans-serif;
+    background:var(--terracotta-dark);color:#fff;font-family:'Nunito',sans-serif;
     font-weight:800;font-size:.82rem;padding:8px 14px;
   }
-  .drillbtn:active{background:var(--terracotta-dark);}
+  .drillbtn:active{filter:brightness(.92);}
+  .voices{
+    display:flex;align-items:center;justify-content:flex-start;gap:8px;
+    flex-wrap:wrap;margin-top:12px;
+  }
+  .voices .lab{
+    font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--soft);font-weight:800;
+  }
+  .vbtn{
+    border:1.5px solid var(--line);background:var(--card);color:var(--ink);
+    border-radius:10px;font-family:'Nunito',sans-serif;font-weight:800;
+    font-size:.78rem;padding:8px 12px;cursor:pointer;min-height:44px;
+  }
+  .vbtn.on{
+    background:var(--terracotta-dark);color:#fff;border-color:var(--terracotta-dark);
+  }
+  .vbtn:focus-visible,.listen:focus-visible,.mini:focus-visible,.drillbtn:focus-visible{
+    outline:3px solid var(--terracotta);outline-offset:2px;
+  }
 
   .grid{
     display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));
@@ -71,6 +90,7 @@
     padding:12px 12px 10px;position:relative;display:flex;flex-direction:column;gap:2px;
   }
   .cardL.watch{border-color:#E3B7A4;background:#FFF9F3;}
+  .cardL.playing{border-color:var(--terracotta-dark);}
   .row1{display:flex;align-items:baseline;gap:8px;}
   .letter{
     font-family:'Cormorant Garamond',serif;font-weight:700;
@@ -88,10 +108,10 @@
   }
   .listen{
     margin-top:8px;border:none;border-radius:10px;cursor:pointer;
-    background:var(--terracotta);color:#fff;font-family:'Nunito',sans-serif;
-    font-weight:800;font-size:.78rem;padding:7px 0;width:100%;
+    background:var(--terracotta-dark);color:#fff;font-family:'Nunito',sans-serif;
+    font-weight:800;font-size:.78rem;padding:7px 0;width:100%;min-height:44px;
   }
-  .listen:active{background:var(--terracotta-dark);}
+  .listen:active{filter:brightness(.92);}
 
   section{margin-bottom:26px;}
   .pairs{display:grid;gap:10px;}
@@ -111,12 +131,13 @@
     padding:10px 14px;font-size:.92rem;display:flex;justify-content:space-between;
     gap:10px;align-items:center;flex-wrap:wrap;
   }
+  .phrase.playing{border-color:var(--terracotta-dark);}
   .phrase .en{font-weight:800;}
   .phrase .es{color:var(--soft);font-size:.82rem;}
   .mini{
     border:none;background:#F0E4D4;color:var(--terracotta-dark);border-radius:8px;
-    font-weight:800;font-size:.72rem;padding:5px 10px;cursor:pointer;
-    font-family:'Nunito',sans-serif;
+    font-weight:800;font-size:.72rem;padding:8px 12px;cursor:pointer;
+    font-family:'Nunito',sans-serif;min-height:44px;
   }
 
   footer{
@@ -126,11 +147,14 @@
   footer .heart{color:var(--terracotta);}
 
   @media print{
-    .listen,.mini,.drillbtn{display:none;}
+    .listen,.mini,.drillbtn,.voices{display:none;}
     body{padding:0;background:#fff;}
     .grid{grid-template-columns:repeat(4,1fr);gap:6px;}
     .cardL{break-inside:avoid;}
     section,.howto{break-inside:avoid;}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .cardL,.phrase,.listen,.vbtn,.drillbtn,.mini{transition:none;}
   }
 </style>
 </head>
@@ -147,6 +171,11 @@
   <p>En inglés se deletrea con esta fórmula mágica:</p>
   <p class="pattern">"D as in Doctor" &nbsp;=&nbsp; "D de Doctor"</p>
   <div class="namedrill" id="namedrill"></div>
+  <div class="voices" id="voices">
+    <span class="lab">Voz</span>
+    <button type="button" class="vbtn on" data-voice="nova" id="btnNova">Nova</button>
+    <button type="button" class="vbtn" data-voice="onyx" id="btnOnyx">Onyx</button>
+  </div>
   <p style="color:var(--soft);font-size:.85rem;margin-top:10px;">Las tarjetas con etiqueta roja son las letras que más confunden a los hispanohablantes. Practica esas primero.</p>
 </div>
 
@@ -179,7 +208,52 @@
 </section>
 
 <footer>Hecho con <span class="heart">♥</span> por tu profesor Gabriel · ARCHES Language School<br>
-Tip: agrega <b>?name=TuNombre</b> al link para personalizarlo. · v2026-08-24d</footer>
+Tip: agrega <b>?name=TuNombre</b> al link para personalizarlo. · v2026-08-24e</footer>
+
+<script id="clip-keys" type="application/json">
+[
+  "A as in Apple.",
+  "B as in Banana.",
+  "C as in Coffee.",
+  "D as in Doctor.",
+  "E as in Elephant.",
+  "F as in Family.",
+  "G as in Golf.",
+  "H as in Hotel.",
+  "I as in Internet.",
+  "J as in Juice.",
+  "K as in Kilo.",
+  "L as in Lemon.",
+  "M as in Mexico.",
+  "N as in November.",
+  "O as in Orange.",
+  "P as in Piano.",
+  "Q as in Queen.",
+  "R as in Radio.",
+  "S as in Sun.",
+  "T as in Taxi.",
+  "U as in Uniform.",
+  "V as in Video.",
+  "W as in WhatsApp.",
+  "X as in X-ray.",
+  "Y as in Yoga.",
+  "Z as in Zero.",
+  "at",
+  "dot",
+  "dash",
+  "underscore",
+  "capital A",
+  "lowercase a",
+  "double L",
+  "dot com",
+  "Can I spell that for you?",
+  "Let me spell it: ...",
+  "Could you spell that, please?",
+  "Sorry, was that B as in Banana or V as in Video?",
+  "Did you get that?",
+  "Let me repeat that."
+]
+</script>
 
 <script>
 (function(){
@@ -188,7 +262,7 @@ var alphabet=[
  ["A","ei","Apple","🍎","AAP-ol",true],
  ["B","bi","Banana","🍌","ba-NAA-na",true],
  ["C","si","Coffee","☕","KA-fi",false],
- ["D","di","Doctor","🩼","DAK-ter",false],
+ ["D","di","Doctor","🩺","DAK-ter",false],
  ["E","i","Elephant","🐘","EL-e-fant",true],
  ["F","ef","Family","👪","FAA-mi-li",false],
  ["G","yyi","Golf","⛳","GALF",true],
@@ -236,6 +310,8 @@ var phrases=[
  ["Let me repeat that.","Se lo repito."]
 ];
 
+function letterKey(L, word){ return L+" as in "+word+"."; }
+
 // ?name= personalization (letters only, accents stripped, ñ -> n)
 function cleanName(raw){
   if(!raw) return "";
@@ -252,7 +328,156 @@ if(name){
   document.title="Alfabeto Telefónico | "+name+" · ARCHES";
 }
 
-// Build the name-spelling drill
+function audioBase(){
+  var p=location.pathname||"/";
+  if(/\/index\.html$/i.test(p)) return p.replace(/index\.html$/i,"");
+  return p.replace(/\/?$/,"/");
+}
+var BASE=audioBase();
+
+var AUDIO_MANIFEST={voices:[],clips:{}};
+function clipPath(voiceId, key){
+  var clips=AUDIO_MANIFEST.clips||{};
+  var bag=clips[voiceId]||{};
+  return bag[key]||null;
+}
+function loadAudioManifest(){
+  return fetch(BASE+"audio/manifest.json",{cache:"no-store"}).then(function(r){
+    if(!r.ok) throw new Error("no manifest");
+    return r.json();
+  }).then(function(j){
+    AUDIO_MANIFEST=j||{voices:[],clips:{}};
+  }).catch(function(){
+    AUDIO_MANIFEST={voices:[],clips:{}};
+  });
+}
+loadAudioManifest();
+
+var currentVoiceId=localStorage.getItem("alfabeto_voice")||"nova";
+if(currentVoiceId!=="nova" && currentVoiceId!=="onyx") currentVoiceId="nova";
+function paintVoice(){
+  var nova=document.getElementById("btnNova");
+  var onyx=document.getElementById("btnOnyx");
+  if(!nova||!onyx) return;
+  nova.className="vbtn"+(currentVoiceId==="nova"?" on":"");
+  onyx.className="vbtn"+(currentVoiceId==="onyx"?" on":"");
+}
+paintVoice();
+document.getElementById("btnNova").onclick=function(){
+  currentVoiceId="nova";
+  localStorage.setItem("alfabeto_voice","nova");
+  paintVoice();
+};
+document.getElementById("btnOnyx").onclick=function(){
+  currentVoiceId="onyx";
+  localStorage.setItem("alfabeto_voice","onyx");
+  paintVoice();
+};
+
+var deviceVoice=null;
+function loadDeviceVoice(){
+  if(!("speechSynthesis" in window)) return;
+  var vs=speechSynthesis.getVoices();
+  var NOV=/albert|bad news|bahh|bells|boing|bubbles|cellos|good news|jester|organ|superstar|trinoids|whisper|wobble|zarvox|junior|kathy|ralph|fred|eddy|flo|grandma|grandpa|reed|rocko|sandy|shelley/i;
+  var en=vs.filter(function(v){return /^en[-_]/i.test(v.lang)&&!NOV.test(v.name);});
+  var pref=["Samantha","Google US English","Microsoft Aria","Microsoft Jenny","Microsoft Zira","Alex","Karen","Daniel"];
+  deviceVoice=null;
+  for(var i=0;i<pref.length;i++){
+    for(var j=0;j<en.length;j++){ if(en[j].name.indexOf(pref[i])===0){deviceVoice=en[j];break;} }
+    if(deviceVoice) break;
+  }
+  if(!deviceVoice){
+    for(var k=0;k<en.length;k++){ if(/en[-_]US/i.test(en[k].lang)){deviceVoice=en[k];break;} }
+  }
+  if(!deviceVoice) deviceVoice=en[0]||null;
+}
+if("speechSynthesis" in window){ loadDeviceVoice(); speechSynthesis.onvoiceschanged=loadDeviceVoice; }
+
+var audioReady=false;
+function unlockAudio(){
+  if(audioReady) return;
+  audioReady=true;
+  if("speechSynthesis" in window){
+    try{ var u=new SpeechSynthesisUtterance(" "); u.volume=0; speechSynthesis.speak(u); }catch(e){}
+  }
+}
+document.addEventListener("touchstart",unlockAudio,{once:true});
+document.addEventListener("click",unlockAudio,{once:true});
+
+var currentAudio=null;
+var chainToken=0;
+function clearPlaying(){
+  var nodes=document.querySelectorAll(".playing");
+  for(var i=0;i<nodes.length;i++) nodes[i].classList.remove("playing");
+}
+function stopPlayback(){
+  if("speechSynthesis" in window) try{ speechSynthesis.cancel(); }catch(e){}
+  if(currentAudio){
+    try{ currentAudio.onended=null; currentAudio.onerror=null; currentAudio.pause(); currentAudio.src=""; }catch(e){}
+    currentAudio=null;
+  }
+}
+function stopAll(){
+  chainToken++;
+  stopPlayback();
+  clearPlaying();
+}
+
+function deviceSpeak(text, onStart, onEnd){
+  if(!("speechSynthesis" in window)){ if(onStart) onStart(); setTimeout(function(){ if(onEnd) onEnd(); }, 400); return; }
+  if(!deviceVoice) loadDeviceVoice();
+  speechSynthesis.cancel();
+  var u=new SpeechSynthesisUtterance(text);
+  u.lang="en-US";
+  u.rate=0.85;
+  if(deviceVoice) u.voice=deviceVoice;
+  u.onstart=function(){ if(onStart) onStart(); };
+  u.onend=function(){ if(onEnd) onEnd(); };
+  u.onerror=function(){ if(onEnd) onEnd(); };
+  if(onStart) onStart();
+  speechSynthesis.speak(u);
+}
+
+function speak(text, key, cardEl, onDone){
+  stopPlayback();
+  if(!key) key=text;
+  var onStart=function(){ if(cardEl) cardEl.classList.add("playing"); };
+  var onEnd=function(){ if(cardEl) cardEl.classList.remove("playing"); if(onDone) onDone(); };
+  var rel=clipPath(currentVoiceId, key);
+  if(rel){
+    try{
+      currentAudio=new Audio(BASE+rel);
+      currentAudio.onplay=onStart;
+      currentAudio.onended=onEnd;
+      currentAudio.onerror=function(){ deviceSpeak(text, onStart, onEnd); };
+      currentAudio.play().catch(function(){ deviceSpeak(text, onStart, onEnd); });
+      return;
+    }catch(e){}
+  }
+  deviceSpeak(text, onStart, onEnd);
+}
+
+function speakOne(text, key, cardEl){
+  chainToken++;
+  speak(text, key||text, cardEl, null);
+}
+
+function speakChain(keys){
+  var my=++chainToken;
+  stopPlayback();
+  var i=0;
+  function next(){
+    if(my!==chainToken) return;
+    if(i>=keys.length) return;
+    var k=keys[i++];
+    speak(k, k, null, function(){
+      if(my!==chainToken) return;
+      setTimeout(function(){ if(my===chainToken) next(); }, 160);
+    });
+  }
+  next();
+}
+
 var drillName=name||"Ana";
 var letters=drillName.replace(/ /g,"").toUpperCase().split("");
 var parts=letters.map(function(L){
@@ -263,52 +488,15 @@ var nd=document.getElementById("namedrill");
 nd.innerHTML="Tu nombre, deletreado: <b>"+drillText+".</b>"+
  '<br><button class="drillbtn" id="drillbtn">🔊 Escuchar mi nombre deletreado</button>';
 document.getElementById("drillbtn").onclick=function(){
-  speak(letters.map(function(L){return wordFor[L]? (L+", as in "+wordFor[L]) : L;}).join(". ")+".");
+  speakChain(letters.map(function(L){
+    return wordFor[L] ? letterKey(L, wordFor[L]) : L;
+  }));
 };
-
-// ---- voice: pick a real English voice (iPhone otherwise falls back to the
-// system voice or one of Apple's novelty/robot voices like "Albert"/"Zarvox") ----
-var voice=null;
-function loadVoice(){
-  if(!("speechSynthesis" in window)) return;
-  var vs=speechSynthesis.getVoices();
-  var NOV=/albert|bad news|bahh|bells|boing|bubbles|cellos|good news|jester|organ|superstar|trinoids|whisper|wobble|zarvox|junior|kathy|ralph|fred|eddy|flo|grandma|grandpa|reed|rocko|sandy|shelley/i;
-  var en=vs.filter(function(v){return /^en[-_]/i.test(v.lang)&&!NOV.test(v.name);});
-  var pref=["Samantha","Google US English","Microsoft Aria","Microsoft Jenny","Microsoft Zira","Alex","Karen","Daniel"];
-  voice=null;
-  for(var i=0;i<pref.length;i++){
-    for(var j=0;j<en.length;j++){ if(en[j].name.indexOf(pref[i])===0){voice=en[j];break;} }
-    if(voice) break;
-  }
-  if(!voice){
-    for(var k=0;k<en.length;k++){ if(/en[-_]US/i.test(en[k].lang)){voice=en[k];break;} }
-  }
-  if(!voice) voice=en[0]||null;
-}
-if("speechSynthesis" in window){ loadVoice(); speechSynthesis.onvoiceschanged=loadVoice; }
-
-// iOS: audio must be unlocked by a user gesture once
-var audioReady=false;
-function unlockAudio(){
-  if(audioReady||!("speechSynthesis" in window)) return;
-  try{ var u=new SpeechSynthesisUtterance(" "); u.volume=0; speechSynthesis.speak(u); audioReady=true; }catch(e){}
-}
-document.addEventListener("touchstart",unlockAudio,{once:true});
-document.addEventListener("click",unlockAudio,{once:true});
-
-function speak(text){
-  if(!("speechSynthesis" in window)) return;
-  if(!voice) loadVoice();
-  speechSynthesis.cancel();
-  var u=new SpeechSynthesisUtterance(text);
-  u.lang="en-US";u.rate=0.85;
-  if(voice) u.voice=voice;
-  speechSynthesis.speak(u);
-}
 
 var grid=document.getElementById("grid");
 alphabet.forEach(function(a){
   var L=a[0],dice=a[1],word=a[2],emoji=a[3],wsay=a[4],watch=a[5];
+  var key=letterKey(L, word);
   var d=document.createElement("div");
   d.className="cardL"+(watch?" watch":"");
   d.innerHTML=
@@ -318,7 +506,7 @@ alphabet.forEach(function(a){
     '<div class="word"><span class="emoji">'+emoji+'</span>'+word+'</div>'+
     '<div class="wordsay">suena: '+wsay+'</div>'+
     '<button class="listen">🔊 '+L+' as in '+word+'</button>';
-  d.querySelector(".listen").onclick=function(){ speak(L+" as in "+word+"."); };
+  d.querySelector(".listen").onclick=function(){ speakOne(key, key, d); };
   grid.appendChild(d);
 });
 
@@ -328,7 +516,7 @@ extras.forEach(function(row){
   d.className="phrase";
   d.innerHTML='<span><span class="en">'+row[0]+' → "'+row[1]+'"</span><br><span class="es">'+row[2]+'</span></span>'+
   '<button class="mini">🔊</button>';
-  d.querySelector(".mini").onclick=function(){ speak(row[1]); };
+  d.querySelector(".mini").onclick=function(){ speakOne(row[1], row[1], d); };
   ex.appendChild(d);
 });
 
@@ -338,7 +526,7 @@ phrases.forEach(function(row){
   d.className="phrase";
   d.innerHTML='<span><span class="en">'+row[0]+'</span><br><span class="es">'+row[1]+'</span></span>'+
   '<button class="mini">🔊</button>';
-  d.querySelector(".mini").onclick=function(){ speak(row[0]); };
+  d.querySelector(".mini").onclick=function(){ speakOne(row[0], row[0], d); };
   ph.appendChild(d);
 });
 })();
