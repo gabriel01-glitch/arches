@@ -1,6 +1,6 @@
 {
   "student": "Mavic",
-  "updated": "31 de julio de 2026",
+  "updated": "24 de agosto de 2026",
   "cards": [
     {
       "wrong": "Stay in home.",
@@ -370,6 +370,22 @@
         "I'll pay more attention in order to improve my understanding."
       ],
       "date": "31 de julio de 2026"
+    },
+    {
+      "wrong": "What I owe you?",
+      "right": "What do I owe you?",
+      "hint": "En preguntas en inglés hay que invertir el sujeto con el auxiliar. En español no necesitas auxiliar ('¿Qué te debo?'), pero en inglés sí: 'do' aparece antes del sujeto cuando preguntas en presente simple.",
+      "alts": [],
+      "date": "24 de agosto de 2026"
+    },
+    {
+      "wrong": "I say him the answer.",
+      "right": "I told him the answer.",
+      "hint": "En español 'decir' funciona para el presente y el pasado, pero en inglés hay que cambiar el verbo: 'say/says' es presente y 'told' (pasado de 'tell') o 'said' (pasado de 'say') se usan para eventos que ya ocurrieron. El error viene de no distinguir el tiempo verbal en inglés.",
+      "alts": [
+        "I said the answer to him."
+      ],
+      "date": "24 de agosto de 2026"
     }
   ]
 }
