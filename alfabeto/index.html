@@ -222,27 +222,27 @@ Tip: agrega <b>?name=TuNombre</b> al link para personalizarlo. · v2026-08-24e</
   "H as in Hotel.",
   "I as in Internet.",
   "J as in Juice.",
-  "K as in Kilo.",
+  "Kay as in Kilo.",
   "L as in Lemon.",
-  "M as in Mexico.",
+  "Em as in Mexico.",
   "N as in November.",
   "O as in Orange.",
   "P as in Piano.",
   "Q as in Queen.",
   "R as in Radio.",
   "Ess as in Sun.",
-  "T as in Taxi.",
+  "Tee as in Taxi.",
   "U as in Uniform.",
   "V as in Video.",
-  "W as in WhatsApp.",
-  "X as in X-ray.",
-  "Y as in Yoga.",
-  "Z as in Zero.",
+  "Double U as in WhatsApp.",
+  "Eks as in X-ray.",
+  "Why as in Yoga.",
+  "Zee as in Zero.",
   "at",
   "dot",
   "dash",
   "underscore",
-  "capital A",
+  "Capital letter A.",
   "lowercase a",
   "double L",
   "dot com",
@@ -295,7 +295,7 @@ var extras=[
  [".","dot","punto"],
  ["-","dash","guión"],
  ["_","underscore","guión bajo"],
- ["Capital A","capital A","A mayúscula"],
+ ["Capital A","capital A","A mayúscula","Capital letter A."],
  ["Lowercase a","lowercase a","a minúscula"],
  ["LL","double L","doble ele"],
  [".com","dot com","punto com"]
@@ -311,7 +311,12 @@ var phrases=[
 ];
 
 function letterKey(L, word){
-  if(L==="S") return "Ess as in Sun.";
+  // Spoken form only. The visible card label stays "L as in Word".
+  // These letter names are spelled out because the voice drops the bare letter.
+  var SPOKEN={S:"Ess as in Sun.",K:"Kay as in Kilo.",M:"Em as in Mexico.",
+    T:"Tee as in Taxi.",W:"Double U as in WhatsApp.",X:"Eks as in X-ray.",
+    Y:"Why as in Yoga.",Z:"Zee as in Zero."};
+  if(SPOKEN[L]) return SPOKEN[L];
   return L+" as in "+word+".";
 }
 
@@ -519,7 +524,7 @@ extras.forEach(function(row){
   d.className="phrase";
   d.innerHTML='<span><span class="en">'+row[0]+' → "'+row[1]+'"</span><br><span class="es">'+row[2]+'</span></span>'+
   '<button class="mini">🔊</button>';
-  d.querySelector(".mini").onclick=function(){ speakOne(row[1], row[1], d); };
+  d.querySelector(".mini").onclick=function(){ var k=row[3]||row[1]; speakOne(k, k, d); };
   ex.appendChild(d);
 });
 
