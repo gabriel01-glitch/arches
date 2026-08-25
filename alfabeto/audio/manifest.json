@@ -60,7 +60,8 @@
       "Eks as in X-ray.": "audio/nova/eks_as_in_x_ray.mp3",
       "Why as in Yoga.": "audio/nova/why_as_in_yoga.mp3",
       "Zee as in Zero.": "audio/nova/zee_as_in_zero.mp3",
-      "Capital letter A.": "audio/nova/capital_letter_a.mp3"
+      "Capital letter A.": "audio/nova/capital_letter_a.mp3",
+      "Aitch as in Hotel.": "audio/nova/aitch_as_in_hotel.mp3"
     },
     "onyx": {
       "A as in Apple.": "audio/onyx/a_as_in_apple.mp3",
@@ -110,7 +111,8 @@
       "Eks as in X-ray.": "audio/onyx/eks_as_in_x_ray.mp3",
       "Why as in Yoga.": "audio/onyx/why_as_in_yoga.mp3",
       "Zee as in Zero.": "audio/onyx/zee_as_in_zero.mp3",
-      "Capital letter A.": "audio/onyx/capital_letter_a.mp3"
+      "Capital letter A.": "audio/onyx/capital_letter_a.mp3",
+      "Aitch as in Hotel.": "audio/onyx/aitch_as_in_hotel.mp3"
     }
   }
 }
