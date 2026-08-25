@@ -33,6 +33,11 @@
   .bar{height:7px;background:var(--terra-tint);border-radius:4px;margin-top:10px;overflow:hidden;}
   .bar > i{display:block;height:100%;background:var(--terra);border-radius:4px;transition:width .45s ease;}
 
+  .bosses{display:flex;gap:10px;margin-top:12px;align-items:center;}
+  .boss{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;border:2px solid var(--line);color:var(--muted);background:var(--cream);}
+  .boss.won{background:var(--good-tint);border-color:var(--good);color:var(--good);}
+  .bosses .lab{font-size:12.5px;color:var(--muted);font-weight:700;}
+
   .tracks-label{font-size:11.5px;text-transform:uppercase;letter-spacing:1.4px;color:var(--muted);font-weight:800;margin:28px 4px 12px;}
   .track{background:var(--surface);border:1.5px solid var(--line);border-radius:18px;padding:18px;margin-bottom:12px;cursor:pointer;transition:transform .08s ease,border-color .15s ease;text-align:left;width:100%;font-family:'Nunito',sans-serif;color:inherit;}
   .track:active{transform:scale(.985);border-color:var(--terra);}
@@ -40,7 +45,6 @@
   .track-title{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:24px;color:var(--ink);line-height:1.1;}
   .track-count{font-size:12.5px;color:var(--muted);font-weight:700;white-space:nowrap;}
   .track-note{font-size:14px;color:var(--muted);font-weight:600;margin-top:5px;line-height:1.4;}
-  .stepnum{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:var(--terra-tint);color:var(--terra-dark);font-weight:800;font-size:13px;margin-right:8px;flex:none;}
 
   .ptop{display:flex;align-items:center;gap:12px;padding:6px 0 16px;}
   .pback{background:none;border:none;color:var(--terra);font-weight:800;font-size:15px;cursor:pointer;font-family:'Nunito',sans-serif;padding:6px 2px;}
@@ -88,6 +92,12 @@
   .opt.ok{background:var(--good-tint);border-color:var(--good);color:var(--good);}
   .opt.no{background:var(--bad-tint);border-color:var(--terra);color:var(--terra-dark);}
 
+  .syls{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;}
+  .syl{background:var(--cream);border:1.5px solid var(--line);border-radius:12px;padding:12px 16px;font-weight:800;font-size:18px;cursor:pointer;font-family:'Nunito',sans-serif;color:var(--ink);min-width:44px;min-height:44px;}
+  .syl:active{transform:scale(.95);}
+  .syl.ok{background:var(--good-tint);border-color:var(--good);color:var(--good);}
+  .syl.no{background:var(--bad-tint);border-color:var(--terra);color:var(--terra-dark);}
+
   .fb{margin-top:14px;border-radius:14px;padding:14px 16px;font-weight:700;font-size:15px;line-height:1.4;}
   .fb.ok{background:var(--good-tint);color:var(--good);}
   .fb.no{background:var(--bad-tint);color:var(--terra-dark);}
@@ -100,14 +110,30 @@
   @keyframes breathe{0%,100%{transform:scale(.82);opacity:.55;}50%{transform:scale(1.12);opacity:1;}}
 
   .stage{background:linear-gradient(160deg,#3a2a24,#5a3a32);color:#fff8f3;border-radius:20px;padding:22px 18px;margin-bottom:12px;}
-  .stage .who{font-size:11.5px;font-weight:800;letter-spacing:1.3px;text-transform:uppercase;color:#e8b48a;margin-bottom:8px;}
+  .stage .who{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+  .stage .avatar{width:38px;height:38px;border-radius:50%;background:#e8b48a;color:#3a2a24;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;flex:none;}
+  .stage .wname{font-size:13px;font-weight:800;letter-spacing:.6px;color:#e8b48a;}
+  .stage .wrole{font-size:11px;font-weight:700;opacity:.7;text-transform:uppercase;letter-spacing:1px;}
   .stage .q{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:26px;line-height:1.18;}
   .stage .qes{font-size:14px;opacity:.72;font-weight:600;margin-top:8px;}
+  .stage .fu-tag{display:inline-block;background:#e8b48a;color:#3a2a24;font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;border-radius:999px;padding:4px 10px;margin-bottom:10px;}
+
+  .persona{background:var(--surface);border:1.5px solid var(--line);border-radius:18px;padding:16px;margin-bottom:12px;cursor:pointer;display:flex;gap:14px;align-items:center;text-align:left;width:100%;font-family:'Nunito',sans-serif;color:inherit;}
+  .persona:active{transform:scale(.985);border-color:var(--terra);}
+  .persona .avatar{width:52px;height:52px;border-radius:50%;background:var(--terra-tint);color:var(--terra-dark);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-weight:700;font-size:24px;flex:none;}
+  .persona.won .avatar{background:var(--good-tint);color:var(--good);}
+  .persona .pn{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:22px;line-height:1.1;}
+  .persona .pr{font-size:12px;color:var(--terra-dark);font-weight:800;text-transform:uppercase;letter-spacing:.8px;margin-top:2px;}
+  .persona .pd{font-size:13.5px;color:var(--muted);font-weight:600;margin-top:4px;line-height:1.35;}
+  .persona .pw{font-size:12px;color:var(--good);font-weight:800;margin-top:4px;}
 
   .done{text-align:center;padding:24px 8px;}
   .done h2{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:34px;margin:0 0 6px;}
   .done .score{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:60px;color:var(--terra);line-height:1;margin:12px 0;}
   .done p{color:var(--muted);font-weight:600;font-size:15px;margin:0 0 18px;line-height:1.45;}
+  .hired{background:var(--good-tint);border:2px solid var(--good);border-radius:20px;padding:20px;margin:14px 0;}
+  .hired .ht{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:30px;color:var(--good);}
+  .hired p{color:var(--ink);margin:8px 0 0;}
 
   .teacher{margin-top:22px;background:var(--surface);border:1.5px dashed var(--line);border-radius:16px;padding:14px 16px;}
   .teacher summary{cursor:pointer;font-weight:800;color:var(--muted);font-size:13px;list-style:none;}
@@ -128,7 +154,8 @@
   "use strict";
 
   const NAME = (new URLSearchParams(location.search).get("name") || "Ruben").trim() || "Ruben";
-  const KEY = "arches-ruben-entrevista-v1";
+  const KEY = "arches-ruben-entrevista-v2";
+  const OLDKEY = "arches-ruben-entrevista-v1";
 
   const BANK = [
     {
@@ -136,202 +163,226 @@
       q:"Tell me about yourself.",
       qes:"Cuéntame de ti.",
       lines:[
-        "My name is Ruben.",
+        "My name is Ruben, and I am 53 years old.",
         "I am an electrical engineer from Cuba.",
-        "I work at a private clinic.",
-        "I take care of hospital equipment."
+        "I have many years of experience with medical equipment.",
+        "Now I work at a private clinic, and I am ready for a bigger challenge."
       ],
-      phon:"mai-NEIM-iz RU-ben. ai-am an i-lek-tri-kal en-ji-NIIR from KYU-ba.",
-      chips:["Ruben","engineer","Cuba","clinic","equipment"],
-      why:"Tu carta de presentación. Cuatro oraciones. No más."
+      phon:"ai-hav ME-nii YIIRZ ov ek-SPII-ri-ans. a BI-guer CHA-lench.",
+      chips:["engineer","Cuba","experience","bigger challenge"],
+      why:"Tu carta de presentación, nivel dos: ahora termina con ambición.",
+      fu:{ q:"Why a bigger challenge?", qes:"¿Por qué un reto más grande?",
+        lines:["Because I love to learn.","A hospital has more equipment and more technology."] }
+    },
+    {
+      id:"experience",
+      q:"Tell me about your experience.",
+      qes:"Cuéntame de tu experiencia.",
+      lines:[
+        "In Cuba, I worked as an electrical engineer for many years.",
+        "I learned to repair all kinds of machines.",
+        "Now, at the clinic, I check, repair, and install medical equipment.",
+        "When something fails, they call me."
+      ],
+      phon:"in KYU-ba ai-WERKT az an en-ji-NIIR. ai-LERND tu ri-PER.",
+      chips:["worked","learned","check, repair, install","they call me"],
+      why:"Pasado simple: worked, learned. Dos verbos en pasado ya suenan a nivel dos.",
+      fu:{ q:"What was difficult?", qes:"¿Qué fue lo difícil?",
+        lines:["Old machines with no manual.","But I studied them, and I repaired them."] }
     },
     {
       id:"do",
-      q:"What do you do at work?",
-      qes:"¿Qué haces en el trabajo?",
+      q:"What do you do in your current job?",
+      qes:"¿Qué haces en tu trabajo actual?",
       lines:[
-        "I check, repair, and install equipment.",
-        "I work with machines in the clinic.",
-        "It is not an office job.",
-        "It is stressful, but I love it."
+        "I take care of all the medical equipment.",
+        "I check it, I repair it, and I install it.",
+        "When a machine fails, the doctors call me first.",
+        "It is a big responsibility, and I love it."
       ],
-      phon:"ai-CHEK ri-PER and in-STOL i-KWIP-mant.",
-      chips:["check","repair","install","not an office job"],
-      why:"Esto es lo que te contratan a hacer. Di las tres acciones."
+      phon:"ai-teik-KER ov OL the ME-di-kal i-KWIP-mant. res-pon-si-BI-li-tii.",
+      chips:["take care","check","repair","install","responsibility"],
+      why:"Antes decías tres acciones. Ahora las envuelves en una idea: responsibility.",
+      fu:{ q:"Can you give me an example?", qes:"¿Me das un ejemplo?",
+        lines:["Yes. When a monitor fails, I check the power and the cables first.","Then I test it, and I tell the doctor when it is ready."] }
     },
     {
-      id:"why",
-      q:"Why do you want this job?",
-      qes:"¿Por qué quieres este trabajo?",
+      id:"whyhosp",
+      q:"Why do you want to work at this hospital?",
+      qes:"¿Por qué quieres trabajar en este hospital?",
       lines:[
-        "I have experience with hospital equipment.",
-        "I am responsible.",
-        "I like to solve problems.",
-        "I want to grow in my career."
+        "A hospital has more equipment and more technology than my clinic.",
+        "I want to learn and grow.",
+        "I am responsible, and I take safety very seriously.",
+        "My experience can help your team."
       ],
-      phon:"ai-hav ek-SPII-ri-ans with HOS-pi-tal i-KWIP-mant.",
-      chips:["experience","responsible","solve problems"],
-      why:"No digas 'because I need a job'. Di lo que tú aportas."
+      phon:"ai-teik SEIF-tii VE-rii SII-ri-as-lii.",
+      chips:["more technology","grow","safety","your team"],
+      why:"No es 'necesito trabajo'. Es 'yo aporto y quiero crecer'.",
+      fu:{ q:"Why should we hire you?", qes:"¿Por qué deberíamos contratarte?",
+        lines:["Because I solve problems, and I don't stop until the machine works."] }
+    },
+    {
+      id:"leaving",
+      q:"Why are you leaving your clinic?",
+      qes:"¿Por qué dejas tu clínica?",
+      lines:[
+        "I am happy at my clinic, but it is small.",
+        "I want to work with more advanced equipment.",
+        "This hospital is the next step for me."
+      ],
+      phon:"AI-am HA-pii, bat it-iz SMOL. the-NEKST STEP for-MII.",
+      chips:["happy, but","advanced equipment","next step"],
+      why:"Nunca hables mal de tu trabajo actual. Fórmula: feliz + pequeño + siguiente paso.",
+      fu:{ q:"When can you start?", qes:"¿Cuándo puedes empezar?",
+        lines:["I am flexible.","We can talk about the date."] }
+    },
+    {
+      id:"machines",
+      q:"What machines do you know?",
+      qes:"¿Qué máquinas conoces?",
+      lines:[
+        "I work with clinic equipment every day.",
+        "I know electrical systems very well.",
+        "If I don't know a machine, I read the manual and I learn fast.",
+        "I am always careful and safe."
+      ],
+      phon:"if-ai-DOUNT-nou a ma-SHIIN, ai-riid the MAN-yu-al and ai-LERN FAST.",
+      chips:["every day","electrical systems","learn fast","careful"],
+      why:"La respuesta estrella: honestidad + aprendo rápido. Eso contrata.",
+      fu:{ q:"Do you know our brand of monitors?", qes:"¿Conoces nuestra marca de monitores?",
+        lines:["Not yet.","But I can learn it fast, with the manual."] }
+    },
+    {
+      id:"emergency",
+      q:"A machine fails during an emergency. What do you do?",
+      qes:"Una máquina falla durante una emergencia. ¿Qué haces?",
+      lines:[
+        "First, I stay calm and I go fast.",
+        "I check the power and the connections.",
+        "If I can't repair it quickly, I call for support.",
+        "Patient safety is always first."
+      ],
+      phon:"FERST ai-stei-KAAM. PEI-shant SEIF-tii iz OL-weiz FERST.",
+      chips:["stay calm","check the power","call for support","safety first"],
+      why:"First, then, if: la estructura salva. La última línea es oro puro.",
+      fu:{ q:"What if there is no support?", qes:"¿Y si no hay apoyo?",
+        lines:["I tell the doctor immediately.","Communication is also safety."] }
     },
     {
       id:"strengths",
       q:"What are your strengths?",
       qes:"¿Cuáles son tus fortalezas?",
       lines:[
-        "I am an electrical engineer.",
-        "I am careful with safety.",
-        "I can fix problems.",
-        "I work hard."
+        "I am careful, and safety is my priority.",
+        "I solve problems with calm.",
+        "I don't stop until the machine works.",
+        "And I am honest: if I don't know something, I say it, and I learn it."
       ],
-      phon:"ai-am KEIR-ful with SEIF-tii. ai-kan-FIKS PRO-blems.",
-      chips:["engineer","safety","fix","work hard"],
-      why:"Fortalezas concretas, no adjetivos vacíos."
-    },
-    {
-      id:"problem",
-      q:"Tell me about a problem at work.",
-      qes:"Cuéntame un problema en el trabajo.",
-      lines:[
-        "Sometimes a machine does not work.",
-        "I check the problem.",
-        "I repair it.",
-        "Then the doctors can use it again."
-      ],
-      phon:"SAM-taimz a ma-SHIIN daz-not-WERK. ai-CHEK. ai-ri-PER-it.",
-      chips:["machine","check","repair","doctors"],
-      why:"Problema, acción, resultado. Tres pasos. Suficiente para A1."
+      phon:"ai-SOLV PRO-blems with KAAM. ai-am O-nest.",
+      chips:["careful","calm","don't stop","honest"],
+      why:"Cuatro fortalezas con hechos, no adjetivos vacíos.",
+      fu:{ q:"And what is your weakness?", qes:"¿Y tu debilidad?",
+        lines:["My English is not perfect yet.","But I study every week, and I improve every month."] }
     },
     {
       id:"schedule",
-      q:"What is your schedule?",
-      qes:"¿Cuál es tu horario?",
+      q:"What is your availability?",
+      qes:"¿Cuál es tu disponibilidad?",
       lines:[
-        "On weekdays I start around 7:00 am.",
-        "I get home around 5:00.",
-        "On Saturdays I work from 9:00 to 2:00.",
-        "I get up around 6:00 am."
+        "Now I work on weekdays from 7 to 5, and on Saturdays from 9 to 2.",
+        "For this job, I am flexible.",
+        "We can talk about the schedule."
       ],
-      phon:"on-WEEK-deiz ai-start a-RAUND SE-ven. ai-get-HOUM a-RAUND faiv.",
-      chips:["on weekdays","get home","on Saturdays","around"],
-      why:"Tus trampas de siempre: on Saturdays, get home, around (no around at)."
-    },
-    {
-      id:"english",
-      q:"How is your English?",
-      qes:"¿Cómo está tu inglés?",
-      lines:[
-        "I am studying English every week.",
-        "I understand more and more.",
-        "I can do this job.",
-        "Please speak slowly, and I will answer clearly."
-      ],
-      phon:"ai-am STA-dii-ing ING-glish EV-rii WEEK. ai-kan-DU this-JOB.",
-      chips:["studying","I can do this job","speak slowly"],
-      why:"El inglés no es un secreto. Es honestidad + capacidad. Eso se respeta."
+      phon:"on-WEEK-deiz. on-SA-tur-deiz. ai-am FLEK-si-bal.",
+      chips:["on weekdays","on Saturdays","flexible","schedule"],
+      why:"Tus trampas de siempre (on, around) más la palabra mágica: flexible.",
+      fu:{ q:"Can you work at night?", qes:"¿Puedes trabajar de noche?",
+        lines:["If it is necessary, yes.","We can talk about it."] }
     },
     {
       id:"ask",
       q:"Do you have any questions for us?",
-      qes:"¿Tienes alguna pregunta para nosotros?",
+      qes:"¿Tienes preguntas para nosotros?",
       lines:[
-        "What equipment do you use here?",
-        "What is a typical day in this job?"
+        "Yes, I have two questions.",
+        "What equipment does the hospital use?",
+        "How big is the maintenance team?",
+        "Thank you for your time."
       ],
-      phon:"wat i-KWIP-mant du-yu-YUZ hiir. wat-iz a TI-pi-kal DEI.",
-      chips:["equipment","typical day"],
-      why:"Siempre pregunta algo. Silencio al final parece desinterés."
+      phon:"hau-BIG iz the MEIN-ta-nans TIIM. THANK-yu for yor-TAIM.",
+      chips:["two questions","equipment","maintenance team","thank you"],
+      why:"Preguntar = interés. Y cierras con gracias. Final fuerte.",
+      fu:null
     }
   ];
 
   const LIFELINES = [
-    {
-      en:"Could you repeat that, please?",
-      es:"¿Puede repetir, por favor?",
-      phon:"ku-yu-ri-PIIT-that-pliiz",
-      when:"No entendiste la pregunta."
-    },
-    {
-      en:"Could you speak more slowly, please?",
-      es:"¿Puede hablar más despacio, por favor?",
-      phon:"ku-yu-spiik-mor-SLOU-lii-pliiz",
-      when:"Habla demasiado rápido."
-    },
-    {
-      en:"That's a good question. Let me think.",
-      es:"Buena pregunta. Déjeme pensar.",
-      phon:"thats-a-gud KWES-chan. let-mii-THINK.",
-      when:"Te quedaste en blanco. Di esto primero. Luego tu respuesta."
-    },
-    {
-      en:"Sorry, I don't know that word.",
-      es:"Perdón, no conozco esa palabra.",
-      phon:"SO-rii ai-dount-nou that-WERD",
-      when:"Una palabra te bloqueó."
-    },
-    {
-      en:"I am studying English. I can do this job.",
-      es:"Estoy estudiando inglés. Puedo hacer este trabajo.",
-      phon:"ai-am STA-dii-ing ING-glish. ai-kan-DU this-JOB.",
-      when:"Preguntan por tu inglés o te sientes juzgado."
-    },
-    {
-      en:"Can you say that in a simpler way?",
-      es:"¿Lo puede decir más simple?",
-      phon:"kan-yu-SEI that in a SIM-pler WEI",
-      when:"La pregunta es larga o difícil."
-    }
+    { en:"Could you repeat that, please?", es:"¿Puede repetir, por favor?",
+      phon:"ku-yu-ri-PIIT-that-PLIIZ", when:"No entendiste la pregunta." },
+    { en:"Could you speak more slowly, please?", es:"¿Puede hablar más despacio, por favor?",
+      phon:"ku-yu-SPIIK mor SLOU-lii PLIIZ", when:"Habla demasiado rápido." },
+    { en:"That's a good question. Let me think.", es:"Buena pregunta. Déjeme pensar.",
+      phon:"thats-a-GUD KWES-chan. let-mii-THINK.", when:"Te quedaste en blanco. Di esto primero. Luego tu respuesta." },
+    { en:"Sorry, I don't know that word.", es:"Perdón, no conozco esa palabra.",
+      phon:"SO-rii ai-DOUNT-nou that-WERD", when:"Una palabra te bloqueó." },
+    { en:"Let me give you an example.", es:"Déjeme darle un ejemplo.",
+      phon:"let-mii-GIV-yu an eg-ZAM-pal", when:"Tu respuesta quedó corta. Un ejemplo siempre suma. Frase de profesional." },
+    { en:"I don't know that machine yet, but I can learn it fast.", es:"No conozco esa máquina todavía, pero la aprendo rápido.",
+      phon:"nat-YET, bat ai-kan-LERN-it FAST", when:"Te preguntan por algo que no conoces. Honestidad + velocidad. Eso contrata." },
+    { en:"I am studying English. I can do this job.", es:"Estoy estudiando inglés. Puedo hacer este trabajo.",
+      phon:"ai-am STA-dii-ing ING-glish. ai-kan-DU this-JOB.", when:"Preguntan por tu inglés o te sientes juzgado." },
+    { en:"Can you say that in a simpler way?", es:"¿Lo puede decir más simple?",
+      phon:"kan-yu-SEI that in a SIM-pler WEI", when:"La pregunta es larga o difícil." }
   ];
 
   const TRAPS = [
-    {
-      wrong:"I work at private clinical.",
-      right:"I work at a private clinic.",
-      why:"Falta a. Clinic es el lugar. Clinical es adjetivo."
-    },
-    {
-      wrong:"I am electrical engineer.",
-      right:"I am an electrical engineer.",
-      why:"Profesión con a o an. Engineer empieza por vocal: an."
-    },
-    {
-      wrong:"I have 53 years.",
-      right:"I am 53 years old.",
-      why:"En inglés la edad es I am, no I have."
-    },
-    {
-      wrong:"I work the Saturday.",
-      right:"I work on Saturdays.",
-      why:"Días: on. El sábado de hábito es on Saturdays."
-    },
-    {
-      wrong:"The weekday I get up around at 6.",
-      right:"On weekdays I get up around 6.",
-      why:"On weekdays. Elige around o at, nunca las dos."
-    },
-    {
-      wrong:"I get at home about at 5.",
-      right:"I get home around 5.",
-      why:"get home no lleva preposición. Una sola palabra de tiempo."
-    },
-    {
-      wrong:"My work isn't officer work.",
-      right:"My job isn't an office job.",
-      why:"job = tu puesto. office = oficina. officer = oficial."
-    },
-    {
-      wrong:"I check the machines the weekday.",
-      right:"I check the machines on weekdays.",
-      why:"Misma trampa: on weekdays."
-    }
+    { wrong:"I have 53 years.", right:"I am 53 years old.",
+      why:"La edad es I am, no I have. Tu clásico número uno." },
+    { wrong:"I am electrical engineer.", right:"I am an electrical engineer.",
+      why:"Profesión con a o an. Engineer empieza por vocal: an." },
+    { wrong:"I can work the Saturdays.", right:"I can work on Saturdays.",
+      why:"Días con on. on Saturdays." },
+    { wrong:"I get at home around at 5.", right:"I get home around 5.",
+      why:"get home sin preposición. Y una sola palabra de tiempo: around o at." },
+    { wrong:"The machine don't work.", right:"The machine doesn't work.",
+      why:"La máquina es it. Tercera persona: doesn't." },
+    { wrong:"My work isn't officer work.", right:"My job isn't an office job.",
+      why:"job = puesto. office = oficina. officer = policía." },
+    { wrong:"I start to work around at 7.", right:"I start work around 7.",
+      why:"Elige around o at, nunca las dos juntas." },
+    { wrong:"I am agree with the doctor.", right:"I agree with the doctor.",
+      why:"agree ya es verbo. Sin am. Error clásico del español." },
+    { wrong:"I want explain my experience.", right:"I want to explain my experience.",
+      why:"want + to + verbo. Siempre." },
+    { wrong:"Is a big hospital.", right:"It is a big hospital.",
+      why:"El inglés no esconde el sujeto. It is." },
+    { wrong:"I no understand the question.", right:"I don't understand the question.",
+      why:"La negación es con don't, no con no." },
+    { wrong:"The peoples at the hospital are good.", right:"The people at the hospital are good.",
+      why:"people ya es plural. Nunca peoples." }
   ];
 
-  const CURVE = [
-    { q:"Are you an engineer?", qes:"¿Eres ingeniero?", bank:"about", hint:"Di quién eres en una oración." },
-    { q:"Can you work on Saturdays?", qes:"¿Puedes trabajar los sábados?", bank:"schedule", hint:"Usa on Saturdays." },
-    { q:"Is this an office job?", qes:"¿Este es un trabajo de oficina?", bank:"do", hint:"It is not an office job." },
-    { q:"Why should we hire you?", qes:"¿Por qué deberíamos contratarte?", bank:"strengths", hint:"Ingeniero + seguridad + problemas." },
-    { q:"Where are you from?", qes:"¿De dónde eres?", bank:"about", hint:"I am from Cuba." },
-    { q:"What time do you start?", qes:"¿A qué hora empiezas?", bank:"schedule", hint:"around 7:00, no around at." }
+  const VOCAB = [
+    { w:"equipment", es:"el equipo", syls:["i","KWIP","mant"], note:"Nunca digas equipments. No tiene plural." },
+    { w:"maintenance", es:"el mantenimiento", syls:["MEIN","ta","nans"], note:"La fuerza al inicio: MEIN. No man-te-NANS." },
+    { w:"monitor", es:"el monitor", syls:["MO","ni","tor"], note:"En inglés la fuerza va al inicio: MO." },
+    { w:"emergency", es:"la emergencia", syls:["i","MER","jan","sii"], note:"La fuerza en MER." },
+    { w:"battery", es:"la batería", syls:["BA","ta","rii"], note:"Tres sílabas rápidas, fuerza en BA." },
+    { w:"safety", es:"la seguridad", syls:["SEIF","tii"], note:"Dos sílabas. La palabra que más vas a decir." },
+    { w:"repair", es:"reparar", syls:["ri","PER"], note:"La fuerza al final: PER." },
+    { w:"power", es:"la corriente", syls:["PAU","er"], note:"Lo primero que revisas cuando algo falla." },
+    { w:"schedule", es:"el horario", syls:["SKE","jul"], note:"Suena SKE-jul. Nada de es-che-du-le." },
+    { w:"X-ray machine", es:"la máquina de rayos X", syls:["EKS","rei","ma","SHIIN"], note:"Dos fuerzas: EKS y SHIIN." }
+  ];
+
+  const PERSONAS = [
+    { id:"sofia", name:"Sofía", role:"Recursos Humanos", init:"S", rate:0.88, fuChance:0.34, n:6,
+      desc:"Amable y clara. Tu calentamiento. Preguntas base, pocas sorpresas." },
+    { id:"director", name:"El Director", role:"Director del hospital", init:"D", rate:1.0, fuChance:0.6, n:7,
+      desc:"Rápido y directo. No repite mucho. Contesta corto y con calma." },
+    { id:"ingeniera", name:"La Ingeniera Jefa", role:"Jefa de mantenimiento", init:"I", rate:0.94, fuChance:1.0, n:8,
+      desc:"Técnica. Siempre pregunta algo más. El reto final." }
   ];
 
   const speakerSVG = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="M19 5a9 9 0 0 1 0 14"/><path d="M15.5 8.5a4 4 0 0 1 0 7"/></svg>';
@@ -361,7 +412,13 @@
   function speakLines(lines, rate){ speak(lines.join(" "), rate); }
 
   function load(){
-    try{ return JSON.parse(localStorage.getItem(KEY)) || {}; }catch(e){ return {}; }
+    try{
+      const v2 = JSON.parse(localStorage.getItem(KEY));
+      if(v2) return v2;
+      const v1 = JSON.parse(localStorage.getItem(OLDKEY));
+      if(v1) return { days: v1.days||[], interviews: v1.interviews||0, ready:{}, life:{}, won:{} };
+      return {};
+    }catch(e){ return {}; }
   }
   function save(data){ try{ localStorage.setItem(KEY, JSON.stringify(data)); }catch(e){} }
   function state(){
@@ -369,6 +426,7 @@
     if(!s.ready) s.ready = {};
     if(!s.life) s.life = {};
     if(!s.days) s.days = [];
+    if(!s.won) s.won = {};
     if(!s.interviews) s.interviews = 0;
     return s;
   }
@@ -391,11 +449,13 @@
     return n;
   }
   function readyCount(){ return BANK.filter(b=>state().ready[b.id]).length; }
+  function wonCount(){ const w=state().won; return PERSONAS.filter(p=>w[p.id]).length; }
 
   function esc(s){ return (s==null?"":""+s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
   function archHTML(s){ return (s||"").split("-").map(p=> p===p.toUpperCase() && /[A-Z]/.test(p) ? "<b>"+esc(p)+"</b>" : esc(p)).join("-"); }
   const app=document.getElementById("app");
   function el(html){ const d=document.createElement("div"); d.innerHTML=html.trim(); return d.firstChild; }
+  function shuffle(a){ a=a.slice(); for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
 
   function shell(backLabel, backFn, pct, count, inner){
     let html='<div class="ptop"><button class="pback" id="pb">‹ '+esc(backLabel)+'</button>';
@@ -411,20 +471,22 @@
     const sc=streakCount();
     const ready=readyCount();
     const pct=Math.round(ready/BANK.length*100);
+    const won=state().won;
     let html='<a class="pback" href="../" style="display:inline-block;margin-bottom:8px;text-decoration:none">‹ Tu página</a>';
     html+='<div class="hello">Hola <span class="nm">'+esc(NAME)+'</span></div>';
-    html+='<div class="sub">El miedo a la entrevista se va cuando las respuestas ya están en la boca. Ocho respuestas. Las mismas. Hasta que sean aburridas.</div>';
+    html+='<div class="sub">Nivel 2. Ya no es tu clínica: hoy te entrevista un hospital. Preguntas nuevas, respuestas más fuertes, y tres entrevistadores distintos.</div>';
     if(sc>0) html+='<div class="streak">'+flameSVG+'<span class="num">'+sc+'</span><span class="lab">'+(sc===1?"día seguido":"días seguidos")+'</span></div>';
-    html+='<div class="muscle"><div class="lab">Músculo de entrevista</div><div class="row"><div class="big">'+ready+' / '+BANK.length+'</div><div class="hint">respuestas listas</div></div><div class="bar"><i style="width:'+pct+'%"></i></div><div class="hint">Listo = las puedes decir sin mirar. Reusa esto cada semana.</div></div>';
-
+    html+='<div class="muscle"><div class="lab">Músculo de entrevista</div><div class="row"><div class="big">'+ready+' / '+BANK.length+'</div><div class="hint">respuestas listas</div></div><div class="bar"><i style="width:'+pct+'%"></i></div>';
+    html+='<div class="bosses">'+PERSONAS.map(p=>'<div class="boss'+(won[p.id]?' won':'')+'">'+esc(p.init)+'</div>').join("")+'<div class="lab">'+(wonCount()===3?'Convenciste a los tres. Contratado.':'Convence a los tres entrevistadores.')+'</div></div></div>';
     html+='<div class="tracks-label">El gimnasio</div>';
     app.innerHTML=html;
 
     const rooms=[
-      { title:"1. Mis 8 respuestas", note:"Escucha. Repite. Tápate. El corazón del ejercicio.", go:renderBankList, count:ready+" listas" },
-      { title:"2. Frases de rescate", note:"Qué decir cuando te quedas en blanco. Más importante que la gramática.", go:renderLifelines, count:LIFELINES.length },
-      { title:"3. Trampas de entrevista", note:"Tus errores reales, ahora en frases de entrevista.", go:()=>startTraps(), count:TRAPS.length },
-      { title:"4. La entrevista", note:"Simulacro. El entrevistador pregunta. Tú hablas. Si te congelas, hay rescate.", go:()=>startInterview(), count:(state().interviews||0)+" hechas" }
+      { title:"1. Mis 10 respuestas", note:"Escucha. Repite. Tápate. Ahora con pasado, con because, y con preguntas de seguimiento.", go:renderBankList, count:ready+" listas" },
+      { title:"2. Palabras del hospital", note:"Diez palabras que vas a oír en la entrevista. Toca la sílaba fuerte.", go:renderVocab, count:VOCAB.length },
+      { title:"3. Frases de rescate", note:"Ocho anclas. Dos nuevas de profesional: el ejemplo y la máquina que no conoces.", go:renderLifelines, count:LIFELINES.length },
+      { title:"4. Trampas de entrevista", note:"Tus errores reales más los clásicos del español, en frases de entrevista.", go:()=>startTraps(), count:TRAPS.length },
+      { title:"5. La entrevista", note:"Elige quién te entrevista: Sofía, El Director o La Ingeniera Jefa. Cada uno es distinto.", go:renderPersonas, count:(state().interviews||0)+" hechas" }
     ];
     rooms.forEach(r=>{
       const card=el('<button class="track"><div class="track-head"><div class="track-title">'+esc(r.title)+'</div><div class="track-count">'+esc(""+r.count)+'</div></div><div class="track-note">'+esc(r.note)+'</div></button>');
@@ -432,28 +494,29 @@
       app.appendChild(card);
     });
 
-    const teach=el('<details class="teacher"><summary>Notas para Gabriel · cómo usarlo en clase</summary><div class="body">El miedo de Ruben no es el inglés. Es el segundo vacío: traducir 20 años de ingeniería en tres segundos. La cura es un banco de 8 respuestas a su nivel, dichas hasta el aburrimiento. Aburrido = el miedo se fue.<ol><li>Calentamiento (3 min): una frase de rescate en voz alta. Hoy: <i>That\'s a good question. Let me think.</i></li><li>Banco (12 min): dos respuestas. Escucha, línea por línea, luego tápate. Sin español.</li><li>Simulacro (10 min): tú eres RR.HH. de un hospital. 4 preguntas. Si se congela, primero la frase de rescate, después la respuesta. Nunca saltar al español.</li><li>Follow-up: <i>Can you give me an example?</i> Lo obliga a flexionar el banco, no a recitar.</li><li>Un error vivo, una corrección, de vuelta al inglés.</li><li>Tarea: las 8 en modo tápate, una vez, en la tablet.</li></ol>Nivel A1+. Oraciones cortas. Presente simple. Honestidad sobre el inglés como fortaleza, no como secreto. Recicla on Saturdays, get home, a private clinic, an electrical engineer, job / office.</div></details>');
+    const teach=el('<details class="teacher"><summary>Notas para Gabriel · plan de clase v2</summary><div class="body">El salto de v1 a v2: de recitar a flexionar. Las preguntas de seguimiento (follow-ups) son el corazón: lo obligan a moverse dentro del banco.<ol><li>Calentamiento (3 min): Palabras del hospital, una ronda de sílaba fuerte. Ríanse de maintenance.</li><li>Banco (10 min): dos respuestas nuevas (sugerencia: experience por el pasado, y machines por la honestidad). Escucha, línea por línea, tápate.</li><li>Simulacro (12 min): primera vez con Sofía. Segunda clase: El Director. Cuando gane con los tres, celebración.</li><li>En el simulacro tú callas. La app pregunta, él contesta. Tú solo anotas un error vivo para el final.</li><li>Regla de oro sin cambios: congelado = frase de rescate primero, respuesta después. Nunca español.</li><li>Tarea: una entrevista con Sofía en la tablet, y las dos respuestas nuevas en modo tápate.</li></ol>Nivel A1+ empujando a A2: pasado simple (worked, learned), because y but, if + presente. Oraciones cortas siempre. Sin años exactos de experiencia ni fechas de inicio: la app dice many years y I am flexible a propósito, hasta confirmar con Ruben.</div></details>');
     app.appendChild(teach);
-    app.appendChild(el('<div class="credit">ARCHES · Ruben · La Entrevista · v2026-08-20</div>'));
+    app.appendChild(el('<div class="credit">ARCHES · Ruben · La Entrevista · v2 · 2026-08-25</div>'));
   }
 
   function renderBankList(){
-    shell("Inicio", renderHome, null, null, '<div class="kicker">Paso 1</div><div class="q-en" style="font-size:32px;margin-bottom:8px">Mis 8 respuestas</div><div class="sub" style="margin:0 0 16px">Las mismas ocho. Cada vez. Cuando te las sabes sin mirar, la entrevista deja de ser un examen.</div>');
+    shell("Inicio", renderHome, null, null, '<div class="kicker">Paso 1</div><div class="q-en" style="font-size:32px;margin-bottom:8px">Mis 10 respuestas</div><div class="sub" style="margin:0 0 16px">Las mismas diez, hasta que sean aburridas. Las que tienen flecha ↳ esconden una pregunta de seguimiento.</div>');
     BANK.forEach(b=>{
       const ok=!!state().ready[b.id];
-      const card=el('<button class="track"><div class="track-head"><div class="track-title" style="font-size:20px">'+esc(b.q)+'</div><div class="track-count">'+(ok?'<span class="ready">lista</span>':'practicar')+'</div></div><div class="track-note">'+esc(b.qes)+'</div></button>');
+      const card=el('<button class="track"><div class="track-head"><div class="track-title" style="font-size:20px">'+esc(b.q)+'</div><div class="track-count">'+(ok?'<span class="ready">lista</span>':'practicar')+'</div></div><div class="track-note">'+esc(b.qes)+(b.fu?' · ↳ '+esc(b.fu.q):'')+'</div></button>');
       card.onclick=()=>openBank(b, 1);
       app.appendChild(card);
     });
   }
 
   function openBank(b, step){
-    const total=3;
+    const total=b.fu?4:3;
     const pct=Math.round((step-1)/total*100);
     const count=step+" / "+total;
     if(step===1) return bankListen(b, pct, count);
     if(step===2) return bankShadow(b, pct, count);
-    return bankHide(b, pct, count);
+    if(step===3) return bankHide(b, pct, count);
+    return bankFollowUp(b, pct, count);
   }
 
   function bankListen(b, pct, count){
@@ -498,7 +561,7 @@
 
   function bankHide(b, pct, count){
     let revealed=false;
-    shell("Respuestas", renderBankList, Math.min(92,pct+30), count,
+    shell("Respuestas", renderBankList, pct, count,
       '<div class="kicker">Tápate</div><div class="card">'+
       '<div class="q-en">'+esc(b.q)+'</div>'+
       '<div class="q-es">'+esc(b.qes)+'</div>'+
@@ -518,13 +581,97 @@
     };
     document.getElementById("ready").onclick=()=>{
       const s=state(); s.ready[b.id]=true; save(s); markDay();
-      renderBankList();
+      if(b.fu) openBank(b, 4); else renderBankList();
     };
+  }
+
+  function bankFollowUp(b, pct, count){
+    const fu=b.fu;
+    let revealed=false;
+    shell("Respuestas", renderBankList, pct, count,
+      '<div class="kicker">La pregunta escondida</div>'+
+      '<div class="stage"><div class="fu-tag">Seguimiento</div><div class="q">'+esc(fu.q)+'</div><div class="qes">'+esc(fu.qes)+'</div></div>'+
+      '<div class="card">'+
+      '<div class="hint">El entrevistador no se queda con tu primera respuesta. Contesta esto en voz alta, corto. Luego destapa.</div>'+
+      '<div id="hidden"></div>'+
+      '<button class="speaker" id="hearq">'+speakerSVG+'Oír la pregunta</button>'+
+      '<button class="btn btn-primary" id="go">Ya contesté · destapar</button>'+
+      '<div class="row2"><button class="btn btn-ghost full" id="done">Listo · volver a la lista</button></div></div>');
+    document.getElementById("hearq").onclick=()=>speak(fu.q);
+    document.getElementById("go").onclick=()=>{
+      if(!revealed){
+        revealed=true;
+        document.getElementById("hidden").innerHTML='<div class="fb ok">Modelo:<span class="ans">'+esc(fu.lines.join(" "))+'</span></div>';
+        speakLines(fu.lines);
+        document.getElementById("go").textContent="Oír el modelo otra vez";
+      } else speakLines(fu.lines);
+    };
+    document.getElementById("done").onclick=renderBankList;
+    setTimeout(()=>speak(fu.q), 260);
+  }
+
+  function renderVocab(){
+    shell("Inicio", renderHome, null, null,
+      '<div class="kicker">Paso 2</div><div class="q-en" style="font-size:32px;margin-bottom:8px">Palabras del hospital</div><div class="sub" style="margin:0 0 16px">Toca una palabra para oírla. Cuando estés listo, juega: ¿dónde está la sílaba fuerte?</div>');
+    VOCAB.forEach(v=>{
+      const card=el('<button class="life"><div class="en">'+esc(v.w)+'</div><div class="arch" style="margin-top:6px">'+archHTML(v.syls.join("-"))+'</div><div class="es">'+esc(v.es)+'</div>'+(v.note?'<div class="when">'+esc(v.note)+'</div>':'')+'</button>');
+      card.onclick=()=>speak(v.w);
+      app.appendChild(card);
+    });
+    const drill=el('<button class="btn btn-primary" style="margin-top:8px">Jugar · la sílaba fuerte</button>');
+    drill.onclick=()=>{ const q=shuffle(VOCAB).slice(0,5); stressGame(q, 0, 0); };
+    app.appendChild(drill);
+  }
+
+  function stressGame(queue, qi, score){
+    if(qi>=queue.length){
+      shell("Palabras", renderVocab, 100, "fin",
+        '<div class="done"><h2>'+(score>=4?"Oído de ingeniero.":"El oído se entrena. Otra ronda.")+'</h2><div class="score">'+score+'/'+queue.length+'</div><p>La sílaba fuerte es la mitad de la pronunciación. Si golpeas la correcta, te entienden aunque el resto falle.</p>'+
+        '<button class="btn btn-primary" id="again">Otra ronda</button>'+
+        '<div class="row2"><button class="btn btn-ghost full" id="home">Volver</button></div></div>');
+      document.getElementById("again").onclick=()=>{ const q=shuffle(VOCAB).slice(0,5); stressGame(q, 0, 0); };
+      document.getElementById("home").onclick=renderVocab;
+      markDay();
+      return;
+    }
+    const v=queue[qi];
+    let locked=false;
+    shell("Palabras", renderVocab, Math.round(qi/queue.length*100), (qi+1)+" / "+queue.length,
+      '<div class="kicker">¿Dónde golpea la voz?</div><div class="card">'+
+      '<div class="q-en">'+esc(v.w)+'</div>'+
+      '<div class="q-es">'+esc(v.es)+'</div>'+
+      '<div class="hint">Escucha y toca la sílaba fuerte.</div>'+
+      '<div class="syls" id="syls"></div>'+
+      '<button class="speaker" id="play">'+speakerSVG+'Oír otra vez</button>'+
+      '<div id="fb"></div></div>');
+    document.getElementById("play").onclick=()=>speak(v.w);
+    const box=document.getElementById("syls");
+    v.syls.forEach(syl=>{
+      const isStrong = syl===syl.toUpperCase() && /[A-Z]/.test(syl);
+      const b=el('<button class="syl">'+esc(syl.toLowerCase())+'</button>');
+      b.onclick=()=>{
+        if(locked) return; locked=true;
+        b.className="syl "+(isStrong?"ok":"no");
+        if(!isStrong){
+          Array.from(box.children).forEach((c,i)=>{
+            const s=v.syls[i];
+            if(s===s.toUpperCase() && /[A-Z]/.test(s)) c.className="syl ok";
+          });
+        }
+        document.getElementById("fb").innerHTML='<div class="fb '+(isStrong?'ok':'no')+'">'+(isStrong?'Eso es. ':'Casi. ')+'<span class="ans">'+archHTML(v.syls.join("-"))+'</span>'+(v.note?'<span class="why">'+esc(v.note)+'</span>':'')+'</div>';
+        speak(v.w);
+        const next=el('<button class="btn btn-primary">Siguiente</button>');
+        next.onclick=()=>stressGame(queue, qi+1, score+(isStrong?1:0));
+        document.getElementById("fb").appendChild(next);
+      };
+      box.appendChild(b);
+    });
+    setTimeout(()=>speak(v.w), 300);
   }
 
   function renderLifelines(){
     shell("Inicio", renderHome, null, null,
-      '<div class="kicker">Paso 2</div><div class="q-en" style="font-size:32px;margin-bottom:8px">Frases de rescate</div><div class="sub" style="margin:0 0 16px">Cuando el cerebro se vacía, no improvises. Di una de estas. Ganas tres segundos. Eso basta.</div>');
+      '<div class="kicker">Paso 3</div><div class="q-en" style="font-size:32px;margin-bottom:8px">Frases de rescate</div><div class="sub" style="margin:0 0 16px">Cuando el cerebro se vacía, no improvises. Di una de estas. Las dos nuevas son frases de profesional.</div>');
     LIFELINES.forEach((L,idx)=>{
       const card=el('<button class="life"><div class="en">'+esc(L.en)+'</div><div class="arch" style="margin-top:6px">'+archHTML(L.phon)+'</div><div class="es">'+esc(L.es)+'</div><div class="when">Úsala cuando: '+esc(L.when)+'</div></button>');
       card.onclick=()=>{
@@ -533,7 +680,7 @@
       };
       app.appendChild(card);
     });
-    const drill=el('<button class="btn btn-primary" style="margin-top:8px">Ensayar las 6 seguidas</button>');
+    const drill=el('<button class="btn btn-primary" style="margin-top:8px">Ensayar las 8 seguidas</button>');
     drill.onclick=()=>drillLifelines(0);
     app.appendChild(drill);
   }
@@ -541,7 +688,7 @@
   function drillLifelines(i){
     if(i>=LIFELINES.length){
       shell("Rescate", renderLifelines, 100, "listo",
-        '<div class="done"><h2>Seis anclas</h2><p>En la entrevista real, la número 3 es oro: That\'s a good question. Let me think.</p><button class="btn btn-primary" id="home">Volver</button></div>');
+        '<div class="done"><h2>Ocho anclas</h2><p>En la entrevista real, dos son oro: That\'s a good question, y la de la máquina que no conoces todavía.</p><button class="btn btn-primary" id="home">Volver</button></div>');
       document.getElementById("home").onclick=renderLifelines;
       return;
     }
@@ -565,8 +712,7 @@
   }
 
   function startTraps(){
-    const queue=TRAPS.map((t,i)=>({t,i}));
-    for(let i=queue.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [queue[i],queue[j]]=[queue[j],queue[i]]; }
+    const queue=shuffle(TRAPS.map((t,i)=>({t,i})));
     runTrap(queue, 0, 0);
   }
   function runTrap(queue, qi, score){
@@ -577,6 +723,7 @@
         '<div class="row2"><button class="btn btn-ghost full" id="home">Inicio</button></div></div>');
       document.getElementById("again").onclick=startTraps;
       document.getElementById("home").onclick=renderHome;
+      markDay();
       return;
     }
     const {t}=queue[qi];
@@ -606,60 +753,61 @@
       box.appendChild(b);
     });
   }
-  function shuffle(a){ a=a.slice(); for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
 
-  function startInterview(){
-    const core=shuffle(BANK).slice(0,6).map(b=>({kind:"bank", b}));
-    const extra=shuffle(CURVE).slice(0,2).map(c=>({kind:"curve", c, b: BANK.find(x=>x.id===c.bank)}));
-    const queue=shuffle(core.concat(extra));
-    runInterview(queue, 0, {good:0, mid:0, freeze:0});
+  function renderPersonas(){
+    const won=state().won;
+    shell("Inicio", renderHome, null, null,
+      '<div class="kicker">Paso 5</div><div class="q-en" style="font-size:32px;margin-bottom:8px">¿Quién te entrevista hoy?</div><div class="sub" style="margin:0 0 16px">Cada entrevistador habla distinto y pregunta distinto. Gana con los tres.</div>');
+    PERSONAS.forEach(p=>{
+      const w=!!won[p.id];
+      const card=el('<button class="persona'+(w?' won':'')+'"><div class="avatar">'+esc(p.init)+'</div><div><div class="pn">'+esc(p.name)+'</div><div class="pr">'+esc(p.role)+'</div><div class="pd">'+esc(p.desc)+'</div>'+(w?'<div class="pw">Ya lo convenciste. Puedes repetir.</div>':'')+'</div></button>');
+      card.onclick=()=>startInterview(p);
+      app.appendChild(card);
+    });
+    const rnd=el('<button class="btn btn-primary" style="margin-top:8px">Sorpréndeme</button>');
+    rnd.onclick=()=>startInterview(PERSONAS[Math.floor(Math.random()*PERSONAS.length)]);
+    app.appendChild(rnd);
   }
 
-  function runInterview(queue, qi, score){
-    if(qi>=queue.length){
-      const s=state(); s.interviews=(s.interviews||0)+1; save(s); markDay();
-      const total=queue.length;
-      const muscle=score.good;
-      shell("Inicio", renderHome, 100, "fin",
-        '<div class="done"><h2>'+(muscle>=6?"Ya no es miedo. Es práctica.":(muscle>=3?"Vas. Otra ronda.":"Bien. El hielo se rompe así."))+'</h2>'+
-        '<div class="score">'+muscle+'/'+total+'</div>'+
-        '<p>Bien dichas: '+score.good+' · Más o menos: '+score.mid+' · En blanco: '+score.freeze+'</p>'+
-        '<p>El número que importa: cuántas puedes decir sin mirar. Vuelve mañana a las que congelaron.</p>'+
-        '<button class="btn btn-primary" id="again">Otra entrevista</button>'+
-        '<div class="row2"><button class="btn btn-ghost full" id="home">Inicio</button></div></div>');
-      document.getElementById("again").onclick=startInterview;
-      document.getElementById("home").onclick=renderHome;
-      return;
+  function startInterview(p){
+    const queue=shuffle(BANK).slice(0, p.n).map(b=>({b}));
+    runInterview(p, queue, 0, {good:0, mid:0, freeze:0, fuGood:0, fuTotal:0});
+  }
+
+  function runInterview(p, queue, qi, score){
+    if(qi>=queue.length) return finishInterview(p, queue.length, score);
+    const b=queue[qi].b;
+
+    function stageHTML(q, qes, isFu){
+      return '<div class="stage"><div class="who"><div class="avatar">'+esc(p.init)+'</div><div><div class="wname">'+esc(p.name)+'</div><div class="wrole">'+esc(p.role)+'</div></div></div>'+
+        (isFu?'<div><span class="fu-tag">No se conforma · seguimiento</span></div>':'')+
+        '<div class="q">'+esc(q)+'</div><div class="qes">'+esc(qes)+'</div></div>';
     }
-    const item=queue[qi];
-    const b=item.b;
-    const q = item.kind==="curve" ? item.c.q : b.q;
-    const qes = item.kind==="curve" ? item.c.qes : b.qes;
-    const hint = item.kind==="curve" ? item.c.hint : "Tres o cuatro oraciones. Luego para.";
+    const pctOf=(x)=>Math.round(x/queue.length*100);
 
     function ask(){
-      shell("Inicio", renderHome, Math.round(qi/queue.length*100), (qi+1)+" / "+queue.length,
-        '<div class="stage"><div class="who">Entrevistador · clínica</div><div class="q">'+esc(q)+'</div><div class="qes">'+esc(qes)+'</div></div>'+
+      shell("Salir", renderPersonas, pctOf(qi), (qi+1)+" / "+queue.length,
+        stageHTML(b.q, b.qes, false)+
         '<div class="card">'+
         '<div class="breathe" id="br"></div>'+
         '<div class="breathe-lab">Respira · luego habla</div>'+
-        '<div class="hint" style="text-align:center">'+esc(hint)+'</div>'+
+        '<div class="hint" style="text-align:center">Tres o cuatro oraciones. Luego para.</div>'+
         '<button class="speaker" id="hearq">'+speakerSVG+'Oír la pregunta otra vez</button>'+
         '<button class="btn btn-primary" id="spoke">Ya contesté</button>'+
         '<div class="row2">'+
           '<button class="btn btn-danger" id="freeze">Me quedé en blanco</button>'+
           '<button class="btn btn-ghost" id="life">Frase de rescate</button>'+
         '</div></div>');
-      document.getElementById("hearq").onclick=()=>speak(q);
+      document.getElementById("hearq").onclick=()=>speak(b.q, p.rate);
       document.getElementById("spoke").onclick=()=>reveal("spoke");
-      document.getElementById("freeze").onclick=()=>freezeFlow();
-      document.getElementById("life").onclick=()=>lifeFlow();
-      setTimeout(()=>speak(q), 260);
+      document.getElementById("freeze").onclick=freezeFlow;
+      document.getElementById("life").onclick=lifeFlow;
+      setTimeout(()=>speak(b.q, p.rate), 260);
     }
 
     function lifeFlow(){
       const L=LIFELINES[2];
-      shell("Inicio", renderHome, Math.round(qi/queue.length*100), (qi+1)+" / "+queue.length,
+      shell("Salir", renderPersonas, pctOf(qi), (qi+1)+" / "+queue.length,
         '<div class="kicker">Rescate</div><div class="card">'+
         '<div class="q-en">'+esc(L.en)+'</div>'+
         '<div class="arch">'+archHTML(L.phon)+'</div>'+
@@ -673,7 +821,7 @@
 
     function freezeFlow(){
       const first=b.lines[0];
-      shell("Inicio", renderHome, Math.round(qi/queue.length*100), (qi+1)+" / "+queue.length,
+      shell("Salir", renderPersonas, pctOf(qi), (qi+1)+" / "+queue.length,
         '<div class="kicker">Protocolo anti-hielo</div><div class="card">'+
         '<div class="fb warn">Está bien. Nadie espera inglés perfecto. Esperan que no te calles.</div>'+
         '<div class="q-en" style="font-size:22px;margin-top:14px">1. That\'s a good question. Let me think.</div>'+
@@ -688,27 +836,76 @@
     }
 
     function reveal(how){
-      shell("Inicio", renderHome, Math.round((qi+0.5)/queue.length*100), (qi+1)+" / "+queue.length,
+      shell("Salir", renderPersonas, pctOf(qi+0.5), (qi+1)+" / "+queue.length,
         '<div class="kicker">Modelo · no tiene que ser idéntico</div><div class="card">'+
-        '<div class="q-en" style="font-size:22px">'+esc(q)+'</div>'+
+        '<div class="q-en" style="font-size:22px">'+esc(b.q)+'</div>'+
         '<div class="answer" style="margin-top:12px">'+b.lines.map(l=>'<span class="line">'+esc(l)+'</span>').join("")+'</div>'+
         '<div class="hint">¿Qué tan cerca estuviste, en voz alta?</div>'+
         '<button class="speaker" id="play">'+speakerSVG+'Oír el modelo</button>'+
         '<button class="btn btn-good" id="good">La dije bien</button>'+
         '<div class="row2"><button class="btn btn-ghost" id="mid">Más o menos</button><button class="btn btn-danger" id="no">No salió</button></div></div>');
-      document.getElementById("play").onclick=()=>speakLines(b.lines);
+      document.getElementById("play").onclick=()=>speakLines(b.lines, p.rate);
       const bump=(k)=>{
         score[k]++;
         if(k==="good"){ const s=state(); s.ready[b.id]=true; save(s); }
-        runInterview(queue, qi+1, score);
+        if(k==="good" && b.fu && Math.random()<p.fuChance) followUp();
+        else runInterview(p, queue, qi+1, score);
       };
       document.getElementById("good").onclick=()=>bump("good");
       document.getElementById("mid").onclick=()=>bump("mid");
       document.getElementById("no").onclick=()=>bump("freeze");
-      if(how!=="freeze") speakLines(b.lines);
+      if(how!=="freeze") speakLines(b.lines, p.rate);
+    }
+
+    function followUp(){
+      const fu=b.fu;
+      score.fuTotal++;
+      shell("Salir", renderPersonas, pctOf(qi+0.7), (qi+1)+" / "+queue.length,
+        stageHTML(fu.q, fu.qes, true)+
+        '<div class="card">'+
+        '<div class="hint" style="text-align:center">Sorpresa: quiere más. Contesta corto, en voz alta.</div>'+
+        '<button class="speaker" id="hearq">'+speakerSVG+'Oír la pregunta otra vez</button>'+
+        '<button class="btn btn-primary" id="spoke">Ya contesté · ver modelo</button></div>');
+      document.getElementById("hearq").onclick=()=>speak(fu.q, p.rate);
+      document.getElementById("spoke").onclick=()=>{
+        shell("Salir", renderPersonas, pctOf(qi+0.85), (qi+1)+" / "+queue.length,
+          '<div class="kicker">Modelo del seguimiento</div><div class="card">'+
+          '<div class="answer">'+fu.lines.map(l=>'<span class="line">'+esc(l)+'</span>').join("")+'</div>'+
+          '<button class="speaker" id="play">'+speakerSVG+'Oír el modelo</button>'+
+          '<button class="btn btn-good" id="ok">Lo dije</button>'+
+          '<div class="row2"><button class="btn btn-ghost full" id="no">No salió · sigo</button></div></div>');
+        document.getElementById("play").onclick=()=>speakLines(fu.lines, p.rate);
+        document.getElementById("ok").onclick=()=>{ score.fuGood++; runInterview(p, queue, qi+1, score); };
+        document.getElementById("no").onclick=()=>runInterview(p, queue, qi+1, score);
+        speakLines(fu.lines, p.rate);
+      };
+      setTimeout(()=>speak(fu.q, p.rate), 300);
     }
 
     ask();
+  }
+
+  function finishInterview(p, total, score){
+    const s=state(); s.interviews=(s.interviews||0)+1;
+    const passed = score.good >= Math.ceil(total*0.7) && score.freeze===0;
+    if(passed) s.won[p.id]=true;
+    save(s); markDay();
+    const allWon = wonCount()===3;
+    let head = passed ? p.name+" quedó convencido." : (score.good>=Math.ceil(total/2) ? "Cerca. "+p.name+" quiere otra ronda." : "Bien. El hielo se rompe así.");
+    if(p.id==="sofia" && passed) head="Sofía quedó convencida.";
+    if(p.id==="ingeniera" && passed) head="La Ingeniera quedó convencida.";
+    let html='<div class="done"><h2>'+esc(head)+'</h2>'+
+      '<div class="score">'+score.good+'/'+total+'</div>'+
+      '<p>Bien dichas: '+score.good+' · Más o menos: '+score.mid+' · En blanco: '+score.freeze+
+      (score.fuTotal?' · Seguimientos: '+score.fuGood+'/'+score.fuTotal:'')+'</p>';
+    if(allWon) html+='<div class="hired"><div class="ht">Contratado.</div><p>Convenciste a Recursos Humanos, al Director y a la Ingeniera Jefa. Cuando llegue la entrevista real, ya la hiciste tres veces.</p></div>';
+    else if(passed) html+='<p>'+(3-wonCount())+' entrevistador'+(3-wonCount()===1?'':'es')+' por convencer.</p>';
+    else html+='<p>Para convencer: casi todas bien dichas y ninguna en blanco. Congelado no es fallo, es entrenamiento.</p>';
+    html+='<button class="btn btn-primary" id="again">Otra entrevista</button>'+
+      '<div class="row2"><button class="btn btn-ghost full" id="home">Inicio</button></div></div>';
+    shell("Inicio", renderHome, 100, "fin", html);
+    document.getElementById("again").onclick=renderPersonas;
+    document.getElementById("home").onclick=renderHome;
   }
 
   renderHome();
