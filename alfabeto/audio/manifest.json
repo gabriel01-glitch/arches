@@ -52,7 +52,15 @@
       "Sorry, was that B as in Banana or V as in Video?": "audio/nova/sorry_was_that_b_as_in_banana_or_v_as_in_video.mp3",
       "Did you get that?": "audio/nova/did_you_get_that.mp3",
       "Let me repeat that.": "audio/nova/let_me_repeat_that.mp3",
-      "Ess as in Sun.": "audio/nova/ess_as_in_sun.mp3"
+      "Ess as in Sun.": "audio/nova/ess_as_in_sun.mp3",
+      "Kay as in Kilo.": "audio/nova/kay_as_in_kilo.mp3",
+      "Em as in Mexico.": "audio/nova/em_as_in_mexico.mp3",
+      "Tee as in Taxi.": "audio/nova/tee_as_in_taxi.mp3",
+      "Double U as in WhatsApp.": "audio/nova/double_u_as_in_whatsapp.mp3",
+      "Eks as in X-ray.": "audio/nova/eks_as_in_x_ray.mp3",
+      "Why as in Yoga.": "audio/nova/why_as_in_yoga.mp3",
+      "Zee as in Zero.": "audio/nova/zee_as_in_zero.mp3",
+      "Capital letter A.": "audio/nova/capital_letter_a.mp3"
     },
     "onyx": {
       "A as in Apple.": "audio/onyx/a_as_in_apple.mp3",
@@ -94,7 +102,15 @@
       "Sorry, was that B as in Banana or V as in Video?": "audio/onyx/sorry_was_that_b_as_in_banana_or_v_as_in_video.mp3",
       "Did you get that?": "audio/onyx/did_you_get_that.mp3",
       "Let me repeat that.": "audio/onyx/let_me_repeat_that.mp3",
-      "Ess as in Sun.": "audio/onyx/ess_as_in_sun.mp3"
+      "Ess as in Sun.": "audio/onyx/ess_as_in_sun.mp3",
+      "Kay as in Kilo.": "audio/onyx/kay_as_in_kilo.mp3",
+      "Em as in Mexico.": "audio/onyx/em_as_in_mexico.mp3",
+      "Tee as in Taxi.": "audio/onyx/tee_as_in_taxi.mp3",
+      "Double U as in WhatsApp.": "audio/onyx/double_u_as_in_whatsapp.mp3",
+      "Eks as in X-ray.": "audio/onyx/eks_as_in_x_ray.mp3",
+      "Why as in Yoga.": "audio/onyx/why_as_in_yoga.mp3",
+      "Zee as in Zero.": "audio/onyx/zee_as_in_zero.mp3",
+      "Capital letter A.": "audio/onyx/capital_letter_a.mp3"
     }
   }
 }
