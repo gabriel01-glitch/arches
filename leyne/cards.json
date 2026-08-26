@@ -1,6 +1,6 @@
 {
   "student": "Leyne",
-  "updated": "12 de agosto de 2026",
+  "updated": "26 de agosto de 2026",
   "cards": [
     {
       "wrong": "I am going the beach.",
@@ -97,6 +97,48 @@
       "hint": "La preposición 'sin' en español va seguida de infinitivo, pero en inglés 'without' requiere gerundio (-ing). Recuerda: preposición + verbo en -ing.",
       "alts": [],
       "date": "12 de agosto de 2026"
+    },
+    {
+      "wrong": "It haven't arrived.",
+      "right": "It hasn't arrived.",
+      "hint": "Con 'it' (tercera persona singular) el auxiliar es 'has', no 'have'. La contracción negativa es 'hasn't'. En español no hay auxiliares que cambien según la persona, por eso este ajuste se olvida.",
+      "alts": [
+        "It has not arrived."
+      ],
+      "date": "26 de agosto de 2026"
+    },
+    {
+      "wrong": "It haven't arrived.",
+      "right": "It hadn't arrived.",
+      "hint": "'Haven't' usa 'have' como auxiliar del presente perfecto. Para el pasado perfecto (past perfect) el auxiliar cambia a 'had'. En negación: 'had not' o 'hadn't', igual para todas las personas (I, he, she, it...).",
+      "alts": [
+        "It had not arrived."
+      ],
+      "date": "26 de agosto de 2026"
+    },
+    {
+      "wrong": "It don't let them go.",
+      "right": "It doesn't let them go.",
+      "hint": "Con 'it', 'he' y 'she' el auxiliar negativo es 'doesn't', no 'don't'. En español usamos 'no' para todo, pero en inglés la forma cambia según la persona.",
+      "alts": [],
+      "date": "26 de agosto de 2026"
+    },
+    {
+      "wrong": "Make the dinner.",
+      "right": "Make dinner.",
+      "hint": "En inglés, con actividades domésticas rutinarias como 'make dinner' o 'do homework', no se usa artículo. El 'the' suena como si fuera una cena específica ya mencionada antes.",
+      "alts": [
+        "Cook dinner.",
+        "Prepare dinner."
+      ],
+      "date": "26 de agosto de 2026"
+    },
+    {
+      "wrong": "he have a part-time job at a restaurant",
+      "right": "he has a part-time job at a restaurant",
+      "hint": "En inglés, los pronombres de tercera persona singular (he, she, it) requieren que el verbo lleve una 's' al final en el presente simple. En español no cambiamos el verbo así ('él tiene'), así que es fácil olvidarlo en inglés.",
+      "alts": [],
+      "date": "26 de agosto de 2026"
     }
   ]
 }
