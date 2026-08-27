@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Origin Case · Wilfredo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&family=Eczar:wght@500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --night:#16110c;
+    --ink:#1c1712;
+    --paper:#f6f0e4;
+    --bone:#ebe3d2;
+    --clay:#9a4a24;
+    --clay-d:#6e3016;
+    --slate:#2f4f58;
+    --slate-ink:#1c333b;
+    --slate-s:#dce8ea;
+    --gold:#b8893a;
+    --gold-s:#f3e6c4;
+    --muted:#6a5d4e;
+    --line:#d8ccb4;
+    --ok:#2f6a48;
+    --ok-s:#dceee4;
+    --no:#9a3a28;
+    --no-s:#f6e4dc;
+    --r:16px;
+    --ease-out:cubic-bezier(0.23, 1, 0.32, 1);
+    --shadow:0 18px 40px rgba(22,17,12,.28);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  html,body{margin:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    min-height:100vh;
+    color:var(--ink);
+    font-family:"Atkinson Hyperlegible",system-ui,sans-serif;
+    background:var(--night);
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{background:var(--gold-s); color:var(--ink);}
+  :focus-visible{outline:3px solid var(--clay); outline-offset:3px;}
+  img{max-width:100%; display:block;}
+
+  .shell{max-width:640px; margin:0 auto; padding:0 0 96px;}
+
+  .hero{
+    position:relative;
+    min-height:72vh;
+    color:var(--paper);
+  }
+  .hero img{
+    width:100%; height:72vh; object-fit:cover; object-position:center 30%;
+  }
+  .hero-scrim{
+    position:absolute; inset:auto 0 0 0; height:58%;
+    background:linear-gradient(180deg, transparent, rgba(22,17,12,.55) 36%, var(--night) 100%);
+    pointer-events:none;
+  }
+  .hero-copy{
+    position:absolute; left:0; right:0; bottom:0;
+    padding:18px 18px 22px;
+  }
+  .hero h1{
+    font-family:Eczar,Georgia,serif;
+    font-weight:700;
+    font-size:clamp(34px,8vw,48px);
+    line-height:.98;
+    letter-spacing:-.03em;
+    margin:0 0 10px;
+    color:#f6f0e4;
+  }
+  .hero p{
+    margin:0 0 16px;
+    font-size:17px;
+    line-height:1.45;
+    font-weight:400;
+    color:#ebe3d2;
+    max-width:34em;
+  }
+  .start{
+    display:inline-flex; align-items:center; justify-content:center;
+    min-height:48px; padding:12px 18px;
+    background:var(--clay); color:#f6f0e4;
+    border:0; border-radius:12px;
+    font-family:inherit; font-weight:700; font-size:16px;
+    cursor:pointer;
+  }
+  .start:active{transform:scale(.98); background:var(--clay-d);}
+
+  .backhome{
+    position:absolute; top:12px; left:12px; z-index:4;
+    display:inline-flex; align-items:center; min-height:44px;
+    padding:8px 14px; border-radius:999px;
+    background:rgba(22,17,12,.62); color:#f6f0e4;
+    text-decoration:none; font-weight:700; font-size:14px;
+    border:1px solid rgba(246,240,228,.18);
+  }
+  nav.dock{
+    position:sticky; top:0; z-index:20;
+    background:rgba(22,17,12,.92);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid rgba(246,240,228,.08);
+    padding:8px 8px 10px;
+    display:flex; gap:6px; overflow-x:auto;
+    scrollbar-width:none;
+  }
+  nav.dock::-webkit-scrollbar{display:none;}
+  .dock button{
+    flex:0 0 auto;
+    min-height:44px; padding:8px 12px;
+    border:1px solid rgba(246,240,228,.14);
+    background:transparent; color:#ebe3d2;
+    border-radius:999px;
+    font-family:inherit; font-weight:700; font-size:13px;
+    cursor:pointer; white-space:nowrap;
+  }
+  .dock button.on{
+    background:var(--paper); color:var(--ink); border-color:var(--paper);
+  }
+
+  .paper{
+    background:var(--paper);
+    color:var(--ink);
+    border-radius:22px 22px 0 0;
+    margin-top:-14px;
+    position:relative;
+    padding:8px 0 40px;
+    box-shadow:0 -12px 40px rgba(0,0,0,.25);
+  }
+  .pad{padding:22px 18px 8px;}
+  .panel{display:none;}
+  .panel.on{display:block; animation:enter .45s var(--ease-out);}
+  @keyframes enter{
+    from{opacity:0; transform:translateY(10px);}
+    to{opacity:1; transform:none;}
+  }
+
+  h2{
+    font-family:Eczar,Georgia,serif;
+    font-weight:700;
+    font-size:clamp(26px,6.4vw,34px);
+    letter-spacing:-.025em;
+    line-height:1.08;
+    margin:6px 0 10px;
+  }
+  h3{
+    font-family:Eczar,Georgia,serif;
+    font-weight:600;
+    font-size:22px;
+    letter-spacing:-.02em;
+    margin:0 0 8px;
+    line-height:1.15;
+  }
+  p{margin:0 0 12px; line-height:1.55; font-size:17px;}
+  .lead{font-size:18px;}
+
+  .es{
+    background:var(--gold-s);
+    border:1px solid #e3d09a;
+    border-radius:12px;
+    padding:11px 13px;
+    margin:10px 0 16px;
+    color:#5c4314;
+    font-size:15.5px;
+    line-height:1.5;
+  }
+  .es b{color:#3f2d0c;}
+
+  .say{
+    background:var(--slate-s);
+    border:1px solid #bfd0d4;
+    border-radius:12px;
+    padding:12px 13px;
+    margin:8px 0 14px;
+    color:var(--slate-ink);
+  }
+  .say .lab{
+    display:flex; align-items:center; gap:8px;
+    font-size:12px; font-weight:700; letter-spacing:.04em; text-transform:uppercase;
+    color:var(--slate); margin-bottom:6px;
+  }
+  .say p{margin:0; font-size:17px; font-weight:700; line-height:1.4; color:var(--ink);}
+  .listen{
+    margin-left:auto;
+    border:0; background:transparent; color:var(--slate);
+    font-family:inherit; font-weight:700; font-size:13px;
+    cursor:pointer; padding:4px 0; min-height:32px;
+  }
+
+  .shot{
+    margin:4px 0 16px;
+    border-radius:14px;
+    overflow:hidden;
+    background:#1c1712;
+  }
+  .shot img{width:100%; height:220px; object-fit:cover;}
+  .cap{
+    padding:9px 12px;
+    font-size:13px; color:var(--muted); font-weight:700;
+    background:var(--bone);
+  }
+
+  .split{
+    display:grid; grid-template-columns:1fr 1fr; gap:10px;
+    margin:12px 0 16px;
+  }
+  .side{
+    border-radius:14px; padding:14px 12px;
+    text-align:left;
+    font-family:inherit; color:inherit;
+    min-height:110px;
+    cursor:pointer;
+  }
+  .side.earth{background:#f3e6d4; border:1.5px solid #d2b48c;}
+  .side.stars{background:var(--slate-s); border:1.5px solid #b7c9ce;}
+  .side .k{font-size:12px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; margin-bottom:4px;}
+  .side.earth .k{color:var(--clay);}
+  .side.stars .k{color:var(--slate);}
+  .side h3{font-size:18px;}
+  .side p{margin:0; font-size:14.5px; color:var(--muted); font-weight:400;}
+
+  .idea{
+    background:var(--bone);
+    border:1.5px solid var(--line);
+    border-radius:14px;
+    padding:14px;
+    margin:0 0 10px;
+  }
+  .idea .tag{
+    display:inline-block;
+    font-size:12px; font-weight:700; letter-spacing:.04em; text-transform:uppercase;
+    padding:3px 8px; border-radius:999px; margin-bottom:8px;
+  }
+  .tag.sci{background:var(--ok-s); color:var(--ok);}
+  .tag.maybe{background:var(--slate-s); color:var(--slate-ink);}
+  .tag.story{background:var(--no-s); color:var(--no);}
+
+  .exhibit{
+    background:var(--bone);
+    border:1.5px solid var(--line);
+    border-radius:14px;
+    padding:16px 14px;
+    margin:0 0 14px;
+  }
+  .votes{display:flex; gap:8px; margin-top:10px;}
+  .vote{
+    flex:1; min-height:46px;
+    border-radius:12px; border:1.5px solid var(--line);
+    background:var(--paper); color:var(--ink);
+    font-family:inherit; font-weight:700; font-size:14.5px;
+    cursor:pointer;
+  }
+  .vote:disabled{cursor:default;}
+  .vote.yes.on{background:var(--ok-s); border-color:var(--ok); color:var(--ok);}
+  .vote.no.on{background:var(--no-s); border-color:var(--no); color:var(--no);}
+  .reply{
+    display:none; margin-top:10px; font-size:15.5px; line-height:1.5; font-weight:400;
+    padding:10px 12px; border-radius:12px;
+  }
+  .reply.show{display:block;}
+  .reply.earth{background:#f3e6d4; color:#5a3214;}
+  .reply.stars{background:var(--slate-s); color:var(--slate-ink);}
+
+  .chr{
+    background:#1c1712; color:var(--paper);
+    border-radius:14px; padding:16px 14px; margin:8px 0 14px;
+  }
+  .chr .row{display:flex; flex-direction:column; gap:8px; margin:10px 0 6px;}
+  .bar{
+    height:18px; border-radius:9px; position:relative;
+    display:flex; align-items:center; justify-content:center;
+    font-size:11px; font-weight:700; letter-spacing:.04em;
+  }
+  .bar.a{background:#c47a48; width:72%;}
+  .bar.b{background:#7aa0aa; width:58%;}
+  .bar.h{
+    background:linear-gradient(90deg,#c47a48 0 52%, #d4b06a 52% 58%, #7aa0aa 58% 100%);
+    width:92%; color:#1c1712;
+  }
+  .weld{
+    position:absolute; left:52%; top:-7px; bottom:-7px; width:8px; margin-left:-4px;
+    background:#f3e6c4; border-radius:2px;
+    box-shadow:0 0 0 3px rgba(243,230,196,.25);
+  }
+  .chr p{color:#d8ccb4; font-size:14.5px; margin:8px 0 0;}
+
+  .lineage{margin:8px 0 16px; padding-left:4px;}
+  .step{
+    display:grid; grid-template-columns:92px 1fr; gap:10px;
+    padding:10px 0;
+    border-left:2px solid var(--line);
+    padding-left:14px;
+    margin-left:8px;
+  }
+  .when{font-weight:700; color:var(--clay); font-size:13.5px;}
+  .what{font-size:15.5px; line-height:1.4;}
+
+  .qbox{
+    background:var(--bone);
+    border:1.5px solid var(--line);
+    border-radius:14px;
+    padding:14px;
+    margin:0 0 12px;
+  }
+  .qn{font-weight:700; margin-bottom:10px; font-size:17px; line-height:1.35;}
+  .opts{display:flex; flex-direction:column; gap:8px;}
+  .opt{
+    text-align:left; min-height:46px;
+    background:var(--paper); border:1.5px solid var(--line); border-radius:12px;
+    padding:11px 12px; font-weight:700; font-size:15.5px;
+    cursor:pointer; font-family:inherit; color:inherit;
+  }
+  .opt.ok{background:var(--ok-s); border-color:var(--ok); color:var(--ok);}
+  .opt.bad{background:var(--no-s); border-color:var(--no); color:var(--no);}
+  .opt:disabled{cursor:default;}
+  .fb{display:none; margin-top:10px; font-size:15px; line-height:1.45; font-weight:400;}
+  .fb.show{display:block;}
+  .fb.good{color:var(--ok);}
+  .fb.poor{color:var(--no);}
+
+  .phrase{
+    background:var(--paper);
+    border:1.5px dashed var(--line);
+    border-radius:12px;
+    padding:12px;
+    margin:0 0 10px;
+  }
+  .phrase b{display:block; font-family:Eczar,Georgia,serif; font-size:20px; margin-bottom:4px;}
+  .phrase span{color:var(--muted); font-size:14.5px;}
+
+  .field, textarea{
+    width:100%;
+    border:1.5px solid var(--line);
+    border-radius:12px;
+    padding:12px 13px;
+    font-family:inherit; font-size:16.5px; color:var(--ink);
+    background:#fff;
+  }
+  textarea{min-height:140px; resize:vertical; line-height:1.5;}
+  .field:focus, textarea:focus{outline:none; border-color:var(--clay);}
+
+  .btn{
+    border:0; border-radius:12px;
+    min-height:48px; padding:12px 16px;
+    font-family:inherit; font-weight:700; font-size:16px;
+    cursor:pointer;
+  }
+  .btn-c{background:var(--clay); color:#f6f0e4;}
+  .btn-s{background:var(--slate); color:#f6f0e4;}
+  .btn-w{background:var(--bone); color:var(--ink); border:1.5px solid var(--line);}
+  .row{display:flex; gap:8px; flex-wrap:wrap; margin-top:10px;}
+
+  .notes{
+    display:none;
+    margin:0 18px 8px;
+    background:#1c1712; color:#ebe3d2;
+    border-radius:12px; padding:10px 12px;
+    font-size:13.5px; line-height:1.4;
+  }
+  .notes.show{display:block;}
+  .notes b{color:#f3e6c4;}
+
+  .prog{
+    height:6px; background:rgba(246,240,228,.12);
+    border-radius:99px; overflow:hidden; margin:0 18px 8px;
+  }
+  .prog > i{display:block; height:100%; width:0; background:var(--gold); transition:width .4s var(--ease-out);}
+
+  .glos{display:grid; gap:8px; margin:8px 0 16px;}
+  .gitem{background:var(--bone); border:1px solid var(--line); border-radius:12px; padding:11px 12px;}
+  .gitem b{display:block; font-size:17px;}
+  .gitem i{color:var(--clay); font-style:normal; font-weight:700; font-size:13.5px;}
+  .gitem span{display:block; color:var(--muted); font-size:14.5px; margin-top:2px;}
+
+  .verdict-card{
+    background:linear-gradient(180deg,#f6f0e4,#f3e6c4);
+    border:2px solid var(--gold);
+    border-radius:18px;
+    padding:22px 16px;
+    text-align:center;
+  }
+  .verdict-card h2{margin-bottom:6px;}
+  .saved{display:none; color:var(--ok); font-weight:700; margin-top:8px;}
+  .saved.show{display:block;}
+
+  footer.tiny{
+    color:rgba(246,240,228,.45);
+    font-size:12.5px; text-align:center;
+    padding:8px 18px 24px;
+  }
+
+  .next{
+    position:sticky; bottom:12px;
+    margin:18px 18px 0;
+    display:flex; gap:8px;
+  }
+  .next .btn{flex:1;}
+
+  @media (hover:hover) and (pointer:fine){
+    .start:hover{transform:translateY(-2px); box-shadow:0 10px 22px rgba(0,0,0,.28);}
+    .opt:hover, .vote:hover, .side:hover{transform:translateY(-2px);}
+    .opt, .vote, .side, .start{transition:transform .18s ease, background .18s ease, border-color .18s ease;}
+  }
+  @media (max-width:420px){
+    .split{grid-template-columns:1fr;}
+    .hero, .hero img{min-height:62vh; height:62vh;}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none !important; transition:none !important;}
+    html{scroll-behavior:auto;}
+    .panel.on{animation:none;}
+  }
+  noscript .paper{display:block;}
+</style>
+</head>
+<body>
+<!--
+THESIS: A live English case file that pressure-tests Wilfredo's idea without mocking it, by splitting three claims and making him argue both sides.
+OWN-WORLD: Night porch over bone paper. Eczar + Atkinson. Clay for Earth, slate for the other sky. No cosmic purple.
+STORY: He leaves able to say the difference between panspermia and "aliens dropped humans," and to give a verdict in English.
+FIRST VIEWPORT: Full-bleed porch photo, title, one button: Open the case.
+FORM: Case file / two-folder investigation. Code-led student class.
+FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
+-->
+<div class="shell">
+  <header class="hero" id="top">
+    <a class="backhome" href="../?name=Wilfredo">‹ Temas</a>
+    <img src="img/hero.jpg" width="1536" height="1024" alt="A man on a Tampa porch at night looking at the stars, wrench and coffee on the table." />
+    <div class="hero-scrim"></div>
+    <div class="hero-copy">
+      <h1>Wilfredo, where are we from?</h1>
+      <p>You think humans are not from Earth. Tonight we do not laugh at that. We open both folders, then you give the verdict in English.</p>
+      <button class="start" onclick="showPanel('ideas')">Open the case</button>
+    </div>
+  </header>
+
+  <nav class="dock" aria-label="Class sections">
+    <button class="on" data-panel="ideas" onclick="showPanel('ideas')">1. Three ideas</button>
+    <button data-panel="earth" onclick="showPanel('earth')">2. Earth</button>
+    <button data-panel="stars" onclick="showPanel('stars')">3. The sky</button>
+    <button data-panel="test" onclick="showPanel('test')">4. The test</button>
+    <button data-panel="speak" onclick="showPanel('speak')">5. Speak</button>
+    <button data-panel="quiz" onclick="showPanel('quiz')">6. Quiz</button>
+    <button data-panel="verdict" onclick="showPanel('verdict')">7. Verdict</button>
+  </nav>
+
+  <div class="prog" aria-hidden="true"><i id="bar"></i></div>
+  <div class="notes" id="notes"></div>
+
+  <main class="paper">
+    <!-- 1 THREE IDEAS -->
+    <section class="panel on" id="ideas">
+      <div class="pad">
+        <h2>Do not mix three different questions</h2>
+        <p class="lead">Smart people lose this argument because they fight three fights at once. Separate them, and you suddenly sound like a scientist.</p>
+        <div class="es"><b>En simple:</b> Una cosa es “la vida llegó en una roca”. Otra es “alguien nos trajo a los humanos”. Y otra es “evolucionamos aquí”. No son la misma idea.</div>
+
+        <article class="idea">
+          <span class="tag sci">Science takes this seriously</span>
+          <h3>1. We evolved here</h3>
+          <p>Life started on Earth (or arrived as chemistry), then changed, slowly, into us. Bones, DNA, and our bodies all point to Africa, then the whole planet.</p>
+        </article>
+        <article class="idea">
+          <span class="tag maybe">Possible. Not proven.</span>
+          <h3>2. Panspermia: life hitchhiked</h3>
+          <p>Maybe the first spark of life did not start on Earth. Amino acids ride inside meteorites. A microbe could, in theory, survive a trip on a rock. That would still mean humans evolved here after the spark arrived.</p>
+        </article>
+        <article class="idea">
+          <span class="tag story">A story, so far</span>
+          <h3>3. Someone dropped humans here</h3>
+          <p>Ancient astronauts, seeders, Anunnaki. This is the claim you are really making. It is the hardest one to prove, and the one with the weakest evidence.</p>
+        </article>
+
+        <div class="say">
+          <div class="lab">Say this <button class="listen" onclick="speak('Those are three different claims. They are not the same thing.')">Listen</button></div>
+          <p>Those are three different claims. They are not the same thing.</p>
+        </div>
+
+        <div class="qbox" data-q="q1">
+          <div class="qn">If microbes arrived on a meteorite, and then became humans on Earth, which claim is that?</div>
+          <div class="opts">
+            <button class="opt" data-ok="1">Panspermia, then evolution here</button>
+            <button class="opt">Aliens dropped ready-made humans</button>
+            <button class="opt">Proof that Earth is empty of fossils</button>
+          </div>
+          <div class="fb">Yes. The spark can come from the sky. The people still grow up on this planet.</div>
+        </div>
+
+        <div class="qbox" data-q="q2">
+          <div class="qn">Why does a plumber care about this split?</div>
+          <div class="opts">
+            <button class="opt" data-ok="1">You do not fix three leaks as if they were one</button>
+            <button class="opt">Pipes come from Mars</button>
+            <button class="opt">Science never changes its mind</button>
+          </div>
+          <div class="fb">Exactly. Isolate the claim, then pressure-test it. Same job, bigger scale.</div>
+        </div>
+      </div>
+      <div class="next">
+        <button class="btn btn-c" onclick="showPanel('earth')">Earth's folder</button>
+      </div>
+    </section>
+
+    <!-- 2 EARTH -->
+    <section class="panel" id="earth">
+      <div class="pad">
+        <h2>Earth's folder: the chain is long</h2>
+        <p class="lead">If humans arrived last week from another world, somebody left a lot of bones, and they look like a family.</p>
+        <div class="es"><b>En simple:</b> No es un salto. Es una cadena. África, millones de años, y el ADN todavía tiene las soldaduras.</div>
+
+        <figure class="shot">
+          <img src="img/fossil.jpg" width="1376" height="1024" alt="A hominin skull on a workbench beside a tape measure and a copper pipe fitting." loading="lazy" />
+          <figcaption class="cap">On the bench, not in a spaceship. Measure first.</figcaption>
+        </figure>
+
+        <article class="exhibit" data-ex="bones">
+          <h3>Exhibit A. The bones</h3>
+          <div class="lineage">
+            <div class="step"><div class="when">~3.2 million</div><div class="what">Lucy, Ethiopia. <i>Australopithecus afarensis</i>. Walked on two legs.</div></div>
+            <div class="step"><div class="when">~1.8 million</div><div class="what"><i>Homo erectus</i> leaves Africa with fire and tools.</div></div>
+            <div class="step"><div class="when">~300,000</div><div class="what">Jebel Irhoud, Morocco. Early <i>Homo sapiens</i>. A modern-looking face.</div></div>
+            <div class="step"><div class="when">today</div><div class="what">You, in Tampa, with a wrench, arguing about the sky.</div></div>
+          </div>
+          <p>A gap in the chain is normal. A chain with no links would be the surprise.</p>
+          <div class="votes">
+            <button class="vote yes" onclick="vote('bones', true)">This is strong</button>
+            <button class="vote no" onclick="vote('bones', false)">Not enough</button>
+          </div>
+          <div class="reply earth">The other sky answers: “Bones prove we lived here. They do not prove the first spark started here.” Fair. That is panspermia, not “dropped humans.”</div>
+        </article>
+
+        <article class="exhibit" data-ex="dna">
+          <h3>Exhibit B. The family recipe</h3>
+          <p>Our closest living relatives are chimpanzees and bonobos. Non-African people still carry about 1 to 2 percent Neanderthal DNA. We did not only look similar. We mixed.</p>
+          <div class="es">Si alguien te “sembró” como especie lista, ¿por qué tu receta coincide con la de África y con neandertales que ya estaban en la Tierra?</div>
+          <div class="votes">
+            <button class="vote yes" onclick="vote('dna', true)">This is strong</button>
+            <button class="vote no" onclick="vote('dna', false)">Not enough</button>
+          </div>
+          <div class="reply earth">The other sky answers: “A seeder could use local DNA.” Possible in a story. We have never found a second recipe.</div>
+        </article>
+
+        <article class="exhibit" data-ex="chr2">
+          <h3>Exhibit C. The soldered pipe</h3>
+          <p>Great apes have 24 pairs of chromosomes. Humans have 23. Two ape chromosomes fused, end to end. The old caps are still in the middle. One old centromere is still there, retired.</p>
+          <div class="chr" aria-hidden="true">
+            <div class="row">
+              <div class="bar a">Ape 2A</div>
+              <div class="bar b">Ape 2B</div>
+              <div class="bar h"><span class="weld"></span>Human chromosome 2</div>
+            </div>
+            <p>Like two copper pipes soldered into one. The joint is still visible.</p>
+          </div>
+          <div class="say">
+            <div class="lab">Say this <button class="listen" onclick="speak('Human chromosome two is a fusion. You can still see the joint.')">Listen</button></div>
+            <p>Human chromosome two is a fusion. You can still see the joint.</p>
+          </div>
+          <div class="votes">
+            <button class="vote yes" onclick="vote('chr2', true)">This is strong</button>
+            <button class="vote no" onclick="vote('chr2', false)">Not enough</button>
+          </div>
+          <div class="reply earth">This is one of the hardest exhibits for the “dropped humans” claim. A seeder would have to fake an ape joint inside every one of us.</div>
+        </article>
+
+        <article class="exhibit" data-ex="body">
+          <h3>Exhibit D. Built for this planet</h3>
+          <p>Vitamin D from this sun. Bones and blood pressure for 1G. Lungs for about 21 percent oxygen. A body clock that expects a 24-hour day. If we were built for another world, this one would fight us harder.</p>
+          <div class="votes">
+            <button class="vote yes" onclick="vote('body', true)">This is strong</button>
+            <button class="vote no" onclick="vote('body', false)">Not enough</button>
+          </div>
+          <div class="reply earth">The other sky answers: “They could have designed us for Earth on purpose.” Then we are back to a story that needs a craft, a lab, or a second code. We do not have those.</div>
+        </article>
+      </div>
+      <div class="next">
+        <button class="btn btn-w" onclick="showPanel('ideas')">Back</button>
+        <button class="btn btn-s" onclick="showPanel('stars')">The sky's folder</button>
+      </div>
+    </section>
+
+    <!-- 3 STARS -->
+    <section class="panel" id="stars">
+      <div class="pad">
+        <h2>The sky's folder: some of this is real</h2>
+        <p class="lead">If you want to defend your idea like an adult, start here. Do not start with pyramids.</p>
+        <div class="es"><b>En simple:</b> Lo más fuerte de “no somos de aquí” no son los aliens de televisión. Es la química que cae del cielo.</div>
+
+        <figure class="shot">
+          <img src="img/meteorite.jpg" width="1376" height="1024" alt="A cut slice of a dark meteorite with golden specks, on black cloth." loading="lazy" />
+          <figcaption class="cap">Murchison-style carbonaceous rock. The Lego bricks of life, inside a stone.</figcaption>
+        </figure>
+
+        <article class="exhibit" data-ex="murch">
+          <h3>Exhibit E. Rocks that carry the ingredients</h3>
+          <p>The Murchison meteorite fell in Australia in 1969. Inside: amino acids and nucleobases, the pieces of proteins and DNA. Some of those amino acids are rare on Earth, so this is not just dirt from a farm.</p>
+          <p>Life’s bricks fall from the sky. That part is not a theory. It is a lab result.</p>
+          <div class="votes">
+            <button class="vote yes" onclick="vote('murch', true)">This is strong</button>
+            <button class="vote no" onclick="vote('murch', false)">Not enough</button>
+          </div>
+          <div class="reply stars">Earth answers: “Bricks are not a house. Amino acids are not a person, and they are not a spaceship.”</div>
+        </article>
+
+        <article class="exhibit" data-ex="hitch">
+          <h3>Exhibit F. Hitchhikers can survive</h3>
+          <p>Tardigrades survive vacuum and radiation. Rocks blasted off Mars can land on Earth. So a microbe taking a ride is physically possible. Scientists call this panspermia. They argue about it in papers, not in memes.</p>
+          <div class="say">
+            <div class="lab">Say this <button class="listen" onclick="speak('Panspermia is possible. It is not the same as ancient astronauts.')">Listen</button></div>
+            <p>Panspermia is possible. It is not the same as ancient astronauts.</p>
+          </div>
+          <div class="votes">
+            <button class="vote yes" onclick="vote('hitch', true)">This is strong</button>
+            <button class="vote no" onclick="vote('hitch', false)">Not enough</button>
+          </div>
+          <div class="reply stars">Earth answers: “Possible is not proven. And a microbe still has to become Lucy, then you, on this planet.”</div>
+        </article>
+
+        <article class="exhibit" data-ex="crick">
+          <h3>Exhibit G. A Nobel winner asked the question</h3>
+          <p>Francis Crick helped discover the shape of DNA. In 1973 he and Leslie Orgel published “Directed Panspermia”: maybe a civilization sent microbes on purpose. They offered a hypothesis, not a proof. Smart people are allowed to ask wild questions. Asking is not answering.</p>
+          <div class="votes">
+            <button class="vote yes" onclick="vote('crick', true)">This is strong</button>
+            <button class="vote no" onclick="vote('crick', false)">Not enough</button>
+          </div>
+          <div class="reply stars">Earth answers: “Crick also said we should look for evidence. Fifty years later, we still have Earth DNA, Earth bones, Earth joints.”</div>
+        </article>
+
+        <article class="exhibit" data-ex="gods">
+          <h3>Exhibit H. The ancient astronaut story</h3>
+          <p>Erich von Däniken, 1968, <i>Chariots of the Gods</i>: pyramids, Nazca, “too advanced for humans.” Archaeologists answer with quarries, copper tools, worker villages, and unfinished stones. Zecharia Sitchin’s Anunnaki translations are rejected by Sumerian scholars.</p>
+          <p>A mystery is not an alien. A mystery is a job.</p>
+          <div class="es">Las pirámides son impresionantes. Impresionante no es la misma palabra que extraterrestre.</div>
+          <div class="votes">
+            <button class="vote yes" onclick="vote('gods', true)">This is strong</button>
+            <button class="vote no" onclick="vote('gods', false)">Not enough</button>
+          </div>
+          <div class="reply stars">Earth answers: “If this is your best exhibit, the case is leaking. Impressive stonework is what humans do when they have time, food, and a reason.”</div>
+        </article>
+      </div>
+      <div class="next">
+        <button class="btn btn-w" onclick="showPanel('earth')">Back</button>
+        <button class="btn btn-c" onclick="showPanel('test')">How we test it</button>
+      </div>
+    </section>
+
+    <!-- 4 TEST -->
+    <section class="panel" id="test">
+      <div class="pad">
+        <h2>The pressure test</h2>
+        <p class="lead">You do not guess where the leak is. You shut the valve, pressurize, and look. Science is the same habit with bigger tools.</p>
+        <div class="es"><b>En simple:</b> Una afirmación extraordinaria necesita una prueba extraordinaria. “Siento que no somos de aquí” no cierra la válvula.</div>
+
+        <div class="split">
+          <div class="side earth">
+            <div class="k">Plumber</div>
+            <h3>Isolate, then look</h3>
+            <p>One line at a time. A wet wall is a clue, not the source.</p>
+          </div>
+          <div class="side stars">
+            <div class="k">Scientist</div>
+            <h3>Claim, then test</h3>
+            <p>A feeling is a clue. A fossil, a gene, a rock: those are tests.</p>
+          </div>
+        </div>
+
+        <h3>What would actually count?</h3>
+        <p>If Wilfredo is right that humans were brought here, we should one day find at least one of these:</p>
+        <article class="idea">
+          <span class="tag sci">Would count</span>
+          <h3>A bone that is not Earth's chemistry</h3>
+          <p>Isotopes in the bone that do not match this planet's water and crust.</p>
+        </article>
+        <article class="idea">
+          <span class="tag sci">Would count</span>
+          <h3>A second recipe</h3>
+          <p>A body that does not use DNA and RNA, or uses a code that does not fit the Earth family.</p>
+        </article>
+        <article class="idea">
+          <span class="tag sci">Would count</span>
+          <h3>A tool, not a story about a tool</h3>
+          <p>An alloy or a craft whose materials do not exist in this solar system's chemistry.</p>
+        </article>
+
+        <h3>What does not count</h3>
+        <div class="qbox" data-q="q3">
+          <div class="qn">Which one is a real test?</div>
+          <div class="opts">
+            <button class="opt">The pyramids are too perfect</button>
+            <button class="opt" data-ok="1">A bone with non-Earth isotopes</button>
+            <button class="opt">Scientists have been wrong before</button>
+          </div>
+          <div class="fb">Yes. “Scientists have been wrong” is true, and it is not evidence. It is a reminder to keep looking.</div>
+        </div>
+
+        <div class="say">
+          <div class="lab">Say this <button class="listen" onclick="speak('A mystery is not proof. I want evidence I can test.')">Listen</button></div>
+          <p>A mystery is not proof. I want evidence I can test.</p>
+        </div>
+      </div>
+      <div class="next">
+        <button class="btn btn-w" onclick="showPanel('stars')">Back</button>
+        <button class="btn btn-c" onclick="showPanel('speak')">Learn the English</button>
+      </div>
+    </section>
+
+    <!-- 5 SPEAK -->
+    <section class="panel" id="speak">
+      <div class="pad">
+        <h2>Speak both sides</h2>
+        <p class="lead">A man who can argue the other side is dangerous in a good way. Do Earth first, then the sky, out loud.</p>
+        <div class="es"><b>En simple:</b> Si solo sabes defender tu idea, no la entiendes. Si puedes defender las dos, ya estás en B1 de verdad.</div>
+
+        <h3>Phrases for a serious argument</h3>
+        <div class="phrase">
+          <b>According to the evidence...</b>
+          <span>Según la evidencia... Use this when you have a fact, not a feeling.</span>
+        </div>
+        <div class="phrase">
+          <b>On the other hand...</b>
+          <span>Por otro lado... The adult way to change folders.</span>
+        </div>
+        <div class="phrase">
+          <b>That is possible, but it is not proven.</b>
+          <span>The golden sentence of this class. Panspermia lives here.</span>
+        </div>
+        <div class="phrase">
+          <b>I'm not convinced yet.</b>
+          <span>No “you're stupid.” Just: show me the joint in the pipe.</span>
+        </div>
+        <div class="phrase">
+          <b>The claim and the proof are not the same thing.</b>
+          <span>La afirmación y la prueba no son lo mismo. Tattoo this one.</span>
+        </div>
+
+        <div class="say">
+          <div class="lab">Earth, out loud <button class="listen" onclick="speak('According to the evidence, humans evolved in Africa. You can still see the fusion in chromosome two.')">Listen</button></div>
+          <p>According to the evidence, humans evolved in Africa. You can still see the fusion in chromosome two.</p>
+        </div>
+        <div class="say">
+          <div class="lab">The sky, out loud <button class="listen" onclick="speak('On the other hand, meteorites carry amino acids. Panspermia is possible, but it is not proven.')">Listen</button></div>
+          <p>On the other hand, meteorites carry amino acids. Panspermia is possible, but it is not proven.</p>
+        </div>
+        <div class="say">
+          <div class="lab">The adult close <button class="listen" onclick="speak('I am not convinced that aliens dropped humans here. I want evidence I can test.')">Listen</button></div>
+          <p>I'm not convinced that aliens dropped humans here. I want evidence I can test.</p>
+        </div>
+
+        <h3>Words you need tonight</h3>
+        <div class="glos">
+          <div class="gitem"><b>evidence</b><i>EV-i-dens</i><span>evidencia: lo que puedes mostrar, no lo que sientes.</span></div>
+          <div class="gitem"><b>claim</b><i>KLEIM</i><span>afirmación: lo que alguien dice que es verdad.</span></div>
+          <div class="gitem"><b>prove</b><i>PRUUV</i><span>probar. Prove it = muéstrame la prueba.</span></div>
+          <div class="gitem"><b>fossil</b><i>FO-sel</i><span>fósil. Hueso de piedra, historia en el suelo.</span></div>
+          <div class="gitem"><b>evolve</b><i>i-VOLV</i><span>evolucionar. Cambiar a lo largo de mucho tiempo.</span></div>
+          <div class="gitem"><b>species</b><i>SPEE-sheez</i><span>especie. Humans are one species.</span></div>
+          <div class="gitem"><b>chromosome</b><i>KRO-muh-som</i><span>cromosoma. El tubo de la receta.</span></div>
+          <div class="gitem"><b>meteorite</b><i>MEE-tee-uh-rait</i><span>meteorito. La piedra que sí llegó.</span></div>
+          <div class="gitem"><b>hypothesis</b><i>hai-PO-thuh-sis</i><span>hipótesis: una idea lista para el test.</span></div>
+        </div>
+
+        <div class="qbox" data-q="q4">
+          <div class="qn">Pick the adult sentence.</div>
+          <div class="opts">
+            <button class="opt">Scientists are hiding everything.</button>
+            <button class="opt" data-ok="1">That is possible, but it is not proven.</button>
+            <button class="opt">I saw a video, so it is true.</button>
+          </div>
+          <div class="fb">Keep that sentence in your pocket. It works at a job site and in this argument.</div>
+        </div>
+      </div>
+      <div class="next">
+        <button class="btn btn-w" onclick="showPanel('test')">Back</button>
+        <button class="btn btn-c" onclick="showPanel('quiz')">Quiz</button>
+      </div>
+    </section>
+
+    <!-- 6 QUIZ -->
+    <section class="panel" id="quiz">
+      <div class="pad">
+        <h2>Ten questions. No mercy, no mockery.</h2>
+        <p class="lead">Science and English in the same pass. Green means you understood it. You can miss and try again.</p>
+        <div class="es"><b>En simple:</b> No hay trampa. Si fallas, lees por qué y sigues.</div>
+
+        <div class="qbox" data-q="q5">
+          <div class="qn">1. Humans have 23 pairs of chromosomes because...</div>
+          <div class="opts">
+            <button class="opt">aliens removed one pair</button>
+            <button class="opt" data-ok="1">two ancestral chromosomes fused</button>
+            <button class="opt">chimps have fewer than we do</button>
+          </div>
+          <div class="fb">Great apes: 24 pairs. We fused two into chromosome 2. The joint is still there.</div>
+        </div>
+        <div class="qbox" data-q="q6">
+          <div class="qn">2. The oldest well-dated Homo sapiens fossils are from...</div>
+          <div class="opts">
+            <button class="opt">the Moon</button>
+            <button class="opt">Peru</button>
+            <button class="opt" data-ok="1">Jebel Irhoud, Morocco, about 300,000 years ago</button>
+          </div>
+          <div class="fb">Africa again. The story keeps pointing at the same continent.</div>
+        </div>
+        <div class="qbox" data-q="q7">
+          <div class="qn">3. Panspermia means...</div>
+          <div class="opts">
+            <button class="opt">humans were dropped here as adults</button>
+            <button class="opt" data-ok="1">life, or its ingredients, can travel on rocks</button>
+            <button class="opt">pyramids were landing pads</button>
+          </div>
+          <div class="fb">Keep this word. It is the respectable version of “not from here.”</div>
+        </div>
+        <div class="qbox" data-q="q8">
+          <div class="qn">4. Complete: “On the other hand, ...”</div>
+          <div class="opts">
+            <button class="opt">you are wrong and that is the end</button>
+            <button class="opt" data-ok="1">meteorites carry amino acids</button>
+            <button class="opt">I do not want to hear it</button>
+          </div>
+          <div class="fb">On the other hand = you are opening the second folder.</div>
+        </div>
+        <div class="qbox" data-q="q9">
+          <div class="qn">5. Lucy is important because she...</div>
+          <div class="opts">
+            <button class="opt">came from a UFO crash</button>
+            <button class="opt" data-ok="1">walked on two legs 3.2 million years ago in Ethiopia</button>
+            <button class="opt">had a modern human brain</button>
+          </div>
+          <div class="fb">Two legs first, big brain later. Evolution has an order.</div>
+        </div>
+        <div class="qbox" data-q="q10">
+          <div class="qn">6. “I'm not convinced yet” means...</div>
+          <div class="opts">
+            <button class="opt">I think you are stupid</button>
+            <button class="opt" data-ok="1">show me a test I can check</button>
+            <button class="opt">I refuse to listen</button>
+          </div>
+          <div class="fb">Polite, adult, and strong. Use it at work too.</div>
+        </div>
+        <div class="qbox" data-q="q11">
+          <div class="qn">7. The Murchison meteorite matters because it contains...</div>
+          <div class="opts">
+            <button class="opt">a small alien skeleton</button>
+            <button class="opt" data-ok="1">amino acids, some rare on Earth</button>
+            <button class="opt">Egyptian gold</button>
+          </div>
+          <div class="fb">Ingredients, not people. That is the honest sky argument.</div>
+        </div>
+        <div class="qbox" data-q="q12">
+          <div class="qn">8. Non-African humans carry a little DNA from...</div>
+          <div class="opts">
+            <button class="opt">Martians</button>
+            <button class="opt" data-ok="1">Neanderthals</button>
+            <button class="opt">dolphins</button>
+          </div>
+          <div class="fb">About 1 to 2 percent. We mixed with another Earth species.</div>
+        </div>
+        <div class="qbox" data-q="q13">
+          <div class="qn">9. A pyramid is...</div>
+          <div class="opts">
+            <button class="opt" data-ok="1">impressive human stonework</button>
+            <button class="opt">automatic proof of a spaceship</button>
+            <button class="opt">impossible without lasers</button>
+          </div>
+          <div class="fb">Impressive ≠ extraterrestrial. Hold that line.</div>
+        </div>
+        <div class="qbox" data-q="q14">
+          <div class="qn">10. The adult close of this class is...</div>
+          <div class="opts">
+            <button class="opt">Nobody knows anything, so anything goes</button>
+            <button class="opt" data-ok="1">A mystery is not proof. I want evidence I can test.</button>
+            <button class="opt">Trust the first video you see</button>
+          </div>
+          <div class="fb">Take that sentence home. It is the whole class in twelve words.</div>
+        </div>
+        <p id="quizScore" style="font-weight:700;margin-top:8px;"></p>
+      </div>
+      <div class="next">
+        <button class="btn btn-w" onclick="showPanel('speak')">Back</button>
+        <button class="btn btn-c" onclick="showPanel('verdict')">Your verdict</button>
+      </div>
+    </section>
+
+    <!-- 7 VERDICT -->
+    <section class="panel" id="verdict">
+      <div class="pad">
+        <h2>Your verdict, Wilfredo</h2>
+        <p class="lead">Four sentences in English. You can still believe what you believe. You just have to say it like a man who opened both folders.</p>
+        <div class="es"><b>Usa:</b> According to the evidence... / On the other hand... / That is possible, but... / I'm not convinced yet...</div>
+
+        <p>1. What does Earth's folder show?<br />
+        2. What is the strongest point for the sky?<br />
+        3. Are you talking about panspermia, or about someone dropping humans?<br />
+        4. What would convince you to change your mind?</p>
+
+        <textarea id="verdictBox" placeholder="According to the evidence, ..."></textarea>
+        <div class="row">
+          <button class="btn btn-s" type="button" onclick="speak(document.getElementById('verdictBox').value)">Listen to me</button>
+          <button class="btn btn-c" type="button" onclick="saveVerdict()">Save verdict</button>
+        </div>
+        <p class="saved" id="saved">Saved on this phone. Read it out loud to Gabriel.</p>
+
+        <div class="verdict-card" style="margin-top:22px;">
+          <h2>The case is open</h2>
+          <p>You do not have to pick a team. You have to pick a test. That is how a plumber thinks, and that is how a scientist thinks.</p>
+          <p style="margin:0;color:var(--muted);font-size:14.5px;">ARCHES · Wilfredo · Origin Case · 2026-08-26</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="tiny">ARCHES · Wilfredo · Origin Case. <a href="../?name=Wilfredo" style="color:#f3e6c4">Volver a tus temas</a>.</footer>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  const KEY = "origin_wilfredo_v1";
+  const mem = {};
+  const store = {
+    get: function(d){ try{ const v=localStorage.getItem(KEY); return v?JSON.parse(v):d; }catch(e){ return mem.data||d; } },
+    set: function(v){ try{ localStorage.setItem(KEY, JSON.stringify(v)); }catch(e){ mem.data=v; } }
+  };
+  let state = store.get({ panel:"ideas", votes:{}, quiz:{}, verdict:"" });
+
+  const panels = ["ideas","earth","stars","test","speak","quiz","verdict"];
+  function showPanel(id){
+    document.querySelectorAll(".panel").forEach(function(p){ p.classList.toggle("on", p.id===id); });
+    document.querySelectorAll(".dock button").forEach(function(b){ b.classList.toggle("on", b.getAttribute("data-panel")===id); });
+    state.panel = id;
+    store.set(state);
+    updateBar();
+    window.scrollTo(0, document.querySelector("nav.dock").offsetTop - 2);
+  }
+  window.showPanel = showPanel;
+
+  function updateBar(){
+    const i = Math.max(0, panels.indexOf(state.panel));
+    document.getElementById("bar").style.width = ((i+1)/panels.length*100) + "%";
+    const votes = state.votes || {};
+    const keys = Object.keys(votes);
+    const notes = document.getElementById("notes");
+    if(!keys.length){ notes.classList.remove("show"); notes.innerHTML=""; return; }
+    const yes = keys.filter(function(k){ return votes[k]; }).length;
+    notes.classList.add("show");
+    notes.innerHTML = "<b>Case notes.</b> You marked " + yes + " of " + keys.length + " exhibits as strong. Change your mind as you go. That is allowed.";
+  }
+
+  function vote(id, yes){
+    state.votes[id] = yes;
+    store.set(state);
+    const box = document.querySelector('[data-ex="'+id+'"]');
+    if(!box) return;
+    box.querySelectorAll(".vote").forEach(function(b){ b.classList.remove("on"); });
+    box.querySelector(yes? ".vote.yes" : ".vote.no").classList.add("on");
+    const reply = box.querySelector(".reply");
+    if(reply) reply.classList.add("show");
+    updateBar();
+  }
+  window.vote = vote;
+
+  document.querySelectorAll(".qbox").forEach(function(box){
+    const id = box.getAttribute("data-q");
+    const fb = box.querySelector(".fb");
+    const opts = box.querySelectorAll(".opt");
+    if(state.quiz[id]){
+      opts.forEach(function(o){
+        if(o.getAttribute("data-ok")) o.classList.add("ok");
+        o.disabled = true;
+      });
+      if(fb) fb.classList.add("show","good");
+    }
+    opts.forEach(function(btn){
+      btn.addEventListener("click", function(){
+        if(btn.disabled) return;
+        const ok = btn.hasAttribute("data-ok");
+        if(ok){
+          opts.forEach(function(o){ o.disabled = true; });
+          btn.classList.add("ok");
+          if(fb){ fb.classList.add("show","good"); fb.classList.remove("poor"); }
+          state.quiz[id] = true;
+          store.set(state);
+          scoreQuiz();
+        } else {
+          btn.classList.add("bad");
+          btn.disabled = true;
+          if(fb){ fb.classList.add("show","poor"); }
+        }
+      });
+    });
+  });
+
+  function scoreQuiz(){
+    const need = ["q5","q6","q7","q8","q9","q10","q11","q12","q13","q14"];
+    const n = need.filter(function(k){ return state.quiz[k]; }).length;
+    const el = document.getElementById("quizScore");
+    if(el) el.textContent = n ? ("Score: " + n + " / 10") : "";
+  }
+
+  function saveVerdict(){
+    const t = document.getElementById("verdictBox").value.trim();
+    state.verdict = t;
+    store.set(state);
+    const s = document.getElementById("saved");
+    s.classList.add("show");
+    s.textContent = t ? "Saved on this phone. Read it out loud to Gabriel." : "Write four sentences first.";
+  }
+  window.saveVerdict = saveVerdict;
+
+  let voice = null, audioReady = false;
+  function loadVoice(){
+    if(!window.speechSynthesis) return;
+    const vs = speechSynthesis.getVoices();
+    const NOV=/albert|bad news|bahh|bells|boing|bubbles|cellos|good news|jester|organ|superstar|trinoids|whisper|wobble|zarvox|junior|kathy|ralph|fred/i;
+    const en = vs.filter(function(v){ return /^en[-_]/i.test(v.lang) && !NOV.test(v.name); });
+    const pref = ["Samantha","Google US English","Microsoft Aria","Microsoft Jenny","Microsoft Zira","Alex"];
+    voice = null;
+    for(let i=0;i<pref.length;i++){
+      const m = en.find(function(v){ return v.name.indexOf(pref[i])===0; });
+      if(m){ voice=m; break; }
+    }
+    if(!voice) voice = en.find(function(v){ return /en[-_]US/i.test(v.lang); }) || en[0] || null;
+  }
+  if(window.speechSynthesis){ loadVoice(); speechSynthesis.onvoiceschanged = loadVoice; }
+  function unlockAudio(){
+    if(audioReady || !window.speechSynthesis) return;
+    try{ const u=new SpeechSynthesisUtterance(""); u.volume=0; speechSynthesis.speak(u); audioReady=true; }catch(e){}
+  }
+  document.addEventListener("touchstart", unlockAudio, {once:true});
+  document.addEventListener("click", unlockAudio, {once:true});
+  function speak(text){
+    if(!text || !window.speechSynthesis) return;
+    try{
+      speechSynthesis.cancel();
+      const u=new SpeechSynthesisUtterance(text);
+      u.lang="en-US"; u.rate=0.92; if(voice) u.voice=voice;
+      speechSynthesis.speak(u);
+    }catch(e){}
+  }
+  window.speak = speak;
+
+  Object.keys(state.votes||{}).forEach(function(id){
+    const box = document.querySelector('[data-ex="'+id+'"]');
+    if(!box) return;
+    const yes = state.votes[id];
+    const b = box.querySelector(yes? ".vote.yes" : ".vote.no");
+    if(b) b.classList.add("on");
+    const reply = box.querySelector(".reply");
+    if(reply) reply.classList.add("show");
+  });
+  if(state.verdict) document.getElementById("verdictBox").value = state.verdict;
+  scoreQuiz();
+  if(state.panel && state.panel!=="ideas") showPanel(state.panel);
+  else updateBar();
+})();
+</script>
+</body>
+</html>
