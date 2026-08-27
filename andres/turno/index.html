@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Shift · Andrés</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Manrope:wght@400;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --night:#141210;
+    --ink:#1c1914;
+    --paper:#f3eee3;
+    --linen:#f7f2e8;
+    --mist:#e8e0d0;
+    --yellow:#d4a017;
+    --yellow-d:#6e5408;
+    --yellow-s:#f6e7b8;
+    --rust:#b33a2b;
+    --rust-d:#8a2c21;
+    --rust-s:#f4ddd8;
+    --ok:#3d6b3a;
+    --ok-s:#dceee0;
+    --muted:#5c5648;
+    --line:#d4cbb8;
+    --ease-out:cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  html,body{margin:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    min-height:100vh;
+    color:var(--ink);
+    font-family:Manrope,system-ui,sans-serif;
+    background:var(--night);
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{background:var(--yellow-s); color:var(--ink);}
+  :focus-visible{outline:3px solid var(--yellow); outline-offset:3px;}
+  img{max-width:100%; display:block;}
+
+  .shell{max-width:640px; margin:0 auto; padding:0 0 96px;}
+
+  .hero{position:relative; min-height:72vh; color:var(--linen);}
+  .hero img{width:100%; height:72vh; object-fit:cover; object-position:78% 55%;}
+  .hero-scrim{
+    position:absolute; inset:auto 0 0 0; height:62%;
+    background:linear-gradient(180deg, transparent, rgba(20,18,16,.55) 38%, var(--night) 100%);
+    pointer-events:none;
+  }
+  .hero-copy{position:absolute; left:0; right:0; bottom:0; padding:18px 18px 22px;}
+  .hero h1{
+    font-family:"Barlow Condensed",Impact,sans-serif;
+    font-weight:700;
+    font-size:clamp(28px,7vw,46px);
+    line-height:.95;
+    letter-spacing:-.015em;
+    text-transform:uppercase;
+    margin:0 0 10px;
+    color:var(--linen);
+  }
+  .hero p{
+    margin:0 0 16px;
+    font-size:17px;
+    line-height:1.45;
+    color:#ece6d8;
+    max-width:34em;
+  }
+  .start{
+    display:inline-flex; align-items:center; justify-content:center;
+    min-height:48px; padding:12px 18px;
+    background:var(--yellow); color:var(--night);
+    border:0; border-radius:12px;
+    font-family:inherit; font-weight:700; font-size:16px;
+    cursor:pointer;
+  }
+  .start:active{transform:scale(.97); background:#b88910;}
+
+  .backhome{
+    position:absolute; top:12px; left:12px; z-index:4;
+    display:inline-flex; align-items:center; min-height:44px;
+    padding:8px 14px; border-radius:999px;
+    background:rgba(20,18,16,.62); color:var(--linen);
+    text-decoration:none; font-weight:700; font-size:14px;
+    border:1px solid rgba(247,242,232,.18);
+  }
+
+  nav.dock{
+    position:sticky; top:0; z-index:20;
+    background:rgba(20,18,16,.92);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid rgba(247,242,232,.08);
+    padding:8px 8px 10px;
+    display:flex; gap:6px; overflow-x:auto;
+    scrollbar-width:none;
+  }
+  nav.dock::-webkit-scrollbar{display:none;}
+  .dock button{
+    flex:0 0 auto;
+    min-height:44px; padding:8px 12px;
+    border:1px solid rgba(247,242,232,.14);
+    background:transparent; color:#ece6d8;
+    border-radius:999px;
+    font-family:inherit; font-weight:700; font-size:13px;
+    cursor:pointer; white-space:nowrap;
+  }
+  .dock button.on{background:var(--yellow); color:var(--night); border-color:var(--yellow);}
+
+  .paper{
+    background:var(--paper);
+    color:var(--ink);
+    border-radius:22px 22px 0 0;
+    margin-top:-14px;
+    position:relative;
+    padding:8px 0 28px;
+    box-shadow:0 -12px 40px rgba(0,0,0,.25);
+  }
+  .pad{padding:22px 18px 12px;}
+  .panel{display:none;}
+  .panel.on{display:block; animation:enter .45s var(--ease-out);}
+  @keyframes enter{
+    from{opacity:0; transform:translateY(10px);}
+    to{opacity:1; transform:none;}
+  }
+
+  h2{
+    font-family:"Barlow Condensed",Impact,sans-serif;
+    font-weight:700;
+    font-size:clamp(26px,6.2vw,36px);
+    letter-spacing:-.02em;
+    text-transform:uppercase;
+    line-height:1.02;
+    margin:6px 0 10px;
+  }
+  h3{
+    font-family:"Barlow Condensed",Impact,sans-serif;
+    font-weight:700;
+    font-size:24px;
+    letter-spacing:.01em;
+    text-transform:uppercase;
+    margin:0 0 8px;
+    line-height:1.1;
+  }
+  p{margin:0 0 12px; line-height:1.55; font-size:17px;}
+  .lead{font-size:18px;}
+
+  .es{
+    background:var(--yellow-s);
+    border:1px solid #e3c56a;
+    border-radius:12px;
+    padding:11px 13px;
+    margin:10px 0 16px;
+    color:#5c4314;
+    font-size:15.5px;
+    line-height:1.5;
+  }
+  .es b{color:#3f2d0c;}
+
+  .tag{
+    display:inline-block;
+    font-size:11.5px; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
+    padding:4px 9px; border-radius:999px; margin-bottom:8px;
+  }
+  .tag.y{background:var(--yellow-s); color:var(--yellow-d);}
+  .tag.r{background:var(--rust-s); color:var(--rust-d);}
+  .tag.g{background:var(--ok-s); color:var(--ok);}
+
+  .say{
+    background:var(--yellow-s);
+    border:1px solid #e3c56a;
+    border-radius:12px;
+    padding:12px 13px;
+    margin:8px 0 14px;
+    color:var(--yellow-d);
+  }
+  .say .lab{
+    display:flex; align-items:center; gap:8px;
+    font-size:12px; font-weight:700; letter-spacing:.04em; text-transform:uppercase;
+    color:var(--yellow-d); margin-bottom:6px;
+  }
+  .say p{margin:0; font-size:17px; font-weight:700; line-height:1.4; color:var(--ink);}
+  .listen{
+    margin-left:auto;
+    border:0; background:transparent; color:var(--yellow-d);
+    font-family:inherit; font-weight:700; font-size:13px;
+    cursor:pointer; padding:4px 0; min-height:32px;
+  }
+
+  .shot{
+    margin:4px 0 16px;
+    border-radius:14px;
+    overflow:hidden;
+    background:#141210;
+  }
+  .shot img{width:100%; height:220px; object-fit:cover;}
+  .cap{
+    padding:9px 12px;
+    font-size:13px; color:var(--muted); font-weight:700;
+    background:var(--mist);
+  }
+
+  .idea{
+    background:var(--mist);
+    border:1.5px solid var(--line);
+    border-radius:14px;
+    padding:14px;
+    margin:0 0 10px;
+  }
+
+  .pieces{
+    display:grid; grid-template-columns:1fr auto 1fr auto 1fr;
+    gap:6px; align-items:stretch;
+    margin:12px 0 16px;
+  }
+  .piece{
+    background:var(--night); color:var(--linen);
+    border-radius:12px; padding:12px 8px; text-align:center;
+  }
+  .piece b{display:block; font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:var(--yellow); margin-bottom:6px;}
+  .piece span{font-family:"Barlow Condensed",sans-serif; font-weight:700; font-size:22px; line-height:1.15;}
+  .plus{align-self:center; font-weight:800; color:var(--muted);}
+
+  .verbs{display:grid; grid-template-columns:1fr 1fr; gap:8px; margin:10px 0 16px;}
+  .vb{
+    background:var(--linen);
+    border:1.5px solid var(--line);
+    border-radius:12px;
+    padding:12px 10px;
+    text-align:left;
+    font-family:inherit; color:inherit;
+    min-height:72px; cursor:pointer;
+  }
+  .vb b{display:block; font-size:16px;}
+  .vb span{display:block; color:var(--muted); font-size:12.5px; font-weight:600; margin-top:3px;}
+  .vb.on{background:var(--yellow-s); border-color:var(--yellow); color:var(--yellow-d);}
+
+  .cut{
+    background:var(--mist);
+    border:1.5px solid var(--line);
+    border-radius:14px;
+    padding:14px;
+    margin:0 0 12px;
+  }
+  .cut .long{color:var(--muted); font-size:15.5px; line-height:1.45;}
+  .cut.short .long{display:none;}
+  .cut .shortline{display:none; font-weight:700; font-size:17px; margin:0 0 10px;}
+  .cut.short .shortline{display:block;}
+
+  .qbox{
+    background:var(--mist);
+    border:1.5px solid var(--line);
+    border-radius:14px;
+    padding:14px;
+    margin:0 0 12px;
+  }
+  .qn{font-weight:700; margin-bottom:10px; font-size:17px; line-height:1.35;}
+  .opts{display:flex; flex-direction:column; gap:8px;}
+  .opt{
+    text-align:left; min-height:46px;
+    background:var(--paper); border:1.5px solid var(--line); border-radius:12px;
+    padding:11px 12px; font-weight:700; font-size:15.5px;
+    cursor:pointer; font-family:inherit; color:inherit;
+  }
+  .opt.ok{background:var(--ok-s); border-color:var(--ok); color:var(--ok);}
+  .opt.bad{background:var(--rust-s); border-color:var(--rust); color:var(--rust-d);}
+  .opt:disabled{cursor:default;}
+  .fb{display:none; margin-top:10px; font-size:15px; line-height:1.45;}
+  .fb.show{display:block;}
+  .fb.good{color:var(--ok);}
+  .fb.poor{color:var(--rust-d);}
+
+  .phrase{
+    background:var(--linen);
+    border:1.5px dashed var(--line);
+    border-radius:12px;
+    padding:12px;
+    margin:0 0 10px;
+  }
+  .phrase b{display:block; font-family:"Barlow Condensed",sans-serif; font-size:22px; text-transform:uppercase; margin-bottom:4px;}
+  .phrase span{color:var(--muted); font-size:14.5px;}
+
+  .cols{display:grid; grid-template-columns:1fr 1fr 1fr; gap:6px; margin:10px 0 16px; font-size:13.5px;}
+  .cols div{background:var(--mist); border-radius:10px; padding:10px 8px;}
+  .cols b{display:block; font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:var(--yellow-d); margin-bottom:6px;}
+  .cols i{display:block; font-style:normal; font-weight:700; padding:2px 0;}
+  .cols .c3 i{color:var(--rust-d);}
+
+  textarea{
+    width:100%;
+    border:1.5px solid var(--line);
+    border-radius:12px;
+    padding:12px 13px;
+    font-family:inherit; font-size:16.5px; color:var(--ink);
+    background:#fff;
+    min-height:150px; resize:vertical; line-height:1.5;
+  }
+  textarea:focus{outline:none; border-color:var(--yellow);}
+
+  .btn{
+    border:0; border-radius:12px;
+    min-height:48px; padding:12px 16px;
+    font-family:inherit; font-weight:700; font-size:16px;
+    cursor:pointer;
+  }
+  .btn-c{background:var(--yellow); color:var(--night);}
+  .btn-c:active{background:#b88910; transform:scale(.97);}
+  .btn-r{background:var(--rust); color:var(--linen);}
+  .btn-r:active{background:var(--rust-d); transform:scale(.97);}
+  .btn-w{background:var(--mist); color:var(--ink); border:1.5px solid var(--line);}
+  .row{display:flex; gap:8px; flex-wrap:wrap; margin-top:10px;}
+
+  .notes{
+    display:none;
+    margin:0 18px 8px;
+    background:#141210; color:#ece6d8;
+    border-radius:12px; padding:10px 12px;
+    font-size:13.5px; line-height:1.4;
+  }
+  .notes.show{display:block;}
+  .notes b{color:var(--yellow);}
+
+  .prog{
+    height:6px; background:rgba(247,242,232,.12);
+    border-radius:99px; overflow:hidden; margin:0 18px 8px;
+  }
+  .prog > i{display:block; height:100%; width:0; background:var(--yellow); transition:width .4s var(--ease-out);}
+
+  .glos{display:grid; gap:8px; margin:8px 0 16px;}
+  .gitem{background:var(--mist); border:1px solid var(--line); border-radius:12px; padding:11px 12px;}
+  .gitem b{display:block; font-size:17px;}
+  .gitem i{color:var(--yellow-d); font-style:normal; font-weight:700; font-size:13.5px;}
+  .gitem span{display:block; color:var(--muted); font-size:14.5px; margin-top:2px;}
+
+  .verdict-card{
+    background:linear-gradient(180deg,#f7f2e8,#f6e7b8);
+    border:2px solid var(--yellow);
+    border-radius:18px;
+    padding:22px 16px;
+    text-align:center;
+  }
+  .verdict-card h2{margin-bottom:6px;}
+  .saved{display:none; color:var(--ok); font-weight:700; margin-top:8px;}
+  .saved.show{display:block;}
+
+  footer.tiny{
+    color:rgba(247,242,232,.45);
+    font-size:12.5px; text-align:center;
+    padding:8px 18px 24px;
+  }
+  footer.tiny a{color:var(--yellow);}
+
+  .next{margin:18px 18px 8px; display:flex; gap:8px;}
+  .next .btn{flex:1;}
+
+  .teacher{
+    margin:18px 18px 0;
+    background:var(--mist);
+    border:1.5px dashed var(--line);
+    border-radius:14px;
+    padding:12px 14px;
+  }
+  .teacher summary{cursor:pointer; font-weight:800; color:var(--muted); font-size:13px; list-style:none;}
+  .teacher summary::-webkit-details-marker{display:none;}
+  .teacher .body{font-size:13.5px; line-height:1.5; margin-top:10px;}
+  .teacher ol{margin:8px 0 0; padding-left:18px;}
+  .teacher li{margin:6px 0;}
+
+  @media (hover:hover) and (pointer:fine){
+    .start:hover{transform:translateY(-2px); box-shadow:0 10px 22px rgba(0,0,0,.28);}
+    .opt:hover, .vb:hover{transform:translateY(-2px);}
+    .opt, .vb, .start{transition:transform .18s var(--ease-out), background .18s ease, border-color .18s ease;}
+  }
+  @media (max-width:420px){
+    .verbs{grid-template-columns:1fr;}
+    .pieces{grid-template-columns:1fr; gap:8px;}
+    .plus{display:none;}
+    .hero, .hero img{min-height:56vh; height:56vh;}
+    .hero img{object-position:82% 50%;}
+    .hero p{font-size:16px;}
+    .shot img{height:200px;}
+    .cols{grid-template-columns:1fr;}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none !important; transition:none !important;}
+    html{scroll-behavior:auto;}
+    .panel.on{animation:none;}
+  }
+</style>
+</head>
+<body>
+<!--
+THESIS: HAVE is not tener. HAVE plus the third column is how English moves a shipment — and Andrés talks too long because he is translating Spanish.
+OWN-WORLD: Dawn warehouse over packing paper. Barlow Condensed + Manrope. Safety yellow for HAVE, rust for haven't/hadn't. No terra, no teal, no purple.
+STORY: He leaves able to load a short sentence with have/hasn't/had, name warehouse verbs in the third column, and cut a paragraph to radio English.
+FIRST VIEWPORT: Full-bleed dock, title, one button: Start the shift.
+FORM: Warehouse shift / radio English. Code-led student class.
+FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
+-->
+<div class="shell">
+  <header class="hero" id="top">
+    <a class="backhome" href="../?name=Andres">‹ Temas</a>
+    <img src="img/hero.jpg" width="1248" height="832" alt="A warehouse loading dock at dawn with a pallet of boxes and a yellow barcode scanner." />
+    <div class="hero-scrim"></div>
+    <div class="hero-copy">
+      <h1>Andrés,<br />have you loaded it yet?</h1>
+      <p>HAVE is not tener. Tonight we cut the extra words.</p>
+      <button class="start" onclick="showPanel('load')">Start the shift</button>
+    </div>
+  </header>
+
+  <nav class="dock" aria-label="Class sections">
+    <button class="on" data-panel="load" onclick="showPanel('load')">1. Load</button>
+    <button data-panel="three" onclick="showPanel('three')">2. Three</button>
+    <button data-panel="column" onclick="showPanel('column')">3. Column</button>
+    <button data-panel="dockp" onclick="showPanel('dockp')">4. Dock</button>
+    <button data-panel="hadnt" onclick="showPanel('hadnt')">5. Hadn't</button>
+    <button data-panel="radio" onclick="showPanel('radio')">6. Radio</button>
+    <button data-panel="quiz" onclick="showPanel('quiz')">7. Quiz</button>
+    <button data-panel="report" onclick="showPanel('report')">8. Report</button>
+  </nav>
+
+  <div class="prog" aria-hidden="true"><i id="bar"></i></div>
+  <div class="notes" id="notes"></div>
+
+  <main class="paper">
+
+    <section class="panel on" id="load">
+      <div class="pad">
+        <h2>The third word is the pallet</h2>
+        <p class="lead">You already know the job. Inventory, DHL, colleagues, the dock. English is slower because you carry extra boxes: Spanish explanations. A radio does not have time for that.</p>
+        <div class="es"><b>En simple:</b> HAVE no es “tener”. HAVE + participio = el trabajo ya está en el muelle. Y corto. Siempre corto.</div>
+
+        <article class="idea">
+          <span class="tag y">The trap</span>
+          <h3>Tener vs have</h3>
+          <p>Spanish: <i>Tengo tres años aquí. No he podido. Si yo hubiera revisado.</i> English does not stack those the same way. Age is <b>I am</b>. Time living here is <b>I have lived</b>. A missing truck is <b>hasn't arrived</b>.</p>
+        </article>
+
+        <div class="say">
+          <div class="lab">Too many words <button class="listen" onclick="speak('Well, what happened is that we were waiting because DHL, and then my colleague, he did not come, and we could not finish.')">Listen</button></div>
+          <p>Well, what happened is that we were waiting because DHL, and then my colleague…</p>
+        </div>
+        <div class="say">
+          <div class="lab">The same idea, loaded <button class="listen" onclick="speak('DHL has not arrived yet. We have not finished.')">Listen</button></div>
+          <p>DHL hasn't arrived yet. We haven't finished.</p>
+        </div>
+
+        <div class="qbox" data-q="q1">
+          <div class="qn">In a warehouse radio, which sentence moves the shift?</div>
+          <div class="opts">
+            <button class="opt">Because you know, the thing is, we were like waiting for the truck that maybe comes later</button>
+            <button class="opt" data-ok="1">The truck hasn't arrived yet.</button>
+            <button class="opt">I have three years in this warehouse living here</button>
+          </div>
+          <div class="fb">Yes. Two pieces: HAVE + arrived. Yet. That is the whole status report.</div>
+        </div>
+      </div>
+      <div class="next">
+        <button class="btn btn-c" onclick="showPanel('three')">The three pieces</button>
+      </div>
+    </section>
+
+    <section class="panel" id="three">
+      <div class="pad">
+        <h2>A sentence is a three-piece load</h2>
+        <p class="lead">Forklift, pallet, destination. In English: HAVE or HAS, then the third column, then the rest. If one piece is missing, the sentence does not leave the dock.</p>
+        <div class="es"><b>En simple:</b> I/you/we/they = HAVE. He/she/it = HAS. Después, siempre el participio: gone, done, loaded. Nunca went, nunca did.</div>
+
+        <div class="pieces" aria-hidden="true">
+          <div class="piece"><b>I you we they</b><span>HAVE</span></div>
+          <div class="plus">+</div>
+          <div class="piece"><b>he she it</b><span>HAS</span></div>
+          <div class="plus">+</div>
+          <div class="piece"><b>the pallet</b><span>GONE<br>LOADED<br>SENT</span></div>
+        </div>
+
+        <div class="say">
+          <div class="lab">Broken load <button class="listen" onclick="speak('I have go. I have went. She have finished.')">Listen</button></div>
+          <p>I have go. I have went. She have finished.</p>
+        </div>
+        <div class="say">
+          <div class="lab">Loaded <button class="listen" onclick="speak('I have gone. I have gone. She has finished.')">Listen</button></div>
+          <p>I have gone. She has finished.</p>
+        </div>
+
+        <article class="idea">
+          <span class="tag r">Your classic from class</span>
+          <h3>I have three years living here</h3>
+          <p>Spanish stacks <i>tener + años + gerundio</i>. English uses the three-piece load and <b>for</b>.</p>
+        </article>
+        <div class="say">
+          <div class="lab">Say this <button class="listen" onclick="speak('I have lived here for three years.')">Listen</button></div>
+          <p>I have lived here for three years.</p>
+        </div>
+
+        <div class="qbox" data-q="q2">
+          <div class="qn">Pick the sentence that can leave the dock.</div>
+          <div class="opts">
+            <button class="opt">I have went to the bank.</button>
+            <button class="opt">She have scanned the boxes.</button>
+            <button class="opt" data-ok="1">She has scanned the boxes.</button>
+          </div>
+          <div class="fb">She = HAS. Scanned = third column. Three pieces. Go.</div>
+        </div>
+
+        <div class="qbox" data-q="q3">
+          <div class="qn">Yesterday the truck arrived at 4. Which one?</div>
+          <div class="opts">
+            <button class="opt">Yesterday the truck has arrived at 4.</button>
+            <button class="opt" data-ok="1">Yesterday the truck arrived at 4.</button>
+            <button class="opt">Yesterday the truck have arrived at 4.</button>
+          </div>
+          <div class="fb">Yesterday closes the time. Simple past. HAVE is for a load that still matters now.</div>
+        </div>
+      </div>
+      <div class="next">
+        <button class="btn btn-w" onclick="showPanel('load')">Back</button>
+        <button class="btn btn-c" onclick="showPanel('column')">The third column</button>
+      </div>
+    </section>
+
+    <section class="panel" id="column">
+      <div class="pad">
+        <h2>Warehouse verbs. Third column only.</h2>
+        <p class="lead">After HAVE, you never use the middle column. Went, did, took, saw — those walk alone. With HAVE they become gone, done, taken, seen.</p>
+        <div class="es"><b>En simple:</b> Toca un verbo. Escucha las tres columnas. La de la derecha es la que viaja con HAVE.</div>
+
+        <figure class="shot">
+          <img src="img/aisle.jpg" width="1152" height="864" alt="A warehouse aisle at night with a pallet jack between tall racks of boxes." loading="lazy" />
+          <figcaption class="cap">The aisle. The jack is HAVE. The boxes on it are the participle.</figcaption>
+        </figure>
+
+        <div class="cols">
+          <div><b>1 base</b><i>go</i><i>do</i><i>take</i><i>send</i><i>leave</i></div>
+          <div><b>2 past</b><i>went</i><i>did</i><i>took</i><i>sent</i><i>left</i></div>
+          <div><b>3 with HAVE</b><i>gone</i><i>done</i><i>taken</i><i>sent</i><i>left</i></div>
+        </div>
+
+        <h3>Tap a verb. Hear the load.</h3>
+        <div class="verbs" id="verbs"></div>
+
+        <div class="say">
+          <div class="lab">A real dock sentence <button class="listen" onclick="speak('I have already scanned the pallets. My colleague has called DHL.')">Listen</button></div>
+          <p>I have already scanned the pallets. My colleague has called DHL.</p>
+        </div>
+
+        <div class="qbox" data-q="q4">
+          <div class="qn">I have ___ the inventory.</div>
+          <div class="opts">
+            <button class="opt">did</button>
+            <button class="opt" data-ok="1">done</button>
+            <button class="opt">do</button>
+          </div>
+          <div class="fb">do → did → done. HAVE takes done.</div>
+        </div>
+      </div>
+      <div class="next">
+        <button class="btn btn-w" onclick="showPanel('three')">Back</button>
+        <button class="btn btn-c" onclick="showPanel('dockp')">The dock words</button>
+      </div>
+    </section>
+
+    <section class="panel" id="dockp">
+      <div class="pad">
+        <h2>Yet, already, never, ever</h2>
+        <p class="lead">These four words live with HAVE. They are how a shift talks about time without a long story.</p>
+        <div class="es"><b>En simple:</b> yet = todavía no. already = ya. never = nunca. ever = alguna vez. Yet al final. Already entre have y el participio.</div>
+
+        <figure class="shot">
+          <img src="img/pallet.jpg" width="1152" height="864" alt="A wrapped pallet on a blue skid with a clipboard and packing tape under a work lamp." loading="lazy" />
+          <figcaption class="cap">Waiting on the dock. Has it gone? Not yet.</figcaption>
+        </figure>
+
+        <div class="phrase">
+          <b>Has the truck arrived yet?</b>
+          <span>¿Ya llegó el camión? Yet al final. Pregunta o negativo.</span>
+        </div>
+        <div class="phrase">
+          <b>I have already scanned it.</b>
+          <span>Ya lo escaneé — y eso sigue importando ahora.</span>
+        </div>
+        <div class="phrase">
+          <b>I have never driven a forklift.</b>
+          <span>Experiencia: never + participio. Honestidad de muelle.</span>
+        </div>
+        <div class="phrase">
+          <b>Have you ever called DHL?</b>
+          <span>Tu frase de clase, pero corta: ever + participio + to, no in.</span>
+        </div>
+
+        <div class="say">
+          <div class="lab">Four status lines <button class="listen" onclick="speak('Has the truck arrived yet? I have already counted the inventory. A box is missing. We have not found it yet.')">Listen</button></div>
+          <p>Has the truck arrived yet? I have already counted the inventory. A box is missing. We haven't found it yet.</p>
+        </div>
+
+        <div class="qbox" data-q="q5">
+          <div class="qn">From your class: Have you ever ___ to Colombia?</div>
+          <div class="opts">
+            <button class="opt">to travel in</button>
+            <button class="opt" data-ok="1">traveled to</button>
+            <button class="opt">went in</button>
+          </div>
+          <div class="fb">Have you ever + participle. Travel TO a country. You already earned this one.</div>
+        </div>
+      </div>
+      <div class="next">
+        <button class="btn btn-w" onclick="showPanel('column')">Back</button>
+        <button class="btn btn-r" onclick="showPanel('hadnt')">Haven't / hadn't</button>
+      </div>
+    </section>
+
+    <section class="panel" id="hadnt">
+      <div class="pad">
+        <h2>The missing pallet</h2>
+        <p class="lead">HAVEN'T is now. HADN'T is a door that already closed. If I had checked — that is the sentence that scares you. It is only two loads, not a speech.</p>
+        <div class="es"><b>En simple:</b> haven't = no he (todavía). hadn't = no había. If I had + participio, we would have + participio. Dos paletas. Nada más.</div>
+
+        <article class="idea">
+          <span class="tag r">Now</span>
+          <h3>I haven't / she hasn't</h3>
+          <p>The shift is still open. The truck is still a problem.</p>
+        </article>
+        <div class="say">
+          <div class="lab">Say this <button class="listen" onclick="speak('I have not finished the inventory. She has not called DHL yet.')">Listen</button></div>
+          <p>I haven't finished the inventory. She hasn't called DHL yet.</p>
+        </div>
+
+        <article class="idea">
+          <span class="tag y">The closed door</span>
+          <h3>If I had… / If I hadn't…</h3>
+          <p>You are not telling a novel. You are naming one check you missed.</p>
+        </article>
+        <div class="say">
+          <div class="lab">The short regret <button class="listen" onclick="speak('If I had checked the labels, we would have found the box.')">Listen</button></div>
+          <p>If I had checked the labels, we would have found the box.</p>
+        </div>
+        <div class="say">
+          <div class="lab">The other side <button class="listen" onclick="speak('If I had not forgotten the label, DHL would have taken the pallet.')">Listen</button></div>
+          <p>If I hadn't forgotten the label, DHL would have taken the pallet.</p>
+        </div>
+
+        <div class="qbox" data-q="q6">
+          <div class="qn">Which one is English, not a translation?</div>
+          <div class="opts">
+            <button class="opt">If I would have checked the boxes, maybe we don't have this problem</button>
+            <button class="opt" data-ok="1">If I had checked the boxes, we would have found the pallet.</button>
+            <button class="opt">If I have checked the boxes, we found the pallet</button>
+          </div>
+          <div class="fb">If I HAD + participle, we WOULD HAVE + participle. Two loads. No maybe-speech.</div>
+        </div>
+      </div>
+      <div class="next">
+        <button class="btn btn-w" onclick="showPanel('dockp')">Back</button>
+        <button class="btn btn-c" onclick="showPanel('radio')">Cut it for the radio</button>
+      </div>
+    </section>
+
+    <section class="panel" id="radio">
+      <div class="pad">
+        <h2>Talk like the radio</h2>
+        <p class="lead">Your colleagues do not need the movie. They need the load. Tap Cut it. Keep the HAVE sentence. Throw the rest.</p>
+        <div class="es"><b>En simple:</b> Andrés habla mucho porque traduce el cuento. El muelle pide el resultado. Corta.</div>
+
+        <figure class="shot">
+          <img src="img/radio.jpg" width="1152" height="864" alt="A warehouse radio, barcode scanner, and yellow safety vest on a wooden shipping crate." loading="lazy" />
+          <figcaption class="cap">Radio, scanner, vest. Short English lives here.</figcaption>
+        </figure>
+
+        <div class="cut" data-short="DHL hasn't arrived yet. We haven't finished." data-say="DHL has not arrived yet. We have not finished.">
+          <p class="long">Well, what happened is that we were waiting because DHL, and then my colleague he did not come, and so we could not finish the inventory with all the boxes.</p>
+          <p class="shortline">DHL hasn't arrived yet. We haven't finished.</p>
+          <button class="btn btn-c" type="button" data-cut>Cut it</button>
+        </div>
+
+        <div class="cut" data-short="I have lived here for three years." data-say="I have lived here for three years.">
+          <p class="long">I have three years living here in this country, working in the warehouse, you know, with the inventory and everything.</p>
+          <p class="shortline">I have lived here for three years.</p>
+          <button class="btn btn-c" type="button" data-cut>Cut it</button>
+        </div>
+
+        <div class="cut" data-short="If I had checked the labels, we would have found the box." data-say="If I had checked the labels, we would have found the box.">
+          <p class="long">If I would have checked the boxes before, maybe we don't have this problem now with the missing pallet and DHL waiting.</p>
+          <p class="shortline">If I had checked the labels, we would have found the box.</p>
+          <button class="btn btn-c" type="button" data-cut>Cut it</button>
+        </div>
+
+        <h3>Words for this shift</h3>
+        <div class="glos">
+          <div class="gitem"><b>shipment</b><i>SHIP-mant</i><span>el envío. The shipment hasn't arrived yet.</span></div>
+          <div class="gitem"><b>inventory</b><i>IN-ven-to-rii</i><span>el inventario. I have already counted it.</span></div>
+          <div class="gitem"><b>pallet</b><i>PA-lit</i><span>la tarima. They have loaded the pallets.</span></div>
+          <div class="gitem"><b>scan</b><i>SKAN</i><span>escanear. I have scanned the labels.</span></div>
+          <div class="gitem"><b>colleague</b><i>KO-liig</i><span>el compañero. My colleague has already left.</span></div>
+          <div class="gitem"><b>dock</b><i>DAK</i><span>el muelle. Has the truck arrived at the dock yet?</span></div>
+        </div>
+      </div>
+      <div class="next">
+        <button class="btn btn-w" onclick="showPanel('hadnt')">Back</button>
+        <button class="btn btn-c" onclick="showPanel('quiz')">Quiz</button>
+      </div>
+    </section>
+
+    <section class="panel" id="quiz">
+      <div class="pad">
+        <h2>Ten loads. No extra boxes.</h2>
+        <p class="lead">HAVE, the third column, yet/already, and one closed door. You can miss and try again.</p>
+        <div class="es"><b>En simple:</b> Si es largo, está mal. Si usa went con have, está mal.</div>
+
+        <div class="qbox" data-q="q7">
+          <div class="qn">1. After HAVE you use…</div>
+          <div class="opts">
+            <button class="opt">the past: went, did, took</button>
+            <button class="opt" data-ok="1">the third column: gone, done, taken</button>
+            <button class="opt">the gerund: going, doing</button>
+          </div>
+          <div class="fb">The pallet is column three. Always.</div>
+        </div>
+        <div class="qbox" data-q="q8">
+          <div class="qn">2. He / she / it takes…</div>
+          <div class="opts">
+            <button class="opt">have</button>
+            <button class="opt" data-ok="1">has</button>
+            <button class="opt">haves</button>
+          </div>
+          <div class="fb">The truck HAS arrived. She HAS called.</div>
+        </div>
+        <div class="qbox" data-q="q9">
+          <div class="qn">3. Correct:</div>
+          <div class="opts">
+            <button class="opt">I have three years living here.</button>
+            <button class="opt" data-ok="1">I have lived here for three years.</button>
+            <button class="opt">I have living here since three years.</button>
+          </div>
+          <div class="fb">HAVE + lived + for. Your Spanish trap, fixed.</div>
+        </div>
+        <div class="qbox" data-q="q10">
+          <div class="qn">4. The inventory is still not done.</div>
+          <div class="opts">
+            <button class="opt">We didn't finished the inventory.</button>
+            <button class="opt" data-ok="1">We haven't finished the inventory yet.</button>
+            <button class="opt">We haven't finish the inventory.</button>
+          </div>
+          <div class="fb">haven't + finished + yet. The shift is still open.</div>
+        </div>
+        <div class="qbox" data-q="q11">
+          <div class="qn">5. Yesterday at 4 the truck…</div>
+          <div class="opts">
+            <button class="opt">has arrived</button>
+            <button class="opt" data-ok="1">arrived</button>
+            <button class="opt">have arrived</button>
+          </div>
+          <div class="fb">Yesterday = simple past. HAVE is for a load that still matters.</div>
+        </div>
+        <div class="qbox" data-q="q12">
+          <div class="qn">6. Do you have finished? should be</div>
+          <div class="opts">
+            <button class="opt">Do you finished?</button>
+            <button class="opt" data-ok="1">Have you finished?</button>
+            <button class="opt">Have you finish?</button>
+          </div>
+          <div class="fb">No DO in this machine. HAVE you + participle.</div>
+        </div>
+        <div class="qbox" data-q="q13">
+          <div class="qn">7. A colleague on the radio. Shortest true sentence:</div>
+          <div class="opts">
+            <button class="opt">What happened is that DHL was supposed to come but then</button>
+            <button class="opt" data-ok="1">DHL hasn't arrived yet.</button>
+            <button class="opt">DHL no come still</button>
+          </div>
+          <div class="fb">Status. Two pieces. Yet.</div>
+        </div>
+        <div class="qbox" data-q="q14">
+          <div class="qn">8. If I ___ checked the labels, we would have found the box.</div>
+          <div class="opts">
+            <button class="opt">have</button>
+            <button class="opt">would have</button>
+            <button class="opt" data-ok="1">had</button>
+          </div>
+          <div class="fb">If I HAD + participle. The door already closed.</div>
+        </div>
+        <div class="qbox" data-q="q15">
+          <div class="qn">9. Have you ever ___ to Colombia?</div>
+          <div class="opts">
+            <button class="opt">to travel in</button>
+            <button class="opt" data-ok="1">traveled to</button>
+            <button class="opt">went to</button>
+          </div>
+          <div class="fb">Ever + participle. To a country. From your real card.</div>
+        </div>
+        <div class="qbox" data-q="q16">
+          <div class="qn">10. The line of this class is…</div>
+          <div class="opts">
+            <button class="opt">Explain the whole movie first</button>
+            <button class="opt" data-ok="1">Have you loaded it yet?</button>
+            <button class="opt">I have go</button>
+          </div>
+          <div class="fb">HAVE + loaded + yet. Three pieces. Take that onto the floor.</div>
+        </div>
+        <p id="quizScore" style="font-weight:700;margin-top:8px;"></p>
+      </div>
+      <div class="next">
+        <button class="btn btn-w" onclick="showPanel('radio')">Back</button>
+        <button class="btn btn-c" onclick="showPanel('report')">Your shift report</button>
+      </div>
+    </section>
+
+    <section class="panel" id="report">
+      <div class="pad">
+        <h2>Your shift report, Andrés</h2>
+        <p class="lead">Four short sentences. If a sentence needs a comma and a because, cut it.</p>
+        <div class="es"><b>Usa:</b> I have already… / I haven't… yet / Has DHL…? / If I had…</div>
+
+        <p>1. One thing you have already done today.<br />
+        2. One thing you haven't finished yet.<br />
+        3. A question for a colleague, with yet or ever.<br />
+        4. One closed door: If I had… / If I hadn't…</p>
+
+        <textarea id="verdictBox" placeholder="I have already scanned the boxes. I haven't called DHL yet..."></textarea>
+        <div class="row">
+          <button class="btn btn-w" type="button" onclick="speak(document.getElementById('verdictBox').value)">Listen to me</button>
+          <button class="btn btn-c" type="button" onclick="saveVerdict()">Save report</button>
+        </div>
+        <p class="saved" id="saved">Saved on this phone. Read it out loud to Gabriel.</p>
+
+        <div class="verdict-card" style="margin-top:22px;">
+          <h2>The dock is clear</h2>
+          <p>HAVE plus the third column. Yet at the end. No extra boxes. That is the whole shift.</p>
+          <p style="margin:0;color:var(--muted);font-size:14.5px;">ARCHES · Andrés · The Shift · 2026-08-27</p>
+        </div>
+      </div>
+
+      <details class="teacher">
+        <summary>Notas para Gabriel · plan de clase</summary>
+        <div class="body">
+          El salto: de la máquina de 3 piezas en tarjetas a un turno de almacén. HAVE deja de ser gramática y se vuelve radio. Corta las palabras de más — ese es el otro músculo de Andrés.
+          <ol>
+            <li><b>Load (4 min).</b> Él oye la frase larga y la corta. Tú callas. Si explica, pide the radio version.</li>
+            <li><b>Three (6 min).</b> HAVE / HAS / tercera columna. Trampa viva: I have three years living here.</li>
+            <li><b>Column (8 min).</b> Toca los verbos del muelle. gone, done, taken, sent, left. Ríanse de I have went.</li>
+            <li><b>Dock (8 min).</b> yet / already / never / ever. Has the truck arrived yet? Have you ever called DHL?</li>
+            <li><b>Hadn't (6 min).</b> Una sola frase de If I had. No explicar el condicional: cargarlo.</li>
+            <li><b>Radio + report (8 min).</b> Tres cortes. Luego cuatro oraciones cortas. Celebrar la más corta que sea verdad.</li>
+          </ol>
+          Nivel A2–B1. Oraciones cortas a propósito. Colombia, almacén, DHL, colegas, inventario: su mundo, no un libro. No mezclar DO con HAVE. Yesterday = pasado simple.
+        </div>
+      </details>
+    </section>
+  </main>
+
+  <footer class="tiny">ARCHES · Andrés · The Shift. <a href="../?name=Andres">Volver a tus temas</a></footer>
+</div>
+
+<noscript>
+  <style>.panel{display:block !important; transform:none !important; opacity:1 !important;}</style>
+</noscript>
+
+<script>
+(function(){
+  "use strict";
+  const KEY = "shift_andres_v1";
+  const mem = {};
+  const store = {
+    get: function(d){ try{ const v=localStorage.getItem(KEY); return v?JSON.parse(v):d; }catch(e){ return mem.data||d; } },
+    set: function(v){ try{ localStorage.setItem(KEY, JSON.stringify(v)); }catch(e){ mem.data=v; } }
+  };
+  let state = store.get({ panel:"load", quiz:{}, report:"", verbs:{}, cuts:0 });
+  const startPanel = new URLSearchParams(location.search).get("p");
+  if(startPanel && ["load","three","column","dockp","hadnt","radio","quiz","report"].indexOf(startPanel)>=0){
+    state.panel = startPanel;
+  }
+
+  const VERBS = [
+    { id:"load", line:"load, loaded, loaded", say:"load, loaded, loaded. I have loaded the pallets." },
+    { id:"scan", line:"scan, scanned, scanned", say:"scan, scanned, scanned. I have already scanned the labels." },
+    { id:"send", line:"send, sent, sent", say:"send, sent, sent. We have sent the shipment." },
+    { id:"call", line:"call, called, called", say:"call, called, called. She has called DHL." },
+    { id:"check", line:"check, checked, checked", say:"check, checked, checked. If I had checked the inventory." },
+    { id:"leave", line:"leave, left, left", say:"leave, left, left. My colleague has already left." },
+    { id:"find", line:"find, found, found", say:"find, found, found. We have not found the box yet." },
+    { id:"take", line:"take, took, taken", say:"take, took, taken. DHL has taken the pallet." },
+    { id:"go", line:"go, went, gone", say:"go, went, gone. The truck has gone." },
+    { id:"do", line:"do, did, done", say:"do, did, done. We have done the inventory." }
+  ];
+
+  const panels = ["load","three","column","dockp","hadnt","radio","quiz","report"];
+  function showPanel(id){
+    document.querySelectorAll(".panel").forEach(function(p){ p.classList.toggle("on", p.id===id); });
+    document.querySelectorAll(".dock button").forEach(function(b){ b.classList.toggle("on", b.getAttribute("data-panel")===id); });
+    state.panel = id;
+    store.set(state);
+    updateBar();
+    const dock = document.querySelector("nav.dock");
+    const html = document.documentElement;
+    const prev = html.style.scrollBehavior;
+    html.style.scrollBehavior = "auto";
+    window.scrollTo(0, dock ? dock.offsetTop - 2 : 0);
+    html.style.scrollBehavior = prev;
+  }
+  window.showPanel = showPanel;
+
+  function updateBar(){
+    const i = Math.max(0, panels.indexOf(state.panel));
+    document.getElementById("bar").style.width = ((i+1)/panels.length*100) + "%";
+    const n = Object.keys(state.verbs||{}).length;
+    const notes = document.getElementById("notes");
+    if(!n && !state.cuts){ notes.classList.remove("show"); notes.innerHTML=""; return; }
+    notes.classList.add("show");
+    const bits = [];
+    if(n) bits.push("You loaded " + n + " of 10 verbs.");
+    if(state.cuts) bits.push(state.cuts + " sentences cut for the radio.");
+    notes.innerHTML = "<b>Shift notes.</b> " + bits.join(" ");
+  }
+
+  const vWrap = document.getElementById("verbs");
+  if(vWrap){
+    VERBS.forEach(function(m){
+      const b = document.createElement("button");
+      b.className = "vb" + (state.verbs[m.id] ? " on" : "");
+      b.type = "button";
+      b.innerHTML = "<b>"+m.line.split(",")[0]+"</b><span>"+m.line+"</span>";
+      b.addEventListener("click", function(){
+        speak(m.say);
+        state.verbs[m.id] = true;
+        b.classList.add("on");
+        store.set(state);
+        updateBar();
+      });
+      vWrap.appendChild(b);
+    });
+  }
+
+  document.querySelectorAll("[data-cut]").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      const box = btn.closest(".cut");
+      box.classList.add("short");
+      btn.textContent = "Listen";
+      speak(box.getAttribute("data-say"));
+      state.cuts = (state.cuts||0) + 1;
+      store.set(state);
+      updateBar();
+    });
+  });
+
+  document.querySelectorAll(".qbox").forEach(function(box){
+    const id = box.getAttribute("data-q");
+    const fb = box.querySelector(".fb");
+    const opts = box.querySelectorAll(".opt");
+    if(state.quiz[id]){
+      opts.forEach(function(o){
+        if(o.getAttribute("data-ok")) o.classList.add("ok");
+        o.disabled = true;
+      });
+      if(fb) fb.classList.add("show","good");
+    }
+    opts.forEach(function(btn){
+      btn.addEventListener("click", function(){
+        if(btn.disabled) return;
+        const ok = btn.hasAttribute("data-ok");
+        if(ok){
+          opts.forEach(function(o){ o.disabled = true; });
+          btn.classList.add("ok");
+          if(fb){ fb.classList.add("show","good"); fb.classList.remove("poor"); }
+          state.quiz[id] = true;
+          store.set(state);
+          scoreQuiz();
+        } else {
+          btn.classList.add("bad");
+          btn.disabled = true;
+          if(fb){ fb.classList.add("show","poor"); }
+        }
+      });
+    });
+  });
+
+  function scoreQuiz(){
+    const need = ["q7","q8","q9","q10","q11","q12","q13","q14","q15","q16"];
+    const n = need.filter(function(k){ return state.quiz[k]; }).length;
+    const el = document.getElementById("quizScore");
+    if(el) el.textContent = n ? ("Score: " + n + " / 10") : "";
+  }
+
+  function saveVerdict(){
+    const t = document.getElementById("verdictBox").value.trim();
+    state.report = t;
+    store.set(state);
+    const s = document.getElementById("saved");
+    s.classList.add("show");
+    s.textContent = t ? "Saved on this phone. Read it out loud to Gabriel." : "Write four short sentences first.";
+  }
+  window.saveVerdict = saveVerdict;
+
+  let voice = null, audioReady = false;
+  function loadVoice(){
+    if(!window.speechSynthesis) return;
+    const vs = speechSynthesis.getVoices();
+    const NOV=/albert|bad news|bahh|bells|boing|bubbles|cellos|good news|jester|organ|superstar|trinoids|whisper|wobble|zarvox|junior|kathy|ralph|fred/i;
+    const en = vs.filter(function(v){ return /^en[-_]/i.test(v.lang) && !NOV.test(v.name); });
+    const pref = ["Samantha","Google US English","Microsoft Aria","Microsoft Jenny","Microsoft Zira","Alex"];
+    voice = null;
+    for(let i=0;i<pref.length;i++){
+      const m = en.find(function(v){ return v.name.indexOf(pref[i])===0; });
+      if(m){ voice=m; break; }
+    }
+    if(!voice) voice = en.find(function(v){ return /en[-_]US/i.test(v.lang); }) || en[0] || null;
+  }
+  if(window.speechSynthesis){ loadVoice(); speechSynthesis.onvoiceschanged = loadVoice; }
+  function unlockAudio(){
+    if(audioReady || !window.speechSynthesis) return;
+    try{ const u=new SpeechSynthesisUtterance(""); u.volume=0; speechSynthesis.speak(u); audioReady=true; }catch(e){}
+  }
+  document.addEventListener("touchstart", unlockAudio, {once:true});
+  document.addEventListener("click", unlockAudio, {once:true});
+  function speak(text){
+    if(!text || !window.speechSynthesis) return;
+    try{
+      speechSynthesis.cancel();
+      const u=new SpeechSynthesisUtterance(text);
+      u.lang="en-US"; u.rate=0.9; if(voice) u.voice=voice;
+      speechSynthesis.speak(u);
+    }catch(e){}
+  }
+  window.speak = speak;
+
+  if(state.report) document.getElementById("verdictBox").value = state.report;
+  scoreQuiz();
+  if(state.panel && state.panel!=="load") showPanel(state.panel);
+  else updateBar();
+})();
+</script>
+</body>
+</html>
