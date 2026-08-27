@@ -123,8 +123,8 @@
     "level": "B1",
     "l1": "Spanish",
     "context": "Venezolana de Maracaibo. Maestra de PreK en New Jersey. Mamá de tres.",
-    "greeting": "¡Hellooooo Ale! Tus frases de verdad: del salón de PreK a la vida diaria. Un poquito cada día... hasta hablar como gringa. 😉",
-    "version": "2026-08-24c"
+    "greeting": "Hoy: Macondo. Many years later… el hielo, la soledad, y el it que no se esconde.",
+    "version": "2026-08-27"
   },
   "tracks": [
     {
@@ -780,6 +780,11 @@
   ],
   "links": [
     {
+      "title": "Macondo",
+      "note": "Clase de hoy. Cien años de soledad en inglés: el hielo, los nombres, y el it.",
+      "url": "macondo/"
+    },
+    {
       "title": "Rutina de Articulación",
       "note": "Calentamiento de 72 segundos con la voz de Teacher Gabriel. Cada mañana, antes de hablar inglés.",
       "url": "../apps/rutina/?name=Alejandra"
@@ -925,8 +930,16 @@
     const sc=streakCount();
     if(sc>0) html+='<div class="streak">'+flameSVG+'<span class="num">'+sc+'</span><span class="lab">'+(sc===1?'día seguido':'días seguidos')+'</span></div>';
     html+='</div>';
-    html+='<div class="tracks-label">Tus temas</div>';
+    html+='<div class="tracks-label">Hoy</div>';
     app.innerHTML=html;
+    if(STUDENT.links && STUDENT.links[0] && STUDENT.links[0].url==="macondo/"){
+      const L=STUDENT.links[0];
+      const feat=el('<a class="track" style="display:block;text-decoration:none;border-color:var(--terra)" href="'+L.url+'">'+
+        '<div class="track-head"><div class="track-title">'+esc(L.title)+'</div><div class="track-count">hoy</div></div>'+
+        (L.note?'<div class="track-note">'+esc(L.note)+'</div>':'')+'</a>');
+      app.appendChild(feat);
+    }
+    app.appendChild(el('<div class="tracks-label">Tus temas</div>'));
     STUDENT.tracks.forEach(t=>{
       const pct=trackMastery(t);
       const card=el('<div class="track">'+
@@ -939,6 +952,7 @@
     if(STUDENT.links && STUDENT.links.length){
       app.appendChild(el('<div class="tracks-label">Tus otras apps</div>'));
       STUDENT.links.forEach(function(L){
+        if(L.url==="macondo/") return;
         const a=el('<a class="track" style="display:block;text-decoration:none" href="'+L.url+'">'+
           '<div class="track-head"><div class="track-title">'+esc(L.title)+'</div><div class="track-count">›</div></div>'+
           (L.note?'<div class="track-note">'+esc(L.note)+'</div>':'')+'</a>');

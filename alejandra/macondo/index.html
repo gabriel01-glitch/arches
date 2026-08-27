@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Macondo · Alejandra</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,500;0,600;0,700;1,500&family=Karla:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --cacao:#241910;
+    --ink:#1f1712;
+    --pith:#f6f0e4;
+    --mist:#ebe3d4;
+    --leaf:#2f4a32;
+    --leaf-d:#1f3424;
+    --ice:#4a6c72;
+    --ice-s:#dce8ea;
+    --flower:#c45c2c;
+    --flower-d:#8a3a18;
+    --flower-s:#f3e0d4;
+    --ok:#2f6a48;
+    --ok-s:#dceee4;
+    --no:#9a3a28;
+    --no-s:#f6e4dc;
+    --muted:#6a5d4e;
+    --line:#d8ccb4;
+    --ease-out:cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  html,body{margin:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    min-height:100vh;
+    color:var(--ink);
+    font-family:Karla,system-ui,sans-serif;
+    background:var(--cacao);
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{background:var(--ice-s); color:var(--ink);}
+  :focus-visible{outline:3px solid var(--flower); outline-offset:3px;}
+  img{max-width:100%; display:block;}
+
+  .shell{max-width:640px; margin:0 auto; padding:0 0 96px;}
+
+  .hero{position:relative; min-height:72vh; color:var(--pith);}
+  .hero img{width:100%; height:72vh; object-fit:cover; object-position:78% 60%;}
+  .hero-scrim{
+    position:absolute; inset:auto 0 0 0; height:62%;
+    background:linear-gradient(180deg, transparent, rgba(36,25,16,.55) 38%, var(--cacao) 100%);
+    pointer-events:none;
+  }
+  .hero-copy{position:absolute; left:0; right:0; bottom:0; padding:18px 18px 22px;}
+  .hero h1{
+    font-family:Bitter,Georgia,serif;
+    font-weight:700;
+    font-size:clamp(28px,6.8vw,44px);
+    line-height:.98;
+    letter-spacing:-.03em;
+    margin:0 0 10px;
+    color:var(--pith);
+  }
+  .hero p{
+    margin:0 0 16px;
+    font-size:17px;
+    line-height:1.45;
+    color:#ebe3d4;
+    max-width:34em;
+  }
+  .start{
+    display:inline-flex; align-items:center; justify-content:center;
+    min-height:48px; padding:12px 18px;
+    background:var(--leaf); color:var(--pith);
+    border:0; border-radius:12px;
+    font-family:inherit; font-weight:700; font-size:16px;
+    cursor:pointer;
+  }
+  .start:active{transform:scale(.97); background:var(--leaf-d);}
+
+  .backhome{
+    position:absolute; top:12px; left:12px; z-index:4;
+    display:inline-flex; align-items:center; min-height:44px;
+    padding:8px 14px; border-radius:999px;
+    background:rgba(36,25,16,.62); color:var(--pith);
+    text-decoration:none; font-weight:700; font-size:14px;
+    border:1px solid rgba(246,240,228,.18);
+  }
+
+  nav.dock{
+    position:sticky; top:0; z-index:20;
+    background:rgba(36,25,16,.92);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid rgba(246,240,228,.08);
+    padding:8px 8px 10px;
+    display:flex; gap:6px; overflow-x:auto;
+    scrollbar-width:none;
+  }
+  nav.dock::-webkit-scrollbar{display:none;}
+  .dock button{
+    flex:0 0 auto;
+    min-height:44px; padding:8px 12px;
+    border:1px solid rgba(246,240,228,.14);
+    background:transparent; color:#ebe3d4;
+    border-radius:999px;
+    font-family:inherit; font-weight:700; font-size:13px;
+    cursor:pointer; white-space:nowrap;
+  }
+  .dock button.on{background:var(--pith); color:var(--ink); border-color:var(--pith);}
+
+  .paper{
+    background:var(--pith);
+    color:var(--ink);
+    border-radius:22px 22px 0 0;
+    margin-top:-14px;
+    position:relative;
+    padding:8px 0 28px;
+    box-shadow:0 -12px 40px rgba(0,0,0,.25);
+  }
+  .pad{padding:22px 18px 12px;}
+  .panel{display:none;}
+  .panel.on{display:block; animation:enter .45s var(--ease-out);}
+  @keyframes enter{
+    from{opacity:0; transform:translateY(10px);}
+    to{opacity:1; transform:none;}
+  }
+
+  h2{
+    font-family:Bitter,Georgia,serif;
+    font-weight:700;
+    font-size:clamp(26px,6.2vw,34px);
+    letter-spacing:-.025em;
+    line-height:1.08;
+    margin:6px 0 10px;
+  }
+  h3{
+    font-family:Bitter,Georgia,serif;
+    font-weight:600;
+    font-size:22px;
+    letter-spacing:-.02em;
+    margin:0 0 8px;
+    line-height:1.15;
+  }
+  p{margin:0 0 12px; line-height:1.55; font-size:17px;}
+  .lead{font-size:18px;}
+
+  .es{
+    background:#f3e4c8;
+    border:1px solid #e3c56a;
+    border-radius:12px;
+    padding:11px 13px;
+    margin:10px 0 16px;
+    color:#5c4314;
+    font-size:15.5px;
+    line-height:1.5;
+  }
+  .es b{color:#3f2d0c;}
+
+  .tag{
+    display:inline-block;
+    font-size:11.5px; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
+    padding:4px 9px; border-radius:999px; margin-bottom:8px;
+  }
+  .tag.ice{background:var(--ice-s); color:var(--ice);}
+  .tag.hot{background:var(--flower-s); color:var(--flower-d);}
+  .tag.ok{background:var(--ok-s); color:var(--ok);}
+
+  .say{
+    background:var(--ice-s);
+    border:1px solid #b7c9ce;
+    border-radius:12px;
+    padding:12px 13px;
+    margin:8px 0 14px;
+    color:var(--ice);
+  }
+  .say .lab{
+    display:flex; align-items:center; gap:8px;
+    font-size:12px; font-weight:700; letter-spacing:.04em; text-transform:uppercase;
+    color:var(--ice); margin-bottom:6px;
+  }
+  .say p{margin:0; font-size:17px; font-weight:700; line-height:1.4; color:var(--ink);}
+  .listen{
+    margin-left:auto;
+    border:0; background:transparent; color:var(--ice);
+    font-family:inherit; font-weight:700; font-size:13px;
+    cursor:pointer; padding:4px 0; min-height:32px;
+  }
+
+  .shot{
+    margin:4px 0 16px;
+    border-radius:14px;
+    overflow:hidden;
+    background:#241910;
+  }
+  .shot img{width:100%; height:220px; object-fit:cover;}
+  .cap{
+    padding:9px 12px;
+    font-size:13px; color:var(--muted); font-weight:700;
+    background:var(--mist);
+  }
+
+  .idea{
+    background:var(--mist);
+    border:1.5px solid var(--line);
+    border-radius:14px;
+    padding:14px;
+    margin:0 0 10px;
+  }
+
+  .names{display:grid; grid-template-columns:1fr 1fr; gap:8px; margin:10px 0 16px;}
+  .nm{
+    background:var(--pith);
+    border:1.5px solid var(--line);
+    border-radius:12px;
+    padding:12px 10px;
+    text-align:left;
+    font-family:inherit; color:inherit;
+    min-height:72px; cursor:pointer;
+  }
+  .nm b{display:block; font-family:Bitter,Georgia,serif; font-size:16px;}
+  .nm span{display:block; color:var(--muted); font-size:12.5px; font-weight:600; margin-top:3px;}
+  .nm.on{background:var(--ice-s); border-color:var(--ice); color:var(--ice);}
+
+  .qbox{
+    background:var(--mist);
+    border:1.5px solid var(--line);
+    border-radius:14px;
+    padding:14px;
+    margin:0 0 12px;
+  }
+  .qn{font-weight:700; margin-bottom:10px; font-size:17px; line-height:1.35;}
+  .opts{display:flex; flex-direction:column; gap:8px;}
+  .opt{
+    text-align:left; min-height:46px;
+    background:var(--pith); border:1.5px solid var(--line); border-radius:12px;
+    padding:11px 12px; font-weight:700; font-size:15.5px;
+    cursor:pointer; font-family:inherit; color:inherit;
+  }
+  .opt.ok{background:var(--ok-s); border-color:var(--ok); color:var(--ok);}
+  .opt.bad{background:var(--no-s); border-color:var(--no); color:var(--no);}
+  .opt:disabled{cursor:default;}
+  .fb{display:none; margin-top:10px; font-size:15px; line-height:1.45;}
+  .fb.show{display:block;}
+  .fb.good{color:var(--ok);}
+  .fb.poor{color:var(--no);}
+
+  .phrase{
+    background:var(--pith);
+    border:1.5px dashed var(--line);
+    border-radius:12px;
+    padding:12px;
+    margin:0 0 10px;
+  }
+  .phrase b{display:block; font-family:Bitter,Georgia,serif; font-size:20px; margin-bottom:4px;}
+  .phrase span{color:var(--muted); font-size:14.5px;}
+
+  textarea{
+    width:100%;
+    border:1.5px solid var(--line);
+    border-radius:12px;
+    padding:12px 13px;
+    font-family:inherit; font-size:16.5px; color:var(--ink);
+    background:#fff;
+    min-height:150px; resize:vertical; line-height:1.5;
+  }
+  textarea:focus{outline:none; border-color:var(--leaf);}
+
+  .btn{
+    border:0; border-radius:12px;
+    min-height:48px; padding:12px 16px;
+    font-family:inherit; font-weight:700; font-size:16px;
+    cursor:pointer;
+  }
+  .btn-c{background:var(--leaf); color:var(--pith);}
+  .btn-c:active{background:var(--leaf-d); transform:scale(.97);}
+  .btn-f{background:var(--flower); color:var(--pith);}
+  .btn-f:active{background:var(--flower-d); transform:scale(.97);}
+  .btn-w{background:var(--mist); color:var(--ink); border:1.5px solid var(--line);}
+  .row{display:flex; gap:8px; flex-wrap:wrap; margin-top:10px;}
+
+  .notes{
+    display:none;
+    margin:0 18px 8px;
+    background:#241910; color:#ebe3d4;
+    border-radius:12px; padding:10px 12px;
+    font-size:13.5px; line-height:1.4;
+  }
+  .notes.show{display:block;}
+  .notes b{color:#f3e4c8;}
+
+  .prog{
+    height:6px; background:rgba(246,240,228,.12);
+    border-radius:99px; overflow:hidden; margin:0 18px 8px;
+  }
+  .prog > i{display:block; height:100%; width:0; background:#c5d8dc; transition:width .4s var(--ease-out);}
+
+  .glos{display:grid; gap:8px; margin:8px 0 16px;}
+  .gitem{background:var(--mist); border:1px solid var(--line); border-radius:12px; padding:11px 12px;}
+  .gitem b{display:block; font-size:17px;}
+  .gitem i{color:var(--flower-d); font-style:normal; font-weight:700; font-size:13.5px;}
+  .gitem span{display:block; color:var(--muted); font-size:14.5px; margin-top:2px;}
+
+  .verdict-card{
+    background:linear-gradient(180deg,#f6f0e4,#dce8ea);
+    border:2px solid var(--ice);
+    border-radius:18px;
+    padding:22px 16px;
+    text-align:center;
+  }
+  .verdict-card h2{margin-bottom:6px;}
+  .saved{display:none; color:var(--ok); font-weight:700; margin-top:8px;}
+  .saved.show{display:block;}
+
+  footer.tiny{
+    color:rgba(246,240,228,.45);
+    font-size:12.5px; text-align:center;
+    padding:8px 18px 24px;
+  }
+  footer.tiny a{color:#c5d8dc;}
+
+  .next{margin:18px 18px 8px; display:flex; gap:8px;}
+  .next .btn{flex:1;}
+
+  .teacher{
+    margin:18px 18px 0;
+    background:var(--mist);
+    border:1.5px dashed var(--line);
+    border-radius:14px;
+    padding:12px 14px;
+  }
+  .teacher summary{cursor:pointer; font-weight:800; color:var(--muted); font-size:13px; list-style:none;}
+  .teacher summary::-webkit-details-marker{display:none;}
+  .teacher .body{font-size:13.5px; line-height:1.5; margin-top:10px;}
+  .teacher ol{margin:8px 0 0; padding-left:18px;}
+  .teacher li{margin:6px 0;}
+
+  @media (hover:hover) and (pointer:fine){
+    .start:hover{transform:translateY(-2px); box-shadow:0 10px 22px rgba(0,0,0,.28);}
+    .opt:hover, .nm:hover{transform:translateY(-2px);}
+    .opt, .nm, .start{transition:transform .18s var(--ease-out), background .18s ease, border-color .18s ease;}
+  }
+  @media (max-width:420px){
+    .names{grid-template-columns:1fr;}
+    .hero, .hero img{min-height:56vh; height:56vh;}
+    .hero img{object-position:80% 58%;}
+    .hero p{font-size:16px;}
+    .shot img{height:200px;}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none !important; transition:none !important;}
+    html{scroll-behavior:auto;}
+    .panel.on{animation:none;}
+  }
+</style>
+</head>
+<body>
+<!--
+THESIS: Alejandra already owns this book in Spanish. Tonight she learns to speak the ice, the rain, and the missing it in English, without translating Gabo word for word.
+OWN-WORLD: Hot river afternoon over banana pith. Bitter + Karla. Leaf green for competence, ice for the miracle, marigold for the flowers. No terra, no teal, no warehouse yellow, no purple.
+STORY: She leaves able to say the opening, name solitude vs loneliness, put it in the weather, and talk about Macondo like a reader.
+FIRST VIEWPORT: Full-bleed ice on a veranda, title, one button: Open the book.
+FORM: Literary case file / read-aloud. Code-led student class.
+FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
+-->
+<div class="shell">
+  <header class="hero" id="top">
+    <a class="backhome" href="../?name=Alejandra">‹ Temas</a>
+    <img src="img/hero.jpg" width="1248" height="832" alt="A block of ice melting on a wooden table on a river veranda in tropical heat." />
+    <div class="hero-scrim"></div>
+    <div class="hero-copy">
+      <h1>Alejandra,<br />many years later.</h1>
+      <p>You already have this book in Spanish.<br />Tonight you say the ice in English.</p>
+      <button class="start" onclick="showPanel('open')">Open the book</button>
+    </div>
+  </header>
+
+  <nav class="dock" aria-label="Class sections">
+    <button class="on" data-panel="open" onclick="showPanel('open')">1. Opening</button>
+    <button data-panel="ice" onclick="showPanel('ice')">2. Ice</button>
+    <button data-panel="names" onclick="showPanel('names')">3. Names</button>
+    <button data-panel="solitude" onclick="showPanel('solitude')">4. Solitude</button>
+    <button data-panel="rain" onclick="showPanel('rain')">5. Rain</button>
+    <button data-panel="speak" onclick="showPanel('speak')">6. Speak</button>
+    <button data-panel="quiz" onclick="showPanel('quiz')">7. Quiz</button>
+    <button data-panel="yours" onclick="showPanel('yours')">8. Yours</button>
+  </nav>
+
+  <div class="prog" aria-hidden="true"><i id="bar"></i></div>
+  <div class="notes" id="notes"></div>
+
+  <main class="paper">
+
+    <section class="panel on" id="open">
+      <div class="pad">
+        <h2>The first sentence is a door</h2>
+        <p class="lead">García Márquez wrote it in Spanish. Gregory Rabassa carried it into English. You do not have to be Rabassa. You have to be able to say it out loud, like a teacher who loves the book.</p>
+        <div class="es"><b>En simple:</b> No traduzcas palabra por palabra. Di la música. Y no te comas el <i>it</i> — tu clásico de siempre.</div>
+
+        <div class="say">
+          <div class="lab">The opening, in English <button class="listen" onclick="speak('Many years later, as he faced the firing squad, Colonel Aureliano Buendia was to remember that distant afternoon when his father took him to discover ice.')">Listen</button></div>
+          <p>Many years later, as he faced the firing squad, Colonel Aureliano Buendía was to remember that distant afternoon when his father took him to discover ice.</p>
+        </div>
+
+        <article class="idea">
+          <span class="tag ice">was to remember</span>
+          <h3>Future inside the past</h3>
+          <p>Spanish: <i>había de recordar</i>. English: <b>was to remember</b>. The book starts at the end of a life and walks backward to a child touching ice. Time is a loop. English has a tense for that.</p>
+        </article>
+
+        <div class="say">
+          <div class="lab">Say just this much <button class="listen" onclick="speak('Many years later, he was to remember the ice.')">Listen</button></div>
+          <p>Many years later, he was to remember the ice.</p>
+        </div>
+
+        <div class="qbox" data-q="q1">
+          <div class="qn">The first miracle in the book is not a ghost. It is…</div>
+          <div class="opts">
+            <button class="opt">a flying carpet as the main plot</button>
+            <button class="opt" data-ok="1">ice, on a hot afternoon</button>
+            <button class="opt">a cellphone in Macondo</button>
+          </div>
+          <div class="fb">Ice in the Caribbean heat. Ordinary and impossible. That is the whole method of the book.</div>
+        </div>
+      </div>
+      <div class="next">
+        <button class="btn btn-c" onclick="showPanel('ice')">Discover ice</button>
+      </div>
+    </section>
+
+    <section class="panel" id="ice">
+      <div class="pad">
+        <h2>It was ice. English needs it.</h2>
+        <p class="lead">José Arcadio Buendía takes the children to the gypsies. Aureliano puts his hand on the ice. In Spanish you can hide the subject. In English, the weather and the thing both want <b>it</b>.</p>
+        <div class="es"><b>En simple:</b> Tu error de siempre. <s>Was excellent.</s> <b>It was excellent.</b> <s>Is snowing.</s> <b>It's snowing.</b> Macondo no perdona el <i>it</i> tampoco.</div>
+
+        <figure class="shot">
+          <img src="img/ice.jpg" width="1152" height="864" alt="A block of ice on a metal tray, a banana-leaf shadow across it." loading="lazy" />
+          <figcaption class="cap">The first wonder. Aureliano is a child. It is ice.</figcaption>
+        </figure>
+
+        <div class="say">
+          <div class="lab">Broken, the Alejandra way <button class="listen" onclick="speak('Was ice. Is cold. Was a miracle.')">Listen</button></div>
+          <p>Was ice. Is cold. Was a miracle.</p>
+        </div>
+        <div class="say">
+          <div class="lab">Loaded <button class="listen" onclick="speak('It was ice. It is cold. It was a miracle.')">Listen</button></div>
+          <p>It was ice. It is cold. It was a miracle.</p>
+        </div>
+        <div class="say">
+          <div class="lab">The line you can take home <button class="listen" onclick="speak('His father took him to discover ice.')">Listen</button></div>
+          <p>His father took him to discover ice.</p>
+        </div>
+
+        <div class="qbox" data-q="q2">
+          <div class="qn">Which one is English?</div>
+          <div class="opts">
+            <button class="opt">Was excellent, the ice.</button>
+            <button class="opt" data-ok="1">It was ice. It felt like a miracle.</button>
+            <button class="opt">Is snowing in Macondo.</button>
+          </div>
+          <div class="fb">It was. It felt. It's snowing. The book is full of weather. English never drops it.</div>
+        </div>
+      </div>
+      <div class="next">
+        <button class="btn btn-w" onclick="showPanel('open')">Back</button>
+        <button class="btn btn-c" onclick="showPanel('names')">The names</button>
+      </div>
+    </section>
+
+    <section class="panel" id="names">
+      <div class="pad">
+        <h2>If you love the book, say the names</h2>
+        <p class="lead">English speakers will ask you about it. If you freeze on Aureliano, the conversation dies. Tap a name. Hear it. Then you can talk.</p>
+        <div class="es"><b>En simple:</b> No hace falta el árbol genealógico entero. Seis nombres. Luego una frase: The Buendía family cannot escape its own story.</div>
+
+        <figure class="shot">
+          <img src="img/street.jpg" width="1152" height="864" alt="An empty river-town street of whitewashed houses and banana trees at late afternoon." loading="lazy" />
+          <figcaption class="cap">A town like Macondo. Heat, a river, names that repeat.</figcaption>
+        </figure>
+
+        <div class="names" id="names"></div>
+
+        <div class="say">
+          <div class="lab">The one-sentence book <button class="listen" onclick="speak('The book is about a family in Macondo that cannot escape its own story.')">Listen</button></div>
+          <p>The book is about a family in Macondo that cannot escape its own story.</p>
+        </div>
+
+        <div class="qbox" data-q="q3">
+          <div class="qn">Who founds Macondo?</div>
+          <div class="opts">
+            <button class="opt">Only the gypsies</button>
+            <button class="opt" data-ok="1">José Arcadio Buendía and Úrsula Iguarán</button>
+            <button class="opt">Colonel Aureliano, as a child</button>
+          </div>
+          <div class="fb">The couple at the start. The names will come back, and back, and back.</div>
+        </div>
+      </div>
+      <div class="next">
+        <button class="btn btn-w" onclick="showPanel('ice')">Back</button>
+        <button class="btn btn-c" onclick="showPanel('solitude')">Solitude</button>
+      </div>
+    </section>
+
+    <section class="panel" id="solitude">
+      <div class="pad">
+        <h2>Solitude is not loneliness</h2>
+        <p class="lead">The English title is <i>One Hundred Years of Solitude</i>, not of loneliness. You once said <i>I wanted stay alone</i>. Three different words. The book lives in the first.</p>
+        <div class="es"><b>En simple:</b> alone = estar solo. loneliness = la tristeza de faltar gente. solitude = la soledad grande, a veces elegida, a veces una condena. El libro es lo tercero.</div>
+
+        <div class="phrase">
+          <b>alone</b>
+          <span>A fact. I wanted to stay alone. (Tu frase de clase, con to.)</span>
+        </div>
+        <div class="phrase">
+          <b>loneliness</b>
+          <span>A feeling of missing people. Sad. Small.</span>
+        </div>
+        <div class="phrase">
+          <b>solitude</b>
+          <span>A condition. Úrsula, Aureliano, Macondo. Big. The title.</span>
+        </div>
+
+        <div class="say">
+          <div class="lab">Say this <button class="listen" onclick="speak('The Buendias live in solitude, not just loneliness.')">Listen</button></div>
+          <p>The Buendías live in solitude, not just loneliness.</p>
+        </div>
+        <div class="say">
+          <div class="lab">Your old sentence, fixed <button class="listen" onclick="speak('I wanted to stay alone.')">Listen</button></div>
+          <p>I wanted to stay alone.</p>
+        </div>
+
+        <article class="idea">
+          <span class="tag hot">The last line, almost</span>
+          <h3>No second opportunity</h3>
+          <p>Races condemned to one hundred years of solitude did not have a second opportunity on earth. You do not have to recite it. You have to know what <b>solitude</b> is doing in that sentence.</p>
+        </article>
+
+        <div class="qbox" data-q="q4">
+          <div class="qn">The title means…</div>
+          <div class="opts">
+            <button class="opt">one hundred years of being bored at a party</button>
+            <button class="opt" data-ok="1">a family trapped in its own fate, cut off from the world</button>
+            <button class="opt">Úrsula is a little sad on Tuesdays</button>
+          </div>
+          <div class="fb">Solitude is the size of a town. Loneliness is a mood. Keep them apart.</div>
+        </div>
+      </div>
+      <div class="next">
+        <button class="btn btn-w" onclick="showPanel('names')">Back</button>
+        <button class="btn btn-f" onclick="showPanel('rain')">The rain</button>
+      </div>
+    </section>
+
+    <section class="panel" id="rain">
+      <div class="pad">
+        <h2>It's raining flowers. Keep the it.</h2>
+        <p class="lead">When José Arcadio Buendía dies, yellow flowers fall on Macondo. English weather always starts with it. This is your track, wearing Gabo.</p>
+        <div class="es"><b>En simple:</b> It's raining. It rained for years. It was as if time had stopped. Tres <i>it</i>. Cero disculpas.</div>
+
+        <figure class="shot">
+          <img src="img/butterflies.jpg" width="1152" height="864" alt="Yellow butterflies on a peeling turquoise window of a whitewashed house." loading="lazy" />
+          <figcaption class="cap">Mauricio Babilonia arrives with yellow butterflies. It is not a metaphor yet. It is on the window.</figcaption>
+        </figure>
+
+        <div class="say">
+          <div class="lab">Weather <button class="listen" onclick="speak('It is raining yellow flowers in Macondo.')">Listen</button></div>
+          <p>It's raining yellow flowers in Macondo.</p>
+        </div>
+        <div class="say">
+          <div class="lab">Time <button class="listen" onclick="speak('It was as if time had stopped.')">Listen</button></div>
+          <p>It was as if time had stopped.</p>
+        </div>
+        <div class="say">
+          <div class="lab">Your Netflix sentence, in Macondo <button class="listen" onclick="speak('It is on the page. It was excellent.')">Listen</button></div>
+          <p>It's on the page. It was excellent.</p>
+        </div>
+
+        <div class="qbox" data-q="q5">
+          <div class="qn">Pick the sentence that would survive in your class.</div>
+          <div class="opts">
+            <button class="opt">Is raining flowers.</button>
+            <button class="opt">Was excellent, the book.</button>
+            <button class="opt" data-ok="1">It's raining flowers. It was excellent.</button>
+          </div>
+          <div class="fb">Two its. You already know this. Macondo just makes it unforgettable.</div>
+        </div>
+      </div>
+      <div class="next">
+        <button class="btn btn-w" onclick="showPanel('solitude')">Back</button>
+        <button class="btn btn-c" onclick="showPanel('speak')">Talk about the book</button>
+      </div>
+    </section>
+
+    <section class="panel" id="speak">
+      <div class="pad">
+        <h2>How a reader talks, not a summary</h2>
+        <p class="lead">Nobody in New Jersey wants the whole family tree. They want three sentences and your voice. Read-aloud is your strength. Use it.</p>
+        <div class="es"><b>En simple:</b> Escucha. Repite. Luego tápate y díselo a Gabriel como si él no hubiera leído el libro.</div>
+
+        <h3>Phrases for the room</h3>
+        <div class="phrase">
+          <b>It's about a family that repeats itself.</b>
+          <span>La frase más honesta. Los nombres vuelven.</span>
+        </div>
+        <div class="phrase">
+          <b>The first wonder is ice.</b>
+          <span>No empieces por el fusilamiento. Empieza por el hielo.</span>
+        </div>
+        <div class="phrase">
+          <b>Solitude is not the same as loneliness.</b>
+          <span>Tu distinción de adulta. Eso es C1.</span>
+        </div>
+        <div class="phrase">
+          <b>I wanted to stay alone. That is not solitude.</b>
+          <span>Tu frase de clase, ahora al lado del libro.</span>
+        </div>
+        <div class="phrase">
+          <b>It was as if time had stopped.</b>
+          <span>It + past perfect. El tiempo de Macondo.</span>
+        </div>
+
+        <div class="say">
+          <div class="lab">Your 20-second pitch <button class="listen" onclick="speak('I love One Hundred Years of Solitude. It is about the Buendia family in Macondo. The first wonder is ice. They live in solitude, not just loneliness.')">Listen</button></div>
+          <p>I love <i>One Hundred Years of Solitude</i>. It's about the Buendía family in Macondo. The first wonder is ice. They live in solitude, not just loneliness.</p>
+        </div>
+
+        <h3>Words you will need</h3>
+        <div class="glos">
+          <div class="gitem"><b>solitude</b><i>SO-li-tyood</i><span>soledad grande. El título.</span></div>
+          <div class="gitem"><b>loneliness</b><i>LONE-li-nes</i><span>la tristeza de faltar gente.</span></div>
+          <div class="gitem"><b>ice</b><i>AIS</i><span>el hielo. The first wonder.</span></div>
+          <div class="gitem"><b>firing squad</b><i>FAI-ring skwod</i><span>el pelotón de fusilamiento.</span></div>
+          <div class="gitem"><b>remember</b><i>ri-MEM-ber</i><span>he was to remember.</span></div>
+          <div class="gitem"><b>as if</b><i>az IF</i><span>como si. It was as if time had stopped.</span></div>
+        </div>
+      </div>
+      <div class="next">
+        <button class="btn btn-w" onclick="showPanel('rain')">Back</button>
+        <button class="btn btn-c" onclick="showPanel('quiz')">Quiz</button>
+      </div>
+    </section>
+
+    <section class="panel" id="quiz">
+      <div class="pad">
+        <h2>Ten questions. Book and it, same pass.</h2>
+        <p class="lead">Gabo and your English. You can miss and try again.</p>
+        <div class="es"><b>En simple:</b> Si falta it, está mal. Si confundes solitude y loneliness, vuelve a la 4.</div>
+
+        <div class="qbox" data-q="q6">
+          <div class="qn">1. The opening starts…</div>
+          <div class="opts">
+            <button class="opt">Once upon a time in New Jersey</button>
+            <button class="opt" data-ok="1">Many years later, as he faced the firing squad</button>
+            <button class="opt">It is snowing in Macondo today</button>
+          </div>
+          <div class="fb">The book starts at the end of a life and walks back to ice.</div>
+        </div>
+        <div class="qbox" data-q="q7">
+          <div class="qn">2. “Was to remember” means…</div>
+          <div class="opts">
+            <button class="opt">he forgot on purpose</button>
+            <button class="opt" data-ok="1">later, looking back, he would remember</button>
+            <button class="opt">he is remembering right now in present tense</button>
+          </div>
+          <div class="fb">Future inside the past. Había de recordar.</div>
+        </div>
+        <div class="qbox" data-q="q8">
+          <div class="qn">3. Correct English:</div>
+          <div class="opts">
+            <button class="opt">Was ice.</button>
+            <button class="opt" data-ok="1">It was ice.</button>
+            <button class="opt">Is ice, the thing.</button>
+          </div>
+          <div class="fb">Your classic. It was.</div>
+        </div>
+        <div class="qbox" data-q="q9">
+          <div class="qn">4. The English title uses…</div>
+          <div class="opts">
+            <button class="opt">loneliness</button>
+            <button class="opt" data-ok="1">solitude</button>
+            <button class="opt">alone</button>
+          </div>
+          <div class="fb">One Hundred Years of Solitude. Not loneliness.</div>
+        </div>
+        <div class="qbox" data-q="q10">
+          <div class="qn">5. I wanted stay alone →</div>
+          <div class="opts">
+            <button class="opt">I wanted stay in solitude</button>
+            <button class="opt" data-ok="1">I wanted to stay alone</button>
+            <button class="opt">I wanted staying loneliness</button>
+          </div>
+          <div class="fb">want + to. From your cards. Alone is the fact.</div>
+        </div>
+        <div class="qbox" data-q="q11">
+          <div class="qn">6. Yellow butterflies belong to…</div>
+          <div class="opts">
+            <button class="opt">DHL</button>
+            <button class="opt" data-ok="1">Mauricio Babilonia</button>
+            <button class="opt">the firing squad</button>
+          </div>
+          <div class="fb">They arrive with him. It is on the window before it is a symbol.</div>
+        </div>
+        <div class="qbox" data-q="q12">
+          <div class="qn">7. Weather in English:</div>
+          <div class="opts">
+            <button class="opt">Is raining flowers.</button>
+            <button class="opt" data-ok="1">It's raining flowers.</button>
+            <button class="opt">Are raining flowers.</button>
+          </div>
+          <div class="fb">It's snowing in New Jersey. It's raining in Macondo. Same it.</div>
+        </div>
+        <div class="qbox" data-q="q13">
+          <div class="qn">8. People ___ crazy — and the Buendías too.</div>
+          <div class="opts">
+            <button class="opt">is</button>
+            <button class="opt" data-ok="1">are</button>
+            <button class="opt">be</button>
+          </div>
+          <div class="fb">People are. From your cards. The family are many people, one fate.</div>
+        </div>
+        <div class="qbox" data-q="q14">
+          <div class="qn">9. A short, true pitch for a colleague:</div>
+          <div class="opts">
+            <button class="opt">I will now explain every José Arcadio in order</button>
+            <button class="opt" data-ok="1">It's about a family in Macondo that cannot escape its own story.</button>
+            <button class="opt">Was excellent.</button>
+          </div>
+          <div class="fb">One sentence. It is about. Then stop.</div>
+        </div>
+        <div class="qbox" data-q="q15">
+          <div class="qn">10. The line of this class is…</div>
+          <div class="opts">
+            <button class="opt">Translate every page tonight</button>
+            <button class="opt" data-ok="1">Many years later. It was ice.</button>
+            <button class="opt">I have go to Macondo</button>
+          </div>
+          <div class="fb">The opening, and the it. Take both home.</div>
+        </div>
+        <p id="quizScore" style="font-weight:700;margin-top:8px;"></p>
+      </div>
+      <div class="next">
+        <button class="btn btn-w" onclick="showPanel('speak')">Back</button>
+        <button class="btn btn-c" onclick="showPanel('yours')">Your Macondo</button>
+      </div>
+    </section>
+
+    <section class="panel" id="yours">
+      <div class="pad">
+        <h2>Your Macondo, Alejandra</h2>
+        <p class="lead">Four sentences in English. You are from Maracaibo. You teach PreK in New Jersey. You still remember ice.</p>
+        <div class="es"><b>Usa:</b> Many years later… / It was… / I wanted to… / Solitude is not…</div>
+
+        <p>1. Why do you love this book?<br />
+        2. What is the ice, in one sentence?<br />
+        3. Solitude or loneliness — which one, and why?<br />
+        4. A sentence with it that you used to drop.</p>
+
+        <textarea id="verdictBox" placeholder="I love this book because... It was ice..."></textarea>
+        <div class="row">
+          <button class="btn btn-w" type="button" onclick="speak(document.getElementById('verdictBox').value)">Listen to me</button>
+          <button class="btn btn-c" type="button" onclick="saveVerdict()">Save it</button>
+        </div>
+        <p class="saved" id="saved">Saved on this phone. Read it out loud to Gabriel.</p>
+
+        <div class="verdict-card" style="margin-top:22px;">
+          <h2>The book is still open</h2>
+          <p>Many years later, it was ice. Say it. Then say it again, slower.</p>
+          <p style="margin:0;color:var(--muted);font-size:14.5px;">ARCHES · Alejandra · Macondo · 2026-08-27</p>
+        </div>
+      </div>
+
+      <details class="teacher">
+        <summary>Notas para Gabriel · plan de clase</summary>
+        <div class="body">
+          B2–C1. Lectura en voz alta es su músculo. El libro es el cebo; el it es la trampa. No dejes que recuente el árbol genealógico.
+          <ol>
+            <li><b>Opening (6 min).</b> Escucha la primera oración. Ella la lee. Tú marcas el was to remember. No expliques el condicional: hazla decirla.</li>
+            <li><b>Ice (6 min).</b> It was ice. Contrasta con Was excellent / Is snowing. Ríanse. Luego His father took him to discover ice.</li>
+            <li><b>Names (8 min).</b> Toca seis nombres. Luego la frase de una línea: a family that cannot escape its own story.</li>
+            <li><b>Solitude (8 min).</b> alone / loneliness / solitude. Recupera I wanted to stay alone. El título es el grande.</li>
+            <li><b>Rain (6 min).</b> It's raining flowers. It was as if time had stopped. Dos it de C1.</li>
+            <li><b>Speak + write (8 min).</b> El pitch de 20 segundos. Luego cuatro oraciones. Celebrar la que suene a ella, no a Wikipedia.</li>
+          </ol>
+          Hechos del libro, no inventos: el arranque de Rabassa, el hielo, Úrsula y José Arcadio, las mariposas de Mauricio Babilonia, las flores amarillas, la soledad del título. Ella es de Maracaibo, maestra de PreK en New Jersey, mamá de tres. El calor es el puente, no un disfraz de Gabo.
+        </div>
+      </details>
+    </section>
+  </main>
+
+  <footer class="tiny">ARCHES · Alejandra · Macondo. <a href="../?name=Alejandra">Volver a tus temas</a></footer>
+</div>
+
+<noscript>
+  <style>.panel{display:block !important; transform:none !important; opacity:1 !important;}</style>
+</noscript>
+
+<script>
+(function(){
+  "use strict";
+  const KEY = "macondo_alejandra_v1";
+  const mem = {};
+  const store = {
+    get: function(d){ try{ const v=localStorage.getItem(KEY); return v?JSON.parse(v):d; }catch(e){ return mem.data||d; } },
+    set: function(v){ try{ localStorage.setItem(KEY, JSON.stringify(v)); }catch(e){ mem.data=v; } }
+  };
+  let state = store.get({ panel:"open", quiz:{}, yours:"", names:{} });
+  const startPanel = new URLSearchParams(location.search).get("p");
+  if(startPanel && ["open","ice","names","solitude","rain","speak","quiz","yours"].indexOf(startPanel)>=0){
+    state.panel = startPanel;
+  }
+
+  const NAMES = [
+    { id:"macondo", en:"Macondo", phon:"mah-KON-do", say:"Macondo" },
+    { id:"jose", en:"José Arcadio Buendía", phon:"ho-SE ar-KA-dyo bwen-DEE-ah", say:"Jose Arcadio Buendia" },
+    { id:"ursula", en:"Úrsula Iguarán", phon:"OOR-soo-la ee-gwa-RAN", say:"Ursula Iguaran" },
+    { id:"aureliano", en:"Colonel Aureliano", phon:"ow-reh-LYAH-no", say:"Colonel Aureliano Buendia" },
+    { id:"melquiades", en:"Melquíades", phon:"mel-KEE-ah-des", say:"Melquiades" },
+    { id:"mauricio", en:"Mauricio Babilonia", phon:"mau-REE-syo ba-bee-LO-nya", say:"Mauricio Babilonia" }
+  ];
+
+  const panels = ["open","ice","names","solitude","rain","speak","quiz","yours"];
+  function showPanel(id){
+    document.querySelectorAll(".panel").forEach(function(p){ p.classList.toggle("on", p.id===id); });
+    document.querySelectorAll(".dock button").forEach(function(b){ b.classList.toggle("on", b.getAttribute("data-panel")===id); });
+    state.panel = id;
+    store.set(state);
+    updateBar();
+    const dock = document.querySelector("nav.dock");
+    const html = document.documentElement;
+    const prev = html.style.scrollBehavior;
+    html.style.scrollBehavior = "auto";
+    window.scrollTo(0, dock ? dock.offsetTop - 2 : 0);
+    html.style.scrollBehavior = prev;
+  }
+  window.showPanel = showPanel;
+
+  function updateBar(){
+    const i = Math.max(0, panels.indexOf(state.panel));
+    document.getElementById("bar").style.width = ((i+1)/panels.length*100) + "%";
+    const n = Object.keys(state.names||{}).length;
+    const notes = document.getElementById("notes");
+    if(!n){ notes.classList.remove("show"); notes.innerHTML=""; return; }
+    notes.classList.add("show");
+    notes.innerHTML = "<b>Macondo notes.</b> You named " + n + " of 6 names.";
+  }
+
+  const nWrap = document.getElementById("names");
+  if(nWrap){
+    NAMES.forEach(function(m){
+      const b = document.createElement("button");
+      b.className = "nm" + (state.names[m.id] ? " on" : "");
+      b.type = "button";
+      b.innerHTML = "<b>"+m.en+"</b><span>"+m.phon+"</span>";
+      b.addEventListener("click", function(){
+        speak(m.say);
+        state.names[m.id] = true;
+        b.classList.add("on");
+        store.set(state);
+        updateBar();
+      });
+      nWrap.appendChild(b);
+    });
+  }
+
+  document.querySelectorAll(".qbox").forEach(function(box){
+    const id = box.getAttribute("data-q");
+    const fb = box.querySelector(".fb");
+    const opts = box.querySelectorAll(".opt");
+    if(state.quiz[id]){
+      opts.forEach(function(o){
+        if(o.getAttribute("data-ok")) o.classList.add("ok");
+        o.disabled = true;
+      });
+      if(fb) fb.classList.add("show","good");
+    }
+    opts.forEach(function(btn){
+      btn.addEventListener("click", function(){
+        if(btn.disabled) return;
+        const ok = btn.hasAttribute("data-ok");
+        if(ok){
+          opts.forEach(function(o){ o.disabled = true; });
+          btn.classList.add("ok");
+          if(fb){ fb.classList.add("show","good"); fb.classList.remove("poor"); }
+          state.quiz[id] = true;
+          store.set(state);
+          scoreQuiz();
+        } else {
+          btn.classList.add("bad");
+          btn.disabled = true;
+          if(fb){ fb.classList.add("show","poor"); }
+        }
+      });
+    });
+  });
+
+  function scoreQuiz(){
+    const need = ["q6","q7","q8","q9","q10","q11","q12","q13","q14","q15"];
+    const n = need.filter(function(k){ return state.quiz[k]; }).length;
+    const el = document.getElementById("quizScore");
+    if(el) el.textContent = n ? ("Score: " + n + " / 10") : "";
+  }
+
+  function saveVerdict(){
+    const t = document.getElementById("verdictBox").value.trim();
+    state.yours = t;
+    store.set(state);
+    const s = document.getElementById("saved");
+    s.classList.add("show");
+    s.textContent = t ? "Saved on this phone. Read it out loud to Gabriel." : "Write four sentences first.";
+  }
+  window.saveVerdict = saveVerdict;
+
+  let voice = null, audioReady = false;
+  function loadVoice(){
+    if(!window.speechSynthesis) return;
+    const vs = speechSynthesis.getVoices();
+    const NOV=/albert|bad news|bahh|bells|boing|bubbles|cellos|good news|jester|organ|superstar|trinoids|whisper|wobble|zarvox|junior|kathy|ralph|fred/i;
+    const en = vs.filter(function(v){ return /^en[-_]/i.test(v.lang) && !NOV.test(v.name); });
+    const pref = ["Samantha","Google US English","Microsoft Aria","Microsoft Jenny","Microsoft Zira","Alex"];
+    voice = null;
+    for(let i=0;i<pref.length;i++){
+      const m = en.find(function(v){ return v.name.indexOf(pref[i])===0; });
+      if(m){ voice=m; break; }
+    }
+    if(!voice) voice = en.find(function(v){ return /en[-_]US/i.test(v.lang); }) || en[0] || null;
+  }
+  if(window.speechSynthesis){ loadVoice(); speechSynthesis.onvoiceschanged = loadVoice; }
+  function unlockAudio(){
+    if(audioReady || !window.speechSynthesis) return;
+    try{ const u=new SpeechSynthesisUtterance(""); u.volume=0; speechSynthesis.speak(u); audioReady=true; }catch(e){}
+  }
+  document.addEventListener("touchstart", unlockAudio, {once:true});
+  document.addEventListener("click", unlockAudio, {once:true});
+  function speak(text){
+    if(!text || !window.speechSynthesis) return;
+    try{
+      speechSynthesis.cancel();
+      const u=new SpeechSynthesisUtterance(text);
+      u.lang="en-US"; u.rate=0.88; if(voice) u.voice=voice;
+      speechSynthesis.speak(u);
+    }catch(e){}
+  }
+  window.speak = speak;
+
+  if(state.yours) document.getElementById("verdictBox").value = state.yours;
+  scoreQuiz();
+  if(state.panel && state.panel!=="open") showPanel(state.panel);
+  else updateBar();
+})();
+</script>
+</body>
+</html>
