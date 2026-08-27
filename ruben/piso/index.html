@@ -1,0 +1,1244 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Floor · Rubén</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,400;0,600;0,700;1,400&family=Petrona:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --night:#0c1718;
+    --ink:#152022;
+    --linen:#f2eee4;
+    --paper:#f7f4ec;
+    --mist:#e4ebe8;
+    --scrub:#1e6a62;
+    --scrub-d:#154e48;
+    --scrub-s:#d7ebe7;
+    --pulse:#b5443a;
+    --pulse-d:#8a3129;
+    --pulse-s:#f4ddd8;
+    --amber:#b8862e;
+    --amber-s:#f3e6c8;
+    --muted:#536363;
+    --line:#cfd8d4;
+    --ok:#2d6a58;
+    --ok-s:#dceee6;
+    --no:#9a3a28;
+    --no-s:#f6e4dc;
+    --r:16px;
+    --ease-out:cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  html,body{margin:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    min-height:100vh;
+    color:var(--ink);
+    font-family:Figtree,system-ui,sans-serif;
+    background:var(--night);
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{background:var(--scrub-s); color:var(--ink);}
+  :focus-visible{outline:3px solid var(--scrub); outline-offset:3px;}
+  img{max-width:100%; display:block;}
+
+  .shell{max-width:640px; margin:0 auto; padding:0 0 96px;}
+
+  .hero{position:relative; min-height:72vh; color:var(--linen);}
+  .hero img{width:100%; height:72vh; object-fit:cover; object-position:18% 42%;}
+  .hero-scrim{
+    position:absolute; inset:auto 0 0 0; height:62%;
+    background:linear-gradient(180deg, transparent, rgba(12,23,24,.58) 38%, var(--night) 100%);
+    pointer-events:none;
+  }
+  .hero-copy{position:absolute; left:0; right:0; bottom:0; padding:18px 18px 22px;}
+  .hero h1{
+    font-family:Petrona,Georgia,serif;
+    font-weight:700;
+    font-size:clamp(32px,7.6vw,46px);
+    line-height:.98;
+    letter-spacing:-.03em;
+    margin:0 0 10px;
+    color:var(--linen);
+  }
+  .hero p{
+    margin:0 0 16px;
+    font-size:17px;
+    line-height:1.45;
+    color:#e4ebe8;
+    max-width:34em;
+  }
+  .start{
+    display:inline-flex; align-items:center; justify-content:center;
+    min-height:48px; padding:12px 18px;
+    background:var(--scrub); color:var(--linen);
+    border:0; border-radius:12px;
+    font-family:inherit; font-weight:700; font-size:16px;
+    cursor:pointer;
+  }
+  .start:active{transform:scale(.97); background:var(--scrub-d);}
+
+  .backhome{
+    position:absolute; top:12px; left:12px; z-index:4;
+    display:inline-flex; align-items:center; min-height:44px;
+    padding:8px 14px; border-radius:999px;
+    background:rgba(12,23,24,.62); color:var(--linen);
+    text-decoration:none; font-weight:700; font-size:14px;
+    border:1px solid rgba(242,238,228,.18);
+  }
+
+  nav.dock{
+    position:sticky; top:0; z-index:20;
+    background:rgba(12,23,24,.92);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid rgba(242,238,228,.08);
+    padding:8px 8px 10px;
+    display:flex; gap:6px; overflow-x:auto;
+    scrollbar-width:none;
+  }
+  nav.dock::-webkit-scrollbar{display:none;}
+  .dock button{
+    flex:0 0 auto;
+    min-height:44px; padding:8px 12px;
+    border:1px solid rgba(242,238,228,.14);
+    background:transparent; color:#e4ebe8;
+    border-radius:999px;
+    font-family:inherit; font-weight:700; font-size:13px;
+    cursor:pointer; white-space:nowrap;
+  }
+  .dock button.on{background:var(--linen); color:var(--ink); border-color:var(--linen);}
+
+  .paper{
+    background:var(--paper);
+    color:var(--ink);
+    border-radius:22px 22px 0 0;
+    margin-top:-14px;
+    position:relative;
+    padding:8px 0 28px;
+    box-shadow:0 -12px 40px rgba(0,0,0,.25);
+  }
+  .pad{padding:22px 18px 12px;}
+  .panel{display:none;}
+  .panel.on{display:block; animation:enter .45s var(--ease-out);}
+  @keyframes enter{
+    from{opacity:0; transform:translateY(10px);}
+    to{opacity:1; transform:none;}
+  }
+
+  h2{
+    font-family:Petrona,Georgia,serif;
+    font-weight:700;
+    font-size:clamp(26px,6.4vw,34px);
+    letter-spacing:-.025em;
+    line-height:1.08;
+    margin:6px 0 10px;
+  }
+  h3{
+    font-family:Petrona,Georgia,serif;
+    font-weight:600;
+    font-size:22px;
+    letter-spacing:-.02em;
+    margin:0 0 8px;
+    line-height:1.15;
+  }
+  p{margin:0 0 12px; line-height:1.55; font-size:17px;}
+  .lead{font-size:18px;}
+
+  .es{
+    background:var(--amber-s);
+    border:1px solid #e3d09a;
+    border-radius:12px;
+    padding:11px 13px;
+    margin:10px 0 16px;
+    color:#5c4314;
+    font-size:15.5px;
+    line-height:1.5;
+  }
+  .es b{color:#3f2d0c;}
+
+  .tag{
+    display:inline-block;
+    font-size:11.5px; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
+    padding:4px 9px; border-radius:999px; margin-bottom:8px;
+  }
+  .tag.calm{background:var(--scrub-s); color:var(--scrub-d);}
+  .tag.hot{background:var(--pulse-s); color:var(--pulse-d);}
+  .tag.job{background:var(--mist); color:var(--ink);}
+
+  .say{
+    background:var(--scrub-s);
+    border:1px solid #b7d4cf;
+    border-radius:12px;
+    padding:12px 13px;
+    margin:8px 0 14px;
+    color:var(--scrub-d);
+  }
+  .say .lab{
+    display:flex; align-items:center; gap:8px;
+    font-size:12px; font-weight:700; letter-spacing:.04em; text-transform:uppercase;
+    color:var(--scrub); margin-bottom:6px;
+  }
+  .say p{margin:0; font-size:17px; font-weight:700; line-height:1.4; color:var(--ink);}
+  .listen{
+    margin-left:auto;
+    border:0; background:transparent; color:var(--scrub-d);
+    font-family:inherit; font-weight:700; font-size:13px;
+    cursor:pointer; padding:4px 0; min-height:32px;
+  }
+
+  .shot{
+    margin:4px 0 16px;
+    border-radius:14px;
+    overflow:hidden;
+    background:#0c1718;
+  }
+  .shot img{width:100%; height:220px; object-fit:cover;}
+  .cap{
+    padding:9px 12px;
+    font-size:13px; color:var(--muted); font-weight:700;
+    background:var(--mist);
+  }
+
+  .idea{
+    background:var(--mist);
+    border:1.5px solid var(--line);
+    border-radius:14px;
+    padding:14px;
+    margin:0 0 10px;
+  }
+
+  .split{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:12px 0 16px;}
+  .side{
+    border-radius:14px; padding:14px 12px;
+    text-align:left; font-family:inherit; color:inherit;
+    min-height:118px; cursor:pointer;
+  }
+  .side.wire{background:#e8f0ee; border:1.5px solid #b7d4cf;}
+  .side.body{background:#f3e6d4; border:1.5px solid #d2b48c;}
+  .side .k{font-size:12px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; margin-bottom:4px;}
+  .side.wire .k{color:var(--scrub);}
+  .side.body .k{color:#8a4a1a;}
+  .side h3{font-size:18px;}
+  .side p{margin:0; font-size:14.5px; color:var(--muted); font-weight:400;}
+
+  .exhibit{
+    background:var(--mist);
+    border:1.5px solid var(--line);
+    border-radius:14px;
+    padding:16px 14px;
+    margin:0 0 14px;
+  }
+
+  .qbox{
+    background:var(--mist);
+    border:1.5px solid var(--line);
+    border-radius:14px;
+    padding:14px;
+    margin:0 0 12px;
+  }
+  .qn{font-weight:700; margin-bottom:10px; font-size:17px; line-height:1.35;}
+  .opts{display:flex; flex-direction:column; gap:8px;}
+  .opt{
+    text-align:left; min-height:46px;
+    background:var(--paper); border:1.5px solid var(--line); border-radius:12px;
+    padding:11px 12px; font-weight:700; font-size:15.5px;
+    cursor:pointer; font-family:inherit; color:inherit;
+  }
+  .opt.ok{background:var(--ok-s); border-color:var(--ok); color:var(--ok);}
+  .opt.bad{background:var(--no-s); border-color:var(--no); color:var(--no);}
+  .opt:disabled{cursor:default;}
+  .fb{display:none; margin-top:10px; font-size:15px; line-height:1.45; font-weight:400;}
+  .fb.show{display:block;}
+  .fb.good{color:var(--ok);}
+  .fb.poor{color:var(--no);}
+
+  .phrase{
+    background:var(--paper);
+    border:1.5px dashed var(--line);
+    border-radius:12px;
+    padding:12px;
+    margin:0 0 10px;
+  }
+  .phrase b{display:block; font-family:Petrona,Georgia,serif; font-size:20px; margin-bottom:4px;}
+  .phrase span{color:var(--muted); font-size:14.5px;}
+
+  .machines{display:grid; grid-template-columns:1fr 1fr; gap:8px; margin:10px 0 16px;}
+  .mac{
+    background:var(--paper);
+    border:1.5px solid var(--line);
+    border-radius:12px;
+    padding:12px 10px;
+    text-align:left;
+    font-family:inherit; color:inherit;
+    min-height:72px; cursor:pointer;
+  }
+  .mac b{display:block; font-size:15.5px;}
+  .mac span{display:block; color:var(--muted); font-size:12.5px; font-weight:600; margin-top:2px;}
+  .mac.on{background:var(--scrub-s); border-color:var(--scrub); color:var(--scrub-d);}
+
+  .steps{display:flex; flex-direction:column; gap:8px; margin:10px 0 16px; padding:0; list-style:none;}
+  .stepbtn{
+    display:flex; gap:12px; align-items:flex-start;
+    background:var(--paper); border:1.5px solid var(--line); border-radius:14px;
+    padding:12px; text-align:left; cursor:pointer;
+    font-family:inherit; color:inherit; min-height:64px;
+  }
+  .num{
+    flex:none; width:32px; height:32px; border-radius:50%;
+    background:var(--mist); color:var(--muted);
+    display:flex; align-items:center; justify-content:center;
+    font-weight:800; font-size:14px;
+  }
+  .stepbtn h3{font-size:17px; margin:0 0 2px;}
+  .stepbtn p{margin:0; font-size:14px; color:var(--muted);}
+  .stepbtn.on{background:var(--scrub-s); border-color:var(--scrub);}
+  .stepbtn.on .num{background:var(--scrub); color:var(--linen);}
+  .stepbtn.bad{background:var(--pulse-s); border-color:var(--pulse);}
+  .stepbtn.bad .num{background:var(--pulse); color:var(--linen);}
+
+  .boardq{
+    background:var(--night); color:var(--linen);
+    border-radius:16px; padding:16px 14px; margin:0 0 14px;
+  }
+  .boardq .who{font-size:11.5px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:#9fd4cc; margin-bottom:8px;}
+  .boardq h3{color:var(--linen); font-size:22px;}
+  .boardq .qes{color:#b7c9c6; font-size:14.5px; margin:0;}
+
+  textarea{
+    width:100%;
+    border:1.5px solid var(--line);
+    border-radius:12px;
+    padding:12px 13px;
+    font-family:inherit; font-size:16.5px; color:var(--ink);
+    background:#fff;
+    min-height:150px; resize:vertical; line-height:1.5;
+  }
+  textarea:focus{outline:none; border-color:var(--scrub);}
+
+  .btn{
+    border:0; border-radius:12px;
+    min-height:48px; padding:12px 16px;
+    font-family:inherit; font-weight:700; font-size:16px;
+    cursor:pointer;
+  }
+  .btn-c{background:var(--scrub); color:var(--linen);}
+  .btn-c:active{background:var(--scrub-d); transform:scale(.97);}
+  .btn-p{background:var(--pulse); color:var(--linen);}
+  .btn-p:active{background:var(--pulse-d); transform:scale(.97);}
+  .btn-w{background:var(--mist); color:var(--ink); border:1.5px solid var(--line);}
+  .row{display:flex; gap:8px; flex-wrap:wrap; margin-top:10px;}
+
+  .notes{
+    display:none;
+    margin:0 18px 8px;
+    background:#0c1718; color:#e4ebe8;
+    border-radius:12px; padding:10px 12px;
+    font-size:13.5px; line-height:1.4;
+  }
+  .notes.show{display:block;}
+  .notes b{color:#c8efe6;}
+
+  .prog{
+    height:6px; background:rgba(242,238,228,.12);
+    border-radius:99px; overflow:hidden; margin:0 18px 8px;
+  }
+  .prog > i{display:block; height:100%; width:0; background:#9fd4cc; transition:width .4s var(--ease-out);}
+
+  .glos{display:grid; gap:8px; margin:8px 0 16px;}
+  .gitem{background:var(--mist); border:1px solid var(--line); border-radius:12px; padding:11px 12px;}
+  .gitem b{display:block; font-size:17px;}
+  .gitem i{color:var(--scrub-d); font-style:normal; font-weight:700; font-size:13.5px;}
+  .gitem span{display:block; color:var(--muted); font-size:14.5px; margin-top:2px;}
+
+  .verdict-card{
+    background:linear-gradient(180deg,#f7f4ec,#d7ebe7);
+    border:2px solid var(--scrub);
+    border-radius:18px;
+    padding:22px 16px;
+    text-align:center;
+  }
+  .verdict-card h2{margin-bottom:6px;}
+  .saved{display:none; color:var(--ok); font-weight:700; margin-top:8px;}
+  .saved.show{display:block;}
+
+  footer.tiny{
+    color:rgba(242,238,228,.45);
+    font-size:12.5px; text-align:center;
+    padding:8px 18px 24px;
+  }
+  footer.tiny a{color:#9fd4cc;}
+
+  .next{
+    margin:18px 18px 8px;
+    display:flex; gap:8px;
+  }
+  .next .btn{flex:1;}
+
+  .teacher{
+    margin:18px 18px 0;
+    background:var(--mist);
+    border:1.5px dashed var(--line);
+    border-radius:14px;
+    padding:12px 14px;
+  }
+  .teacher summary{cursor:pointer; font-weight:800; color:var(--muted); font-size:13px; list-style:none;}
+  .teacher summary::-webkit-details-marker{display:none;}
+  .teacher .body{font-size:13.5px; line-height:1.5; margin-top:10px;}
+  .teacher ol{margin:8px 0 0; padding-left:18px;}
+  .teacher li{margin:6px 0;}
+
+  @media (hover:hover) and (pointer:fine){
+    .start:hover{transform:translateY(-2px); box-shadow:0 10px 22px rgba(0,0,0,.28);}
+    .opt:hover, .mac:hover, .stepbtn:hover, .side:hover{transform:translateY(-2px);}
+    .opt, .mac, .stepbtn, .side, .start{transition:transform .18s var(--ease-out), background .18s ease, border-color .18s ease;}
+  }
+  @media (max-width:420px){
+    .split, .machines{grid-template-columns:1fr;}
+    .hero, .hero img{min-height:56vh; height:56vh;}
+    .hero img{object-position:8% 38%;}
+    .hero p{font-size:16px;}
+    .shot img{height:200px;}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none !important; transition:none !important;}
+    html{scroll-behavior:auto;}
+    .panel.on{animation:none;}
+  }
+</style>
+</head>
+<body>
+<!--
+THESIS: A live English walk of a hospital interview that treats Rubén's fear as the real machine to fix, without lowering the job.
+OWN-WORLD: Night hospital over linen paper. Petrona + Figtree. Scrub teal for competence, pulse red only when a machine is down. Asset-tag labels. No terra, no clay, no purple.
+STORY: He leaves able to say he is a biomedical engineer, name three shop jobs, walk four floor steps, and give a 30-second pitch.
+FIRST VIEWPORT: Full-bleed night corridor, title, one button: Walk the floor.
+FORM: Hospital case file / walk-the-floor. Code-led student class.
+FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
+-->
+<div class="shell">
+  <header class="hero" id="top">
+    <a class="backhome" href="../?name=Ruben">‹ Temas</a>
+    <img src="img/hero.jpg" width="1248" height="832" alt="A hospital corridor at night with a biomedical toolkit and multimeters on a steel cart." />
+    <div class="hero-scrim"></div>
+    <div class="hero-copy">
+      <h1>Rubén, the machine is down.</h1>
+      <p>You are not afraid of the machine.<br />Tonight we walk the floor.</p>
+      <button class="start" onclick="showPanel('fear')">Walk the floor</button>
+    </div>
+  </header>
+
+  <nav class="dock" aria-label="Class sections">
+    <button class="on" data-panel="fear" onclick="showPanel('fear')">1. Fear</button>
+    <button data-panel="name" onclick="showPanel('name')">2. Name</button>
+    <button data-panel="shop" onclick="showPanel('shop')">3. Shop</button>
+    <button data-panel="floor" onclick="showPanel('floor')">4. Floor</button>
+    <button data-panel="board" onclick="showPanel('board')">5. Board</button>
+    <button data-panel="speak" onclick="showPanel('speak')">6. Speak</button>
+    <button data-panel="quiz" onclick="showPanel('quiz')">7. Quiz</button>
+    <button data-panel="pitch" onclick="showPanel('pitch')">8. Pitch</button>
+  </nav>
+
+  <div class="prog" aria-hidden="true"><i id="bar"></i></div>
+  <div class="notes" id="notes"></div>
+
+  <main class="paper">
+
+    <!-- 1 FEAR -->
+    <section class="panel on" id="fear">
+      <div class="pad">
+        <h2>They are not testing poetry</h2>
+        <p class="lead">You have been inside machines for years. A hospital interview has two tests: the job, and English. You already pass the first. Tonight we make the second small enough to say.</p>
+        <div class="es"><b>En simple:</b> Tu miedo no es la máquina. Tu miedo es quedarte en blanco. En una entrevista de hospital, tres frases te sacan del hielo.</div>
+
+        <article class="idea">
+          <span class="tag calm">What they really want</span>
+          <h3>Calm. Honesty. The patient first.</h3>
+          <p>They do not need Shakespeare. They need a man who stays calm when a monitor fails, who says “I don’t know yet” instead of guessing, and who never sends a bad machine back to the floor.</p>
+        </article>
+
+        <h3>Three rescue lines. Learn these first.</h3>
+        <div class="say">
+          <div class="lab">If you miss the question <button class="listen" onclick="speak('Could you repeat that, please?')">Listen</button></div>
+          <p>Could you repeat that, please?</p>
+        </div>
+        <div class="say">
+          <div class="lab">If your mind goes blank <button class="listen" onclick="speak('That is a good question. Let me think.')">Listen</button></div>
+          <p>That’s a good question. Let me think.</p>
+        </div>
+        <div class="say">
+          <div class="lab">If they ask about your English <button class="listen" onclick="speak('My English is not perfect yet, but I can do this job.')">Listen</button></div>
+          <p>My English is not perfect yet, but I can do this job.</p>
+        </div>
+
+        <div class="qbox" data-q="q1">
+          <div class="qn">If you freeze, what do you do first?</div>
+          <div class="opts">
+            <button class="opt">Switch to Spanish so they understand</button>
+            <button class="opt" data-ok="1">Say a rescue line, then answer</button>
+            <button class="opt">Apologize five times</button>
+          </div>
+          <div class="fb">Yes. Rescue first, answer second. Never Spanish in that room.</div>
+        </div>
+
+        <div class="qbox" data-q="q2">
+          <div class="qn">What is the interviewer really testing?</div>
+          <div class="opts">
+            <button class="opt">If your English is native</button>
+            <button class="opt" data-ok="1">If you stay calm, tell the truth, and put the patient first</button>
+            <button class="opt">If you know every brand of ventilator</button>
+          </div>
+          <div class="fb">They can teach a brand. They cannot teach calm.</div>
+        </div>
+      </div>
+      <div class="next">
+        <button class="btn btn-c" onclick="showPanel('name')">Who you are</button>
+      </div>
+    </section>
+
+    <!-- 2 NAME -->
+    <section class="panel" id="name">
+      <div class="pad">
+        <h2>Say the title that opens the door</h2>
+        <p class="lead">You are an electrical engineer. That is true. You are also a biomedical engineer. In a hospital, that second title is the one they came to hear.</p>
+        <div class="es"><b>En simple:</b> Eléctrico = cables y corriente. Biomédico = eso, más el cuerpo, más la seguridad del paciente. Di los dos.</div>
+
+        <div class="split">
+          <button class="side wire" type="button" onclick="speak('I am an electrical engineer. I know power, motors, and circuits.')">
+            <div class="k">True</div>
+            <h3>Electrical</h3>
+            <p>Power, motors, circuits. The language of the shop.</p>
+          </button>
+          <button class="side body" type="button" onclick="speak('I am a biomedical engineer. I take care of medical equipment.')">
+            <div class="k">Also true. Say this first.</div>
+            <h3>Biomedical</h3>
+            <p>Medical devices, the body, patient safety. The language of the floor.</p>
+          </button>
+        </div>
+
+        <article class="idea">
+          <span class="tag job">Your opening, four lines</span>
+          <h3>Tell me about yourself.</h3>
+          <p>Short. Present simple. End with ambition, not apology.</p>
+        </article>
+
+        <div class="say">
+          <div class="lab">Line 1 <button class="listen" onclick="speak('My name is Ruben, and I am 53 years old.')">Listen</button></div>
+          <p>My name is Rubén, and I am 53 years old.</p>
+        </div>
+        <div class="say">
+          <div class="lab">Line 2 <button class="listen" onclick="speak('I am a biomedical engineer from Cuba.')">Listen</button></div>
+          <p>I am a biomedical engineer from Cuba.</p>
+        </div>
+        <div class="say">
+          <div class="lab">Line 3 <button class="listen" onclick="speak('I am also an electrical engineer. I take care of medical equipment.')">Listen</button></div>
+          <p>I am also an electrical engineer. I take care of medical equipment.</p>
+        </div>
+        <div class="say">
+          <div class="lab">Line 4 <button class="listen" onclick="speak('Now I work at a clinic, and I am ready for a hospital.')">Listen</button></div>
+          <p>Now I work at a clinic, and I am ready for a hospital.</p>
+        </div>
+
+        <div class="qbox" data-q="q3">
+          <div class="qn">Pick the sentence that hires you.</div>
+          <div class="opts">
+            <button class="opt">I have 53 years. I am electrical engineer.</button>
+            <button class="opt" data-ok="1">I am a biomedical engineer from Cuba.</button>
+            <button class="opt">I need a job because my clinic is small.</button>
+          </div>
+          <div class="fb">Age is I am, not I have. Profession takes a or an. Biomedical first.</div>
+        </div>
+
+        <article class="idea">
+          <span class="tag calm">A word hospitals use</span>
+          <h3>BMET</h3>
+          <p>Biomedical equipment technician. Many hospital ads say this, not “engineer.” If they say BMET, you can answer: <b>Yes. I install, check, and repair medical equipment.</b></p>
+        </article>
+        <div class="say">
+          <div class="lab">If they say BMET <button class="listen" onclick="speak('Yes. I install, check, and repair medical equipment.')">Listen</button></div>
+          <p>Yes. I install, check, and repair medical equipment.</p>
+        </div>
+      </div>
+      <div class="next">
+        <button class="btn btn-w" onclick="showPanel('fear')">Back</button>
+        <button class="btn btn-c" onclick="showPanel('shop')">The shop</button>
+      </div>
+    </section>
+
+    <!-- 3 SHOP -->
+    <section class="panel" id="shop">
+      <div class="pad">
+        <h2>Name the three jobs</h2>
+        <p class="lead">A clinic interview asks “what do you do.” A hospital interview asks if you know the difference between a check, a repair, and a true number.</p>
+        <div class="es"><b>En simple:</b> PM = antes de que falle. Repair = ya falló. Calibration = que el número sea verdad. Y luego lo escribes.</div>
+
+        <figure class="shot">
+          <img src="img/bench.jpg" width="1152" height="864" alt="An open patient monitor on a workbench with a multimeter, schematic, and coffee." loading="lazy" />
+          <figcaption class="cap">The shop. This is your country. Speak from here.</figcaption>
+        </figure>
+
+        <article class="exhibit">
+          <span class="tag job">Job 1</span>
+          <h3>Preventive maintenance</h3>
+          <p>A scheduled check, before a problem. Clean, test, replace a part that is tired. Hospitals love this word. They will say <i>PM</i>.</p>
+          <div class="say">
+            <div class="lab">Say this <button class="listen" onclick="speak('Preventive maintenance is before a problem.')">Listen</button></div>
+            <p>Preventive maintenance is before a problem.</p>
+          </div>
+        </article>
+
+        <article class="exhibit">
+          <span class="tag hot">Job 2</span>
+          <h3>Repair</h3>
+          <p>The machine already failed. You find the fault. Easy things first: power, cables, the screen. Then the inside.</p>
+          <div class="say">
+            <div class="lab">Say this <button class="listen" onclick="speak('Repair is after a problem. Easy things first.')">Listen</button></div>
+            <p>Repair is after a problem. Easy things first.</p>
+          </div>
+        </article>
+
+        <article class="exhibit">
+          <span class="tag calm">Job 3</span>
+          <h3>Calibration</h3>
+          <p>The numbers must be true. A pump that says 50 milliliters must give 50. A monitor that says 120 must be 120. Wrong numbers hurt people.</p>
+          <div class="say">
+            <div class="lab">Say this <button class="listen" onclick="speak('Calibration means the numbers are true.')">Listen</button></div>
+            <p>Calibration means the numbers are true.</p>
+          </div>
+        </article>
+
+        <div class="say">
+          <div class="lab">The line that sounds like a professional <button class="listen" onclick="speak('I check it, I repair it, I install it, and I write it down.')">Listen</button></div>
+          <p>I check it, I repair it, I install it, and I write it down.</p>
+        </div>
+
+        <h3>Tap a machine. Hear the English.</h3>
+        <p>Clinic first, then hospital. You do not need to know every brand. You need the names.</p>
+        <div class="machines" id="macs"></div>
+
+        <div class="qbox" data-q="q4">
+          <div class="qn">A nurse says: “This infusion pump is due for PM.” She means:</div>
+          <div class="opts">
+            <button class="opt">The pump is broken right now</button>
+            <button class="opt" data-ok="1">It is time for the scheduled check</button>
+            <button class="opt">Throw the pump away</button>
+          </div>
+          <div class="fb">PM = preventive maintenance. Before it fails. Gold word in a hospital.</div>
+        </div>
+
+        <div class="qbox" data-q="q5">
+          <div class="qn">Which sentence is correct?</div>
+          <div class="opts">
+            <button class="opt">I repair medical equipments.</button>
+            <button class="opt" data-ok="1">I repair medical equipment.</button>
+            <button class="opt">I repair the medicals equipment.</button>
+          </div>
+          <div class="fb">Equipment has no plural. Never equipments. Tattoo this one.</div>
+        </div>
+      </div>
+      <div class="next">
+        <button class="btn btn-w" onclick="showPanel('name')">Back</button>
+        <button class="btn btn-p" onclick="showPanel('floor')">The floor</button>
+      </div>
+    </section>
+
+    <!-- 4 FLOOR -->
+    <section class="panel" id="floor">
+      <div class="pad">
+        <h2>A machine fails. Four steps.</h2>
+        <p class="lead">This is the question that hires biomedical people. Not “are you smart.” “What do you do when a life-support machine dies in front of a doctor.”</p>
+        <div class="es"><b>En simple:</b> Toca los cuatro pasos en orden. Si tocas el 3 antes del 1, vuelves a empezar. Así es el piso: el orden es seguridad.</div>
+
+        <figure class="shot">
+          <img src="img/icu.jpg" width="1152" height="864" alt="An empty ICU bay at night with a ventilator and patient monitors glowing beside the bed." loading="lazy" />
+          <figcaption class="cap">The floor. Empty bed, live machines. You walk in calm.</figcaption>
+        </figure>
+
+        <p><b>Tap 1, then 2, then 3, then 4.</b></p>
+        <ol class="steps" id="foursteps">
+          <li><button class="stepbtn" data-n="1" type="button">
+            <span class="num">1</span>
+            <div>
+              <h3>Stay calm. Go fast.</h3>
+              <p>First, I stay calm and I go fast.</p>
+            </div>
+          </button></li>
+          <li><button class="stepbtn" data-n="2" type="button">
+            <span class="num">2</span>
+            <div>
+              <h3>Power and cables</h3>
+              <p>I check the power and the connections. Easy things first.</p>
+            </div>
+          </button></li>
+          <li><button class="stepbtn" data-n="3" type="button">
+            <span class="num">3</span>
+            <div>
+              <h3>Backup or support</h3>
+              <p>If I can’t repair it quickly, I get a backup or I call for support.</p>
+            </div>
+          </button></li>
+          <li><button class="stepbtn" data-n="4" type="button">
+            <span class="num">4</span>
+            <div>
+              <h3>Tell the doctor</h3>
+              <p>I tell the doctor. Patient safety is always first.</p>
+            </div>
+          </button></li>
+        </ol>
+        <p id="stepNote" style="font-weight:700;color:var(--scrub-d);"></p>
+
+        <div class="say">
+          <div class="lab">The whole answer, out loud <button class="listen" onclick="speak('First, I stay calm and I go fast. I check the power and the connections. If I cannot repair it quickly, I get a backup or I call for support. I tell the doctor. Patient safety is always first.')">Listen</button></div>
+          <p>First, I stay calm and I go fast. I check the power and the connections. If I can’t repair it quickly, I get a backup or I call for support. I tell the doctor. Patient safety is always first.</p>
+        </div>
+
+        <figure class="shot">
+          <img src="img/defib.jpg" width="1152" height="864" alt="A defibrillator with orange paddles on a red crash cart in a dim hospital corridor." loading="lazy" />
+          <figcaption class="cap">A defibrillator. If this fails a safety test, it does not go back to the floor.</figcaption>
+        </figure>
+
+        <article class="exhibit">
+          <span class="tag hot">Electrical safety</span>
+          <h3>A failed test stays in the shop</h3>
+          <p>Hospitals will ask: “What if a device fails electrical safety?” The only adult answer is: it does not return to the patient. You tag it. You repair it. You test it again.</p>
+          <div class="say">
+            <div class="lab">Say this <button class="listen" onclick="speak('If a machine fails a safety test, it does not go back to the floor. I never skip a safety test.')">Listen</button></div>
+            <p>If a machine fails a safety test, it does not go back to the floor. I never skip a safety test.</p>
+          </div>
+        </article>
+
+        <article class="exhibit">
+          <span class="tag calm">The sentence they remember</span>
+          <h3>Communication is also safety</h3>
+          <p>A silent engineer is a dangerous engineer. The doctor needs to know: is it two minutes, or is it down?</p>
+          <div class="say">
+            <div class="lab">Say this <button class="listen" onclick="speak('I tell the doctor immediately. Communication is also safety.')">Listen</button></div>
+            <p>I tell the doctor immediately. Communication is also safety.</p>
+          </div>
+        </article>
+
+        <div class="qbox" data-q="q6">
+          <div class="qn">A ventilator fails during a case. First move?</div>
+          <div class="opts">
+            <button class="opt">Open the machine and start replacing boards</button>
+            <button class="opt" data-ok="1">Stay calm, check power and cables, get a backup</button>
+            <button class="opt">Leave and look for the manual in the shop</button>
+          </div>
+          <div class="fb">On the floor: calm, easy things, backup. The shop comes after the patient is safe.</div>
+        </div>
+      </div>
+      <div class="next">
+        <button class="btn btn-w" onclick="showPanel('shop')">Back</button>
+        <button class="btn btn-c" onclick="showPanel('board')">The board</button>
+      </div>
+    </section>
+
+    <!-- 5 BOARD -->
+    <section class="panel" id="board">
+      <div class="pad">
+        <h2>Five questions a hospital actually asks</h2>
+        <p class="lead">Not “what is your favorite color.” These come from real BMET and clinical-engineering interviews. Short answers. Your English is enough.</p>
+        <div class="es"><b>En simple:</b> Escucha la pregunta. Di la respuesta. Si no sabes la máquina, la carta de oro: honestidad + manual + rápido.</div>
+
+        <article class="boardq">
+          <div class="who">Sofía · Human Resources</div>
+          <h3>Why do you want to work at this hospital?</h3>
+          <p class="qes">¿Por qué quieres trabajar en este hospital?</p>
+        </article>
+        <div class="say">
+          <div class="lab">Answer <button class="listen" onclick="speak('A hospital has more equipment and more technology than my clinic. I want to learn and grow. My experience can help your team.')">Listen</button></div>
+          <p>A hospital has more equipment and more technology than my clinic. I want to learn and grow. My experience can help your team.</p>
+        </div>
+
+        <article class="boardq">
+          <div class="who">The Director</div>
+          <h3>How do you troubleshoot a fault?</h3>
+          <p class="qes">¿Cómo diagnosticas una falla?</p>
+        </article>
+        <div class="say">
+          <div class="lab">Answer <button class="listen" onclick="speak('First I listen to the nurse. Then I look: power, cables, the screen. Easy things first. Then the inside. Then I test it, and I write it down.')">Listen</button></div>
+          <p>First I listen to the nurse. Then I look: power, cables, the screen. Easy things first. Then the inside. Then I test it, and I write it down.</p>
+        </div>
+
+        <article class="boardq">
+          <div class="who">Chief biomedical engineer</div>
+          <h3>What is the difference between PM and calibration?</h3>
+          <p class="qes">¿Cuál es la diferencia entre PM y calibración?</p>
+        </article>
+        <div class="say">
+          <div class="lab">Answer <button class="listen" onclick="speak('PM is a scheduled check, before a problem. Calibration means the numbers are true. Both are safety.')">Listen</button></div>
+          <p>PM is a scheduled check, before a problem. Calibration means the numbers are true. Both are safety.</p>
+        </div>
+
+        <article class="boardq">
+          <div class="who">Chief biomedical engineer</div>
+          <h3>Do you know our brand of ventilators?</h3>
+          <p class="qes">¿Conoces nuestra marca de ventiladores?</p>
+        </article>
+        <div class="say">
+          <div class="lab">The honesty card. This hires you. <button class="listen" onclick="speak('Not yet. But I can learn it fast, with the manual.')">Listen</button></div>
+          <p>Not yet. But I can learn it fast, with the manual.</p>
+        </div>
+
+        <article class="boardq">
+          <div class="who">A stressed nurse, then the board</div>
+          <h3>How do you talk to a nurse when she is afraid?</h3>
+          <p class="qes">¿Cómo hablas con una enfermera que está asustada?</p>
+        </article>
+        <div class="say">
+          <div class="lab">Answer <button class="listen" onclick="speak('I stay calm. I listen. I tell her what I will do, and when the machine will be ready.')">Listen</button></div>
+          <p>I stay calm. I listen. I tell her what I will do, and when the machine will be ready.</p>
+        </div>
+
+        <div class="qbox" data-q="q7">
+          <div class="qn">They name a machine you have never opened. You say:</div>
+          <div class="opts">
+            <button class="opt">Yes, of course, I know all machines</button>
+            <button class="opt" data-ok="1">Not yet. But I can learn it fast, with the manual.</button>
+            <button class="opt">I no understand the question</button>
+          </div>
+          <div class="fb">A lie about a ventilator can kill. Honesty plus speed is the professional answer.</div>
+        </div>
+
+        <h3>Your two questions for them</h3>
+        <p>Asking is interest. Silence looks like fear.</p>
+        <div class="say">
+          <div class="lab">Ask this <button class="listen" onclick="speak('What equipment does the hospital use? How big is the maintenance team?')">Listen</button></div>
+          <p>What equipment does the hospital use? How big is the maintenance team?</p>
+        </div>
+      </div>
+      <div class="next">
+        <button class="btn btn-w" onclick="showPanel('floor')">Back</button>
+        <button class="btn btn-c" onclick="showPanel('speak')">Learn the English</button>
+      </div>
+    </section>
+
+    <!-- 6 SPEAK -->
+    <section class="panel" id="speak">
+      <div class="pad">
+        <h2>The English of a man they hire</h2>
+        <p class="lead">These sentences are short on purpose. A1+ that sounds like a professional beats B1 that collapses.</p>
+        <div class="es"><b>En simple:</b> Escucha. Repite. Luego tápate la pantalla y diles a Gabriel, sin leer.</div>
+
+        <h3>Phrases for the room</h3>
+        <div class="phrase">
+          <b>Could you repeat that, please?</b>
+          <span>No entendí. Nunca “what?” a secas.</span>
+        </div>
+        <div class="phrase">
+          <b>That’s a good question. Let me think.</b>
+          <span>Tu ancla. Compras diez segundos. Luego contestas.</span>
+        </div>
+        <div class="phrase">
+          <b>Patient safety is always first.</b>
+          <span>La frase de oro de esta clase. Ciérrala al final de casi todo.</span>
+        </div>
+        <div class="phrase">
+          <b>Not yet. But I can learn it fast.</b>
+          <span>Honestidad + velocidad. Eso contrata.</span>
+        </div>
+        <div class="phrase">
+          <b>I never skip a safety test.</b>
+          <span>Un no que suena a sí.</span>
+        </div>
+        <div class="phrase">
+          <b>Communication is also safety.</b>
+          <span>Dile al doctor. El silencio no es profesionalismo.</span>
+        </div>
+
+        <div class="say">
+          <div class="lab">The 20-second pitch <button class="listen" onclick="speak('My name is Ruben. I am a biomedical engineer from Cuba. I take care of medical equipment. Patient safety is always first. If I do not know a machine, I read the manual and I learn fast.')">Listen</button></div>
+          <p>My name is Rubén. I am a biomedical engineer from Cuba. I take care of medical equipment. Patient safety is always first. If I don’t know a machine, I read the manual and I learn fast.</p>
+        </div>
+
+        <h3>Words you will hear in that room</h3>
+        <div class="glos">
+          <div class="gitem"><b>equipment</b><i>i-KWIP-mant</i><span>el equipo. Nunca equipments.</span></div>
+          <div class="gitem"><b>maintenance</b><i>MEIN-ta-nans</i><span>mantenimiento. Fuerza al inicio: MEIN.</span></div>
+          <div class="gitem"><b>calibrate</b><i>KA-li-breit</i><span>calibrar. Que el número sea verdad.</span></div>
+          <div class="gitem"><b>troubleshoot</b><i>TRUH-bl-shoot</i><span>diagnosticar una falla. First I listen, then I look.</span></div>
+          <div class="gitem"><b>ventilator</b><i>VEN-ti-lei-ter</i><span>ventilador mecánico. Si no lo conoces: not yet.</span></div>
+          <div class="gitem"><b>defibrillator</b><i>dee-FIB-ri-lei-ter</i><span>desfibrilador. Fuerza en FIB.</span></div>
+          <div class="gitem"><b>infusion pump</b><i>in-FYOO-zhen pump</i><span>bomba de infusión. Clinic equipment. You know this world.</span></div>
+          <div class="gitem"><b>safety</b><i>SEIF-tii</i><span>seguridad. La palabra que más vas a decir.</span></div>
+          <div class="gitem"><b>schedule</b><i>SKE-jul</i><span>horario. Nada de es-che-du-le.</span></div>
+          <div class="gitem"><b>biomedical</b><i>bai-o-ME-di-kal</i><span>biomédico. Tu título. Di este primero.</span></div>
+        </div>
+
+        <div class="qbox" data-q="q8">
+          <div class="qn">Pick the adult close of an interview.</div>
+          <div class="opts">
+            <button class="opt">I am sorry for my English. Maybe I am not ready.</button>
+            <button class="opt" data-ok="1">Thank you for your time. I am ready for this job.</button>
+            <button class="opt">When can I have the money?</button>
+          </div>
+          <div class="fb">You can name the English. You do not end on it. End on the job.</div>
+        </div>
+      </div>
+      <div class="next">
+        <button class="btn btn-w" onclick="showPanel('board')">Back</button>
+        <button class="btn btn-c" onclick="showPanel('quiz')">Quiz</button>
+      </div>
+    </section>
+
+    <!-- 7 QUIZ -->
+    <section class="panel" id="quiz">
+      <div class="pad">
+        <h2>Ten questions. Hospital and English, same pass.</h2>
+        <p class="lead">Green means you understood it. You can miss and try again. No mercy, no mockery.</p>
+        <div class="es"><b>En simple:</b> Mitad oficio, mitad tus trampas de siempre (I have 53 years, equipments, doesn’t).</div>
+
+        <div class="qbox" data-q="q9">
+          <div class="qn">1. “I am a biomedical engineer” is stronger than “I am an electrical engineer” in a hospital because…</div>
+          <div class="opts">
+            <button class="opt">electrical is not a real job</button>
+            <button class="opt" data-ok="1">it names the patient, not only the wires</button>
+            <button class="opt">biomedical is easier to pronounce</button>
+          </div>
+          <div class="fb">Both are true for you. Lead with the one the hospital came to hire.</div>
+        </div>
+
+        <div class="qbox" data-q="q10">
+          <div class="qn">2. Preventive maintenance happens…</div>
+          <div class="opts">
+            <button class="opt">after the machine fails</button>
+            <button class="opt" data-ok="1">before a problem, on a schedule</button>
+            <button class="opt">only at night</button>
+          </div>
+          <div class="fb">PM = scheduled, before. Repair = after. Keep the split clean.</div>
+        </div>
+
+        <div class="qbox" data-q="q11">
+          <div class="qn">3. Calibration means…</div>
+          <div class="opts">
+            <button class="opt">cleaning the outside</button>
+            <button class="opt" data-ok="1">the numbers are true</button>
+            <button class="opt">turning the machine off</button>
+          </div>
+          <div class="fb">Wrong numbers hurt people. That is why they ask this.</div>
+        </div>
+
+        <div class="qbox" data-q="q12">
+          <div class="qn">4. Correct English:</div>
+          <div class="opts">
+            <button class="opt">I have 53 years.</button>
+            <button class="opt" data-ok="1">I am 53 years old.</button>
+            <button class="opt">I am 53 years.</button>
+          </div>
+          <div class="fb">Your classic. Age is I am, not I have.</div>
+        </div>
+
+        <div class="qbox" data-q="q13">
+          <div class="qn">5. A machine fails a safety test. You…</div>
+          <div class="opts">
+            <button class="opt">send it back if the doctor is waiting</button>
+            <button class="opt" data-ok="1">keep it in the shop, tag it, repair it, test it again</button>
+            <button class="opt">ask the nurse to watch it</button>
+          </div>
+          <div class="fb">I never skip a safety test. Full stop.</div>
+        </div>
+
+        <div class="qbox" data-q="q14">
+          <div class="qn">6. “The machine don’t work” should be…</div>
+          <div class="opts">
+            <button class="opt">The machine no work</button>
+            <button class="opt" data-ok="1">The machine doesn’t work</button>
+            <button class="opt">The machine don’t works</button>
+          </div>
+          <div class="fb">It / the machine = third person. doesn’t.</div>
+        </div>
+
+        <div class="qbox" data-q="q15">
+          <div class="qn">7. First things you check on the floor:</div>
+          <div class="opts">
+            <button class="opt">the firmware version and the service contract</button>
+            <button class="opt" data-ok="1">power and cables</button>
+            <button class="opt">who to blame</button>
+          </div>
+          <div class="fb">Easy things first. Then the inside.</div>
+        </div>
+
+        <div class="qbox" data-q="q16">
+          <div class="qn">8. They ask about a brand you do not know. You say:</div>
+          <div class="opts">
+            <button class="opt">I know it. I used it in Cuba. (if that is not true)</button>
+            <button class="opt" data-ok="1">Not yet. But I can learn it fast, with the manual.</button>
+            <button class="opt">That is not my problem.</button>
+          </div>
+          <div class="fb">The honesty card. This is how adults get hired.</div>
+        </div>
+
+        <div class="qbox" data-q="q17">
+          <div class="qn">9. “I want explain my experience” is missing…</div>
+          <div class="opts">
+            <button class="opt">the word equipment</button>
+            <button class="opt" data-ok="1">to — I want to explain</button>
+            <button class="opt">a capital letter</button>
+          </div>
+          <div class="fb">want + to + verb. Always.</div>
+        </div>
+
+        <div class="qbox" data-q="q18">
+          <div class="qn">10. The last line of this class is…</div>
+          <div class="opts">
+            <button class="opt">My English is the problem</button>
+            <button class="opt" data-ok="1">Patient safety is always first.</button>
+            <button class="opt">I will try my best maybe</button>
+          </div>
+          <div class="fb">Take that sentence into the room. It is the whole class in five words.</div>
+        </div>
+
+        <p id="quizScore" style="font-weight:700;margin-top:8px;"></p>
+      </div>
+      <div class="next">
+        <button class="btn btn-w" onclick="showPanel('speak')">Back</button>
+        <button class="btn btn-c" onclick="showPanel('pitch')">Your pitch</button>
+      </div>
+    </section>
+
+    <!-- 8 PITCH -->
+    <section class="panel" id="pitch">
+      <div class="pad">
+        <h2>Your pitch, Rubén</h2>
+        <p class="lead">Four sentences in English. You can still be afraid. You just have to sound like a man who walked the floor.</p>
+        <div class="es"><b>Usa:</b> I am a biomedical engineer… / I take care of… / Patient safety… / If I don’t know a machine…</div>
+
+        <p>1. Who are you?<br />
+        2. What do you do with machines?<br />
+        3. What do you do when a machine is down?<br />
+        4. Why this hospital?</p>
+
+        <textarea id="verdictBox" placeholder="My name is Rubén. I am a biomedical engineer from Cuba..."></textarea>
+        <div class="row">
+          <button class="btn btn-w" type="button" onclick="speak(document.getElementById('verdictBox').value)">Listen to me</button>
+          <button class="btn btn-c" type="button" onclick="saveVerdict()">Save pitch</button>
+        </div>
+        <p class="saved" id="saved">Saved on this phone. Read it out loud to Gabriel.</p>
+
+        <div class="verdict-card" style="margin-top:22px;">
+          <h2>The floor is open</h2>
+          <p>The machine will fail. Your English does not have to. Calm, honest, patient first — then the next sentence.</p>
+          <p style="margin:0;color:var(--muted);font-size:14.5px;">ARCHES · Rubén · The Floor · 2026-08-27</p>
+        </div>
+      </div>
+
+      <details class="teacher">
+        <summary>Notas para Gabriel · plan de clase</summary>
+        <div class="body">
+          El salto respecto a La Entrevista v2: de recitar diez respuestas de RR.HH. a hablar como ingeniero biomédico en el piso. Las fotos hacen el trabajo que el aula no puede: lo ponen en el pasillo.
+          <ol>
+            <li><b>Miedo (4 min).</b> Él nombra el miedo. Tres frases de rescate, en voz alta. Tú callas. Si usa español, rescue line first.</li>
+            <li><b>El título (6 min).</b> Biomedical first, electrical second. Escucha, tápate, las cuatro líneas. Trampa viva: I have 53 years / I am electrical engineer.</li>
+            <li><b>El taller (8 min).</b> PM / repair / calibration. Toca las máquinas. Ríanse de maintenance y de equipments.</li>
+            <li><b>El piso (8 min).</b> Los cuatro pasos, en orden. Si toca mal, otra vez. Frase de oro: Patient safety is always first.</li>
+            <li><b>La mesa (8 min).</b> Tú eres la ingeniera jefa. Dos preguntas del board. Un error vivo al final, no cinco.</li>
+            <li><b>El pitch (6 min).</b> Escribe cuatro oraciones. Las lee. Guardar. Celebrar la que suene a él, no a libro.</li>
+          </ol>
+          Nivel A1+ empujando A2: presente, pasado corto (worked, learned), first/then/if. Oraciones cortas siempre. No inventar CT/MRI/años exactos. Honestidad + manual es la carta que contrata.
+        </div>
+      </details>
+    </section>
+  </main>
+
+  <footer class="tiny">ARCHES · Rubén · The Floor. <a href="../?name=Ruben">Volver a tus temas</a> · <a href="../entrevista/">La Entrevista</a></footer>
+</div>
+
+<noscript>
+  <style>.panel{display:block !important; transform:none !important; opacity:1 !important;}</style>
+</noscript>
+
+<script>
+(function(){
+  "use strict";
+  const KEY = "floor_ruben_v1";
+  const mem = {};
+  const store = {
+    get: function(d){ try{ const v=localStorage.getItem(KEY); return v?JSON.parse(v):d; }catch(e){ return mem.data||d; } },
+    set: function(v){ try{ localStorage.setItem(KEY, JSON.stringify(v)); }catch(e){ mem.data=v; } }
+  };
+  let state = store.get({ panel:"fear", quiz:{}, pitch:"", machines:{}, steps:0 });
+  const startPanel = new URLSearchParams(location.search).get("p");
+  if(startPanel && ["fear","name","shop","floor","board","speak","quiz","pitch"].indexOf(startPanel)>=0){
+    state.panel = startPanel;
+  }
+
+  const MACS = [
+    { id:"mon", en:"patient monitor", es:"monitor de paciente" },
+    { id:"pump", en:"infusion pump", es:"bomba de infusión" },
+    { id:"ecg", en:"ECG machine", es:"electrocardiógrafo" },
+    { id:"xray", en:"X-ray machine", es:"máquina de rayos X" },
+    { id:"auto", en:"autoclave", es:"autoclave / esterilizador" },
+    { id:"defib", en:"defibrillator", es:"desfibrilador · hospital" },
+    { id:"vent", en:"ventilator", es:"ventilador · si no lo conoces: not yet" },
+    { id:"anes", en:"anesthesia machine", es:"máquina de anestesia · hospital" }
+  ];
+
+  const panels = ["fear","name","shop","floor","board","speak","quiz","pitch"];
+  function showPanel(id){
+    document.querySelectorAll(".panel").forEach(function(p){ p.classList.toggle("on", p.id===id); });
+    document.querySelectorAll(".dock button").forEach(function(b){ b.classList.toggle("on", b.getAttribute("data-panel")===id); });
+    state.panel = id;
+    store.set(state);
+    updateBar();
+    const dock = document.querySelector("nav.dock");
+    const html = document.documentElement;
+    const prev = html.style.scrollBehavior;
+    html.style.scrollBehavior = "auto";
+    window.scrollTo(0, dock ? dock.offsetTop - 2 : 0);
+    html.style.scrollBehavior = prev;
+  }
+  window.showPanel = showPanel;
+
+  function updateBar(){
+    const i = Math.max(0, panels.indexOf(state.panel));
+    document.getElementById("bar").style.width = ((i+1)/panels.length*100) + "%";
+    const n = Object.keys(state.machines||{}).length;
+    const notes = document.getElementById("notes");
+    if(!n && !state.steps){ notes.classList.remove("show"); notes.innerHTML=""; return; }
+    notes.classList.add("show");
+    const bits = [];
+    if(n) bits.push("You named " + n + " of 8 machines.");
+    if(state.steps>=4) bits.push("Four floor steps: in order.");
+    notes.innerHTML = "<b>Floor notes.</b> " + bits.join(" ");
+  }
+
+  const macWrap = document.getElementById("macs");
+  if(macWrap){
+    MACS.forEach(function(m){
+      const b = document.createElement("button");
+      b.className = "mac" + (state.machines[m.id] ? " on" : "");
+      b.type = "button";
+      b.innerHTML = "<b>"+m.en+"</b><span>"+m.es+"</span>";
+      b.addEventListener("click", function(){
+        speak(m.en);
+        state.machines[m.id] = true;
+        b.classList.add("on");
+        store.set(state);
+        updateBar();
+      });
+      macWrap.appendChild(b);
+    });
+  }
+
+  let expect = 1;
+  const stepNote = document.getElementById("stepNote");
+  document.querySelectorAll("#foursteps .stepbtn").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      const n = parseInt(btn.getAttribute("data-n"), 10);
+      if(n === expect){
+        btn.classList.remove("bad");
+        btn.classList.add("on");
+        speak(btn.querySelector("p").textContent);
+        expect += 1;
+        if(expect > 4){
+          state.steps = 4;
+          store.set(state);
+          if(stepNote) stepNote.textContent = "Four steps. In order. That is the job.";
+          updateBar();
+        }
+      } else {
+        document.querySelectorAll("#foursteps .stepbtn").forEach(function(x){
+          x.classList.remove("on","bad");
+        });
+        btn.classList.add("bad");
+        expect = 1;
+        if(stepNote) stepNote.textContent = "Out of order. Start again at 1. The floor is like that.";
+        speak("Start again. First, stay calm.");
+      }
+    });
+  });
+
+  document.querySelectorAll(".qbox").forEach(function(box){
+    const id = box.getAttribute("data-q");
+    const fb = box.querySelector(".fb");
+    const opts = box.querySelectorAll(".opt");
+    if(state.quiz[id]){
+      opts.forEach(function(o){
+        if(o.getAttribute("data-ok")) o.classList.add("ok");
+        o.disabled = true;
+      });
+      if(fb) fb.classList.add("show","good");
+    }
+    opts.forEach(function(btn){
+      btn.addEventListener("click", function(){
+        if(btn.disabled) return;
+        const ok = btn.hasAttribute("data-ok");
+        if(ok){
+          opts.forEach(function(o){ o.disabled = true; });
+          btn.classList.add("ok");
+          if(fb){ fb.classList.add("show","good"); fb.classList.remove("poor"); }
+          state.quiz[id] = true;
+          store.set(state);
+          scoreQuiz();
+        } else {
+          btn.classList.add("bad");
+          btn.disabled = true;
+          if(fb){ fb.classList.add("show","poor"); }
+        }
+      });
+    });
+  });
+
+  function scoreQuiz(){
+    const need = ["q9","q10","q11","q12","q13","q14","q15","q16","q17","q18"];
+    const n = need.filter(function(k){ return state.quiz[k]; }).length;
+    const el = document.getElementById("quizScore");
+    if(el) el.textContent = n ? ("Score: " + n + " / 10") : "";
+  }
+
+  function saveVerdict(){
+    const t = document.getElementById("verdictBox").value.trim();
+    state.pitch = t;
+    store.set(state);
+    const s = document.getElementById("saved");
+    s.classList.add("show");
+    s.textContent = t ? "Saved on this phone. Read it out loud to Gabriel." : "Write four sentences first.";
+  }
+  window.saveVerdict = saveVerdict;
+
+  let voice = null, audioReady = false;
+  function loadVoice(){
+    if(!window.speechSynthesis) return;
+    const vs = speechSynthesis.getVoices();
+    const NOV=/albert|bad news|bahh|bells|boing|bubbles|cellos|good news|jester|organ|superstar|trinoids|whisper|wobble|zarvox|junior|kathy|ralph|fred/i;
+    const en = vs.filter(function(v){ return /^en[-_]/i.test(v.lang) && !NOV.test(v.name); });
+    const pref = ["Samantha","Google US English","Microsoft Aria","Microsoft Jenny","Microsoft Zira","Alex"];
+    voice = null;
+    for(let i=0;i<pref.length;i++){
+      const m = en.find(function(v){ return v.name.indexOf(pref[i])===0; });
+      if(m){ voice=m; break; }
+    }
+    if(!voice) voice = en.find(function(v){ return /en[-_]US/i.test(v.lang); }) || en[0] || null;
+  }
+  if(window.speechSynthesis){ loadVoice(); speechSynthesis.onvoiceschanged = loadVoice; }
+  function unlockAudio(){
+    if(audioReady || !window.speechSynthesis) return;
+    try{ const u=new SpeechSynthesisUtterance(""); u.volume=0; speechSynthesis.speak(u); audioReady=true; }catch(e){}
+  }
+  document.addEventListener("touchstart", unlockAudio, {once:true});
+  document.addEventListener("click", unlockAudio, {once:true});
+  function speak(text){
+    if(!text || !window.speechSynthesis) return;
+    try{
+      speechSynthesis.cancel();
+      const u=new SpeechSynthesisUtterance(text);
+      u.lang="en-US"; u.rate=0.88; if(voice) u.voice=voice;
+      speechSynthesis.speak(u);
+    }catch(e){}
+  }
+  window.speak = speak;
+
+  if(state.pitch) document.getElementById("verdictBox").value = state.pitch;
+  if(state.steps>=4){
+    document.querySelectorAll("#foursteps .stepbtn").forEach(function(b){ b.classList.add("on"); });
+    if(stepNote) stepNote.textContent = "Four steps. In order. That is the job.";
+  }
+  scoreQuiz();
+  if(state.panel && state.panel!=="fear") showPanel(state.panel);
+  else updateBar();
+})();
+</script>
+</body>
+</html>

@@ -123,8 +123,8 @@
     "level": "A1+",
     "l1": "Spanish",
     "context": "Trabaja en una clínica privada",
-    "greeting": "Hoy: La Entrevista, nivel 2. Te entrevista un hospital: preguntas nuevas y tres entrevistadores.",
-    "version": "2026-08-25"
+    "greeting": "Hoy: The Floor. La entrevista de un hospital de verdad: biomédico, el piso, y el inglés del miedo.",
+    "version": "2026-08-27"
   },
   "tracks": [
     {
@@ -579,6 +579,11 @@
   ],
   "links": [
     {
+      "title": "The Floor",
+      "note": "Clase de hoy. Un hospital te entrevista de verdad: biomédico, el piso, y el inglés del miedo.",
+      "url": "piso/"
+    },
+    {
       "title": "La Entrevista",
       "note": "Nivel 2: te entrevista un hospital. Diez respuestas, seguimientos y tres entrevistadores.",
       "url": "entrevista/"
@@ -736,7 +741,7 @@
     html+='</div>';
     html+='<div class="tracks-label">Hoy</div>';
     app.innerHTML=html;
-    if(STUDENT.links && STUDENT.links[0] && STUDENT.links[0].url==="entrevista/"){
+    if(STUDENT.links && STUDENT.links[0] && STUDENT.links[0].url==="piso/"){
       const L=STUDENT.links[0];
       const feat=el('<a class="track" style="display:block;text-decoration:none;border-color:var(--terra)" href="'+L.url+'">'+
         '<div class="track-head"><div class="track-title">'+esc(L.title)+'</div><div class="track-count">hoy</div></div>'+
@@ -756,7 +761,7 @@
     if(STUDENT.links && STUDENT.links.length){
       app.appendChild(el('<div class="tracks-label">Tus otras apps</div>'));
       STUDENT.links.forEach(function(L){
-        if(L.url==="entrevista/") return;
+        if(L.url==="piso/") return;
         const a=el('<a class="track" style="display:block;text-decoration:none" href="'+L.url+'">'+
           '<div class="track-head"><div class="track-title">'+esc(L.title)+'</div><div class="track-count">›</div></div>'+
           (L.note?'<div class="track-note">'+esc(L.note)+'</div>':'')+'</a>');
