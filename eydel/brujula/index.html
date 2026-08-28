@@ -1,0 +1,1527 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Compass · Eydel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=Public+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --night:#16130e;
+    --ink:#1c1812;
+    --paper:#f3ead8;
+    --field:#e7dcc4;
+    --linen:#f6efe2;
+    --brass:#8a6420;
+    --brass-d:#5c4214;
+    --brass-s:#f0e2b8;
+    --brass-line:#e0c98a;
+    --brass-ink:#3f2d0c;
+    --white:#fff;
+    --flag:#8a3210;
+    --flag-d:#6a240c;
+    --slate:#2c4a52;
+    --slate-s:#dce8ea;
+    --slate-line:#b7c9ce;
+    --muted:#5c5346;
+    --line:#d8cbb0;
+    --ok:#2a5f48;
+    --ok-s:#dceee4;
+    --no:#8f2d24;
+    --no-s:#f4e0d8;
+    --scrim:rgba(22,19,14,.62);
+    --ease-out:cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  html,body{margin:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    min-height:100vh;
+    color:var(--ink);
+    font-family:"Public Sans",system-ui,sans-serif;
+    background:var(--night);
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{background:var(--brass-s); color:var(--ink);}
+  :focus-visible{outline:3px solid var(--brass); outline-offset:3px;}
+  img{max-width:100%; display:block;}
+
+  .shell{max-width:640px; margin:0 auto; padding:0 0 96px;}
+
+  .hero{position:relative; min-height:72vh; color:var(--linen);}
+  .hero img{width:100%; height:72vh; object-fit:cover; object-position:58% 18%;}
+  .hero-scrim{
+    position:absolute; inset:auto 0 0 0; height:64%;
+    background:linear-gradient(180deg, transparent, var(--scrim) 42%, var(--night) 100%);
+    pointer-events:none;
+  }
+  .hero-copy{position:absolute; left:0; right:0; bottom:0; padding:18px 18px 22px;}
+  .hero h1{
+    font-family:"Bricolage Grotesque",Georgia,sans-serif;
+    font-weight:700;
+    font-size:clamp(32px,7.4vw,46px);
+    line-height:.98;
+    letter-spacing:-.03em;
+    margin:0 0 10px;
+    color:var(--linen);
+  }
+  .hero p{
+    margin:0 0 16px;
+    font-size:17px;
+    line-height:1.45;
+    color:var(--field);
+    max-width:34em;
+  }
+  .start{
+    display:inline-flex; align-items:center; justify-content:center;
+    min-height:48px; padding:12px 18px;
+    background:var(--flag); color:var(--linen);
+    border:0; border-radius:12px;
+    font-family:inherit; font-weight:700; font-size:16px;
+    cursor:pointer;
+  }
+  .start:active{transform:scale(.97); background:var(--flag-d);}
+
+  .backhome{
+    position:absolute; top:12px; left:12px; z-index:4;
+    display:inline-flex; align-items:center; min-height:44px;
+    padding:8px 14px; border-radius:999px;
+    background:var(--scrim); color:var(--linen);
+    text-decoration:none; font-weight:700; font-size:14px;
+    border:1px solid rgba(246,239,226,.18);
+  }
+
+  nav.dock{
+    position:sticky; top:0; z-index:20;
+    background:rgba(22,19,14,.92);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid rgba(246,239,226,.08);
+    padding:8px 8px 10px;
+    display:flex; gap:6px; overflow-x:auto;
+    scrollbar-width:none;
+  }
+  nav.dock::-webkit-scrollbar{display:none;}
+  .dock button{
+    flex:0 0 auto;
+    min-height:44px; padding:8px 12px;
+    border:1px solid rgba(246,239,226,.14);
+    background:transparent; color:var(--field);
+    border-radius:999px;
+    font-family:inherit; font-weight:700; font-size:13px;
+    cursor:pointer; white-space:nowrap;
+  }
+  .dock button.on{background:var(--linen); color:var(--ink); border-color:var(--linen);}
+
+  .paper{
+    background:var(--paper);
+    color:var(--ink);
+    border-radius:22px 22px 0 0;
+    margin-top:-14px;
+    position:relative;
+    padding:8px 0 28px;
+    box-shadow:0 -12px 40px rgba(0,0,0,.28);
+  }
+  .pad{padding:22px 18px 12px;}
+  .panel{display:none;}
+  .panel.on{display:block; animation:enter .45s var(--ease-out);}
+  @keyframes enter{
+    from{opacity:0; transform:translateY(10px);}
+    to{opacity:1; transform:none;}
+  }
+
+  h2{
+    font-family:"Bricolage Grotesque",Georgia,sans-serif;
+    font-weight:700;
+    font-size:clamp(26px,6.4vw,34px);
+    letter-spacing:-.025em;
+    line-height:1.08;
+    margin:6px 0 10px;
+  }
+  h3{
+    font-family:"Bricolage Grotesque",Georgia,sans-serif;
+    font-weight:600;
+    font-size:22px;
+    letter-spacing:-.02em;
+    margin:0 0 8px;
+    line-height:1.15;
+  }
+  p{margin:0 0 12px; line-height:1.55; font-size:17px;}
+  .lead{font-size:18px;}
+
+  .es{
+    background:var(--brass-s);
+    border:1px solid var(--brass-line);
+    border-radius:12px;
+    padding:11px 13px;
+    margin:10px 0 16px;
+    color:var(--brass-d);
+    font-size:15.5px;
+    line-height:1.5;
+  }
+  .es b{color:var(--brass-ink);}
+
+  .tag{
+    display:inline-block;
+    font-size:11.5px; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
+    padding:4px 9px; border-radius:999px; margin-bottom:8px;
+  }
+  .tag.hot{background:var(--no-s); color:var(--no);}
+  .tag.ok{background:var(--ok-s); color:var(--ok);}
+  .tag.job{background:var(--field); color:var(--ink);}
+  .tag.tool{background:var(--slate-s); color:var(--slate);}
+
+  .say{
+    background:var(--slate-s);
+    border:1px solid var(--slate-line);
+    border-radius:12px;
+    padding:12px 13px;
+    margin:8px 0 14px;
+    color:var(--slate);
+  }
+  .say .lab{
+    display:flex; align-items:center; gap:8px;
+    font-size:12px; font-weight:700; letter-spacing:.04em; text-transform:uppercase;
+    color:var(--slate); margin-bottom:6px;
+  }
+  .say p{margin:0; font-size:17px; font-weight:700; line-height:1.4; color:var(--ink);}
+  .listen{
+    margin-left:auto;
+    border:0; background:transparent; color:var(--slate);
+    font-family:inherit; font-weight:700; font-size:13px;
+    cursor:pointer; padding:4px 0; min-height:32px;
+  }
+
+  .shot{
+    margin:4px 0 16px;
+    border-radius:14px;
+    overflow:hidden;
+    background:var(--night);
+  }
+  .shot img{width:100%; height:220px; object-fit:cover;}
+  .cap{
+    padding:9px 12px;
+    font-size:13px; color:var(--muted); font-weight:700;
+    background:var(--field);
+  }
+
+  .idea{
+    background:var(--field);
+    border:1.5px solid var(--line);
+    border-radius:14px;
+    padding:14px;
+    margin:0 0 10px;
+  }
+
+  .costs{display:grid; gap:8px; margin:12px 0 14px;}
+  .cost{
+    text-align:left;
+    background:var(--paper);
+    border:1.5px solid var(--line);
+    border-radius:14px;
+    padding:14px 14px 12px;
+    font-family:inherit; color:inherit;
+    min-height:72px; cursor:pointer;
+  }
+  .cost .k{font-size:12px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; color:var(--muted);}
+  .cost h3{font-size:22px; margin:2px 0 4px;}
+  .cost p{margin:0; font-size:14.5px; color:var(--muted);}
+  .cost.on.bad{background:var(--no-s); border-color:var(--no);}
+  .cost.on.mid{background:var(--brass-s); border-color:var(--brass);}
+  .cost.on.good{background:var(--ok-s); border-color:var(--ok);}
+
+  .years{
+    display:none;
+    background:var(--night);
+    color:var(--linen);
+    border-radius:14px;
+    padding:14px;
+    margin:0 0 14px;
+  }
+  .years.show{display:block;}
+  .years p{color:var(--field); font-size:15px; margin:0 0 10px;}
+  .ygrid{display:grid; grid-template-columns:repeat(5,1fr); gap:6px;}
+  .ygrid i{
+    display:block; height:28px; border-radius:6px;
+    background:var(--brass);
+  }
+  .years .lab{font-size:12px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--brass-s); margin:0 0 8px;}
+
+  .words{display:grid; grid-template-columns:1fr 1fr; gap:8px; margin:10px 0 14px;}
+  .word{
+    text-align:left;
+    background:var(--paper);
+    border:1.5px solid var(--line);
+    border-radius:14px;
+    padding:12px;
+    font-family:inherit; color:inherit;
+    min-height:88px; cursor:pointer;
+  }
+  .word b{display:block; font-family:"Bricolage Grotesque",Georgia,sans-serif; font-size:20px;}
+  .word i{display:block; font-style:normal; font-weight:700; font-size:13px; color:var(--brass); margin:2px 0 4px;}
+  .word span{display:none; font-size:13.5px; color:var(--muted); line-height:1.4;}
+  .word.on{background:var(--brass-s); border-color:var(--brass);}
+  .word.on span{display:block;}
+
+  .stations{display:flex; flex-direction:column; gap:8px; margin:10px 0 16px;}
+  .stat{
+    display:flex; gap:12px; align-items:flex-start;
+    background:var(--paper); border:1.5px solid var(--line); border-radius:14px;
+    padding:12px; text-align:left; cursor:pointer;
+    font-family:inherit; color:inherit; min-height:64px;
+  }
+  .num{
+    flex:none; width:32px; height:32px; border-radius:50%;
+    background:var(--field); color:var(--muted);
+    display:flex; align-items:center; justify-content:center;
+    font-weight:800; font-size:14px;
+  }
+  .stat h3{font-size:17px; margin:0 0 2px;}
+  .stat p{margin:0; font-size:14px; color:var(--muted);}
+  .stat.on{background:var(--ok-s); border-color:var(--ok);}
+  .stat.on .num{background:var(--ok); color:var(--linen);}
+  .stat.bad{background:var(--no-s); border-color:var(--no);}
+  .stat.bad .num{background:var(--no); color:var(--linen);}
+
+  .tools{display:grid; gap:8px; margin:10px 0 14px;}
+  .tool{
+    background:var(--field);
+    border:1.5px solid var(--line);
+    border-radius:14px;
+    padding:14px;
+  }
+  .tool .row{display:flex; gap:8px; flex-wrap:wrap; margin-top:8px;}
+
+  .prompt{
+    background:var(--night); color:var(--linen);
+    border-radius:12px; padding:12px;
+    font-size:15px; line-height:1.45; margin:8px 0 0;
+  }
+
+  .qbox{
+    background:var(--field);
+    border:1.5px solid var(--line);
+    border-radius:14px;
+    padding:14px;
+    margin:0 0 12px;
+  }
+  .qn{font-weight:700; margin-bottom:10px; font-size:17px; line-height:1.35;}
+  .opts{display:flex; flex-direction:column; gap:8px;}
+  .opt{
+    text-align:left; min-height:46px;
+    background:var(--paper); border:1.5px solid var(--line); border-radius:12px;
+    padding:11px 12px; font-weight:700; font-size:15.5px;
+    cursor:pointer; font-family:inherit; color:inherit;
+  }
+  .opt.ok{background:var(--ok-s); border-color:var(--ok); color:var(--ok);}
+  .opt.bad{background:var(--no-s); border-color:var(--no); color:var(--no);}
+  .opt:disabled{cursor:default;}
+  .fb{display:none; margin-top:10px; font-size:15px; line-height:1.45; font-weight:400;}
+  .fb.show{display:block;}
+  .fb.good{color:var(--ok);}
+  .fb.poor{color:var(--no);}
+
+  .traps{display:grid; gap:8px; margin:10px 0 14px;}
+  .trapcard{
+    background:var(--paper);
+    border:1.5px solid var(--line);
+    border-radius:14px;
+    padding:12px;
+  }
+  .trapcard p{margin:0 0 8px; font-weight:700; font-size:15.5px;}
+  .trapcard.ok{background:var(--ok-s); border-color:var(--ok);}
+  .trapcard.bad{background:var(--no-s); border-color:var(--no);}
+  .trapbtns{display:flex; gap:8px;}
+  .trapbtns button{
+    flex:1; min-height:44px;
+    border-radius:12px; border:1.5px solid var(--line);
+    background:var(--field); color:var(--ink);
+    font-family:inherit; font-weight:700; font-size:14.5px;
+    cursor:pointer;
+  }
+  .trapbtns button:disabled{cursor:default;}
+  .trapbtns button.on-bad{background:var(--no); color:var(--linen); border-color:var(--no);}
+  .trapbtns button.on-ok{background:var(--ok); color:var(--linen); border-color:var(--ok);}
+
+  .cos{display:grid; gap:8px; margin:10px 0 14px;}
+  .co{
+    text-align:left;
+    background:var(--paper);
+    border:1.5px solid var(--line);
+    border-radius:14px;
+    padding:14px;
+    font-family:inherit; color:inherit;
+    min-height:72px; cursor:pointer;
+  }
+  .co .k{font-size:12px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; color:var(--muted);}
+  .co.on{background:var(--ok-s); border-color:var(--ok);}
+  .co:disabled{opacity:.7; cursor:default;}
+
+  .ledger{
+    background:var(--night); color:var(--linen);
+    border-radius:14px; padding:14px; margin:0 0 14px;
+  }
+  .ledger .k{font-size:12px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--brass-s);}
+  .ledger p{margin:6px 0 0; color:var(--field); font-size:15.5px;}
+  .ledger b{color:var(--linen);}
+  .ledger .tiny{font-size:12.5px; color:var(--brass-s); margin-top:8px;}
+
+  .weeks{display:grid; gap:8px; margin:10px 0 14px;}
+  .week{
+    text-align:left;
+    background:var(--paper);
+    border:1.5px solid var(--line);
+    border-radius:14px;
+    padding:14px;
+    font-family:inherit; color:inherit;
+    cursor:pointer; min-height:72px;
+  }
+  .week .k{font-size:12px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; color:var(--brass);}
+  .week.on{background:var(--brass-s); border-color:var(--brass);}
+
+  .phrase{
+    background:var(--paper);
+    border:1.5px dashed var(--line);
+    border-radius:12px;
+    padding:12px;
+    margin:0 0 10px;
+  }
+  .phrase b{display:block; font-family:"Bricolage Grotesque",Georgia,sans-serif; font-size:20px; margin-bottom:4px;}
+  .phrase span{color:var(--muted); font-size:14.5px;}
+
+  textarea, .field{
+    width:100%;
+    border:1.5px solid var(--line);
+    border-radius:12px;
+    padding:12px 13px;
+    font-family:inherit; font-size:16.5px; color:var(--ink);
+    background:var(--white);
+  }
+  textarea{min-height:140px; resize:vertical; line-height:1.5;}
+  textarea:focus, .field:focus{outline:none; border-color:var(--brass);}
+
+  .btn{
+    border:0; border-radius:12px;
+    min-height:48px; padding:12px 16px;
+    font-family:inherit; font-weight:700; font-size:16px;
+    cursor:pointer;
+  }
+  .btn:active{transform:scale(.97);}
+  .btn-c{background:var(--flag); color:var(--linen);}
+  .btn-c:active{background:var(--flag-d);}
+  .btn-s{background:var(--slate); color:var(--linen);}
+  .btn-w{background:var(--field); color:var(--ink); border:1.5px solid var(--line);}
+  .btn:disabled{opacity:.45; cursor:default; transform:none;}
+  .row{display:flex; gap:8px; flex-wrap:wrap; margin-top:10px;}
+
+  .notes{
+    display:none;
+    margin:0 18px 8px;
+    background:var(--night); color:var(--field);
+    border-radius:12px; padding:10px 12px;
+    font-size:13.5px; line-height:1.4;
+  }
+  .notes.show{display:block;}
+  .notes b{color:var(--brass-s);}
+
+  .prog{
+    height:6px; background:rgba(246,239,226,.12);
+    border-radius:99px; overflow:hidden; margin:0 18px 8px;
+  }
+  .prog > i{display:block; height:100%; width:0; background:var(--brass); transition:width .4s var(--ease-out);}
+
+  .glos{display:grid; gap:8px; margin:8px 0 16px;}
+  .gitem{background:var(--field); border:1px solid var(--line); border-radius:12px; padding:11px 12px;}
+  .gitem b{display:block; font-size:17px;}
+  .gitem i{color:var(--brass-d); font-style:normal; font-weight:700; font-size:13.5px;}
+  .gitem span{display:block; color:var(--muted); font-size:14.5px; margin-top:2px;}
+
+  .verdict-card{
+    background:linear-gradient(180deg,var(--paper),var(--brass-s));
+    border:2px solid var(--brass);
+    border-radius:18px;
+    padding:22px 16px;
+    text-align:center;
+  }
+  .verdict-card h2{margin-bottom:6px;}
+  .saved{display:none; color:var(--ok); font-weight:700; margin-top:8px;}
+  .saved.show{display:block;}
+
+  footer.tiny{
+    color:rgba(246,239,226,.45);
+    font-size:12.5px; text-align:center;
+    padding:8px 18px 24px;
+  }
+  footer.tiny a{color:var(--brass-s);}
+
+  .next{
+    margin:18px 18px 8px;
+    display:flex; gap:8px;
+  }
+  .next .btn{flex:1;}
+
+  .teacher{
+    margin:18px 18px 0;
+    background:var(--field);
+    border:1.5px dashed var(--line);
+    border-radius:14px;
+    padding:12px 14px;
+  }
+  .teacher summary{cursor:pointer; font-weight:800; color:var(--muted); font-size:13px; list-style:none;}
+  .teacher summary::-webkit-details-marker{display:none;}
+  .teacher .body{font-size:13.5px; line-height:1.5; margin-top:10px;}
+  .teacher ol{margin:8px 0 0; padding-left:18px;}
+  .teacher li{margin:6px 0;}
+
+  .fine{
+    font-size:12.5px; color:var(--muted); line-height:1.45; margin:8px 0 0;
+  }
+
+  @media (hover:hover) and (pointer:fine){
+    .start:hover{transform:translateY(-2px); box-shadow:0 10px 22px rgba(0,0,0,.28);}
+    .opt:hover, .cost:hover, .word:hover, .stat:hover, .trapbtns button:hover, .co:hover, .week:hover{transform:translateY(-2px);}
+    .opt, .cost, .word, .stat, .trapbtns button, .co, .week, .start, .btn{
+      transition:transform .18s var(--ease-out), background .18s ease, border-color .18s ease;
+    }
+  }
+  @media (max-width:420px){
+    .words{grid-template-columns:1fr;}
+    .hero, .hero img{min-height:62vh; height:62vh;}
+    .hero img{object-position:62% 12%;}
+    .shot img{height:200px;}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none !important; transition:none !important;}
+    html{scroll-behavior:auto;}
+    .panel.on{animation:none;}
+  }
+</style>
+</head>
+<body>
+<!--
+THESIS: A live English class that stops Eydel from buying a $6,000 stock machine by making him spend fake money, name the trap, and say I want to learn first.
+OWN-WORLD: Dusk kitchen over kraft field-book paper. Bricolage Grotesque + Public Sans. Brass compass, flagging rust. No neon terminal, no purple.
+STORY: He leaves able to say what a stock is, what AI cannot do, and why six thousand dollars can wait.
+FIRST VIEWPORT: Full-bleed dusk kitchen, title, one button: Open the compass.
+FORM: Field-book / compass case. Code-led student class. Pinned: like Wilfredo and Ruben.
+FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
+-->
+<div class="shell">
+  <header class="hero" id="top">
+    <a class="backhome" href="../?name=Eydel">‹ Temas</a>
+    <img src="img/hero.jpg" width="1248" height="832" alt="A construction worker at a kitchen table at dusk, with a brass compass, a notebook, and a closed laptop." />
+    <div class="hero-scrim"></div>
+    <div class="hero-copy">
+      <h1>Eydel, don’t buy the machine.</h1>
+      <p>Six thousand dollars is a lot of wood. Tonight we learn first.</p>
+      <button class="start" onclick="showPanel('trap')">Open the compass</button>
+    </div>
+  </header>
+
+  <nav class="dock" aria-label="Class sections">
+    <button class="on" data-panel="trap" onclick="showPanel('trap')">1. Trap</button>
+    <button data-panel="words" onclick="showPanel('words')">2. Words</button>
+    <button data-panel="ai" onclick="showPanel('ai')">3. AI</button>
+    <button data-panel="paper" onclick="showPanel('paper')">4. Paper</button>
+    <button data-panel="month" onclick="showPanel('month')">5. 30 days</button>
+    <button data-panel="speak" onclick="showPanel('speak')">6. Speak</button>
+    <button data-panel="quiz" onclick="showPanel('quiz')">7. Quiz</button>
+    <button data-panel="verdict" onclick="showPanel('verdict')">8. Verdict</button>
+  </nav>
+
+  <div class="prog" aria-hidden="true"><i id="bar"></i></div>
+  <div class="notes" id="notes"></div>
+
+  <main class="paper">
+
+    <!-- 1 TRAP -->
+    <section class="panel on" id="trap">
+      <div class="pad">
+        <h2>The machine wants your money first</h2>
+        <p class="lead">A platform can cost more than six thousand dollars. AI can cost twenty. Paper costs nothing. The expensive one is not the smart one.</p>
+        <div class="es"><b>En simple:</b> No pagas $6,000 por una máquina que “predice” acciones. Primero aprendes. Luego, si acaso, un mes de IA a $20. El papel es gratis.</div>
+
+        <figure class="shot">
+          <img src="img/trap.jpg" width="1248" height="832" alt="A tablet with a red trading chart next to a kraft notebook, a brass compass, and a dollar bill." loading="lazy" />
+          <figcaption class="cap">The shiny screen is loud. The notebook is the adult tool.</figcaption>
+        </figure>
+
+        <p>Tap the path you want. One is a trap.</p>
+        <div class="costs">
+          <button class="cost bad" type="button" data-cost="big" onclick="pickCost('big')">
+            <div class="k">The machine</div>
+            <h3>$6,000</h3>
+            <p>A stock platform that promises an edge.</p>
+          </button>
+          <button class="cost mid" type="button" data-cost="ai" onclick="pickCost('ai')">
+            <div class="k">One month of AI</div>
+            <h3>$20</h3>
+            <p>ChatGPT Plus, Claude Pro, or wait — Grok is $30.</p>
+          </button>
+          <button class="cost good" type="button" data-cost="paper" onclick="pickCost('paper')">
+            <div class="k">The adult start</div>
+            <h3>$0 · paper</h3>
+            <p>Fake money. Real questions. No trade.</p>
+          </button>
+        </div>
+
+        <div class="years" id="years">
+          <div class="lab">$6,000 = 25 years of $20 a month</div>
+          <p>That is 300 months of ChatGPT Plus. The machine does not make you smarter. Time on paper does.</p>
+          <div class="ygrid" aria-hidden="true" id="ygrid"></div>
+        </div>
+        <p id="costNote" style="font-weight:700;"></p>
+
+        <div class="say">
+          <div class="lab">Say this <button class="listen" type="button" onclick="speak('I want to learn first. I do not buy the machine.')">Listen</button></div>
+          <p>I want to learn first. I do not buy the machine.</p>
+        </div>
+
+        <h3>Trap or adult?</h3>
+        <p>Four messages. Mark each one.</p>
+        <div class="traps" id="traps"></div>
+        <p id="trapNote" style="font-weight:700;"></p>
+
+        <div class="qbox" data-q="q1">
+          <div class="qn">What can AI do for you?</div>
+          <div class="opts">
+            <button class="opt">Promise the future</button>
+            <button class="opt" data-ok="1">Help you study</button>
+            <button class="opt">Buy stocks for you with no risk</button>
+          </div>
+          <div class="fb">Yes. AI is a teacher. It is not a crystal ball.</div>
+        </div>
+
+        <article class="idea">
+          <span class="tag hot">Not investment advice</span>
+          <h3>This class does not tell you what to buy</h3>
+          <p>It teaches words, traps, and paper. You can lose money in a real market. That is the first fact.</p>
+        </article>
+      </div>
+      <div class="next">
+        <button class="btn btn-c" onclick="showPanel('words')">The words</button>
+      </div>
+    </section>
+
+    <!-- 2 WORDS -->
+    <section class="panel" id="words">
+      <div class="pad">
+        <h2>Six words before any stock</h2>
+        <p class="lead">Tap a word. Hear it. Then you can talk.</p>
+        <div class="es"><b>En simple:</b> Una acción no es un boleto de lotería. Es un pedazo de una empresa real. Toca las seis.</div>
+
+        <figure class="shot">
+          <img src="img/notebook.jpg" width="1248" height="832" alt="A kraft notebook with a brass compass, a pencil, a steel ruler, and orange flagging tape on a workbench." loading="lazy" />
+          <figcaption class="cap">Measure first. Same habit as the job site.</figcaption>
+        </figure>
+
+        <div class="words" id="wordbox"></div>
+
+        <h3>How a buy travels</h3>
+        <p>Tap 1, then 2, then 3, then 4. The order is the lesson.</p>
+        <div class="stations" id="stations">
+          <button class="stat" data-n="1" type="button">
+            <span class="num">1</span>
+            <div>
+              <h3>You</h3>
+              <p>You have a question. You do not have a trade yet.</p>
+            </div>
+          </button>
+          <button class="stat" data-n="2" type="button">
+            <span class="num">2</span>
+            <div>
+              <h3>Broker</h3>
+              <p>A company that can send your order. Like a clerk, not a prophet.</p>
+            </div>
+          </button>
+          <button class="stat" data-n="3" type="button">
+            <span class="num">3</span>
+            <div>
+              <h3>Exchange</h3>
+              <p>The market. Buyers and sellers meet here.</p>
+            </div>
+          </button>
+          <button class="stat" data-n="4" type="button">
+            <span class="num">4</span>
+            <div>
+              <h3>Company</h3>
+              <p>A real business. A stock is a small piece of it.</p>
+            </div>
+          </button>
+        </div>
+        <p id="pathNote" style="font-weight:700;color:var(--ok);"></p>
+
+        <div class="say">
+          <div class="lab">Say this <button class="listen" type="button" onclick="speak('A stock is a piece of a company. It is not a lottery ticket.')">Listen</button></div>
+          <p>A stock is a piece of a company. It is not a lottery ticket.</p>
+        </div>
+
+        <div class="qbox" data-q="q2">
+          <div class="qn">“It go up” is wrong. The adult line is:</div>
+          <div class="opts">
+            <button class="opt">It go up</button>
+            <button class="opt" data-ok="1">It goes up</button>
+            <button class="opt">Goes up it</button>
+          </div>
+          <div class="fb">It + verb + s. Your classic. The price is it.</div>
+        </div>
+      </div>
+      <div class="next">
+        <button class="btn btn-w" onclick="showPanel('trap')">Back</button>
+        <button class="btn btn-c" onclick="showPanel('ai')">AI as teacher</button>
+      </div>
+    </section>
+
+    <!-- 3 AI -->
+    <section class="panel" id="ai">
+      <div class="pad">
+        <h2>Use AI to investigate. Never as a crystal ball.</h2>
+        <p class="lead">Three tools. One job: study. No tool can promise next week.</p>
+        <div class="es"><b>En simple:</b> Grok para explorar rápido. Claude para leer informes. ChatGPT para aprender y hacer pruebas. Ninguno compra por ti.</div>
+
+        <div class="tools">
+          <article class="tool">
+            <span class="tag tool">Grok · $0 / $30 / $100</span>
+            <h3>Fast questions. Live noise.</h3>
+            <p><b>Use:</b> Compare news and claims. Build a simple watchlist.</p>
+            <p><b>Never:</b> Buy because a post sounds sure.</p>
+            <div class="prompt">“Explain why this stock moved today. Separate facts, opinions, and rumors.”</div>
+            <div class="row">
+              <button class="btn btn-s" type="button" onclick="speak('Explain why this stock moved today. Separate facts, opinions, and rumors.')">Listen</button>
+              <button class="btn btn-w" type="button" onclick="copyText('Explain why this stock moved today. Separate facts, opinions, and rumors.')">Copy</button>
+            </div>
+          </article>
+          <article class="tool">
+            <span class="tag tool">Claude · $0 / $20 / $100</span>
+            <h3>Long papers. Clear English.</h3>
+            <p><b>Use:</b> Read a company report. Name the risks.</p>
+            <p><b>Never:</b> Trust a long answer just because it is pretty.</p>
+            <div class="prompt">“Explain this annual report for a beginner. Cite each important number.”</div>
+            <div class="row">
+              <button class="btn btn-s" type="button" onclick="speak('Explain this annual report for a beginner. Cite each important number.')">Listen</button>
+              <button class="btn btn-w" type="button" onclick="copyText('Explain this annual report for a beginner. Cite each important number.')">Copy</button>
+            </div>
+          </article>
+          <article class="tool">
+            <span class="tag tool">ChatGPT · $0 / $20 / $100</span>
+            <h3>Learn. Then quiz. Then paper.</h3>
+            <p><b>Use:</b> Learn a word. Analyze a sheet. Code a fake test.</p>
+            <p><b>Never:</b> Let AI place a real trade.</p>
+            <div class="prompt">“Teach me what a stock is with one simple example. Then quiz me in English and Spanish.”</div>
+            <div class="row">
+              <button class="btn btn-s" type="button" onclick="speak('Teach me what a stock is with one simple example. Then quiz me in English and Spanish.')">Listen</button>
+              <button class="btn btn-w" type="button" onclick="copyText('Teach me what a stock is with one simple example. Then quiz me in English and Spanish.')">Copy</button>
+            </div>
+          </article>
+        </div>
+        <p class="fine">Prices from a 25 Aug 2026 snapshot: x.ai/pricing, anthropic.com/pricing, chatgpt.com/pricing. Start free. Pay one month only when you know what you want to study.</p>
+        <p id="copied" class="fine" style="font-weight:700;color:var(--ok);"></p>
+
+        <div class="say">
+          <div class="lab">Say this <button class="listen" type="button" onclick="speak('AI can help me study. It cannot promise the future.')">Listen</button></div>
+          <p>AI can help me study. It cannot promise the future.</p>
+        </div>
+
+        <div class="qbox" data-q="q3">
+          <div class="qn">A good AI question asks for:</div>
+          <div class="opts">
+            <button class="opt">The winning stock of the week</button>
+            <button class="opt" data-ok="1">Facts, opinions, and what is not known</button>
+            <button class="opt">A secret strategy with no risk</button>
+          </div>
+          <div class="fb">Evidence, assumptions, uncertainty. That is a teacher. A crystal ball is a trap.</div>
+        </div>
+      </div>
+      <div class="next">
+        <button class="btn btn-w" onclick="showPanel('words')">Back</button>
+        <button class="btn btn-c" onclick="showPanel('paper')">Paper money</button>
+      </div>
+    </section>
+
+    <!-- 4 PAPER -->
+    <section class="panel" id="paper">
+      <div class="pad">
+        <h2>Write the reason. Then spend fake money.</h2>
+        <p class="lead">You have $10,000 on paper. It is not real. If you cannot say why, you cannot tap buy.</p>
+        <div class="es"><b>En simple:</b> $10,000 ficticios. Escribe por qué. Luego elige una, dos o tres empresas de ejemplo. Una semana después, el mercado se mueve. A veces baja.</div>
+
+        <figure class="shot">
+          <img src="img/paper.jpg" width="1248" height="832" alt="Three blank index cards, play money, a brass compass, and a pencil under a lamp." loading="lazy" />
+          <figcaption class="cap">Three cards. Paper money. No platform required.</figcaption>
+        </figure>
+
+        <article class="idea">
+          <span class="tag job">Examples only. Not advice.</span>
+          <h3>Three made-up companies</h3>
+          <p>Phone Co., Car Co., Tool Store. They are names for class. They are not a recommendation.</p>
+        </article>
+
+        <p>1. Write your reason first.</p>
+        <textarea id="reasonBox" placeholder="I pick this because..."></textarea>
+
+        <p style="margin-top:14px;">2. Tap a company to put $3,000 on it. Tap again to take it off. You can pick one, two, or three.</p>
+        <div class="cos" id="cos"></div>
+
+        <div class="ledger" id="ledger">
+          <div class="k">Paper book</div>
+          <p>Cash: <b>$10,000</b> · In companies: <b>$0</b></p>
+          <p class="tiny">Example prices. Not the real market.</p>
+        </div>
+
+        <button class="btn btn-c" id="weekBtn" type="button" onclick="runWeek()" disabled>One week later</button>
+        <p id="weekStory" style="margin-top:12px;font-weight:600;"></p>
+
+        <div class="say">
+          <div class="lab">Say this <button class="listen" type="button" onclick="speak('I do not buy yet. I use paper money first.')">Listen</button></div>
+          <p>I do not buy yet. I use paper money first.</p>
+        </div>
+
+        <div class="qbox" data-q="q4">
+          <div class="qn">I want ___ learn first.</div>
+          <div class="opts">
+            <button class="opt">I want learn first</button>
+            <button class="opt" data-ok="1">I want to learn first</button>
+            <button class="opt">I want learning first</button>
+          </div>
+          <div class="fb">want + to + verb. Tattoo this one. It is also the whole class.</div>
+        </div>
+      </div>
+      <div class="next">
+        <button class="btn btn-w" onclick="showPanel('ai')">Back</button>
+        <button class="btn btn-c" onclick="showPanel('month')">30 days</button>
+      </div>
+    </section>
+
+    <!-- 5 THIRTY DAYS -->
+    <section class="panel" id="month">
+      <div class="pad">
+        <h2>The goal is not to get rich in 30 days</h2>
+        <p class="lead">The goal is to become harder to fool. Tap each week when you can say it.</p>
+        <div class="es"><b>En simple:</b> Semana 1: las palabras. Semana 2: tres empresas que conoces. Semana 3: el negocio. Semana 4: la cartera de papel. Todavía no compras.</div>
+
+        <div class="weeks">
+          <button class="week" type="button" data-w="1" onclick="markWeek(1)">
+            <div class="k">Week 1</div>
+            <h3>Learn the words</h3>
+            <p>Stock, bond, ETF, risk, diversification, compound. Quiz yourself every day.</p>
+          </button>
+          <button class="week" type="button" data-w="2" onclick="markWeek(2)">
+            <div class="k">Week 2</div>
+            <h3>Follow 3 companies you know</h3>
+            <p>Products you use. Official pages. Price and news in a notebook. Do not buy yet.</p>
+          </button>
+          <button class="week" type="button" data-w="3" onclick="markWeek(3)">
+            <div class="k">Week 3</div>
+            <h3>Read the business</h3>
+            <p>What does it sell? How does it earn? Debt? Competition? Risks in the report.</p>
+          </button>
+          <button class="week" type="button" data-w="4" onclick="markWeek(4)">
+            <div class="k">Week 4</div>
+            <h3>Paper portfolio</h3>
+            <p>Fake money. Write the reason first. Track what happened. Explain mistakes.</p>
+          </button>
+        </div>
+
+        <article class="idea">
+          <span class="tag ok">Eydel’s weekly question</span>
+          <h3>What did I learn that could prove my first idea wrong?</h3>
+          <p>Changing your mind after new evidence is intelligence. It is not failure.</p>
+        </article>
+
+        <div class="say">
+          <div class="lab">Say this <button class="listen" type="button" onclick="speak('Changing my mind is intelligence. It is not failure.')">Listen</button></div>
+          <p>Changing my mind is intelligence. It is not failure.</p>
+        </div>
+
+        <h3>Five safety rules</h3>
+        <article class="idea"><p>No guaranteed returns. <i>No hay ganancias garantizadas.</i></p></article>
+        <article class="idea"><p>Verify AI with sources. <i>Verifica la IA con fuentes.</i></p></article>
+        <article class="idea"><p>Never act from urgency. <i>Nunca actúes por presión.</i></p></article>
+        <article class="idea"><p>Diversify. Expect losses. <i>Diversifica. Espera pérdidas.</i></p></article>
+        <article class="idea"><p>Do not use real money yet. <i>Todavía no uses dinero real.</i></p></article>
+      </div>
+      <div class="next">
+        <button class="btn btn-w" onclick="showPanel('paper')">Back</button>
+        <button class="btn btn-c" onclick="showPanel('speak')">Learn the English</button>
+      </div>
+    </section>
+
+    <!-- 6 SPEAK -->
+    <section class="panel" id="speak">
+      <div class="pad">
+        <h2>Short sentences. Adult meaning.</h2>
+        <p class="lead">Listen. Repeat. Then cover the screen and tell Gabriel.</p>
+        <div class="es"><b>En simple:</b> Pre-A1 a propósito. IT, la -s, TO. El mercado no te perdona un “it go up” si quieres sonar serio.</div>
+
+        <h3>Phrases for tonight</h3>
+        <div class="phrase">
+          <b>I want to learn first.</b>
+          <span>Quiero aprender primero. want + to. La frase de oro.</span>
+        </div>
+        <div class="phrase">
+          <b>I do not buy yet.</b>
+          <span>Todavía no compro. yet = todavía no.</span>
+        </div>
+        <div class="phrase">
+          <b>It goes up and it goes down.</b>
+          <span>It + goes. El precio es it.</span>
+        </div>
+        <div class="phrase">
+          <b>It doesn’t promise the future.</b>
+          <span>doesn’t ya lleva la -s. El verbo no: promise, no promises.</span>
+        </div>
+        <div class="phrase">
+          <b>That is possible, but it is not proven.</b>
+          <span>Posible no es lo mismo que probado. Úsala con la IA también.</span>
+        </div>
+
+        <div class="say">
+          <div class="lab">Out loud <button class="listen" type="button" onclick="speak('I want to learn first. I do not buy yet.')">Listen</button></div>
+          <p>I want to learn first. I do not buy yet.</p>
+        </div>
+        <div class="say">
+          <div class="lab">The price <button class="listen" type="button" onclick="speak('The price goes up and it goes down. It does not go up every day.')">Listen</button></div>
+          <p>The price goes up and it goes down. It does not go up every day.</p>
+        </div>
+        <div class="say">
+          <div class="lab">The AI line <button class="listen" type="button" onclick="speak('AI can help me study. It cannot promise the future.')">Listen</button></div>
+          <p>AI can help me study. It cannot promise the future.</p>
+        </div>
+
+        <h3>Words you need tonight</h3>
+        <div class="glos">
+          <div class="gitem"><b>stock</b><i>STOK</i><span>acción: un pedazo de una empresa.</span></div>
+          <div class="gitem"><b>price</b><i>PRAIS</i><span>precio. The price goes up.</span></div>
+          <div class="gitem"><b>risk</b><i>RISK</i><span>riesgo. You can lose money.</span></div>
+          <div class="gitem"><b>company</b><i>KUM-puh-nee</i><span>empresa.</span></div>
+          <div class="gitem"><b>learn</b><i>LURN</i><span>aprender. I want to learn.</span></div>
+          <div class="gitem"><b>yet</b><i>YET</i><span>todavía no. I do not buy yet.</span></div>
+          <div class="gitem"><b>promise</b><i>PRO-mis</i><span>prometer. It cannot promise the future.</span></div>
+          <div class="gitem"><b>paper</b><i>PEI-per</i><span>papel. Fake money first.</span></div>
+        </div>
+
+        <div class="qbox" data-q="q5">
+          <div class="qn">“It doesn’t works” should be:</div>
+          <div class="opts">
+            <button class="opt">It doesn’t works</button>
+            <button class="opt" data-ok="1">It doesn’t work</button>
+            <button class="opt">It don’t work</button>
+          </div>
+          <div class="fb">doesn’t already has the -s. The verb stays work. Same as La Barra.</div>
+        </div>
+      </div>
+      <div class="next">
+        <button class="btn btn-w" onclick="showPanel('month')">Back</button>
+        <button class="btn btn-c" onclick="showPanel('quiz')">Quiz</button>
+      </div>
+    </section>
+
+    <!-- 7 QUIZ -->
+    <section class="panel" id="quiz">
+      <div class="pad">
+        <h2>Ten questions. Market and English, same pass.</h2>
+        <p class="lead">Green means you understood it. You can miss and try again. No mercy, no mockery.</p>
+        <div class="es"><b>En simple:</b> Mitad brújula, mitad tus trampas de siempre: it, la -s, want to, doesn’t.</div>
+
+        <div class="qbox" data-q="q6">
+          <div class="qn">1. A stock is…</div>
+          <div class="opts">
+            <button class="opt">a lottery ticket</button>
+            <button class="opt" data-ok="1">a small piece of a company</button>
+            <button class="opt">a promise of free money</button>
+          </div>
+          <div class="fb">Ownership in a real business. The price can go up or down.</div>
+        </div>
+        <div class="qbox" data-q="q7">
+          <div class="qn">2. “It go up” should be…</div>
+          <div class="opts">
+            <button class="opt">It go up</button>
+            <button class="opt" data-ok="1">It goes up</button>
+            <button class="opt">Is go up</button>
+          </div>
+          <div class="fb">The price is it. It goes.</div>
+        </div>
+        <div class="qbox" data-q="q8">
+          <div class="qn">3. Diversification means…</div>
+          <div class="opts">
+            <button class="opt">put all the money in one stock</button>
+            <button class="opt" data-ok="1">spread the risk across more than one thing</button>
+            <button class="opt">you cannot lose</button>
+          </div>
+          <div class="fb">Spread risk. It cannot stop every loss.</div>
+        </div>
+        <div class="qbox" data-q="q9">
+          <div class="qn">4. $6,000 is about…</div>
+          <div class="opts">
+            <button class="opt">one week of ChatGPT Plus</button>
+            <button class="opt" data-ok="1">25 years of $20 a month</button>
+            <button class="opt">the only way to learn the market</button>
+          </div>
+          <div class="fb">300 months of Plus. The machine is not the study.</div>
+        </div>
+        <div class="qbox" data-q="q10">
+          <div class="qn">5. I want ___ learn first.</div>
+          <div class="opts">
+            <button class="opt">I want learn first</button>
+            <button class="opt" data-ok="1">I want to learn first</button>
+            <button class="opt">I want for learn first</button>
+          </div>
+          <div class="fb">want + to + verb. The gold sentence of this class.</div>
+        </div>
+        <div class="qbox" data-q="q11">
+          <div class="qn">6. A trap is…</div>
+          <div class="opts">
+            <button class="opt">“Learn first. Use fake money.”</button>
+            <button class="opt" data-ok="1">“Guaranteed 10% every week. Buy now.”</button>
+            <button class="opt">“Cite the number in the report.”</button>
+          </div>
+          <div class="fb">Urgency plus a guarantee. Walk away.</div>
+        </div>
+        <div class="qbox" data-q="q12">
+          <div class="qn">7. Paper money means…</div>
+          <div class="opts">
+            <button class="opt">a loan from the bank</button>
+            <button class="opt" data-ok="1">fake money, so you can practice</button>
+            <button class="opt">cash in your pocket today</button>
+          </div>
+          <div class="fb">Write the reason. Track what happened. No real trade.</div>
+        </div>
+        <div class="qbox" data-q="q13">
+          <div class="qn">8. “The price doesn’t goes up every day” should be…</div>
+          <div class="opts">
+            <button class="opt">The price doesn’t goes up every day</button>
+            <button class="opt" data-ok="1">The price doesn’t go up every day</button>
+            <button class="opt">The price don’t go up every day</button>
+          </div>
+          <div class="fb">doesn’t + go. The -s already lives in doesn’t.</div>
+        </div>
+        <div class="qbox" data-q="q14">
+          <div class="qn">9. AI may be…</div>
+          <div class="opts">
+            <button class="opt">always right about prices</button>
+            <button class="opt" data-ok="1">wrong, old, or tricked</button>
+            <button class="opt">a legal promise of profit</button>
+          </div>
+          <div class="fb">Confirm important facts in official reports and more than one source.</div>
+        </div>
+        <div class="qbox" data-q="q15">
+          <div class="qn">10. The adult close of this class is…</div>
+          <div class="opts">
+            <button class="opt">Buy the $6,000 machine today</button>
+            <button class="opt" data-ok="1">I want to learn first. I do not buy yet.</button>
+            <button class="opt">AI will make me rich this month</button>
+          </div>
+          <div class="fb">Take that sentence home. It is the whole class in ten words.</div>
+        </div>
+        <p id="quizScore" style="font-weight:700;margin-top:8px;"></p>
+      </div>
+      <div class="next">
+        <button class="btn btn-w" onclick="showPanel('speak')">Back</button>
+        <button class="btn btn-c" onclick="showPanel('verdict')">Your verdict</button>
+      </div>
+    </section>
+
+    <!-- 8 VERDICT -->
+    <section class="panel" id="verdict">
+      <div class="pad">
+        <h2>Your verdict, Eydel</h2>
+        <p class="lead">Four sentences in English. You can still love AI. You just have to sound like a man who opened the notebook first.</p>
+        <div class="es"><b>Usa:</b> I want to learn first… / A stock is… / AI can help me study… / I do not buy yet…</div>
+
+        <p>1. What is a stock?<br />
+        2. What can AI do? What can it not do?<br />
+        3. Why not six thousand dollars today?<br />
+        4. What do you do for 30 days?</p>
+
+        <textarea id="verdictBox" placeholder="I want to learn first..."></textarea>
+        <div class="row">
+          <button class="btn btn-s" type="button" onclick="speak(document.getElementById('verdictBox').value)">Listen to me</button>
+          <button class="btn btn-c" type="button" onclick="saveVerdict()">Save verdict</button>
+        </div>
+        <p class="saved" id="saved">Saved on this phone. Read it out loud to Gabriel.</p>
+
+        <div class="verdict-card" style="margin-top:22px;">
+          <h2>The compass is open</h2>
+          <p>Learn first. Test ideas. Protect your future. The machine can wait. The words cannot.</p>
+          <p style="margin:0;color:var(--muted);font-size:14.5px;">ARCHES · Eydel · The Compass · 2026-08-27</p>
+        </div>
+      </div>
+
+      <details class="teacher">
+        <summary>Notas para Gabriel · plan de clase</summary>
+        <div class="body">
+          El salto respecto al PDF de ChatGPT: de cinco páginas estáticas a que Eydel gaste dinero ficticio, nombre la trampa, y salga con diez palabras en inglés. Pre-A1. Oraciones cortas. No le des un curso de finanzas. El inglés es la clase; el mercado es el cebo.
+          <ol>
+            <li><b>La trampa (6 min).</b> Toca $6,000. Mira los 25 años. Tres mensajes trampa. Frase de oro: I want to learn first.</li>
+            <li><b>Las palabras (6 min).</b> Toca stock / risk / it goes up. El camino You → Broker → Exchange → Company, en orden. Si toca mal, otra vez.</li>
+            <li><b>La IA (5 min).</b> Un prompt, en voz alta. Nunca “qué compro hoy”.</li>
+            <li><b>Papel (8 min).</b> Razón primero. Si pone todo en Phone Co., pierde. Si diversifica, queda parejo. Eso es la lección, no el ticker.</li>
+            <li><b>El veredicto (6 min).</b> Cuatro oraciones. Las lee. Guardar. Celebrar la que suene a él.</li>
+          </ol>
+          Ego lift: quiere hablar como alguien de mercados. El fallo será it, la -s, want to, doesn’t. No corrijas el vocabulario primero. Señala el básico que se cayó. “It go up” es el mismo error que “It doesn’t works” en La Barra.
+          Esto no es asesoría financiera. Empresas de ejemplo, precios sintéticos, y “do not buy yet” se quedan en pantalla.
+        </div>
+      </details>
+    </section>
+  </main>
+
+  <footer class="tiny">
+    ARCHES · Eydel · The Compass.
+    <a href="../?name=Eydel">Volver a tus temas</a>
+    · Educational guide, not investment advice.
+    Sources: Investor.gov · FINRA · x.ai/pricing · anthropic.com/pricing · chatgpt.com/pricing. Snapshot 25 Aug 2026.
+  </footer>
+</div>
+
+<noscript>
+  <style>.panel{display:block !important; transform:none !important; opacity:1 !important;}</style>
+</noscript>
+
+<script>
+(function(){
+  "use strict";
+  const KEY = "compass_eydel_v1";
+  const mem = {};
+  const store = {
+    get: function(d){ try{ const v=localStorage.getItem(KEY); return v?JSON.parse(v):d; }catch(e){ return mem.data||d; } },
+    set: function(v){ try{ localStorage.setItem(KEY, JSON.stringify(v)); }catch(e){ mem.data=v; } }
+  };
+  let state = store.get({
+    panel:"trap", quiz:{}, words:{}, weeks:{}, cost:null, traps:{},
+    picks:{}, reason:"", weekDone:false, verdict:"", path:0
+  });
+  const startPanel = new URLSearchParams(location.search).get("p");
+  const panels = ["trap","words","ai","paper","month","speak","quiz","verdict"];
+  if(startPanel && panels.indexOf(startPanel)>=0) state.panel = startPanel;
+
+  const WORDS = [
+    { id:"stock", en:"stock", es:"acción", def:"A small piece of a company. The price can go up or down." },
+    { id:"bond", en:"bond", es:"bono", def:"A loan to a company or a government. It may pay interest." },
+    { id:"etf", en:"ETF / index", es:"fondo índice", def:"A basket of many companies. It can spread risk." },
+    { id:"risk", en:"risk", es:"riesgo", def:"You can lose money. More possible return usually means more risk." },
+    { id:"div", en:"diversify", es:"diversificar", def:"Do not put all the wood in one truck." },
+    { id:"comp", en:"compound", es:"compuesto", def:"Returns can earn more returns. Time matters." }
+  ];
+
+  const TRAPS = [
+    { id:"t1", text:"Guaranteed 10% every week.", trap:true, fb:"A guarantee plus a weekly number is a trap." },
+    { id:"t2", text:"Buy now. Last chance.", trap:true, fb:"Urgency is the machine talking. Walk away." },
+    { id:"t3", text:"This AI never loses.", trap:true, fb:"Every market system can lose. AI too." },
+    { id:"t4", text:"Learn first. Use fake money.", trap:false, fb:"Yes. That is the adult line. That is this class." }
+  ];
+
+  const COS = [
+    { id:"phone", name:"Phone Co.", es:"teléfonos · ejemplo", after:0.94, news:"The news was mixed. It went down." },
+    { id:"car", name:"Car Co.", es:"autos · ejemplo", after:1.06, news:"A good week. It went up." },
+    { id:"tool", name:"Tool Store", es:"herramientas · ejemplo", after:1.00, news:"Nothing big. It stayed flat." }
+  ];
+
+  function showPanel(id){
+    document.querySelectorAll(".panel").forEach(function(p){ p.classList.toggle("on", p.id===id); });
+    document.querySelectorAll(".dock button").forEach(function(b){ b.classList.toggle("on", b.getAttribute("data-panel")===id); });
+    state.panel = id;
+    store.set(state);
+    updateBar();
+    const dock = document.querySelector("nav.dock");
+    const html = document.documentElement;
+    const prev = html.style.scrollBehavior;
+    html.style.scrollBehavior = "auto";
+    window.scrollTo(0, dock ? dock.offsetTop - 2 : 0);
+    html.style.scrollBehavior = prev;
+  }
+  window.showPanel = showPanel;
+
+  function updateBar(){
+    const i = Math.max(0, panels.indexOf(state.panel));
+    document.getElementById("bar").style.width = ((i+1)/panels.length*100) + "%";
+    const notes = document.getElementById("notes");
+    const bits = [];
+    if(state.cost==="paper") bits.push("Path: paper, $0.");
+    if(state.cost==="ai") bits.push("Path: one month of AI.");
+    if(state.cost==="big") bits.push("You tapped $6,000. Look at the 25 years.");
+    const nW = Object.keys(state.words||{}).length;
+    if(nW) bits.push(nW + "/6 words open.");
+    const nWk = Object.keys(state.weeks||{}).length;
+    if(nWk) bits.push(nWk + "/4 weeks marked.");
+    if(state.weekDone) bits.push("Paper week: done.");
+    if(!bits.length){ notes.classList.remove("show"); notes.innerHTML=""; return; }
+    notes.classList.add("show");
+    notes.innerHTML = "<b>Field notes.</b> " + bits.join(" ");
+  }
+
+  function pickCost(id){
+    state.cost = id;
+    store.set(state);
+    document.querySelectorAll(".cost").forEach(function(b){
+      b.classList.toggle("on", b.getAttribute("data-cost")===id);
+    });
+    const years = document.getElementById("years");
+    const note = document.getElementById("costNote");
+    years.classList.toggle("show", id==="big");
+    if(id==="big"){
+      note.textContent = "That is 25 years of learning. The machine still cannot promise the future.";
+      note.style.color = "var(--no)";
+    } else if(id==="ai"){
+      note.textContent = "One month. Then you decide if it helps you study.";
+      note.style.color = "var(--brass-d)";
+    } else {
+      note.textContent = "This is the adult start. Paper first.";
+      note.style.color = "var(--ok)";
+    }
+    updateBar();
+  }
+  window.pickCost = pickCost;
+
+  (function buildYears(){
+    const g = document.getElementById("ygrid");
+    for(let i=0;i<25;i++){
+      const el = document.createElement("i");
+      g.appendChild(el);
+    }
+  })();
+
+  (function buildWords(){
+    const box = document.getElementById("wordbox");
+    WORDS.forEach(function(w){
+      const b = document.createElement("button");
+      b.className = "word" + (state.words[w.id] ? " on" : "");
+      b.type = "button";
+      b.innerHTML = "<b>"+w.en+"</b><i>"+w.es+"</i><span>"+w.def+"</span>";
+      b.addEventListener("click", function(){
+        const open = !b.classList.contains("on");
+        b.classList.toggle("on", open);
+        state.words[w.id] = open;
+        store.set(state);
+        if(open) speak(w.en + ". " + w.def);
+        updateBar();
+      });
+      box.appendChild(b);
+    });
+  })();
+
+  (function buildTraps(){
+    const box = document.getElementById("traps");
+    function paint(card, t, saved){
+      const yes = card.querySelector('[data-v="trap"]');
+      const no = card.querySelector('[data-v="adult"]');
+      yes.disabled = no.disabled = true;
+      yes.classList.remove("on-bad","on-ok");
+      no.classList.remove("on-bad","on-ok");
+      const pickedTrap = saved === "trap";
+      card.classList.remove("ok","bad");
+      card.classList.add("ok");
+      (pickedTrap ? yes : no).classList.add(t.trap ? "on-bad" : "on-ok");
+    }
+    TRAPS.forEach(function(t){
+      const card = document.createElement("div");
+      card.className = "trapcard";
+      card.innerHTML = "<p>"+t.text+"</p><div class='trapbtns'>"+
+        "<button type='button' data-v='trap'>Trap</button>"+
+        "<button type='button' data-v='adult'>Adult</button></div>";
+      if(state.traps[t.id]) paint(card, t, state.traps[t.id]);
+      card.querySelectorAll("button").forEach(function(btn){
+        btn.addEventListener("click", function(){
+          if(btn.disabled) return;
+          const picked = btn.getAttribute("data-v");
+          const correct = (picked==="trap") === t.trap;
+          if(!correct){
+            btn.classList.add(picked==="trap" ? "on-bad" : "on-ok");
+            btn.disabled = true;
+            const note = document.getElementById("trapNote");
+            note.textContent = picked==="trap" ? "No. That line is the class." : "No. That line is a trap.";
+            note.style.color = "var(--no)";
+            return;
+          }
+          state.traps[t.id] = picked;
+          store.set(state);
+          paint(card, t, picked);
+          const note = document.getElementById("trapNote");
+          note.textContent = t.fb;
+          note.style.color = t.trap ? "var(--no)" : "var(--ok)";
+          const n = Object.keys(state.traps).length;
+          if(n===4) note.textContent += " Four of four. You can see the trap now.";
+        });
+      });
+      box.appendChild(card);
+    });
+  })();
+
+  (function path(){
+    const btns = document.querySelectorAll("#stations .stat");
+    let next = (state.path||0) + 1;
+    if(state.path>=4){
+      btns.forEach(function(b){ b.classList.add("on"); });
+      document.getElementById("pathNote").textContent = "You → broker → exchange → company. You are last in line to be rich, first in line to learn.";
+    }
+    btns.forEach(function(btn){
+      btn.addEventListener("click", function(){
+        const n = parseInt(btn.getAttribute("data-n"),10);
+        if(state.path>=4) return;
+        if(n===next){
+          btn.classList.add("on");
+          btn.classList.remove("bad");
+          state.path = n;
+          next = n+1;
+          store.set(state);
+          const lines = {
+            1:"You have a question. That is the right start.",
+            2:"A broker is a clerk, not a prophet.",
+            3:"The exchange is people meeting. It is not magic.",
+            4:"A company is a real business. Now you can say the chain."
+          };
+          document.getElementById("pathNote").textContent = lines[n];
+          speak(btn.querySelector("h3").textContent);
+        } else {
+          btn.classList.add("bad");
+          document.getElementById("pathNote").textContent = "Order matters. Start with you.";
+          document.getElementById("pathNote").style.color = "var(--no)";
+          setTimeout(function(){
+            btn.classList.remove("bad");
+            document.getElementById("pathNote").style.color = "var(--ok)";
+          }, 700);
+        }
+      });
+    });
+  })();
+
+  function copyText(t){
+    const el = document.getElementById("copied");
+    function ok(){ el.textContent = "Copied. Paste it into Grok, Claude, or ChatGPT at home."; }
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(t).then(ok).catch(function(){ el.textContent = "Select the prompt and copy it."; });
+    } else {
+      el.textContent = "Select the prompt and copy it.";
+    }
+  }
+  window.copyText = copyText;
+
+  (function buildCos(){
+    const box = document.getElementById("cos");
+    COS.forEach(function(c){
+      const b = document.createElement("button");
+      b.className = "co" + (state.picks[c.id] ? " on" : "");
+      b.type = "button";
+      b.setAttribute("data-co", c.id);
+      b.innerHTML = "<div class='k'>"+c.es+"</div><h3>"+c.name+"</h3><p>Tap to put $3,000 on paper.</p>";
+      b.addEventListener("click", function(){
+        if(state.weekDone) return;
+        if(state.picks[c.id]) delete state.picks[c.id];
+        else {
+          if(Object.keys(state.picks).length>=3) return;
+          state.picks[c.id] = 3000;
+        }
+        store.set(state);
+        b.classList.toggle("on", !!state.picks[c.id]);
+        renderLedger();
+      });
+      box.appendChild(b);
+    });
+  })();
+
+  const reasonBox = document.getElementById("reasonBox");
+  if(state.reason) reasonBox.value = state.reason;
+  reasonBox.addEventListener("input", function(){
+    state.reason = reasonBox.value;
+    store.set(state);
+    renderLedger();
+  });
+
+  function cashNow(){
+    const used = Object.keys(state.picks).reduce(function(s,k){ return s + state.picks[k]; }, 0);
+    return { used: used, cash: 10000 - used };
+  }
+
+  function renderLedger(){
+    const L = document.getElementById("ledger");
+    const weekBtn = document.getElementById("weekBtn");
+    const c = cashNow();
+    const names = Object.keys(state.picks).map(function(id){
+      const co = COS.find(function(x){ return x.id===id; });
+      return co.name + " $3,000";
+    });
+    if(!state.weekDone){
+      L.innerHTML = "<div class='k'>Paper book</div>"+
+        "<p>Cash: <b>$"+c.cash.toLocaleString()+"</b> · In companies: <b>$"+c.used.toLocaleString()+"</b></p>"+
+        (names.length ? "<p>"+names.join(" · ")+"</p>" : "<p>No company yet.</p>")+
+        "<p class='tiny'>Example names and prices. Not the real market. Not advice.</p>";
+      const ready = reasonBox.value.trim().length>=8 && c.used>0;
+      weekBtn.disabled = !ready;
+    }
+    if(state.weekDone) weekBtn.disabled = true;
+  }
+
+  function runWeek(){
+    if(state.weekDone) return;
+    if(reasonBox.value.trim().length<8) return;
+    const c = cashNow();
+    if(!c.used) return;
+    let total = c.cash;
+    const lines = [];
+    COS.forEach(function(co){
+      if(!state.picks[co.id]) return;
+      const now = Math.round(state.picks[co.id] * co.after);
+      total += now;
+      const diff = now - 3000;
+      const sign = diff>0 ? "+" : "";
+      lines.push(co.name + ": $"+now.toLocaleString()+" ("+sign+diff+"). "+co.news);
+    });
+    const delta = total - 10000;
+    const sign = delta>0 ? "+" : "";
+    const n = Object.keys(state.picks).length;
+    let moral;
+    if(n===1){
+      moral = "You put all the wood in one truck. This week it moved. Next week it can move the other way. That is risk.";
+    } else if(n===3){
+      moral = "One down, one up, one flat. That is diversification. You did not get rich. You did not blow up.";
+    } else {
+      moral = "The week moved. Paper showed you before real money did.";
+    }
+    document.getElementById("weekStory").innerHTML =
+      lines.map(function(s){ return "<p>"+s+"</p>"; }).join("")+
+      "<p><b>After one example week: $"+total.toLocaleString()+" ("+sign+delta+").</b> "+moral+"</p>"+
+      "<p class='fine'>Synthetic week for class. Not real prices.</p>";
+    const L = document.getElementById("ledger");
+    L.innerHTML = "<div class='k'>After one example week</div>"+
+      "<p>Paper total: <b>$"+total.toLocaleString()+"</b></p>"+
+      "<p class='tiny'>Example only. The platform did not make you smarter. The reason did.</p>";
+    state.weekDone = true;
+    store.set(state);
+    document.getElementById("weekBtn").disabled = true;
+    document.querySelectorAll(".co").forEach(function(b){ b.disabled = true; });
+    updateBar();
+  }
+  window.runWeek = runWeek;
+
+  function markWeek(n){
+    state.weeks[n] = !state.weeks[n];
+    store.set(state);
+    document.querySelectorAll(".week").forEach(function(b){
+      const w = parseInt(b.getAttribute("data-w"),10);
+      b.classList.toggle("on", !!state.weeks[w]);
+    });
+    updateBar();
+  }
+  window.markWeek = markWeek;
+
+  document.querySelectorAll(".qbox").forEach(function(box){
+    const id = box.getAttribute("data-q");
+    const fb = box.querySelector(".fb");
+    const opts = box.querySelectorAll(".opt");
+    if(state.quiz[id]){
+      opts.forEach(function(o){
+        if(o.getAttribute("data-ok")) o.classList.add("ok");
+        o.disabled = true;
+      });
+      if(fb) fb.classList.add("show","good");
+    }
+    opts.forEach(function(btn){
+      btn.addEventListener("click", function(){
+        if(btn.disabled) return;
+        const ok = btn.hasAttribute("data-ok");
+        if(ok){
+          opts.forEach(function(o){ o.disabled = true; });
+          btn.classList.add("ok");
+          if(fb){ fb.classList.add("show","good"); fb.classList.remove("poor"); }
+          state.quiz[id] = true;
+          store.set(state);
+          scoreQuiz();
+        } else {
+          btn.classList.add("bad");
+          btn.disabled = true;
+          if(fb){ fb.classList.add("show","poor"); }
+        }
+      });
+    });
+  });
+
+  function scoreQuiz(){
+    const need = ["q6","q7","q8","q9","q10","q11","q12","q13","q14","q15"];
+    const n = need.filter(function(k){ return state.quiz[k]; }).length;
+    const el = document.getElementById("quizScore");
+    if(el) el.textContent = n ? ("Score: " + n + " / 10") : "";
+  }
+
+  function saveVerdict(){
+    const t = document.getElementById("verdictBox").value.trim();
+    state.verdict = t;
+    store.set(state);
+    const s = document.getElementById("saved");
+    s.classList.add("show");
+    s.textContent = t ? "Saved on this phone. Read it out loud to Gabriel." : "Write four sentences first.";
+  }
+  window.saveVerdict = saveVerdict;
+
+  let voice = null, audioReady = false;
+  function loadVoice(){
+    if(!window.speechSynthesis) return;
+    const vs = speechSynthesis.getVoices();
+    const NOV=/albert|bad news|bahh|bells|boing|bubbles|cellos|good news|jester|organ|superstar|trinoids|whisper|wobble|zarvox|junior|kathy|ralph|fred/i;
+    const en = vs.filter(function(v){ return /^en[-_]/i.test(v.lang) && !NOV.test(v.name); });
+    const pref = ["Samantha","Google US English","Microsoft Aria","Microsoft Jenny","Microsoft Zira","Alex"];
+    voice = null;
+    for(let i=0;i<pref.length;i++){
+      const m = en.find(function(v){ return v.name.indexOf(pref[i])===0; });
+      if(m){ voice=m; break; }
+    }
+    if(!voice) voice = en.find(function(v){ return /en[-_]US/i.test(v.lang); }) || en[0] || null;
+  }
+  if(window.speechSynthesis){ loadVoice(); speechSynthesis.onvoiceschanged = loadVoice; }
+  function unlockAudio(){
+    if(audioReady || !window.speechSynthesis) return;
+    try{ const u=new SpeechSynthesisUtterance(""); u.volume=0; speechSynthesis.speak(u); audioReady=true; }catch(e){}
+  }
+  document.addEventListener("touchstart", unlockAudio, {once:true});
+  document.addEventListener("click", unlockAudio, {once:true});
+  function speak(text){
+    if(!text || !window.speechSynthesis) return;
+    try{
+      speechSynthesis.cancel();
+      const u=new SpeechSynthesisUtterance(text);
+      u.lang="en-US"; u.rate=0.92; if(voice) u.voice=voice;
+      speechSynthesis.speak(u);
+    }catch(e){}
+  }
+  window.speak = speak;
+
+  if(state.cost) pickCost(state.cost);
+  Object.keys(state.weeks||{}).forEach(function(n){
+    const b = document.querySelector('.week[data-w="'+n+'"]');
+    if(b && state.weeks[n]) b.classList.add("on");
+  });
+  if(state.verdict) document.getElementById("verdictBox").value = state.verdict;
+  renderLedger();
+  if(state.weekDone){
+    document.querySelectorAll(".co").forEach(function(b){ b.disabled = true; });
+    runWeekRestore();
+  }
+  scoreQuiz();
+  if(state.panel && state.panel!=="trap") showPanel(state.panel);
+  else updateBar();
+
+  function runWeekRestore(){
+    const c = cashNow();
+    let total = c.cash;
+    const lines = [];
+    COS.forEach(function(co){
+      if(!state.picks[co.id]) return;
+      const now = Math.round(state.picks[co.id] * co.after);
+      total += now;
+      const diff = now - 3000;
+      const sign = diff>0 ? "+" : "";
+      lines.push(co.name + ": $"+now.toLocaleString()+" ("+sign+diff+"). "+co.news);
+    });
+    const delta = total - 10000;
+    const sign = delta>0 ? "+" : "";
+    document.getElementById("weekStory").innerHTML =
+      lines.map(function(s){ return "<p>"+s+"</p>"; }).join("")+
+      "<p><b>After one example week: $"+total.toLocaleString()+" ("+sign+delta+").</b></p>"+
+      "<p class='fine'>Synthetic week for class. Not real prices.</p>";
+    document.getElementById("ledger").innerHTML = "<div class='k'>After one example week</div>"+
+      "<p>Paper total: <b>$"+total.toLocaleString()+"</b></p>"+
+      "<p class='tiny'>Example only.</p>";
+  }
+})();
+</script>
+</body>
+</html>
