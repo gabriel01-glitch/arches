@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Andrés: Q4 Team Talk</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,500&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#fbf7f0;--paper:#fffdf8;--ink:#2a2420;--ink-soft:#6b5f56;
+  --terra:#bf5a36;--terra-dark:#8f3f22;--terra-tint:#f6e3d9;
+  --sage:#4f7a5a;--sage-tint:#e2efe4;--gold:#c9973a;--line:#e8dccd;
+  --r:16px;--shadow:0 6px 20px rgba(42,36,32,.08);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--cream);color:var(--ink);font-family:Nunito,system-ui,sans-serif;line-height:1.5;padding-bottom:88px}
+h1,h2,h3{font-family:"Cormorant Garamond",Georgia,serif;font-weight:700;line-height:1.1}
+h1{font-size:2.2rem}
+h2{font-size:1.6rem;margin-bottom:.35rem}
+h3{font-size:1.2rem;color:var(--terra-dark)}
+.wrap{max-width:640px;margin:0 auto;padding:0 18px}
+header{padding:28px 0 18px}
+.eyebrow{color:var(--terra);font-weight:800;letter-spacing:.14em;text-transform:uppercase;font-size:.72rem}
+.lead{color:var(--ink-soft);margin-top:6px;font-size:.95rem}
+.streak{display:inline-flex;align-items:center;gap:8px;margin-top:12px;background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:6px 14px;font-weight:700;font-size:.85rem}
+.streak b{color:var(--terra-dark)}
+nav.tabs{display:flex;gap:6px;position:sticky;top:0;background:var(--cream);padding:10px 0;z-index:5;border-bottom:1px solid var(--line)}
+.tab{flex:1;min-height:44px;border:1px solid var(--line);background:var(--paper);border-radius:12px;font:700 .85rem Nunito,sans-serif;color:var(--ink-soft);cursor:pointer;transition:transform .18s ease-out,box-shadow .18s ease-out}
+.tab[aria-selected="true"]{background:var(--terra);color:#fff;border-color:var(--terra)}
+.tab:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+.tab:focus-visible,button:focus-visible{outline:3px solid var(--terra);outline-offset:2px}
+section.panel{display:none;padding:22px 0 30px}
+section.panel.active{display:block}
+.intro{background:var(--terra-tint);border-left:4px solid var(--terra);border-radius:0 var(--r) var(--r) 0;padding:12px 14px;margin:12px 0 18px;font-size:.92rem}
+.intro strong{color:var(--terra-dark)}
+.script{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);padding:18px 16px;margin-bottom:18px}
+.script .who{font-size:.78rem;color:var(--ink-soft);font-weight:700;margin-bottom:8px}
+.line{padding:10px 0;border-top:1px dashed var(--line)}
+.line:first-of-type{border-top:0}
+.line .en{font-size:1.02rem;font-weight:600}
+.line .es{font-size:.9rem;color:var(--ink-soft);font-style:italic;margin-top:4px;display:none}
+.line.show .es{display:block}
+.line .row{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
+.chip{min-height:36px;padding:6px 12px;border-radius:999px;border:1px solid var(--line);background:var(--cream);font:700 .78rem Nunito,sans-serif;color:var(--terra-dark);cursor:pointer;transition:transform .18s ease-out}
+.chip:hover{transform:translateY(-2px)}
+.chip.on{background:var(--terra-tint);border-color:var(--terra)}
+.rehearse .line .en{filter:blur(7px);user-select:none;transition:filter .3s ease-out}
+.rehearse .line.peek .en{filter:none}
+.rehearse .line .es{display:block}
+.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.btn{min-height:44px;padding:10px 18px;border-radius:12px;border:2px solid var(--terra);background:var(--terra);color:#fff;font:800 .9rem Nunito,sans-serif;cursor:pointer;transition:transform .18s ease-out,box-shadow .18s ease-out}
+.btn.ghost{background:transparent;color:var(--terra-dark)}
+.btn:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+.btn:active{transform:translateY(0)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:14px;min-height:96px;cursor:pointer;box-shadow:var(--shadow);transition:transform .18s ease-out}
+.card:hover{transform:translateY(-3px)}
+.card .f{font-weight:800;color:var(--terra-dark)}
+.card .b{font-size:.85rem;color:var(--ink-soft);margin-top:6px;display:none}
+.card.flip .b{display:block}
+.card .hint{font-size:.7rem;color:var(--ink-soft);margin-top:6px;letter-spacing:.06em;text-transform:uppercase}
+.q{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:18px 16px;box-shadow:var(--shadow)}
+.q .prompt{font-size:1.05rem;margin-bottom:6px}
+.q .prompt em{color:var(--terra-dark);font-style:normal;font-weight:800}
+.q .cue{font-size:.85rem;color:var(--ink-soft);margin-bottom:12px}
+.opts{display:grid;gap:8px}
+.opt{min-height:48px;text-align:left;padding:10px 14px;border-radius:12px;border:2px solid var(--line);background:var(--cream);font:600 .95rem Nunito,sans-serif;color:var(--ink);cursor:pointer;transition:transform .15s ease-out}
+.opt:hover{transform:translateY(-2px)}
+.opt.right{background:var(--sage-tint);border-color:var(--sage)}
+.opt.wrong{background:var(--terra-tint);border-color:var(--terra)}
+.fb{margin-top:12px;font-size:.9rem;min-height:1.4em}
+.fb.ok{color:var(--sage);font-weight:700}
+.fb.no{color:var(--terra-dark);font-weight:700}
+.progress{height:6px;background:var(--line);border-radius:3px;margin:0 0 14px;overflow:hidden}
+.progress i{display:block;height:100%;width:0;background:var(--sage);transition:width .35s ease-in-out}
+.score{font-size:.85rem;color:var(--ink-soft);margin-bottom:10px;font-weight:700}
+.done{text-align:center;padding:20px}
+.done h3{font-size:1.6rem;color:var(--sage)}
+.reveal{opacity:0;transform:translateY(10px);transition:opacity .5s ease-out,transform .5s ease-out}
+.reveal.in{opacity:1;transform:none}
+footer{font-size:.75rem;color:var(--ink-soft);text-align:center;padding:10px 0 20px}
+@media (prefers-reduced-motion:reduce){
+  *{transition:none!important;animation:none!important}
+  .reveal{opacity:1;transform:none}
+}
+</style>
+<noscript><style>.reveal{opacity:1;transform:none}.line .es{display:block}</style></noscript>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="eyebrow">ARCHES · English at work</div>
+  <h1 id="title">Q4 Team Talk</h1>
+  <p class="lead">Your three conversations for the last quarter: PTO planning, the overtime talk, and order accuracy. Listen, read, then rehearse with the English hidden.</p>
+  <div class="streak">🔥 Streak: <b id="streakN">0</b> days</div>
+</header>
+
+<nav class="tabs" role="tablist">
+  <button class="tab" role="tab" aria-selected="true" data-tab="scripts">Scripts</button>
+  <button class="tab" role="tab" aria-selected="false" data-tab="phrases">Phrases</button>
+  <button class="tab" role="tab" aria-selected="false" data-tab="drill">Drill</button>
+</nav>
+
+<!-- SCRIPTS -->
+<section class="panel active" id="scripts">
+  <div class="toolbar">
+    <button class="btn" id="rehearseBtn">Rehearse mode: OFF</button>
+    <button class="btn ghost" id="allEsBtn">Show all Spanish</button>
+  </div>
+  <div class="intro"><strong>How to use:</strong> tap <b>Listen</b> to hear the line, <b>ES</b> to see the Spanish. In rehearse mode the English is blurred: read the Spanish, say it out loud in English, then tap the line to check.</div>
+  <div id="scriptHost"></div>
+</section>
+
+<!-- PHRASES -->
+<section class="panel" id="phrases">
+  <div class="intro"><strong>Tap a card</strong> to flip it. These are the phrases that carry the whole meeting.</div>
+  <div class="grid" id="phraseHost"></div>
+</section>
+
+<!-- DRILL -->
+<section class="panel" id="drill">
+  <div class="intro"><strong>Present perfect at work.</strong> Has / have + past participle, using your own situation. 10 questions, instant feedback.</div>
+  <div class="progress"><i id="bar"></i></div>
+  <div class="score" id="score">0 / 10</div>
+  <div class="q" id="qHost"></div>
+</section>
+
+<footer>ARCHES Language School · built for Andrés</footer>
+</div>
+
+<script>
+/* ---------- data ---------- */
+const scripts=[
+ {title:"1. The team meeting: PTO for Q4",who:"Andrés to the whole team (Ground, TL, Warehouse)",lines:[
+  ["Hi team, quick meeting. Three things today: PTO for the last quarter, overtime, and order accuracy.","Hola equipo, junta rápida. Tres temas hoy: PTO del último trimestre, horas extra y precisión en las órdenes."],
+  ["Q4 is coming and each of you has about five to seven PTO days left.","Ya viene el cuarto trimestre y a cada uno le quedan entre cinco y siete días de PTO."],
+  ["I need your dates confirmed by the end of this week.","Necesito que me confirmen sus fechas antes de que termine esta semana."],
+  ["The rule is simple: we never leave an area empty.","La regla es simple: nunca dejamos un área sola."],
+  ["Ground, you two coordinate. One goes out, the other covers, then you switch.","Ground, ustedes dos se coordinan. Uno sale, el otro cubre, y luego cambian."],
+  ["Same for TL and Warehouse.","Lo mismo para TL y Warehouse."],
+  ["TL is our most critical area. If the TL person is out, the other one steps in to cover, and takes their days off afterward.","TL es nuestra área más crítica. Si la persona de TL sale, el otro entra a cubrir y toma sus días después."],
+  ["Send me your dates and I'll put them on the schedule.","Mándenme sus fechas y las pongo en el calendario."]
+ ]},
+ {title:"2. One-on-one: the overtime talk",who:"Andrés to one Ground employee, in private",lines:[
+  ["Can I talk to you for a minute? It's about overtime.","¿Puedo hablar contigo un minuto? Es sobre las horas extra."],
+  ["You've been staying late without approval.","Te has estado quedando tarde sin autorización."],
+  ["The company doesn't allow overtime unless I request it or the workload needs it.","La compañía no permite horas extra a menos que yo lo pida o el trabajo lo requiera."],
+  ["Please finish your work within your regular hours.","Por favor termina tu trabajo dentro de tu horario normal."],
+  ["If you think extra time is necessary, come to me first and we'll decide together.","Si crees que se necesita tiempo extra, ven conmigo primero y lo decidimos juntos."],
+  ["I'm not upset, I just need us to follow the policy. Are we clear?","No estoy molesto, solo necesito que sigamos la política. ¿Quedamos claros?"]
+ ]},
+ {title:"3. The accuracy reminder",who:"Andrés to the whole team",lines:[
+  ["Last thing: attention to detail.","Último punto: atención al detalle."],
+  ["When you pick, organize and dispatch orders, double-check everything.","Cuando piquen, organicen y despachen órdenes, revisen todo dos veces."],
+  ["Only use the lanes the company has authorized.","Usen solo los carriles que la compañía ha autorizado."],
+  ["Export orders to Canada, Central America and South America have to go out with zero mistakes.","Las órdenes de exportación a Canadá, Centroamérica y Sudamérica tienen que salir sin errores."],
+  ["That's it. Thanks, everyone. Any questions?","Eso es todo. Gracias a todos. ¿Alguna pregunta?"]
+ ]}
+];
+
+const phrases=[
+ ["cover for someone","cubrir a alguien (mientras no está)"],
+ ["swap / switch","cambiar turnos entre ustedes"],
+ ["without approval","sin autorización"],
+ ["within your regular hours","dentro de tu horario normal"],
+ ["the workload needs it","el trabajo lo requiere"],
+ ["step in","entrar a apoyar / respaldar"],
+ ["take your days off afterward","tomar tus días de descanso después"],
+ ["double-check","revisar dos veces"],
+ ["authorized lanes","carriles autorizados"],
+ ["zero mistakes","cero errores"],
+ ["by the end of this week","antes de que termine esta semana"],
+ ["Are we clear?","¿Quedamos claros? (firme pero cortés)"]
+];
+
+const drill=[
+ {p:"He ___ late three times this week.",cue:"stay (present perfect)",a:"has stayed",o:["has stayed","has stay","have stayed"],why:"he/she/it + has + stayed"},
+ {p:"The team ___ their PTO dates yet.",cue:"not confirm",a:"hasn't confirmed",o:["hasn't confirmed","haven't confirm","didn't confirmed"],why:"'yet' asks for present perfect: hasn't + confirmed"},
+ {p:"You ___ overtime without approval.",cue:"do",a:"have done",o:["have done","have did","has done"],why:"you + have + done (irregular: do, did, done)"},
+ {p:"We ___ two export orders wrong this month.",cue:"send",a:"have sent",o:["have sent","have sended","has sent"],why:"send, sent, sent"},
+ {p:"The company ___ these three lanes.",cue:"authorize",a:"has authorized",o:["has authorized","has authorize","have authorized"],why:"the company = it: has + authorized"},
+ {p:"I ___ the schedule for October.",cue:"already make",a:"have already made",o:["have already made","have already make","already have made"],why:"make, made, made; 'already' goes between have and the participle"},
+ {p:"___ you ___ your dates to me?",cue:"send (question)",a:"Have / sent",t:"Have you sent your dates to me?",o:["Have / sent","Did / sent","Have / send"],why:"question: Have + you + sent?"},
+ {p:"Nobody ___ the TL area alone.",cue:"leave",a:"has left",o:["has left","has leaved","have left"],why:"nobody = singular: has + left"},
+ {p:"She ___ for her coworker twice already.",cue:"cover",a:"has covered",o:["has covered","has cover","have covered"],why:"regular verb: covered"},
+ {p:"They ___ their orders before dispatching.",cue:"not double-check",a:"haven't double-checked",o:["haven't double-checked","hasn't double-checked","haven't double-check"],why:"they + haven't + double-checked"}
+];
+
+/* ---------- name param ---------- */
+const nm=new URLSearchParams(location.search).get("name");
+if(nm){document.getElementById("title").textContent=nm+": Q4 Team Talk";}
+
+/* ---------- streak ---------- */
+(function(){
+  const k="arches_andres_teamtalk";
+  let d={last:null,streak:0};
+  try{d=JSON.parse(localStorage.getItem(k))||d}catch(e){}
+  const today=new Date().toDateString();
+  if(d.last!==today){
+    const y=new Date();y.setDate(y.getDate()-1);
+    d.streak=(d.last===y.toDateString())?d.streak+1:1;
+    d.last=today;
+    try{localStorage.setItem(k,JSON.stringify(d))}catch(e){}
+  }
+  document.getElementById("streakN").textContent=d.streak;
+})();
+
+/* ---------- speech (iOS unlock) ---------- */
+let voice=null,unlocked=false;
+function pickVoice(){
+  const vs=speechSynthesis.getVoices();
+  voice=vs.find(v=>/en-US/i.test(v.lang)&&/Samantha|Google US|Aria|Jenny/i.test(v.name))||vs.find(v=>/en-US/i.test(v.lang))||vs.find(v=>/^en/i.test(v.lang))||null;
+}
+if("speechSynthesis" in window){pickVoice();speechSynthesis.onvoiceschanged=pickVoice;}
+function unlock(){
+  if(unlocked||!("speechSynthesis" in window))return;
+  const u=new SpeechSynthesisUtterance(" ");u.volume=0;speechSynthesis.speak(u);unlocked=true;
+}
+document.addEventListener("touchstart",unlock,{once:true,passive:true});
+document.addEventListener("click",unlock,{once:true});
+function say(t){
+  if(!("speechSynthesis" in window))return;
+  speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(t);u.lang="en-US";u.rate=.9;if(voice)u.voice=voice;
+  speechSynthesis.speak(u);
+}
+
+/* ---------- tabs ---------- */
+document.querySelectorAll(".tab").forEach(t=>t.addEventListener("click",()=>{
+  document.querySelectorAll(".tab").forEach(x=>x.setAttribute("aria-selected",x===t));
+  document.querySelectorAll(".panel").forEach(p=>p.classList.toggle("active",p.id===t.dataset.tab));
+  window.scrollTo({top:0});
+}));
+
+/* ---------- scripts render ---------- */
+const host=document.getElementById("scriptHost");
+scripts.forEach((s,i)=>{
+  const box=document.createElement("div");box.className="script reveal";
+  box.style.transitionDelay=(i*80)+"ms";
+  box.innerHTML=`<h2>${s.title}</h2><div class="who">${s.who}</div>`+
+   s.lines.map(l=>`<div class="line"><div class="en">${l[0]}</div><div class="es">${l[1]}</div>
+   <div class="row"><button class="chip listen" data-t="${l[0].replace(/"/g,"&quot;")}">▶ Listen</button><button class="chip es-toggle">ES</button></div></div>`).join("")+
+   `<div class="row" style="margin-top:12px"><button class="chip listen-all">▶ Listen to the whole script</button></div>`;
+  host.appendChild(box);
+  box.querySelector(".listen-all").addEventListener("click",()=>{
+    if(!("speechSynthesis" in window))return;
+    speechSynthesis.cancel();
+    s.lines.forEach(l=>{const u=new SpeechSynthesisUtterance(l[0]);u.lang="en-US";u.rate=.9;if(voice)u.voice=voice;speechSynthesis.speak(u);});
+  });
+});
+host.addEventListener("click",e=>{
+  const line=e.target.closest(".line");
+  if(e.target.classList.contains("listen")){say(e.target.dataset.t);return;}
+  if(e.target.classList.contains("es-toggle")){line.classList.toggle("show");e.target.classList.toggle("on");return;}
+  if(line&&document.body.classList.contains("rehearse")&&!e.target.classList.contains("chip")){line.classList.toggle("peek");}
+});
+document.getElementById("rehearseBtn").addEventListener("click",function(){
+  const on=document.body.classList.toggle("rehearse");
+  this.textContent="Rehearse mode: "+(on?"ON":"OFF");
+  if(!on)document.querySelectorAll(".line.peek").forEach(l=>l.classList.remove("peek"));
+});
+document.getElementById("allEsBtn").addEventListener("click",function(){
+  const lines=document.querySelectorAll("#scriptHost .line");
+  const anyHidden=[...lines].some(l=>!l.classList.contains("show"));
+  lines.forEach(l=>{l.classList.toggle("show",anyHidden);l.querySelector(".es-toggle").classList.toggle("on",anyHidden);});
+  this.textContent=anyHidden?"Hide all Spanish":"Show all Spanish";
+});
+
+/* ---------- phrases ---------- */
+const ph=document.getElementById("phraseHost");
+phrases.forEach((p,i)=>{
+  const c=document.createElement("button");c.className="card reveal";c.style.transitionDelay=(i*80)+"ms";
+  c.innerHTML=`<div class="f">${p[0]}</div><div class="b">${p[1]}</div><div class="hint">tap to flip</div>`;
+  c.addEventListener("click",()=>{c.classList.toggle("flip");if(c.classList.contains("flip"))say(p[0]);});
+  ph.appendChild(c);
+});
+
+/* ---------- drill ---------- */
+let qi=0,sc=0;
+const qh=document.getElementById("qHost"),bar=document.getElementById("bar"),scoreEl=document.getElementById("score");
+function shuffle(a){return a.map(x=>[Math.random(),x]).sort((a,b)=>a[0]-b[0]).map(x=>x[1]);}
+function renderQ(){
+  bar.style.width=(qi/drill.length*100)+"%";
+  scoreEl.textContent=sc+" / "+drill.length;
+  if(qi>=drill.length){
+    qh.innerHTML=`<div class="done"><h3>${sc>=8?"Excellent work":sc>=5?"Good, keep going":"Try again tomorrow"}</h3><p>${sc} of ${drill.length} correct.</p><p style="margin-top:14px"><button class="btn" id="again">Try again</button></p></div>`;
+    document.getElementById("again").addEventListener("click",()=>{qi=0;sc=0;renderQ();});
+    return;
+  }
+  const q=drill[qi];
+  qh.innerHTML=`<div class="prompt">${q.p.replace(/___/g,"<em>___</em>")}</div><div class="cue">${q.cue}</div>
+   <div class="opts">${shuffle(q.o).map(o=>`<button class="opt">${o}</button>`).join("")}</div><div class="fb" id="fb"></div>`;
+  let locked=false;
+  qh.querySelectorAll(".opt").forEach(b=>b.addEventListener("click",()=>{
+    if(locked)return;locked=true;
+    const ok=b.textContent===q.a;
+    b.classList.add(ok?"right":"wrong");
+    if(!ok)qh.querySelectorAll(".opt").forEach(x=>{if(x.textContent===q.a)x.classList.add("right");});
+    const fb=document.getElementById("fb");fb.className="fb "+(ok?"ok":"no");
+    fb.textContent=(ok?"Correct. ":"Not quite. ")+q.why;
+    if(ok)sc++;
+    say(q.t||q.p.replace("___",q.a));
+    setTimeout(()=>{qi++;renderQ();},ok?1300:2400);
+  }));
+}
+renderQ();
+
+/* ---------- scroll reveal ---------- */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target);}}),{threshold:.15});
+document.querySelectorAll(".reveal").forEach(r=>io.observe(r));
+</script>
+</body>
+</html>
