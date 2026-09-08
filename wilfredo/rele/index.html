@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Podcast Tampa · Wilfredo</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--cream:#fbf7f0;--surface:#fffdf9;--ink:#1c1814;--muted:#8a8074;--line:#e6dccf;--terra:#bf5a36;--terra-dark:#9f4528;--terra-tint:#f4e4d9;--ok:#2f6b4f;--ok-tint:#e8f3ec;--bad:#a33;--bad-tint:#fceceb}
+*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font-family:Nunito,system-ui,sans-serif}
+.wrap{max-width:440px;margin:0 auto;padding:16px 16px 48px}a.back{color:var(--terra);font-weight:800;font-size:13px;text-decoration:none}
+h1{font-family:Cormorant Garamond,Georgia,serif;font-size:34px;color:var(--terra-dark);margin:10px 0 4px}
+.sub{color:var(--muted);font-weight:700;font-size:14px;margin:0 0 14px}
+.barra{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 14px}.barra span{background:var(--terra-tint);color:var(--terra-dark);font-size:11px;font-weight:800;padding:5px 10px;border-radius:999px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px;margin:0 0 12px}
+.card h2{font-family:Cormorant Garamond,Georgia,serif;font-size:22px;margin:0 0 8px;color:var(--terra-dark)}
+.meta{font-size:12px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px}
+.prompt{font-size:16px;font-weight:700;margin:0 0 12px}.opts{display:grid;gap:8px}
+.opts button{text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:14px;padding:12px 14px;font:inherit;font-weight:700;font-size:15px;cursor:pointer}
+.opts button.ok{border-color:var(--ok);background:var(--ok-tint)}.opts button.no{border-color:var(--bad);background:var(--bad-tint)}
+.fb{min-height:22px;font-weight:800;font-size:14px;margin-top:10px}.fb.good{color:var(--ok)}.fb.bad{color:var(--bad)}
+.row{display:flex;gap:8px;align-items:center;justify-content:space-between;margin-top:12px}
+.btn{border:0;background:var(--terra);color:#fff;font-weight:800;padding:12px 16px;border-radius:999px;font-size:14px;cursor:pointer}
+.btn.ghost{background:#fff;color:var(--terra-dark);border:1.5px solid var(--line)}.score{font-weight:800;color:var(--muted);font-size:13px}
+.ego{background:#fff6e8;border:1.5px solid #e8c98a;border-radius:14px;padding:12px;font-size:14px;font-weight:700;margin:0 0 14px}
+.done{text-align:center;padding:24px 8px}.done h2{font-family:Cormorant Garamond,Georgia,serif;color:var(--terra-dark);font-size:28px;margin:0 0 8px}
+</style></head><body><div class="wrap">
+<a class="back" href="../?name=Wilfredo">← Wilfredo</a>
+<h1>Podcast Tampa</h1>
+<p class="sub">Narrativa en pasado + phrasals: turned off, put back, dug out.</p>
+<div class="barra"><span>PAST</span><span>PHRASALS</span><span>STORY</span></div>
+<div class="ego">Historia terminada = pasado. No saltes al present a mitad del job.</div>
+<div id="app"></div></div>
+<script>
+const KEY="arches_wilfredo_rele";
+const ITEMS=[{"tag":"Past","q":"Start the job story:","opts":["I arrived at the house at nine.","I arrive at the house at nine.","I am arrive at the house at nine."],"ans":"I arrived at the house at nine.","why":"arrived = pasado."},{"tag":"Past","q":"Problem found:","opts":["The breaker had tripped overnight.","The breaker trips overnight.","The breaker is trip overnight."],"ans":"The breaker had tripped overnight.","why":"had tripped = antes de que llegaras."},{"tag":"Phrasal","q":"Power cut for safety:","opts":["I turned off the main switch.","I turned the main switch.","I turn offed the main switch."],"ans":"I turned off the main switch.","why":"turned off = apagué."},{"tag":"Phrasal","q":"After the fix:","opts":["I put the cover back.","I put backed the cover.","I put the cover."],"ans":"I put the cover back.","why":"put … back = devolví a su lugar."},{"tag":"Phrasal","q":"Old part in the truck:","opts":["I dug out the spare from the box.","I dug the spare.","I digged out the spare from the box."],"ans":"I dug out the spare from the box.","why":"dug out = saqué con esfuerzo."},{"tag":"Story","q":"Sequence:","opts":["I turned off the power, replaced the outlet, and put the plate back.","I turn off the power, replace the outlet, and put the plate back.","I turned off, replace, and put back."],"ans":"I turned off the power, replaced the outlet, and put the plate back.","why":"tres pasados en cadena."},{"tag":"Story","q":"Client ask 'when?':","opts":["I finished before noon and tested every circuit.","I finish before noon and test every circuit.","I finished before noon and test every circuit."],"ans":"I finished before noon and tested every circuit.","why":"finished + tested."},{"tag":"Story","q":"Missing tool moment:","opts":["I dug out a longer bit and kept going.","I dig out a longer bit and keep going.","I dug a longer bit outed."],"ans":"I dug out a longer bit and kept going.","why":"dug out + kept."},{"tag":"Phrasal","q":"Leave the site:","opts":["I turned off the work lights and locked up.","I turned the work lights and locked.","I turn off the work lights and lock up."],"ans":"I turned off the work lights and locked up.","why":"turned off + locked up."},{"tag":"Phrasal","q":"Restore setting:","opts":["I put the thermostat back to 72.","I put back the thermostat at 72.","I putted the thermostat back to 72."],"ans":"I put the thermostat back to 72.","why":"put X back to Y."},{"tag":"Fix","q":"Broken present in finished story: 'I replace the valve and go.'","opts":["I replaced the valve and left.","I replace the valve and left.","I replaced the valve and go."],"ans":"I replaced the valve and left.","why":"historia cerrada = pasado."},{"tag":"Fix","q":"Broken particle: 'I turned the breaker and put the panel.'","opts":["I turned off the breaker and put the panel back.","I turned the breaker offed and put panel.","I turn off breaker and put back panel."],"ans":"I turned off the breaker and put the panel back.","why":"turned off + put back."},{"tag":"Podcast","q":"Hook for Tampa episode:","opts":["Last Tuesday I dug out a fried cable behind a dryer.","Last Tuesday I dig out a fried cable behind a dryer.","Last Tuesday I dug a fried cable."],"ans":"Last Tuesday I dug out a fried cable behind a dryer.","why":"Last Tuesday + dug out."},{"tag":"Podcast","q":"Close the story:","opts":["I put everything back, turned off my lamp, and drove home.","I put everything, turn off my lamp, and drive home.","I putted everything back and turned off."],"ans":"I put everything back, turned off my lamp, and drove home.","why":"put back / turned off / drove."}];
+let i=0,ok=0,lock=false;const app=document.getElementById("app");
+function save(){try{localStorage.setItem(KEY,JSON.stringify({i,ok,t:Date.now()}))}catch(e){}}
+function load(){try{const s=JSON.parse(localStorage.getItem(KEY)||"null");if(s&&typeof s.i==="number"){i=Math.min(s.i,ITEMS.length);ok=s.ok||0}}catch(e){}}
+function render(){if(i>=ITEMS.length){app.innerHTML='<div class="card done"><h2>Listo</h2><p class="sub">'+ok+" / "+ITEMS.length+' limpios.</p><button class="btn" id="again">Otra vez</button></div>';document.getElementById("again").onclick=()=>{i=0;ok=0;save();render()};return;}
+const it=ITEMS[i];app.innerHTML='<div class="card"><div class="meta">'+it.tag+" · "+(i+1)+" / "+ITEMS.length+'</div><h2>Elige la forma limpia</h2><p class="prompt">'+it.q+'</p><div class="opts" id="opts"></div><div class="fb" id="fb"></div><div class="row"><span class="score">✓ '+ok+'</span><button class="btn ghost" id="next" disabled>Siguiente</button></div></div>';
+const box=document.getElementById("opts");lock=false;it.opts.forEach(o=>{const b=document.createElement("button");b.textContent=o;b.onclick=()=>{if(lock)return;lock=true;const good=o===it.ans;b.className=good?"ok":"no";[...box.children].forEach(x=>{if(x.textContent===it.ans)x.classList.add("ok")});const fb=document.getElementById("fb");fb.className="fb "+(good?"good":"bad");fb.textContent=(good?"Bien. ":"Casi. ")+it.why;if(good)ok++;document.getElementById("next").disabled=false;save();};box.appendChild(b);});
+document.getElementById("next").onclick=()=>{i++;save();render()};}
+load();render();
+</script></body></html>
