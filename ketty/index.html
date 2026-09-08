@@ -119,301 +119,1270 @@
      Swap this object, redeploy, done. Schema v2.
      ========================================================= */
   const STUDENT = {
-  "student": {
-    "name": "Ketty",
-    "level": "B1",
-    "l1": "Spanish",
-    "context": "Estudiante de ARCHES. Contenido de su mazo de Anki.",
-    "greeting": "Tus frases y correcciones reales, Ketty. Un poco cada día.",
-    "version": "2026-09-02"
-  },
-  "links": [
-    {
-      "title": "Rutina de Articulación",
-      "note": "Calentamiento de 72 segundos con la voz de Teacher Gabriel. Cada mañana, antes de hablar inglés.",
-      "url": "../apps/rutina/?name=Ketty"
+    "student": {
+      "name": "Ketty",
+      "level": "A2",
+      "l1": "Spanish",
+      "context": "Estudiante de ARCHES desde 2023. Ciudadana desde 2024. Contenido: sus mensajes reales de WhatsApp (2023 a 2026), su mazo de Anki limpio y el inglés de su negocio de eventos.",
+      "greeting": "Tu regalo, Ketty: tus frases reales pulidas, tu mazo de Anki limpio y el inglés de tu negocio de eventos. Un poco cada día.",
+      "version": "2026-09-08"
     },
-    {
-      "title": "Alfabeto Telefónico",
-      "note": "Deletrea tu nombre y tu correo por teléfono, letra por letra.",
-      "url": "../alfabeto/?name=Ketty"
-    },
-    {
-      "title": "Oído",
-      "note": "Entrenamiento auditivo completo, con audio real.",
-      "url": "https://gabriel01-glitch.github.io/oido/?name=Ketty"
-    },
-    {
-      "title": "Past Tense",
-      "note": "Verbos en pasado, con audio y quiz.",
-      "url": "../apps/englishpast/?name=Ketty"
-    },
-    {
-      "title": "Sonidos -ED",
-      "note": "La -ed del pasado: /t/, /d/ o /id/.",
-      "url": "../apps/ed-sounds/"
-    },
-    {
-      "title": "Esencial",
-      "note": "Los errores típicos del español al inglés.",
-      "url": "../esencial/"
-    }
-  ],
-  "tracks": [
-    {
-      "id": "correcciones",
-      "title": "Tus correcciones",
-      "note": "errores reales de clase, a pulir.",
-      "items": [
-        {
-          "type": "fix",
-          "wrong": "My daughter have been searching for a new job",
-          "right": "My daughter has been searching for a new job",
-          "say": "My daughter has been searching for a new job"
-        }
-      ]
-    },
-    {
-      "id": "vocab",
-      "title": "Vocabulario",
-      "note": "tus palabras clave, español a inglés.",
-      "items": [
-        {
-          "type": "translate",
-          "es": "Me duché",
-          "en": "I showered",
-          "alts": [
-            "I took a shower"
-          ],
-          "say": "I showered"
-        },
-        {
-          "type": "translate",
-          "es": "globos",
-          "en": "balloons",
-          "say": "balloons"
-        }
-      ]
-    },
-    {
-      "id": "frases",
-      "title": "Frases y expresiones",
-      "note": "lo que dijiste en clase, en inglés natural.",
-      "items": [
-        {
-          "type": "translate",
-          "es": "Mi hija está buscando un nuevo trabajo",
-          "en": "My daughter is looking for a new job",
-          "alts": [
-            "My daughter is searching for a new job",
-            "She's looking for a new job"
-          ],
-          "say": "My daughter is looking for a new job",
-          "note": "look for / search for + objeto. No dejes el for."
-        },
-        {
-          "type": "translate",
-          "es": "¿Qué te digo de ayer? / ¿Qué te puedo decir de ayer?",
-          "en": "What can I say about yesterday?",
-          "say": "What can I say about yesterday?",
-          "alts": [
-            "What can I tell you about yesterday?"
-          ],
-          "note": "Una sola frase. say about / tell you about."
-        },
-        {
-          "type": "translate",
-          "es": "El gato de mi hija  Sus gatos",
-          "en": "My daughter's cat Her cats",
-          "say": "My daughter's cat Her cats"
-        },
-        {
-          "type": "translate",
-          "es": "pasado de \"give\"",
-          "en": "gave I gave her things for the kitchen",
-          "say": "gave I gave her things for the kitchen"
-        },
-        {
-          "type": "translate",
-          "es": "Le di de comer a las mascotas. Alimenté a las mascotas",
-          "en": "I fed the pets. (pasado)I feed the pets. (presente)I am feeding the pets. (presente)I will feed the pets. (futuro)",
-          "say": "I fed the pets. (pasado)I feed the pets. (presente)I am feeding the pets. (presente)I will feed the pets. (futuro)"
-        },
-        {
-          "type": "translate",
-          "es": "How long have you lived at that address?",
-          "en": "Since (desde) August 4th, 2023",
-          "say": "Since (desde) August 4th, 2023"
-        },
-        {
-          "type": "translate",
-          "es": "What do you do for work?",
-          "en": "I work in medical school administration",
-          "alts": [
-            "I work in administration at a medical school",
-            "I'm employed in the administrative department of a medical school"
-          ],
-          "say": "I work in medical school administration"
-        },
-        {
-          "type": "translate",
-          "es": "Espero ver fotos",
-          "en": "I hope to see pictures",
-          "say": "I hope to see pictures"
-        },
-        {
-          "type": "translate",
-          "es": "Lejos de mi casa",
-          "en": "Far from my house",
-          "alts": [
-            "Far from home",
-            "Near my house",
-            "Near home"
-          ],
-          "say": "Far from my house"
-        },
-        {
-          "type": "translate",
-          "es": "Joseph no me ayudó",
-          "en": "Joseph didn't (did not) help me",
-          "say": "Joseph didn't (did not) help me"
-        },
-        {
-          "type": "translate",
-          "es": "cada viernes",
-          "en": "each Fridayevery Friday (todos los viernes)",
-          "say": "each Fridayevery Friday (todos los viernes)"
-        },
-        {
-          "type": "translate",
-          "es": "escuché las noticias",
-          "en": "I listened to the news",
-          "say": "I listened to the news"
-        },
-        {
-          "type": "translate",
-          "es": "si Trump gana",
-          "en": "if Trump wins",
-          "say": "if Trump wins"
-        },
-        {
-          "type": "translate",
-          "es": "Todas las noches mi esposo se sienta y ve las noticias",
-          "en": "Every night my husband sits down and watches the news",
-          "say": "Every night my husband sits down and watches the news"
-        },
-        {
-          "type": "translate",
-          "es": "Mi hermana se levanta temprano de lunes a viernes... alrededor de las 7:00 am",
-          "en": "My sister wakes up early Monday to Friday",
-          "alts": [
-            "around 7:00 am"
-          ],
-          "say": "My sister wakes up early Monday to Friday"
-        },
-        {
-          "type": "translate",
-          "es": "Trabaja lejos de casa y toma un autobús sobre las 8:00 porque no tiene auto",
-          "en": "She works far from home and takes a bus around 8:00 am because she doesn't have a car",
-          "alts": [
-            "She works far from home and takes the bus around 8:00 because she doesn't have a car"
-          ],
-          "say": "She works far from home and takes a bus around 8:00 am because she doesn't have a car",
-          "note": "far from home. takes a bus. because she doesn't have a car."
-        },
-        {
-          "type": "translate",
-          "es": "Llega a su oficina sobre las 9:00 y trabaja medio tiempo hasta la 1:00 de la tarde",
-          "en": "She gets to her office around 9:00 am and works part-time until 1:00 in the afternoon",
-          "say": "She gets to her office around 9:00 am and works part-time until 1:00 in the afternoon"
-        },
-        {
-          "type": "translate",
-          "es": "Entonces, va a casa y almuerza conmigo",
-          "en": "Then, she goes home and has lunch with me",
-          "say": "Then, she goes home and has lunch with me"
-        },
-        {
-          "type": "translate",
-          "es": "Mi hermana no tiene un trabajo full-time porque va a la escuela en las tardes",
-          "en": "My sister doesn't have a full-time job because she goes to school in the afternoons",
-          "say": "My sister doesn't have a full-time job because she goes to school in the afternoons",
-          "note": "My sister. Mi es español."
-        },
-        {
-          "type": "translate",
-          "es": "Estudia enfermería en la universidad",
-          "en": "She studies Nursing in college",
-          "say": "She studies Nursing in college"
-        },
-        {
-          "type": "translate",
-          "es": "Cuando llega a casa, se siente muy cansada",
-          "en": "When she gets home, she feels very tired",
-          "say": "When she gets home, she feels very tired"
-        },
-        {
-          "type": "translate",
-          "es": "Entonces, miramos la tele juntos y hablamos de nuestro día",
-          "en": "Then, we watch TV together and talk about our day",
-          "say": "Then, we watch TV together and talk about our day"
-        },
-        {
-          "type": "translate",
-          "es": "Los fines de semana no tiene clases, pero los sábados tiene un segundo trabajo en un restaurante",
-          "en": "She doesn't have classes on weekends, but on Saturdays she has a second job in a restaurant",
-          "say": "She doesn't have classes on weekends, but on Saturdays she has a second job in a restaurant"
-        },
-        {
-          "type": "translate",
-          "es": "¡Mi hermana es una chica muy ocupada!",
-          "en": "My sister is a very busy girl!",
-          "say": "My sister is a very busy girl!"
-        },
-        {
-          "type": "translate",
-          "es": "Pedir permiso",
-          "en": "Ask (for) permission",
-          "say": "Ask (for) permission"
-        },
-        {
-          "type": "translate",
-          "es": "Estaba en el trabajo.",
-          "en": "I was at work",
-          "alts": [
-            "We were at work",
-            "I was working",
-            "We were working"
-          ],
-          "say": "I was at work",
-          "note": "estaba = was. at work = en el trabajo."
-        },
-        {
-          "type": "translate",
-          "es": "Siempre estuvo riéndose conmigo",
-          "en": "He was always laughing with me",
-          "say": "He was always laughing with me"
-        },
-        {
-          "type": "translate",
-          "es": "sin un teléfonosin teléfonos",
-          "en": "without a phonewithout phones",
-          "say": "without a phonewithout phones"
-        },
-        {
-          "type": "translate",
-          "es": "¿Cuáles son algunas de tus funciones en el trabajo?",
-          "en": "I register students, I process payments, and I check the income.",
-          "alts": [
-            "I do customer service: I register students, process payments, and check the income"
-          ],
-          "note": "tres deberes, una lista en inglés natural.",
-          "say": "I register students, I process payments, and I check the income."
-        }
-      ]
-    }
-  ]
-};
+    "links": [
+      {
+        "title": "Rutina de Articulación",
+        "note": "Calentamiento de 72 segundos con la voz de Teacher Gabriel. Cada mañana, antes de hablar inglés.",
+        "url": "../apps/rutina/?name=Ketty"
+      },
+      {
+        "title": "Alfabeto Telefónico",
+        "note": "Deletrea tu nombre y tu correo por teléfono, letra por letra. K as in Kangaroo.",
+        "url": "../alfabeto/?name=Ketty"
+      },
+      {
+        "title": "Oído",
+        "note": "Entrenamiento auditivo completo, con audio real.",
+        "url": "https://gabriel01-glitch.github.io/oido/?name=Ketty"
+      },
+      {
+        "title": "Past Tense",
+        "note": "Verbos en pasado, con audio y quiz.",
+        "url": "../apps/englishpast/?name=Ketty"
+      },
+      {
+        "title": "Sonidos -ED",
+        "note": "La -ed del pasado: /t/, /d/ o /id/.",
+        "url": "../apps/ed-sounds/"
+      },
+      {
+        "title": "Esencial",
+        "note": "Los errores típicos del español al inglés.",
+        "url": "../esencial/"
+      }
+    ],
+    "tracks": [
+      {
+        "id": "pulidas",
+        "title": "Tus frases, pulidas",
+        "note": "frases que tú escribiste en WhatsApp, corregidas. Tu patrón número uno: el verbo be que se escapa.",
+        "items": [
+          {
+            "type": "fix",
+            "wrong": "I working now",
+            "right": "I'm working now",
+            "say": "I'm working now",
+            "note": "Antes de un verbo con -ing siempre va am, is o are."
+          },
+          {
+            "type": "fix",
+            "wrong": "I waiting for you",
+            "right": "I'm waiting for you",
+            "say": "I'm waiting for you",
+            "note": "Mismo patrón: I'm + waiting."
+          },
+          {
+            "type": "fix",
+            "wrong": "Im in my work",
+            "right": "I'm at work",
+            "say": "I'm at work",
+            "note": "Estoy en el trabajo = at work. No digas in my work."
+          },
+          {
+            "type": "fix",
+            "wrong": "Yes, is perfect for me",
+            "right": "Yes, it's perfect for me",
+            "say": "Yes, it's perfect for me",
+            "note": "En inglés el sujeto it nunca se omite."
+          },
+          {
+            "type": "fix",
+            "wrong": "Here it's",
+            "right": "Here it is",
+            "say": "Here it is",
+            "note": "Al final de la frase no se contrae: it is."
+          },
+          {
+            "type": "fix",
+            "wrong": "This Friday not, the next Friday",
+            "right": "Not this Friday, next Friday",
+            "say": "Not this Friday, next Friday",
+            "note": "next Friday va sin the. Y el not va primero."
+          },
+          {
+            "type": "fix",
+            "wrong": "See you the next Friday, teacher",
+            "right": "See you next Friday, teacher",
+            "say": "See you next Friday, teacher",
+            "note": "next Monday, next week, next year: nunca con the."
+          },
+          {
+            "type": "fix",
+            "wrong": "Tomorrow only one hours of class because I have my grandson at home",
+            "right": "Tomorrow only one hour of class because I have my grandson at home",
+            "say": "Tomorrow only one hour of class because I have my grandson at home",
+            "note": "one = singular: one hour, two hours."
+          },
+          {
+            "type": "fix",
+            "wrong": "I'm ready five minutes",
+            "right": "I'll be ready in five minutes",
+            "say": "I'll be ready in five minutes",
+            "note": "Futuro cercano: I'll be ready. Y el tiempo lleva in."
+          },
+          {
+            "type": "fix",
+            "wrong": "I came to paint my hair",
+            "right": "I came to dye my hair",
+            "say": "I came to dye my hair",
+            "note": "dye = teñir. paint es para paredes."
+          },
+          {
+            "type": "fix",
+            "wrong": "I'm free the day",
+            "right": "I'm free today",
+            "say": "I'm free today",
+            "note": "today, no the day."
+          },
+          {
+            "type": "fix",
+            "wrong": "You welcome",
+            "right": "You're welcome",
+            "say": "You're welcome",
+            "note": "You are welcome. El verbo be otra vez."
+          },
+          {
+            "type": "fix",
+            "wrong": "I'm happy today for interview only 13 minutes",
+            "right": "I'm happy today, the interview only took 13 minutes",
+            "say": "I'm happy today, the interview only took 13 minutes",
+            "note": "Dos ideas, dos verbos: I'm happy. The interview took 13 minutes."
+          },
+          {
+            "type": "fix",
+            "wrong": "Someone who drink to much alcohol",
+            "right": "Someone who drinks too much alcohol",
+            "say": "Someone who drinks too much alcohol",
+            "note": "who drinks (tercera persona, -s). too much = demasiado."
+          },
+          {
+            "type": "fix",
+            "wrong": "My daughter have been searching for a new job",
+            "right": "My daughter has been searching for a new job",
+            "say": "My daughter has been searching for a new job",
+            "note": "my daughter = she = has."
+          },
+          {
+            "type": "fix",
+            "wrong": "Delaware was the first state the United States",
+            "right": "Delaware was the first state of the United States",
+            "say": "Delaware was the first state of the United States",
+            "note": "Tu clásico de 2023, ya de recuerdo. of the United States."
+          },
+          {
+            "type": "fix",
+            "wrong": "A group that fights against the goverment",
+            "right": "A group that fights against the government",
+            "say": "A group that fights against the government",
+            "note": "govern + ment. Se pronuncia GA-vern-ment."
+          },
+          {
+            "type": "fix",
+            "wrong": "I no can take the class tomorrow",
+            "right": "I can't take the class tomorrow",
+            "say": "I can't take the class tomorrow",
+            "note": "can't, nunca no can."
+          }
+        ]
+      },
+      {
+        "id": "whatsapp",
+        "title": "Tu WhatsApp, en inglés",
+        "note": "lo que me escribes en español casi todos los días. Ahora en inglés natural.",
+        "items": [
+          {
+            "type": "translate",
+            "es": "Llegando en 10 minutos",
+            "en": "I'll be there in 10 minutes",
+            "alts": [
+              "Arriving in 10 minutes",
+              "I'm arriving in 10 minutes",
+              "I'll be there in ten minutes"
+            ],
+            "say": "I'll be there in 10 minutes"
+          },
+          {
+            "type": "translate",
+            "es": "Estoy en camino",
+            "en": "I'm on my way",
+            "alts": [
+              "On my way"
+            ],
+            "say": "I'm on my way",
+            "note": "way, no wey."
+          },
+          {
+            "type": "translate",
+            "es": "Estoy full en el trabajo",
+            "en": "I'm really busy at work",
+            "alts": [
+              "I'm swamped at work",
+              "I'm slammed at work",
+              "I'm very busy at work"
+            ],
+            "say": "I'm really busy at work",
+            "note": "full no se usa así en inglés. swamped = hasta el cuello."
+          },
+          {
+            "type": "translate",
+            "es": "Se me olvidó",
+            "en": "I forgot",
+            "alts": [
+              "I forgot about it",
+              "I forgot, sorry"
+            ],
+            "say": "I forgot",
+            "note": "forgot = pasado de forget."
+          },
+          {
+            "type": "translate",
+            "es": "Ya estoy en casa",
+            "en": "I'm home now",
+            "alts": [
+              "I'm already home",
+              "I'm at home now",
+              "Home now"
+            ],
+            "say": "I'm home now"
+          },
+          {
+            "type": "translate",
+            "es": "Dame 5 minutos",
+            "en": "Give me 5 minutes",
+            "alts": [
+              "Give me five minutes"
+            ],
+            "say": "Give me 5 minutes"
+          },
+          {
+            "type": "translate",
+            "es": "Nos vemos a las 7",
+            "en": "See you at 7",
+            "alts": [
+              "See you at seven"
+            ],
+            "say": "See you at 7",
+            "note": "Horas: at."
+          },
+          {
+            "type": "translate",
+            "es": "No voy a poder tomar la clase hoy",
+            "en": "I won't be able to take the class today",
+            "alts": [
+              "I can't take the class today",
+              "I will not be able to take the class today"
+            ],
+            "say": "I won't be able to take the class today"
+          },
+          {
+            "type": "translate",
+            "es": "Voy a llegar más tarde",
+            "en": "I'm going to be late",
+            "alts": [
+              "I'll be late",
+              "I'm going to arrive later"
+            ],
+            "say": "I'm going to be late"
+          },
+          {
+            "type": "translate",
+            "es": "Estoy con mis dos nietos",
+            "en": "I'm with my two grandsons",
+            "alts": [
+              "I'm with my two grandkids"
+            ],
+            "say": "I'm with my two grandsons"
+          },
+          {
+            "type": "translate",
+            "es": "Me siento horrible",
+            "en": "I feel horrible",
+            "alts": [
+              "I feel terrible",
+              "I feel awful"
+            ],
+            "say": "I feel horrible"
+          },
+          {
+            "type": "translate",
+            "es": "Cuando quiera, me avisa",
+            "en": "Whenever you want, let me know",
+            "alts": [
+              "Let me know whenever you want",
+              "Whenever you want, just let me know"
+            ],
+            "say": "Whenever you want, let me know"
+          },
+          {
+            "type": "translate",
+            "es": "Hoy estoy en el trabajo porque fui al dentista",
+            "en": "Today I'm at work because I went to the dentist",
+            "alts": [
+              "I'm at work today because I went to the dentist"
+            ],
+            "say": "Today I'm at work because I went to the dentist",
+            "note": "went = pasado de go."
+          },
+          {
+            "type": "translate",
+            "es": "¿Puede ser a la 1 y media?",
+            "en": "Can it be at 1:30?",
+            "alts": [
+              "Can we do 1:30?",
+              "How about 1:30?",
+              "Does 1:30 work?"
+            ],
+            "say": "Can it be at 1:30?"
+          },
+          {
+            "type": "translate",
+            "es": "Ya no sufro más",
+            "en": "I don't suffer anymore",
+            "alts": [
+              "I'm not suffering anymore",
+              "No more suffering"
+            ],
+            "say": "I don't suffer anymore",
+            "note": "anymore = ya no, al final de la frase."
+          },
+          {
+            "type": "translate",
+            "es": "No estudié, qué pena",
+            "en": "I didn't study, how embarrassing",
+            "alts": [
+              "I didn't study, I'm embarrassed",
+              "I didn't study, sorry"
+            ],
+            "say": "I didn't study, how embarrassing",
+            "note": "qué pena aquí = vergüenza, no tristeza."
+          },
+          {
+            "type": "translate",
+            "es": "Estoy súper nerviosa",
+            "en": "I'm super nervous",
+            "alts": [
+              "I'm really nervous",
+              "I'm very nervous"
+            ],
+            "say": "I'm super nervous"
+          },
+          {
+            "type": "translate",
+            "es": "Gracias por tu paciencia",
+            "en": "Thank you for your patience",
+            "alts": [
+              "Thanks for your patience"
+            ],
+            "say": "Thank you for your patience"
+          },
+          {
+            "type": "translate",
+            "es": "Te quiero mucho, profe",
+            "en": "I love you a lot, teacher",
+            "alts": [
+              "I love you so much, teacher",
+              "Love you lots, teacher"
+            ],
+            "say": "I love you a lot, teacher"
+          }
+        ]
+      },
+      {
+        "id": "trampas",
+        "title": "Trampas del español",
+        "note": "los errores que casi todos cometemos al pasar del español al inglés.",
+        "items": [
+          {
+            "type": "fix",
+            "wrong": "My grandson has 6 years",
+            "right": "My grandson is 6 years old",
+            "say": "My grandson is 6 years old",
+            "note": "La edad se es, no se tiene: is 6 years old."
+          },
+          {
+            "type": "fix",
+            "wrong": "I am agree with you",
+            "right": "I agree with you",
+            "say": "I agree with you",
+            "note": "agree ya es verbo. Sin am."
+          },
+          {
+            "type": "fix",
+            "wrong": "She no like the cake",
+            "right": "She doesn't like the cake",
+            "say": "She doesn't like the cake",
+            "note": "Negativo en presente: doesn't + verbo base."
+          },
+          {
+            "type": "fix",
+            "wrong": "I have hungry",
+            "right": "I'm hungry",
+            "say": "I'm hungry",
+            "note": "hungry, tired, cold, scared: con be, no con have."
+          },
+          {
+            "type": "fix",
+            "wrong": "I want that you come to the party",
+            "right": "I want you to come to the party",
+            "say": "I want you to come to the party",
+            "note": "want + persona + to + verbo."
+          },
+          {
+            "type": "fix",
+            "wrong": "Explain me the recipe",
+            "right": "Explain the recipe to me",
+            "say": "Explain the recipe to me",
+            "note": "explain something to someone."
+          },
+          {
+            "type": "fix",
+            "wrong": "He is married with a doctor",
+            "right": "He is married to a doctor",
+            "say": "He is married to a doctor",
+            "note": "married to, no with."
+          },
+          {
+            "type": "fix",
+            "wrong": "It depends of the weather",
+            "right": "It depends on the weather",
+            "say": "It depends on the weather",
+            "note": "depend on."
+          },
+          {
+            "type": "fix",
+            "wrong": "I forgot my phone in the car",
+            "right": "I left my phone in the car",
+            "say": "I left my phone in the car",
+            "note": "Dejar un objeto en un lugar = leave. forget es olvidar la acción."
+          },
+          {
+            "type": "fix",
+            "wrong": "Actually I work at a medical school",
+            "right": "Currently I work at a medical school",
+            "say": "Currently I work at a medical school",
+            "note": "Falso amigo: actually = en realidad. Actualmente = currently."
+          },
+          {
+            "type": "choice",
+            "prompt": "People ___ very friendly in Miami.",
+            "options": [
+              "are",
+              "is",
+              "be"
+            ],
+            "answer": "are",
+            "say": "People are very friendly in Miami",
+            "note": "people es plural en inglés."
+          },
+          {
+            "type": "choice",
+            "prompt": "I've lived in Miami ___ 2015.",
+            "options": [
+              "since",
+              "for",
+              "from"
+            ],
+            "answer": "since",
+            "say": "I've lived in Miami since 2015",
+            "note": "since + fecha o momento."
+          },
+          {
+            "type": "choice",
+            "prompt": "I've lived in Miami ___ ten years.",
+            "options": [
+              "for",
+              "since",
+              "during"
+            ],
+            "answer": "for",
+            "say": "I've lived in Miami for ten years",
+            "note": "for + cantidad de tiempo."
+          },
+          {
+            "type": "choice",
+            "prompt": "My husband ___ the news every night.",
+            "options": [
+              "watches",
+              "watch",
+              "watching"
+            ],
+            "answer": "watches",
+            "say": "My husband watches the news every night",
+            "note": "he / she / it = -s (o -es)."
+          },
+          {
+            "type": "choice",
+            "prompt": "Can you ___ me a favor?",
+            "options": [
+              "do",
+              "make",
+              "give"
+            ],
+            "answer": "do",
+            "say": "Can you do me a favor?",
+            "note": "do a favor, make a cake."
+          },
+          {
+            "type": "choice",
+            "prompt": "I'm looking ___ a new venue for the party.",
+            "options": [
+              "for",
+              "to",
+              "at"
+            ],
+            "answer": "for",
+            "say": "I'm looking for a new venue for the party",
+            "note": "look for = buscar. Nunca sueltes el for."
+          },
+          {
+            "type": "scramble",
+            "answer": "Where do you live now?",
+            "say": "Where do you live now?",
+            "note": "Pregunta en presente: palabra Wh + do + sujeto + verbo."
+          },
+          {
+            "type": "scramble",
+            "answer": "Did you have a good weekend?",
+            "say": "Did you have a good weekend?",
+            "note": "Pregunta en pasado: Did + sujeto + verbo base."
+          },
+          {
+            "type": "scramble",
+            "answer": "How long have you lived here?",
+            "say": "How long have you lived here?",
+            "extra": [
+              "do"
+            ],
+            "note": "Sobra una palabra."
+          }
+        ]
+      },
+      {
+        "id": "anki",
+        "title": "Tu mazo de Anki, limpio",
+        "note": "tus tarjetas de siempre, ordenadas y sin las de ciudadanía (esa meta ya la cumpliste).",
+        "items": [
+          {
+            "type": "translate",
+            "es": "Me duché",
+            "en": "I showered",
+            "alts": [
+              "I took a shower"
+            ],
+            "say": "I showered"
+          },
+          {
+            "type": "translate",
+            "es": "globos",
+            "en": "balloons",
+            "say": "balloons",
+            "note": "Se pronuncia ba-LUNS."
+          },
+          {
+            "type": "translate",
+            "es": "Mi hija está buscando un nuevo trabajo",
+            "en": "My daughter is looking for a new job",
+            "alts": [
+              "My daughter is searching for a new job",
+              "My daughter's looking for a new job"
+            ],
+            "say": "My daughter is looking for a new job",
+            "note": "look for / search for + objeto. No dejes el for."
+          },
+          {
+            "type": "translate",
+            "es": "¿Qué te puedo decir de ayer?",
+            "en": "What can I say about yesterday?",
+            "alts": [
+              "What can I tell you about yesterday?"
+            ],
+            "say": "What can I say about yesterday?",
+            "note": "say about / tell you about."
+          },
+          {
+            "type": "translate",
+            "es": "El gato de mi hija",
+            "en": "My daughter's cat",
+            "say": "My daughter's cat",
+            "note": "El apóstrofo s = de."
+          },
+          {
+            "type": "translate",
+            "es": "Sus gatos (de ella)",
+            "en": "Her cats",
+            "say": "Her cats"
+          },
+          {
+            "type": "translate",
+            "es": "Le di cosas para la cocina",
+            "en": "I gave her things for the kitchen",
+            "say": "I gave her things for the kitchen",
+            "note": "gave = pasado de give."
+          },
+          {
+            "type": "translate",
+            "es": "Alimenté a las mascotas",
+            "en": "I fed the pets",
+            "say": "I fed the pets",
+            "note": "fed = pasado de feed."
+          },
+          {
+            "type": "translate",
+            "es": "Estoy alimentando a las mascotas",
+            "en": "I'm feeding the pets",
+            "alts": [
+              "I am feeding the pets"
+            ],
+            "say": "I'm feeding the pets"
+          },
+          {
+            "type": "translate",
+            "es": "Voy a alimentar a las mascotas",
+            "en": "I'm going to feed the pets",
+            "alts": [
+              "I will feed the pets",
+              "I'll feed the pets"
+            ],
+            "say": "I'm going to feed the pets"
+          },
+          {
+            "type": "translate",
+            "es": "Espero ver fotos",
+            "en": "I hope to see pictures",
+            "alts": [
+              "I hope to see photos"
+            ],
+            "say": "I hope to see pictures"
+          },
+          {
+            "type": "translate",
+            "es": "Lejos de mi casa",
+            "en": "Far from my house",
+            "alts": [
+              "Far from home"
+            ],
+            "say": "Far from my house"
+          },
+          {
+            "type": "translate",
+            "es": "Cerca de mi casa",
+            "en": "Near my house",
+            "alts": [
+              "Near home",
+              "Close to my house"
+            ],
+            "say": "Near my house"
+          },
+          {
+            "type": "translate",
+            "es": "Mi esposo no me ayudó",
+            "en": "My husband didn't help me",
+            "alts": [
+              "My husband did not help me"
+            ],
+            "say": "My husband didn't help me",
+            "note": "didn't + verbo base (help, no helped)."
+          },
+          {
+            "type": "translate",
+            "es": "Mi esposo me ayudó",
+            "en": "My husband helped me",
+            "say": "My husband helped me"
+          },
+          {
+            "type": "translate",
+            "es": "cada viernes / todos los viernes",
+            "en": "every Friday",
+            "alts": [
+              "each Friday"
+            ],
+            "say": "every Friday"
+          },
+          {
+            "type": "translate",
+            "es": "Escuché las noticias",
+            "en": "I listened to the news",
+            "say": "I listened to the news",
+            "note": "listen to."
+          },
+          {
+            "type": "translate",
+            "es": "Estaba escuchando las noticias",
+            "en": "I was listening to the news",
+            "say": "I was listening to the news"
+          },
+          {
+            "type": "translate",
+            "es": "Todas las noches mi esposo se sienta y ve las noticias",
+            "en": "Every night my husband sits down and watches the news",
+            "say": "Every night my husband sits down and watches the news",
+            "note": "sits, watches: la -s de he."
+          },
+          {
+            "type": "translate",
+            "es": "Mi hermana se levanta temprano de lunes a viernes",
+            "en": "My sister wakes up early Monday to Friday",
+            "alts": [
+              "My sister gets up early Monday to Friday",
+              "My sister wakes up early from Monday to Friday"
+            ],
+            "say": "My sister wakes up early Monday to Friday",
+            "note": "wake up = despertarse. get up = levantarse."
+          },
+          {
+            "type": "translate",
+            "es": "Trabaja lejos de casa y toma un autobús porque no tiene auto",
+            "en": "She works far from home and takes a bus because she doesn't have a car",
+            "alts": [
+              "She works far from home and takes the bus because she doesn't have a car"
+            ],
+            "say": "She works far from home and takes a bus because she doesn't have a car"
+          },
+          {
+            "type": "translate",
+            "es": "Llega a su oficina sobre las 9 y trabaja medio tiempo hasta la 1",
+            "en": "She gets to her office around 9 and works part-time until 1",
+            "alts": [
+              "She arrives at her office around 9 and works part-time until 1"
+            ],
+            "say": "She gets to her office around 9 and works part-time until 1"
+          },
+          {
+            "type": "translate",
+            "es": "Entonces, va a casa y almuerza conmigo",
+            "en": "Then she goes home and has lunch with me",
+            "alts": [
+              "Then, she goes home and has lunch with me"
+            ],
+            "say": "Then she goes home and has lunch with me",
+            "note": "goes home, sin to."
+          },
+          {
+            "type": "translate",
+            "es": "Mi hermana no tiene un trabajo de tiempo completo porque va a la escuela en las tardes",
+            "en": "My sister doesn't have a full-time job because she goes to school in the afternoons",
+            "say": "My sister doesn't have a full-time job because she goes to school in the afternoons",
+            "note": "My sister. Mi es español."
+          },
+          {
+            "type": "translate",
+            "es": "Estudia enfermería en la universidad",
+            "en": "She studies nursing in college",
+            "alts": [
+              "She studies nursing at the university",
+              "She studies nursing in university"
+            ],
+            "say": "She studies nursing in college"
+          },
+          {
+            "type": "translate",
+            "es": "Cuando llega a casa, se siente muy cansada",
+            "en": "When she gets home, she feels very tired",
+            "say": "When she gets home, she feels very tired"
+          },
+          {
+            "type": "translate",
+            "es": "Entonces, vemos la tele juntos y hablamos de nuestro día",
+            "en": "Then we watch TV together and talk about our day",
+            "alts": [
+              "Then, we watch TV together and talk about our day"
+            ],
+            "say": "Then we watch TV together and talk about our day"
+          },
+          {
+            "type": "translate",
+            "es": "Los sábados tiene un segundo trabajo en un restaurante",
+            "en": "On Saturdays she has a second job in a restaurant",
+            "alts": [
+              "On Saturdays she has a second job at a restaurant"
+            ],
+            "say": "On Saturdays she has a second job in a restaurant",
+            "note": "on Saturdays, no in."
+          },
+          {
+            "type": "translate",
+            "es": "¡Mi hermana es una chica muy ocupada!",
+            "en": "My sister is a very busy girl!",
+            "say": "My sister is a very busy girl!"
+          },
+          {
+            "type": "translate",
+            "es": "Pedir permiso",
+            "en": "Ask for permission",
+            "alts": [
+              "Ask permission"
+            ],
+            "say": "Ask for permission"
+          },
+          {
+            "type": "translate",
+            "es": "Estaba en el trabajo",
+            "en": "I was at work",
+            "alts": [
+              "I was working"
+            ],
+            "say": "I was at work",
+            "note": "estaba = was. en el trabajo = at work."
+          },
+          {
+            "type": "translate",
+            "es": "Siempre estaba riéndose conmigo",
+            "en": "He was always laughing with me",
+            "say": "He was always laughing with me"
+          },
+          {
+            "type": "translate",
+            "es": "sin un teléfono",
+            "en": "without a phone",
+            "say": "without a phone"
+          },
+          {
+            "type": "translate",
+            "es": "sin teléfonos",
+            "en": "without phones",
+            "say": "without phones"
+          },
+          {
+            "type": "translate",
+            "es": "Trabajo en administración en una escuela de medicina",
+            "en": "I work in medical school administration",
+            "alts": [
+              "I work in administration at a medical school"
+            ],
+            "say": "I work in medical school administration"
+          },
+          {
+            "type": "translate",
+            "es": "Registro estudiantes, proceso pagos y reviso los ingresos",
+            "en": "I register students, I process payments, and I check the income",
+            "alts": [
+              "I register students, process payments, and check the income"
+            ],
+            "say": "I register students, I process payments, and I check the income",
+            "note": "Tres deberes, una lista natural."
+          },
+          {
+            "type": "translate",
+            "es": "Quería hacer eso, pero no pude",
+            "en": "I wanted to do that, but I couldn't",
+            "alts": [
+              "I wanted to do that but I couldn't"
+            ],
+            "say": "I wanted to do that, but I couldn't"
+          },
+          {
+            "type": "translate",
+            "es": "Necesito un disfraz",
+            "en": "I need a costume",
+            "say": "I need a costume",
+            "note": "costume = disfraz. customs = aduana."
+          },
+          {
+            "type": "translate",
+            "es": "¿Has podido trabajar bien?",
+            "en": "Have you been able to work ok?",
+            "alts": [
+              "Have you been able to work okay?",
+              "Have you been able to work well?"
+            ],
+            "say": "Have you been able to work ok?",
+            "note": "JAV-iu-bin-EI-bel-tu-UERK-o-KEI."
+          },
+          {
+            "type": "translate",
+            "es": "estar dispuesto, dispuesta",
+            "en": "willing",
+            "alts": [
+              "to be willing"
+            ],
+            "say": "willing"
+          },
+          {
+            "type": "translate",
+            "es": "a mediodía",
+            "en": "at noon",
+            "alts": [
+              "at midday"
+            ],
+            "say": "at noon"
+          },
+          {
+            "type": "translate",
+            "es": "a medianoche",
+            "en": "at midnight",
+            "say": "at midnight"
+          },
+          {
+            "type": "translate",
+            "es": "Buenas noches (al llegar)",
+            "en": "Good evening",
+            "say": "Good evening",
+            "note": "Good night solo para despedirse a dormir."
+          },
+          {
+            "type": "translate",
+            "es": "Mastica lento",
+            "en": "Chew slowly",
+            "say": "Chew slowly"
+          },
+          {
+            "type": "translate",
+            "es": "un osito de peluche",
+            "en": "a furry teddy bear",
+            "alts": [
+              "a teddy bear"
+            ],
+            "say": "a furry teddy bear"
+          }
+        ]
+      },
+      {
+        "id": "eventos",
+        "title": "Tu negocio de eventos",
+        "note": "el inglés para vender tus fiestas a clientes que hablan inglés: preguntas, presupuesto, montaje.",
+        "items": [
+          {
+            "type": "translate",
+            "es": "Gracias por contactarnos",
+            "en": "Thank you for contacting us",
+            "alts": [
+              "Thanks for contacting us",
+              "Thanks for reaching out"
+            ],
+            "say": "Thank you for contacting us",
+            "note": "for + verbo con -ing."
+          },
+          {
+            "type": "translate",
+            "es": "¿Qué tipo de celebración quieres planear?",
+            "en": "What kind of celebration do you want to plan?",
+            "alts": [
+              "What type of celebration do you want to plan?",
+              "What kind of celebration would you like to plan?"
+            ],
+            "say": "What kind of celebration do you want to plan?"
+          },
+          {
+            "type": "translate",
+            "es": "cumpleaños sorpresa",
+            "en": "surprise birthday party",
+            "alts": [
+              "a surprise birthday party",
+              "surprise party"
+            ],
+            "say": "surprise birthday party"
+          },
+          {
+            "type": "translate",
+            "es": "fiesta de quince años",
+            "en": "quinceañera",
+            "alts": [
+              "a quinceañera",
+              "sweet fifteen",
+              "sweet fifteen party"
+            ],
+            "say": "quinceañera",
+            "note": "En Miami se dice así, en español. También sweet fifteen."
+          },
+          {
+            "type": "translate",
+            "es": "fiesta de graduación",
+            "en": "graduation party",
+            "alts": [
+              "a graduation party"
+            ],
+            "say": "graduation party"
+          },
+          {
+            "type": "translate",
+            "es": "petición de mano",
+            "en": "marriage proposal",
+            "alts": [
+              "a marriage proposal",
+              "proposal"
+            ],
+            "say": "marriage proposal",
+            "note": "pro-PO-sal."
+          },
+          {
+            "type": "translate",
+            "es": "¿Es para una dama o para un caballero?",
+            "en": "Is it for a lady or a gentleman?",
+            "alts": [
+              "Is it for a woman or a man?",
+              "Is it for a lady or for a gentleman?"
+            ],
+            "say": "Is it for a lady or a gentleman?",
+            "note": "Is it: nunca sueltes el it."
+          },
+          {
+            "type": "translate",
+            "es": "¿Para cuántas personas?",
+            "en": "For how many people?",
+            "alts": [
+              "How many people?",
+              "How many guests?"
+            ],
+            "say": "For how many people?",
+            "note": "people, nunca peoples."
+          },
+          {
+            "type": "translate",
+            "es": "¿Cuál es tu presupuesto?",
+            "en": "What is your budget?",
+            "alts": [
+              "What's your budget?"
+            ],
+            "say": "What is your budget?",
+            "note": "BA-yet."
+          },
+          {
+            "type": "translate",
+            "es": "¿Qué fecha tienes en mente?",
+            "en": "What date do you have in mind?",
+            "say": "What date do you have in mind?"
+          },
+          {
+            "type": "translate",
+            "es": "¿Dónde va a ser la fiesta?",
+            "en": "Where is the party going to be?",
+            "alts": [
+              "Where will the party be?",
+              "Where is the party?"
+            ],
+            "say": "Where is the party going to be?"
+          },
+          {
+            "type": "translate",
+            "es": "Decoro con globos y flores",
+            "en": "I decorate with balloons and flowers",
+            "say": "I decorate with balloons and flowers"
+          },
+          {
+            "type": "translate",
+            "es": "Hacemos centros de mesa personalizados",
+            "en": "We make custom centerpieces",
+            "alts": [
+              "We make personalized centerpieces"
+            ],
+            "say": "We make custom centerpieces"
+          },
+          {
+            "type": "translate",
+            "es": "Puedo mandarte fotos de mi trabajo",
+            "en": "I can send you pictures of my work",
+            "alts": [
+              "I can send you photos of my work"
+            ],
+            "say": "I can send you pictures of my work"
+          },
+          {
+            "type": "translate",
+            "es": "Te mando el presupuesto hoy",
+            "en": "I'll send you the quote today",
+            "alts": [
+              "I will send you the quote today",
+              "I'll send you the estimate today"
+            ],
+            "say": "I'll send you the quote today",
+            "note": "quote = cotización. budget = lo que el cliente quiere gastar."
+          },
+          {
+            "type": "translate",
+            "es": "Se paga la mitad de depósito",
+            "en": "Half is paid as a deposit",
+            "alts": [
+              "You pay half as a deposit",
+              "The deposit is half"
+            ],
+            "say": "Half is paid as a deposit"
+          },
+          {
+            "type": "translate",
+            "es": "Llego dos horas antes para montar todo",
+            "en": "I arrive two hours early to set everything up",
+            "alts": [
+              "I get there two hours early to set everything up"
+            ],
+            "say": "I arrive two hours early to set everything up",
+            "note": "set up = montar, instalar."
+          },
+          {
+            "type": "translate",
+            "es": "¿Me compartes esa información, por favor?",
+            "en": "Could you share that information with me, please?",
+            "alts": [
+              "Can you share that information with me, please?",
+              "Could you send me that information, please?"
+            ],
+            "say": "Could you share that information with me, please?"
+          },
+          {
+            "type": "translate",
+            "es": "Con mucho gusto",
+            "en": "With pleasure",
+            "alts": [
+              "My pleasure",
+              "Gladly"
+            ],
+            "say": "With pleasure"
+          },
+          {
+            "type": "translate",
+            "es": "La fiesta quedó hermosa",
+            "en": "The party turned out beautiful",
+            "alts": [
+              "The party was beautiful",
+              "The party turned out beautifully"
+            ],
+            "say": "The party turned out beautiful",
+            "note": "turn out = quedar, resultar."
+          },
+          {
+            "type": "choice",
+            "prompt": "Thank you for ___ us.",
+            "options": [
+              "contacting",
+              "contact",
+              "to contact"
+            ],
+            "answer": "contacting",
+            "say": "Thank you for contacting us",
+            "note": "Después de for, el verbo va con -ing."
+          },
+          {
+            "type": "choice",
+            "prompt": "The party ___ on Saturday at 6.",
+            "options": [
+              "is",
+              "are",
+              "be"
+            ],
+            "answer": "is",
+            "say": "The party is on Saturday at 6",
+            "note": "Días: on. Horas: at."
+          },
+          {
+            "type": "choice",
+            "prompt": "How many ___ are coming?",
+            "options": [
+              "people",
+              "peoples",
+              "persons"
+            ],
+            "answer": "people",
+            "say": "How many people are coming?"
+          },
+          {
+            "type": "choice",
+            "prompt": "I ___ a party for 30 people last Saturday.",
+            "options": [
+              "decorated",
+              "decorate",
+              "decorating"
+            ],
+            "answer": "decorated",
+            "say": "I decorated a party for 30 people last Saturday",
+            "note": "last Saturday = pasado."
+          },
+          {
+            "type": "scramble",
+            "answer": "What date do you have in mind?",
+            "say": "What date do you have in mind?"
+          },
+          {
+            "type": "scramble",
+            "answer": "I can send you pictures of my work",
+            "say": "I can send you pictures of my work"
+          },
+          {
+            "type": "scramble",
+            "answer": "Is it for a lady or a gentleman?",
+            "say": "Is it for a lady or a gentleman?",
+            "extra": [
+              "are"
+            ],
+            "note": "Sobra una palabra."
+          }
+        ]
+      },
+      {
+        "id": "dictado",
+        "title": "Escucha y escribe",
+        "note": "afina el oído con tus propias frases. Escucha, escribe, revisa.",
+        "items": [
+          {
+            "type": "dictate",
+            "say": "I'm working now.",
+            "answer": "I'm working now"
+          },
+          {
+            "type": "dictate",
+            "say": "See you next Friday.",
+            "answer": "See you next Friday"
+          },
+          {
+            "type": "dictate",
+            "say": "I'll be ready in five minutes.",
+            "answer": "I'll be ready in five minutes"
+          },
+          {
+            "type": "dictate",
+            "say": "Yes, it's perfect for me.",
+            "answer": "Yes, it's perfect for me"
+          },
+          {
+            "type": "dictate",
+            "say": "I'm on my way.",
+            "answer": "I'm on my way"
+          },
+          {
+            "type": "dictate",
+            "say": "My daughter has been looking for a new job.",
+            "answer": "My daughter has been looking for a new job"
+          },
+          {
+            "type": "dictate",
+            "say": "Every night my husband watches the news.",
+            "answer": "Every night my husband watches the news"
+          },
+          {
+            "type": "dictate",
+            "say": "It's for a surprise party.",
+            "answer": "It's for a surprise party"
+          },
+          {
+            "type": "dictate",
+            "say": "How many guests are coming?",
+            "answer": "How many guests are coming?"
+          },
+          {
+            "type": "dictate",
+            "say": "What is your budget?",
+            "answer": "What is your budget?"
+          },
+          {
+            "type": "dictate",
+            "say": "I forgot, sorry!",
+            "answer": "I forgot, sorry"
+          },
+          {
+            "type": "dictate",
+            "say": "Thank you for your patience.",
+            "answer": "Thank you for your patience"
+          }
+        ]
+      }
+    ]
+  };
   /* ====================  end content  ====================== */
 
 
