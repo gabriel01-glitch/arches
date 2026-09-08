@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Northwave Panel · Monica</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--cream:#fbf7f0;--surface:#fffdf9;--ink:#1c1814;--muted:#8a8074;--line:#e6dccf;--terra:#bf5a36;--terra-dark:#9f4528;--terra-tint:#f4e4d9;--ok:#2f6b4f;--ok-tint:#e8f3ec;--bad:#a33;--bad-tint:#fceceb}
+*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font-family:Nunito,system-ui,sans-serif}
+.wrap{max-width:440px;margin:0 auto;padding:16px 16px 48px}a.back{color:var(--terra);font-weight:800;font-size:13px;text-decoration:none}
+h1{font-family:Cormorant Garamond,Georgia,serif;font-size:34px;color:var(--terra-dark);margin:10px 0 4px}
+.sub{color:var(--muted);font-weight:700;font-size:14px;margin:0 0 14px}
+.barra{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 14px}.barra span{background:var(--terra-tint);color:var(--terra-dark);font-size:11px;font-weight:800;padding:5px 10px;border-radius:999px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px;margin:0 0 12px}
+.card h2{font-family:Cormorant Garamond,Georgia,serif;font-size:22px;margin:0 0 8px;color:var(--terra-dark)}
+.meta{font-size:12px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px}
+.prompt{font-size:16px;font-weight:700;margin:0 0 12px}.opts{display:grid;gap:8px}
+.opts button{text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:14px;padding:12px 14px;font:inherit;font-weight:700;font-size:15px;cursor:pointer}
+.opts button.ok{border-color:var(--ok);background:var(--ok-tint)}.opts button.no{border-color:var(--bad);background:var(--bad-tint)}
+.fb{min-height:22px;font-weight:800;font-size:14px;margin-top:10px}.fb.good{color:var(--ok)}.fb.bad{color:var(--bad)}
+.row{display:flex;gap:8px;align-items:center;justify-content:space-between;margin-top:12px}
+.btn{border:0;background:var(--terra);color:#fff;font-weight:800;padding:12px 16px;border-radius:999px;font-size:14px;cursor:pointer}
+.btn.ghost{background:#fff;color:var(--terra-dark);border:1.5px solid var(--line)}.score{font-weight:800;color:var(--muted);font-size:13px}
+.ego{background:#fff6e8;border:1.5px solid #e8c98a;border-radius:14px;padding:12px;font-size:14px;font-weight:700;margin:0 0 14px}
+.done{text-align:center;padding:24px 8px}.done h2{font-family:Cormorant Garamond,Georgia,serif;color:var(--terra-dark);font-size:28px;margin:0 0 8px}
+</style></head><body><div class="wrap">
+<a class="back" href="../?name=Monica">← Monica</a>
+<h1>Northwave Panel</h1>
+<p class="sub">have vs be + 3rd -s bajo job talk. I have tickets / I am available / the team needs.</p>
+<div class="barra"><span>HAVE/BE</span><span>3RD -S</span><span>JOB</span></div>
+<div class="ego">I have ≠ I am. She needs la -s. Panel mode: limpio y corto.</div>
+<div id="app"></div></div>
+<script>
+const KEY="arches_monivale_rele";
+const ITEMS=[{"tag":"Have","q":"Tickets for the panel:","opts":["I have two tickets for Friday.","I am two tickets for Friday.","I have got be two tickets."],"ans":"I have two tickets for Friday.","why":"have = posesión."},{"tag":"Be","q":"Calendar:","opts":["I am available after three.","I have available after three.","I am have available after three."],"ans":"I am available after three.","why":"be + adjective."},{"tag":"Have","q":"Experience:","opts":["I have experience with live Q&A.","I am experience with live Q&A.","I have be experience."],"ans":"I have experience with live Q&A.","why":"have experience."},{"tag":"Be","q":"Role line:","opts":["I am ready for the Northwave panel.","I have ready for the Northwave panel.","I am have ready."],"ans":"I am ready for the Northwave panel.","why":"I am ready."},{"tag":"-s","q":"Team need:","opts":["The team needs a clearer agenda.","The team need a clearer agenda.","The team needing a clearer agenda."],"ans":"The team needs a clearer agenda.","why":"team (singular group here) + needs."},{"tag":"-s","q":"Manager:","opts":["She needs the slides tonight.","She need the slides tonight.","She needs to the slides tonight."],"ans":"She needs the slides tonight.","why":"she + needs."},{"tag":"-s","q":"Client:","opts":["The client wants a shorter demo.","The client want a shorter demo.","The client wanting shorter demo."],"ans":"The client wants a shorter demo.","why":"wants + -s."},{"tag":"Job","q":"Offer help:","opts":["I have time now and I am available to jump in.","I am time now and I have available.","I have available time I am."],"ans":"I have time now and I am available to jump in.","why":"have time + am available."},{"tag":"Job","q":"Panel truth:","opts":["Northwave needs one strong story, not ten.","Northwave need one strong story, not ten.","Northwave needing one strong story."],"ans":"Northwave needs one strong story, not ten.","why":"needs."},{"tag":"Mix","q":"Open mic:","opts":["I have the brief. I am available. The host needs a signal.","I am the brief. I have available. The host need a signal.","I have brief. Am available. Host need."],"ans":"I have the brief. I am available. The host needs a signal.","why":"have / be / -s."},{"tag":"Fix","q":"Broken: 'I am tickets and I have ready.'","opts":["I have tickets and I am ready.","I am tickets and I am ready.","I have tickets and I have ready."],"ans":"I have tickets and I am ready.","why":"have tickets / am ready."},{"tag":"Fix","q":"Broken: 'The team need me and she want help.'","opts":["The team needs me and she wants help.","The team need me and she wants help.","The team needs me and she want help."],"ans":"The team needs me and she wants help.","why":"needs + wants."},{"tag":"Panel","q":"Close:","opts":["I have one last point and I am done.","I am one last point and I have done.","I have one last point and I have done ready."],"ans":"I have one last point and I am done.","why":"have a point / am done."},{"tag":"Panel","q":"Booking:","opts":["She needs confirmation that I have the slot.","She need confirmation that I am the slot.","She needs confirmation that I have be the slot."],"ans":"She needs confirmation that I have the slot.","why":"needs + have the slot."}];
+let i=0,ok=0,lock=false;const app=document.getElementById("app");
+function save(){try{localStorage.setItem(KEY,JSON.stringify({i,ok,t:Date.now()}))}catch(e){}}
+function load(){try{const s=JSON.parse(localStorage.getItem(KEY)||"null");if(s&&typeof s.i==="number"){i=Math.min(s.i,ITEMS.length);ok=s.ok||0}}catch(e){}}
+function render(){if(i>=ITEMS.length){app.innerHTML='<div class="card done"><h2>Listo</h2><p class="sub">'+ok+" / "+ITEMS.length+' limpios.</p><button class="btn" id="again">Otra vez</button></div>';document.getElementById("again").onclick=()=>{i=0;ok=0;save();render()};return;}
+const it=ITEMS[i];app.innerHTML='<div class="card"><div class="meta">'+it.tag+" · "+(i+1)+" / "+ITEMS.length+'</div><h2>Elige la forma limpia</h2><p class="prompt">'+it.q+'</p><div class="opts" id="opts"></div><div class="fb" id="fb"></div><div class="row"><span class="score">✓ '+ok+'</span><button class="btn ghost" id="next" disabled>Siguiente</button></div></div>';
+const box=document.getElementById("opts");lock=false;it.opts.forEach(o=>{const b=document.createElement("button");b.textContent=o;b.onclick=()=>{if(lock)return;lock=true;const good=o===it.ans;b.className=good?"ok":"no";[...box.children].forEach(x=>{if(x.textContent===it.ans)x.classList.add("ok")});const fb=document.getElementById("fb");fb.className="fb "+(good?"good":"bad");fb.textContent=(good?"Bien. ":"Casi. ")+it.why;if(good)ok++;document.getElementById("next").disabled=false;save();};box.appendChild(b);});
+document.getElementById("next").onclick=()=>{i++;save();render()};}
+load();render();
+</script></body></html>
