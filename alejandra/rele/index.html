@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Noche de padres · Alejandra</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--cream:#fbf7f0;--surface:#fffdf9;--ink:#1c1814;--muted:#8a8074;--line:#e6dccf;--terra:#bf5a36;--terra-dark:#9f4528;--terra-tint:#f4e4d9;--ok:#2f6b4f;--ok-tint:#e8f3ec;--bad:#a33;--bad-tint:#fceceb}
+*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font-family:Nunito,system-ui,sans-serif}
+.wrap{max-width:440px;margin:0 auto;padding:16px 16px 48px}a.back{color:var(--terra);font-weight:800;font-size:13px;text-decoration:none}
+h1{font-family:Cormorant Garamond,Georgia,serif;font-size:34px;color:var(--terra-dark);margin:10px 0 4px}
+.sub{color:var(--muted);font-weight:700;font-size:14px;margin:0 0 14px}
+.barra{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 14px}.barra span{background:var(--terra-tint);color:var(--terra-dark);font-size:11px;font-weight:800;padding:5px 10px;border-radius:999px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px;margin:0 0 12px}
+.card h2{font-family:Cormorant Garamond,Georgia,serif;font-size:22px;margin:0 0 8px;color:var(--terra-dark)}
+.meta{font-size:12px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px}
+.prompt{font-size:16px;font-weight:700;margin:0 0 12px}.opts{display:grid;gap:8px}
+.opts button{text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:14px;padding:12px 14px;font:inherit;font-weight:700;font-size:15px;cursor:pointer}
+.opts button.ok{border-color:var(--ok);background:var(--ok-tint)}.opts button.no{border-color:var(--bad);background:var(--bad-tint)}
+.fb{min-height:22px;font-weight:800;font-size:14px;margin-top:10px}.fb.good{color:var(--ok)}.fb.bad{color:var(--bad)}
+.row{display:flex;gap:8px;align-items:center;justify-content:space-between;margin-top:12px}
+.btn{border:0;background:var(--terra);color:#fff;font-weight:800;padding:12px 16px;border-radius:999px;font-size:14px;cursor:pointer}
+.btn.ghost{background:#fff;color:var(--terra-dark);border:1.5px solid var(--line)}.score{font-weight:800;color:var(--muted);font-size:13px}
+.ego{background:#fff6e8;border:1.5px solid #e8c98a;border-radius:14px;padding:12px;font-size:14px;font-weight:700;margin:0 0 14px}
+.done{text-align:center;padding:24px 8px}.done h2{font-family:Cormorant Garamond,Georgia,serif;color:var(--terra-dark);font-size:28px;margin:0 0 8px}
+</style></head><body><div class="wrap">
+<a class="back" href="../?name=Alejandra">← Alejandra</a>
+<h1>Noche de padres</h1>
+<p class="sub">It's raining / It was excellent / I'm concerned / I'd like to share. Maya · Leo · Samir.</p>
+<div class="barra"><span>IT</span><span>SOFTEN</span><span>SHARE</span></div>
+<div class="ego">Padres fake: Maya, Leo, Samir. Suaviza; no acuses.</div>
+<div id="app"></div></div>
+<script>
+const KEY="arches_alejandra_rele";
+const ITEMS=[{"tag":"IT","q":"Walk-in weather:","opts":["It's raining — thanks for coming anyway.","Is raining — thanks for coming anyway.","Raining — thanks for come."],"ans":"It's raining — thanks for coming anyway.","why":"It's raining."},{"tag":"IT","q":"Praise a show:","opts":["It was excellent — Maya shone in the second act.","Was excellent — Maya shone.","It excellent — Maya shine."],"ans":"It was excellent — Maya shone in the second act.","why":"It was excellent."},{"tag":"Soft","q":"Worry without attack:","opts":["I'm concerned about Leo's reading pace.","Leo doesn't read and that's bad.","You don't help Leo read."],"ans":"I'm concerned about Leo's reading pace.","why":"I'm concerned about…"},{"tag":"Soft","q":"Open a hard topic:","opts":["I'd like to share a note about Samir.","I will tell you the problem of Samir.","You must hear Samir's issue."],"ans":"I'd like to share a note about Samir.","why":"I'd like to share = soft opener."},{"tag":"Maya","q":"Positive frame:","opts":["It was excellent to see Maya lead the group.","Was excellent see Maya lead.","Maya was lead the group excellent."],"ans":"It was excellent to see Maya lead the group.","why":"It was excellent to…"},{"tag":"Leo","q":"Concern clean:","opts":["I'm concerned Leo rushes the last problems.","Leo is lazy on the last problems.","You make Leo rush."],"ans":"I'm concerned Leo rushes the last problems.","why":"concerned + clause."},{"tag":"Samir","q":"Share ask:","opts":["I'd like to share how Samir helps the quiet kids.","I share you Samir helps quiet kids.","Samir help quiet kids I tell."],"ans":"I'd like to share how Samir helps the quiet kids.","why":"I'd like to share how…"},{"tag":"Mix","q":"Door line:","opts":["It's raining. I'd like to share two minutes about Maya.","Is raining. I share two minutes Maya.","Raining. Share Maya."],"ans":"It's raining. I'd like to share two minutes about Maya.","why":"IT + soft share."},{"tag":"Mix","q":"After the play:","opts":["It was excellent. I'm concerned only about the timing.","Was excellent. I concern the timing.","It excellent. Concerned timing."],"ans":"It was excellent. I'm concerned only about the timing.","why":"praise + soft concern."},{"tag":"Soft","q":"Replace accusation 'You ignore Leo':","opts":["I'm concerned Leo feels left out in group work.","You ignore Leo in group work.","Leo is ignored by you."],"ans":"I'm concerned Leo feels left out in group work.","why":"softener > blame."},{"tag":"Share","q":"Close politely:","opts":["I'd like to share one win: Samir started asking for help.","I inform you Samir ask help.","Samir finally ask help I say."],"ans":"I'd like to share one win: Samir started asking for help.","why":"share a win."},{"tag":"IT","q":"Broken: 'Is cold and was good the meeting.'","opts":["It's cold and the meeting was excellent.","Is cold and the meeting was excellent.","It's cold and was excellent the meeting."],"ans":"It's cold and the meeting was excellent.","why":"It's + It was excellent (reordenado)."},{"tag":"Kids","q":"Three names, one soft line:","opts":["I'd like to share: Maya leads, Leo tries, Samir includes.","Maya Leo Samir: problems you must fix.","I tell Maya Leo Samir issues."],"ans":"I'd like to share: Maya leads, Leo tries, Samir includes.","why":"share + three clean verbs."},{"tag":"Kids","q":"Rain + concern:","opts":["It's raining hard. I'm concerned about pickup time.","Is raining hard. I concern pickup.","Raining. Concerned pickup time you."],"ans":"It's raining hard. I'm concerned about pickup time.","why":"It's + I'm concerned about."}];
+let i=0,ok=0,lock=false;const app=document.getElementById("app");
+function save(){try{localStorage.setItem(KEY,JSON.stringify({i,ok,t:Date.now()}))}catch(e){}}
+function load(){try{const s=JSON.parse(localStorage.getItem(KEY)||"null");if(s&&typeof s.i==="number"){i=Math.min(s.i,ITEMS.length);ok=s.ok||0}}catch(e){}}
+function render(){if(i>=ITEMS.length){app.innerHTML='<div class="card done"><h2>Listo</h2><p class="sub">'+ok+" / "+ITEMS.length+' limpios.</p><button class="btn" id="again">Otra vez</button></div>';document.getElementById("again").onclick=()=>{i=0;ok=0;save();render()};return;}
+const it=ITEMS[i];app.innerHTML='<div class="card"><div class="meta">'+it.tag+" · "+(i+1)+" / "+ITEMS.length+'</div><h2>Elige la forma limpia</h2><p class="prompt">'+it.q+'</p><div class="opts" id="opts"></div><div class="fb" id="fb"></div><div class="row"><span class="score">✓ '+ok+'</span><button class="btn ghost" id="next" disabled>Siguiente</button></div></div>';
+const box=document.getElementById("opts");lock=false;it.opts.forEach(o=>{const b=document.createElement("button");b.textContent=o;b.onclick=()=>{if(lock)return;lock=true;const good=o===it.ans;b.className=good?"ok":"no";[...box.children].forEach(x=>{if(x.textContent===it.ans)x.classList.add("ok")});const fb=document.getElementById("fb");fb.className="fb "+(good?"good":"bad");fb.textContent=(good?"Bien. ":"Casi. ")+it.why;if(good)ok++;document.getElementById("next").disabled=false;save();};box.appendChild(b);});
+document.getElementById("next").onclick=()=>{i++;save();render()};}
+load();render();
+</script></body></html>
