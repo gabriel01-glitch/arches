@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Debate Toronto · Joanna</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--cream:#fbf7f0;--surface:#fffdf9;--ink:#1c1814;--muted:#8a8074;--line:#e6dccf;--terra:#bf5a36;--terra-dark:#9f4528;--terra-tint:#f4e4d9;--ok:#2f6b4f;--ok-tint:#e8f3ec;--bad:#a33;--bad-tint:#fceceb}
+*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font-family:Nunito,system-ui,sans-serif}
+.wrap{max-width:440px;margin:0 auto;padding:16px 16px 48px}a.back{color:var(--terra);font-weight:800;font-size:13px;text-decoration:none}
+h1{font-family:Cormorant Garamond,Georgia,serif;font-size:34px;color:var(--terra-dark);margin:10px 0 4px}
+.sub{color:var(--muted);font-weight:700;font-size:14px;margin:0 0 14px}
+.barra{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 14px}.barra span{background:var(--terra-tint);color:var(--terra-dark);font-size:11px;font-weight:800;padding:5px 10px;border-radius:999px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px;margin:0 0 12px}
+.card h2{font-family:Cormorant Garamond,Georgia,serif;font-size:22px;margin:0 0 8px;color:var(--terra-dark)}
+.meta{font-size:12px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px}
+.prompt{font-size:16px;font-weight:700;margin:0 0 12px}.opts{display:grid;gap:8px}
+.opts button{text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:14px;padding:12px 14px;font:inherit;font-weight:700;font-size:15px;cursor:pointer}
+.opts button.ok{border-color:var(--ok);background:var(--ok-tint)}.opts button.no{border-color:var(--bad);background:var(--bad-tint)}
+.fb{min-height:22px;font-weight:800;font-size:14px;margin-top:10px}.fb.good{color:var(--ok)}.fb.bad{color:var(--bad)}
+.row{display:flex;gap:8px;align-items:center;justify-content:space-between;margin-top:12px}
+.btn{border:0;background:var(--terra);color:#fff;font-weight:800;padding:12px 16px;border-radius:999px;font-size:14px;cursor:pointer}
+.btn.ghost{background:#fff;color:var(--terra-dark);border:1.5px solid var(--line)}.score{font-weight:800;color:var(--muted);font-size:13px}
+.ego{background:#fff6e8;border:1.5px solid #e8c98a;border-radius:14px;padding:12px;font-size:14px;font-weight:700;margin:0 0 14px}
+.done{text-align:center;padding:24px 8px}.done h2{font-family:Cormorant Garamond,Georgia,serif;color:var(--terra-dark);font-size:28px;margin:0 0 8px}
+</style></head><body><div class="wrap">
+<a class="back" href="../?name=Joanna">← Joanna</a>
+<h1>Debate Toronto</h1>
+<p class="sub">everybody has / I'm going to / there are / comparatives. Club night.</p>
+<div class="barra"><span>EVERYBODY HAS</span><span>GOING TO</span><span>THERE ARE</span></div>
+<div class="ego">Everybody HAS. There ARE. Comparatives limpios — sin Spanish calques.</div>
+<div id="app"></div></div>
+<script>
+const KEY="arches_joanna_rele";
+const ITEMS=[{"tag":"Everybody","q":"Club rule:","opts":["Everybody has one minute to open.","Everybody have one minute to open.","Everybody has got one minutes."],"ans":"Everybody has one minute to open.","why":"everybody + has (singular)."},{"tag":"Everybody","q":"Fairness line:","opts":["Everybody has a chance to reply.","Everybody have a chance to reply.","All have a chances."],"ans":"Everybody has a chance to reply.","why":"has + a chance."},{"tag":"Going to","q":"Your plan:","opts":["I'm going to challenge the first claim.","I going to challenge the first claim.","I go to challenge the first claim."],"ans":"I'm going to challenge the first claim.","why":"I'm going to + verb."},{"tag":"Going to","q":"Team plan:","opts":["We're going to use two examples.","We going to use two examples.","We goes to use two examples."],"ans":"We're going to use two examples.","why":"We're going to."},{"tag":"There","q":"Room check:","opts":["There are three strong points on the board.","There is three strong points on the board.","There are a three strong points."],"ans":"There are three strong points on the board.","why":"there are + plural."},{"tag":"There","q":"Counter:","opts":["There are better options than silence.","There is better options than silence.","There are better that silence."],"ans":"There are better options than silence.","why":"there are + comparative adjective + noun."},{"tag":"Comp","q":"Clean comparative:","opts":["This argument is clearer than the last one.","This argument is more clearer than the last.","This argument is clear more than last."],"ans":"This argument is clearer than the last one.","why":"clearer than (no more clearer)."},{"tag":"Comp","q":"Policy line:","opts":["Transit is cheaper than owning two cars.","Transit is more cheaper than owning two cars.","Transit is cheap more than two cars."],"ans":"Transit is cheaper than owning two cars.","why":"cheaper than."},{"tag":"Debate","q":"Open:","opts":["Everybody has heard the motion. I'm going to define 'access'.","Everybody have heard. I going to define.","Everybody has. I go define access."],"ans":"Everybody has heard the motion. I'm going to define 'access'.","why":"has + I'm going to."},{"tag":"Debate","q":"Evidence:","opts":["There are two studies newer than 2020.","There is two studies newer than 2020.","There are two studies more newer."],"ans":"There are two studies newer than 2020.","why":"there are + newer than."},{"tag":"Debate","q":"Close:","opts":["I'm going to end here — everybody has the same clock.","I going to end — everybody have the clock.","I go end — everybody has clock."],"ans":"I'm going to end here — everybody has the same clock.","why":"going to + everybody has."},{"tag":"Fix","q":"Broken: 'Everybody have ideas and there is many.'","opts":["Everybody has ideas and there are many.","Everybody have ideas and there are many.","Everybody has ideas and there is many."],"ans":"Everybody has ideas and there are many.","why":"has + there are."},{"tag":"Fix","q":"Broken: 'I going to say this is more better.'","opts":["I'm going to say this is better.","I going to say this is better.","I'm going to say this is more better."],"ans":"I'm going to say this is better.","why":"I'm going to + better (no more better)."},{"tag":"Comp","q":"Toronto night:","opts":["This round felt tighter than last week's.","This round felt more tighter than last week.","This round felt tight more than last."],"ans":"This round felt tighter than last week's.","why":"tighter than."}];
+let i=0,ok=0,lock=false;const app=document.getElementById("app");
+function save(){try{localStorage.setItem(KEY,JSON.stringify({i,ok,t:Date.now()}))}catch(e){}}
+function load(){try{const s=JSON.parse(localStorage.getItem(KEY)||"null");if(s&&typeof s.i==="number"){i=Math.min(s.i,ITEMS.length);ok=s.ok||0}}catch(e){}}
+function render(){if(i>=ITEMS.length){app.innerHTML='<div class="card done"><h2>Listo</h2><p class="sub">'+ok+" / "+ITEMS.length+' limpios.</p><button class="btn" id="again">Otra vez</button></div>';document.getElementById("again").onclick=()=>{i=0;ok=0;save();render()};return;}
+const it=ITEMS[i];app.innerHTML='<div class="card"><div class="meta">'+it.tag+" · "+(i+1)+" / "+ITEMS.length+'</div><h2>Elige la forma limpia</h2><p class="prompt">'+it.q+'</p><div class="opts" id="opts"></div><div class="fb" id="fb"></div><div class="row"><span class="score">✓ '+ok+'</span><button class="btn ghost" id="next" disabled>Siguiente</button></div></div>';
+const box=document.getElementById("opts");lock=false;it.opts.forEach(o=>{const b=document.createElement("button");b.textContent=o;b.onclick=()=>{if(lock)return;lock=true;const good=o===it.ans;b.className=good?"ok":"no";[...box.children].forEach(x=>{if(x.textContent===it.ans)x.classList.add("ok")});const fb=document.getElementById("fb");fb.className="fb "+(good?"good":"bad");fb.textContent=(good?"Bien. ":"Casi. ")+it.why;if(good)ok++;document.getElementById("next").disabled=false;save();};box.appendChild(b);});
+document.getElementById("next").onclick=()=>{i++;save();render()};}
+load();render();
+</script></body></html>
