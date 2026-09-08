@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Llamada al cliente · Carlenis</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--cream:#fbf7f0;--surface:#fffdf9;--ink:#1c1814;--muted:#8a8074;--line:#e6dccf;--terra:#bf5a36;--terra-dark:#9f4528;--terra-tint:#f4e4d9;--ok:#2f6b4f;--ok-tint:#e8f3ec;--bad:#a33;--bad-tint:#fceceb}
+*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font-family:Nunito,system-ui,sans-serif}
+.wrap{max-width:440px;margin:0 auto;padding:16px 16px 48px}a.back{color:var(--terra);font-weight:800;font-size:13px;text-decoration:none}
+h1{font-family:Cormorant Garamond,Georgia,serif;font-size:34px;color:var(--terra-dark);margin:10px 0 4px}
+.sub{color:var(--muted);font-weight:700;font-size:14px;margin:0 0 14px}
+.barra{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 14px}.barra span{background:var(--terra-tint);color:var(--terra-dark);font-size:11px;font-weight:800;padding:5px 10px;border-radius:999px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px;margin:0 0 12px}
+.card h2{font-family:Cormorant Garamond,Georgia,serif;font-size:22px;margin:0 0 8px;color:var(--terra-dark)}
+.meta{font-size:12px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px}
+.prompt{font-size:16px;font-weight:700;margin:0 0 12px}.opts{display:grid;gap:8px}
+.opts button{text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:14px;padding:12px 14px;font:inherit;font-weight:700;font-size:15px;cursor:pointer}
+.opts button.ok{border-color:var(--ok);background:var(--ok-tint)}.opts button.no{border-color:var(--bad);background:var(--bad-tint)}
+.fb{min-height:22px;font-weight:800;font-size:14px;margin-top:10px}.fb.good{color:var(--ok)}.fb.bad{color:var(--bad)}
+.row{display:flex;gap:8px;align-items:center;justify-content:space-between;margin-top:12px}
+.btn{border:0;background:var(--terra);color:#fff;font-weight:800;padding:12px 16px;border-radius:999px;font-size:14px;cursor:pointer}
+.btn.ghost{background:#fff;color:var(--terra-dark);border:1.5px solid var(--line)}.score{font-weight:800;color:var(--muted);font-size:13px}
+.ego{background:#fff6e8;border:1.5px solid #e8c98a;border-radius:14px;padding:12px;font-size:14px;font-weight:700;margin:0 0 14px}
+.done{text-align:center;padding:24px 8px}.done h2{font-family:Cormorant Garamond,Georgia,serif;color:var(--terra-dark);font-size:28px;margin:0 0 8px}
+</style></head><body><div class="wrap">
+<a class="back" href="../?name=Carlenis">← Carlenis</a>
+<h1>Llamada al cliente</h1>
+<p class="sub">I agreed / they have been / to get. Contabilidad en la línea.</p>
+<div class="barra"><span>AGREED</span><span>HAVE BEEN</span><span>TO GET</span></div>
+<div class="ego">Nunca: I was agree / they has / to gets. Tres limpios, siempre.</div>
+<div id="app"></div></div>
+<script>
+const KEY="arches_carlenis_rele";
+const ITEMS=[{"tag":"Agree","q":"You said yes on the fee:","opts":["I agreed to the new rate.","I was agree to the new rate.","I am agree with the new rate."],"ans":"I agreed to the new rate.","why":"agreed (verbo) — no 'was agree'."},{"tag":"Agree","q":"Deadline:","opts":["We agreed on Friday delivery.","We were agree on Friday delivery.","We agree on Friday yesterday."],"ans":"We agreed on Friday delivery.","why":"agreed on + noun."},{"tag":"Agree","q":"Client pushback:","opts":["I agreed, but I need the files today.","I was agree, but I need the files today.","I am agreed, but I need files."],"ans":"I agreed, but I need the files today.","why":"I agreed + need."},{"tag":"Have","q":"Status since Monday:","opts":["They have been waiting for the invoice.","They has been waiting for the invoice.","They have waiting for the invoice."],"ans":"They have been waiting for the invoice.","why":"they have been + -ing."},{"tag":"Have","q":"Your side:","opts":["I have been reviewing the ledger.","I has been reviewing the ledger.","I have reviewing the ledger."],"ans":"I have been reviewing the ledger.","why":"I have been + -ing."},{"tag":"Have","q":"Firm line:","opts":["They have been late three times.","They has been late three times.","They have late three times."],"ans":"They have been late three times.","why":"have been + adjetivo."},{"tag":"To get","q":"Need + purpose:","opts":["I need to get the statements.","I need get the statements.","I need to gets the statements."],"ans":"I need to get the statements.","why":"need TO get."},{"tag":"To get","q":"Client ask:","opts":["Could you help me to get access?","Could you help me get to access?","Could you help me to gets access?"],"ans":"Could you help me to get access?","why":"to get + noun."},{"tag":"To get","q":"Follow-up:","opts":["I'll call to get a confirmation.","I'll call for get a confirmation.","I'll call to gets confirmation."],"ans":"I'll call to get a confirmation.","why":"to get = para obtener."},{"tag":"Client","q":"Open the call:","opts":["Thanks for your time — I agreed to review line 14.","Thanks for your time — I was agree to review.","Thanks — I am agree review line 14."],"ans":"Thanks for your time — I agreed to review line 14.","why":"agreed to + verb."},{"tag":"Client","q":"Explain delay:","opts":["They have been sending partial files.","They has been sending partial files.","They have sending partial files."],"ans":"They have been sending partial files.","why":"have been sending."},{"tag":"Client","q":"Next step:","opts":["I need to get the missing receipts before noon.","I need get the missing receipts before noon.","I need to gets the missing receipts."],"ans":"I need to get the missing receipts before noon.","why":"need to get."},{"tag":"Fix","q":"Broken: 'I was agree and they has the report.'","opts":["I agreed and they have the report.","I was agree and they have the report.","I agreed and they has the report."],"ans":"I agreed and they have the report.","why":"agreed + they have."},{"tag":"Fix","q":"Broken: 'I need get the PDF to sends.'","opts":["I need to get the PDF to send.","I need get the PDF to send.","I need to gets the PDF to send."],"ans":"I need to get the PDF to send.","why":"to get / to send."}];
+let i=0,ok=0,lock=false;const app=document.getElementById("app");
+function save(){try{localStorage.setItem(KEY,JSON.stringify({i,ok,t:Date.now()}))}catch(e){}}
+function load(){try{const s=JSON.parse(localStorage.getItem(KEY)||"null");if(s&&typeof s.i==="number"){i=Math.min(s.i,ITEMS.length);ok=s.ok||0}}catch(e){}}
+function render(){if(i>=ITEMS.length){app.innerHTML='<div class="card done"><h2>Listo</h2><p class="sub">'+ok+" / "+ITEMS.length+' limpios.</p><button class="btn" id="again">Otra vez</button></div>';document.getElementById("again").onclick=()=>{i=0;ok=0;save();render()};return;}
+const it=ITEMS[i];app.innerHTML='<div class="card"><div class="meta">'+it.tag+" · "+(i+1)+" / "+ITEMS.length+'</div><h2>Elige la forma limpia</h2><p class="prompt">'+it.q+'</p><div class="opts" id="opts"></div><div class="fb" id="fb"></div><div class="row"><span class="score">✓ '+ok+'</span><button class="btn ghost" id="next" disabled>Siguiente</button></div></div>';
+const box=document.getElementById("opts");lock=false;it.opts.forEach(o=>{const b=document.createElement("button");b.textContent=o;b.onclick=()=>{if(lock)return;lock=true;const good=o===it.ans;b.className=good?"ok":"no";[...box.children].forEach(x=>{if(x.textContent===it.ans)x.classList.add("ok")});const fb=document.getElementById("fb");fb.className="fb "+(good?"good":"bad");fb.textContent=(good?"Bien. ":"Casi. ")+it.why;if(good)ok++;document.getElementById("next").disabled=false;save();};box.appendChild(b);});
+document.getElementById("next").onclick=()=>{i++;save();render()};}
+load();render();
+</script></body></html>
