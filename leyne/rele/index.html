@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Domingo en Orlando · Leyne</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--cream:#fbf7f0;--surface:#fffdf9;--ink:#1c1814;--muted:#8a8074;--line:#e6dccf;--terra:#bf5a36;--terra-dark:#9f4528;--terra-tint:#f4e4d9;--ok:#2f6b4f;--ok-tint:#e8f3ec;--bad:#a33;--bad-tint:#fceceb}
+*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font-family:Nunito,system-ui,sans-serif}
+.wrap{max-width:440px;margin:0 auto;padding:16px 16px 48px}a.back{color:var(--terra);font-weight:800;font-size:13px;text-decoration:none}
+h1{font-family:Cormorant Garamond,Georgia,serif;font-size:34px;color:var(--terra-dark);margin:10px 0 4px}
+.sub{color:var(--muted);font-weight:700;font-size:14px;margin:0 0 14px}
+.barra{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 14px}.barra span{background:var(--terra-tint);color:var(--terra-dark);font-size:11px;font-weight:800;padding:5px 10px;border-radius:999px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px;margin:0 0 12px}
+.card h2{font-family:Cormorant Garamond,Georgia,serif;font-size:22px;margin:0 0 8px;color:var(--terra-dark)}
+.meta{font-size:12px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px}
+.prompt{font-size:16px;font-weight:700;margin:0 0 12px}.opts{display:grid;gap:8px}
+.opts button{text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:14px;padding:12px 14px;font:inherit;font-weight:700;font-size:15px;cursor:pointer}
+.opts button.ok{border-color:var(--ok);background:var(--ok-tint)}.opts button.no{border-color:var(--bad);background:var(--bad-tint)}
+.fb{min-height:22px;font-weight:800;font-size:14px;margin-top:10px}.fb.good{color:var(--ok)}.fb.bad{color:var(--bad)}
+.row{display:flex;gap:8px;align-items:center;justify-content:space-between;margin-top:12px}
+.btn{border:0;background:var(--terra);color:#fff;font-weight:800;padding:12px 16px;border-radius:999px;font-size:14px;cursor:pointer}
+.btn.ghost{background:#fff;color:var(--terra-dark);border:1.5px solid var(--line)}.score{font-weight:800;color:var(--muted);font-size:13px}
+.ego{background:#fff6e8;border:1.5px solid #e8c98a;border-radius:14px;padding:12px;font-size:14px;font-weight:700;margin:0 0 14px}
+.done{text-align:center;padding:24px 8px}.done h2{font-family:Cormorant Garamond,Georgia,serif;color:var(--terra-dark);font-size:28px;margin:0 0 8px}
+</style></head><body><div class="wrap">
+<a class="back" href="../?name=Leyne">← Leyne</a>
+<h1>Domingo en Orlando</h1>
+<p class="sub">IT + people are + like + -ing. Tu domingo limpio.</p>
+<div class="barra"><span>IT</span><span>PEOPLE ARE</span><span>LIKE+-ING</span></div>
+<div class="ego">Si falta el IT o dices people is → repite la frase limpia.</div>
+<div id="app"></div></div>
+<script>
+const KEY="arches_leyne_rele";
+const ITEMS=[{"tag":"IT","q":"Weather shot:","opts":["It's sunny in Orlando.","Is sunny in Orlando.","Sunny in Orlando."],"ans":"It's sunny in Orlando.","why":"It's = It is. El IT no se come."},{"tag":"IT","q":"Evening line:","opts":["It's warm tonight.","Is warm tonight.","It warm tonight."],"ans":"It's warm tonight.","why":"It's + adjetivo."},{"tag":"IT","q":"Rain check:","opts":["It isn't raining right now.","Isn't raining right now.","It don't raining."],"ans":"It isn't raining right now.","why":"It isn't + -ing."},{"tag":"People","q":"Park line:","opts":["People are waiting for the tram.","People is waiting for the tram.","People waiting the tram."],"ans":"People are waiting for the tram.","why":"people = plural → are."},{"tag":"People","q":"Pool scene:","opts":["People are swimming already.","People is swimming already.","The people swimming already."],"ans":"People are swimming already.","why":"are + -ing."},{"tag":"People","q":"Food truck:","opts":["People are looking at the menu.","People looks at the menu.","People is look the menu."],"ans":"People are looking at the menu.","why":"are looking."},{"tag":"Like","q":"Your habit:","opts":["I like swimming on Sundays.","I like swim on Sundays.","I like to swimming on Sundays."],"ans":"I like swimming on Sundays.","why":"like + -ing (placer)."},{"tag":"Like","q":"Theme park:","opts":["I like walking between the parks.","I like walk between the parks.","I liking walk between parks."],"ans":"I like walking between the parks.","why":"like + walking."},{"tag":"Like","q":"Food:","opts":["I like trying new desserts.","I like try new desserts.","I like to trying new desserts."],"ans":"I like trying new desserts.","why":"like + -ing."},{"tag":"Combo","q":"Full postcard:","opts":["It's sunny, people are waiting, and I like swimming.","Is sunny, people is waiting, and I like swim.","It's sunny, people waiting, I like swim."],"ans":"It's sunny, people are waiting, and I like swimming.","why":"los tres frames juntos."},{"tag":"Combo","q":"Morning plan:","opts":["It's early. People are opening shops. I like starting slow.","Is early. People is open shops. I like start slow.","It's early. People opens. I like start."],"ans":"It's early. People are opening shops. I like starting slow.","why":"IT / are / like+-ing."},{"tag":"Combo","q":"Night exit:","opts":["It's quiet now. People are leaving. I like ending here.","Is quiet. People is leave. I like end here.","It's quiet. People leaving. I like end."],"ans":"It's quiet now. People are leaving. I like ending here.","why":"tres beats limpios."},{"tag":"Fix","q":"Broken: 'Is hot and people is in line.'","opts":["It's hot and people are in line.","It hot and people are in line.","It's hot and people is in line."],"ans":"It's hot and people are in line.","why":"It's + people are."},{"tag":"Fix","q":"Broken: 'I like swim when is sunny.'","opts":["I like swimming when it's sunny.","I like swim when it's sunny.","I like swimming when is sunny."],"ans":"I like swimming when it's sunny.","why":"like+-ing + it's."}];
+let i=0,ok=0,lock=false;const app=document.getElementById("app");
+function save(){try{localStorage.setItem(KEY,JSON.stringify({i,ok,t:Date.now()}))}catch(e){}}
+function load(){try{const s=JSON.parse(localStorage.getItem(KEY)||"null");if(s&&typeof s.i==="number"){i=Math.min(s.i,ITEMS.length);ok=s.ok||0}}catch(e){}}
+function render(){if(i>=ITEMS.length){app.innerHTML='<div class="card done"><h2>Listo</h2><p class="sub">'+ok+" / "+ITEMS.length+' limpios.</p><button class="btn" id="again">Otra vez</button></div>';document.getElementById("again").onclick=()=>{i=0;ok=0;save();render()};return;}
+const it=ITEMS[i];app.innerHTML='<div class="card"><div class="meta">'+it.tag+" · "+(i+1)+" / "+ITEMS.length+'</div><h2>Elige la forma limpia</h2><p class="prompt">'+it.q+'</p><div class="opts" id="opts"></div><div class="fb" id="fb"></div><div class="row"><span class="score">✓ '+ok+'</span><button class="btn ghost" id="next" disabled>Siguiente</button></div></div>';
+const box=document.getElementById("opts");lock=false;it.opts.forEach(o=>{const b=document.createElement("button");b.textContent=o;b.onclick=()=>{if(lock)return;lock=true;const good=o===it.ans;b.className=good?"ok":"no";[...box.children].forEach(x=>{if(x.textContent===it.ans)x.classList.add("ok")});const fb=document.getElementById("fb");fb.className="fb "+(good?"good":"bad");fb.textContent=(good?"Bien. ":"Casi. ")+it.why;if(good)ok++;document.getElementById("next").disabled=false;save();};box.appendChild(b);});
+document.getElementById("next").onclick=()=>{i++;save();render()};}
+load();render();
+</script></body></html>
