@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cocina + Clinica · Eydel</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--cream:#fbf7f0;--surface:#fffdf9;--ink:#1c1814;--muted:#8a8074;--line:#e6dccf;--terra:#bf5a36;--terra-dark:#9f4528;--terra-tint:#f4e4d9;--ok:#2f6b4f;--ok-tint:#e8f3ec;--bad:#a33;--bad-tint:#fceceb}
+*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font-family:Nunito,system-ui,sans-serif}
+.wrap{max-width:440px;margin:0 auto;padding:16px 16px 48px}a.back{color:var(--terra);font-weight:800;font-size:13px;text-decoration:none}
+h1{font-family:Cormorant Garamond,Georgia,serif;font-size:34px;color:var(--terra-dark);margin:10px 0 4px}
+.sub{color:var(--muted);font-weight:700;font-size:14px;margin:0 0 14px}
+.barra{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 14px}.barra span{background:var(--terra-tint);color:var(--terra-dark);font-size:11px;font-weight:800;padding:5px 10px;border-radius:999px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px;margin:0 0 12px}
+.card h2{font-family:Cormorant Garamond,Georgia,serif;font-size:22px;margin:0 0 8px;color:var(--terra-dark)}
+.meta{font-size:12px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px}
+.prompt{font-size:16px;font-weight:700;margin:0 0 12px}.opts{display:grid;gap:8px}
+.opts button{text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:14px;padding:12px 14px;font:inherit;font-weight:700;font-size:15px;cursor:pointer}
+.opts button.ok{border-color:var(--ok);background:var(--ok-tint)}.opts button.no{border-color:var(--bad);background:var(--bad-tint)}
+.fb{min-height:22px;font-weight:800;font-size:14px;margin-top:10px}.fb.good{color:var(--ok)}.fb.bad{color:var(--bad)}
+.row{display:flex;gap:8px;align-items:center;justify-content:space-between;margin-top:12px}
+.btn{border:0;background:var(--terra);color:#fff;font-weight:800;padding:12px 16px;border-radius:999px;font-size:14px;cursor:pointer}
+.btn.ghost{background:#fff;color:var(--terra-dark);border:1.5px solid var(--line)}.score{font-weight:800;color:var(--muted);font-size:13px}
+.ego{background:#fff6e8;border:1.5px solid #e8c98a;border-radius:14px;padding:12px;font-size:14px;font-weight:700;margin:0 0 14px}
+.done{text-align:center;padding:24px 8px}.done h2{font-family:Cormorant Garamond,Georgia,serif;color:var(--terra-dark);font-size:28px;margin:0 0 8px}
+</style></head><body><div class="wrap">
+<a class="back" href="../?name=Eydel">← Eydel</a>
+<h1>Cocina + Clínica</h1>
+<p class="sub">Relé a velocidad. La Barra limpia bajo presión.</p>
+<div class="barra"><span>IT</span><span>-s</span><span>DO / DOES</span><span>TO</span></div>
+<div class="ego">Si piensas “ya sé” → igual haces las reps.</div>
+<div id="app"></div></div>
+<script>
+const KEY="arches_eydel_rele_20260908";
+const ITEMS=[
+{tag:"Cocina",q:"The blender ___ start.",opts:["won't","doesn't to","no"],ans:"won't",why:"won't / doesn't — it + auxiliar."},
+{tag:"Cocina",q:"___ it make any sound?",opts:["Does","Do","Is"],ans:"Does",why:"Does + it + verbo base."},
+{tag:"Cocina",q:"It ___. I need ___ check the plug.",opts:["doesn't / to","don't / for","doesn't / empty"],ans:"doesn't / to",why:"doesn't + need TO."},
+{tag:"Cocina",q:"She ___ to make a smoothie before work.",opts:["wants","want","wanting"],ans:"wants",why:"she + -s + wants TO."},
+{tag:"Oficina",q:"The invoice ___ arrive by email.",opts:["doesn't","don't","isn't"],ans:"doesn't",why:"singular + doesn't."},
+{tag:"Oficina",q:"___ it go to spam?",opts:["Does","Do","Has"],ans:"Does",why:"Does it…?"},
+{tag:"Oficina",q:"He ___ to pay today.",opts:["wants","want","is want"],ans:"wants",why:"he wants TO pay."},
+{tag:"Clinica",q:"The patient ___ a root canal tomorrow.",opts:["needs","need","needing"],ans:"needs",why:"patient + -s."},
+{tag:"Clinica",q:"___ she need to come early?",opts:["Does","Do","Is"],ans:"Does",why:"Does she need TO…?"},
+{tag:"Clinica",q:"She wants ___ bring a friend.",opts:["to","for","a"],ans:"to",why:"wants TO + verbo."},
+{tag:"Clinica",q:"We need ___ prep the room tonight.",opts:["to","for","a"],ans:"to",why:"need TO."},
+{tag:"Envio",q:"She wants to pay the box ___ shipping.",opts:["for","to","in"],ans:"for",why:"pay for shipping."},
+{tag:"Envio",q:"___ the shop take cards?",opts:["Does","Do","Is"],ans:"Does",why:"Does the shop…?"},
+{tag:"Envio",q:"It ___. It ___ cash today.",opts:["doesn't / needs","don't / need","doesn't / need"],ans:"doesn't / needs",why:"It doesn't. It needs."}
+];
+let i=0,ok=0,lock=false;const app=document.getElementById("app");
+function save(){try{localStorage.setItem(KEY,JSON.stringify({i,ok,t:Date.now()}))}catch(e){}}
+function load(){try{const s=JSON.parse(localStorage.getItem(KEY)||"null");if(s&&typeof s.i==="number"){i=Math.min(s.i,ITEMS.length);ok=s.ok||0}}catch(e){}}
+function render(){if(i>=ITEMS.length){app.innerHTML='<div class="card done"><h2>Listo</h2><p class="sub">'+ok+" / "+ITEMS.length+' limpios.</p><button class="btn" id="again">Otra vez</button></div>';document.getElementById("again").onclick=()=>{i=0;ok=0;save();render()};return;}
+const it=ITEMS[i];app.innerHTML='<div class="card"><div class="meta">'+it.tag+" · "+(i+1)+" / "+ITEMS.length+'</div><h2>Elige la forma limpia</h2><p class="prompt">'+it.q+'</p><div class="opts" id="opts"></div><div class="fb" id="fb"></div><div class="row"><span class="score">✓ '+ok+'</span><button class="btn ghost" id="next" disabled>Siguiente</button></div></div>';
+const box=document.getElementById("opts");lock=false;it.opts.forEach(o=>{const b=document.createElement("button");b.textContent=o;b.onclick=()=>{if(lock)return;lock=true;const good=o===it.ans;b.className=good?"ok":"no";[...box.children].forEach(x=>{if(x.textContent===it.ans)x.classList.add("ok")});const fb=document.getElementById("fb");fb.className="fb "+(good?"good":"bad");fb.textContent=(good?"Bien. ":"Casi. ")+it.why;if(good)ok++;document.getElementById("next").disabled=false;save();};box.appendChild(b);});
+document.getElementById("next").onclick=()=>{i++;save();render()};}
+load();render();
+</script></body></html>
