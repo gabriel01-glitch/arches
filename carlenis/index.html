@@ -124,8 +124,8 @@
     "level": "B1-B2",
     "l1": "Spanish",
     "context": "Venezolana en EE. UU. Contadora con metas en finanzas. Bachata y ley de atracción.",
-    "greeting": "Tus frases reales, Carlenis. Del error a la fluidez, un poco cada día.",
-    "version": "2026-09-08"
+    "greeting": "Hoy: I AM. You are in Barbados… el presente, el agree, y el to que no se esconde.",
+    "version": "2026-09-09"
   },
   "tracks": [
     {
@@ -761,6 +761,11 @@
   ],
   "links": [
     {
+      "title": "I AM",
+      "note": "Clase de hoy. Neville en inglés: You are in Barbados, I agree, I need to get.",
+      "url": "iam/"
+    },
+    {
       "title": "Rutina de Articulación",
       "note": "Calentamiento de 72 segundos con la voz de Teacher Gabriel. Cada mañana, antes de hablar inglés.",
       "url": "../apps/rutina/?name=Carlenis"
@@ -917,8 +922,16 @@
     const sc=streakCount();
     if(sc>0) html+='<div class="streak">'+flameSVG+'<span class="num">'+sc+'</span><span class="lab">'+(sc===1?'día seguido':'días seguidos')+'</span></div>';
     html+='</div>';
-    html+='<div class="tracks-label">Tus temas</div>';
+    html+='<div class="tracks-label">Hoy</div>';
     app.innerHTML=html;
+    if(STUDENT.links && STUDENT.links[0] && STUDENT.links[0].url==="iam/"){
+      const L=STUDENT.links[0];
+      const feat=el('<a class="track" style="display:block;text-decoration:none;border-color:var(--terra)" href="'+L.url+'">'+
+        '<div class="track-head"><div class="track-title">'+esc(L.title)+'</div><div class="track-count">hoy</div></div>'+
+        (L.note?'<div class="track-note">'+esc(L.note)+'</div>':'')+'</a>');
+      app.appendChild(feat);
+    }
+    app.appendChild(el('<div class="tracks-label">Tus temas</div>'));
     STUDENT.tracks.forEach(t=>{
       const pct=trackMastery(t);
       const card=el('<div class="track">'+
@@ -931,6 +944,7 @@
     if(STUDENT.links && STUDENT.links.length){
       app.appendChild(el('<div class="tracks-label">Tus otras apps</div>'));
       STUDENT.links.forEach(function(L){
+        if(L.url==="iam/") return;
         const a=el('<a class="track" style="display:block;text-decoration:none" href="'+L.url+'">'+
           '<div class="track-head"><div class="track-title">'+esc(L.title)+'</div><div class="track-count">›</div></div>'+
           (L.note?'<div class="track-note">'+esc(L.note)+'</div>':'')+'</a>');

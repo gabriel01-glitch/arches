@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>I AM · Carlenis</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,400;0,600;0,700;1,400&family=Petrona:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --night:#101820;
+    --ink:#1a1610;
+    --linen:#f3ead6;
+    --mist:#e8dcc4;
+    --teal:#3d7a74;
+    --teal-d:#2a5854;
+    --brass:#b8893a;
+    --brass-d:#8a6424;
+    --brass-s:#f0e4c4;
+    --sea:#1e4a52;
+    --sea-s:#d5e6e8;
+    --ok:#2d6a48;
+    --ok-s:#dceee4;
+    --no:#9a3a28;
+    --no-s:#f6e4dc;
+    --muted:#6a5c4a;
+    --line:#d8cbb0;
+    --ease-out:cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  html,body{margin:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    min-height:100vh;
+    color:var(--ink);
+    font-family:Figtree,system-ui,sans-serif;
+    background:var(--night);
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{background:var(--brass-s); color:var(--ink);}
+  :focus-visible{outline:3px solid var(--brass); outline-offset:3px;}
+  img{max-width:100%; display:block;}
+
+  .shell{max-width:640px; margin:0 auto; padding:0 0 96px;}
+
+  .hero{position:relative; min-height:72vh; color:var(--linen);}
+  .hero img{width:100%; height:72vh; object-fit:cover; object-position:28% 55%;}
+  .hero-scrim{
+    position:absolute; inset:auto 0 0 0; height:64%;
+    background:linear-gradient(180deg, transparent, rgba(16,24,32,.5) 36%, var(--night) 100%);
+    pointer-events:none;
+  }
+  .hero-copy{position:absolute; left:0; right:0; bottom:0; padding:18px 18px 22px;}
+  .hero h1{
+    font-family:Petrona,Georgia,serif;
+    font-weight:700;
+    font-size:clamp(28px,6.8vw,44px);
+    line-height:.98;
+    letter-spacing:-.03em;
+    margin:0 0 10px;
+    color:var(--linen);
+  }
+  .hero p{
+    margin:0 0 16px;
+    font-size:17px;
+    line-height:1.45;
+    color:#e8dcc4;
+    max-width:34em;
+  }
+  .start{
+    display:inline-flex; align-items:center; justify-content:center;
+    min-height:48px; padding:12px 18px;
+    background:var(--teal); color:var(--linen);
+    border:0; border-radius:12px;
+    font-family:inherit; font-weight:700; font-size:16px;
+    cursor:pointer;
+  }
+  .start:active{transform:scale(.97); background:var(--teal-d);}
+
+  .backhome{
+    position:absolute; top:12px; left:12px; z-index:4;
+    display:inline-flex; align-items:center; min-height:44px;
+    padding:8px 14px; border-radius:999px;
+    background:rgba(16,24,32,.62); color:var(--linen);
+    text-decoration:none; font-weight:700; font-size:14px;
+    border:1px solid rgba(243,234,214,.18);
+  }
+
+  nav.dock{
+    position:sticky; top:0; z-index:20;
+    background:rgba(16,24,32,.92);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid rgba(243,234,214,.08);
+    padding:8px 8px 10px;
+    display:flex; gap:6px; overflow-x:auto;
+    scrollbar-width:none;
+  }
+  nav.dock::-webkit-scrollbar{display:none;}
+  .dock button{
+    flex:0 0 auto;
+    min-height:44px; padding:8px 12px;
+    border:1px solid rgba(243,234,214,.14);
+    background:transparent; color:#e8dcc4;
+    border-radius:999px;
+    font-family:inherit; font-weight:700; font-size:13px;
+    cursor:pointer; white-space:nowrap;
+  }
+  .dock button.on{background:var(--linen); color:var(--ink); border-color:var(--linen);}
+
+  .paper{
+    background:var(--linen);
+    color:var(--ink);
+    border-radius:22px 22px 0 0;
+    margin-top:-14px;
+    position:relative;
+    padding:8px 0 28px;
+    box-shadow:0 -12px 40px rgba(0,0,0,.28);
+  }
+  .pad{padding:22px 18px 12px;}
+  .panel{display:none;}
+  .panel.on{display:block; animation:enter .45s var(--ease-out);}
+  @keyframes enter{
+    from{opacity:0; transform:translateY(10px);}
+    to{opacity:1; transform:none;}
+  }
+
+  h2{
+    font-family:Petrona,Georgia,serif;
+    font-weight:700;
+    font-size:clamp(26px,6.2vw,34px);
+    letter-spacing:-.025em;
+    line-height:1.08;
+    margin:6px 0 10px;
+  }
+  h3{
+    font-family:Petrona,Georgia,serif;
+    font-weight:600;
+    font-size:22px;
+    letter-spacing:-.02em;
+    margin:0 0 8px;
+    line-height:1.15;
+  }
+  p{margin:0 0 12px; line-height:1.55; font-size:17px;}
+  .lead{font-size:18px;}
+
+  .es{
+    background:#efe0b8;
+    border:1px solid #d4b45a;
+    border-radius:12px;
+    padding:11px 13px;
+    margin:10px 0 16px;
+    color:#5c4314;
+    font-size:15.5px;
+    line-height:1.5;
+  }
+  .es b{color:#3f2d0c;}
+
+  .tag{
+    display:inline-block;
+    font-size:11.5px; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
+    padding:4px 9px; border-radius:999px; margin-bottom:8px;
+  }
+  .tag.sea{background:var(--sea-s); color:var(--sea);}
+  .tag.hot{background:var(--brass-s); color:var(--brass-d);}
+  .tag.ok{background:var(--ok-s); color:var(--ok);}
+
+  .say{
+    background:var(--sea-s);
+    border:1px solid #b4cdd2;
+    border-radius:12px;
+    padding:12px 13px;
+    margin:8px 0 14px;
+    color:var(--sea);
+  }
+  .say.gold{
+    background:var(--brass-s);
+    border-color:#d4b45a;
+    color:var(--brass-d);
+  }
+  .say .lab{
+    display:flex; align-items:center; gap:8px;
+    font-size:12px; font-weight:700; letter-spacing:.04em; text-transform:uppercase;
+    color:inherit; margin-bottom:6px;
+  }
+  .say p{margin:0; font-size:17px; font-weight:700; line-height:1.4; color:var(--ink);}
+  .listen{
+    margin-left:auto;
+    border:0; background:transparent; color:inherit;
+    font-family:inherit; font-weight:700; font-size:13px;
+    cursor:pointer; padding:4px 0; min-height:32px;
+  }
+
+  .shot{
+    margin:4px 0 16px;
+    border-radius:14px;
+    overflow:hidden;
+    background:#101820;
+  }
+  .shot img{width:100%; height:220px; object-fit:cover;}
+  .cap{
+    padding:9px 12px;
+    font-size:13px; color:var(--muted); font-weight:700;
+    background:var(--mist);
+  }
+
+  .idea{
+    background:var(--mist);
+    border:1.5px solid var(--line);
+    border-radius:14px;
+    padding:14px;
+    margin:0 0 10px;
+  }
+
+  .names{display:grid; grid-template-columns:1fr 1fr; gap:8px; margin:10px 0 16px;}
+  .nm{
+    background:var(--linen);
+    border:1.5px solid var(--line);
+    border-radius:12px;
+    padding:12px 10px;
+    text-align:left;
+    font-family:inherit; color:inherit;
+    min-height:72px; cursor:pointer;
+  }
+  .nm b{display:block; font-family:Petrona,Georgia,serif; font-size:16px;}
+  .nm span{display:block; color:var(--muted); font-size:12.5px; font-weight:600; margin-top:3px;}
+  .nm.on{background:var(--sea-s); border-color:var(--teal); color:var(--teal-d);}
+
+  .qbox{
+    background:var(--mist);
+    border:1.5px solid var(--line);
+    border-radius:14px;
+    padding:14px;
+    margin:0 0 12px;
+  }
+  .qn{font-weight:700; margin-bottom:10px; font-size:17px; line-height:1.35;}
+  .opts{display:flex; flex-direction:column; gap:8px;}
+  .opt{
+    text-align:left; min-height:46px;
+    background:var(--linen); border:1.5px solid var(--line); border-radius:12px;
+    padding:11px 12px; font-weight:700; font-size:15.5px;
+    cursor:pointer; font-family:inherit; color:inherit;
+  }
+  .opt.ok{background:var(--ok-s); border-color:var(--ok); color:var(--ok);}
+  .opt.bad{background:var(--no-s); border-color:var(--no); color:var(--no);}
+  .opt:disabled{cursor:default;}
+  .fb{display:none; margin-top:10px; font-size:15px; line-height:1.45;}
+  .fb.show{display:block;}
+  .fb.good{color:var(--ok);}
+  .fb.poor{color:var(--no);}
+
+  .phrase{
+    background:var(--linen);
+    border:1.5px dashed var(--line);
+    border-radius:12px;
+    padding:12px;
+    margin:0 0 10px;
+  }
+  .phrase b{display:block; font-family:Petrona,Georgia,serif; font-size:20px; margin-bottom:4px;}
+  .phrase span{color:var(--muted); font-size:14.5px;}
+
+  textarea{
+    width:100%;
+    border:1.5px solid var(--line);
+    border-radius:12px;
+    padding:12px 13px;
+    font-family:inherit; font-size:16.5px; color:var(--ink);
+    background:#fff;
+    min-height:150px; resize:vertical; line-height:1.5;
+  }
+  textarea:focus{outline:none; border-color:var(--teal);}
+
+  .btn{
+    border:0; border-radius:12px;
+    min-height:48px; padding:12px 16px;
+    font-family:inherit; font-weight:700; font-size:16px;
+    cursor:pointer;
+  }
+  .btn-c{background:var(--teal); color:var(--linen);}
+  .btn-c:active{background:var(--teal-d); transform:scale(.97);}
+  .btn-f{background:var(--brass); color:var(--night);}
+  .btn-f:active{background:var(--brass-d); transform:scale(.97);}
+  .btn-w{background:var(--mist); color:var(--ink); border:1.5px solid var(--line);}
+  .row{display:flex; gap:8px; flex-wrap:wrap; margin-top:10px;}
+
+  .notes{
+    display:none;
+    margin:0 18px 8px;
+    background:#101820; color:#e8dcc4;
+    border-radius:12px; padding:10px 12px;
+    font-size:13.5px; line-height:1.4;
+  }
+  .notes.show{display:block;}
+  .notes b{color:#f0e4c4;}
+
+  .prog{
+    height:6px; background:rgba(243,234,214,.12);
+    border-radius:99px; overflow:hidden; margin:0 18px 8px;
+  }
+  .prog > i{display:block; height:100%; width:0; background:#c9a45c; transition:width .4s var(--ease-out);}
+
+  .glos{display:grid; gap:8px; margin:8px 0 16px;}
+  .gitem{background:var(--mist); border:1px solid var(--line); border-radius:12px; padding:11px 12px;}
+  .gitem b{display:block; font-size:17px;}
+  .gitem i{color:var(--brass-d); font-style:normal; font-weight:700; font-size:13.5px;}
+  .gitem span{display:block; color:var(--muted); font-size:14.5px; margin-top:2px;}
+
+  .verdict-card{
+    background:linear-gradient(180deg,#f3ead6,#d5e6e8);
+    border:2px solid var(--teal);
+    border-radius:18px;
+    padding:22px 16px;
+    text-align:center;
+  }
+  .verdict-card h2{margin-bottom:6px;}
+  .saved{display:none; color:var(--ok); font-weight:700; margin-top:8px;}
+  .saved.show{display:block;}
+
+  footer.tiny{
+    color:rgba(243,234,214,.45);
+    font-size:12.5px; text-align:center;
+    padding:8px 18px 24px;
+  }
+  footer.tiny a{color:#c9a45c;}
+
+  .next{margin:18px 18px 8px; display:flex; gap:8px;}
+  .next .btn{flex:1;}
+
+  .teacher{
+    margin:18px 18px 0;
+    background:var(--mist);
+    border:1.5px dashed var(--line);
+    border-radius:14px;
+    padding:12px 14px;
+  }
+  .teacher summary{cursor:pointer; font-weight:800; color:var(--muted); font-size:13px; list-style:none;}
+  .teacher summary::-webkit-details-marker{display:none;}
+  .teacher .body{font-size:13.5px; line-height:1.5; margin-top:10px;}
+  .teacher ol{margin:8px 0 0; padding-left:18px;}
+  .teacher li{margin:6px 0;}
+
+  @media (hover:hover) and (pointer:fine){
+    .start:hover{transform:translateY(-2px); box-shadow:0 10px 22px rgba(0,0,0,.28);}
+    .opt:hover, .nm:hover{transform:translateY(-2px);}
+    .opt, .nm, .start{transition:transform .18s var(--ease-out), background .18s ease, border-color .18s ease;}
+  }
+  @media (max-width:420px){
+    .names{grid-template-columns:1fr;}
+    .hero, .hero img{min-height:56vh; height:56vh;}
+    .hero img{object-position:26% 52%;}
+    .hero p{font-size:16px;}
+    .shot img{height:200px;}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none !important; transition:none !important;}
+    html{scroll-behavior:auto;}
+    .panel.on{animation:none;}
+  }
+</style>
+</head>
+<body>
+<!--
+THESIS: Carlenis already lives inside Neville. Tonight she learns to say I AM in English without Spanish glue: I agree, not I am agree; I am, not I will be; I need to get, with the to.
+OWN-WORLD: Barbados midnight over linen. Petrona + Figtree. Door teal for competence, sea for the island, brass for the lamp before sleep. No terra, no cacao, no purple.
+STORY: She leaves able to say You are in Barbados, keep I AM clean, feel from the end, and talk about her house like a mystic who also has clients.
+FIRST VIEWPORT: Full-bleed open Caribbean door at night, title, one button: Open the door.
+FORM: Literary case file / read-aloud. Code-led student class.
+FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
+-->
+<div class="shell">
+  <header class="hero" id="top">
+    <a class="backhome" href="../?name=Carlenis">‹ Temas</a>
+    <img src="img/hero.jpg" width="1248" height="832" alt="A weathered turquoise door standing open on a Caribbean porch at night, warm lamp light spilling onto the boards." />
+    <div class="hero-scrim"></div>
+    <div class="hero-copy">
+      <h1>Carlenis,<br />you are in Barbados.</h1>
+      <p>You already have this book in Spanish.<br />Tonight you say I AM in English.</p>
+      <button class="start" onclick="showPanel('barbados')">Open the door</button>
+    </div>
+  </header>
+
+  <nav class="dock" aria-label="Class sections">
+    <button class="on" data-panel="barbados" onclick="showPanel('barbados')">1. Barbados</button>
+    <button data-panel="iam" onclick="showPanel('iam')">2. I AM</button>
+    <button data-panel="end" onclick="showPanel('end')">3. The end</button>
+    <button data-panel="feeling" onclick="showPanel('feeling')">4. Feeling</button>
+    <button data-panel="get" onclick="showPanel('get')">5. To get</button>
+    <button data-panel="house" onclick="showPanel('house')">6. The house</button>
+    <button data-panel="speak" onclick="showPanel('speak')">7. Speak</button>
+    <button data-panel="yours" onclick="showPanel('yours')">8. Yours</button>
+  </nav>
+
+  <div class="prog" aria-hidden="true"><i id="bar"></i></div>
+  <div class="notes" id="notes"></div>
+
+  <main class="paper">
+
+    <section class="panel on" id="barbados">
+      <div class="pad">
+        <h2>You are in Barbados. Present tense.</h2>
+        <p class="lead">Neville wanted to go home. He had no money. Abdullah, on 72nd Street in New York, did not discuss the ticket. He said four words. English has a tense for that: now.</p>
+        <div class="es"><b>En simple:</b> No “you will be.” No “you are going to.” <b>You are in Barbados.</b> El presente es la ley. Y no te comas el <i>am</i> — tu clásico de siempre.</div>
+
+        <div class="say gold">
+          <div class="lab">Abdullah, 1933 <button class="listen" onclick="speak('You are in Barbados.')">Listen</button></div>
+          <p>You are in Barbados.</p>
+        </div>
+
+        <article class="idea">
+          <span class="tag sea">present, not future</span>
+          <h3>No future inside the wish</h3>
+          <p>Spanish can hide the verb: <i>estoy en Barbados / ya estás.</i> English names it. <b>You are.</b> <b>I am.</b> If you drop <i>am</i>, the sentence dies. If you add <i>will</i>, you confess you are not there.</p>
+        </article>
+
+        <figure class="shot">
+          <img src="img/barbados.jpg" width="1152" height="864" alt="A moonlit Barbados bay with coconut palms and a wooden jetty." loading="lazy" />
+          <figcaption class="cap">Sleep as if you see New York two thousand miles to the north. Then you are there.</figcaption>
+        </figure>
+
+        <div class="say">
+          <div class="lab">Say just this much <button class="listen" onclick="speak('I am in Barbados.')">Listen</button></div>
+          <p>I am in Barbados.</p>
+        </div>
+        <div class="say">
+          <div class="lab">Your old weather, loaded <button class="listen" onclick="speak('I am still in my house because of the rain.')">Listen</button></div>
+          <p>I am still in my house because of the rain.</p>
+        </div>
+
+        <div class="qbox" data-q="q1">
+          <div class="qn">Abdullah did not say…</div>
+          <div class="opts">
+            <button class="opt">You are in Barbados.</button>
+            <button class="opt" data-ok="1">You will be in Barbados when the money arrives.</button>
+            <button class="opt">I am in Barbados.</button>
+          </div>
+          <div class="fb">The how is not the sentence. The sentence is already true. Present tense.</div>
+        </div>
+      </div>
+      <div class="next">
+        <button class="btn btn-c" onclick="showPanel('iam')">The name I AM</button>
+      </div>
+    </section>
+
+    <section class="panel" id="iam">
+      <div class="pad">
+        <h2>I AM is God. Agree is a verb.</h2>
+        <p class="lead">Neville’s whole teaching hangs on two words: I AM. In English they are sacred and grammatical. You cannot glue them to a Spanish adjective. <i>Estoy de acuerdo</i> is not <i>I am agree</i>.</p>
+        <div class="es"><b>En simple:</b> Tu error de siempre. <s>I am agree.</s> <b>I agree.</b> / <b>I agreed.</b> <s>I still in my house.</s> <b>I am in my house.</b> El <i>am</i> se usa para ser. No se pega a un verbo.</div>
+
+        <div class="phrase">
+          <b>I AM</b>
+          <span>The name. I am in Barbados. I am in my house. Ser, estado, presencia.</span>
+        </div>
+        <div class="phrase">
+          <b>I agree / I agreed</b>
+          <span>Un verbo. No lleva am. Tu calco de oficina, ahora al lado de Neville.</span>
+        </div>
+        <div class="phrase">
+          <b>I am agree</b>
+          <span>A false assumption. English will not objectify it. Delete am.</span>
+        </div>
+
+        <div class="say">
+          <div class="lab">Broken, the Carlenis way <button class="listen" onclick="speak('I am agree. I still in my house.')">Listen</button></div>
+          <p>I am agree. I still in my house.</p>
+        </div>
+        <div class="say">
+          <div class="lab">Loaded <button class="listen" onclick="speak('I agree. I am in my house.')">Listen</button></div>
+          <p>I agree. I am in my house.</p>
+        </div>
+        <div class="say gold">
+          <div class="lab">The line you can take home <button class="listen" onclick="speak('I AM is the name. I agree is the verb.')">Listen</button></div>
+          <p>I AM is the name. I agree is the verb.</p>
+        </div>
+
+        <div class="qbox" data-q="q2">
+          <div class="qn">Which one would survive in your class — and in Neville?</div>
+          <div class="opts">
+            <button class="opt">I am agree with the assumption.</button>
+            <button class="opt">I still in Barbados.</button>
+            <button class="opt" data-ok="1">I agree. I am in Barbados.</button>
+          </div>
+          <div class="fb">Keep am for being. Keep agree as a verb. Two sentences. One law.</div>
+        </div>
+      </div>
+      <div class="next">
+        <button class="btn btn-w" onclick="showPanel('barbados')">Back</button>
+        <button class="btn btn-c" onclick="showPanel('end')">Live in the end</button>
+      </div>
+    </section>
+
+    <section class="panel" id="end">
+      <div class="pad">
+        <h2>I am is stronger than I will be</h2>
+        <p class="lead"><i>Feeling is the Secret</i>, 1944. Neville is not being poetic. He is doing English grammar. Future tense confesses lack. Present tense assumes the end.</p>
+        <div class="es"><b>En simple:</b> <i>I will be healthy</i> = confieso que no lo soy. <i>I am healthy</i> = lo asumo ahora. El inglés del deseo cumplido es presente. Tu casa también.</div>
+
+        <div class="say gold">
+          <div class="lab">From the book <button class="listen" onclick="speak('I am healthy is a stronger feeling than I will be healthy. To feel I will be is to confess I am not.')">Listen</button></div>
+          <p>I am healthy is a stronger feeling than I will be healthy. To feel I will be is to confess I am not.</p>
+        </div>
+
+        <article class="idea">
+          <span class="tag hot">live in the end</span>
+          <h3>Think from it, not of it</h3>
+          <p>Of Barbados: I will go. From Barbados: I am here. Of the house: I will have it. From the house: I am opening the door. You already wrote that sentence in class. Keep it in the present.</p>
+        </article>
+
+        <div class="say">
+          <div class="lab">Of the house <button class="listen" onclick="speak('I will have my own house.')">Listen</button></div>
+          <p>I will have my own house.</p>
+        </div>
+        <div class="say">
+          <div class="lab">From the house <button class="listen" onclick="speak('I am opening the door of my new house.')">Listen</button></div>
+          <p>I am opening the door of my new house.</p>
+        </div>
+
+        <div class="qbox" data-q="q3">
+          <div class="qn">The wish fulfilled uses…</div>
+          <div class="opts">
+            <button class="opt">I will be. Someday. When the invoice is paid.</button>
+            <button class="opt" data-ok="1">I am. Now. As if it were already true.</button>
+            <button class="opt">I am agree it will happen.</button>
+          </div>
+          <div class="fb">I am is stronger than I will be. I am is stronger than I am not.</div>
+        </div>
+      </div>
+      <div class="next">
+        <button class="btn btn-w" onclick="showPanel('iam')">Back</button>
+        <button class="btn btn-f" onclick="showPanel('feeling')">Feeling is the secret</button>
+      </div>
+    </section>
+
+    <section class="panel" id="feeling">
+      <div class="pad">
+        <h2>Feeling is the secret. Feel, felt, feeling.</h2>
+        <p class="lead">Not excitement. The feeling of reality — as if it were true. English needs the verb in the right tense, and the gerund when it is a thing you enjoy.</p>
+        <div class="es"><b>En simple:</b> <s>I feel so nervous yesterday.</s> <b>I felt so nervous yesterday.</b> Ayer pide pasado. Y <s>I enjoy to dance.</s> <b>I enjoy dancing.</b> El secreto es un gerundio: feeling.</div>
+
+        <figure class="shot">
+          <img src="img/sats.jpg" width="1152" height="864" alt="An unmade bed in a small room, a brass lamp turned low, the drowsy minute before sleep." loading="lazy" />
+          <figcaption class="cap">SATS: the state akin to sleep. Body still. Mind awake. Fall asleep in the end.</figcaption>
+        </figure>
+
+        <div class="phrase">
+          <b>feel</b>
+          <span>Present. I feel the wish fulfilled. I feel at home.</span>
+        </div>
+        <div class="phrase">
+          <b>felt</b>
+          <span>Past. I felt the warm air. Ayer, felt. Tu carta de siempre.</span>
+        </div>
+        <div class="phrase">
+          <b>feeling</b>
+          <span>The noun. The title. Feeling is the secret. Enjoy + -ing: I enjoy dancing bachata.</span>
+        </div>
+
+        <div class="say">
+          <div class="lab">SATS, in one line <button class="listen" onclick="speak('I fall asleep feeling it is already true.')">Listen</button></div>
+          <p>I fall asleep feeling it is already true.</p>
+        </div>
+        <div class="say">
+          <div class="lab">Your sentence, with the gerund <button class="listen" onclick="speak('I enjoy dancing bachata.')">Listen</button></div>
+          <p>I enjoy dancing bachata.</p>
+        </div>
+        <div class="say">
+          <div class="lab">Your house, in her own words <button class="listen" onclick="speak('I am practicing the feeling of my own house.')">Listen</button></div>
+          <p>I am practicing the feeling of my own house.</p>
+        </div>
+
+        <div class="qbox" data-q="q4">
+          <div class="qn">Yesterday, and the title of the book:</div>
+          <div class="opts">
+            <button class="opt">I feel so nervous yesterday. Feeling are the secret.</button>
+            <button class="opt">I enjoy to dance. I will feel it later.</button>
+            <button class="opt" data-ok="1">I felt it. Feeling is the secret.</button>
+          </div>
+          <div class="fb">Felt for yesterday. Feeling for the title. Enjoy dancing. Three shapes of one verb.</div>
+        </div>
+      </div>
+      <div class="next">
+        <button class="btn btn-w" onclick="showPanel('end')">Back</button>
+        <button class="btn btn-c" onclick="showPanel('get')">Need to get</button>
+      </div>
+    </section>
+
+    <section class="panel" id="get">
+      <div class="pad">
+        <h2>Do not discuss how. Keep the to.</h2>
+        <p class="lead">Abdullah slammed the door when Neville talked about the boat. The means appear. In English, after <i>need / want / agree</i>, the infinitive still wants <b>to</b>. The how is silent. The <i>to</i> is not.</p>
+        <div class="es"><b>En simple:</b> <s>I need get.</s> <b>I need to get.</b> <s>to got.</s> <b>to get.</b> Neville no discute el barco. El inglés, después de need, no suelta el to.</div>
+
+        <article class="idea">
+          <span class="tag sea">first class</span>
+          <h3>The ticket arrived. Then first class.</h3>
+          <p>A family cable. A passage. Neville wavered: third class to St. Thomas. Abdullah would not. <i>You went first class.</i> On 6 December the Nerissa sailed. There had been a cancellation. He went first class. Faithful to the assumption. Not to the compromise.</p>
+        </article>
+
+        <div class="say">
+          <div class="lab">Broken <button class="listen" onclick="speak('I need get a ticket. I want go first class.')">Listen</button></div>
+          <p>I need get a ticket. I want go first class.</p>
+        </div>
+        <div class="say">
+          <div class="lab">Loaded <button class="listen" onclick="speak('I need to get a ticket. I want to go first class.')">Listen</button></div>
+          <p>I need to get a ticket. I want to go first class.</p>
+        </div>
+        <div class="say gold">
+          <div class="lab">The office, wearing Neville <button class="listen" onclick="speak('I agreed to check. I need to get the file.')">Listen</button></div>
+          <p>I agreed to check. I need to get the file.</p>
+        </div>
+
+        <div class="qbox" data-q="q5">
+          <div class="qn">Pick the sentence that would survive with Abdullah — and with a client.</div>
+          <div class="opts">
+            <button class="opt">I need get the W-2.</button>
+            <button class="opt">I am agree to get it.</button>
+            <button class="opt" data-ok="1">I agreed. I need to get the file.</button>
+          </div>
+          <div class="fb">Agreed, not am agree. To get, not need get. The how can stay quiet. The to cannot.</div>
+        </div>
+      </div>
+      <div class="next">
+        <button class="btn btn-w" onclick="showPanel('feeling')">Back</button>
+        <button class="btn btn-c" onclick="showPanel('house')">Your Barbados</button>
+      </div>
+    </section>
+
+    <section class="panel" id="house">
+      <div class="pad">
+        <h2>The house is your Barbados</h2>
+        <p class="lead">You told Gabriel you were practicing the feeling of your own house. Emerson was already in our class: every spirit builds for itself a house. Tap a name. Hear it. Then you can talk.</p>
+        <div class="es"><b>En simple:</b> Barbados, para Neville. La casa, para ti. Misma ley. Seis nombres. Luego una frase: I am in my house.</div>
+
+        <figure class="shot">
+          <img src="img/house.jpg" width="1152" height="864" alt="Brass house keys, a mug, and an open notebook on a wooden table in late-afternoon light." loading="lazy" />
+          <figcaption class="cap">Keys on the table. The feeling of already being home.</figcaption>
+        </figure>
+
+        <div class="names" id="names"></div>
+
+        <div class="say">
+          <div class="lab">Emerson, from our cloze <button class="listen" onclick="speak('Man surrounds himself with the true image of himself, as every spirit builds for itself a house beyond its world.')">Listen</button></div>
+          <p>Man surrounds himself with the true image of himself, as every spirit builds for itself a house beyond its world.</p>
+        </div>
+        <div class="say gold">
+          <div class="lab">Your one-sentence book <button class="listen" onclick="speak('I am in my house. I am practicing the feeling of it.')">Listen</button></div>
+          <p>I am in my house. I am practicing the feeling of it.</p>
+        </div>
+
+        <div class="qbox" data-q="q6">
+          <div class="qn">Who told Neville, “You are in Barbados”?</div>
+          <div class="opts">
+            <button class="opt">Joe Dispenza, in a meditation</button>
+            <button class="opt" data-ok="1">Abdullah, in New York</button>
+            <button class="opt">Emerson, in a poem about ice</button>
+          </div>
+          <div class="fb">Abdullah. 72nd Street. Present tense. The door closed on the how.</div>
+        </div>
+      </div>
+      <div class="next">
+        <button class="btn btn-w" onclick="showPanel('get')">Back</button>
+        <button class="btn btn-c" onclick="showPanel('speak')">Talk about it</button>
+      </div>
+    </section>
+
+    <section class="panel" id="speak">
+      <div class="pad">
+        <h2>How a reader talks, not a summary</h2>
+        <p class="lead">Nobody at work wants the whole lecture. They want three sentences and your voice. You already learn from people whose English is clear. Be one of them.</p>
+        <div class="es"><b>En simple:</b> Escucha. Repite. Luego tápate y díselo a Gabriel como si él no hubiera leído a Neville.</div>
+
+        <h3>Phrases for the room</h3>
+        <div class="phrase">
+          <b>You are in Barbados.</b>
+          <span>Presente. La frase de Abdullah. Sin will.</span>
+        </div>
+        <div class="phrase">
+          <b>I AM is the name. I agree is the verb.</b>
+          <span>Tu distinción de adulta. Eso es B2.</span>
+        </div>
+        <div class="phrase">
+          <b>I am is stronger than I will be.</b>
+          <span>Feeling is the Secret, en una línea.</span>
+        </div>
+        <div class="phrase">
+          <b>I need to get — keep the to. Don’t discuss the how.</b>
+          <span>Oficina y ley, misma gramática.</span>
+        </div>
+        <div class="phrase">
+          <b>I am practicing the feeling of my own house.</b>
+          <span>Tu frase. Ya la viviste.</span>
+        </div>
+
+        <div class="say gold">
+          <div class="lab">Your 20-second pitch <button class="listen" onclick="speak('I love Neville Goddard. He taught that imagination is God, and that I AM is the name. You live in the end: I am, not I will be. Feeling is the secret.')">Listen</button></div>
+          <p>I love Neville Goddard. He taught that imagination is God, and that I AM is the name. You live in the end: I am, not I will be. Feeling is the secret.</p>
+        </div>
+
+        <h3>Words you will need</h3>
+        <div class="glos">
+          <div class="gitem"><b>assumption</b><i>uh-SUMP-shun</i><span>la ley. Assume = asumir que ya es.</span></div>
+          <div class="gitem"><b>imagination</b><i>i-ma-ji-NAY-shun</i><span>el poder creativo. El libro que compartiste.</span></div>
+          <div class="gitem"><b>feeling</b><i>FEE-ling</i><span>el secreto. No emoción: realidad sentida.</span></div>
+          <div class="gitem"><b>SATS</b><i>sats</i><span>state akin to sleep. El umbral.</span></div>
+          <div class="gitem"><b>agree</b><i>uh-GREE</i><span>verbo. I agree / I agreed. Nunca I am agree.</span></div>
+          <div class="gitem"><b>to get</b><i>tuh GET</i><span>need to get. Después de to, verbo base.</span></div>
+        </div>
+
+        <h3>Ten questions. Law and grammar, same pass.</h3>
+        <div class="es"><b>En simple:</b> Si dices I am agree, está mal. Si dices I will be para el deseo cumplido, vuelve a la 3.</div>
+
+        <div class="qbox" data-q="q7">
+          <div class="qn">1. Abdullah’s sentence is…</div>
+          <div class="opts">
+            <button class="opt">You will be in Barbados soon</button>
+            <button class="opt" data-ok="1">You are in Barbados</button>
+            <button class="opt">I still in Barbados</button>
+          </div>
+          <div class="fb">Present. You are. The how is not invited.</div>
+        </div>
+        <div class="qbox" data-q="q8">
+          <div class="qn">2. Correct English:</div>
+          <div class="opts">
+            <button class="opt">I am agree with him.</button>
+            <button class="opt" data-ok="1">I agreed with him.</button>
+            <button class="opt">I was agree with him.</button>
+          </div>
+          <div class="fb">Agree is a verb. Your office track. Neville does not save the calque.</div>
+        </div>
+        <div class="qbox" data-q="q9">
+          <div class="qn">3. “I will be healthy” secretly says…</div>
+          <div class="opts">
+            <button class="opt">I am healthy now</button>
+            <button class="opt" data-ok="1">I am not healthy now</button>
+            <button class="opt">I am agree I am healthy</button>
+          </div>
+          <div class="fb">To feel I will be is to confess I am not.</div>
+        </div>
+        <div class="qbox" data-q="q10">
+          <div class="qn">4. I feel so nervous yesterday →</div>
+          <div class="opts">
+            <button class="opt">I feel so nervous yesterday</button>
+            <button class="opt" data-ok="1">I felt so nervous yesterday</button>
+            <button class="opt">I am feel nervous yesterday</button>
+          </div>
+          <div class="fb">Ayer: felt. Feeling is the noun of the title.</div>
+        </div>
+        <div class="qbox" data-q="q11">
+          <div class="qn">5. I enjoy ___ bachata.</div>
+          <div class="opts">
+            <button class="opt">to dance</button>
+            <button class="opt" data-ok="1">dancing</button>
+            <button class="opt">dance</button>
+          </div>
+          <div class="fb">Enjoy + -ing. Feeling, dancing: gerunds that live.</div>
+        </div>
+        <div class="qbox" data-q="q12">
+          <div class="qn">6. I need ___ the file.</div>
+          <div class="opts">
+            <button class="opt">get</button>
+            <button class="opt" data-ok="1">to get</button>
+            <button class="opt">to got</button>
+          </div>
+          <div class="fb">Need to get. Keep the to. Don’t discuss the boat.</div>
+        </div>
+        <div class="qbox" data-q="q13">
+          <div class="qn">7. SATS is…</div>
+          <div class="opts">
+            <button class="opt">a shipping company in Barbados</button>
+            <button class="opt" data-ok="1">the drowsy state before sleep</button>
+            <button class="opt">Spanish for Saturday</button>
+          </div>
+          <div class="fb">State akin to sleep. Fall asleep in the end.</div>
+        </div>
+        <div class="qbox" data-q="q14">
+          <div class="qn">8. People ___ going to hate me — never.</div>
+          <div class="opts">
+            <button class="opt">is</button>
+            <button class="opt" data-ok="1">are</button>
+            <button class="opt">be</button>
+          </div>
+          <div class="fb">People are. From your cards. Assumption does not change the plural.</div>
+        </div>
+        <div class="qbox" data-q="q15">
+          <div class="qn">9. A short, true pitch:</div>
+          <div class="opts">
+            <button class="opt">I will now explain every lecture from 1944 to 1972</button>
+            <button class="opt" data-ok="1">Imagination is God. I AM is the name. Feeling is the secret.</button>
+            <button class="opt">I am agree with quantum physics.</button>
+          </div>
+          <div class="fb">Three sentences. Then stop. You already like teachers with easy vocabulary.</div>
+        </div>
+        <div class="qbox" data-q="q16">
+          <div class="qn">10. The line of this class is…</div>
+          <div class="opts">
+            <button class="opt">Translate every page of Feeling is the Secret tonight</button>
+            <button class="opt" data-ok="1">You are in Barbados. I agree. I am.</button>
+            <button class="opt">I have go to Barbados</button>
+          </div>
+          <div class="fb">Present tense, clean I AM, the verb agree. Take all three home.</div>
+        </div>
+        <p id="quizScore" style="font-weight:700;margin-top:8px;"></p>
+      </div>
+      <div class="next">
+        <button class="btn btn-w" onclick="showPanel('house')">Back</button>
+        <button class="btn btn-c" onclick="showPanel('yours')">Your I AM</button>
+      </div>
+    </section>
+
+    <section class="panel" id="yours">
+      <div class="pad">
+        <h2>Your I AM, Carlenis</h2>
+        <p class="lead">Four sentences in English. You are from Venezuela. You are an accountant. You dance bachata. You already practiced the feeling of a house.</p>
+        <div class="es"><b>Usa:</b> You are in… / I am… / I agreed… / I need to get… / Feeling is…</div>
+
+        <p>1. What is your Barbados — in one present-tense sentence?<br />
+        2. I AM or I agree — which one, and why?<br />
+        3. I am or I will be — which one for the wish fulfilled?<br />
+        4. A sentence with <i>to get</i> that you used to drop.</p>
+
+        <textarea id="verdictBox" placeholder="I am in my house. I agree that feeling is the secret..."></textarea>
+        <div class="row">
+          <button class="btn btn-w" type="button" onclick="speak(document.getElementById('verdictBox').value)">Listen to me</button>
+          <button class="btn btn-c" type="button" onclick="saveVerdict()">Save it</button>
+        </div>
+        <p class="saved" id="saved">Saved on this phone. Read it out loud to Gabriel.</p>
+
+        <div class="verdict-card" style="margin-top:22px;">
+          <h2>The door is still open</h2>
+          <p>You are in Barbados. I am. Say it. Then say it again, slower.</p>
+          <p style="margin:0;color:var(--muted);font-size:14.5px;">ARCHES · Carlenis · I AM · 2026-09-09</p>
+        </div>
+      </div>
+
+      <details class="teacher">
+        <summary>Notas para Gabriel · plan de clase</summary>
+        <div class="body">
+          B1–B2. Neville es el cebo; I AM / I agree / to get es la trampa. No dejes que recuente toda la ley de atracción. Hazla decir las frases.
+          <ol>
+            <li><b>Barbados (6 min).</b> Escucha You are in Barbados. Ella la lee. Tú marcas el presente. Recupera I still in my house → I am still in my house.</li>
+            <li><b>I AM (7 min).</b> I AM vs I agree. Contrasta I am agree / I was agree. Ríanse. Luego I agree. I am in Barbados.</li>
+            <li><b>The end (6 min).</b> I am vs I will be. Feeling is the Secret. Recupera I am opening the door of my new house.</li>
+            <li><b>Feeling (6 min).</b> feel / felt / feeling. I felt so nervous yesterday. I enjoy dancing bachata. SATS en una línea.</li>
+            <li><b>To get (6 min).</b> I need to get. First class. I agreed to check. I need to get the file.</li>
+            <li><b>House + speak + write (10 min).</b> Seis nombres. El pitch de 20 segundos. Cuatro oraciones. Celebrar la que suene a ella, no a un video de TikTok.</li>
+          </ol>
+          Hechos, no inventos: Abdullah en 72nd Street, 1933; You are in Barbados; el Nerissa el 6 de diciembre, first class; Feeling is the Secret (“I am healthy is stronger than I will be healthy”); Emerson del cloze de mayo 2024; su frase de agosto 2024 sobre the feeling of my own house; I am opening the door of my new house, de sus cards. Ella es venezolana, contadora, bachata, Houston. El Caribe es el puente, no un disfraz de Neville.
+        </div>
+      </details>
+    </section>
+  </main>
+
+  <footer class="tiny">ARCHES · Carlenis · I AM. <a href="../?name=Carlenis">Volver a tus temas</a></footer>
+</div>
+
+<noscript>
+  <style>.panel{display:block !important; transform:none !important; opacity:1 !important;}</style>
+</noscript>
+
+<script>
+(function(){
+  "use strict";
+  const KEY = "iam_carlenis_v1";
+  const mem = {};
+  const store = {
+    get: function(d){ try{ const v=localStorage.getItem(KEY); return v?JSON.parse(v):d; }catch(e){ return mem.data||d; } },
+    set: function(v){ try{ localStorage.setItem(KEY, JSON.stringify(v)); }catch(e){ mem.data=v; } }
+  };
+  let state = store.get({ panel:"barbados", quiz:{}, yours:"", names:{} });
+  const startPanel = new URLSearchParams(location.search).get("p");
+  if(startPanel && ["barbados","iam","end","feeling","get","house","speak","yours"].indexOf(startPanel)>=0){
+    state.panel = startPanel;
+  }
+
+  const NAMES = [
+    { id:"neville", en:"Neville Goddard", phon:"NEV-il GOD-ard", say:"Neville Goddard" },
+    { id:"abdullah", en:"Abdullah", phon:"ab-DUL-ah", say:"Abdullah" },
+    { id:"emerson", en:"Emerson", phon:"EM-er-sun", say:"Ralph Waldo Emerson" },
+    { id:"dispenza", en:"Joe Dispenza", phon:"joo dis-PEN-zuh", say:"Joe Dispenza" },
+    { id:"sats", en:"SATS", phon:"sats", say:"state akin to sleep" },
+    { id:"barbados", en:"Barbados", phon:"bar-BAY-dos", say:"Barbados" }
+  ];
+
+  const panels = ["barbados","iam","end","feeling","get","house","speak","yours"];
+  function showPanel(id){
+    document.querySelectorAll(".panel").forEach(function(p){ p.classList.toggle("on", p.id===id); });
+    document.querySelectorAll(".dock button").forEach(function(b){ b.classList.toggle("on", b.getAttribute("data-panel")===id); });
+    state.panel = id;
+    store.set(state);
+    updateBar();
+    const dock = document.querySelector("nav.dock");
+    const html = document.documentElement;
+    const prev = html.style.scrollBehavior;
+    html.style.scrollBehavior = "auto";
+    window.scrollTo(0, dock ? dock.offsetTop - 2 : 0);
+    html.style.scrollBehavior = prev;
+  }
+  window.showPanel = showPanel;
+
+  function updateBar(){
+    const i = Math.max(0, panels.indexOf(state.panel));
+    document.getElementById("bar").style.width = ((i+1)/panels.length*100) + "%";
+    const n = Object.keys(state.names||{}).length;
+    const notes = document.getElementById("notes");
+    if(!n){ notes.classList.remove("show"); notes.innerHTML=""; return; }
+    notes.classList.add("show");
+    notes.innerHTML = "<b>I AM notes.</b> You named " + n + " of 6.";
+  }
+
+  const nWrap = document.getElementById("names");
+  if(nWrap){
+    NAMES.forEach(function(m){
+      const b = document.createElement("button");
+      b.className = "nm" + (state.names[m.id] ? " on" : "");
+      b.type = "button";
+      b.innerHTML = "<b>"+m.en+"</b><span>"+m.phon+"</span>";
+      b.addEventListener("click", function(){
+        speak(m.say);
+        state.names[m.id] = true;
+        b.classList.add("on");
+        store.set(state);
+        updateBar();
+      });
+      nWrap.appendChild(b);
+    });
+  }
+
+  document.querySelectorAll(".qbox").forEach(function(box){
+    const id = box.getAttribute("data-q");
+    const fb = box.querySelector(".fb");
+    const opts = box.querySelectorAll(".opt");
+    if(state.quiz[id]){
+      opts.forEach(function(o){
+        if(o.getAttribute("data-ok")) o.classList.add("ok");
+        o.disabled = true;
+      });
+      if(fb) fb.classList.add("show","good");
+    }
+    opts.forEach(function(btn){
+      btn.addEventListener("click", function(){
+        if(btn.disabled) return;
+        const ok = btn.hasAttribute("data-ok");
+        if(ok){
+          opts.forEach(function(o){ o.disabled = true; });
+          btn.classList.add("ok");
+          if(fb){ fb.classList.add("show","good"); fb.classList.remove("poor"); }
+          state.quiz[id] = true;
+          store.set(state);
+          scoreQuiz();
+        } else {
+          btn.classList.add("bad");
+          btn.disabled = true;
+          if(fb){ fb.classList.add("show","poor"); }
+        }
+      });
+    });
+  });
+
+  function scoreQuiz(){
+    const need = ["q7","q8","q9","q10","q11","q12","q13","q14","q15","q16"];
+    const n = need.filter(function(k){ return state.quiz[k]; }).length;
+    const el = document.getElementById("quizScore");
+    if(el) el.textContent = n ? ("Score: " + n + " / 10") : "";
+  }
+
+  function saveVerdict(){
+    const t = document.getElementById("verdictBox").value.trim();
+    state.yours = t;
+    store.set(state);
+    const s = document.getElementById("saved");
+    s.classList.add("show");
+    s.textContent = t ? "Saved on this phone. Read it out loud to Gabriel." : "Write four sentences first.";
+  }
+  window.saveVerdict = saveVerdict;
+
+  let voice = null, audioReady = false;
+  function loadVoice(){
+    if(!window.speechSynthesis) return;
+    const vs = speechSynthesis.getVoices();
+    const NOV=/albert|bad news|bahh|bells|boing|bubbles|cellos|good news|jester|organ|superstar|trinoids|whisper|wobble|zarvox|junior|kathy|ralph|fred/i;
+    const en = vs.filter(function(v){ return /^en[-_]/i.test(v.lang) && !NOV.test(v.name); });
+    const pref = ["Samantha","Google US English","Microsoft Aria","Microsoft Jenny","Microsoft Zira","Alex"];
+    voice = null;
+    for(let i=0;i<pref.length;i++){
+      const m = en.find(function(v){ return v.name.indexOf(pref[i])===0; });
+      if(m){ voice=m; break; }
+    }
+    if(!voice) voice = en.find(function(v){ return /en[-_]US/i.test(v.lang); }) || en[0] || null;
+  }
+  if(window.speechSynthesis){ loadVoice(); speechSynthesis.onvoiceschanged = loadVoice; }
+  function unlockAudio(){
+    if(audioReady || !window.speechSynthesis) return;
+    try{ const u=new SpeechSynthesisUtterance(""); u.volume=0; speechSynthesis.speak(u); audioReady=true; }catch(e){}
+  }
+  document.addEventListener("touchstart", unlockAudio, {once:true});
+  document.addEventListener("click", unlockAudio, {once:true});
+  function speak(text){
+    if(!text || !window.speechSynthesis) return;
+    try{
+      speechSynthesis.cancel();
+      const u=new SpeechSynthesisUtterance(text);
+      u.lang="en-US"; u.rate=0.88; if(voice) u.voice=voice;
+      speechSynthesis.speak(u);
+    }catch(e){}
+  }
+  window.speak = speak;
+
+  if(state.yours) document.getElementById("verdictBox").value = state.yours;
+  scoreQuiz();
+  if(state.panel && state.panel!=="barbados") showPanel(state.panel);
+  else updateBar();
+})();
+</script>
+</body>
+</html>
