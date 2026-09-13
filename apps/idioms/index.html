@@ -11,8 +11,9 @@
 <style>
   :root{
     --cream:#fbf7f0; --surface:#fffdf9; --ink:#2c2722; --muted:#8a7f73;
-    --line:#e9e0d3; --terra:#bf5a36; --terra-dark:#8e3b22; --terra-tint:#f4e4d9;
-    --good:#3f695e; --good-tint:#e8f1dd; --bad-tint:#f6e2da;
+    --line:#e9e0d3; --terra:#bf5a36; --terra-dark:#8e3b22; --terra-press:#7a311c;
+    --terra-tint:#f4e4d9; --good:#3f695e; --good-tint:#e8f1dd; --bad-tint:#f6e2da;
+    --on-terra:#fffdf9; --credit:#c9bdac;
   }
   *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
   html,body{margin:0;padding:0}
@@ -24,8 +25,8 @@
   :focus-visible{outline:2px solid var(--terra);outline-offset:3px}
   .wrap{max-width:540px;margin:0 auto;padding:22px 18px 56px}
 
-  .hello{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:40px;line-height:1.02}
-  .hello .nm{color:var(--terra)}
+  h1{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:40px;line-height:1.02;margin:0}
+  h1 .nm{color:var(--terra)}
   .sub{font-size:15px;color:var(--muted);font-weight:600;margin-top:10px;line-height:1.45}
   .meta{font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--terra);margin-top:18px}
 
@@ -34,13 +35,13 @@
     display:block;width:100%;text-align:left;background:var(--surface);
     border:1.5px solid var(--line);border-radius:18px;padding:18px 18px 16px;
     font-family:'Nunito',sans-serif;cursor:pointer;
-    transition:transform .15s ease,border-color .15s ease,box-shadow .2s ease;
+    transition:transform .18s ease,border-color .15s ease,box-shadow .2s ease;
   }
   .mode:hover{transform:translateY(-3px);border-color:var(--terra);box-shadow:0 8px 18px rgba(44,39,34,.08)}
   .mode:active{transform:scale(.985)}
   .mode .t{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:28px;line-height:1.1}
   .mode .d{font-size:14px;color:var(--muted);font-weight:600;margin-top:4px;line-height:1.4}
-  .mode.hot{border-color:var(--terra);background:linear-gradient(180deg,#fffdf9,#f7ebe3)}
+  .mode.hot{border-color:var(--terra);background:var(--terra-tint)}
 
   .ptop{display:flex;align-items:center;gap:12px;padding:4px 0 16px}
   .pback{
@@ -60,6 +61,8 @@
   }
   .pic{width:100%;aspect-ratio:1;object-fit:contain;display:block;background:var(--cream)}
 
+  .reveal{animation:up .4s ease-out both}
+  @keyframes up{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
   .idiom{
     font-family:'Cormorant Garamond',serif;font-weight:700;font-size:30px;line-height:1.15;
     margin:14px 2px 0;
@@ -71,6 +74,7 @@
     font-weight:700;font-size:15.5px;line-height:1.4;
   }
   .ex em{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:600;color:var(--terra-dark)}
+  .use{font-size:14px;font-weight:700;color:var(--terra-dark);margin-top:12px}
 
   .opts{display:flex;flex-direction:column;gap:10px;margin-top:16px}
   .opt{
@@ -89,8 +93,8 @@
     transition:transform .08s ease,background .15s ease;
   }
   .btn:active{transform:scale(.98)}
-  .btn-primary{background:var(--terra-dark);color:#fff;width:100%;margin-top:14px}
-  .btn-primary:hover{background:#7a311c}
+  .btn-primary{background:var(--terra-dark);color:var(--on-terra);width:100%;margin-top:14px}
+  .btn-primary:hover{background:var(--terra-press)}
   .row2{display:flex;gap:10px;margin-top:12px}
   .btn-ghost{
     background:var(--cream);color:var(--ink);border:1.5px solid var(--line);flex:1;
@@ -116,21 +120,26 @@
   .done .score{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:64px;color:var(--terra);line-height:1;margin:12px 0}
   .done p{color:var(--muted);font-weight:600;font-size:15px;margin:0 0 22px}
 
-  .credit{text-align:center;color:#c9bdac;font-size:11.5px;font-weight:700;margin-top:28px;letter-spacing:.5px}
+  .homeback{
+    display:inline-block;margin-top:18px;font-size:14px;font-weight:800;
+    color:var(--terra-dark);text-decoration:none;min-height:44px;line-height:44px;
+  }
+  .credit{text-align:center;color:var(--credit);font-size:11.5px;font-weight:700;margin-top:28px;letter-spacing:.5px}
 
   @media (prefers-reduced-motion: reduce){
     *,*::before,*::after{transition:none !important;animation:none !important}
     .mode:hover{transform:none}
+    .reveal{opacity:1;transform:none}
   }
 </style>
 </head>
 <body>
 <!--
-THESIS: Guess the idiom from the literal picture. The absurd image is the memory, not a word list.
+THESIS: Guess the idiom from the literal picture. The absurd image is the memory.
 OWN-WORLD: ARCHES cream, terracotta, Cormorant + Nunito. The drawing fills the card.
 STORY: See the picture, name the idiom, then get Spanish + a sentence you can steal.
 FIRST VIEWPORT: Hello, one line of why, two modes. Class puts the picture on screen immediately.
-FORM: Inherited ARCHES student practice. FINISH: live on their hub for today's class.
+FORM: Inherited ARCHES student practice.
 -->
 <div class="wrap" id="app"></div>
 <noscript><p style="padding:24px;font-family:Nunito,sans-serif">Abre esta página con JavaScript para practicar.</p></noscript>
@@ -146,8 +155,7 @@ FORM: Inherited ARCHES student practice. FINISH: live on their hub for today's c
       es:"llover a cántaros",
       meaning:"Está lloviendo muy fuerte.",
       example:"Don't go out — it's raining cats and dogs.",
-      say:"It's raining cats and dogs.",
-      alts:["it's raining cats and dogs","raining cats and dogs"]
+      say:"It's raining cats and dogs."
     },
     {
       id:"pigs-fly", img:"pigs-fly.webp",
@@ -155,17 +163,15 @@ FORM: Inherited ARCHES student practice. FINISH: live on their hub for today's c
       es:"cuando las vacas vuelen",
       meaning:"Algo que nunca va a pasar.",
       example:"He'll clean his room when pigs fly.",
-      say:"When pigs fly.",
-      alts:["when pigs fly","that'll happen when pigs fly"]
+      say:"When pigs fly."
     },
     {
       id:"spill-beans", img:"spill-beans.webp",
       idiom:"Spill the beans", short:"spill the beans",
-      es:"soltar la sopa / revelar el secreto",
+      es:"soltar la sopa",
       meaning:"Contar un secreto.",
       example:"Don't spill the beans about the party.",
-      say:"Don't spill the beans.",
-      alts:["spill the beans","to spill the beans","don't spill the beans"]
+      say:"Don't spill the beans."
     },
     {
       id:"arm-and-leg", img:"arm-and-leg.webp",
@@ -173,8 +179,7 @@ FORM: Inherited ARCHES student practice. FINISH: live on their hub for today's c
       es:"costar un ojo de la cara",
       meaning:"Ser muy caro.",
       example:"That bag cost an arm and a leg.",
-      say:"It cost an arm and a leg.",
-      alts:["cost an arm and a leg","costs an arm and a leg","it cost an arm and a leg","it costs an arm and a leg"]
+      say:"It cost an arm and a leg."
     },
     {
       id:"piece-of-cake", img:"piece-of-cake.webp",
@@ -182,8 +187,7 @@ FORM: Inherited ARCHES student practice. FINISH: live on their hub for today's c
       es:"pan comido",
       meaning:"Muy fácil.",
       example:"The interview was a piece of cake.",
-      say:"It was a piece of cake.",
-      alts:["a piece of cake","it's a piece of cake","piece of cake"]
+      say:"It was a piece of cake."
     },
     {
       id:"cat-out-of-bag", img:"cat-out-of-bag.webp",
@@ -191,8 +195,7 @@ FORM: Inherited ARCHES student practice. FINISH: live on their hub for today's c
       es:"irse de la lengua",
       meaning:"Revelar un secreto, a veces sin querer.",
       example:"She let the cat out of the bag.",
-      say:"She let the cat out of the bag.",
-      alts:["let the cat out of the bag","let the cat out","the cat is out of the bag"]
+      say:"She let the cat out of the bag."
     },
     {
       id:"ball-in-court", img:"ball-in-court.webp",
@@ -200,26 +203,23 @@ FORM: Inherited ARCHES student practice. FINISH: live on their hub for today's c
       es:"la pelota está en tu tejado",
       meaning:"Te toca a ti decidir o responder.",
       example:"I sent the offer. The ball is in your court.",
-      say:"The ball is in your court.",
-      alts:["the ball is in your court","ball is in your court"]
+      say:"The ball is in your court."
     },
     {
       id:"under-weather", img:"under-weather.webp",
       idiom:"Under the weather", short:"under the weather",
-      es:"estar indispuesto / malito",
-      meaning:"No sentirse bien, un poco enfermo.",
+      es:"no sentirse bien",
+      meaning:"Estar un poco enfermo o indispuesto.",
       example:"I'm a bit under the weather today.",
-      say:"I'm a bit under the weather today.",
-      alts:["under the weather","i'm under the weather","feeling under the weather"]
+      say:"I'm a bit under the weather today."
     },
     {
       id:"over-the-moon", img:"over-the-moon.webp",
       idiom:"Over the moon", short:"over the moon",
-      es:"en la gloria / eufórico",
+      es:"en la gloria",
       meaning:"Muy, muy feliz.",
       example:"She was over the moon when she got the job.",
-      say:"I'm over the moon.",
-      alts:["over the moon","i'm over the moon","over the moon about it"]
+      say:"I'm over the moon."
     },
     {
       id:"nail-on-head", img:"nail-on-head.webp",
@@ -227,8 +227,7 @@ FORM: Inherited ARCHES student practice. FINISH: live on their hub for today's c
       es:"dar en el clavo",
       meaning:"Acertar exactamente.",
       example:"You hit the nail on the head.",
-      say:"You hit the nail on the head.",
-      alts:["hit the nail on the head","you hit the nail on the head"]
+      say:"You hit the nail on the head."
     },
     {
       id:"cold-feet", img:"cold-feet.webp",
@@ -236,8 +235,7 @@ FORM: Inherited ARCHES student practice. FINISH: live on their hub for today's c
       es:"acobardarse a último momento",
       meaning:"Echarse atrás justo antes de hacerlo.",
       example:"He got cold feet before the interview.",
-      say:"He got cold feet.",
-      alts:["get cold feet","got cold feet","have cold feet"]
+      say:"He got cold feet."
     },
     {
       id:"beat-around-bush", img:"beat-around-bush.webp",
@@ -245,8 +243,7 @@ FORM: Inherited ARCHES student practice. FINISH: live on their hub for today's c
       es:"andarse por las ramas",
       meaning:"Evitar el punto. No ir al grano.",
       example:"Stop beating around the bush.",
-      say:"Stop beating around the bush.",
-      alts:["beat around the bush","beating around the bush","stop beating around the bush"]
+      say:"Stop beating around the bush."
     },
     {
       id:"blue-moon", img:"blue-moon.webp",
@@ -254,8 +251,7 @@ FORM: Inherited ARCHES student practice. FINISH: live on their hub for today's c
       es:"de uvas a peras",
       meaning:"Muy de vez en cuando.",
       example:"We go there once in a blue moon.",
-      say:"Once in a blue moon.",
-      alts:["once in a blue moon"]
+      say:"Once in a blue moon."
     },
     {
       id:"butterflies", img:"butterflies.webp",
@@ -263,13 +259,13 @@ FORM: Inherited ARCHES student practice. FINISH: live on their hub for today's c
       es:"mariposas en el estómago",
       meaning:"Nervios, esa sensación rara en la panza.",
       example:"I had butterflies in my stomach before the call.",
-      say:"I have butterflies in my stomach.",
-      alts:["butterflies in my stomach","butterflies in your stomach","have butterflies"]
+      say:"I have butterflies in my stomach."
     }
   ];
 
   const params = new URLSearchParams(location.search);
-  const displayName = params.get("name") || "";
+  const displayName = (params.get("name")||"").trim();
+  const fromSlug = (params.get("from")||"").replace(/[^a-z]/gi,"").toLowerCase();
   const app = document.getElementById("app");
   const IMG = "img/";
 
@@ -313,18 +309,23 @@ FORM: Inherited ARCHES student practice. FINISH: live on their hub for today's c
     return shuffle([item.short].concat(pool));
   }
 
+  function backHomeLink(){
+    if(!fromSlug) return "";
+    return '<a class="homeback" href="../'+esc(fromSlug)+'/">‹ Tu práctica</a>';
+  }
+
   function renderHome(){
     view="home";
     const who = displayName ? 'Hola <span class="nm">'+esc(displayName)+'</span>' : 'Idioms';
     app.innerHTML =
-      '<div class="hello">'+who+'</div>'+
-      (displayName?'<div class="sub">Mira el dibujo. El inglés literal es ridículo — por eso se te queda.</div>':
-                   '<div class="sub">Mira el dibujo. El inglés literal es ridículo — por eso se te queda.</div>')+
+      '<h1>'+who+'</h1>'+
+      '<div class="sub">Mira el dibujo. El inglés literal es ridículo — por eso se te queda.</div>'+
       '<div class="meta">B1–B2 · 14 dibujos</div>'+
       '<div class="modes">'+
-        '<button class="mode hot" id="mClase"><div class="t">Clase</div><div class="d">El dibujo grande. Lo dicen. Tú revelas. Para las dos, en voz alta.</div></button>'+
-        '<button class="mode" id="mPrac"><div class="t">Practicar</div><div class="d">Tres opciones. Eligen el idiom. Luego la frase.</div></button>'+
+        '<button class="mode hot" id="mClase" type="button"><div class="t">Clase</div><div class="d">El dibujo grande. Lo dices en voz alta. Luego revelas.</div></button>'+
+        '<button class="mode" id="mPrac" type="button"><div class="t">Practicar</div><div class="d">Tres opciones. Elige el idiom. Luego la frase.</div></button>'+
       '</div>'+
+      backHomeLink()+
       '<div class="credit">ARCHES · Idioms</div>';
     document.getElementById("mClase").onclick=()=>start("clase");
     document.getElementById("mPrac").onclick=()=>start("practicar");
@@ -336,6 +337,13 @@ FORM: Inherited ARCHES student practice. FINISH: live on their hub for today's c
     renderCard();
   }
 
+  function preloadNext(){
+    const n = queue[qi+1];
+    if(!n) return;
+    const img = new Image();
+    img.src = IMG+n.img;
+  }
+
   function shell(inner){
     const pct = queue.length ? Math.round(qi/queue.length*100) : 0;
     app.innerHTML =
@@ -345,23 +353,27 @@ FORM: Inherited ARCHES student practice. FINISH: live on their hub for today's c
         '<div class="pcount">'+(qi+1)+' / '+queue.length+'</div>'+
       '</div>'+inner;
     document.getElementById("pb").onclick=renderHome;
+    preloadNext();
   }
 
   function picHTML(item){
-    return '<div class="picwrap"><img class="pic" src="'+IMG+item.img+'" width="1100" height="1100" alt=""></div>';
+    return '<div class="picwrap"><img class="pic" src="'+IMG+item.img+'" width="1100" height="1100" alt="Dibujo de un idiom" fetchpriority="high"></div>';
   }
 
-  function revealBlock(item){
-    return '<div class="idiom">'+esc(item.idiom)+'</div>'+
+  function revealBlock(item, withUse){
+    return '<div class="reveal">'+
+      '<div class="idiom">'+esc(item.idiom)+'</div>'+
       '<div class="es">'+esc(item.es)+'</div>'+
       '<div class="meaning">'+esc(item.meaning)+'</div>'+
       '<div class="ex"><em>Example.</em> '+esc(item.example)+'</div>'+
-      '<button class="speaker" id="play" type="button">'+speakerSVG+'Escuchar</button>';
+      (withUse?'<div class="use">Ahora una frase tuya, en voz alta.</div>':'')+
+      '<button class="speaker" id="play" type="button">'+speakerSVG+'Escuchar</button>'+
+    '</div>';
   }
 
   function renderCard(){
     if(qi>=queue.length) return renderDone();
-    locked=false;
+    view="card"; locked=false;
     const item=queue[qi];
     if(mode==="clase") return renderClase(item);
     return renderPrac(item);
@@ -386,10 +398,10 @@ FORM: Inherited ARCHES student practice. FINISH: live on their hub for today's c
     document.getElementById("revBtn").onclick=function(){
       document.getElementById("acts").innerHTML = '';
       document.getElementById("hint").textContent = '';
-      document.getElementById("rev").innerHTML = revealBlock(item);
+      document.getElementById("rev").innerHTML = revealBlock(item, true);
       document.getElementById("play").onclick=()=>speak(item.say);
       speak(item.say);
-      const next=el('<button class="btn btn-primary" type="button">Siguiente</button>');
+      const next=el('<button class="btn btn-primary" id="nextBtn" type="button">Siguiente</button>');
       next.onclick=()=>{ qi++; renderCard(); };
       document.getElementById("acts").appendChild(next);
     };
@@ -433,17 +445,18 @@ FORM: Inherited ARCHES student practice. FINISH: live on their hub for today's c
       b.disabled=true;
       if(b.textContent===item.short) b.classList.add("ok");
     });
-    document.getElementById("rev").innerHTML = revealBlock(item);
+    document.getElementById("rev").innerHTML = revealBlock(item, false);
     document.getElementById("play").onclick=()=>speak(item.say);
     speak(item.say);
-    const next=el('<button class="btn btn-primary" type="button">Siguiente</button>');
+    const next=el('<button class="btn btn-primary" id="nextBtn" type="button">Siguiente</button>');
     next.onclick=()=>{ qi++; renderCard(); };
     document.getElementById("acts").appendChild(next);
   }
 
   function renderDone(){
+    view="done";
     const line = mode==="clase"
-      ? "Ahora que vieron el dibujo, el idiom se queda."
+      ? "Ahora que viste el dibujo, el idiom se queda."
       : (total && right/total>=.8 ? "Casi todos. El dibujo hizo su trabajo." : "Otra vuelta y se quedan.");
     const score = mode==="clase" ? queue.length+" dibujos" : right+"/"+total;
     app.innerHTML =
@@ -453,10 +466,20 @@ FORM: Inherited ARCHES student practice. FINISH: live on their hub for today's c
         '<p>'+line+'</p>'+
         '<button class="btn btn-primary" id="again" type="button">Otra vez</button>'+
         '<div class="row2"><button class="btn btn-ghost" id="home" type="button">Volver al inicio</button></div>'+
+        backHomeLink()+
       '</div>';
     document.getElementById("again").onclick=()=>start(mode);
     document.getElementById("home").onclick=renderHome;
   }
+
+  document.addEventListener("keydown", function(e){
+    if(view!=="card") return;
+    if(e.key!=="Enter") return;
+    const rev=document.getElementById("revBtn");
+    const next=document.getElementById("nextBtn");
+    if(rev){ e.preventDefault(); rev.click(); }
+    else if(next){ e.preventDefault(); next.click(); }
+  });
 
   const boot = (params.get("mode")||"").toLowerCase();
   if(boot==="clase") start("clase");
