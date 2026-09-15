@@ -58,8 +58,13 @@
   }
   .picwrap{
     background:var(--cream);border-radius:14px;overflow:hidden;border:1px solid var(--line);
+    max-height:min(42vh, 340px);
   }
-  .pic{width:100%;aspect-ratio:1;object-fit:contain;display:block;background:var(--cream)}
+  .pic{
+    width:100%;height:auto;max-height:min(42vh, 340px);
+    aspect-ratio:1;object-fit:contain;object-position:center;
+    display:block;background:var(--cream);
+  }
 
   .reveal{animation:up .4s ease-out both}
   @keyframes up{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
@@ -96,6 +101,9 @@
   .btn-primary{background:var(--terra-dark);color:var(--on-terra);width:100%;margin-top:14px}
   .btn-primary:hover{background:var(--terra-press)}
   .row2{display:flex;gap:10px;margin-top:12px}
+  .acts-dock{
+    position:sticky;bottom:0;background:var(--surface);padding-top:8px;padding-bottom:2px;z-index:2;
+  }
   .btn-ghost{
     background:var(--cream);color:var(--ink);border:1.5px solid var(--line);flex:1;
   }
@@ -152,58 +160,66 @@ FORM: Inherited from apps/idioms.
     ruben: {
       key:"ruben",
       title:"En la entrevista",
-      sub:"Mira el dibujo. Es la entrevista. El inglés literal es ridículo — por eso se te queda.",
-      meta:"Entrevista · 8 dibujos",
-      use:"Ahora una frase tuya, de la entrevista.",
-      doneClase:"Ahora que viste el dibujo, la frase se queda. Tres oraciones. Frame first.",
+      sub:"El dibujo. Luego TÚ contestas. Tres oraciones. Frame first.",
+      meta:"Hoy · wear many hats · keep your cool · break the ice",
+      use:"Ahora TÚ: una respuesta de la entrevista. No un consejo.",
+      doneClase:"Hoy se quedan tres: wear many hats, keep your cool, break the ice.",
       items:[
-        {
-          id:"break-ice", img:"break-the-ice.webp",
-          idiom:"Break the ice", short:"break the ice",
-          es:"romper el hielo",
-          meaning:"Empezar la conversación para que no sea incómoda.",
-          example:"Let's break the ice. Tell me about yourself.",
-          say:"Let's break the ice."
-        },
-        {
-          id:"keep-cool", img:"keep-your-cool.webp",
-          idiom:"Keep your cool", short:"keep your cool",
-          es:"mantener la calma",
-          meaning:"No perder la cabeza. En la entrevista, respirar.",
-          example:"Keep your cool. You can do this job.",
-          say:"Keep your cool."
-        },
-        {
-          id:"call-day", img:"call-it-a-day.webp",
-          idiom:"Call it a day", short:"call it a day",
-          es:"dar por terminado el día",
-          meaning:"Parar el trabajo por hoy. La máquina ya funciona.",
-          example:"The machine works. Let's call it a day.",
-          say:"Let's call it a day."
-        },
         {
           id:"many-hats", img:"many-hats.webp",
           idiom:"Wear many hats", short:"wear many hats",
           es:"hacer de todo",
           meaning:"Tener varios roles. Check, repair, install.",
-          example:"At the clinic I wear many hats.",
-          say:"I wear many hats."
+          example:"At the clinic I wear many hats. I check, repair, and install equipment.",
+          say:"At the clinic I wear many hats."
+        },
+        {
+          id:"keep-cool", img:"keep-your-cool.webp",
+          idiom:"Keep your cool", short:"keep your cool",
+          es:"mantener la calma",
+          meaning:"No perder la cabeza. Cuando una máquina falla.",
+          example:"When a machine fails, I keep my cool.",
+          say:"When a machine fails, I keep my cool."
+        },
+        {
+          id:"break-ice", img:"break-the-ice.webp",
+          idiom:"Break the ice", short:"break the ice",
+          es:"romper el hielo",
+          meaning:"Empezar tú. Primera frase de la entrevista.",
+          example:"Let me break the ice. I am an electrical engineer.",
+          say:"Let me break the ice. I am an electrical engineer."
+        },
+        {
+          id:"check-repair", img:"check-repair-install.webp",
+          idiom:"I check, repair, and install", short:"I check, repair, and install",
+          es:"reviso, reparo e instalo",
+          meaning:"Qué haces en el trabajo. Tres verbos. Suficiente.",
+          example:"I check, repair, and install hospital equipment.",
+          say:"I check, repair, and install hospital equipment."
+        },
+        {
+          id:"solve-problems", img:"solve-problems.webp",
+          idiom:"I solve problems", short:"I solve problems",
+          es:"resuelvo problemas",
+          meaning:"Una máquina no funciona. Tú la arreglas.",
+          example:"At work I solve problems. A machine does not work, I repair it.",
+          say:"At work I solve problems."
         },
         {
           id:"cold-feet", img:"cold-feet.webp",
           idiom:"Get cold feet", short:"get cold feet",
           es:"acobardarse a último momento",
-          meaning:"Echarse atrás justo antes de la entrevista.",
-          example:"Don't get cold feet before the interview.",
-          say:"Don't get cold feet."
+          meaning:"El miedo en la puerta. Tú no te echas atrás.",
+          example:"I don't get cold feet. I can do this job.",
+          say:"I don't get cold feet. I can do this job."
         },
         {
-          id:"think-feet", img:"think-on-feet.webp",
-          idiom:"Think on your feet", short:"think on your feet",
-          es:"pensar rápido",
-          meaning:"Responder sin tiempo. Tres oraciones. Frame first.",
-          example:"In an interview you think on your feet.",
-          say:"Think on your feet."
+          id:"call-day", img:"call-it-a-day.webp",
+          idiom:"Call it a day", short:"call it a day",
+          es:"dar por terminado el día",
+          meaning:"La máquina ya funciona. Se acaba el turno.",
+          example:"The machine works. I call it a day.",
+          say:"The machine works. I call it a day."
         },
         {
           id:"extra-mile", img:"extra-mile.webp",
@@ -211,15 +227,7 @@ FORM: Inherited from apps/idioms.
           es:"ir más allá",
           meaning:"Hacer más de lo pedido. Cuando una máquina falla.",
           example:"I go the extra mile when a machine fails.",
-          say:"I go the extra mile."
-        },
-        {
-          id:"best-foot", img:"best-foot.webp",
-          idiom:"Put your best foot forward", short:"put your best foot forward",
-          es:"dar la mejor impresión",
-          meaning:"Mostrar lo mejor de ti. Mañana, en la entrevista.",
-          example:"Put your best foot forward tomorrow.",
-          say:"Put your best foot forward."
+          say:"I go the extra mile when a machine fails."
         }
       ]
     },
@@ -283,7 +291,7 @@ FORM: Inherited from apps/idioms.
           id:"fill-out", img:"fill-out.webp",
           idiom:"Fill out", short:"fill out",
           es:"llenar un formulario",
-          meaning:"Completar un papel. No fill IN si el jefe dice fill out.",
+          meaning:"Completar un papel. Fill in también existe. En el trabajo en EE.UU. se dice fill out.",
           example:"Fill out this form, please.",
           say:"Fill out this form."
         },
@@ -370,7 +378,7 @@ FORM: Inherited from apps/idioms.
       '<div class="sub">Mira el dibujo. El inglés literal es ridículo — por eso se te queda.</div>'+
       '<div class="meta">Dos mazos · entrevista y muelle</div>'+
       '<div class="modes">'+
-        '<button class="mode hot" id="dRuben" type="button"><div class="t">Entrevista</div><div class="d">Ruben. Ocho frases para no congelarse.</div></button>'+
+        '<button class="mode hot" id="dRuben" type="button"><div class="t">Entrevista</div><div class="d">Ruben. Tres frases para contestar. El dibujo es la memoria.</div></button>'+
         '<button class="mode" id="dAndres" type="button"><div class="t">El muelle</div><div class="d">Andres. Ocho verbos del almacén, dibujados.</div></button>'+
       '</div>'+
       '<div class="credit">ARCHES · En el trabajo</div>';
@@ -399,7 +407,7 @@ FORM: Inherited from apps/idioms.
 
   function start(m){
     unlockAudio();
-    mode=m; queue=shuffle(items()); qi=0; right=0; total=0; locked=false;
+    mode=m; queue=(m==="clase") ? items().slice() : shuffle(items()); qi=0; right=0; total=0; locked=false;
     renderCard();
   }
 
@@ -423,7 +431,7 @@ FORM: Inherited from apps/idioms.
   }
 
   function picHTML(item){
-    return '<div class="picwrap"><img class="pic" src="'+IMG+item.img+'" width="1100" height="1100" alt="Dibujo literal de una frase de trabajo" fetchpriority="high"></div>';
+    return '<div class="picwrap"><img class="pic" src="'+IMG+item.img+'" width="800" height="800" alt="Dibujo de una frase de trabajo" fetchpriority="high"></div>';
   }
 
   function revealBlock(item, withUse){
@@ -453,7 +461,7 @@ FORM: Inherited from apps/idioms.
         picHTML(item)+
         '<div class="hintline" id="hint"></div>'+
         '<div id="rev"></div>'+
-        '<div class="row2" id="acts">'+
+        '<div class="row2 acts-dock" id="acts">'+
           '<button class="btn btn-ghost" id="hintBtn" type="button">Pista en español</button>'+
           '<button class="btn btn-primary" id="revBtn" type="button" style="margin-top:0">Revelar</button>'+
         '</div>'+
@@ -512,7 +520,7 @@ FORM: Inherited from apps/idioms.
       b.disabled=true;
       if(b.textContent===item.short) b.classList.add("ok");
     });
-    document.getElementById("rev").innerHTML = revealBlock(item, false);
+    document.getElementById("rev").innerHTML = revealBlock(item, true);
     document.getElementById("play").onclick=()=>speak(item.say);
     speak(item.say);
     const next=el('<button class="btn btn-primary" id="nextBtn" type="button">Siguiente</button>');
@@ -543,10 +551,13 @@ FORM: Inherited from apps/idioms.
   document.addEventListener("keydown", function(e){
     if(view!=="card") return;
     if(e.key!=="Enter") return;
-    const rev=document.getElementById("revBtn");
+    const tag = (e.target && e.target.tagName) || "";
+    if(tag==="BUTTON" || tag==="A" || tag==="INPUT" || tag==="TEXTAREA") return;
+    e.preventDefault();
     const next=document.getElementById("nextBtn");
-    if(rev){ e.preventDefault(); rev.click(); }
-    else if(next){ e.preventDefault(); next.click(); }
+    const rev=document.getElementById("revBtn");
+    if(next) next.click();
+    else if(rev) rev.click();
   });
 
   const boot = (params.get("mode")||"").toLowerCase();
