@@ -124,8 +124,8 @@
     "level": "A1+",
     "l1": "Spanish",
     "context": "Trabaja en una clínica privada",
-    "greeting": "Hoy: The Floor. La entrevista de un hospital de verdad: biomédico, el piso, y el inglés del miedo.",
-    "version": "2026-09-08"
+    "greeting": "Hoy: En la entrevista. Ocho dibujos. El inglés literal es ridículo — por eso se te queda.",
+    "version": "2026-09-15"
   },
   "tracks": [
     {
@@ -580,11 +580,15 @@
   ],
   "links": [
     {
+      "title": "En la entrevista",
+      "note": "Clase de hoy. Ocho dibujos literales. Break the ice, keep your cool, three sentences.",
+      "url": "../apps/trabajo/?name=Ruben&from=ruben"
+    },
+    {
       "title": "Idioms",
       "note": "Mira el dibujo. El inglés literal es ridículo — por eso se te queda.",
       "url": "../apps/idioms/?name=Ruben&from=ruben"
     },
-
     {
       "title": "The Floor",
       "note": "Clase de hoy. Un hospital te entrevista de verdad: biomédico, el piso, y el inglés del miedo.",
@@ -754,7 +758,7 @@
     html+='</div>';
     html+='<div class="tracks-label">Hoy</div>';
     app.innerHTML=html;
-    if(STUDENT.links && STUDENT.links[0] && STUDENT.links[0].url==="piso/"){
+    if(STUDENT.links && STUDENT.links[0]){
       const L=STUDENT.links[0];
       const feat=el('<a class="track" style="display:block;text-decoration:none;border-color:var(--terra)" href="'+L.url+'">'+
         '<div class="track-head"><div class="track-title">'+esc(L.title)+'</div><div class="track-count">hoy</div></div>'+
@@ -774,7 +778,7 @@
     if(STUDENT.links && STUDENT.links.length){
       app.appendChild(el('<div class="tracks-label">Tus otras apps</div>'));
       STUDENT.links.forEach(function(L){
-        if(L.url==="piso/") return;
+        if(STUDENT.links[0] && L.url===STUDENT.links[0].url) return;
         const a=el('<a class="track" style="display:block;text-decoration:none" href="'+L.url+'">'+
           '<div class="track-head"><div class="track-title">'+esc(L.title)+'</div><div class="track-count">›</div></div>'+
           (L.note?'<div class="track-note">'+esc(L.note)+'</div>':'')+'</a>');

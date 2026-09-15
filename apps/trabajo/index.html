@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>En el trabajo · ARCHES</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#fbf7f0; --surface:#fffdf9; --ink:#2c2722; --muted:#8a7f73;
+    --line:#e9e0d3; --terra:#bf5a36; --terra-dark:#8e3b22; --terra-press:#7a311c;
+    --terra-tint:#f4e4d9; --good:#3f695e; --good-tint:#e8f1dd; --bad-tint:#f6e2da;
+    --on-terra:#fffdf9; --credit:#c9bdac;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--cream);color:var(--ink);font-family:'Nunito',sans-serif;
+    -webkit-font-smoothing:antialiased;min-height:100vh;
+  }
+  ::selection{background:var(--terra-tint);color:var(--ink)}
+  :focus-visible{outline:2px solid var(--terra);outline-offset:3px}
+  .wrap{max-width:540px;margin:0 auto;padding:22px 18px 56px}
+
+  h1{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:40px;line-height:1.02;margin:0}
+  h1 .nm{color:var(--terra)}
+  .sub{font-size:15px;color:var(--muted);font-weight:600;margin-top:10px;line-height:1.45}
+  .meta{font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--terra);margin-top:18px}
+
+  .modes{display:flex;flex-direction:column;gap:12px;margin-top:22px}
+  .mode{
+    display:block;width:100%;text-align:left;background:var(--surface);
+    border:1.5px solid var(--line);border-radius:18px;padding:18px 18px 16px;
+    font-family:'Nunito',sans-serif;cursor:pointer;
+    transition:transform .18s ease,border-color .15s ease,box-shadow .2s ease;
+  }
+  .mode:hover{transform:translateY(-3px);border-color:var(--terra);box-shadow:0 8px 18px rgba(44,39,34,.08)}
+  .mode:active{transform:scale(.985)}
+  .mode .t{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:28px;line-height:1.1}
+  .mode .d{font-size:14px;color:var(--muted);font-weight:600;margin-top:4px;line-height:1.4}
+  .mode.hot{border-color:var(--terra);background:var(--terra-tint)}
+
+  .ptop{display:flex;align-items:center;gap:12px;padding:4px 0 16px}
+  .pback{
+    background:none;border:none;color:var(--terra-dark);font-weight:800;font-size:15px;
+    cursor:pointer;font-family:'Nunito',sans-serif;padding:8px 4px;min-height:44px;
+  }
+  .pbar{flex:1;height:7px;background:var(--line);border-radius:4px;overflow:hidden}
+  .pbar > i{display:block;height:100%;background:var(--terra);width:0;transition:width .35s ease}
+  .pcount{font-size:13px;color:var(--muted);font-weight:800;white-space:nowrap}
+
+  .kicker{font-size:12px;text-transform:uppercase;letter-spacing:1.4px;color:var(--terra);font-weight:800;margin-bottom:12px}
+  .card{
+    background:var(--surface);border:1.5px solid var(--line);border-radius:20px;padding:16px;
+  }
+  .picwrap{
+    background:var(--cream);border-radius:14px;overflow:hidden;border:1px solid var(--line);
+  }
+  .pic{width:100%;aspect-ratio:1;object-fit:contain;display:block;background:var(--cream)}
+
+  .reveal{animation:up .4s ease-out both}
+  @keyframes up{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+  .idiom{
+    font-family:'Cormorant Garamond',serif;font-weight:700;font-size:30px;line-height:1.15;
+    margin:14px 2px 0;
+  }
+  .es{font-size:16px;font-weight:800;color:var(--terra-dark);margin-top:8px}
+  .meaning{font-size:15px;font-weight:600;color:var(--muted);margin-top:6px;line-height:1.4}
+  .ex{
+    margin-top:12px;background:var(--cream);border-radius:12px;padding:12px 14px;
+    font-weight:700;font-size:15.5px;line-height:1.4;
+  }
+  .ex em{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:600;color:var(--terra-dark)}
+  .use{font-size:14px;font-weight:700;color:var(--terra-dark);margin-top:12px}
+
+  .opts{display:flex;flex-direction:column;gap:10px;margin-top:16px}
+  .opt{
+    background:var(--cream);border:1.5px solid var(--line);border-radius:14px;padding:14px 16px;
+    font-size:17px;font-weight:700;color:var(--ink);cursor:pointer;text-align:left;
+    font-family:'Nunito',sans-serif;min-height:48px;
+    transition:transform .08s ease,border-color .12s,background .12s;
+  }
+  .opt:active{transform:scale(.98)}
+  .opt.ok{background:var(--good-tint);border-color:var(--good);color:var(--good)}
+  .opt.no{background:var(--bad-tint);border-color:var(--terra);color:var(--terra-dark)}
+
+  .btn{
+    border:none;border-radius:14px;font-family:'Nunito',sans-serif;font-weight:800;
+    font-size:16px;padding:15px;cursor:pointer;min-height:48px;
+    transition:transform .08s ease,background .15s ease;
+  }
+  .btn:active{transform:scale(.98)}
+  .btn-primary{background:var(--terra-dark);color:var(--on-terra);width:100%;margin-top:14px}
+  .btn-primary:hover{background:var(--terra-press)}
+  .row2{display:flex;gap:10px;margin-top:12px}
+  .btn-ghost{
+    background:var(--cream);color:var(--ink);border:1.5px solid var(--line);flex:1;
+  }
+
+  .speaker{
+    display:inline-flex;align-items:center;justify-content:center;gap:9px;
+    background:var(--cream);border:1.5px solid var(--line);border-radius:30px;
+    padding:12px 20px;font-weight:800;font-size:15px;color:var(--ink);
+    cursor:pointer;font-family:'Nunito',sans-serif;margin-top:14px;width:100%;min-height:48px;
+  }
+  .speaker:active{border-color:var(--terra)}
+  .speaker svg{display:block}
+
+  .hintline{font-size:15px;font-weight:700;color:var(--terra-dark);margin-top:12px;min-height:1.4em}
+
+  .fb{margin-top:14px;border-radius:14px;padding:14px 16px;font-weight:700;font-size:15px;line-height:1.4}
+  .fb.ok{background:var(--good-tint);color:var(--good)}
+  .fb.no{background:var(--bad-tint);color:var(--terra-dark)}
+
+  .done{text-align:center;padding:28px 8px}
+  .done h2{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:34px;margin:0 0 8px}
+  .done .score{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:64px;color:var(--terra);line-height:1;margin:12px 0}
+  .done p{color:var(--muted);font-weight:600;font-size:15px;margin:0 0 22px}
+
+  .homeback{
+    display:inline-block;margin-top:18px;font-size:14px;font-weight:800;
+    color:var(--terra-dark);text-decoration:none;min-height:44px;line-height:44px;
+  }
+  .credit{text-align:center;color:var(--credit);font-size:11.5px;font-weight:700;margin-top:28px;letter-spacing:.5px}
+
+  @media (prefers-reduced-motion: reduce){
+    *,*::before,*::after{transition:none !important;animation:none !important}
+    .mode:hover{transform:none}
+    .reveal{opacity:1;transform:none}
+  }
+</style>
+</head>
+<body>
+<!--
+THESIS: Same memory trick as idioms: the absurd literal picture is the hook. The phrases are from their jobs.
+OWN-WORLD: ARCHES cream, terracotta, Cormorant + Nunito. The drawing fills the card.
+STORY: See the picture, name the phrase, steal a sentence for the interview or the dock.
+FIRST VIEWPORT: Hello, one line of why, two modes. Class puts the picture on screen immediately.
+FORM: Inherited from apps/idioms.
+-->
+<div class="wrap" id="app"></div>
+<noscript><p style="padding:24px;font-family:Nunito,sans-serif">Abre esta página con JavaScript para practicar. El dibujo es la memoria.</p></noscript>
+
+<script>
+(function(){
+  "use strict";
+
+  const DECKS = {
+    ruben: {
+      key:"ruben",
+      title:"En la entrevista",
+      sub:"Mira el dibujo. Es la entrevista. El inglés literal es ridículo — por eso se te queda.",
+      meta:"Entrevista · 8 dibujos",
+      use:"Ahora una frase tuya, de la entrevista.",
+      doneClase:"Ahora que viste el dibujo, la frase se queda. Tres oraciones. Frame first.",
+      items:[
+        {
+          id:"break-ice", img:"break-the-ice.webp",
+          idiom:"Break the ice", short:"break the ice",
+          es:"romper el hielo",
+          meaning:"Empezar la conversación para que no sea incómoda.",
+          example:"Let's break the ice. Tell me about yourself.",
+          say:"Let's break the ice."
+        },
+        {
+          id:"keep-cool", img:"keep-your-cool.webp",
+          idiom:"Keep your cool", short:"keep your cool",
+          es:"mantener la calma",
+          meaning:"No perder la cabeza. En la entrevista, respirar.",
+          example:"Keep your cool. You can do this job.",
+          say:"Keep your cool."
+        },
+        {
+          id:"call-day", img:"call-it-a-day.webp",
+          idiom:"Call it a day", short:"call it a day",
+          es:"dar por terminado el día",
+          meaning:"Parar el trabajo por hoy. La máquina ya funciona.",
+          example:"The machine works. Let's call it a day.",
+          say:"Let's call it a day."
+        },
+        {
+          id:"many-hats", img:"many-hats.webp",
+          idiom:"Wear many hats", short:"wear many hats",
+          es:"hacer de todo",
+          meaning:"Tener varios roles. Check, repair, install.",
+          example:"At the clinic I wear many hats.",
+          say:"I wear many hats."
+        },
+        {
+          id:"cold-feet", img:"cold-feet.webp",
+          idiom:"Get cold feet", short:"get cold feet",
+          es:"acobardarse a último momento",
+          meaning:"Echarse atrás justo antes de la entrevista.",
+          example:"Don't get cold feet before the interview.",
+          say:"Don't get cold feet."
+        },
+        {
+          id:"think-feet", img:"think-on-feet.webp",
+          idiom:"Think on your feet", short:"think on your feet",
+          es:"pensar rápido",
+          meaning:"Responder sin tiempo. Tres oraciones. Frame first.",
+          example:"In an interview you think on your feet.",
+          say:"Think on your feet."
+        },
+        {
+          id:"extra-mile", img:"extra-mile.webp",
+          idiom:"Go the extra mile", short:"go the extra mile",
+          es:"ir más allá",
+          meaning:"Hacer más de lo pedido. Cuando una máquina falla.",
+          example:"I go the extra mile when a machine fails.",
+          say:"I go the extra mile."
+        },
+        {
+          id:"best-foot", img:"best-foot.webp",
+          idiom:"Put your best foot forward", short:"put your best foot forward",
+          es:"dar la mejor impresión",
+          meaning:"Mostrar lo mejor de ti. Mañana, en la entrevista.",
+          example:"Put your best foot forward tomorrow.",
+          say:"Put your best foot forward."
+        }
+      ]
+    },
+    andres: {
+      key:"andres",
+      title:"En el muelle",
+      sub:"Mira el dibujo. Es el muelle. El inglés literal es ridículo — por eso se te queda.",
+      meta:"Almacén · 8 dibujos",
+      use:"Ahora una frase tuya, del muelle. Corta, como la radio.",
+      doneClase:"Ahora que viste el dibujo, la frase se queda. Corta. Como la radio.",
+      items:[
+        {
+          id:"pick-up", img:"pick-up.webp",
+          idiom:"Pick up", short:"pick up",
+          es:"recoger / levantar",
+          meaning:"Recoger un pallet, un pedido, una llamada.",
+          example:"Can you pick up that pallet?",
+          say:"Pick up that pallet."
+        },
+        {
+          id:"put-away", img:"put-away.webp",
+          idiom:"Put away", short:"put away",
+          es:"guardar",
+          meaning:"Colocar las cajas en su lugar.",
+          example:"Put the boxes away in aisle three.",
+          say:"Put the boxes away."
+        },
+        {
+          id:"run-out", img:"run-out.webp",
+          idiom:"Run out of", short:"run out of",
+          es:"quedarse sin",
+          meaning:"Se acabó. Stock, etiquetas, tiempo.",
+          example:"We ran out of labels.",
+          say:"We ran out of labels."
+        },
+        {
+          id:"fall-behind", img:"fall-behind.webp",
+          idiom:"Fall behind", short:"fall behind",
+          es:"atrasarse",
+          meaning:"No alcanzar el ritmo del turno.",
+          example:"We fell behind on the inventory.",
+          say:"We fell behind."
+        },
+        {
+          id:"catch-up", img:"catch-up.webp",
+          idiom:"Catch up", short:"catch up",
+          es:"ponerse al día",
+          meaning:"Recuperar lo atrasado.",
+          example:"I need to catch up on the orders.",
+          say:"I need to catch up."
+        },
+        {
+          id:"look-out", img:"look-out.webp",
+          idiom:"Look out", short:"look out",
+          es:"cuidado",
+          meaning:"Alerta. Hay peligro. Un forklift.",
+          example:"Look out! Forklift coming.",
+          say:"Look out."
+        },
+        {
+          id:"fill-out", img:"fill-out.webp",
+          idiom:"Fill out", short:"fill out",
+          es:"llenar un formulario",
+          meaning:"Completar un papel. No fill IN si el jefe dice fill out.",
+          example:"Fill out this form, please.",
+          say:"Fill out this form."
+        },
+        {
+          id:"take-over", img:"take-over.webp",
+          idiom:"Take over", short:"take over",
+          es:"hacerse cargo / relevar",
+          meaning:"Tomar el turno de otro.",
+          example:"I'll take over at six.",
+          say:"I'll take over at six."
+        }
+      ]
+    }
+  };
+
+  const params = new URLSearchParams(location.search);
+  const displayName = (params.get("name")||"").trim();
+  const fromSlug = (params.get("from")||"").replace(/[^a-z]/gi,"").toLowerCase();
+  const app = document.getElementById("app");
+  const IMG = "img/";
+
+  function inferDeck(){
+    const d = (params.get("deck")||"").toLowerCase();
+    if(d==="ruben" || d==="entrevista") return "ruben";
+    if(d==="andres" || d==="muelle" || d==="warehouse") return "andres";
+    const n = (displayName+" "+fromSlug).toLowerCase();
+    if(n.indexOf("ruben")>=0) return "ruben";
+    if(n.indexOf("andres")>=0 || n.indexOf("andrés")>=0) return "andres";
+    return "";
+  }
+
+  let deckKey = inferDeck();
+  let view = "home", mode = "clase", queue = [], qi = 0, right = 0, total = 0, locked = false;
+
+  function items(){ return DECKS[deckKey].items; }
+
+  const speakerSVG = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="M19 5a9 9 0 0 1 0 14"/><path d="M15.5 8.5a4 4 0 0 1 0 7"/></svg>';
+
+  let voice = null, audioReady = false;
+  function loadVoice(){
+    const vs = window.speechSynthesis ? speechSynthesis.getVoices() : [];
+    const NOV=/albert|bad news|bahh|bells|boing|bubbles|cellos|good news|jester|organ|superstar|trinoids|whisper|wobble|zarvox|junior|kathy|ralph|fred/i;
+    const en=vs.filter(v=>/^en[-_]/i.test(v.lang)&&!NOV.test(v.name));
+    const pref=["Samantha","Google US English","Microsoft Aria","Microsoft Jenny","Microsoft Zira","Alex"];
+    voice=null;
+    for(const p of pref){ const m=en.find(v=>v.name.indexOf(p)===0); if(m){voice=m;break;} }
+    if(!voice) voice = en.find(v=>/en[-_]US/i.test(v.lang)) || en[0] || null;
+  }
+  if(window.speechSynthesis){ loadVoice(); speechSynthesis.onvoiceschanged = loadVoice; }
+  function unlockAudio(){
+    if(audioReady || !window.speechSynthesis) return;
+    try{ const u=new SpeechSynthesisUtterance(""); u.volume=0; speechSynthesis.speak(u); audioReady=true; }catch(e){}
+  }
+  document.addEventListener("touchstart", unlockAudio, {once:true});
+  document.addEventListener("click", unlockAudio, {once:true});
+  function speak(text){
+    if(!text || !window.speechSynthesis) return;
+    try{
+      speechSynthesis.cancel();
+      const u=new SpeechSynthesisUtterance(text);
+      u.lang="en-US"; u.rate=0.95; if(voice) u.voice=voice;
+      speechSynthesis.speak(u);
+    }catch(e){}
+  }
+
+  function esc(s){ return (s==null?"":""+s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+  function shuffle(a){ a=a.slice(); for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+  function el(html){ const d=document.createElement("div"); d.innerHTML=html.trim(); return d.firstChild; }
+
+  function distractors(item){
+    const pool = shuffle(items().filter(x=>x.id!==item.id)).slice(0,2).map(x=>x.short);
+    return shuffle([item.short].concat(pool));
+  }
+
+  function backHomeLink(){
+    if(!fromSlug) return "";
+    return '<a class="homeback" href="../../'+esc(fromSlug)+'/">‹ Tu práctica</a>';
+  }
+
+  function renderPicker(){
+    view="home";
+    app.innerHTML =
+      '<h1>En el trabajo</h1>'+
+      '<div class="sub">Mira el dibujo. El inglés literal es ridículo — por eso se te queda.</div>'+
+      '<div class="meta">Dos mazos · entrevista y muelle</div>'+
+      '<div class="modes">'+
+        '<button class="mode hot" id="dRuben" type="button"><div class="t">Entrevista</div><div class="d">Ruben. Ocho frases para no congelarse.</div></button>'+
+        '<button class="mode" id="dAndres" type="button"><div class="t">El muelle</div><div class="d">Andres. Ocho verbos del almacén, dibujados.</div></button>'+
+      '</div>'+
+      '<div class="credit">ARCHES · En el trabajo</div>';
+    document.getElementById("dRuben").onclick=function(){ deckKey="ruben"; renderHome(); };
+    document.getElementById("dAndres").onclick=function(){ deckKey="andres"; renderHome(); };
+  }
+
+  function renderHome(){
+    if(!deckKey) return renderPicker();
+    view="home";
+    const deck = DECKS[deckKey];
+    const who = displayName ? 'Hola <span class="nm">'+esc(displayName)+'</span>' : deck.title;
+    app.innerHTML =
+      '<h1>'+who+'</h1>'+
+      '<div class="sub">'+esc(deck.sub)+'</div>'+
+      '<div class="meta">'+esc(deck.meta)+'</div>'+
+      '<div class="modes">'+
+        '<button class="mode hot" id="mClase" type="button"><div class="t">Clase</div><div class="d">El dibujo grande. Lo dices en voz alta. Luego revelas.</div></button>'+
+        '<button class="mode" id="mPrac" type="button"><div class="t">Practicar</div><div class="d">Tres opciones. Elige la frase. Luego la usas.</div></button>'+
+      '</div>'+
+      backHomeLink()+
+      '<div class="credit">ARCHES · '+esc(deck.title)+'</div>';
+    document.getElementById("mClase").onclick=()=>start("clase");
+    document.getElementById("mPrac").onclick=()=>start("practicar");
+  }
+
+  function start(m){
+    unlockAudio();
+    mode=m; queue=shuffle(items()); qi=0; right=0; total=0; locked=false;
+    renderCard();
+  }
+
+  function preloadNext(){
+    const n = queue[qi+1];
+    if(!n) return;
+    const img = new Image();
+    img.src = IMG+n.img;
+  }
+
+  function shell(inner){
+    const pct = queue.length ? Math.round(qi/queue.length*100) : 0;
+    app.innerHTML =
+      '<div class="ptop">'+
+        '<button class="pback" id="pb" type="button">‹ Inicio</button>'+
+        '<div class="pbar"><i style="width:'+pct+'%"></i></div>'+
+        '<div class="pcount">'+(qi+1)+' / '+queue.length+'</div>'+
+      '</div>'+inner;
+    document.getElementById("pb").onclick=renderHome;
+    preloadNext();
+  }
+
+  function picHTML(item){
+    return '<div class="picwrap"><img class="pic" src="'+IMG+item.img+'" width="1100" height="1100" alt="Dibujo literal de una frase de trabajo" fetchpriority="high"></div>';
+  }
+
+  function revealBlock(item, withUse){
+    const deck = DECKS[deckKey];
+    return '<div class="reveal">'+
+      '<div class="idiom">'+esc(item.idiom)+'</div>'+
+      '<div class="es">'+esc(item.es)+'</div>'+
+      '<div class="meaning">'+esc(item.meaning)+'</div>'+
+      '<div class="ex"><em>Example.</em> '+esc(item.example)+'</div>'+
+      (withUse?'<div class="use">'+esc(deck.use)+'</div>':'')+
+      '<button class="speaker" id="play" type="button">'+speakerSVG+'Escuchar</button>'+
+    '</div>';
+  }
+
+  function renderCard(){
+    if(qi>=queue.length) return renderDone();
+    view="card"; locked=false;
+    const item=queue[qi];
+    if(mode==="clase") return renderClase(item);
+    return renderPrac(item);
+  }
+
+  function renderClase(item){
+    shell(
+      '<div class="kicker">Mira el dibujo</div>'+
+      '<div class="card">'+
+        picHTML(item)+
+        '<div class="hintline" id="hint"></div>'+
+        '<div id="rev"></div>'+
+        '<div class="row2" id="acts">'+
+          '<button class="btn btn-ghost" id="hintBtn" type="button">Pista en español</button>'+
+          '<button class="btn btn-primary" id="revBtn" type="button" style="margin-top:0">Revelar</button>'+
+        '</div>'+
+      '</div>'
+    );
+    document.getElementById("hintBtn").onclick=function(){
+      document.getElementById("hint").textContent = item.es;
+    };
+    document.getElementById("revBtn").onclick=function(){
+      document.getElementById("acts").innerHTML = '';
+      document.getElementById("hint").textContent = '';
+      document.getElementById("rev").innerHTML = revealBlock(item, true);
+      document.getElementById("play").onclick=()=>speak(item.say);
+      speak(item.say);
+      const next=el('<button class="btn btn-primary" id="nextBtn" type="button">Siguiente</button>');
+      next.onclick=()=>{ qi++; renderCard(); };
+      document.getElementById("acts").appendChild(next);
+    };
+  }
+
+  function renderPrac(item){
+    const opts = distractors(item);
+    shell(
+      '<div class="kicker">¿Cuál es la frase?</div>'+
+      '<div class="card">'+
+        picHTML(item)+
+        '<div class="opts" id="opts"></div>'+
+        '<div id="fb"></div>'+
+        '<div id="rev"></div>'+
+        '<div id="acts"></div>'+
+      '</div>'
+    );
+    const box=document.getElementById("opts");
+    let firstTry=true;
+    opts.forEach(function(o){
+      const b=el('<button class="opt" type="button">'+esc(o)+'</button>');
+      b.onclick=function(){
+        if(locked) return;
+        if(o===item.short){
+          locked=true; total++; if(firstTry) right++;
+          b.classList.add("ok");
+          document.getElementById("fb").innerHTML='<div class="fb ok">Eso es.</div>';
+          finishPrac(item);
+        } else {
+          firstTry=false;
+          b.classList.add("no"); b.disabled=true;
+          document.getElementById("fb").innerHTML='<div class="fb no">Esa no. Prueba otra.</div>';
+        }
+      };
+      box.appendChild(b);
+    });
+  }
+
+  function finishPrac(item){
+    document.querySelectorAll(".opt").forEach(function(b){
+      b.disabled=true;
+      if(b.textContent===item.short) b.classList.add("ok");
+    });
+    document.getElementById("rev").innerHTML = revealBlock(item, false);
+    document.getElementById("play").onclick=()=>speak(item.say);
+    speak(item.say);
+    const next=el('<button class="btn btn-primary" id="nextBtn" type="button">Siguiente</button>');
+    next.onclick=()=>{ qi++; renderCard(); };
+    document.getElementById("acts").appendChild(next);
+  }
+
+  function renderDone(){
+    view="done";
+    const deck = DECKS[deckKey];
+    const line = mode==="clase"
+      ? deck.doneClase
+      : (total && right/total>=.8 ? "Casi todos. El dibujo hizo su trabajo." : "Otra vuelta y se quedan.");
+    const score = mode==="clase" ? queue.length+" dibujos" : right+"/"+total;
+    app.innerHTML =
+      '<div class="done">'+
+        '<h2>'+esc(deck.title)+'</h2>'+
+        '<div class="score">'+esc(score)+'</div>'+
+        '<p>'+esc(line)+'</p>'+
+        '<button class="btn btn-primary" id="again" type="button">Otra vez</button>'+
+        '<div class="row2"><button class="btn btn-ghost" id="home" type="button">Volver al inicio</button></div>'+
+        backHomeLink()+
+      '</div>';
+    document.getElementById("again").onclick=()=>start(mode);
+    document.getElementById("home").onclick=renderHome;
+  }
+
+  document.addEventListener("keydown", function(e){
+    if(view!=="card") return;
+    if(e.key!=="Enter") return;
+    const rev=document.getElementById("revBtn");
+    const next=document.getElementById("nextBtn");
+    if(rev){ e.preventDefault(); rev.click(); }
+    else if(next){ e.preventDefault(); next.click(); }
+  });
+
+  const boot = (params.get("mode")||"").toLowerCase();
+  if(!deckKey) renderPicker();
+  else if(boot==="clase") start("clase");
+  else if(boot==="practicar" || boot==="practice") start("practicar");
+  else renderHome();
+})();
+</script>
+</body>
+</html>

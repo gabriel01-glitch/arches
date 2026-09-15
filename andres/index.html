@@ -141,13 +141,18 @@
     "level": "A2-B1",
     "l1": "Spanish",
     "context": "Estudiante de ARCHES. Español L1. Base de clase mientras llega su mazo.",
-    "greeting": "Hoy: The Shift. HAVE no es tener. HAVE más el participio es el pallet. Corta las palabras de más.",
-    "version": "2026-08-27"
+    "greeting": "Hoy: En el muelle. Ocho dibujos. Pick up, put away, look out — el inglés literal se queda.",
+    "version": "2026-09-15"
   },
   "links": [
     {
+      "title": "En el muelle",
+      "note": "Clase de hoy. Ocho dibujos literales. Pick up, put away, look out. Corta, como la radio.",
+      "url": "../apps/trabajo/?name=Andres&from=andres"
+    },
+    {
       "title": "The Shift",
-      "note": "Clase de hoy. El almacén, DHL, y have / haven't / if I had. Corto, como la radio.",
+      "note": "El almacén, DHL, y have / haven't / if I had. Corto, como la radio.",
       "url": "turno/"
     },
     {
@@ -1126,7 +1131,7 @@
     html+='</div>';
     html+='<div class="tracks-label">Hoy</div>';
     app.innerHTML=html;
-    if(STUDENT.links && STUDENT.links[0] && STUDENT.links[0].url==="turno/"){
+    if(STUDENT.links && STUDENT.links[0]){
       const L=STUDENT.links[0];
       const feat=el('<a class="track" style="display:block;text-decoration:none;border-color:var(--terra)" href="'+L.url+'">'+
         '<div class="track-head"><div class="track-title">'+esc(L.title)+'</div><div class="track-count">hoy</div></div>'+
@@ -1146,7 +1151,7 @@
     if(STUDENT.links && STUDENT.links.length){
       app.appendChild(el('<div class="tracks-label">Tus otras apps</div>'));
       STUDENT.links.forEach(function(L){
-        if(L.url==="turno/") return;
+        if(STUDENT.links[0] && L.url===STUDENT.links[0].url) return;
         const a=el('<a class="track" style="display:block;text-decoration:none" href="'+L.url+'">'+
           '<div class="track-head"><div class="track-title">'+esc(L.title)+'</div><div class="track-count">›</div></div>'+
           (L.note?'<div class="track-note">'+esc(L.note)+'</div>':'')+'</a>');
