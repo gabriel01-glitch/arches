@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
 <title>Leyne · On the floor</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -62,6 +63,12 @@ body{
   color:#fffaf2;
 }
 .hero .copy-inner{max-width:430px;margin:0 auto}
+.back{
+  position:absolute;top:14px;left:14px;z-index:2;
+  text-decoration:none;font-weight:800;font-size:13px;
+  color:#fffaf2;background:rgba(28,25,22,.42);
+  padding:8px 12px;border-radius:999px;
+}
 .hero h1{
   font-family:'Cormorant Garamond',Georgia,serif;
   font-size:42px;line-height:.95;
@@ -229,13 +236,18 @@ body{
 </style>
 </head>
 <body>
-<div class="wrap">
-  <p style="padding:16px 16px 0;margin:0"><a href="./index.html" style="color:#8a3a1e;font-weight:800;text-decoration:none">‹ Leyne</a></p>
-  <header class="hero" style="height:auto;min-height:0;max-height:none;padding:8px 16px 0">
-    <h1 style="font-family:'Cormorant Garamond',Georgia,serif;font-size:42px;line-height:.95;margin:0 0 6px;color:#8a3a1e">On the floor</h1>
-    <p class="sub" style="color:#6a5e52">Leyne · Sam’s Club</p>
+  <header class="hero">
+    <a class="back" href="./index.html">‹ Leyne</a>
+    <img src="img/hero.jpg" width="768" height="1024" alt="Warehouse-club associate on the floor between pallet racks">
+    <div class="veil" aria-hidden="true"></div>
+    <div class="copy">
+      <div class="copy-inner">
+        <h1>On the floor</h1>
+        <p class="sub">Leyne · Sam’s Club</p>
+      </div>
+    </div>
   </header>
-
+<div class="wrap">
 
   <div class="intro">
     <p>Phrases you can say <strong>today</strong> — with members and with your team.</p>
@@ -249,6 +261,10 @@ body{
   <div class="tabs" role="tablist" aria-label="Who you are talking to">
     <button type="button" role="tab" id="tab-m" aria-selected="true" aria-controls="panel-m">Members</button>
     <button type="button" role="tab" id="tab-t" aria-selected="false" aria-controls="panel-t">Team</button>
+  </div>
+
+  <div class="strip members" id="strip">
+    <img id="strip-img" src="img/door.jpg" width="768" height="1024" alt="Greeting a member at the door">
   </div>
 
   <section class="panel" id="panel-m" role="tabpanel" aria-labelledby="tab-m">
@@ -361,6 +377,7 @@ body{
 </div>
 
 <div class="dock">
+  <a class="g" href="./index.html">‹ Leyne</a>
   <button class="g" type="button" id="btn-top">Top</button>
   <button class="p" type="button" id="btn-hear">Hear a line</button>
 </div>
@@ -371,6 +388,8 @@ body{
   const tabT = document.getElementById('tab-t');
   const panelM = document.getElementById('panel-m');
   const panelT = document.getElementById('panel-t');
+  const strip = document.getElementById('strip');
+  const stripImg = document.getElementById('strip-img');
   const tabs = document.querySelector('.tabs');
 
   function show(which, push){
@@ -379,6 +398,9 @@ body{
     tabT.setAttribute('aria-selected', members ? 'false' : 'true');
     panelM.hidden = !members;
     panelT.hidden = members;
+    strip.className = members ? 'strip members' : 'strip team';
+    stripImg.src = members ? 'img/door.jpg' : 'img/team.jpg';
+    stripImg.alt = members ? 'Greeting a member at the door' : 'Talking with a teammate on the floor';
     if (push !== false){
       const hash = members ? '#members' : '#team';
       if (location.hash !== hash) history.replaceState(null, '', hash);
