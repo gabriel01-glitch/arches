@@ -124,10 +124,115 @@
     "level": "A2",
     "l1": "Spanish",
     "context": "Vive en Orlando. Le encanta el downtown y su lago. Set 5, conversación.",
-    "greeting": "Bienvenida, Leyne. Tus frases sobre Orlando, pulidas una a una.",
-    "version": "2026-09-08"
+    "greeting": "Bienvenida, Leyne. Hoy: frases de Sam\u2019s Club en el piso.",
+    "version": "2026-09-16"
   },
   "tracks": [
+    {
+      "id": "sams",
+      "title": "Sam's Club · en el piso",
+      "note": "Frases reales con miembros y con tu equipo. Siempre con sujeto: I / It / People / We.",
+      "items": [
+        {
+          "type": "translate",
+          "es": "En la puerta: ¿Puedo ver tu membresía?",
+          "en": "Welcome. Can I see your membership card?",
+          "note": "members, no customers. I see.",
+          "say": "Welcome. Can I see your membership card?"
+        },
+        {
+          "type": "translate",
+          "es": "Un miembro busca algo.",
+          "en": "I can help you find that.",
+          "say": "I can help you find that."
+        },
+        {
+          "type": "fix",
+          "wrong": "Is in aisle 8, on the left.",
+          "right": "It is in aisle 8, on the left.",
+          "note": "IT is in aisle 8.",
+          "say": "It is in aisle 8, on the left."
+        },
+        {
+          "type": "translate",
+          "es": "No está en el piso. Voy a revisar atrás.",
+          "en": "I don't have it on the floor. Let me check the back.",
+          "alts": ["I do not have it on the floor. Let me check the back."],
+          "say": "I don't have it on the floor. Let me check the back."
+        },
+        {
+          "type": "fix",
+          "wrong": "People is waiting. I will be right with you.",
+          "right": "People are waiting. I will be right with you.",
+          "note": "people ARE.",
+          "say": "People are waiting. I will be right with you."
+        },
+        {
+          "type": "translate",
+          "es": "Puedes usar Scan & Go en la app.",
+          "en": "You can use Scan and Go on the app.",
+          "alts": ["You can use Scan & Go on the app."],
+          "say": "You can use Scan and Go on the app."
+        },
+        {
+          "type": "translate",
+          "es": "No escuché. ¿Puedes repetirlo?",
+          "en": "Sorry, I didn't catch that. Can you say it again?",
+          "alts": ["Sorry, I did not catch that. Can you say it again?"],
+          "say": "Sorry, I didn't catch that. Can you say it again?"
+        },
+        {
+          "type": "translate",
+          "es": "En la salida: el recibo.",
+          "en": "Can I see your receipt, please?",
+          "say": "Can I see your receipt, please?"
+        },
+        {
+          "type": "translate",
+          "es": "¿Me cubres el break?",
+          "en": "Can you cover my break?",
+          "say": "Can you cover my break?"
+        },
+        {
+          "type": "translate",
+          "es": "Necesito un price check.",
+          "en": "I need a price check on this.",
+          "say": "I need a price check on this."
+        },
+        {
+          "type": "fix",
+          "wrong": "Is busy at the door.",
+          "right": "It is busy at the door.",
+          "note": "IT is busy.",
+          "say": "It is busy at the door."
+        },
+        {
+          "type": "scramble",
+          "answer": "People are lining up at register 3.",
+          "extra": ["is"],
+          "note": "people ARE lining up.",
+          "say": "People are lining up at register 3."
+        },
+        {
+          "type": "translate",
+          "es": "¿Puedes bajar este pallet?",
+          "en": "Can you drop this pallet?",
+          "say": "Can you drop this pallet?"
+        },
+        {
+          "type": "translate",
+          "es": "Me voy a break. Vuelvo a las 3.",
+          "en": "I am going on break. I will be back at 3.",
+          "alts": ["I'm going on break. I'll be back at 3."],
+          "say": "I am going on break. I will be back at 3."
+        },
+        {
+          "type": "dictate",
+          "say": "It is busy at the door. People are waiting.",
+          "note": "IT is. People ARE."
+        }
+      ]
+    },
     {
       "id": "frases",
       "title": "Tus frases, pulidas",
@@ -456,6 +561,11 @@
     }
   ],
   "links": [
+    {
+      "title": "Sam's Club · escúchalo",
+      "note": "Toca cada frase y oye cómo se dice en el piso.",
+      "url": "./floor.html"
+    },
     {
       "title": "Idioms",
       "note": "Mira el dibujo. El inglés literal es ridículo — por eso se te queda.",

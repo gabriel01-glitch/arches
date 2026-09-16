@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Leyne · On the floor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#f6efe4;
+  --paper:#fffaf2;
+  --ink:#1c1916;
+  --muted:#6a5e52;
+  --line:#e3d6c4;
+  --terra:#c45c32;
+  --terra-dark:#8a3a1e;
+  --navy:#1e3350;
+  --navy-soft:#e8eef4;
+  --ok:#2c6a4e;
+  --ok-tint:#e7f2eb;
+  --listen:#fff4e4;
+  --shadow:0 10px 28px rgba(28,25,22,.08);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:var(--cream);
+  color:var(--ink);
+  font-family:Nunito,system-ui,sans-serif;
+  line-height:1.35;
+}
+::selection{background:#f0c9b4;color:var(--ink)}
+:focus-visible{
+  outline:3px solid var(--terra);
+  outline-offset:3px;
+}
+.wrap{max-width:430px;margin:0 auto;padding:0 0 132px}
+
+.hero{
+  position:relative;
+  height:40vh;
+  min-height:230px;
+  max-height:340px;
+  overflow:hidden;
+}
+.hero img{
+  width:100%;height:100%;
+  object-fit:cover;
+  object-position:50% 22%;
+  display:block;
+}
+.hero .veil{
+  position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(28,25,22,.08) 20%,rgba(28,25,22,.72) 100%);
+}
+.hero .copy{
+  position:absolute;left:0;right:0;bottom:0;
+  padding:22px 18px 18px;
+  color:#fffaf2;
+}
+.hero .copy-inner{max-width:430px;margin:0 auto}
+.hero h1{
+  font-family:'Cormorant Garamond',Georgia,serif;
+  font-size:42px;line-height:.95;
+  margin:0 0 6px;
+  letter-spacing:-.02em;
+}
+.hero .sub{
+  margin:0;
+  font-size:13px;font-weight:800;
+  letter-spacing:.08em;text-transform:uppercase;
+  color:#f0d8c6;
+}
+
+.intro{
+  padding:16px 16px 8px;
+}
+.intro p{
+  margin:0 0 8px;
+  font-size:15px;font-weight:700;
+  color:var(--muted);
+}
+.intro strong{color:var(--ink);font-weight:800}
+.hint{
+  margin:10px 0 0;
+  display:flex;align-items:center;gap:8px;
+  font-size:13px;font-weight:800;color:var(--terra-dark);
+}
+.hint svg{flex:0 0 auto}
+
+.tabs{
+  position:sticky;top:0;z-index:4;
+  display:grid;grid-template-columns:1fr 1fr;gap:8px;
+  padding:10px 16px 12px;
+  background:rgba(246,239,228,.92);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid transparent;
+}
+.tabs.stuck{border-bottom-color:var(--line)}
+.tabs button{
+  appearance:none;border:0;cursor:pointer;
+  min-height:46px;border-radius:999px;
+  font-family:inherit;font-size:14px;font-weight:800;
+  background:#fff;color:var(--navy);
+  border:1px solid var(--line);
+  transition:transform 180ms ease, background 180ms ease, color 180ms ease, box-shadow 180ms ease;
+}
+.tabs button[aria-selected="true"]{
+  background:var(--navy);color:#fffaf2;border-color:var(--navy);
+  box-shadow:0 8px 16px rgba(30,51,80,.18);
+}
+.tabs button:active{transform:translateY(1px)}
+
+.strip{
+  margin:4px 16px 14px;
+  height:118px;border-radius:16px;overflow:hidden;
+  box-shadow:var(--shadow);
+}
+.strip img{width:100%;height:100%;object-fit:cover;display:block}
+.strip.members img{object-position:50% 40%}
+.strip.team img{object-position:50% 45%}
+
+.panel{padding:0 16px}
+.panel[hidden]{display:none}
+
+.row{
+  width:100%;
+  text-align:left;
+  appearance:none;border:0;background:var(--paper);
+  border-radius:16px;
+  padding:13px 12px 13px 14px;
+  margin:0 0 10px;
+  cursor:pointer;
+  box-shadow:0 1px 0 var(--line);
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 28px;
+  gap:10px;
+  align-items:start;
+  transition:transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+}
+.row:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+.row:active{transform:translateY(0)}
+.row.speaking{background:var(--listen)}
+.when{
+  grid-column:1;
+  margin:0 0 4px;
+  font-size:11px;font-weight:800;
+  letter-spacing:.08em;text-transform:uppercase;
+  color:var(--terra-dark);
+}
+.say{
+  grid-column:1;
+  margin:0;
+  min-width:0;
+  font-size:17px;font-weight:800;line-height:1.32;
+  color:var(--ink);
+  overflow-wrap:break-word;
+}
+.sk{color:var(--terra-dark);font-weight:800}
+.ear{
+  grid-column:2;grid-row:1 / span 2;
+  align-self:center;justify-self:end;
+  width:28px;height:28px;color:var(--navy);
+  opacity:.7;
+  background:var(--navy-soft);
+  border-radius:50%;
+  padding:5px;
+  box-sizing:border-box;
+}
+.row.speaking .ear{opacity:1;color:var(--terra-dark)}
+
+.drill{
+  margin:18px 16px 0;
+  background:var(--navy);
+  color:#fffaf2;
+  border-radius:20px;
+  padding:18px 16px 16px;
+}
+.drill h2{
+  font-family:'Cormorant Garamond',Georgia,serif;
+  font-size:28px;margin:0 0 6px;line-height:1.05;
+}
+.drill p{margin:0 0 12px;font-size:14px;font-weight:700;color:#d7c4b2}
+.drill .model{
+  background:rgba(255,250,242,.08);
+  border-radius:12px;
+  padding:12px;
+  font-size:16px;font-weight:800;line-height:1.45;
+}
+.drill .model span{color:#f0b089}
+
+.foot{
+  text-align:center;
+  padding:22px 16px 0;
+  font-size:12px;font-weight:700;color:var(--muted);
+}
+
+.dock{
+  position:fixed;left:0;right:0;bottom:0;z-index:6;
+  background:rgba(246,239,228,.94);
+  backdrop-filter:blur(10px);
+  border-top:1px solid var(--line);
+  padding:10px 12px calc(10px + env(safe-area-inset-bottom));
+  display:flex;justify-content:center;gap:8px;
+}
+.dock button,.dock a{
+  text-decoration:none;border:0;cursor:pointer;
+  font-family:inherit;font-weight:800;font-size:13px;
+  min-height:44px;padding:0 16px;border-radius:999px;
+  display:inline-flex;align-items:center;
+}
+.dock .p{background:var(--terra-dark);color:#fffaf2}
+.dock .g{background:#fff;color:var(--terra-dark);border:1px solid var(--line)}
+
+@media (min-width:720px){
+  .hero{height:48vh;max-height:520px}
+  .hero img{object-position:50% 58%}
+  .dock{display:none}
+  .wrap{padding-bottom:48px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .row,.tabs button{transition:none}
+  .row:hover{transform:none}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p style="padding:16px 16px 0;margin:0"><a href="./index.html" style="color:#8a3a1e;font-weight:800;text-decoration:none">‹ Leyne</a></p>
+  <header class="hero" style="height:auto;min-height:0;max-height:none;padding:8px 16px 0">
+    <h1 style="font-family:'Cormorant Garamond',Georgia,serif;font-size:42px;line-height:.95;margin:0 0 6px;color:#8a3a1e">On the floor</h1>
+    <p class="sub" style="color:#6a5e52">Leyne · Sam’s Club</p>
+  </header>
+
+
+  <div class="intro">
+    <p>Phrases you can say <strong>today</strong> — with members and with your team.</p>
+    <p>Every line has a subject: <strong>I · It · People · We</strong>.</p>
+    <p class="hint">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 10v4h4l5 4V6L7 10H3z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M16.5 8.5a5 5 0 010 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      Tap a line to hear it.
+    </p>
+  </div>
+
+  <div class="tabs" role="tablist" aria-label="Who you are talking to">
+    <button type="button" role="tab" id="tab-m" aria-selected="true" aria-controls="panel-m">Members</button>
+    <button type="button" role="tab" id="tab-t" aria-selected="false" aria-controls="panel-t">Team</button>
+  </div>
+
+  <section class="panel" id="panel-m" role="tabpanel" aria-labelledby="tab-m">
+    <button class="row" data-say="Welcome. Can I see your membership card?">
+      <p class="when">At the door</p>
+      <p class="say">Welcome. Can <b class="sk">I</b> see your membership card?</p>
+      <svg class="ear" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 10v4h4l5 4V6L7 10H3z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M16.5 8.5a5 5 0 010 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+    <button class="row" data-say="I can help you find that.">
+      <p class="when">A member is looking</p>
+      <p class="say"><b class="sk">I</b> can help you find that.</p>
+      <svg class="ear" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 10v4h4l5 4V6L7 10H3z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M16.5 8.5a5 5 0 010 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+    <button class="row" data-say="It is in aisle 8, on the left.">
+      <p class="when">Where is it?</p>
+      <p class="say"><b class="sk">It</b> is in aisle 8, on the left.</p>
+      <svg class="ear" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 10v4h4l5 4V6L7 10H3z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M16.5 8.5a5 5 0 010 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+    <button class="row" data-say="I don't have it on the floor. Let me check the back.">
+      <p class="when">Not on the shelf</p>
+      <p class="say"><b class="sk">I</b> don’t have it on the floor. Let me check the back.</p>
+      <svg class="ear" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 10v4h4l5 4V6L7 10H3z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M16.5 8.5a5 5 0 010 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+    <button class="row" data-say="People are waiting. I will be right with you.">
+      <p class="when">A line is forming</p>
+      <p class="say"><b class="sk">People</b> are waiting. <b class="sk">I</b> will be right with you.</p>
+      <svg class="ear" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 10v4h4l5 4V6L7 10H3z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M16.5 8.5a5 5 0 010 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+    <button class="row" data-say="You can use Scan and Go on the app.">
+      <p class="when">Skip the line</p>
+      <p class="say"><b class="sk">You</b> can use Scan &amp; Go on the app.</p>
+      <svg class="ear" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 10v4h4l5 4V6L7 10H3z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M16.5 8.5a5 5 0 010 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+    <button class="row" data-say="Sorry, I didn't catch that. Can you say it again?">
+      <p class="when">You didn’t hear</p>
+      <p class="say">Sorry, <b class="sk">I</b> didn’t catch that. Can you say it again?</p>
+      <svg class="ear" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 10v4h4l5 4V6L7 10H3z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M16.5 8.5a5 5 0 010 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+    <button class="row" data-say="Can I see your receipt, please?">
+      <p class="when">At the exit</p>
+      <p class="say">Can <b class="sk">I</b> see your receipt, please?</p>
+      <svg class="ear" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 10v4h4l5 4V6L7 10H3z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M16.5 8.5a5 5 0 010 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+    <button class="row" data-say="Thank you for shopping with us. Have a good day.">
+      <p class="when">Goodbye</p>
+      <p class="say">Thank you for shopping with us. Have a good day.</p>
+      <svg class="ear" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 10v4h4l5 4V6L7 10H3z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M16.5 8.5a5 5 0 010 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+  </section>
+
+  <section class="panel" id="panel-t" role="tabpanel" aria-labelledby="tab-t" hidden>
+    <button class="row" data-say="Can you cover my break?">
+      <p class="when">You need a break</p>
+      <p class="say">Can you cover my break?</p>
+      <svg class="ear" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 10v4h4l5 4V6L7 10H3z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M16.5 8.5a5 5 0 010 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+    <button class="row" data-say="I need a price check on this.">
+      <p class="when">The tag is wrong / missing</p>
+      <p class="say"><b class="sk">I</b> need a price check on this.</p>
+      <svg class="ear" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 10v4h4l5 4V6L7 10H3z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M16.5 8.5a5 5 0 010 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+    <button class="row" data-say="We are out of rotisserie chicken.">
+      <p class="when">Café / fresh is empty</p>
+      <p class="say"><b class="sk">We</b> are out of rotisserie chicken.</p>
+      <svg class="ear" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 10v4h4l5 4V6L7 10H3z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M16.5 8.5a5 5 0 010 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+    <button class="row" data-say="Can you drop this pallet?">
+      <p class="when">Need the forklift</p>
+      <p class="say">Can you drop this pallet?</p>
+      <svg class="ear" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 10v4h4l5 4V6L7 10H3z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M16.5 8.5a5 5 0 010 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+    <button class="row" data-say="It is busy at the door.">
+      <p class="when">The club is filling up</p>
+      <p class="say"><b class="sk">It</b> is busy at the door.</p>
+      <svg class="ear" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 10v4h4l5 4V6L7 10H3z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M16.5 8.5a5 5 0 010 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+    <button class="row" data-say="People are lining up at register 3.">
+      <p class="when">Registers</p>
+      <p class="say"><b class="sk">People</b> are lining up at register 3.</p>
+      <svg class="ear" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 10v4h4l5 4V6L7 10H3z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M16.5 8.5a5 5 0 010 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+    <button class="row" data-say="Can you help me with this member?">
+      <p class="when">You need backup</p>
+      <p class="say">Can you help me with this member?</p>
+      <svg class="ear" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 10v4h4l5 4V6L7 10H3z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M16.5 8.5a5 5 0 010 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+    <button class="row" data-say="I am going on break. I will be back at 3.">
+      <p class="when">Leaving the floor</p>
+      <p class="say"><b class="sk">I</b> am going on break. <b class="sk">I</b> will be back at 3.</p>
+      <svg class="ear" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 10v4h4l5 4V6L7 10H3z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M16.5 8.5a5 5 0 010 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+    <button class="row" data-say="I need a supervisor, please.">
+      <p class="when">Override / problem</p>
+      <p class="say"><b class="sk">I</b> need a supervisor, please.</p>
+      <svg class="ear" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 10v4h4l5 4V6L7 10H3z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M16.5 8.5a5 5 0 010 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+  </section>
+
+  <aside class="drill" id="drill">
+    <h2>This week on the floor</h2>
+    <p>Same skeleton as class. Fill it with Sam’s Club.</p>
+    <div class="model">
+      <span>It</span> is busy at the door.<br>
+      <span>People</span> are waiting at register 3.<br>
+      <span>I</span> like helping members.
+    </div>
+  </aside>
+
+  <p class="foot">Hecho por tu profesor Gabriel · ARCHES</p>
+</div>
+
+<div class="dock">
+  <button class="g" type="button" id="btn-top">Top</button>
+  <button class="p" type="button" id="btn-hear">Hear a line</button>
+</div>
+
+<script>
+(function(){
+  const tabM = document.getElementById('tab-m');
+  const tabT = document.getElementById('tab-t');
+  const panelM = document.getElementById('panel-m');
+  const panelT = document.getElementById('panel-t');
+  const tabs = document.querySelector('.tabs');
+
+  function show(which, push){
+    const members = which === 'm';
+    tabM.setAttribute('aria-selected', members ? 'true' : 'false');
+    tabT.setAttribute('aria-selected', members ? 'false' : 'true');
+    panelM.hidden = !members;
+    panelT.hidden = members;
+    if (push !== false){
+      const hash = members ? '#members' : '#team';
+      if (location.hash !== hash) history.replaceState(null, '', hash);
+    }
+  }
+  tabM.addEventListener('click', function(){ show('m'); });
+  tabT.addEventListener('click', function(){ show('t'); });
+  show(location.hash === '#team' ? 't' : 'm', false);
+
+  window.addEventListener('scroll', function(){
+    tabs.classList.toggle('stuck', window.scrollY > 200);
+  }, {passive:true});
+
+  let speakingBtn = null;
+  function speak(text, btn){
+    if (!window.speechSynthesis) return;
+    window.speechSynthesis.cancel();
+    if (speakingBtn) speakingBtn.classList.remove('speaking');
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = 'en-US';
+    u.rate = 0.88;
+    speakingBtn = btn || null;
+    if (speakingBtn) speakingBtn.classList.add('speaking');
+    u.onend = u.onerror = function(){
+      if (speakingBtn) speakingBtn.classList.remove('speaking');
+      speakingBtn = null;
+    };
+    window.speechSynthesis.speak(u);
+  }
+
+  document.querySelectorAll('.row').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      speak(btn.getAttribute('data-say'), btn);
+    });
+  });
+
+  document.getElementById('btn-top').addEventListener('click', function(){
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+  document.getElementById('btn-hear').addEventListener('click', function(){
+    const open = panelM.hidden ? panelT : panelM;
+    const first = open.querySelector('.row');
+    if (first) first.click();
+  });
+})();
+</script>
+<noscript>
+<style>.row{opacity:1;transform:none}</style>
+</noscript>
+</body>
+</html>
