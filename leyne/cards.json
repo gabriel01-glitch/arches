@@ -1,6 +1,6 @@
 {
   "student": "Leyne",
-  "updated": "26 de agosto de 2026",
+  "updated": "17 de septiembre de 2026",
   "cards": [
     {
       "wrong": "I am going the beach.",
@@ -139,6 +139,15 @@
       "hint": "En inglés, los pronombres de tercera persona singular (he, she, it) requieren que el verbo lleve una 's' al final en el presente simple. En español no cambiamos el verbo así ('él tiene'), así que es fácil olvidarlo en inglés.",
       "alts": [],
       "date": "26 de agosto de 2026"
+    },
+    {
+      "wrong": "Are you looking something?",
+      "right": "Are you looking for something?",
+      "hint": "En español 'buscar' no necesita preposicion, pero en ingles 'look for' es un phrasal verb inseparable. Siempre necesita el 'for' para expresar busqueda.",
+      "alts": [
+        "Are you looking for anything?"
+      ],
+      "date": "17 de septiembre de 2026"
     }
   ]
 }
