@@ -4,6 +4,7 @@
 <meta name="robots" content="noindex, nofollow">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="cv-shell" content="cv-shell-2026-09-04">
 <title>Leyne · Tu repaso</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
 <style>
@@ -43,6 +44,10 @@ button:active{transform:scale(.96)}
 .shelf{margin-top:22px;text-align:center;color:var(--soft);font-size:13px}
 .backlink{display:block;text-align:center;margin-top:18px;color:var(--terra);font-weight:800;text-decoration:none;font-size:13.5px}
 footer{text-align:center;color:var(--soft);font-size:12px;padding:22px 16px 8px}
+.word{font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:700;line-height:1.2;margin-bottom:4px}
+.say{display:none;margin-top:12px;padding:14px;border-radius:12px;background:var(--cream);border:1px dashed var(--terra);font-weight:800;font-size:22px;letter-spacing:.5px;color:var(--terra)}
+.say small{display:block;font-weight:600;font-size:13px;color:var(--soft);margin-top:6px;letter-spacing:0}
+.say .heard{text-decoration:line-through;color:#a34a2b;font-weight:700}
 </style>
 </head>
 <body>
@@ -69,7 +74,19 @@ function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;
 function normalize(s){return s.toLowerCase().replace(/[\u2019']/g,"'").replace(/[.,!?;:]/g,"").replace(/\s+/g," ").trim().replace(/\bi'm\b/g,"i am").replace(/\bit's\b/g,"it is").replace(/\bcan't\b/g,"cannot").replace(/\bdon't\b/g,"do not");}
 function lev(a,b){var m=[];for(var i=0;i<=b.length;i++){m[i]=[i];}for(var j=0;j<=a.length;j++){m[0][j]=j;}for(i=1;i<=b.length;i++){for(j=1;j<=a.length;j++){m[i][j]=b.charAt(i-1)===a.charAt(j-1)?m[i-1][j-1]:Math.min(m[i-1][j-1]+1,m[i][j-1]+1,m[i-1][j]+1);}}return m[b.length][a.length];}
 function cid(c){return (c.wrong+"||"+c.right).toLowerCase().replace(/\s+/g," ").trim();}
-function speak(t){try{var u=new SpeechSynthesisUtterance(t);u.lang="en-US";u.rate=0.9;speechSynthesis.cancel();speechSynthesis.speak(u);}catch(e){}}
+var VOICE=null;
+function loadVoice(){
+  try{
+    var vs=speechSynthesis.getVoices()||[]; if(!vs.length)return;
+    var bad=/albert|bad news|bahh|bells|boing|bubbles|cellos|deranged|eddy|flo|fred|good news|grandma|grandpa|hysterical|jester|junior|kathy|organ|ralph|reed|rocko|sandy|shelley|superstar|trinoids|whisper|wobble|zarvox|eloquence/i;
+    var en=vs.filter(function(v){return /^en[-_]/i.test(v.lang)&&!bad.test(v.name);});
+    var pref=[/samantha/i,/google us english/i,/microsoft (aria|jenny|guy|ana|zira|david)/i,/alex/i,/karen|moira|daniel|tessa/i];
+    for(var i=0;i<pref.length&&!VOICE;i++){VOICE=en.find(function(v){return pref[i].test(v.name);})||null;}
+    if(!VOICE)VOICE=en.find(function(v){return /en[-_]US/i.test(v.lang);})||en[0]||null;
+  }catch(e){}
+}
+loadVoice(); try{speechSynthesis.onvoiceschanged=loadVoice;}catch(e){}
+function speak(t){try{if(!VOICE)loadVoice();var u=new SpeechSynthesisUtterance(t);u.lang="en-US";u.rate=0.9;if(VOICE)u.voice=VOICE;speechSynthesis.cancel();speechSynthesis.speak(u);}catch(e){}}
 function loadMastery(){try{mastery=JSON.parse(localStorage.getItem("cv_mastery_"+SLUG))||{};}catch(e){mastery={};}}
 function saveMastery(){try{localStorage.setItem("cv_mastery_"+SLUG,JSON.stringify(mastery));}catch(e){}}
 
@@ -100,6 +117,24 @@ function render(){
   var it = queue[idx];
   var sc = scoreOf(it);
   var dots="";for(var k=0;k<MASTER_AT;k++){dots+='<span class="dot'+(k<sc?" on":"")+'"></span>';}
+  if(it.type==="pron"){
+    var w=it.word||it.right;
+    cardEl.innerHTML=
+      '<div class="daytag">'+esc(it.date||"")+'</div>'+
+      '<div class="kicker">Pronuncia la palabra · '+(idx+1)+' de '+queue.length+'</div>'+
+      '<div class="word">'+esc(w)+'</div>'+
+      '<div class="hint">Escuchala, dila en voz alta, y compara con la guia ARCHES.</div>'+
+      '<div class="dots">'+dots+'</div>'+
+      '<div class="row"><button class="audio" onclick="speak(queue['+idx+'].word||queue['+idx+'].right)">Escuchar</button>'+
+      '<button class="ghost" onclick="revealSay()">Ver como se dice</button>'+
+      '<button class="main-btn" onclick="saidIt()">La dije bien</button></div>'+
+      '<div class="say" id="say">'+esc(it.say||w)+
+        (it.heard?'<small>Asi sonaba: <span class="heard">'+esc(it.heard)+'</span></small>':'')+
+        (it.hint?'<small>'+esc(it.hint)+'</small>':'')+'</div>'+
+      '<div class="fb" id="fb"></div>'+
+      '<div class="row"><button class="ghost" id="next" style="display:none" onclick="next()">Siguiente →</button></div>';
+    return;
+  }
   cardEl.innerHTML=
     '<div class="daytag">'+esc(it.date||"")+'</div>'+
     '<div class="kicker">Corrige la frase · '+(idx+1)+' de '+queue.length+'</div>'+
@@ -136,6 +171,13 @@ function reveal(){
   show();
 }
 function show(){document.getElementById("answer").style.display="block";document.getElementById("next").style.display="inline-block";}
+function revealSay(){document.getElementById("say").style.display="block";document.getElementById("next").style.display="inline-block";}
+function saidIt(){
+  var it=queue[idx];var id=cid(it);var m=mastery[id]||{score:0};m.score=Math.min(MASTER_AT,(m.score||0)+1);mastery[id]=m;saveMastery();
+  var fb=document.getElementById("fb");fb.className="fb ok";fb.textContent=(m.score>=MASTER_AT)?"Dominada. Sigue asi.":"Bien. Una vez mas otro dia.";
+  var ds=document.querySelectorAll(".dot");for(var k=0;k<ds.length;k++){if(k<m.score)ds[k].className="dot on";}
+  revealSay();
+}
 function next(){idx++; if(idx>=queue.length){rebuildQueue();} else {render();}}
 function done(){
   barEl.style.width="100%";
