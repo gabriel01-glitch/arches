@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bajo la casa · Wilfredo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --soil:#241910;
+    --paper:#f4efe4;
+    --ink:#241c16;
+    --muted:#4e453c;
+    --line:#e0d3c2;
+    --copper:#8a3e22;
+    --copper-deep:#5c2614;
+    --cream:#fff8f2;
+    --brass:#8a6a2e;
+    --moss:#1c5c38;
+    --moss-s:#e3f1e8;
+    --leak:#7a2e22;
+    --leak-s:#f8e4dc;
+    --sky:#1b2430;
+    --ease:cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  [hidden]{display:none !important;}
+  html,body{margin:0;}
+  body{
+    background:var(--soil);
+    color:var(--ink);
+    font-family:"Source Sans 3",system-ui,sans-serif;
+    font-size:17px;
+    line-height:1.4;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{background:#f0d7c4;color:var(--ink);}
+  :focus-visible{outline:3px solid var(--copper);outline-offset:3px;}
+  button,a{font-family:inherit;}
+  .sheet{
+    max-width:440px;
+    margin:0 auto;
+    background:var(--paper);
+    min-height:100vh;
+    padding:14px 16px calc(24px + env(safe-area-inset-bottom));
+  }
+  .top{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:44px;}
+  .back{
+    color:var(--copper);
+    font-weight:700;
+    font-size:15px;
+    text-decoration:none;
+    min-height:44px;
+    display:inline-flex;
+    align-items:center;
+  }
+  .count{font-size:13px;font-weight:700;letter-spacing:.04em;color:var(--muted);margin:0;}
+  h1{
+    font-family:Fraunces,Georgia,serif;
+    font-weight:700;
+    font-size:clamp(34px,9vw,46px);
+    line-height:.98;
+    letter-spacing:-.03em;
+    margin:8px 0 10px;
+    color:var(--ink);
+  }
+  .sheet.drill h1{font-size:28px;margin:2px 0 0;}
+  .deck{margin:0 0 14px;font-size:17.5px;line-height:1.45;}
+  .rules{margin:0 0 14px;padding:0;list-style:none;}
+  .rules li{
+    margin:0 0 8px;
+    padding:8px 0 8px 12px;
+    border-left:3px solid var(--copper);
+    font-weight:600;
+  }
+  .say{
+    margin:0 0 16px;
+    padding:12px 12px 10px;
+    background:#fff;
+    border-radius:12px;
+    border:1.5px solid var(--line);
+  }
+  .say .lab{
+    display:flex;align-items:center;justify-content:space-between;gap:8px;
+    font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--copper);margin-bottom:4px;
+  }
+  .say p{margin:0;font-family:Fraunces,Georgia,serif;font-size:22px;line-height:1.2;font-weight:600;}
+  .ghost{
+    border:0;background:transparent;color:var(--copper);
+    font-weight:700;font-size:14px;min-height:44px;padding:8px 2px;cursor:pointer;
+  }
+  .btn{
+    display:flex;align-items:center;justify-content:center;
+    width:100%;min-height:52px;padding:12px 16px;
+    border:0;border-radius:12px;
+    background:var(--copper-deep);color:var(--cream);
+    font-weight:700;font-size:17px;cursor:pointer;
+  }
+  .btn:disabled{background:#e0d3c2;color:var(--muted);cursor:default;}
+  .btn.quiet{
+    background:transparent;color:var(--copper-deep);
+    border:1.5px solid var(--line);margin-top:8px;
+  }
+  .stage{
+    margin:8px 0 12px;
+    border-radius:16px;
+    overflow:hidden;
+    background:var(--sky);
+    line-height:0;
+  }
+  .scene{width:100%;height:auto;display:block;}
+  .sky{fill:var(--sky);}
+  .moon{fill:#f3e6c4;}
+  .roof{fill:#2a231c;}
+  .wall{fill:#3c332b;}
+  .window{fill:#24303a;}
+  .phone{fill:#24303a;}
+  .crawl{fill:#140f0c;}
+  .joists line{stroke:#3d332b;stroke-width:3;}
+  .dirt{fill:#2a2118;}
+  .pipe{fill:#8d97a3;}
+  .valve circle{fill:#c6a15a;}
+  .valve path{stroke:#5c4516;stroke-width:1.6;fill:none;}
+  .drops circle{fill:#8fd0de;opacity:0;}
+  .heater-old rect{fill:#6a4634;}
+  .heater-old .band{fill:#c6a15a;}
+  .heater-new{opacity:0;}
+  .heater-new rect{fill:#8a5a3a;}
+  .heater-new .band{fill:#f0d7a4;}
+  .pan{fill:#7a4a2a;}
+  .breaker rect{fill:#3a332c;}
+  .breaker .switch{fill:#2a2622;}
+  .panel rect{fill:#4a4036;stroke:#c6a15a;stroke-width:1.2;}
+  .panel line{stroke:#c6a15a;stroke-width:1;}
+  .panel{transform:translateX(14px);}
+  .heater-old,.heater-new,.panel{transition:transform .4s var(--ease),opacity .4s var(--ease);}
+
+  .look-call .window,.look-call-done .window{fill:#7eb8c9;}
+  .look-call .phone,.look-call-done .phone{fill:#f3e6c4;}
+  .look-call .drops circle,.look-call-done .drops circle,.look-valve .drops circle{opacity:1;}
+  .look-call .drops circle,.look-call-done .drops circle,.look-valve .drops circle{animation:drip 1.5s ease-in infinite;}
+  .drops circle:nth-child(2){animation-delay:.35s;}
+  .drops circle:nth-child(3){animation-delay:.7s;}
+  @keyframes drip{
+    0%{transform:translateY(0);opacity:0;}
+    25%{opacity:1;}
+    100%{transform:translateY(12px);opacity:0;}
+  }
+  .look-dry .valve circle,.look-power .valve circle,.look-power-off .valve circle,
+  .look-pan .valve circle,.look-pan-gone .valve circle,.look-lift .valve circle,
+  .look-lift-gone .valve circle,.look-seat .valve circle,.look-seat-done .valve circle,
+  .look-panel .valve circle,.look-shut .valve circle,.look-done .valve circle{fill:#e7c27a;}
+  .look-power .breaker .switch{fill:#e0b15a;}
+  .look-power-off .breaker .switch,.look-pan .breaker .switch,.look-pan-gone .breaker .switch,
+  .look-lift .breaker .switch,.look-lift-gone .breaker .switch,.look-seat .breaker .switch,
+  .look-seat-done .breaker .switch,.look-panel .breaker .switch,.look-shut .breaker .switch,
+  .look-done .breaker .switch{fill:#1a1816;}
+  .look-pan-gone .pan,.look-lift .pan,.look-lift-gone .pan,.look-seat .pan,
+  .look-seat-done .pan,.look-panel .pan,.look-shut .pan,.look-done .pan{opacity:0;}
+  .look-lift .heater-old{transform:translate(16px,-18px);}
+  .look-lift-gone .heater-old,.look-seat .heater-old,.look-seat-done .heater-old,
+  .look-panel .heater-old,.look-shut .heater-old,.look-done .heater-old{opacity:0;}
+  .look-seat .heater-new{opacity:1;transform:translateY(14px);}
+  .look-seat-done .heater-new,.look-panel .heater-new,.look-shut .heater-new,.look-done .heater-new{opacity:1;transform:none;}
+  .look-shut .panel,.look-done .panel{transform:none;}
+  .look-shut .window,.look-done .window{fill:#e7c27a;}
+
+  .es{margin:0 0 8px;color:var(--muted);font-weight:600;font-size:15.5px;}
+  .built{
+    font-family:Fraunces,Georgia,serif;
+    font-weight:600;
+    font-size:28px;
+    line-height:1.2;
+    margin:0 0 12px;
+    letter-spacing:-.02em;
+  }
+  .slot{
+    display:inline-block;
+    min-width:1.6em;
+    padding:0 4px 1px;
+    border-bottom:2px solid var(--copper);
+    color:var(--muted);
+    font-weight:700;
+  }
+  .slot.on{color:var(--ink);}
+  .lab{
+    margin:12px 0 6px;
+    font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--copper);
+  }
+  .stamps{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;}
+  .stamp{
+    min-height:52px;padding:10px 8px;
+    background:#fff;color:var(--ink);
+    border:1.5px solid var(--line);border-radius:12px;
+    font-weight:700;font-size:15.5px;line-height:1.2;cursor:pointer;
+    transition:transform .16s var(--ease),background .16s ease,border-color .16s ease,color .16s ease;
+  }
+  .stamp.on{background:var(--copper-deep);color:var(--cream);border-color:var(--copper-deep);}
+  .stamp.bad{background:var(--leak-s);color:var(--leak);border-color:var(--leak);}
+  .stamp.good{background:var(--moss-s);color:var(--moss);border-color:var(--moss);}
+  .stamps.shake{animation:nope .18s ease-in-out;}
+  @keyframes nope{
+    0%,100%{transform:none;}
+    30%{transform:translateX(-5px);}
+    70%{transform:translateX(5px);}
+  }
+  .coach{
+    min-height:22px;margin:10px 0 0;
+    font-weight:700;font-size:15.5px;color:var(--leak);
+  }
+  .coach.ok{color:var(--moss);}
+  .locked{
+    font-family:Fraunces,Georgia,serif;
+    font-size:26px;font-weight:600;line-height:1.2;
+    margin:12px 0 8px;color:var(--ink);
+  }
+  .dock{
+    position:sticky;bottom:0;
+    padding-top:12px;
+    background:linear-gradient(180deg,rgba(244,239,228,0),var(--paper) 30%);
+  }
+  .actions{margin-top:14px;}
+  .actions .btn + .btn{margin-top:8px;}
+  .story-line{
+    margin:0 0 8px;padding:8px 0 8px 12px;
+    border-left:3px solid var(--copper);
+    font-family:Fraunces,Georgia,serif;
+    font-size:22px;font-weight:600;line-height:1.25;
+  }
+  .clock{
+    font-family:Fraunces,Georgia,serif;
+    font-size:64px;line-height:1;font-weight:700;
+    margin:6px 0 4px;letter-spacing:-.03em;
+  }
+  .choice{
+    display:block;width:100%;text-align:left;
+    min-height:52px;margin:0 0 8px;padding:12px 14px;
+    background:#fff;border:1.5px solid var(--line);border-radius:12px;
+    font-weight:700;font-size:16.5px;line-height:1.3;color:var(--ink);cursor:pointer;
+  }
+  .choice.bad{background:var(--leak-s);border-color:var(--leak);color:var(--leak);}
+  .choice.good{background:var(--moss-s);border-color:var(--moss);color:var(--moss);}
+  .broken{
+    font-family:Fraunces,Georgia,serif;
+    font-size:26px;font-weight:600;line-height:1.2;
+    margin:4px 0 12px;color:var(--leak);
+    text-decoration:line-through;text-decoration-thickness:2px;
+  }
+  .killer{
+    font-family:Fraunces,Georgia,serif;
+    font-size:30px;font-weight:700;line-height:1.15;
+    letter-spacing:-.02em;margin:8px 0 8px;
+  }
+  .static{padding-top:22px;}
+  .static li{margin:0 0 8px;}
+  @media (hover:hover) and (pointer:fine){
+    .stamp:hover,.choice:hover,.btn:hover{transform:translateY(-2px);}
+    .btn:disabled:hover{transform:none;}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation:none !important;transition:none !important;}
+    .look-call .drops circle,.look-call-done .drops circle,.look-valve .drops circle{opacity:.9;transform:none;}
+  }
+</style>
+</head>
+<body>
+<noscript>
+  <article class="sheet static">
+    <h1>Bajo la casa</h1>
+    <p>Domingo por la noche. Swann Avenue, South Tampa. El calentador ya está cambiado. Job terminado = pasado. La palabrita no se cae.</p>
+    <ol>
+      <li>I got the call at nine.</li>
+      <li>I shut off the main valve.</li>
+      <li>I turned off the breaker.</li>
+      <li>I dug out the rusted pan.</li>
+      <li>I took out the old heater.</li>
+      <li>I put in the new heater.</li>
+      <li>I put back the panel and went home.</li>
+    </ol>
+    <p>I shut off the main, turned off the breaker, dug out the pan, took out the old heater, and put in a new one.</p>
+    <h2>Las que se rompen</h2>
+    <ul>
+      <li>Yesterday I take out the valve. → Yesterday I took out the valve.</li>
+      <li>I putted in a new faucet. → I put in a new faucet.</li>
+      <li>I shut the water. / Close the water. → I shut off the water.</li>
+      <li>Then I check and I go home. → Then I checked and I went home.</li>
+    </ul>
+  </article>
+</noscript>
+<div id="app"></div>
+<script>
+(function(){
+  "use strict";
+
+  var BEATS = [
+    {
+      look:"call", lookDone:"call-done",
+      see:"Teléfono en la ventana. Agua todavía bajo la casa.",
+      es:"Te llamaron a las nueve. El trabajo ya terminó.",
+      before:"I", mid:"the call at nine.",
+      verb:{
+        choices:[
+          {v:"get", why:"Ya terminó. Pasado: got."},
+          {v:"goed", why:"get → got. Goed no existe."},
+          {v:"got", why:""}
+        ],
+        answer:"got"
+      },
+      line:"I got the call at nine."
+    },
+    {
+      look:"valve", lookDone:"dry",
+      see:"El agua corre. La válvula todavía abierta.",
+      es:"Primero el agua. Cierra el paso principal.",
+      before:"I", mid:"the main valve.",
+      verb:{
+        choices:[
+          {v:"shutted", why:"shut no cambia. shut, shut, shut."},
+          {v:"shut", why:""},
+          {v:"shutting", why:"No es ahora. Ya lo hiciste: shut."}
+        ],
+        answer:"shut"
+      },
+      particle:{
+        choices:[
+          {v:"", show:"sin palabrita", why:"Falta off. I shut off the main valve."},
+          {v:"out", why:"out es sacar. El agua se apaga: off."},
+          {v:"off", why:""}
+        ],
+        answer:"off"
+      },
+      line:"I shut off the main valve."
+    },
+    {
+      look:"power", lookDone:"power-off",
+      see:"El breaker sigue encendido, ámbar.",
+      es:"La corriente, antes de meterte bajo la casa.",
+      before:"I", mid:"the breaker.",
+      verb:{
+        choices:[
+          {v:"turned", why:""},
+          {v:"turn", why:"Ayer no es turn. turned."},
+          {v:"turned offed", why:"turned ya es el pasado. off no lleva -ed."}
+        ],
+        answer:"turned"
+      },
+      particle:{
+        choices:[
+          {v:"out", why:"out es sacar. El breaker: off."},
+          {v:"off", why:""},
+          {v:"", show:"sin palabrita", why:"Sin off solo giraste algo. turned off."}
+        ],
+        answer:"off"
+      },
+      line:"I turned off the breaker."
+    },
+    {
+      look:"pan", lookDone:"pan-gone",
+      see:"La bandeja oxidada, abajo del calentador.",
+      es:"La bandeja oxidada, abajo del calentador. Sácala.",
+      before:"I", mid:"the rusted pan.",
+      verb:{
+        choices:[
+          {v:"dig", why:"El job ya terminó. dig → dug."},
+          {v:"digged", why:"dig → dug. No digged."},
+          {v:"dug", why:""}
+        ],
+        answer:"dug"
+      },
+      particle:{
+        choices:[
+          {v:"off", why:"off apaga. Sacar la bandeja es out."},
+          {v:"out", why:""},
+          {v:"", show:"sin palabrita", why:"dug out. Sin out, no la sacaste."}
+        ],
+        answer:"out"
+      },
+      line:"I dug out the rusted pan."
+    },
+    {
+      look:"lift", lookDone:"lift-gone",
+      see:"El calentador viejo, a medio salir.",
+      es:"El calentador viejo, para afuera.",
+      before:"I", mid:"the old heater.",
+      verb:{
+        choices:[
+          {v:"taked", why:"take → took. No taked."},
+          {v:"took", why:""},
+          {v:"take", why:"Historia cerrada. took, no take."}
+        ],
+        answer:"took"
+      },
+      particle:{
+        choices:[
+          {v:"", show:"sin palabrita", why:"took out. Sin out, no salió."},
+          {v:"off", why:"off apaga. Sacar es out."},
+          {v:"out", why:""}
+        ],
+        answer:"out"
+      },
+      line:"I took out the old heater."
+    },
+    {
+      look:"seat", lookDone:"seat-done",
+      see:"El calentador nuevo, todavía en el aire.",
+      es:"El calentador nuevo, adentro.",
+      before:"I", mid:"the new heater.",
+      verb:{
+        choices:[
+          {v:"putting", why:"No es ahora. El job ya terminó. I put."},
+          {v:"putted", why:"put no cambia. I put. Nunca putted."},
+          {v:"put", why:""}
+        ],
+        answer:"put"
+      },
+      particle:{
+        choices:[
+          {v:"back", why:"back es devolver. Instalar es in."},
+          {v:"", show:"sin palabrita", why:"put in. Sin in, no lo instalaste."},
+          {v:"in", why:""}
+        ],
+        answer:"in"
+      },
+      line:"I put in the new heater."
+    },
+    {
+      look:"panel", lookDone:"shut",
+      see:"El panel abierto. La casa todavía despierta.",
+      es:"El panel vuelve a su sitio. Y te vas a la casa.",
+      before:"I", mid:"the panel and", tailAfter:"home.",
+      verb:{
+        choices:[
+          {v:"putted", why:"put no cambia. I put."},
+          {v:"put", why:""},
+          {v:"putting", why:"Ya te fuiste. No es putting."}
+        ],
+        answer:"put"
+      },
+      particle:{
+        choices:[
+          {v:"back", why:""},
+          {v:"in", why:"in es instalar. El panel vuelve: back."},
+          {v:"", show:"sin palabrita", why:"put back the panel. Sin back, no volvió."}
+        ],
+        answer:"back"
+      },
+      tail:{
+        choices:[
+          {v:"go", why:"go → went. La cadena no vuelve al presente."},
+          {v:"goed", why:"go → went. Goed no existe."},
+          {v:"went", why:""}
+        ],
+        answer:"went"
+      },
+      line:"I put back the panel and went home."
+    }
+  ];
+
+  var TRAPS = [
+    {
+      es:"La de siempre: el job de ayer, contado en presente.",
+      broken:"Yesterday I take out the valve.",
+      choices:[
+        {t:"Yesterday I took out the valve.", ok:true},
+        {t:"Yesterday I taked out the valve.", why:"take → took. No taked."},
+        {t:"Yesterday I take outed the valve.", why:"out no lleva -ed. Y el verbo es took."}
+      ]
+    },
+    {
+      es:"El grifo nuevo. Arregla la frase de abajo.",
+      broken:"I putted in a new faucet.",
+      choices:[
+        {t:"I put in a new faucet.", ok:true},
+        {t:"I putted a new faucet.", why:"Sigue putted, y además se cayó in."},
+        {t:"I put ined a new faucet.", why:"in no lleva -ed. I put in."}
+      ]
+    },
+    {
+      es:"Así cierras el agua en la obra. La de abajo no sella.",
+      broken:"I shut the water.",
+      choices:[
+        {t:"I shut off the water.", ok:true},
+        {t:"I close the water.", why:"No es close. Shut off."},
+        {t:"I shut offed the water.", why:"off no lleva -ed. shut off."}
+      ]
+    },
+    {
+      es:"La cadena. Un verbo en pasado y el otro se vuelve presente.",
+      broken:"Then I check and I go home.",
+      choices:[
+        {t:"Then I checked and I went home.", ok:true},
+        {t:"Then I checked and I go home.", why:"checked está bien. go también tiene que ser went."},
+        {t:"Then I check and I went home.", why:"went está bien. check también: checked."}
+      ]
+    }
+  ];
+
+  var KILLER = "I shut off the main, turned off the breaker, dug out the pan, took out the old heater, and put in a new one.";
+  var OLD = "I shut off the water, took out the old valve, and put in a new one.";
+
+  var phase = "open";
+  var bi = 0;
+  var ti = 0;
+  var pick = {};
+  var sealed = false;
+  var clockId = null;
+  var clockLeft = 60;
+
+  function esc(s){
+    return String(s == null ? "" : s)
+      .replace(/&/g,"&").replace(/</g,"<")
+      .replace(/>/g,">").replace(/"/g,""");
+  }
+  function clearTimer(){
+    if(clockId){ clearInterval(clockId); clockId = null; }
+  }
+  function speak(text){
+    if(!window.speechSynthesis) return;
+    window.speechSynthesis.cancel();
+    var u = new SpeechSynthesisUtterance(text);
+    u.lang = "en-US";
+    u.rate = 0.92;
+    var voices = window.speechSynthesis.getVoices();
+    var voice = null;
+    for(var i=0;i<voices.length;i++){
+      if(/en[-_]US/i.test(voices[i].lang)){ voice = voices[i]; break; }
+    }
+    if(voice) u.voice = voice;
+    window.speechSynthesis.speak(u);
+  }
+  if(window.speechSynthesis){
+    window.speechSynthesis.onvoiceschanged = function(){};
+  }
+
+  function scene(look, label){
+    return '<div class="stage look-'+esc(look)+'">'+
+      '<svg class="scene" viewBox="0 0 360 168" role="img" aria-label="'+esc(label)+'">'+
+        '<rect class="sky" width="360" height="168"></rect>'+
+        '<circle class="moon" cx="314" cy="22" r="9"></circle>'+
+        '<polygon class="roof" points="34,72 170,24 326,72"></polygon>'+
+        '<rect class="wall" x="76" y="72" width="208" height="30"></rect>'+
+        '<rect class="window" x="96" y="80" width="28" height="14" rx="1"></rect>'+
+        '<rect class="phone" x="166" y="78" width="10" height="16" rx="2"></rect>'+
+        '<rect class="crawl" x="26" y="104" width="308" height="56" rx="4"></rect>'+
+        '<g class="joists"><line x1="48" y1="104" x2="48" y2="160"></line><line x1="108" y1="104" x2="108" y2="160"></line><line x1="252" y1="104" x2="252" y2="160"></line><line x1="312" y1="104" x2="312" y2="160"></line></g>'+
+        '<rect class="dirt" x="26" y="150" width="308" height="12"></rect>'+
+        '<rect class="pipe" x="86" y="126" width="108" height="7" rx="3"></rect>'+
+        '<g class="valve"><circle cx="124" cy="118" r="10"></circle><path d="M124 109 v18 M115 118 h18"></path></g>'+
+        '<g class="drops"><circle cx="154" cy="138" r="2.5"></circle><circle cx="166" cy="142" r="2.1"></circle><circle cx="146" cy="146" r="1.8"></circle></g>'+
+        '<g class="heater-old"><rect x="178" y="114" width="42" height="36" rx="7"></rect><rect class="band" x="186" y="122" width="26" height="4" rx="1"></rect></g>'+
+        '<g class="heater-new"><rect x="178" y="114" width="42" height="36" rx="7"></rect><rect class="band" x="186" y="122" width="26" height="4" rx="1"></rect></g>'+
+        '<ellipse class="pan" cx="199" cy="150" rx="26" ry="5"></ellipse>'+
+        '<g class="breaker"><rect x="60" y="110" width="24" height="30" rx="2"></rect><rect class="switch" x="66" y="116" width="12" height="7" rx="1"></rect></g>'+
+        '<g class="panel"><rect x="230" y="108" width="54" height="42" rx="2"></rect><line x1="257" y1="108" x2="257" y2="150"></line></g>'+
+      '</svg></div>';
+  }
+
+  function head(count){
+    return '<div class="top"><a class="back" href="../?name=Wilfredo">‹ Temas</a>'+
+      (count ? '<p class="count">'+esc(count)+'</p>' : '')+'</div>'+
+      '<h1>Bajo la casa</h1>';
+  }
+
+  function slot(kind, text, on){
+    return '<span class="slot'+(on?' on':'')+'" id="slot-'+kind+'">'+esc(text)+'</span>';
+  }
+
+  function stampRow(kind, group){
+    var html = '<p class="lab">'+(kind==="verb"?"Verbo":kind==="particle"?"Palabrita":"Y después")+'</p><div class="stamps" data-row="'+kind+'">';
+    group.choices.forEach(function(c){
+      var label = c.show || c.v;
+      var slotText = c.v === "" ? "—" : c.v;
+      var pressed = pick[kind] === c.v ? "true" : "false";
+      var on = pick[kind] === c.v ? " on" : "";
+      html += '<button type="button" class="stamp'+on+'" data-kind="'+kind+'" data-val="'+esc(c.v)+'" data-slot="'+esc(slotText)+'" aria-pressed="'+pressed+'">'+esc(label)+'</button>';
+    });
+    return html + '</div>';
+  }
+
+  function render(){
+    clearTimer();
+    var root = document.getElementById("app");
+    if(phase==="open") renderOpen(root);
+    else if(phase==="beat") renderBeat(root);
+    else if(phase==="story") renderStory(root);
+    else if(phase==="trap") renderTrap(root);
+    else renderDone(root);
+  }
+
+  function renderOpen(root){
+    root.innerHTML =
+      '<article class="sheet">'+
+        head("")+
+        '<p class="deck">Domingo por la noche. Una casa en Swann Avenue, South Tampa. El calentador ya está cambiado. Tú cuentas el trabajo terminado.</p>'+
+        '<ul class="rules">'+
+          '<li>Job terminado = pasado. I turn, I go, I check no cuentan.</li>'+
+          '<li>La palabrita no se cae: off, out, in, back.</li>'+
+        '</ul>'+
+        '<div class="say"><div class="lab">Dilo conmigo <button type="button" class="ghost" id="hear">Oír</button></div>'+
+          '<p>The job is finished. Past. Keep the little word.</p></div>'+
+        '<button type="button" class="btn" id="go">Entrar bajo la casa</button>'+
+      '</article>';
+    document.getElementById("hear").onclick = function(){
+      speak("The job is finished. Past. Keep the little word.");
+    };
+    document.getElementById("go").onclick = function(){
+      bi = 0; pick = {}; sealed = false; phase = "beat"; render();
+    };
+  }
+
+  function face(val, chosen){
+    if(!chosen) return "___";
+    if(val === "") return "—";
+    return val;
+  }
+  function sentence(b){
+    var vOn = pick.verb != null;
+    var pOn = !!(b.particle && pick.particle != null);
+    var tOn = !!(b.tail && pick.tail != null);
+    var html = "I "+slot("verb", face(pick.verb, vOn), vOn)+" ";
+    if(b.particle) html += slot("particle", face(pick.particle, pOn), pOn)+" ";
+    html += esc(b.mid);
+    if(b.tail) html += " "+slot("tail", face(pick.tail, tOn), tOn)+" "+esc(b.tailAfter);
+    return html;
+  }
+  function ready(b){
+    if(pick.verb == null) return false;
+    if(b.particle && pick.particle == null) return false;
+    if(b.tail && pick.tail == null) return false;
+    return true;
+  }
+
+  function renderBeat(root){
+    var b = BEATS[bi];
+    root.innerHTML =
+      '<article class="sheet drill">'+
+        head("Paso "+(bi+1)+" de "+BEATS.length)+
+        scene(sealed ? b.lookDone : b.look, b.see)+
+        '<p class="es">'+esc(b.es)+'</p>'+
+        '<p class="built" id="built">'+sentence(b)+'</p>'+
+        '<div id="rows">'+
+          stampRow("verb", b.verb)+
+          (b.particle ? stampRow("particle", b.particle) : "")+
+          (b.tail ? stampRow("tail", b.tail) : "")+
+        '</div>'+
+        '<p class="coach" id="coach" aria-live="polite"></p>'+
+        '<p class="locked" id="locked" hidden></p>'+
+        '<div class="dock">'+
+          '<button type="button" class="btn" id="seal"'+(ready(b)?"":" disabled")+'">Sellar este paso</button>'+
+          '<button type="button" class="btn quiet" id="hear" hidden>Oír la frase</button>'+
+          '<button type="button" class="btn" id="next" hidden>'+(bi===BEATS.length-1?"Leer el job en voz alta":"Siguiente paso")+'</button>'+
+        '</div>'+
+      '</article>';
+    var rows = document.getElementById("rows");
+    rows.onclick = function(e){
+      var btn = e.target.closest(".stamp");
+      if(!btn || sealed) return;
+      var kind = btn.getAttribute("data-kind");
+      pick[kind] = btn.getAttribute("data-val");
+      rows.querySelectorAll('[data-kind="'+kind+'"]').forEach(function(el){
+        var on = el === btn;
+        el.classList.toggle("on", on);
+        el.classList.remove("bad");
+        el.setAttribute("aria-pressed", on ? "true" : "false");
+      });
+      var hole = document.getElementById("slot-"+kind);
+      hole.textContent = btn.getAttribute("data-slot") || "—";
+      hole.classList.add("on");
+      var coach = document.getElementById("coach");
+      coach.textContent = "";
+      coach.className = "coach";
+      document.getElementById("seal").disabled = !ready(b);
+    };
+    document.getElementById("seal").onclick = function(){ trySeal(root, b); };
+    document.getElementById("next").onclick = function(){
+      if(bi < BEATS.length-1){ bi++; pick = {}; sealed = false; phase = "beat"; }
+      else { phase = "story"; }
+      render();
+    };
+    var hear = document.getElementById("hear");
+    hear.onclick = function(){ speak(b.line); };
+    if(sealed) showSealed(b);
+  }
+
+  function showSealed(b){
+    sealed = true;
+    document.getElementById("rows").hidden = true;
+    var coach = document.getElementById("coach");
+    coach.textContent = "Sellado.";
+    coach.className = "coach ok";
+    var locked = document.getElementById("locked");
+    locked.hidden = false;
+    locked.textContent = b.line;
+    document.getElementById("built").hidden = true;
+    document.getElementById("seal").hidden = true;
+    document.getElementById("hear").hidden = false;
+    document.getElementById("next").hidden = false;
+  }
+
+  function whyFor(group, val){
+    for(var i=0;i<group.choices.length;i++){
+      if(group.choices[i].v === val) return group.choices[i].why || "Otra vez.";
+    }
+    return "Otra vez.";
+  }
+
+  function trySeal(root, b){
+    if(sealed) return;
+    var vOk = pick.verb === b.verb.answer;
+    var pOk = !b.particle || pick.particle === b.particle.answer;
+    var tOk = !b.tail || pick.tail === b.tail.answer;
+    if(vOk && pOk && tOk){
+      document.querySelector(".stage").className = "stage look-"+b.lookDone;
+      showSealed(b);
+      return;
+    }
+    var msg = !vOk ? whyFor(b.verb, pick.verb) : (!pOk ? whyFor(b.particle, pick.particle) : whyFor(b.tail, pick.tail));
+    var coach = document.getElementById("coach");
+    coach.textContent = msg;
+    coach.className = "coach";
+    var rowName = !vOk ? "verb" : (!pOk ? "particle" : "tail");
+    var row = document.querySelector('[data-row="'+rowName+'"]');
+    if(row){
+      row.classList.remove("shake");
+      void row.offsetWidth;
+      row.classList.add("shake");
+      row.querySelectorAll(".stamp").forEach(function(btn){
+        btn.classList.remove("bad");
+        if(btn.getAttribute("data-val") === pick[rowName] && btn.getAttribute("data-val") !== (rowName==="verb"?b.verb:rowName==="particle"?b.particle:b.tail).answer){
+          btn.classList.add("bad");
+        }
+      });
+    }
+  }
+
+  function renderStory(root){
+    clockLeft = 60;
+    var lines = BEATS.map(function(b){ return '<p class="story-line">'+esc(b.line)+'</p>'; }).join("");
+    root.innerHTML =
+      '<article class="sheet drill">'+
+        head("60 segundos")+
+        scene("done", "La casa en calma. El trabajo está hecho.")+
+        '<p class="es">Una toma. Si se cuela I turn, I go o I check, paras y lo dices en pasado.</p>'+
+        '<p class="clock" id="clock">1:00</p>'+
+        '<p class="story-line">Sunday night on Swann.</p>'+
+        lines+
+        '<div class="actions">'+
+          '<button type="button" class="btn" id="tick">Empezar el minuto</button>'+
+          '<button type="button" class="btn quiet" id="model">Oír el modelo</button>'+
+          '<button type="button" class="btn quiet" id="said">Ya lo dije</button>'+
+        '</div>'+
+      '</article>';
+    document.getElementById("tick").onclick = function(){
+      var btn = this;
+      var el = document.getElementById("clock");
+      if(clockId){ clearTimer(); btn.textContent = "Seguir el minuto"; return; }
+      if(clockLeft <= 0) clockLeft = 60;
+      if(el) el.textContent = Math.floor(clockLeft/60)+":"+((clockLeft%60)<10?"0":"")+(clockLeft%60);
+      btn.textContent = "Pausa";
+      clockId = setInterval(function(){
+        clockLeft--;
+        var el = document.getElementById("clock");
+        if(!el){ clearTimer(); return; }
+        if(clockLeft <= 0){
+          clearTimer();
+          el.textContent = "0:00";
+          btn.textContent = "Otra toma";
+          clockLeft = 60;
+          return;
+        }
+        var s = clockLeft % 60;
+        el.textContent = Math.floor(clockLeft/60)+":"+(s<10?"0":"")+s;
+      }, 1000);
+    };
+    document.getElementById("model").onclick = function(){
+      speak("Sunday night on Swann. "+BEATS.map(function(b){return b.line;}).join(" "));
+    };
+    document.getElementById("said").onclick = function(){
+      ti = 0; phase = "trap"; render();
+    };
+  }
+
+  function renderTrap(root){
+    var trap = TRAPS[ti];
+    var buttons = trap.choices.map(function(c, i){
+      return '<button type="button" class="choice" data-i="'+i+'">'+esc(c.t)+'</button>';
+    }).join("");
+    root.innerHTML =
+      '<article class="sheet drill">'+
+        head("Fuga "+(ti+1)+" de "+TRAPS.length)+
+        '<p class="es">'+esc(trap.es)+'</p>'+
+        '<p class="broken">'+esc(trap.broken)+'</p>'+
+        '<div id="choices">'+buttons+'</div>'+
+        '<p class="coach" id="coach" aria-live="polite"></p>'+
+        '<div class="dock"><button type="button" class="btn" id="next" hidden>'+(ti===TRAPS.length-1?"La frase de salida":"Siguiente fuga")+'</button></div>'+
+      '</article>';
+    document.getElementById("choices").onclick = function(e){
+      var btn = e.target.closest(".choice");
+      if(!btn || btn.disabled) return;
+      var c = trap.choices[Number(btn.getAttribute("data-i"))];
+      var coach = document.getElementById("coach");
+      if(!c.ok){
+        btn.classList.add("bad");
+        coach.textContent = c.why;
+        coach.className = "coach";
+        return;
+      }
+      document.querySelectorAll(".choice").forEach(function(el){ el.disabled = true; });
+      btn.classList.add("good");
+      coach.textContent = "Esa sella.";
+      coach.className = "coach ok";
+      document.getElementById("next").hidden = false;
+      speak(c.t);
+    };
+    document.getElementById("next").onclick = function(){
+      if(ti < TRAPS.length-1){ ti++; phase = "trap"; }
+      else phase = "done";
+      render();
+    };
+  }
+
+  function renderDone(root){
+    root.innerHTML =
+      '<article class="sheet">'+
+        head("")+
+        '<p class="deck">Dos veces. Despacio, luego a velocidad de obra.</p>'+
+        '<p class="lab">La de esta noche</p>'+
+        '<p class="killer">'+esc(KILLER)+'</p>'+
+        '<button type="button" class="btn" id="h1">Oír la de esta noche</button>'+
+        '<p class="lab">La de la semana pasada</p>'+
+        '<p class="killer">'+esc(OLD)+'</p>'+
+        '<button type="button" class="btn quiet" id="h2">Oír la de la semana pasada</button>'+
+        '<button type="button" class="btn quiet" id="again">Otra vez desde el principio</button>'+
+      '</article>';
+    document.getElementById("h1").onclick = function(){ speak(KILLER); };
+    document.getElementById("h2").onclick = function(){ speak(OLD); };
+    document.getElementById("again").onclick = function(){
+      phase = "open"; bi = 0; ti = 0; pick = {}; sealed = false; render();
+    };
+  }
+
+  render();
+})();
+</script>
+</body>
+</html>
