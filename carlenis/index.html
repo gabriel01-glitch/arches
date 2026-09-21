@@ -124,8 +124,8 @@
     "level": "B1-B2",
     "l1": "Spanish",
     "context": "Venezolana en EE. UU. Contadora con metas en finanzas. Bachata y ley de atracción.",
-    "greeting": "Hoy: I AM. You are in Barbados… el presente, el agree, y el to que no se esconde.",
-    "version": "2026-09-09"
+    "greeting": "Hoy: tu iPhone 18 Pro. Di desde cuándo lo tienes, to get, y una frase que Siri entienda.",
+    "version": "2026-09-21"
   },
   "tracks": [
     {
@@ -761,6 +761,11 @@
   ],
   "links": [
     {
+      "title": "Since Friday",
+      "note": "Tu iPhone 18 Pro. El ojo, la carga, y una frase que Siri entiende.",
+      "url": "pro/"
+    },
+    {
       "title": "Idioms",
       "note": "Mira el dibujo. El inglés literal es ridículo — por eso se te queda.",
       "url": "../apps/idioms/?name=Carlenis&from=carlenis"
@@ -768,7 +773,7 @@
 
     {
       "title": "I AM",
-      "note": "Clase de hoy. Neville en inglés: You are in Barbados, I agree, I need to get.",
+      "note": "Neville en inglés: You are in Barbados, I agree, I need to get.",
       "url": "iam/"
     },
     {
@@ -928,10 +933,11 @@
     const sc=streakCount();
     if(sc>0) html+='<div class="streak">'+flameSVG+'<span class="num">'+sc+'</span><span class="lab">'+(sc===1?'día seguido':'días seguidos')+'</span></div>';
     html+='</div>';
-    html+='<div class="tracks-label">Hoy</div>';
     app.innerHTML=html;
-    if(STUDENT.links && STUDENT.links[0] && STUDENT.links[0].url==="iam/"){
-      const L=STUDENT.links[0];
+    var hoyLink=(STUDENT.links||[]).find(function(L){return L.url==="pro/";});
+    if(hoyLink){
+      app.appendChild(el('<div class="tracks-label">Hoy</div>'));
+      const L=hoyLink;
       const feat=el('<a class="track" style="display:block;text-decoration:none;border-color:var(--terra)" href="'+L.url+'">'+
         '<div class="track-head"><div class="track-title">'+esc(L.title)+'</div><div class="track-count">hoy</div></div>'+
         (L.note?'<div class="track-note">'+esc(L.note)+'</div>':'')+'</a>');
@@ -950,7 +956,7 @@
     if(STUDENT.links && STUDENT.links.length){
       app.appendChild(el('<div class="tracks-label">Tus otras apps</div>'));
       STUDENT.links.forEach(function(L){
-        if(L.url==="iam/") return;
+        if(L.url==="pro/") return;
         const a=el('<a class="track" style="display:block;text-decoration:none" href="'+L.url+'">'+
           '<div class="track-head"><div class="track-title">'+esc(L.title)+'</div><div class="track-count">›</div></div>'+
           (L.note?'<div class="track-note">'+esc(L.note)+'</div>':'')+'</a>');
