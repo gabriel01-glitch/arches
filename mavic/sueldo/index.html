@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The raise</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f6f1e8; --surface:#fffdf9; --ink:#241c16; --muted:#5c5146;
+    --line:#e4d8c8; --terra:#8d3b24; --deep:#5c2416; --tint:#f3e3d8;
+    --moss:#24543e; --moss-tint:#e5f0ea; --gold-tint:#f8efd8;
+    --ease:cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:Nunito,system-ui,sans-serif;line-height:1.4}
+  :focus-visible{outline:3px solid var(--terra);outline-offset:3px}
+  button,a{font-family:inherit}
+  .shell{max-width:520px;margin:0 auto;padding:16px 16px 40px}
+  .back{display:inline-flex;align-items:center;min-height:44px;color:var(--deep);font-weight:800;text-decoration:none}
+  h1,h2{font-family:"Cormorant Garamond",Georgia,serif;color:var(--deep);line-height:1.02;margin:0}
+  h1{font-size:46px}
+  h2{font-size:28px;margin-top:22px}
+  .kicker{margin:8px 0 0;font-size:12px;font-weight:800;letter-spacing:1.1px;text-transform:uppercase;color:var(--terra)}
+  .lead{font-weight:700;font-size:17px;margin:8px 0 0}
+  .es{color:var(--muted);font-weight:700;font-size:14px;margin:6px 0 0}
+  .beats{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}
+  .beat{background:var(--surface);border:1.5px solid var(--line);border-radius:16px;padding:12px 12px 14px;text-align:left}
+  .beat i{display:block;font-style:normal;font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--terra)}
+  .beat b{display:block;margin-top:4px;font-size:15px}
+  .line{margin-top:10px;background:var(--surface);border-left:4px solid var(--terra);border-radius:0 14px 14px 0;padding:12px 12px 12px 14px}
+  .line p{margin:0;font-family:"Cormorant Garamond",Georgia,serif;font-size:24px;font-weight:600;line-height:1.2}
+  .hear,.go,.opt{min-height:48px;border-radius:14px;font-weight:800;font-size:15px;cursor:pointer}
+  .hear{margin-top:8px;width:100%;border:1.5px solid var(--line);background:var(--paper);color:var(--ink)}
+  .q{margin:14px 0 0;font-weight:800}
+  .opt{display:block;width:100%;text-align:left;margin-top:8px;padding:12px 14px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink)}
+  .opt.good{border-color:var(--moss);background:var(--moss-tint);color:var(--moss)}
+  .opt.no{border-color:var(--terra);background:var(--tint);color:var(--deep)}
+  .why{margin-top:8px;padding:10px 12px;border-radius:12px;background:var(--gold-tint);font-weight:800;font-size:14px}
+  .why.good{background:var(--moss-tint);color:var(--moss)}
+  .guide{margin-top:22px;border-top:1px solid var(--line);padding-top:8px}
+  .guide summary{min-height:44px;display:flex;align-items:center;font-weight:800;color:var(--muted);cursor:pointer}
+  .guide p{margin:0 0 8px;font-weight:700;font-size:14px}
+  @media (prefers-reduced-motion: reduce){*{transition:none !important}}
+</style>
+</head>
+<body>
+<div class="shell">
+  <a class="back" href="../">Home</a>
+  <p class="kicker">A salary talk</p>
+  <h1>Ask for the meeting</h1>
+  <p class="lead">Work first. Then one number. Then a question.</p>
+  <p class="es">No hables de cuentas ni de lo que gana otra persona. Habla de tu trabajo.</p>
+
+  <div class="beats">
+    <div class="beat"><i>1 · Meeting</i><b>Ask for time</b></div>
+    <div class="beat"><i>2 · Because</i><b>Your role grew</b></div>
+    <div class="beat"><i>3 · Proof</i><b>One result</b></div>
+    <div class="beat"><i>4 · Number</i><b>A clear ask</b></div>
+  </div>
+
+  <h2>Say this</h2>
+  <div id="lines"></div>
+
+  <h2>Pick the strong line</h2>
+  <div id="quiz"></div>
+
+  <h2>If they say not now</h2>
+  <div class="line"><p>What would need to happen for a review in three months?</p></div>
+  <button class="hear" type="button" data-say="What would need to happen for a review in three months?">Hear it</button>
+  <p class="es">Si el sueldo no se mueve hoy, pide una fecha. O un beneficio: un curso, un bono, un título.</p>
+
+  <h2>Close the loop</h2>
+  <div class="line"><p>Thank you. I'll send a short summary today.</p></div>
+  <button class="hear" type="button" data-say="Thank you. I'll send a short summary today.">Hear it</button>
+
+  <details class="guide">
+    <summary>Gabriel</summary>
+    <p>She asks for a separate meeting. Not in the middle of a site call.</p>
+    <p>Listen for: I think maybe · Sorry to ask · personal bills · no number.</p>
+    <p>Model: I'd like to review my salary. Because my role is bigger now. I keep the submittals moving and I close the follow-up. I'm asking for [her number]. Is there room for that?</p>
+    <p>If they freeze the number: she still says the range, then the question.</p>
+  </details>
+</div>
+<noscript>
+  <div class="shell">
+    <p>Could we set 20 minutes to talk about my pay?</p>
+    <p>I'd like to review my salary. My role is bigger than when I started. I keep the submittals moving and I close the follow-up. I'm asking for this number. Is there room for that?</p>
+    <p>What would need to happen for a review in three months?</p>
+  </div>
+</noscript>
+<script>
+(function(){
+  var LINES = [
+    ["Meeting", "Could we set 20 minutes to talk about my pay?"],
+    ["Because", "My role is bigger than when I started."],
+    ["Proof", "I keep the submittals moving, and I close the follow-up."],
+    ["Number", "I'm asking for this number. Is there room for that?"]
+  ];
+  var QUIZ = [
+    {
+      q: "You want the conversation.",
+      good: "Could we set 20 minutes to talk about my pay?",
+      bad: "Sorry to bother you, but I think maybe I need more money.",
+      why: "Pides tiempo. Sin sorry y sin maybe."
+    },
+    {
+      q: "You give the reason.",
+      good: "My role is bigger than when I started.",
+      bad: "I need more money because everything is expensive.",
+      why: "La razón es tu trabajo, no las cuentas de la casa."
+    },
+    {
+      q: "You give proof.",
+      good: "I keep the submittals moving, and I close the follow-up.",
+      bad: "I work very hard and I am a good person.",
+      why: "Una prueba concreta. Hard no es prueba."
+    },
+    {
+      q: "You name the ask.",
+      good: "I'm asking for this number. Is there room for that?",
+      bad: "Whatever you think is fair.",
+      why: "Un número, y una pregunta. No dejes el número en sus manos."
+    },
+    {
+      q: "They say another person earns more. You say:",
+      good: "I'd like to keep this about my role and my results.",
+      bad: "She makes more than me, so I should too.",
+      why: "No compares con un nombre. Vuelve a tu trabajo."
+    }
+  ];
+
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
+  function speak(text){
+    if(!window.speechSynthesis) return;
+    try{
+      speechSynthesis.cancel();
+      var u = new SpeechSynthesisUtterance(text);
+      u.lang = "en-US";
+      u.rate = 0.88;
+      speechSynthesis.speak(u);
+    }catch(e){}
+  }
+
+  var box = document.getElementById("lines");
+  LINES.forEach(function(row){
+    var el = document.createElement("div");
+    el.className = "line";
+    el.innerHTML = "<p>"+esc(row[1])+"</p>";
+    var b = document.createElement("button");
+    b.className = "hear";
+    b.type = "button";
+    b.textContent = "Hear · "+row[0];
+    b.onclick = function(){ speak(row[1]); };
+    box.appendChild(el);
+    box.appendChild(b);
+  });
+
+  var quiz = document.getElementById("quiz");
+  QUIZ.forEach(function(item){
+    var wrap = document.createElement("div");
+    var q = document.createElement("p");
+    q.className = "q";
+    q.textContent = item.q;
+    wrap.appendChild(q);
+    var opts = [item.good, item.bad].sort(function(){return Math.random()-0.5;});
+    var locked = false;
+    opts.forEach(function(text){
+      var b = document.createElement("button");
+      b.className = "opt";
+      b.type = "button";
+      b.textContent = text;
+      b.onclick = function(){
+        if(locked) return;
+        locked = true;
+        var ok = text === item.good;
+        wrap.querySelectorAll(".opt").forEach(function(x){
+          if(x.textContent === item.good) x.classList.add("good");
+          else if(x === b) x.classList.add("no");
+        });
+        var note = document.createElement("div");
+        note.className = "why"+(ok?" good":"");
+        note.textContent = item.why;
+        wrap.appendChild(note);
+        if(ok) speak(item.good);
+      };
+      wrap.appendChild(b);
+    });
+    quiz.appendChild(wrap);
+  });
+
+  document.querySelectorAll("[data-say]").forEach(function(b){
+    b.onclick = function(){ speak(b.getAttribute("data-say")); };
+  });
+})();
+</script>
+</body>
+</html>

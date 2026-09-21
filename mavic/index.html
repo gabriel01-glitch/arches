@@ -821,6 +821,11 @@
   ],
   "links": [
     {
+      "title": "El aumento",
+      "note": "Cómo pedir una revisión de sueldo: reunión, razón, prueba y un número.",
+      "url": "sueldo/"
+    },
+    {
       "title": "The 11:00",
       "note": "Clase de hoy. La reunión va rápido. Cuatro movimientos, y no te congelas.",
       "url": "1100/"
@@ -987,7 +992,7 @@
     const sc=streakCount();
     if(sc>0) html+='<div class="streak">'+flameSVG+'<span class="num">'+sc+'</span><span class="lab">'+(sc===1?'día seguido':'días seguidos')+'</span></div>';
     html+='</div>';
-    html+='<a class="today" href="1100/"><b>The 11:00</b><span>Clase de hoy. La reunión va rápido. Cuatro movimientos, y no te congelas.</span></a>';
+    html+='<a class="today" href="sueldo/"><b>El aumento</b><span>Pide la reunión. Una razón. Una prueba. Un número.</span></a>';
     html+='<div class="tracks-label">Tus temas</div>';
     app.innerHTML=html;
     STUDENT.tracks.forEach(t=>{
