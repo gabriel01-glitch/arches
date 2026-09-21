@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The bigger role</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f6f1e8; --surface:#fffdf9; --ink:#241c16; --muted:#5c5146;
+    --line:#e4d8c8; --terra:#8d3b24; --deep:#5c2416; --tint:#f3e3d8;
+    --moss:#24543e; --moss-tint:#e5f0ea; --gold-tint:#f8efd8;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:Nunito,system-ui,sans-serif;line-height:1.4}
+  :focus-visible{outline:3px solid var(--terra);outline-offset:3px}
+  button,a{font-family:inherit}
+  .shell{max-width:520px;margin:0 auto;padding:16px 16px 48px}
+  .back{display:inline-flex;align-items:center;min-height:44px;color:var(--deep);font-weight:800;text-decoration:none}
+  h1,h2{font-family:"Cormorant Garamond",Georgia,serif;color:var(--deep);line-height:1.02;margin:0}
+  h1{font-size:44px}
+  h2{font-size:28px;margin-top:26px}
+  .kicker{margin:8px 0 0;font-size:12px;font-weight:800;letter-spacing:1.1px;text-transform:uppercase;color:var(--terra)}
+  .lead{font-weight:700;font-size:17px;margin:8px 0 0}
+  .es{color:var(--muted);font-weight:700;font-size:14px;margin:6px 0 0}
+  .note{margin-top:12px;padding:12px 14px;border-radius:14px;background:var(--gold-tint);font-weight:800;font-size:14.5px}
+  .beats{display:flex;flex-direction:column;gap:8px;margin-top:14px}
+  .beat{display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:start;background:var(--surface);border:1.5px solid var(--line);border-radius:16px;padding:12px}
+  .beat i{font-style:normal;font-weight:800;color:var(--terra)}
+  .beat b{display:block}
+  .beat span{display:block;margin-top:2px;color:var(--muted);font-weight:700;font-size:14px}
+  .line{margin-top:10px;background:var(--surface);border-left:4px solid var(--terra);border-radius:0 14px 14px 0;padding:12px 12px 12px 14px}
+  .line p{margin:0;font-family:"Cormorant Garamond",Georgia,serif;font-size:24px;font-weight:600;line-height:1.2}
+  .tag{margin:0 0 4px;font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--terra)}
+  .hear,.opt{min-height:48px;border-radius:14px;font-weight:800;font-size:15px;cursor:pointer}
+  .hear{margin-top:8px;width:100%;border:1.5px solid var(--line);background:var(--paper);color:var(--ink)}
+  .q{margin:16px 0 0;font-weight:800}
+  .opt{display:block;width:100%;text-align:left;margin-top:8px;padding:12px 14px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink)}
+  .opt.good{border-color:var(--moss);background:var(--moss-tint);color:var(--moss)}
+  .opt.no{border-color:var(--terra);background:var(--tint);color:var(--deep)}
+  .why{margin-top:8px;padding:10px 12px;border-radius:12px;background:var(--gold-tint);font-weight:800;font-size:14px}
+  .why.good{background:var(--moss-tint);color:var(--moss)}
+  .guide{margin-top:26px;border-top:1px solid var(--line);padding-top:8px}
+  .guide summary{min-height:44px;display:flex;align-items:center;font-weight:800;color:var(--muted);cursor:pointer}
+  .guide p{margin:0 0 8px;font-weight:700;font-size:14px}
+  @media (prefers-reduced-motion: reduce){*{transition:none !important}}
+</style>
+</head>
+<body>
+<div class="shell">
+  <a class="back" href="../">Home</a>
+  <p class="kicker">Growth first · pay with the role</p>
+  <h1>The bigger role</h1>
+  <p class="lead">You do not open with money. You do not leave without it.</p>
+  <p class="es">Ella abre con crecimiento. El sueldo entra en una sola frase, después de la prueba, y se cierra con una fecha.</p>
+  <div class="note">A growth talk with no date becomes more work for the same pay. The date is what makes this a salary conversation.</div>
+
+  <div class="beats">
+    <div class="beat"><i>1</i><div><b>Open on growth</b><span>Not on bills. Not on a number.</span></div></div>
+    <div class="beat"><i>2</i><div><b>Show the role already grew</b><span>One job you already do.</span></div></div>
+    <div class="beat"><i>3</i><div><b>Name the next step</b><span>One bigger piece of the work.</span></div></div>
+    <div class="beat"><i>4</i><div><b>Bridge, then a date</b><span>Pay grows with the role. When do we review it?</span></div></div>
+  </div>
+
+  <h2>Say this, in this order</h2>
+  <div id="lines"></div>
+
+  <h2>If they stay only on development</h2>
+  <div class="line"><p class="tag">Agree, then attach the salary</p><p>Yes. Let's name the next step today. And can we put a salary review on the calendar with it?</p></div>
+  <button class="hear" type="button" data-say="Yes. Let's name the next step today. And can we put a salary review on the calendar with it?">Hear it</button>
+
+  <h2>If they add work and no path</h2>
+  <div class="line"><p class="tag">Yes, with a condition</p><p>I can take that on when it is part of the bigger role, and we have a date to review my pay.</p></div>
+  <button class="hear" type="button" data-say="I can take that on when it is part of the bigger role, and we have a date to review my pay.">Hear it</button>
+
+  <h2>Which line keeps the goal?</h2>
+  <div id="quiz"></div>
+
+  <h2>After the meeting</h2>
+  <div class="line"><p>Thank you. I'll write the next step, the proof, and the review date today.</p></div>
+  <button class="hear" type="button" data-say="Thank you. I'll write the next step, the proof, and the review date today.">Hear it</button>
+  <p class="es">Tres cosas por escrito: el paso, la prueba, la fecha. Sin fecha, no hay aumento.</p>
+
+  <details class="guide">
+    <summary>Gabriel</summary>
+    <p>She will not lead with a number. Do not switch her to the other page mid-sentence.</p>
+    <p>Order: growth meeting → one proof she already does → one next step → one bridge → a date.</p>
+    <p>Bridge, if she freezes: "As the role grows, I want my pay to grow with it." Then stop. Then the date.</p>
+    <p>Listen for: "I'll do anything," "I don't want to talk about money," no date, "I think maybe," "sorry to ask."</p>
+    <p>Her proof, in her words, not yours. One real task is enough.</p>
+  </details>
+</div>
+<noscript>
+  <div class="shell">
+    <p>Could we set 20 minutes to talk about how my role can grow?</p>
+    <p>I already keep the submittals moving, and I close the follow-up.</p>
+    <p>I want to grow toward running one package from start to finish.</p>
+    <p>As that role grows, I want my pay to grow with it.</p>
+    <p>Can we set a date to review the new role and the salary together?</p>
+  </div>
+</noscript>
+<script>
+(function(){
+  var LINES = [
+    ["Open", "Could we set 20 minutes to talk about how my role can grow?"],
+    ["Proof", "I already keep the submittals moving, and I close the follow-up."],
+    ["Next", "I want to grow toward running one package from start to finish."],
+    ["Bridge", "As that role grows, I want my pay to grow with it."],
+    ["Date", "Can we set a date to review the new role and the salary together?"]
+  ];
+  var QUIZ = [
+    {
+      q: "How do you open?",
+      good: "Could we set 20 minutes to talk about how my role can grow?",
+      bad: "Sorry to ask, but I need more money.",
+      why: "Abres con el rol. El dinero va después, en una frase."
+    },
+    {
+      q: "You want growth, and you also want the raise.",
+      good: "As that role grows, I want my pay to grow with it.",
+      bad: "I don't want to talk about money. I only want to grow.",
+      why: "Si cierras el tema del sueldo, el crecimiento se queda en más trabajo."
+    },
+    {
+      q: "They say: take this extra task, it will be good for you.",
+      good: "I can take that on when it is part of the bigger role, and we have a date to review my pay.",
+      bad: "Yes, I'll do anything. I just want to grow.",
+      why: "Más tareas sin fecha no suben el sueldo."
+    },
+    {
+      q: "They say: let's keep this only about development.",
+      good: "Yes. Let's name the next step today. And can we put a salary review on the calendar with it?",
+      bad: "Okay. Forget the salary.",
+      why: "Aceptas el marco de ella. No sueltas la fecha del sueldo."
+    },
+    {
+      q: "The proof.",
+      good: "I already keep the submittals moving, and I close the follow-up.",
+      bad: "I work very hard and I am very committed.",
+      why: "Una tarea real. 'Hard' no es una prueba."
+    }
+  ];
+
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
+  function speak(text){
+    if(!window.speechSynthesis) return;
+    try{
+      speechSynthesis.cancel();
+      var u = new SpeechSynthesisUtterance(text);
+      u.lang = "en-US";
+      u.rate = 0.86;
+      speechSynthesis.speak(u);
+    }catch(e){}
+  }
+
+  var box = document.getElementById("lines");
+  LINES.forEach(function(row){
+    var el = document.createElement("div");
+    el.className = "line";
+    el.innerHTML = '<p class="tag">'+esc(row[0])+'</p><p>'+esc(row[1])+'</p>';
+    var b = document.createElement("button");
+    b.className = "hear";
+    b.type = "button";
+    b.textContent = "Hear it";
+    b.onclick = function(){ speak(row[1]); };
+    box.appendChild(el);
+    box.appendChild(b);
+  });
+
+  var quiz = document.getElementById("quiz");
+  QUIZ.forEach(function(item){
+    var wrap = document.createElement("div");
+    var q = document.createElement("p");
+    q.className = "q";
+    q.textContent = item.q;
+    wrap.appendChild(q);
+    [item.good, item.bad].sort(function(){return Math.random()-0.5;}).forEach(function(text){
+      var b = document.createElement("button");
+      b.className = "opt";
+      b.type = "button";
+      b.textContent = text;
+      b.onclick = function(){
+        if(wrap.dataset.locked) return;
+        wrap.dataset.locked = "1";
+        var ok = text === item.good;
+        wrap.querySelectorAll(".opt").forEach(function(x){
+          if(x.textContent === item.good) x.classList.add("good");
+          else if(x === b) x.classList.add("no");
+        });
+        var note = document.createElement("div");
+        note.className = "why"+(ok?" good":"");
+        note.textContent = item.why;
+        wrap.appendChild(note);
+        if(ok) speak(item.good);
+      };
+      wrap.appendChild(b);
+    });
+    quiz.appendChild(wrap);
+  });
+
+  document.querySelectorAll("[data-say]").forEach(function(b){
+    b.onclick = function(){ speak(b.getAttribute("data-say")); };
+  });
+})();
+</script>
+</body>
+</html>
