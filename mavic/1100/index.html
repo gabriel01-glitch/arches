@@ -4,7 +4,7 @@
 <meta name="robots" content="noindex, nofollow">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>The 11:00</title>
+<title>The 11:00 · Mavic</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
@@ -167,9 +167,9 @@
 <div class="shell" id="app"></div>
 <noscript>
   <div class="noscript-body">
-    <p class="kicker">Monday · the project</p>
+    <p class="kicker">Monday · One Tampa</p>
     <h1>The 11:00</h1>
-    <p>The PM talks fast. Four moves, in this order.</p>
+    <p>Pablo talks fast. Four moves, in this order.</p>
     <ol>
       <li>Hold — Sorry, I didn't catch that.</li>
       <li>Answer — Not yet.</li>
@@ -201,14 +201,14 @@
 
   var FAST = [
     {
-      line:"The RFI on the third-floor window walls is due Thursday, and the GC needs the rough opening before they pour.",
+      line:"Mavic, the RFI on the third-floor window walls is due Thursday, and Moss needs the rough opening before they pour.",
       best:"Sorry, I didn't catch that.",
       opts:["Sorry, I didn't catch that.","I think maybe Thursday.","That's can help."],
       why:"Primero paras. Thursday viene cuando ya oíste.",
       trap:"I think maybe es la duda. That's can no existe. That can."
     },
     {
-      line:"The architect wants the submittal for the fire-rated storefront doors, matte black, before she stamps it.",
+      line:"Elizabeth wants the submittal for the fire-rated storefront doors, SF-8 and SF-9, matte black, before she stamps it.",
       best:"Could you explain that in a simpler way?",
       opts:["Could you explain that in a simpler way?","I think maybe the doors.","We was waiting."],
       why:"Muchas piezas. Pides la versión simple.",
@@ -218,7 +218,7 @@
       line:"The schedule says three-sixteenths, but the manufacturer minimum for that rated lite is three-quarters. Did you flag it?",
       best:"Just to confirm — the glass is three-quarters, not three-sixteenths?",
       opts:["Just to confirm — the glass is three-quarters, not three-sixteenths?","Sorry, I didn't catch that.","He don't send the email."],
-      why:"Sí oíste el número. Confírmalo. 3/4, no 3/16.",
+      why:"Sí oíste el número. Confírmalo. 3/4, no 3/16. Tú marcaste esto el 20 de marzo.",
       trap:"He doesn't. Y esta vez no pidas repetición: confirma el número."
     },
     {
@@ -262,7 +262,7 @@
       parts:[
         {role:"Answer", text:"We caught a spec error."},
         {role:"Because", text:"The schedule said 3/16, and the minimum is 3/4."},
-        {role:"Proof", text:"I emailed the correction."}
+        {role:"Proof", text:"I emailed that on March 20."}
       ],
       traps:[
         {text:"He don't send the size.", fix:"He doesn't send the size."},
@@ -272,15 +272,15 @@
   ];
 
   var LIVE = [
-    {q:"Are the windows ready?", model:"Not yet. Because we're waiting on the glass. The PO is still open in Procore.", you:"You are the PM. Fair, and a little fast. If she is silent, point at Hold."},
-    {q:"Why not?", model:"Because the glass thickness changed. I wrote that in the email: 3/4, not 3/16.", you:"One short follow-up. Then wait."},
+    {q:"Mavic, are the windows ready?", model:"Not yet. Because we're waiting on the glass. The PO is still open in Procore.", you:"You are Pablo. Fair, and a little fast. If she is silent, point at Hold."},
+    {q:"Why not?", model:"Because the glass thickness changed. I wrote that on March 20: 3/4, not 3/16.", you:"One short follow-up. Then wait."},
     {q:"What can help us this week?", model:"That can help us. I can walk you through the submittal today.", you:"Listen for that's can. The clean line is That can."},
     {q:"When can you get back to me?", model:"Let me check and get back to you by Thursday.", you:"She names a day. If she doesn't, offer Thursday."},
-    {q:"Just to confirm — Thursday, yes?", model:"Yes. Thursday. I'll send the update in Procore.", you:"She confirms. Then you can drop the role."}
+    {q:"Just to confirm — Thursday, yes?", model:"Yes. Thursday. I'll send the update in Procore.", you:"She confirms. Then you can drop Pablo."}
   ];
 
   var GUIDE = [
-    "YOU: Hey. English when you answer. Today the PM is fast, and you have four moves.",
+    "YOU: Hey Mavic. English when you answer. Today Pablo is fast, and you have four moves.",
     "YOU: Read each move out loud with her. If she adds I think maybe, point at Answer.",
     "YOU: One sentence about the room. If she freezes: Here is where we are on the window walls.",
     "YOU: Let the line run. She hits Hold. Then she picks. Don't feed the answer.",
@@ -363,7 +363,7 @@
 
   function topbar(){
     var backBtn = S.step===0
-      ? '<a class="back" href="../">Home</a>'
+      ? '<a class="back" href="../?name=Mavic">Home</a>'
       : '<button class="back btn" id="back" type="button">Back</button>';
     return '<div class="top">'+backBtn+'<div class="meter" aria-hidden="true"><i style="width:'+progress()+'%"></i></div><div class="count">'+(S.step+1)+' / 8</div></div>';
   }
@@ -419,9 +419,9 @@
 
   function screenHero(){
     return '<figure class="herofig"><img src="img/tower.jpg" alt="A glass tower in late light, beside the water" width="1248" height="832"></figure>'+
-      '<p class="kicker">Monday · the project</p>'+
+      '<p class="kicker">Monday · One Tampa</p>'+
       '<h1>The 11:00</h1>'+
-      '<p class="lead">The PM talks fast. You have four moves.</p>'+
+      '<p class="lead">Pablo talks fast. You have four moves.</p>'+
       '<p class="es">No te congelas. Paras, respondes, das una razón, das una prueba.</p>'+
       '<button class="go" id="next" type="button">Open the meeting</button>';
   }
@@ -437,10 +437,10 @@
     return '<p class="kicker">The room</p><h2>Who is talking</h2>'+
       '<figure class="photo"><img src="img/table.jpg" alt="A quiet table with drawings, a black window frame, and a glass sample" width="1248" height="832"></figure>'+
       '<ul class="people">'+
-        '<li><b>The PM</b><span>He runs it. Fast, unfinished sentences.</span></li>'+
-        '<li><b>You</b><span>You coordinate the window walls.</span></li>'+
-        '<li><b>The architect</b><span>She wants the submittal.</span></li>'+
-        '<li><b>A colleague</b><span>On your team.</span></li>'+
+        '<li><b>Pablo</b><span>Moss. He runs it. Fast, unfinished sentences.</span></li>'+
+        '<li><b>You</b><span>Epsylon. You coordinate the window walls.</span></li>'+
+        '<li><b>Elizabeth</b><span>Adache. The architect. She wants the submittal.</span></li>'+
+        '<li><b>Ulises</b><span>Your colleague at Epsylon.</span></li>'+
       '</ul>'+
       '<div class="say"><p>Here is where we are on the window walls.</p></div>'+
       '<button class="hear" id="hear" type="button">Hear it, then say it</button>'+
@@ -542,7 +542,7 @@
       '<div class="say"><p>Sorry, I didn\'t catch that. Could you repeat the last part?</p></div>'+
       '<button class="hear" id="hear" type="button">Say it with me</button>'+
       '<p class="es">Lento, y otra vez a velocidad de reunión.</p>'+
-      '<a class="go" id="home" href="../" style="display:block;text-align:center;text-decoration:none">Back to your page</a>';
+      '<a class="go" id="home" href="../?name=Mavic" style="display:block;text-align:center;text-decoration:none">Back to your page</a>';
   }
 
   function startStream(){
