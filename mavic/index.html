@@ -823,7 +823,7 @@
     {
       "title": "The 11:00",
       "note": "Clase de hoy. Pablo habla rápido. Cuatro movimientos, y no te congelas.",
-      "url": "reunion/?name=Mavic"
+      "url": "1100/?name=Mavic"
     },
     {
       "title": "Idioms",
@@ -989,7 +989,7 @@
     const sc=streakCount();
     if(sc>0) html+='<div class="streak">'+flameSVG+'<span class="num">'+sc+'</span><span class="lab">'+(sc===1?'día seguido':'días seguidos')+'</span></div>';
     html+='</div>';
-    html+='<a class="today" href="reunion/?name='+encodeURIComponent(displayName)+'"><b>The 11:00</b><span>Clase de hoy. Pablo habla rápido. Cuatro movimientos, y no te congelas.</span></a>';
+    html+='<a class="today" href="1100/?name='+encodeURIComponent(displayName)+'"><b>The 11:00</b><span>Clase de hoy. Pablo habla rápido. Cuatro movimientos, y no te congelas.</span></a>';
     html+='<div class="tracks-label">Tus temas</div>';
     app.innerHTML=html;
     STUDENT.tracks.forEach(t=>{
