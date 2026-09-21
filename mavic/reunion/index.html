@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The 11:00 · Mavic</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f6f1e8;
+    --surface:#fffdf9;
+    --ink:#241c16;
+    --muted:#5c5146;
+    --line:#e4d8c8;
+    --terra:#8d3b24;
+    --deep:#5c2416;
+    --tint:#f3e3d8;
+    --moss:#24543e;
+    --moss-tint:#e5f0ea;
+    --gold:#7a5524;
+    --gold-tint:#f8efd8;
+    --ease:cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:Nunito,system-ui,sans-serif;
+    line-height:1.4;
+    -webkit-font-smoothing:antialiased;
+  }
+  :focus-visible{outline:3px solid var(--terra);outline-offset:3px}
+  button,a{font-family:inherit}
+  img{max-width:100%;display:block}
+  .shell{max-width:520px;margin:0 auto;padding:0 0 28px}
+  .shell.with-dock{padding-bottom:108px}
+  .top{
+    display:flex;align-items:center;gap:10px;
+    padding:12px 16px 0;
+  }
+  .back{
+    min-height:44px;padding:8px 12px;border-radius:999px;
+    border:1.5px solid var(--line);background:var(--surface);
+    color:var(--deep);font-weight:800;font-size:14px;text-decoration:none;
+    display:inline-flex;align-items:center;
+  }
+  .back.btn{cursor:pointer}
+  .meter{flex:1;height:6px;background:var(--line);border-radius:99px;overflow:hidden}
+  .meter i{display:block;height:100%;background:var(--terra);width:0;transition:width .35s var(--ease)}
+  .count{font-size:12px;font-weight:800;color:var(--muted);min-width:42px;text-align:right}
+  .screen{padding:8px 16px 0;animation:rise .45s var(--ease) both}
+  @keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+  .kicker{margin:0 0 6px;font-size:12px;font-weight:800;letter-spacing:1.1px;text-transform:uppercase;color:var(--terra)}
+  h1,h2{font-family:"Cormorant Garamond",Georgia,serif;font-weight:700;color:var(--deep);line-height:1.02;margin:0}
+  h1{font-size:52px}
+  h2{font-size:34px}
+  .lead{margin:8px 0 0;font-size:17px;font-weight:700;color:var(--ink)}
+  .es{margin:6px 0 0;font-size:14px;font-weight:700;color:var(--muted)}
+  .herofig{margin:0 0 14px;border-radius:18px;overflow:hidden}
+  .herofig img{width:100%;height:210px;object-fit:cover;object-position:62% center}
+  .photo{margin:12px 0;border-radius:16px;overflow:hidden}
+  .photo img{width:100%;height:168px;object-fit:cover;object-position:center 60%}
+  .go,.hold,.choice,.chip,.hear{
+    min-height:48px;border-radius:14px;font-weight:800;font-size:16px;cursor:pointer
+  }
+  .go{
+    width:100%;margin-top:16px;border:0;background:var(--deep);color:#fbf7f0;padding:16px 18px
+  }
+  .go:active{transform:scale(.98)}
+  .go:disabled{opacity:.45;cursor:default}
+  .hold{
+    width:100%;margin-top:14px;border:0;background:var(--deep);color:#fbf7f0;
+    padding:18px;font-size:22px;letter-spacing:.4px
+  }
+  .hold:active{transform:scale(.98)}
+  .hold:disabled{opacity:.45;cursor:default}
+  .stream{
+    min-height:92px;margin-top:14px;padding:16px;
+    background:var(--surface);border:1.5px solid var(--line);border-radius:16px;
+    font-family:"Cormorant Garamond",Georgia,serif;font-size:26px;font-weight:600;line-height:1.25
+  }
+  .note{
+    margin-top:12px;padding:12px 14px;border-radius:14px;
+    background:var(--gold-tint);color:var(--ink);font-weight:800;font-size:15px
+  }
+  .note.good{background:var(--moss-tint);color:var(--moss)}
+  .choices,.chips{display:flex;flex-direction:column;gap:8px;margin-top:12px}
+  .choice,.chip{
+    text-align:left;padding:14px 14px;border:1.5px solid var(--line);
+    background:var(--surface);color:var(--ink)
+  }
+  .choice.good,.chip.used{border-color:var(--moss);background:var(--moss-tint);color:var(--moss)}
+  .choice.trap{border-color:var(--terra);background:var(--tint);color:var(--deep)}
+  .people{list-style:none;margin:14px 0 0;padding:0}
+  .people li{
+    display:grid;grid-template-columns:108px 1fr;gap:10px;align-items:baseline;
+    padding:12px 0;border-top:1px solid var(--line)
+  }
+  .people b{font-size:16px}
+  .people span{color:var(--muted);font-weight:700;font-size:14px}
+  .say{
+    margin-top:14px;padding:14px 14px 14px 16px;
+    border-left:4px solid var(--terra);background:var(--surface);border-radius:0 14px 14px 0
+  }
+  .say p{margin:0;font-family:"Cormorant Garamond",Georgia,serif;font-size:26px;font-weight:600;line-height:1.2}
+  .hear{
+    margin-top:10px;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);padding:12px 14px
+  }
+  .moves{display:flex;flex-direction:column;gap:8px;margin-top:14px}
+  .move{
+    text-align:left;min-height:72px;padding:12px 14px;border-radius:16px;border:1.5px solid var(--line);
+    background:var(--surface);cursor:pointer;color:var(--ink)
+  }
+  .move i{display:block;font-style:normal;font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--terra)}
+  .move b{display:block;font-family:"Cormorant Garamond",Georgia,serif;font-size:26px;color:var(--deep);line-height:1}
+  .move span{display:block;margin-top:4px;font-size:13px;font-weight:700;color:var(--muted)}
+  .stack{display:flex;flex-direction:column;gap:8px;margin-top:14px}
+  .slot{
+    min-height:52px;padding:12px 14px;border-radius:14px;border:1.5px dashed var(--line);
+    background:transparent;font-weight:800
+  }
+  .slot.on{border-style:solid;background:var(--surface)}
+  .slot small{display:block;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--terra);font-weight:800}
+  .q{
+    margin:12px 0 0;font-family:"Cormorant Garamond",Georgia,serif;
+    font-size:30px;font-weight:600;line-height:1.15
+  }
+  .model{
+    margin-top:12px;padding:14px;border-radius:14px;background:var(--moss-tint);color:var(--moss);font-weight:800
+  }
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+  .guide{margin:18px 16px 0;border-top:1px solid var(--line);padding-top:10px}
+  .guide summary{cursor:pointer;font-weight:800;color:var(--muted);font-size:13px;min-height:44px;display:flex;align-items:center}
+  .guide p{margin:0 0 8px;font-size:14px;font-weight:700}
+  .dock{
+    position:fixed;left:0;right:0;bottom:0;z-index:3;
+    padding:8px 10px calc(8px + env(safe-area-inset-bottom));
+    background:rgba(246,241,232,.96);border-top:1px solid var(--line)
+  }
+  .dock-row{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;max-width:520px;margin:0 auto}
+  .dock button{
+    min-height:48px;border-radius:12px;border:1.5px solid var(--line);
+    background:var(--surface);color:var(--deep);font-weight:800;font-size:12px;cursor:pointer
+  }
+  .toast{
+    max-width:520px;margin:0 auto 8px;padding:8px 10px;border-radius:10px;background:var(--deep);color:#fbf7f0;
+    font-weight:800;font-size:14px
+  }
+  .score{margin-top:16px;font-family:"Cormorant Garamond",Georgia,serif;font-size:42px;color:var(--deep);line-height:1}
+  .noscript-body{max-width:520px;margin:0 auto;padding:24px 16px 48px}
+  .noscript-body li{margin:8px 0}
+  @media (prefers-reduced-motion: reduce){
+    .screen{animation:none}
+    .meter i,.go,.hold,.choice,.chip,.move,.back{transition:none}
+  }
+  @media (min-width:720px){
+    .herofig img{height:280px}
+    .shell{padding-top:12px}
+  }
+</style>
+</head>
+<body>
+<div class="shell" id="app"></div>
+<noscript>
+  <div class="noscript-body">
+    <p class="kicker">Monday · One Tampa</p>
+    <h1>The 11:00</h1>
+    <p>Pablo talks fast. Four moves, in this order.</p>
+    <ol>
+      <li>Hold — Sorry, I didn't catch that.</li>
+      <li>Answer — Not yet.</li>
+      <li>Because — Because we're waiting on the glass.</li>
+      <li>Proof — The PO is still open in Procore.</li>
+    </ol>
+    <p>Are the level-3 window walls ready? Not yet. Because we're waiting on the glass. The PO is still open in Procore.</p>
+    <p>Can you send the submittal today? Yes. Because I already have the cutsheet. I uploaded it to Procore this morning.</p>
+    <p>What happened with the fire-rated glass? We caught a spec error. The schedule said 3/16, and the minimum is 3/4. I emailed that on March 20.</p>
+    <p>Useful line: I put the glass timeline together, with the emails and the cutsheet. Do you want it?</p>
+    <p>This week: Sorry, I didn't catch that. Could you repeat the last part?</p>
+  </div>
+</noscript>
+<script>
+(function(){
+  "use strict";
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var app = document.getElementById("app");
+  var timer = null;
+  var voice = null;
+  var toast = "";
+
+  var MOVES = [
+    {k:"Hold", say:"Sorry, I didn't catch that.", es:"Paras. Es tu derecho."},
+    {k:"Answer", say:"Not yet.", es:"Directo. Sin maybe."},
+    {k:"Because", say:"Because we're waiting on the glass.", es:"Una razón."},
+    {k:"Proof", say:"The PO is still open in Procore.", es:"Una prueba."}
+  ];
+
+  var FAST = [
+    {
+      line:"Mavic, the RFI on the third-floor window walls is due Thursday, and Moss needs the rough opening before they pour.",
+      best:"Sorry, I didn't catch that.",
+      opts:["Sorry, I didn't catch that.","I think maybe Thursday.","That's can help."],
+      why:"Primero paras. Thursday viene cuando ya oíste.",
+      trap:"I think maybe es la duda. That's can no existe. That can."
+    },
+    {
+      line:"Elizabeth wants the submittal for the fire-rated storefront doors, SF-8 and SF-9, matte black, before she stamps it.",
+      best:"Could you explain that in a simpler way?",
+      opts:["Could you explain that in a simpler way?","I think maybe the doors.","We was waiting."],
+      why:"Muchas piezas. Pides la versión simple.",
+      trap:"We were waiting. Y hoy la frase es: explícamelo más simple."
+    },
+    {
+      line:"The schedule says three-sixteenths, but the manufacturer minimum for that rated lite is three-quarters. Did you flag it?",
+      best:"Just to confirm — the glass is three-quarters, not three-sixteenths?",
+      opts:["Just to confirm — the glass is three-quarters, not three-sixteenths?","Sorry, I didn't catch that.","He don't send the email."],
+      why:"Sí oíste el número. Confírmalo. 3/4, no 3/16. Tú marcaste esto el 20 de marzo.",
+      trap:"He doesn't. Y esta vez no pidas repetición: confirma el número."
+    },
+    {
+      line:"If their price is more than double, we might as well keep the scope. Can you get back to me before noon?",
+      best:"Hold on — say that one more time, a bit slower?",
+      later:"Let me check and get back to you.",
+      opts:["Hold on — say that one more time, a bit slower?","Let me check and get back to you.","I prefer stay in home."],
+      why:"might as well = mejor lo hacemos nosotros. Primero, más lento.",
+      laterWhy:"Esa es tu frase de después. Primero pide que lo diga más lento.",
+      trap:"I prefer to stay at home. Hoy no. Hoy es la reunión."
+    }
+  ];
+
+  var BEATS = [
+    {
+      q:"Are the level-3 window walls ready?",
+      parts:[
+        {role:"Answer", text:"Not yet."},
+        {role:"Because", text:"Because we're waiting on the glass."},
+        {role:"Proof", text:"The PO is still open in Procore."}
+      ],
+      traps:[
+        {text:"I think maybe.", fix:"Sin maybe. Directo: Not yet."},
+        {text:"That's can help.", fix:"That can. Nunca that's can."}
+      ]
+    },
+    {
+      q:"Can you send the submittal today?",
+      parts:[
+        {role:"Answer", text:"Yes."},
+        {role:"Because", text:"Because I already have the cutsheet."},
+        {role:"Proof", text:"I uploaded it to Procore this morning."}
+      ],
+      traps:[
+        {text:"We was waiting.", fix:"We were waiting."},
+        {text:"I think maybe yes.", fix:"Yes. Una palabra. Luego la razón."}
+      ]
+    },
+    {
+      q:"What happened with the fire-rated glass?",
+      parts:[
+        {role:"Answer", text:"We caught a spec error."},
+        {role:"Because", text:"The schedule said 3/16, and the minimum is 3/4."},
+        {role:"Proof", text:"I emailed that on March 20."}
+      ],
+      traps:[
+        {text:"He don't send the size.", fix:"He doesn't send the size."},
+        {text:"I prefer stay in home.", fix:"I prefer to stay at home. Hoy no la necesitas."}
+      ]
+    }
+  ];
+
+  var LIVE = [
+    {q:"Mavic, are the windows ready?", model:"Not yet. Because we're waiting on the glass. The PO is still open in Procore.", you:"You are Pablo. Fair, and a little fast. If she is silent, point at Hold."},
+    {q:"Why not?", model:"Because the glass thickness changed. I wrote that on March 20: 3/4, not 3/16.", you:"One short follow-up. Then wait."},
+    {q:"What can help us this week?", model:"That can help us. I can walk you through the submittal today.", you:"Listen for that's can. The clean line is That can."},
+    {q:"When can you get back to me?", model:"Let me check and get back to you by Thursday.", you:"She names a day. If she doesn't, offer Thursday."},
+    {q:"Just to confirm — Thursday, yes?", model:"Yes. Thursday. I'll send the update in Procore.", you:"She confirms. Then you can drop Pablo."}
+  ];
+
+  var GUIDE = [
+    "YOU: Hey Mavic. English when you answer. Today Pablo is fast, and you have four moves.",
+    "YOU: Read each move out loud with her. If she adds I think maybe, point at Answer.",
+    "YOU: One sentence about the room. If she freezes: Here is where we are on the window walls.",
+    "YOU: Let the line run. She hits Hold. Then she picks. Don't feed the answer.",
+    "YOU: Answer, then because, then proof. Traps stay traps.",
+    "YOU: Five questions, in character. She speaks before the model opens.",
+    "YOU: She says the useful line twice. Careful, then meeting speed.",
+    "YOU: Killer line together. After class, note what stuck."
+  ];
+
+  var S = {step:0, round:0, phase:"stream", order:null, held:false, pick:null, bi:0, filled:[], trap:"", li:0, shown:false, got:{}};
+
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
+  function clearTimer(){ if(timer){ clearTimeout(timer); timer=null; } }
+  function shuffle(a){
+    a=a.slice();
+    for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=a[i]; a[i]=a[j]; a[j]=t; }
+    return a;
+  }
+  function loadVoice(){
+    if(!window.speechSynthesis) return;
+    var vs = speechSynthesis.getVoices() || [];
+    var en = vs.filter(function(v){return /^en[-_]/i.test(v.lang);});
+    var pref = ["Samantha","Google US English","Microsoft Aria","Microsoft Jenny","Microsoft Zira"];
+    voice = null;
+    for(var i=0;i<pref.length;i++){
+      for(var k=0;k<en.length;k++){ if(en[k].name.indexOf(pref[i])===0){ voice=en[k]; return; } }
+    }
+    voice = en[0] || null;
+  }
+  if(window.speechSynthesis){ loadVoice(); speechSynthesis.onvoiceschanged = loadVoice; }
+  function speak(text, rate){
+    if(!text || !window.speechSynthesis) return;
+    try{
+      speechSynthesis.cancel();
+      var u = new SpeechSynthesisUtterance(text);
+      u.lang = "en-US";
+      u.rate = rate || 0.88;
+      if(voice) u.voice = voice;
+      speechSynthesis.speak(u);
+    }catch(e){}
+  }
+
+  function progress(){
+    var done = 0;
+    if(S.step>0) done += 1;
+    if(S.step>1) done += 1;
+    if(S.step>2) done += 1;
+    if(S.step>3) done += 4; else if(S.step===3) done += S.round;
+    if(S.step>4) done += 3; else if(S.step===4) done += S.bi;
+    if(S.step>5) done += 5; else if(S.step===5) done += S.li;
+    if(S.step>6) done += 1;
+    if(S.step>7) done += 1;
+    return Math.round(done/17*100);
+  }
+  function showDock(){ return S.step===2 || S.step===4 || S.step===5 || S.step===6 || S.step===7; }
+
+  function armFast(){
+    S.phase = reduce ? "read" : "stream";
+    S.order = shuffle(FAST[S.round].opts);
+    S.held = false;
+    S.pick = null;
+  }
+  function go(step){
+    clearTimer();
+    var prev = S.step;
+    S.step = step;
+    if(step===3 && prev<3) S.round = 0;
+    if(step===3) armFast();
+    if(step===4 && prev<4){ S.bi=0; S.filled=[]; S.trap=""; BEATS.forEach(function(b){ b._order=null; }); }
+    if(step===5 && prev<5){ S.li=0; S.shown=false; }
+    render();
+  }
+  function back(){
+    clearTimer();
+    if(S.step===3 && S.round>0){ S.round--; go(3); return; }
+    if(S.step===4 && S.bi>0){ S.bi--; S.filled=[]; S.trap=""; render(); return; }
+    if(S.step===5 && S.li>0){ S.li--; S.shown=false; render(); return; }
+    if(S.step>0) go(S.step-1);
+  }
+
+  function topbar(){
+    var backBtn = S.step===0
+      ? '<a class="back" href="../?name=Mavic">Home</a>'
+      : '<button class="back btn" id="back" type="button">Back</button>';
+    return '<div class="top">'+backBtn+'<div class="meter" aria-hidden="true"><i style="width:'+progress()+'%"></i></div><div class="count">'+(S.step+1)+' / 8</div></div>';
+  }
+  function guide(){
+    return '<details class="guide"><summary>Gabriel</summary><p>'+esc(GUIDE[S.step])+'</p></details>';
+  }
+  function dock(){
+    if(!showDock()) return "";
+    var html = '<div class="dock">';
+    if(toast) html += '<div class="toast">'+esc(toast)+'</div>';
+    html += '<div class="dock-row">';
+    MOVES.forEach(function(m){
+      html += '<button type="button" data-say="'+esc(m.say)+'">'+esc(m.k)+'</button>';
+    });
+    html += '</div></div>';
+    return html;
+  }
+  function bindDock(){
+    var buttons = app.querySelectorAll(".dock button");
+    for(var i=0;i<buttons.length;i++){
+      buttons[i].onclick = function(){
+        toast = this.getAttribute("data-say");
+        speak(toast, 0.86);
+        render();
+      };
+    }
+  }
+  function bindBack(){
+    var b = document.getElementById("back");
+    if(b) b.onclick = back;
+  }
+
+  function render(){
+    clearTimer();
+    var html = topbar() + '<div class="screen">';
+    if(S.step===0) html += screenHero();
+    else if(S.step===1) html += screenCard();
+    else if(S.step===2) html += screenRoom();
+    else if(S.step===3) html += screenFast();
+    else if(S.step===4) html += screenBeats();
+    else if(S.step===5) html += screenLive();
+    else if(S.step===6) html += screenUseful();
+    else html += screenClose();
+    html += '</div>' + guide() + dock();
+    app.innerHTML = html;
+    if(showDock()) app.classList.add("with-dock");
+    else app.classList.remove("with-dock");
+    bindBack();
+    bindDock();
+    bindScreen();
+    if(S.step===3 && S.phase==="stream") startStream();
+  }
+
+  function screenHero(){
+    return '<figure class="herofig"><img src="img/tower.jpg" alt="A glass tower in late light, beside the water" width="1248" height="832"></figure>'+
+      '<p class="kicker">Monday · One Tampa</p>'+
+      '<h1>The 11:00</h1>'+
+      '<p class="lead">Pablo talks fast. You have four moves.</p>'+
+      '<p class="es">No te congelas. Paras, respondes, das una razón, das una prueba.</p>'+
+      '<button class="go" id="next" type="button">Open the meeting</button>';
+  }
+  function screenCard(){
+    var html = '<p class="kicker">Your card</p><h2>Four moves</h2><p class="es">Tócalas. Dilos en voz alta. Este es el orden.</p><div class="moves">';
+    MOVES.forEach(function(m){
+      html += '<button class="move" type="button" data-say="'+esc(m.say)+'"><b>'+esc(m.k)+'</b><span>'+esc(m.say)+'</span></button>';
+    });
+    html += '</div><button class="go" id="next" type="button">I can say them</button>';
+    return html;
+  }
+  function screenRoom(){
+    return '<p class="kicker">The room</p><h2>Who is talking</h2>'+
+      '<figure class="photo"><img src="img/table.jpg" alt="A quiet table with drawings, a black window frame, and a glass sample" width="1248" height="832"></figure>'+
+      '<ul class="people">'+
+        '<li><b>Pablo</b><span>Moss. He runs it. Fast, unfinished sentences.</span></li>'+
+        '<li><b>You</b><span>Epsylon. You coordinate the window walls.</span></li>'+
+        '<li><b>Elizabeth</b><span>Adache. The architect. She wants the submittal.</span></li>'+
+        '<li><b>Ulises</b><span>Your colleague at Epsylon.</span></li>'+
+      '</ul>'+
+      '<div class="say"><p>Here is where we are on the window walls.</p></div>'+
+      '<button class="hear" id="hear" type="button">Hear it, then say it</button>'+
+      '<p class="es">Una frase. Así abres.</p>'+
+      '<button class="go" id="next" type="button">He starts talking</button>';
+  }
+  function screenFast(){
+    var item = FAST[S.round];
+    var html = '<p class="kicker">Round '+(S.round+1)+' of 4</p><h2>Hold the room</h2>'+
+      '<p class="es">Cuando se te vaya el hilo, paras. La frase se queda escrita.</p>'+
+      '<div class="stream" id="stream">'+(S.phase==="stream" ? "" : esc(item.line))+'</div>';
+    if(S.phase==="stream" || S.phase==="read"){
+      html += '<button class="hold" id="hold" type="button"'+(S.phase==="stream"?' disabled':'')+'>Hold</button>';
+    } else {
+      html += '<div class="note'+(S.held?" good":"")+'">'+(S.held?"You held the room.":"The sentence finished. Next time, hold sooner. Your line still works.")+'</div>';
+      html += '<div class="choices" id="choices">';
+      S.order.forEach(function(opt){
+        var cls = "choice";
+        if(S.pick){
+          if(opt===item.best) cls += " good";
+          else if(opt===S.pick && opt!==item.best && opt!==item.later) cls += " trap";
+        }
+        html += '<button class="'+cls+'" type="button" data-opt="'+esc(opt)+'">'+esc(opt)+'</button>';
+      });
+      html += '</div>';
+      if(S.pick){
+        var msg = item.why;
+        if(S.pick===item.later) msg = item.laterWhy;
+        else if(S.pick!==item.best) msg = item.trap;
+        html += '<div class="note'+(S.pick===item.best?" good":"")+'">'+esc(msg)+'</div>';
+        if(S.pick===item.best || S.pick===item.later){
+          html += '<button class="go" id="next" type="button">'+(S.round<3?"Next line":"Build the answer")+'</button>';
+        }
+      }
+    }
+    return html;
+  }
+  function screenBeats(){
+    var item = BEATS[S.bi];
+    var roles = ["Answer","Because","Proof"];
+    var html = '<p class="kicker">Beat '+(S.bi+1)+' of 3</p><h2>Answer. Because. Proof.</h2>'+
+      '<p class="q">'+esc(item.q)+'</p><div class="stack">';
+    for(var i=0;i<3;i++){
+      var got = S.filled[i];
+      html += '<div class="slot'+(got?" on":"")+'"><small>'+roles[i]+'</small>'+(got?esc(got):"")+'</div>';
+    }
+    html += '</div>';
+    if(S.filled.length<3){
+      html += '<div class="chips" id="chips">';
+      var pool = [];
+      item.parts.forEach(function(p){ if(S.filled.indexOf(p.text)<0) pool.push({text:p.text, role:p.role}); });
+      item.traps.forEach(function(t){ pool.push({text:t.text, trap:t.fix}); });
+      if(!item._order){
+        item._order = shuffle(pool.map(function(p){return p.text;}));
+      }
+      item._order.forEach(function(text){
+        if(S.filled.indexOf(text)>=0) return;
+        html += '<button class="chip" type="button" data-chip="'+esc(text)+'">'+esc(text)+'</button>';
+      });
+      html += '</div>';
+      if(S.trap) html += '<div class="note">'+esc(S.trap)+'</div>';
+    } else {
+      html += '<div class="note good">Clean. Say it once, all three beats.</div>';
+      html += '<button class="hear" id="hear" type="button">Hear the whole answer</button>';
+      html += '<button class="go" id="next" type="button">'+(S.bi<2?"Next question":"Now out loud")+'</button>';
+    }
+    return html;
+  }
+  function screenLive(){
+    var item = LIVE[S.li];
+    var html = '<p class="kicker">Out loud · '+(S.li+1)+' of 5</p><h2>Look up</h2>'+
+      '<p class="q">'+esc(item.q)+'</p>'+
+      '<p class="es">Contéstale a Gabriel. El modelo espera.</p>';
+    if(!S.shown){
+      html += '<button class="go" id="show" type="button">I said it</button>';
+    } else {
+      html += '<div class="model">'+esc(item.model)+'</div>';
+      html += '<button class="hear" id="hear" type="button">Hear the model</button>';
+      html += '<button class="go" id="next" type="button">'+(S.li<4?"Next question":"One line you can use")+'</button>';
+    }
+    return html;
+  }
+  function screenUseful(){
+    var line = "I put the glass timeline together, with the emails and the cutsheet. Do you want it?";
+    return '<p class="kicker">After the meeting</p><h2>Be useful</h2>'+
+      '<p class="es">No pides el hilo. Le entregas el archivo.</p>'+
+      '<div class="say"><p>'+esc(line)+'</p></div>'+
+      '<div class="row2">'+
+        '<button class="hear" id="slow" type="button">Careful</button>'+
+        '<button class="hear" id="fast" type="button">Meeting speed</button>'+
+      '</div>'+
+      '<p class="es">Dila dos veces. Primero clara. Luego a velocidad de reunión.</p>'+
+      '<button class="go" id="next" type="button">Close</button>';
+  }
+  function screenClose(){
+    return '<p class="kicker">This week</p><h2>Your line</h2>'+
+      '<p class="score">'+Object.keys(S.got).length+' / 4</p>'+
+      '<p class="lead">'+(Object.keys(S.got).length>=3?"You held the room.":"The line is yours anyway.")+'</p>'+
+      '<div class="say"><p>Sorry, I didn\'t catch that. Could you repeat the last part?</p></div>'+
+      '<button class="hear" id="hear" type="button">Say it with me</button>'+
+      '<p class="es">Lento, y otra vez a velocidad de reunión.</p>'+
+      '<a class="go" id="home" href="../?name=Mavic" style="display:block;text-align:center;text-decoration:none">Back to your page</a>';
+  }
+
+  function startStream(){
+    var words = FAST[S.round].line.split(" ");
+    var box = document.getElementById("stream");
+    var i = 0;
+    var holdBtn = document.getElementById("hold");
+    function tick(){
+      i++;
+      if(i===1 && holdBtn) holdBtn.disabled = false;
+      if(box) box.textContent = words.slice(0,i).join(" ");
+      if(i>=words.length){
+        timer = null;
+        S.phase = "pick";
+        render();
+        return;
+      }
+      timer = setTimeout(tick, 230);
+    }
+    timer = setTimeout(tick, 230);
+  }
+
+  function bindScreen(){
+    var next = document.getElementById("next");
+    if(next && S.step!==3 && S.step!==4 && S.step!==5){
+      next.onclick = function(){ go(S.step+1); };
+    }
+    app.querySelectorAll(".move").forEach(function(btn){
+      btn.onclick = function(){ speak(btn.getAttribute("data-say"), 0.86); };
+    });
+    var hear = document.getElementById("hear");
+    if(hear && S.step===2) hear.onclick = function(){ speak("Here is where we are on the window walls.", 0.86); };
+    if(hear && S.step===4) hear.onclick = function(){ speak(S.filled.join(" "), 0.86); };
+    if(hear && S.step===5) hear.onclick = function(){ speak(LIVE[S.li].model, 0.86); };
+    if(hear && S.step===7) hear.onclick = function(){ speak("Sorry, I didn't catch that. Could you repeat the last part?", 0.84); };
+    var slow = document.getElementById("slow");
+    var fast = document.getElementById("fast");
+    var useful = "I put the glass timeline together, with the emails and the cutsheet. Do you want it?";
+    if(slow) slow.onclick = function(){ speak(useful, 0.78); };
+    if(fast) fast.onclick = function(){ speak(useful, 1.02); };
+
+    var hold = document.getElementById("hold");
+    if(hold) hold.onclick = function(){
+      clearTimer();
+      S.held = true;
+      S.got[S.round] = 1;
+      S.phase = "pick";
+      var box = document.getElementById("stream");
+      if(box) box.textContent = FAST[S.round].line;
+      render();
+    };
+    app.querySelectorAll(".choice").forEach(function(btn){
+      btn.onclick = function(){
+        if(S.pick && (S.pick===FAST[S.round].best || S.pick===FAST[S.round].later)) return;
+        S.pick = btn.getAttribute("data-opt");
+        if(S.pick===FAST[S.round].best || S.pick===FAST[S.round].later) speak(FAST[S.round].best, 0.86);
+        render();
+      };
+    });
+    if(next && S.step===3){
+      next.onclick = function(){
+        if(S.round<3){ S.round++; go(3); }
+        else go(4);
+      };
+    }
+    app.querySelectorAll(".chip").forEach(function(btn){
+      btn.onclick = function(){
+        var text = btn.getAttribute("data-chip");
+        var item = BEATS[S.bi];
+        var trap = null;
+        item.traps.forEach(function(t){ if(t.text===text) trap=t; });
+        if(trap){ S.trap = trap.fix; render(); return; }
+        var expect = item.parts[S.filled.length];
+        if(!expect || text!==expect.text){
+          S.trap = "Ese es el paso "+(item.parts.findIndex(function(p){return p.text===text;})+1)+". Ahora toca "+expect.role+".";
+          render();
+          return;
+        }
+        S.trap = "";
+        S.filled = S.filled.concat([text]);
+        render();
+      };
+    });
+    if(next && S.step===4){
+      next.onclick = function(){
+        if(S.bi<2){ S.bi++; S.filled=[]; S.trap=""; BEATS[S.bi]._order=null; render(); }
+        else { S.filled=[]; go(5); }
+      };
+    }
+    var show = document.getElementById("show");
+    if(show) show.onclick = function(){ S.shown = true; render(); };
+    if(next && S.step===5){
+      next.onclick = function(){
+        if(S.li<4){ S.li++; S.shown=false; render(); }
+        else go(6);
+      };
+    }
+  }
+
+  go(0);
+})();
+</script>
+</body>
+</html>

@@ -12,7 +12,7 @@
   :root{
     --cream:#fbf7f0; --surface:#fffdf9; --ink:#2c2722; --muted:#9a8f83;
     --line:#e9e0d3; --terra:#bf5a36; --terra-dark:#9f4528; --terra-tint:#f4e4d9;
-    --good:#5a7d5a; --good-tint:#e6efe2; --bad-tint:#f6e2da;
+    --good:#5a7d5a; --good-tint:#e6efe2; --bad-tint:#f6e2da; --banner:#5c2416;
   }
   *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
   html,body{margin:0;padding:0;}
@@ -30,6 +30,11 @@
   .streak .lab{font-size:12.5px;color:var(--muted);font-weight:700;}
 
   .tracks-label{font-size:11.5px;text-transform:uppercase;letter-spacing:1.4px;color:var(--muted);font-weight:800;margin:30px 4px 14px;}
+  .today{display:block;text-decoration:none;background:var(--banner);color:#fbf7f0;border-radius:18px;padding:16px 18px;margin:18px 0 4px;}
+  .today b{display:block;font-family:'Cormorant Garamond',serif;font-weight:700;font-size:28px;line-height:1;color:#fbf7f0;}
+  .today span{display:block;margin-top:6px;font-size:14px;font-weight:700;color:#f6e6dc;line-height:1.35;}
+  .today:active{transform:scale(.985);}
+  .today:focus-visible{outline:3px solid var(--terra);outline-offset:3px;}
   .track{background:var(--surface);border:1.5px solid var(--line);border-radius:18px;padding:18px;margin-bottom:13px;cursor:pointer;transition:transform .08s ease,border-color .15s ease;}
   .track:active{transform:scale(.985);border-color:var(--terra);}
   .track-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;}
@@ -125,7 +130,7 @@
     "l1": "Spanish",
     "context": "Venezolana. Project coordinator en Epsylon, proyecto One Tampa.",
     "greeting": "Tu inglés de reuniones, Mavic. Frases reales de One Tampa, un poquito cada día.",
-    "version": "2026-09-08"
+    "version": "2026-09-21"
   },
   "tracks": [
     {
@@ -816,6 +821,11 @@
   ],
   "links": [
     {
+      "title": "The 11:00",
+      "note": "Clase de hoy. Pablo habla rápido. Cuatro movimientos, y no te congelas.",
+      "url": "reunion/?name=Mavic"
+    },
+    {
       "title": "Idioms",
       "note": "Mira el dibujo. El inglés literal es ridículo — por eso se te queda.",
       "url": "../apps/idioms/?name=Mavic&from=mavic"
@@ -979,6 +989,7 @@
     const sc=streakCount();
     if(sc>0) html+='<div class="streak">'+flameSVG+'<span class="num">'+sc+'</span><span class="lab">'+(sc===1?'día seguido':'días seguidos')+'</span></div>';
     html+='</div>';
+    html+='<a class="today" href="reunion/?name='+encodeURIComponent(displayName)+'"><b>The 11:00</b><span>Clase de hoy. Pablo habla rápido. Cuatro movimientos, y no te congelas.</span></a>';
     html+='<div class="tracks-label">Tus temas</div>';
     app.innerHTML=html;
     STUDENT.tracks.forEach(t=>{
