@@ -1369,7 +1369,7 @@
     document.getElementById("home").onclick=renderHome;
   }
 
-  function esc(s){ return (s==null?"":""+s).replace(/&/g,"&").replace(/</g,"<").replace(/>/g,">"); }
+  function esc(s){ return (s==null?"":""+s).replace(/&/g,"\u0026amp;").replace(/</g,"\u0026lt;").replace(/>/g,"\u0026gt;"); }
 
   renderHome();
 
