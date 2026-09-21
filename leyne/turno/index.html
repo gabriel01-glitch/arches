@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Leyne · Tu turno</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#f6efe4;
+  --paper:#fffaf2;
+  --ink:#1c1916;
+  --muted:#5a5046;
+  --line:#e3d6c4;
+  --terra:#c45c32;
+  --terra-dark:#8a3a1e;
+  --navy:#1e3350;
+  --navy-soft:#e8eef4;
+  --ok:#2c6a4e;
+  --ok-tint:#e7f2eb;
+  --bad-tint:#f6e4dc;
+  --listen:#fff4e4;
+  --shadow:0 10px 28px rgba(28,25,22,.08);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:var(--cream);
+  color:var(--ink);
+  font-family:Nunito,system-ui,sans-serif;
+  line-height:1.35;
+  overflow-x:clip;
+}
+::selection{background:#f0c9b4;color:var(--ink)}
+:focus-visible{outline:3px solid var(--terra-dark);outline-offset:3px}
+.wrap{max-width:440px;margin:0 auto;padding:14px 16px 118px}
+a.back{
+  color:var(--terra-dark);font-weight:800;font-size:13px;text-decoration:none;
+  display:inline-flex;align-items:center;min-height:44px;
+}
+.top{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+}
+.notes-btn{
+  appearance:none;border:1px solid var(--line);background:var(--paper);color:var(--navy);
+  font:inherit;font-weight:800;font-size:13px;min-height:44px;padding:0 14px;border-radius:999px;cursor:pointer;
+}
+.notes-btn[aria-pressed="true"]{background:var(--navy);color:#fffaf2;border-color:var(--navy)}
+.rail{
+  display:flex;gap:6px;margin:8px 0 12px;flex-wrap:wrap;
+}
+.rail button{
+  appearance:none;border:0;cursor:pointer;width:28px;height:28px;border-radius:50%;
+  background:#fff;color:var(--muted);font:inherit;font-size:11px;font-weight:800;
+  box-shadow:0 1px 0 var(--line);
+}
+.rail button[aria-current="step"]{background:var(--terra-dark);color:#fffaf2}
+.rail button.said{box-shadow:inset 0 0 0 2px var(--ok)}
+.kicker{
+  margin:0 0 4px;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--terra-dark);
+}
+h1{
+  font-family:"Cormorant Garamond",Georgia,serif;
+  font-size:46px;line-height:.95;margin:0 0 8px;letter-spacing:-.02em;
+}
+.lede{margin:0 0 12px;font-size:16px;font-weight:700;color:var(--muted)}
+.bones{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 14px}
+.bones span{
+  background:var(--navy);color:#fffaf2;font-size:12px;font-weight:800;
+  letter-spacing:.06em;padding:6px 10px;border-radius:999px;
+}
+.stops{display:grid;gap:6px;margin:0}
+.stops button{
+  appearance:none;text-align:left;cursor:pointer;font:inherit;
+  display:flex;justify-content:space-between;gap:12px;align-items:center;
+  background:var(--paper);border:0;border-radius:14px;min-height:48px;padding:10px 14px;
+  box-shadow:0 1px 0 var(--line);font-weight:800;
+}
+.stops button:active{transform:translateY(1px)}
+.stops .t{color:var(--terra-dark);font-size:13px}
+.photo{
+  margin:0 0 12px;border-radius:18px;overflow:hidden;height:200px;
+  box-shadow:var(--shadow);background:var(--navy-soft);
+}
+.photo img{width:100%;height:100%;object-fit:cover;display:block}
+.clockface{
+  height:200px;border-radius:18px;margin:0 0 12px;
+  background:var(--navy);color:#fffaf2;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+}
+.clockface span{
+  font-family:"Cormorant Garamond",Georgia,serif;font-size:92px;line-height:.85;
+}
+.clockface small{font-weight:800;letter-spacing:.14em;text-transform:uppercase;font-size:12px;color:#f0d8c6}
+.place{margin:0;font-size:13px;font-weight:800;color:var(--terra-dark);letter-spacing:.06em;text-transform:uppercase}
+.gloss{margin:4px 0 0;font-size:14px;font-weight:700;color:var(--muted)}
+.prompt{
+  font-family:"Cormorant Garamond",Georgia,serif;
+  font-size:32px;line-height:1.05;margin:10px 0 12px;
+  overflow-wrap:break-word;
+}
+.trap{
+  margin:0 0 12px;padding:10px 12px;border-radius:12px;background:var(--bad-tint);
+  font-weight:800;color:var(--terra-dark);text-decoration:line-through;text-decoration-thickness:2px;
+}
+.line{
+  margin:0 0 8px;padding:14px;border-radius:16px;background:var(--ok-tint);
+  font-size:20px;font-weight:800;line-height:1.35;
+}
+.line b{color:var(--terra-dark)}
+.why{margin:0 0 12px;font-size:14px;font-weight:700;color:var(--muted)}
+.pron{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px}
+.pron button,.show,.said{
+  appearance:none;cursor:pointer;font:inherit;font-weight:800;border-radius:999px;min-height:48px;
+}
+.pron button{
+  border:1px solid var(--line);background:#fff;color:var(--navy);padding:0 14px;font-size:14px;
+}
+.show,.said{
+  border:0;padding:0 18px;font-size:15px;
+}
+.show{background:var(--terra-dark);color:#fffaf2}
+.said{background:#fff;color:var(--ok);border:1.5px solid var(--ok)}
+.said[aria-pressed="true"]{background:var(--ok);color:#fffaf2}
+.cut{
+  margin:12px 0 0;font-size:13px;font-weight:800;
+}
+.cut button{
+  appearance:none;border:0;background:none;color:var(--terra-dark);font:inherit;font-weight:800;
+  text-decoration:underline;text-underline-offset:3px;cursor:pointer;min-height:44px;padding:0;
+}
+.coach{
+  margin-top:14px;background:var(--listen);border-radius:16px;padding:12px 14px;
+  font-size:14px;font-weight:700;white-space:pre-wrap;
+}
+.coach[hidden]{display:none}
+.coach .lab{display:block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--terra-dark);margin-bottom:6px}
+.fixq{
+  font-family:"Cormorant Garamond",Georgia,serif;font-size:30px;margin:8px 0 12px;line-height:1.1;
+}
+.opts{display:grid;gap:8px}
+.opts button{
+  appearance:none;text-align:left;cursor:pointer;font:inherit;font-weight:800;font-size:16px;
+  background:#fff;border:1.5px solid var(--line);border-radius:16px;min-height:52px;padding:12px 14px;
+}
+.opts button:active{transform:translateY(1px)}
+.opts button.ok{background:var(--ok-tint);border-color:var(--ok);color:var(--ok)}
+.opts button.no{background:var(--bad-tint);border-color:var(--terra-dark);color:var(--terra-dark)}
+.blanks{margin:0;padding:0;list-style:none;display:grid;gap:8px}
+.blanks li{
+  background:var(--paper);border-radius:14px;padding:12px 14px;font-size:18px;font-weight:800;
+  box-shadow:0 1px 0 var(--line);
+}
+.dock{
+  position:fixed;left:0;right:0;bottom:0;z-index:5;
+  background:var(--cream);border-top:1px solid var(--line);
+  padding:10px 12px calc(10px + env(safe-area-inset-bottom));
+}
+.dock-inner{max-width:440px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.dock button{
+  appearance:none;cursor:pointer;font:inherit;font-weight:800;font-size:14px;
+  min-width:0;min-height:48px;padding:0 10px;border-radius:999px;
+  border:1px solid var(--line);background:#fff;color:var(--navy);
+}
+.dock .go{background:var(--navy);color:#fffaf2;border-color:var(--navy)}
+.step{animation:rise 420ms ease-out}
+@keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.noscript-class{max-width:440px;margin:0 auto;padding:16px 16px 48px}
+.noscript-class h1{font-size:36px}
+.noscript-class article{background:var(--paper);border-radius:16px;padding:14px;margin:0 0 10px}
+.noscript-class h2{font-family:"Cormorant Garamond",Georgia,serif;font-size:26px;margin:0 0 6px}
+@media (min-width:720px){
+  .photo,.clockface{height:280px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .step{animation:none}
+  .stops button:active,.opts button:active{transform:none}
+}
+</style>
+</head>
+<body>
+<div class="wrap" id="app"></div>
+<noscript>
+  <div class="noscript-class">
+    <h1>Tu turno</h1>
+    <p>Di la frase limpia. La palabra que el español se come va en negrita en la clase: it, are, for, -ing.</p>
+    <article><h2>9:00 · The door</h2><p>Welcome. Can I see your membership card?</p></article>
+    <article><h2>9:15 · Looking</h2><p>Are you looking for something?</p></article>
+    <article><h2>9:30 · Aisle</h2><p>It is in aisle 8, on the left.</p></article>
+    <article><h2>11:00 · Register 3</h2><p>People are waiting. I will be right with you.</p></article>
+    <article><h2>12:30 · Team</h2><p>We are out of rotisserie chicken.</p></article>
+    <article><h2>3:00 · Break</h2><p>I am going on break. I will be back at 3.</p><p>After work, I am going to the lake.</p></article>
+    <article><h2>After · Your lake</h2><p>It is my favorite place because it has a wonderful lake.</p><p>I like walking here. I visit it very often.</p></article>
+    <article><h2>Exit</h2><p>It is busy. People are waiting. Are you looking for something? I like helping you.</p></article>
+  </div>
+</noscript>
+<script>
+(function(){
+  "use strict";
+  var STEPS = [
+    {
+      id:"open", kind:"open",
+      kicker:"Hoy · unos 40 min",
+      title:"Tu turno",
+      lede:"Un turno en Sam’s Club. Después, tu lago. Tú hablas primero.",
+      bones:["IT","ARE","FOR","-ING"],
+      say:"Today we walk your shift. You talk first. Then we put back the word that disappeared.",
+      stops:[["9:00","The door","door"],["9:15","Looking","look"],["9:30","The aisle","aisle"],["11:00","The line","line"],["12:30","Your team","team"],["3:00","Break","break"],["After","Your lake","lake"]],
+      note:"YOU SAY: Today we walk your shift, then your lake. You talk first. I only put back the word Spanish ate: it, are, for, or -ing.\nIF “I don’t know”: We use your floor. Door, aisle, register, break, lake.\nSkeleton = who or what before the verb.\n\nCLOCK\n0–3 Open\n3–7 Door\n7–12 Looking  ← Thursday’s miss, give it time\n12–16 Aisle\n16–20 Line\n20–24 Team\n24–28 Break\n28–33 Lake\n33–38 Fix\n38–40 Exit\n\n25 MIN: from Team, jump to the lake. Then Fix. Then Exit."
+    },
+    {
+      id:"door", kind:"scene", time:"9:00", place:"The door",
+      img:"../img/door.jpg", w:768, h:1024, pos:"50% 28%",
+      alt:"An associate smiles at a member with a full cart by the club doors",
+      gloss:"Un miembro entra con el carrito lleno.",
+      prompt:"What do you say?",
+      line:"Welcome. Can I see your membership card?",
+      html:"Welcome. Can <b>I</b> see your membership card?",
+      why:"El sujeto eres tú: Can I. La I no se cae.",
+      note:"Warm start. Don’t drill.\nLISTEN: a welcome with no I.\nIF she skips it → “Can I. The I is you.”\nOne clean line, then move."
+    },
+    {
+      id:"look", kind:"scene", time:"9:15", place:"Looking",
+      img:"../img/aisle.jpg", w:768, h:1024, pos:"50% 42%",
+      alt:"An associate points down a tall warehouse aisle beside a member",
+      gloss:"Está buscando. No dice qué.",
+      prompt:"He is looking around. What do you ask?",
+      trap:"Are you looking something?",
+      line:"Are you looking for something?",
+      html:"Are you looking <b>for</b> something?",
+      why:"Buscar no lleva preposición. Look for sí. El for se queda.",
+      note:"HER LINE, 17 Sep: “Are you looking something?”\nIF she drops for → stop. “For. Are you looking FOR something?”\nTwo more, out loud: looking for the chicken. Looking for aisle 8.\nThis scene gets the extra minute."
+    },
+    {
+      id:"aisle", kind:"scene", time:"9:30", place:"Where is it?",
+      img:"../img/hero.jpg", w:768, h:1024, pos:"50% 22%",
+      alt:"An associate stands between tall pallets on the club floor",
+      gloss:"Pregunta dónde está.",
+      prompt:"Where is it?",
+      trap:"Is in aisle 8, on the left.",
+      line:"It is in aisle 8, on the left.",
+      html:"<b>It</b> is in aisle 8, on the left.",
+      why:"El lugar necesita IT. “Is in aisle…” no arranca.",
+      note:"LISTEN: a sentence that starts with is / busy / in.\nIF “Is in aisle 8” → “Who? IT is in aisle 8.”\nOne more before you leave: It is busy at the door."
+    },
+    {
+      id:"line", kind:"scene", time:"11:00", place:"Register 3",
+      img:"line.jpg", w:832, h:1248, pos:"50% 32%",
+      alt:"People wait with carts while an associate waves the next member forward",
+      gloss:"Hay fila en la caja.",
+      prompt:"The line is forming. What do you say?",
+      trap:"People is waiting.",
+      line:"People are waiting. I will be right with you.",
+      html:"<b>People are</b> waiting. <b>I</b> will be right with you.",
+      why:"People es plural. People are. Nunca people is.",
+      note:"LISTEN: people is / people goes.\nIF that → “People ARE. Plural. Like they.”\nSecond model, if she is clean: People are lining up at register 3."
+    },
+    {
+      id:"team", kind:"scene", time:"12:30", place:"With your team",
+      img:"../img/team.jpg", w:768, h:1024, pos:"50% 40%",
+      alt:"Two associates talk beside a pallet of water",
+      gloss:"El café se quedó sin pollo.",
+      prompt:"Tell your teammate.",
+      line:"We are out of rotisserie chicken.",
+      html:"<b>We</b> are out of rotisserie chicken.",
+      why:"La frase empieza con alguien. We are.",
+      cut:"lake",
+      note:"25-MIN CUT: skip Team and Break. Jump to the lake, then Fix, then Exit.\nIF you stay, also take: Can you cover my break?\nStill listen for “Is busy” → It is busy."
+    },
+    {
+      id:"break", kind:"scene", time:"3:00", place:"Break",
+      clock:"3:00",
+      gloss:"Te vas. Después, el lago.",
+      prompt:"Tell your team. Then tell me after work.",
+      line:"I am going on break. I will be back at 3.",
+      html:"<b>I</b> am going <b>on</b> break. <b>I</b> will be back at 3.",
+      extra:"After work, I am going to the lake.",
+      extraHtml:"After work, <b>I</b> am going <b>to</b> the lake.",
+      why:"Go necesita su palabra: on break, to the lake. El 3 de agosto dijo “I am going the beach.” El to se había caído.",
+      note:"HER CARD, 3 Aug: “I am going the beach” → “I am going to the beach.”\nSame hole, new place.\nIF “going the lake” → “To. Going TO the lake.”\nShe says both lines before you leave."
+    },
+    {
+      id:"lake", kind:"scene", time:"After", place:"Your lake",
+      img:"lake.jpg", w:832, h:1248, pos:"50% 62%",
+      alt:"A boardwalk curves along a calm lake at sunset, with low houses across the water",
+      gloss:"Downtown. Tu lugar.",
+      prompt:"Tell me this place.",
+      line:"It is my favorite place because it has a wonderful lake.",
+      html:"<b>It</b> is my favorite place because <b>it</b> has a wonderful lake.",
+      extra:"I like walking here. I visit it very often.",
+      extraHtml:"I like <b>walking</b> here. I visit <b>it</b> very often.",
+      why:"Dos it. Y like + walking, no like walk. Visit necesita it.",
+      pron:[["because","bi-COS"],["often","O-fen"]],
+      note:"HER LINES: “because is a tourist city.” “I visit very often.” “I like listen music.”\nIF the it drops → “IT is my favorite place because IT has a lake.”\nIF “I like walk” → “like + -ing. Walking.”\nSay the sounds only if the word shows up. because = bi-COS. often = O-fen. The T is silent."
+    },
+    {
+      id:"fix", kind:"fix",
+      title:"Seis arreglos",
+      lede:"Dila limpia. Después tócala.",
+      items:[
+        {wrong:"Are you looking something?", right:"Are you looking for something?", why:"look for · 17 de septiembre"},
+        {wrong:"Is in aisle 8, on the left.", right:"It is in aisle 8, on the left.", why:"It is"},
+        {wrong:"People is waiting.", right:"People are waiting.", why:"people are"},
+        {wrong:"I am going the beach.", right:"I am going to the beach.", why:"going to · su frase del 3 de agosto"},
+        {wrong:"I like listen music.", right:"I like listening to music.", why:"like + -ing, y listen to"},
+        {wrong:"I visit very often.", right:"I visit it very often.", why:"visit it · downtown"}
+      ],
+      note:"She says the clean line before she taps. If she taps first, she still says it.\nThese six are hers. Don’t add new grammar."
+    },
+    {
+      id:"exit", kind:"exit",
+      title:"Antes de irte",
+      lede:"Cuatro líneas. En voz alta. Como si el miembro estuviera enfrente.",
+      blanks:["It is ___.","People are ___.","Are you looking ___ something?","I like ___-ing."],
+      line:"It is busy. People are waiting. Are you looking for something? I like helping you.",
+      html:"<b>It</b> is busy. <b>People are</b> waiting. Are you looking <b>for</b> something? I like <b>helping</b> you.",
+      why:"Esta semana, una vez al día: un it, un people are, un for, un like + -ing.",
+      note:"Let her build the four first. Then show the model.\nMODEL: It is busy. People are waiting. Are you looking for something? I like helping you.\nTomorrow on the floor, she catches one."
+    }
+  ];
+
+  var KEY = "arches_leyne_turno";
+  var app = document.getElementById("app");
+  var index = 0;
+  var fixAt = 0;
+  var revealed = false;
+  var fixLocked = false;
+  var said = {};
+  var notesOn = false;
+  var started = Date.now();
+  try{
+    var saved = JSON.parse(sessionStorage.getItem(KEY) || "null");
+    if(saved){
+      index = Math.min(saved.index || 0, STEPS.length - 1);
+      fixAt = saved.fixAt || 0;
+      said = saved.said || {};
+      notesOn = !!saved.notesOn;
+    }
+  }catch(e){}
+  var hashId = (location.hash || "").replace("#", "");
+  if(hashId){
+    for(var h = 0; h < STEPS.length; h++){
+      if(STEPS[h].id === hashId){ index = h; fixAt = 0; revealed = false; }
+    }
+  }
+
+  function persist(){
+    try{
+      sessionStorage.setItem(KEY, JSON.stringify({index:index, fixAt:fixAt, said:said, notesOn:notesOn}));
+    }catch(e){}
+  }
+
+  var voice = null;
+  function loadVoice(){
+    var vs = window.speechSynthesis ? speechSynthesis.getVoices() : [];
+    var en = vs.filter(function(v){ return /^en[-_]/i.test(v.lang); });
+    var pref = ["Samantha","Google US English","Microsoft Aria","Microsoft Jenny"];
+    voice = null;
+    for(var p=0;p<pref.length;p++){
+      var m = en.find(function(v){ return v.name.indexOf(pref[p]) === 0; });
+      if(m){ voice = m; break; }
+    }
+    if(!voice) voice = en[0] || null;
+  }
+  if(window.speechSynthesis){
+    loadVoice();
+    speechSynthesis.onvoiceschanged = loadVoice;
+  }
+  function speak(text){
+    if(!text || !window.speechSynthesis) return;
+    speechSynthesis.cancel();
+    var u = new SpeechSynthesisUtterance(text);
+    u.lang = "en-US";
+    u.rate = 0.9;
+    if(voice) u.voice = voice;
+    speechSynthesis.speak(u);
+  }
+  function esc(s){
+    return String(s == null ? "" : s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+  }
+  function stepById(id){
+    for(var i=0;i<STEPS.length;i++) if(STEPS[i].id === id) return i;
+    return 0;
+  }
+  function elapsed(){
+    var s = Math.floor((Date.now() - started) / 1000);
+    var m = Math.floor(s / 60);
+    var r = s % 60;
+    return m + ":" + (r < 10 ? "0" : "") + r;
+  }
+  function currentSay(){
+    var step = STEPS[index];
+    if(step.kind === "fix"){
+      if(!fixLocked) return "";
+      var item = step.items[fixAt];
+      return item ? item.right : "";
+    }
+    if(step.kind === "open") return step.say;
+    if(!revealed) return "";
+    return step.line + (step.extra ? " " + step.extra : "");
+  }
+
+  function coachHTML(step){
+    if(!notesOn) return "";
+    return '<aside class="coach"><span class="lab">Notas · ' + elapsed() + '</span>' + esc(step.note) + '</aside>';
+  }
+
+  function photoHTML(step){
+    if(step.clock){
+      return '<div class="clockface"><span>' + esc(step.clock) + '</span><small>break</small></div>';
+    }
+    if(!step.img) return "";
+    var pos = step.pos ? ' style="object-position:' + step.pos + '"' : "";
+    return '<div class="photo"><img src="' + step.img + '" width="' + step.w + '" height="' + step.h + '" alt="' + esc(step.alt) + '"' + pos + '></div>';
+  }
+
+  function render(){
+    var step = STEPS[index];
+    if(location.hash !== "#" + step.id) history.replaceState(null, "", "#" + step.id);
+    var html = '';
+    html += '<div class="top"><a class="back" href="../?name=Leyne">‹ Leyne</a>';
+    html += '<button type="button" class="notes-btn" id="notes" aria-pressed="' + (notesOn ? "true" : "false") + '">Notas</button></div>';
+    html += '<div class="rail" role="tablist" aria-label="Escenas">';
+    STEPS.forEach(function(s, i){
+      var label = (i + 1);
+      html += '<button type="button" data-go="' + i + '" aria-current="' + (i === index ? "step" : "false") + '" class="' + (said[s.id] ? "said" : "") + '" aria-label="' + esc(s.place || s.title || s.id) + '">' + label + '</button>';
+    });
+    html += '</div>';
+    html += '<div class="step">';
+
+    if(step.kind === "open"){
+      html += '<p class="kicker">' + esc(step.kicker) + '</p>';
+      html += '<h1>' + esc(step.title) + '</h1>';
+      html += '<p class="lede">' + esc(step.lede) + '</p>';
+      html += '<div class="bones">' + step.bones.map(function(b){ return '<span>' + esc(b) + '</span>'; }).join('') + '</div>';
+      html += '<div class="stops">';
+      step.stops.forEach(function(s){
+        html += '<button type="button" data-jump="' + s[2] + '"><span>' + esc(s[1]) + '</span><span class="t">' + esc(s[0]) + '</span></button>';
+      });
+      html += '</div>';
+    }
+
+    if(step.kind === "scene"){
+      html += photoHTML(step);
+      html += '<p class="place">' + esc(step.time) + ' · ' + esc(step.place) + '</p>';
+      html += '<p class="gloss">' + esc(step.gloss) + '</p>';
+      html += '<h1 class="prompt" lang="en">' + esc(step.prompt) + '</h1>';
+      if(!revealed){
+        html += '<button type="button" class="show" id="show">Ver la frase</button>';
+      } else {
+        if(step.trap) html += '<p class="trap" lang="en">' + esc(step.trap) + '</p>';
+        html += '<p class="line" lang="en">' + step.html + '</p>';
+        if(step.extraHtml) html += '<p class="line" lang="en">' + step.extraHtml + '</p>';
+        html += '<p class="why">' + esc(step.why) + '</p>';
+        if(step.pron){
+          html += '<div class="pron">';
+          step.pron.forEach(function(p){
+            html += '<button type="button" data-pron="' + esc(p[0]) + '">' + esc(p[0]) + ' · ' + esc(p[1]) + '</button>';
+          });
+          html += '</div>';
+        }
+        var pressed = said[step.id] ? "true" : "false";
+        html += '<button type="button" class="said" id="said" aria-pressed="' + pressed + '">' + (said[step.id] ? "Dicha" : "Ya la dije") + '</button>';
+      }
+      if(step.cut) html += '<p class="cut"><button type="button" data-jump="' + step.cut + '">Si ya van 25 minutos, salta al lago</button></p>';
+    }
+
+    if(step.kind === "fix"){
+      var item = step.items[fixAt];
+      html += '<p class="kicker">Arreglo ' + (fixAt + 1) + ' / ' + step.items.length + '</p>';
+      html += '<h1>' + esc(step.title) + '</h1>';
+      html += '<p class="lede">' + esc(step.lede) + '</p>';
+      html += '<p class="fixq" lang="en">¿Cuál es la limpia?</p>';
+      var pair = [item.wrong, item.right];
+      if(item.wrong.length % 2 === 0) pair = [item.right, item.wrong];
+      html += '<div class="opts" id="opts">';
+      pair.forEach(function(text){
+        html += '<button type="button" data-pick="' + esc(text) + '">' + esc(text) + '</button>';
+      });
+      html += '</div><div id="fb"></div>';
+    }
+
+    if(step.kind === "exit"){
+      html += '<p class="kicker">Cierre</p>';
+      html += '<h1>' + esc(step.title) + '</h1>';
+      html += '<p class="lede">' + esc(step.lede) + '</p>';
+      html += '<ul class="blanks">';
+      step.blanks.forEach(function(b){ html += '<li lang="en">' + esc(b) + '</li>'; });
+      html += '</ul>';
+      if(!revealed){
+        html += '<p style="height:12px"></p><button type="button" class="show" id="show">Ver el modelo</button>';
+      } else {
+        html += '<p class="line" lang="en" style="margin-top:12px">' + step.html + '</p>';
+        html += '<p class="why">' + esc(step.why) + '</p>';
+      }
+    }
+
+    html += coachHTML(step);
+    html += '</div>';
+    html += '<div class="dock"><div class="dock-inner">';
+    html += '<button type="button" id="back">Anterior</button>';
+    html += '<button type="button" id="hear">Escuchar</button>';
+    html += '<button type="button" class="go" id="next">Sigue</button>';
+    html += '</div></div>';
+    app.innerHTML = html;
+
+    document.getElementById("notes").onclick = function(){
+      notesOn = !notesOn;
+      persist();
+      render();
+    };
+    app.querySelectorAll("[data-go]").forEach(function(btn){
+      btn.onclick = function(){
+        index = Number(btn.getAttribute("data-go"));
+        fixAt = 0;
+        revealed = false;
+        fixLocked = false;
+        persist();
+        render();
+      };
+    });
+    app.querySelectorAll("[data-jump]").forEach(function(btn){
+      btn.onclick = function(){
+        index = stepById(btn.getAttribute("data-jump"));
+        fixAt = 0;
+        revealed = false;
+        fixLocked = false;
+        persist();
+        render();
+      };
+    });
+    var show = document.getElementById("show");
+    if(show) show.onclick = function(){
+      revealed = true;
+      persist();
+      render();
+      speak(STEPS[index].line + (STEPS[index].extra ? " " + STEPS[index].extra : ""));
+    };
+    var saidBtn = document.getElementById("said");
+    if(saidBtn) saidBtn.onclick = function(){
+      said[STEPS[index].id] = true;
+      persist();
+      render();
+    };
+    app.querySelectorAll("[data-pron]").forEach(function(btn){
+      btn.onclick = function(){ speak(btn.getAttribute("data-pron")); };
+    });
+    var opts = document.getElementById("opts");
+    if(opts){
+      opts.querySelectorAll("button").forEach(function(btn){
+        btn.onclick = function(){
+          var item = STEPS[index].items[fixAt];
+          var good = btn.getAttribute("data-pick") === item.right;
+          opts.querySelectorAll("button").forEach(function(b){
+            if(b.getAttribute("data-pick") === item.right) b.classList.add("ok");
+            else if(b === btn) b.classList.add("no");
+            b.disabled = true;
+          });
+          fixLocked = true;
+          var fb = document.getElementById("fb");
+          fb.innerHTML = '<p class="why">' + esc(item.why) + '</p>';
+          if(good) said["fix-" + fixAt] = true;
+          speak(item.right);
+        };
+      });
+    }
+    document.getElementById("back").onclick = goBack;
+    document.getElementById("next").onclick = goNext;
+    document.getElementById("hear").onclick = function(){
+      var text = currentSay();
+      if(!text){
+        var s = STEPS[index];
+        text = s.kind === "fix" ? "Say the clean one." : (s.prompt || s.say || "");
+      }
+      speak(text);
+    };
+  }
+
+  function goNext(){
+    var step = STEPS[index];
+    if(step.kind === "fix" && fixAt < step.items.length - 1){
+      fixAt++;
+      revealed = false;
+      fixLocked = false;
+      persist();
+      render();
+      return;
+    }
+    if(index < STEPS.length - 1){
+      index++;
+      fixAt = 0;
+      revealed = false;
+      fixLocked = false;
+      persist();
+      render();
+    }
+  }
+  function goBack(){
+    var step = STEPS[index];
+    if(step.kind === "fix" && fixAt > 0){
+      fixAt--;
+      revealed = false;
+      fixLocked = false;
+      persist();
+      render();
+      return;
+    }
+    if(index > 0){
+      index--;
+      fixAt = 0;
+      revealed = false;
+      fixLocked = false;
+      persist();
+      render();
+    }
+  }
+
+  document.addEventListener("keydown", function(e){
+    if(e.target && (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA")) return;
+    if(e.key === "ArrowRight") goNext();
+    if(e.key === "ArrowLeft") goBack();
+    if(e.key === "n" || e.key === "N"){
+      notesOn = !notesOn;
+      persist();
+      render();
+    }
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>
