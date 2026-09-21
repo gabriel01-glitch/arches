@@ -511,9 +511,12 @@
   var clockLeft = 60;
 
   function esc(s){
+    var amp = String.fromCharCode(38);
     return String(s == null ? "" : s)
-      .replace(/&/g,"\u0026amp;").replace(/</g,"\u0026lt;")
-      .replace(/>/g,"\u0026gt;").replace(/"/g,"\u0026quot;");
+      .replace(/&/g, amp + "amp;")
+      .replace(/</g, amp + "lt;")
+      .replace(/>/g, amp + "gt;")
+      .replace(/"/g, amp + "quot;");
   }
   function clearTimer(){
     if(clockId){ clearInterval(clockId); clockId = null; }
