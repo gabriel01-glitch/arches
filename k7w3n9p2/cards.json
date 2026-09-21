@@ -1,5 +1,5 @@
 {
-  "student": "Mavic",
+  "student": "",
   "updated": "24 de agosto de 2026",
   "cards": [
     {
@@ -26,22 +26,6 @@
       "hint": "\"That's\" es una contraccion de \"that is\". No se puede combinar con otro verbo auxiliar como \"can\". Elige uno: \"that is\" o \"that can\", no los dos juntos.",
       "alts": [
         "That could help you."
-      ],
-      "date": "13 de julio de 2026"
-    },
-    {
-      "wrong": "My daughter do everything she says.",
-      "right": "My daughter does everything she says.",
-      "hint": "En español el verbo no cambia según la persona ('ella hace' suena igual que 'yo hago' en estructura), pero en inglés la tercera persona singular (he/she/it) necesita una 's' al final del verbo en presente simple.",
-      "alts": [],
-      "date": "13 de julio de 2026"
-    },
-    {
-      "wrong": "I prefer die in Venezuela.",
-      "right": "I prefer to die in Venezuela.",
-      "hint": "En español 'prefiero morir' usa infinitivo directamente, pero en inglés 'prefer' exige 'to + verbo'. Regla: prefer + to + infinitivo.",
-      "alts": [
-        "I'd rather die in Venezuela."
       ],
       "date": "13 de julio de 2026"
     },
@@ -129,35 +113,10 @@
       "date": "15 de julio de 2026"
     },
     {
-      "wrong": "I tried to call to Marcos.",
-      "right": "I tried to call Marcos.",
-      "hint": "En español decimos 'llamar a alguien', pero en inglés el verbo 'call' es transitivo directo: no necesita preposición antes del objeto. El 'to' extra es interferencia del español.",
-      "alts": [],
-      "date": "15 de julio de 2026"
-    },
-    {
-      "wrong": "I am realize that Kasia is upset with me.",
-      "right": "I realize that Kasia is upset with me.",
-      "hint": "'Am' es auxiliar del presente continuo y se usa con el verbo en -ing. 'Realize' es un verbo de estado (stative verb) que normalmente no se usa en continuo, asi que va en simple presente o present perfect sin auxiliar.",
-      "alts": [
-        "I've realized that Kasia is upset with me."
-      ],
-      "date": "15 de julio de 2026"
-    },
-    {
       "wrong": "Don't amenazarme.",
       "right": "Don't threaten me.",
       "hint": "El verbo 'amenazar' en inglés es 'threaten'. Mezclar español e inglés en la misma oración es una señal de que la palabra no está aún automatizada. Practica: 'threaten, threatened, threatening'.",
       "alts": [],
-      "date": "15 de julio de 2026"
-    },
-    {
-      "wrong": "I passed my vacation with my daughter worried.",
-      "right": "I spent my vacation worried about my daughter.",
-      "hint": "En español 'pasar' sirve para el tiempo ('pasé mis vacaciones'), pero en inglés ese uso es 'spend/spent'. Además, 'worried' necesita conectarse claramente al sujeto que siente la preocupación, no dejarlo flotando al final.",
-      "alts": [
-        "I spent my holidays worried about my daughter."
-      ],
       "date": "15 de julio de 2026"
     },
     {
@@ -193,13 +152,6 @@
       "wrong": "Always I think on food.",
       "right": "I always think about food.",
       "hint": "En español el adverbio 'siempre' puede ir al inicio de la oración, pero en inglés los adverbios de frecuencia normalmente van antes del verbo principal, no al principio. Además, 'pensar en algo' se traduce como 'think about', no 'think on'.",
-      "alts": [],
-      "date": "20 de julio de 2026"
-    },
-    {
-      "wrong": "Newman woke up me.",
-      "right": "Newman woke me up.",
-      "hint": "Con verbos frasales separables como 'wake up', el pronombre objeto (me, him, her) siempre va entre el verbo y la partícula, nunca después. En español no existe esta estructura, así que el orden causa confusión.",
       "alts": [],
       "date": "20 de julio de 2026"
     },
