@@ -125,7 +125,7 @@
     "l1": "Spanish",
     "context": "Cubano en Tampa. Plomero. Familia en Cuba. Inglés para el trabajo y la vida.",
     "greeting": "Tus frases reales, Wilfredo. Del taller a la fluidez, un poco cada día.",
-    "version": "2026-09-08"
+    "version": "2026-09-21"
   },
   "tracks": [
     {
@@ -960,6 +960,11 @@
   ],
   "links": [
     {
+      "title": "Bajo la casa",
+      "note": "Esta noche. El job de Swann ya terminó: pasado, y la palabrita no se cae.",
+      "url": "swann/"
+    },
+    {
       "title": "Idioms",
       "note": "Mira el dibujo. El inglés literal es ridículo — por eso se te queda.",
       "url": "../apps/idioms/?name=Wilfredo&from=wilfredo"
@@ -1364,7 +1369,7 @@
     document.getElementById("home").onclick=renderHome;
   }
 
-  function esc(s){ return (s==null?"":""+s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+  function esc(s){ return (s==null?"":""+s).replace(/&/g,"&").replace(/</g,"<").replace(/>/g,">"); }
 
   renderHome();
 
