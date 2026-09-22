@@ -140,9 +140,9 @@
     "name": "Andres",
     "level": "A2-B1",
     "l1": "Spanish",
-    "context": "Estudiante de ARCHES. Español L1. Base de clase mientras llega su mazo.",
-    "greeting": "Hoy: En el muelle. Ocho dibujos. Pick up, put away, look out — el inglés literal se queda.",
-    "version": "2026-09-15"
+    "context": "Estudiante de ARCHES. Español L1.",
+    "greeting": "Hoy: En el muelle. Ocho dibujos. Pick up, put away, look out: el inglés literal se queda.",
+    "version": "2026-09-22"
   },
   "links": [
     {
@@ -396,7 +396,7 @@
         },
         {
           "type": "translate",
-          "es": "El no ha llamado todavia.",
+          "es": "Él no ha llamado todavía.",
           "en": "He hasn't called yet.",
           "alts": ["He has not called yet"],
           "note": "yet al final, en negativos y preguntas.",
@@ -463,6 +463,122 @@
           "type": "dictate",
           "say": "I have never spoken to a native speaker before.",
           "note": "never + participio."
+        }
+      ]
+    },
+    {
+      "id": "frases",
+      "title": "Tus frases de clase",
+      "note": "tus propios errores de clase, corregidos. Primero estos.",
+      "items": [
+        {
+          "type": "fix",
+          "wrong": "Anyone wanted to pay.",
+          "right": "Nobody wanted to pay.",
+          "alts": [
+            "No one wanted to pay"
+          ],
+          "note": "de tu clase: nadie = nobody / no one.",
+          "say": "Nobody wanted to pay."
+        },
+        {
+          "type": "fix",
+          "wrong": "Why that, we couldn't finish on time.",
+          "right": "Because of that, we couldn't finish on time.",
+          "alts": [
+            "That's why we couldn't finish on time",
+            "Because of that we couldn't finish on time"
+          ],
+          "note": "de tu clase: por eso = because of that / that's why.",
+          "say": "Because of that, we couldn't finish on time."
+        },
+        {
+          "type": "fix",
+          "wrong": "In the end of the month.",
+          "right": "At the end of the month.",
+          "note": "de tu clase: at the end of, siempre con at.",
+          "say": "At the end of the month."
+        },
+        {
+          "type": "choice",
+          "prompt": "We need to ___ the deadline.",
+          "options": [
+            "meet",
+            "do",
+            "arrive"
+          ],
+          "answer": "meet",
+          "note": "cumplir con una fecha o un presupuesto = meet.",
+          "say": "We need to meet the deadline."
+        },
+        {
+          "type": "translate",
+          "es": "Tengo que cumplir con el presupuesto.",
+          "en": "I need to meet the budget.",
+          "alts": [
+            "I have to meet the budget",
+            "I need to stick to the budget",
+            "I have to stick to the budget"
+          ],
+          "note": "de tu clase: cumplir no se mete en inglés. meet / stick to.",
+          "say": "I need to meet the budget."
+        },
+        {
+          "type": "fix",
+          "wrong": "When do you need days off you need to speak with me.",
+          "right": "When you need days off, you need to speak with me.",
+          "alts": [
+            "When you need a day off, you need to speak with me",
+            "If you need days off, you need to speak with me",
+            "When you need days off you need to speak with me"
+          ],
+          "note": "de tu clase: When + orden normal (When you need), no orden de pregunta.",
+          "say": "When you need days off, you need to speak with me."
+        },
+        {
+          "type": "fix",
+          "wrong": "I go to the bank yesterday.",
+          "right": "I went to the bank yesterday.",
+          "alts": [
+            "Yesterday I went to the bank"
+          ],
+          "note": "de tu clase: yesterday = pasado. go se vuelve went.",
+          "say": "I went to the bank yesterday."
+        },
+        {
+          "type": "fix",
+          "wrong": "I loved to training people.",
+          "right": "I loved training people.",
+          "alts": [
+            "I loved to train people",
+            "I used to love training people"
+          ],
+          "note": "de tu clase: love + -ing o love + to + verbo. Nunca 'to training'.",
+          "say": "I loved training people."
+        },
+        {
+          "type": "translate",
+          "es": "¿Cómo se dice tratamiento en inglés?",
+          "en": "How do you say tratamiento in English?",
+          "alts": [
+            "How do you say treatment in English",
+            "What's the word for tratamiento in English",
+            "What is the word for tratamiento in English"
+          ],
+          "note": "frase de rescate: pregunta la palabra, no la inventes.",
+          "say": "How do you say tratamiento in English?"
+        },
+        {
+          "type": "pron",
+          "word": "sales",
+          "arches": "SEILZ",
+          "note": "una sílaba, como 'say' + lz. No SA-les.",
+          "say": "sales"
+        },
+        {
+          "type": "dictate",
+          "say": "Because of that, we need to meet the deadline.",
+          "note": "because of that + meet."
         }
       ]
     },
@@ -580,10 +696,7 @@
           "type": "translate",
           "es": "Estaba en el trabajo.",
           "en": "I was at work.",
-          "alts": [
-            "I was at the job"
-          ],
-          "note": "was = pasado de am/is.",
+          "note": "was = pasado de am/is. Y at work, no at the job.",
           "say": "I was at work."
         },
         {
@@ -880,7 +993,7 @@
           "type": "pron",
           "word": "comfortable",
           "arches": "KOMF-ter-bul",
-          "note": "tres sonidos, no cuatro.",
+          "note": "tres sílabas, no cuatro.",
           "say": "comfortable"
         },
         {
@@ -992,7 +1105,7 @@
           "es": "Mi gato es más gordo que mi perro.",
           "en": "My cat is fatter than my dog.",
           "alts": [
-            "My cat is fatter than my dog"
+            "My cat's fatter than my dog"
           ],
           "note": "fat se vuelve fatter (doble t).",
           "say": "My cat is fatter than my dog."

@@ -80,12 +80,12 @@
       "date": "13 de agosto de 2026"
     },
     {
-      "wrong": "I can't fix it.",
-      "right": "I couldn't fix it.",
-      "hint": "En español a veces contamos anécdotas del pasado usando el presente, pero en inglés hay que usar el pasado (couldn't) para acciones que ya ocurrieron.",
+      "wrong": "Yesterday I can't fix it.",
+      "right": "Yesterday I couldn't fix it.",
+      "hint": "Si la historia ya pasó (yesterday, last week), can't cambia a couldn't. En español a veces contamos el pasado en presente; en inglés no.",
       "alts": [
-        "I wasn't able to fix it.",
-        "I couldn't solve it."
+        "I couldn't fix it yesterday.",
+        "Yesterday I wasn't able to fix it."
       ],
       "date": "18 de agosto de 2026"
     },

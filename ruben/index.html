@@ -125,7 +125,7 @@
     "l1": "Spanish",
     "context": "Trabaja en una clínica privada",
     "greeting": "Hoy: wear many hats. Tres frases para contestar. El dibujo es la memoria.",
-    "version": "2026-09-15"
+    "version": "2026-09-22"
   },
   "tracks": [
     {
@@ -198,7 +198,7 @@
           "type": "fix",
           "wrong": "I wake up around at 6.",
           "right": "I wake up around 6.",
-          "note": "Elige una: around o at, nunca las dos.",
+          "note": "around 6 o at around 6. Nunca around at.",
           "say": "I wake up around 6."
         },
         {
@@ -211,9 +211,10 @@
         {
           "type": "fix",
           "wrong": "I finish about at 5.",
-          "right": "I finish about 5.",
-          "note": "Una sola palabra para la hora.",
-          "say": "I finish about 5."
+          "right": "I finish at about 5.",
+          "alts": ["I finish about 5", "I finish around 5", "I finish at around 5"],
+          "note": "at about 5 sí. about at 5 no: el at va primero.",
+          "say": "I finish at about 5."
         },
         {
           "type": "choice",
@@ -418,8 +419,8 @@
         {
           "type": "pron",
           "word": "comprehension",
-          "arches": "kom-pre-HEN-sion",
-          "note": "La fuerza en HEN.",
+          "arches": "kom-pri-JEN-shon",
+          "note": "La fuerza en JEN.",
           "say": "comprehension"
         },
         {
@@ -476,8 +477,8 @@
         {
           "type": "pron",
           "word": "defibrillator",
-          "arches": "dii-FAI-bri-lei-ter",
-          "note": "Como en tu cartoon: la fuerza en FAI.",
+          "arches": "di-FI-bri-lei-ter",
+          "note": "La fuerza en FI (la forma más común). También se oye di-FAI-bri-lei-ter: las dos son correctas.",
           "say": "defibrillator"
         },
         {
@@ -586,17 +587,17 @@
     },
     {
       "title": "Idioms",
-      "note": "Mira el dibujo. El inglés literal es ridículo — por eso se te queda.",
+      "note": "Mira el dibujo. El inglés literal es ridículo, por eso se te queda.",
       "url": "../apps/idioms/?name=Ruben&from=ruben"
     },
     {
       "title": "The Floor",
-      "note": "Clase de hoy. Un hospital te entrevista de verdad: biomédico, el piso, y el inglés del miedo.",
+      "note": "Un hospital te entrevista de verdad: biomédico, el piso, y el inglés del miedo.",
       "url": "piso/"
     },
     {
       "title": "Ascensor",
-      "note": "Frame first + máximo 3 oraciones. Pitch corto: Saturdays / overtime / clinic.",
+      "note": "Frame first + máximo 3 oraciones. Pitch corto: Saturdays / after work / clinic.",
       "url": "rele/?name=Ruben"
     },
 
