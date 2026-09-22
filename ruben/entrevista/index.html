@@ -164,14 +164,14 @@
       q:"Tell me about yourself.",
       qes:"Cuéntame de ti.",
       lines:[
-        "My name is Ruben, and I am 53 years old.",
-        "I am an electrical engineer from Cuba.",
+        "My name is Ruben, and I am an electrical engineer from Cuba.",
         "I have many years of experience with medical equipment.",
-        "Now I work at a private clinic, and I am ready for a bigger challenge."
+        "Now I work at a private clinic.",
+        "I am ready for a bigger challenge."
       ],
       phon:"ai-hav ME-nii YIIRZ ov ek-SPII-ri-ans. a BI-guer CHA-lench.",
       chips:["engineer","Cuba","experience","bigger challenge"],
-      why:"Tu carta de presentación, nivel dos: ahora termina con ambición.",
+      why:"Tu carta de presentación: nombre, profesión, experiencia, ambición. Sin edad: en una entrevista no se dice.",
       fu:{ q:"Why a bigger challenge?", qes:"¿Por qué un reto más grande?",
         lines:["Because I love to learn.","A hospital has more equipment and more technology."] }
     },
@@ -259,14 +259,14 @@
       q:"A machine fails during an emergency. What do you do?",
       qes:"Una máquina falla durante una emergencia. ¿Qué haces?",
       lines:[
-        "First, I stay calm and I go fast.",
-        "I check the power and the connections.",
-        "If I can't repair it quickly, I call for support.",
+        "First, the patient: I bring a backup machine.",
+        "Then I check the power and the connections.",
+        "If I can't fix it quickly, I take it out of service and I call for support.",
         "Patient safety is always first."
       ],
-      phon:"FERST ai-stei-KAAM. PEI-shant SEIF-tii iz OL-weiz FERST.",
-      chips:["stay calm","check the power","call for support","safety first"],
-      why:"First, then, if: la estructura salva. La última línea es oro puro.",
+      phon:"FERST, the PEI-shant: ai-BRING a BAK-ap ma-SHIIN. PEI-shant SEIF-tii iz OL-weiz FERST.",
+      chips:["backup","check the power","out of service","safety first"],
+      why:"En un hospital, primero el paciente: la máquina de repuesto. Después la reparación. First, then, if.",
       fu:{ q:"What if there is no support?", qes:"¿Y si no hay apoyo?",
         lines:["I tell the doctor immediately.","Communication is also safety."] }
     },
@@ -276,11 +276,11 @@
       qes:"¿Cuáles son tus fortalezas?",
       lines:[
         "I am careful, and safety is my priority.",
-        "I solve problems with calm.",
+        "I stay calm when I solve problems.",
         "I don't stop until the machine works.",
         "And I am honest: if I don't know something, I say it, and I learn it."
       ],
-      phon:"ai-SOLV PRO-blems with KAAM. ai-am O-nest.",
+      phon:"ai-stei-KAAM wen ai-SOLV PRO-blems. ai-am O-nest.",
       chips:["careful","calm","don't stop","honest"],
       why:"Cuatro fortalezas con hechos, no adjetivos vacíos.",
       fu:{ q:"And what is your weakness?", qes:"¿Y tu debilidad?",
@@ -298,8 +298,72 @@
       phon:"on-WEEK-deiz. on-SA-tur-deiz. ai-am FLEK-si-bal.",
       chips:["on weekdays","on Saturdays","flexible","schedule"],
       why:"Tus trampas de siempre (on, around) más la palabra mágica: flexible.",
-      fu:{ q:"Can you work at night?", qes:"¿Puedes trabajar de noche?",
+      fu:{ q:"Can you be on call?", qes:"¿Puedes estar de guardia?",
         lines:["If it is necessary, yes.","We can talk about it."] }
+    },
+    {
+      id:"repair",
+      q:"Tell me about a time you fixed a difficult problem.",
+      qes:"Cuéntame de una vez que resolviste un problema difícil.",
+      lines:[
+        "One day, a patient monitor stopped working.",
+        "First, I checked the power and the cables.",
+        "The problem was the battery, so I replaced it.",
+        "I tested it, it worked, and I wrote it down."
+      ],
+      phon:"wan-DEI, a PEI-shant MO-ni-tor STAPT WER-king. ai-CHEKT. ai-ri-PLEIST-it.",
+      chips:["one day","checked","replaced","wrote it down"],
+      why:"La pregunta más común: 'Tell me about a time...'. Se contesta en PASADO: stopped, checked, replaced. Cambia el ejemplo por una historia real tuya.",
+      fu:{ q:"What did you learn?", qes:"¿Qué aprendiste?",
+        lines:["Always check the easy things first.","Power, cables, battery. Then the inside."] }
+    },
+    {
+      id:"pm",
+      q:"What is the difference between preventive maintenance and calibration?",
+      qes:"¿Cuál es la diferencia entre mantenimiento preventivo y calibración?",
+      lines:[
+        "Preventive maintenance is a scheduled check, before a problem.",
+        "I clean it, test it, and replace old parts.",
+        "Calibration means the numbers are correct.",
+        "If a pump says 50, it must give 50."
+      ],
+      phon:"pri-VEN-tiv MEIN-ta-nans. ka-li-BREI-shon.",
+      chips:["scheduled","before a problem","numbers are correct","pump"],
+      why:"Pregunta técnica clásica. Dos definiciones cortas y un ejemplo. No necesitas más.",
+      fu:{ q:"What if a machine fails the safety test?", qes:"¿Y si una máquina falla la prueba de seguridad?",
+        lines:["It does not go back to the patient.","I tag it, I repair it, and I test it again."] }
+    },
+    {
+      id:"priority",
+      q:"You have many work orders. How do you decide what comes first?",
+      qes:"Tienes muchas órdenes de trabajo. ¿Cómo decides qué va primero?",
+      lines:[
+        "Patient safety comes first.",
+        "A machine that a patient needs now is number one.",
+        "Then the urgent repairs, then preventive maintenance.",
+        "And I write everything in the work order."
+      ],
+      phon:"PEI-shant SEIF-tii kamz FERST. WERK OR-derz.",
+      chips:["safety first","needs now","urgent","work order"],
+      why:"Quieren oír un orden lógico: paciente, urgente, preventivo, y todo por escrito.",
+      fu:{ q:"How do you document your work?", qes:"¿Cómo documentas tu trabajo?",
+        lines:["I write every repair and every test in the work order.","If it is not written, it did not happen."] }
+    },
+    {
+      id:"nurses",
+      q:"How do you talk to nurses and doctors about a machine problem?",
+      qes:"¿Cómo hablas con enfermeras y doctores de un problema con una máquina?",
+      lines:[
+        "I use simple words, not technical words.",
+        "I tell them if the machine is safe or not safe.",
+        "I tell them how long it will take.",
+        "And I give them a backup if they need one."
+      ],
+      phon:"ai-YUZ SIM-pol WERDZ. JAU LONG it-wil TEIK.",
+      chips:["simple words","safe or not safe","how long","backup"],
+      why:"Evalúan si sabes hablar con gente no técnica. Seguro o no seguro, y cuánto tarda: eso es todo lo que necesitan.",
+      fu:{ q:"What if a nurse is angry?", qes:"¿Y si una enfermera está enojada?",
+        lines:["I stay calm and I listen.","Then I explain the plan: first the backup, then the repair."] }
     },
     {
       id:"ask",
@@ -308,11 +372,11 @@
       lines:[
         "Yes, I have two questions.",
         "What equipment does the hospital use?",
-        "How big is the maintenance team?",
+        "How big is the biomedical team?",
         "Thank you for your time."
       ],
-      phon:"hau-BIG iz the MEIN-ta-nans TIIM. THANK-yu for yor-TAIM.",
-      chips:["two questions","equipment","maintenance team","thank you"],
+      phon:"jau-BIG iz the bai-o-ME-di-kal TIIM. THANK-yu for yor-TAIM.",
+      chips:["two questions","equipment","biomedical team","thank you"],
       why:"Preguntar = interés. Y cierras con gracias. Final fuerte.",
       fu:null
     }
@@ -338,20 +402,20 @@
   ];
 
   const TRAPS = [
-    { wrong:"I have 53 years.", right:"I am 53 years old.",
-      why:"La edad es I am, no I have. Tu clásico número uno." },
+    { wrong:"I have many years working with machines.", right:"I have many years of experience with machines.",
+      why:"years working ✗ → years of experience ✓. Y tu edad no se dice en una entrevista (para la edad es I am, nunca I have)." },
     { wrong:"I am electrical engineer.", right:"I am an electrical engineer.",
       why:"Profesión con a o an. Engineer empieza por vocal: an." },
     { wrong:"I can work the Saturdays.", right:"I can work on Saturdays.",
       why:"Días con on. on Saturdays." },
     { wrong:"I get at home around at 5.", right:"I get home around 5.",
-      why:"get home sin preposición. Y una sola palabra de tiempo: around o at." },
+      why:"get home sin preposición. around 5 o at around 5. Nunca around at." },
     { wrong:"The machine don't work.", right:"The machine doesn't work.",
       why:"La máquina es it. Tercera persona: doesn't." },
     { wrong:"My work isn't officer work.", right:"My job isn't an office job.",
       why:"job = puesto. office = oficina. officer = policía." },
-    { wrong:"I start to work around at 7.", right:"I start work around 7.",
-      why:"Elige around o at, nunca las dos juntas." },
+    { wrong:"I start to work around at 7.", right:"I start work at around 7.",
+      why:"at around 7 sí. around at 7 no: el at va primero." },
     { wrong:"I am agree with the doctor.", right:"I agree with the doctor.",
       why:"agree ya es verbo. Sin am. Error clásico del español." },
     { wrong:"I want explain my experience.", right:"I want to explain my experience.",
@@ -372,8 +436,10 @@
     { w:"battery", es:"la batería", syls:["BA","ta","rii"], note:"Tres sílabas rápidas, fuerza en BA." },
     { w:"safety", es:"la seguridad", syls:["SEIF","tii"], note:"Dos sílabas. La palabra que más vas a decir." },
     { w:"repair", es:"reparar", syls:["ri","PER"], note:"La fuerza al final: PER." },
-    { w:"power", es:"la corriente", syls:["PAU","er"], note:"Lo primero que revisas cuando algo falla." },
+    { w:"power", es:"la energía, la electricidad", syls:["PAU","er"], note:"Lo primero que revisas cuando algo falla." },
     { w:"schedule", es:"el horario", syls:["SKE","jul"], note:"Suena SKE-jul. Nada de es-che-du-le." },
+    { w:"calibration", es:"la calibración", syls:["ka","li","BREI","shon"], note:"La fuerza en BREI. Que los números sean verdad." },
+    { w:"work order", es:"la orden de trabajo", syls:["WERK","or","der"], note:"Todo lo que reparas se escribe aquí." },
     { w:"X-ray machine", es:"la máquina de rayos X", syls:["EKS","rei","ma","SHIIN"], note:"Dos fuerzas: EKS y SHIIN." }
   ];
 
@@ -488,8 +554,8 @@
     app.innerHTML=html;
 
     const rooms=[
-      { title:"1. Mis 10 respuestas", note:"Escucha. Repite. Tápate. Ahora con pasado, con because, y con preguntas de seguimiento.", go:renderBankList, count:ready+" listas" },
-      { title:"2. Palabras del hospital", note:"Diez palabras que vas a oír en la entrevista. Toca la sílaba fuerte.", go:renderVocab, count:VOCAB.length },
+      { title:"1. Mis "+BANK.length+" respuestas", note:"Escucha. Repite. Tápate. Ahora con pasado, con because, y con preguntas de seguimiento.", go:renderBankList, count:ready+" listas" },
+      { title:"2. Palabras del hospital", note:VOCAB.length+" palabras que vas a oír en la entrevista. Toca la sílaba fuerte.", go:renderVocab, count:VOCAB.length },
       { title:"3. Frases de rescate", note:"Ocho anclas. Dos nuevas de profesional: el ejemplo y la máquina que no conoces.", go:renderLifelines, count:LIFELINES.length },
       { title:"4. Trampas de entrevista", note:"Tus errores reales más los clásicos del español, en frases de entrevista.", go:()=>startTraps(), count:TRAPS.length },
       { title:"5. La entrevista", note:"Elige quién te entrevista: Sofía, El Director o La Ingeniera Jefa. Cada uno es distinto.", go:renderPersonas, count:(state().interviews||0)+" hechas" }
@@ -502,11 +568,11 @@
 
     const teach=el('<details class="teacher"><summary>Notas para Gabriel · plan de clase v2</summary><div class="body">El salto de v1 a v2: de recitar a flexionar. Las preguntas de seguimiento (follow-ups) son el corazón: lo obligan a moverse dentro del banco.<ol><li>Calentamiento (3 min): Palabras del hospital, una ronda de sílaba fuerte. Ríanse de maintenance.</li><li>Banco (10 min): dos respuestas nuevas (sugerencia: experience por el pasado, y machines por la honestidad). Escucha, línea por línea, tápate.</li><li>Simulacro (12 min): primera vez con Sofía. Segunda clase: El Director. Cuando gane con los tres, celebración.</li><li>En el simulacro tú callas. La app pregunta, él contesta. Tú solo anotas un error vivo para el final.</li><li>Regla de oro sin cambios: congelado = frase de rescate primero, respuesta después. Nunca español.</li><li>Tarea: una entrevista con Sofía en la tablet, y las dos respuestas nuevas en modo tápate.</li></ol>Nivel A1+ empujando a A2: pasado simple (worked, learned), because y but, if + presente. Oraciones cortas siempre. Sin años exactos de experiencia ni fechas de inicio: la app dice many years y I am flexible a propósito, hasta confirmar con Ruben.</div></details>');
     app.appendChild(teach);
-    app.appendChild(el('<div class="credit">ARCHES · Ruben · La Entrevista · v2 · 2026-08-25</div>'));
+    app.appendChild(el('<div class="credit">ARCHES · Ruben · La Entrevista · v3 · 2026-09-22</div>'));
   }
 
   function renderBankList(){
-    shell("Inicio", renderHome, null, null, '<div class="kicker">Paso 1</div><div class="q-en" style="font-size:32px;margin-bottom:8px">Mis 10 respuestas</div><div class="sub" style="margin:0 0 16px">Las mismas diez, hasta que sean aburridas. Las que tienen flecha ↳ esconden una pregunta de seguimiento.</div>');
+    shell("Inicio", renderHome, null, null, '<div class="kicker">Paso 1</div><div class="q-en" style="font-size:32px;margin-bottom:8px">Mis '+BANK.length+' respuestas</div><div class="sub" style="margin:0 0 16px">Las mismas, hasta que sean aburridas. Las que tienen flecha ↳ esconden una pregunta de seguimiento.</div>');
     BANK.forEach(b=>{
       const ok=!!state().ready[b.id];
       const card=el('<button class="track"><div class="track-head"><div class="track-title" style="font-size:20px">'+esc(b.q)+'</div><div class="track-count">'+(ok?'<span class="ready">lista</span>':'practicar')+'</div></div><div class="track-note">'+esc(b.qes)+(b.fu?' · ↳ '+esc(b.fu.q):'')+'</div></button>');
@@ -776,7 +842,8 @@
   }
 
   function startInterview(p){
-    const queue=shuffle(BANK).slice(0, p.n).map(b=>({b}));
+    const first=BANK.find(b=>b.id==="about");
+    const queue=[first].concat(shuffle(BANK.filter(b=>b.id!=="about")).slice(0, p.n-1)).map(b=>({b}));
     runInterview(p, queue, 0, {good:0, mid:0, freeze:0, fuGood:0, fuTotal:0});
   }
 
