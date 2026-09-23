@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mi Orlando · Leyne</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#fbf7f0; --surface:#fffdf9; --ink:#2c2722; --muted:#6f665b;
+    --line:#e9e0d3; --terra:#bf5a36; --terra-dark:#8e3b22; --terra-press:#7a311c;
+    --terra-tint:#f4e4d9; --good:#3f695e; --good-tint:#e8f1dd; --bad-tint:#f6e2da;
+    --on-terra:#fffdf9; --credit:#a89c8c;
+    --lake:#9cc4d8; --lake-deep:#5e93ad; --grass:#d3dfb8; --land:#f3efe3; --road:#e0d6c5;
+    --wall:#e6d6c2; --roof:#c9a58a; --sand:#f0dfae; --sun:#e2b04a; --leaf:#6f8f5f; --night:#1d2a44;
+    --n:0;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0;padding:0}
+  body{background:var(--cream);color:var(--ink);font-family:'Nunito',sans-serif;-webkit-font-smoothing:antialiased;min-height:100vh}
+  ::selection{background:var(--terra-tint);color:var(--ink)}
+  :focus-visible{outline:2px solid var(--terra);outline-offset:3px}
+  .wrap{max-width:540px;margin:0 auto;padding:22px 18px 56px}
+  h1{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:40px;line-height:1.02;margin:0}
+  h1 .nm{color:var(--terra)}
+  .sub{font-size:15px;color:var(--muted);font-weight:700;margin-top:10px;line-height:1.45}
+  .meta{font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--terra-dark);margin-top:16px;display:flex;justify-content:space-between;align-items:center}
+  .pill{background:var(--surface);border:1.5px solid var(--line);border-radius:999px;padding:6px 12px;font-size:12px;letter-spacing:.04em}
+
+  .mapcard{margin-top:14px;background:var(--surface);border:1.5px solid var(--line);border-radius:22px;padding:10px;position:relative;overflow:hidden}
+  .map{width:100%;height:auto;display:block;border-radius:14px}
+  .pin{cursor:pointer}
+  .pin .badge{fill:#c9bdac;transition:fill .3s ease}
+  .pin .num{fill:#fffdf9;font-family:'Nunito',sans-serif;font-weight:800;font-size:11px}
+  .pin .lbl{fill:#2c2722;font-family:'Nunito',sans-serif;font-weight:800;font-size:9.5px;letter-spacing:.02em}
+  .pin.done .badge{fill:#bf5a36}
+  .pin.done .num{display:none}
+  .pin .tick{display:none;stroke:#fffdf9;stroke-width:2.2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+  .pin.done .tick{display:block}
+  .pin.active .badge{fill:#8e3b22}
+  .pin:hover .badge{fill:#a34a2b}
+  .night{fill:var(--night);opacity:calc(var(--n) * .66);transition:opacity .8s ease;pointer-events:none}
+  .lights{opacity:var(--n);transition:opacity .8s ease;pointer-events:none}
+  .lights circle{fill:#ffd97a}
+  .glow{opacity:calc(var(--n) * .9)}
+  .maphint{font-size:13.5px;font-weight:700;color:var(--muted);text-align:center;margin-top:10px}
+
+  .card{margin-top:14px;background:var(--surface);border:1.5px solid var(--line);border-radius:20px;padding:18px 16px}
+  .reveal{animation:up .4s ease-out both}
+  @keyframes up{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+  .kicker{font-size:12px;text-transform:uppercase;letter-spacing:1.4px;color:var(--terra-dark);font-weight:800;margin-bottom:10px}
+  .scene{background:var(--cream);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+  .scene svg{display:block;width:100%;height:auto}
+  .sent{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:31px;line-height:1.15;margin:16px 2px 0}
+  .sent .gap{display:inline-block;min-width:72px;border-bottom:3px solid var(--terra);line-height:.9;text-align:center;color:var(--terra-dark);padding:0 4px}
+  .es{font-size:15px;font-weight:700;color:var(--muted);margin-top:8px;line-height:1.4}
+  .opts{display:flex;flex-direction:column;gap:10px;margin-top:16px}
+  .opt{background:var(--cream);border:1.5px solid var(--line);border-radius:14px;padding:14px 16px;font-size:18px;font-weight:800;color:var(--ink);cursor:pointer;text-align:left;font-family:'Nunito',sans-serif;min-height:50px;transition:transform .08s ease,border-color .12s,background .12s}
+  .opt:active{transform:scale(.98)}
+  .opt.ok{background:var(--good-tint);border-color:var(--good);color:var(--good)}
+  .opt.no{background:var(--bad-tint);border-color:var(--terra);color:var(--terra-dark)}
+  .opt[disabled]{cursor:default}
+  .fb{margin-top:14px;border-radius:14px;padding:14px 16px;font-weight:700;font-size:15px;line-height:1.45}
+  .fb.ok{background:var(--good-tint);color:var(--good)}
+  .fb.no{background:var(--bad-tint);color:var(--terra-dark)}
+  .fb b{font-weight:800}
+  .btn{border:none;border-radius:14px;font-family:'Nunito',sans-serif;font-weight:800;font-size:16px;padding:15px;cursor:pointer;min-height:48px;transition:transform .08s ease,background .15s ease}
+  .btn:active{transform:scale(.98)}
+  .btn-primary{background:var(--terra-dark);color:var(--on-terra);width:100%;margin-top:14px}
+  .btn-primary:hover{background:var(--terra-press)}
+  .btn-ghost{background:var(--cream);color:var(--ink);border:1.5px solid var(--line);flex:1}
+  .row2{display:flex;gap:10px;margin-top:12px}
+  .speaker{display:inline-flex;align-items:center;justify-content:center;gap:9px;background:var(--cream);border:1.5px solid var(--line);border-radius:30px;padding:12px 20px;font-weight:800;font-size:15px;color:var(--ink);cursor:pointer;font-family:'Nunito',sans-serif;margin-top:14px;width:100%;min-height:48px}
+  .speaker:active{border-color:var(--terra)}
+
+  .tiles{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+  .tile{background:var(--cream);border:1.5px solid var(--line);border-radius:12px;padding:11px 14px;font-size:17px;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif;min-height:46px;transition:transform .08s ease}
+  .tile:active{transform:scale(.96)}
+  .tile.used{opacity:.28;pointer-events:none}
+  .built{min-height:56px;margin-top:14px;background:var(--cream);border:1.5px dashed var(--line);border-radius:14px;padding:12px 14px;font-family:'Cormorant Garamond',serif;font-weight:700;font-size:26px;line-height:1.2}
+  .built.ok{border-style:solid;border-color:var(--good);color:var(--good)}
+  .built.no{border-style:solid;border-color:var(--terra);color:var(--terra-dark)}
+
+  .done{text-align:center;padding:22px 8px 10px}
+  .done h2{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:34px;margin:0 0 6px}
+  .done .score{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:64px;color:var(--terra);line-height:1;margin:12px 0}
+  .done p{color:var(--muted);font-weight:700;font-size:15px;margin:0 0 18px;line-height:1.45}
+  .homeback{display:inline-block;margin-top:18px;font-size:14px;font-weight:800;color:var(--terra-dark);text-decoration:none;min-height:44px;line-height:44px}
+  .credit{text-align:center;color:var(--credit);font-size:11.5px;font-weight:700;margin-top:28px;letter-spacing:.5px}
+
+  @media (prefers-reduced-motion: reduce){
+    *,*::before,*::after{transition:none !important;animation:none !important}
+    .reveal{opacity:1;transform:none}
+  }
+</style>
+</head>
+<body>
+<div class="wrap" id="app"></div>
+<script>
+(function(){
+  "use strict";
+  var KEY = "arches_leyne_mapa_v1";
+  var NAME = "Leyne";
+
+  /* ---------- content: eight places, eight small words ---------- */
+  var ITEMS = [
+    { id:"lago", n:1, place:"El lago", time:"7:30 am",
+      before:"", after:" beautiful today.", answer:"It's", opts:["It's","Is","Are"],
+      full:"It's beautiful today.", es:"Está precioso hoy.",
+      why:"En inglés el sujeto nunca se cae. Para el clima, la hora y las cosas: <b>it</b>. \"Is beautiful\" suena a frase sin cabeza." },
+    { id:"parque", n:2, place:"El parque", time:"9:00 am",
+      before:"We walked ", after:" Sunday morning.", answer:"on", opts:["on","in","at"],
+      full:"We walked on Sunday morning.", es:"Caminamos el domingo por la mañana.",
+      why:"Los días llevan <b>on</b>: on Sunday, on Monday morning. <b>In</b> es para meses y años, <b>at</b> para horas." },
+    { id:"club", n:3, place:"El Club", time:"11:00 am",
+      before:"She's ", after:" work until six.", answer:"at", opts:["at","in","on"],
+      full:"She's at work until six.", es:"Está en el trabajo hasta las seis.",
+      why:"Lugares de rutina llevan <b>at</b>: at work, at home, at school, at the beach. \"In work\" no existe." },
+    { id:"downtown", n:4, place:"Downtown", time:"1:00 pm",
+      before:"Let's go ", after:" downtown tonight.", answer:"(nada)", opts:["(nada)","to","at"],
+      full:"Let's go downtown tonight.", es:"Vamos al centro esta noche.",
+      why:"Tres palabras van sin <b>to</b>: go <b>downtown</b>, go <b>home</b>, go <b>there</b>. Con el resto sí: go to the beach." },
+    { id:"mall", n:5, place:"El mall", time:"3:00 pm",
+      before:"Just ", after:", no kids.", answer:"us", opts:["us","we","our"],
+      full:"Just us, no kids.", es:"Solo nosotras, sin niños.",
+      why:"Después de una preposición o de \"just\" el pronombre es de objeto: just <b>us</b>, with <b>us</b>, for <b>us</b>. \"Just we\" fue tu frase de agosto." },
+    { id:"casa", n:6, place:"Mi casa", time:"5:00 pm",
+      before:"This is ", after:" car.", answer:"their", opts:["their","them","they"],
+      full:"This is their car.", es:"Este es el carro de ellos.",
+      why:"Antes de un sustantivo va el posesivo: <b>their</b> car, <b>my</b> car. <b>Them</b> va después del verbo: I saw them." },
+    { id:"playa", n:7, place:"La playa", time:"6:30 pm",
+      before:"Let's drive ", after:" the beach.", answer:"to", opts:["to","at","(nada)"],
+      full:"Let's drive to the beach.", es:"Vamos a la playa en carro.",
+      why:"Movimiento hacia un lugar: <b>to</b>. \"I am going the beach\" pierde el to. Excepciones: home, downtown, there." },
+    { id:"aeropuerto", n:8, place:"El aeropuerto", time:"9:00 pm",
+      before:"My cousin is waiting ", after:" the airport.", answer:"at", opts:["at","in","on"],
+      full:"My cousin is waiting at the airport.", es:"Mi prima está esperando en el aeropuerto.",
+      why:"El aeropuerto es un punto de encuentro: <b>at</b> the airport. <b>In</b> the airport solo si hablas de estar adentro del edificio." }
+  ];
+
+  /* ---------- state ---------- */
+  var state = load();
+  function load(){ try{ var s = JSON.parse(localStorage.getItem(KEY)); if(s && s.done) return s; }catch(e){} return {done:{}, misses:{}, r2:{}, best:null}; }
+  function save(){ try{ localStorage.setItem(KEY, JSON.stringify(state)); }catch(e){} }
+  var app = document.getElementById("app");
+  var current = null, locked = false;
+
+  /* ---------- audio (iOS-safe voice) ---------- */
+  var voice = null, audioReady = false;
+  function loadVoice(){
+    var vs = window.speechSynthesis ? speechSynthesis.getVoices() : [];
+    var NOV=/albert|bad news|bahh|bells|boing|bubbles|cellos|good news|jester|organ|superstar|trinoids|whisper|wobble|zarvox|junior|kathy|ralph|fred|eloquence|grandma|grandpa|reed|rocko|sandy|shelley|flo/i;
+    var en=vs.filter(function(v){return /^en[-_]/i.test(v.lang)&&!NOV.test(v.name);});
+    var pref=["Samantha","Google US English","Microsoft Aria","Microsoft Jenny","Microsoft Zira","Alex"];
+    voice=null;
+    for(var i=0;i<pref.length;i++){ var m=en.filter(function(v){return v.name.indexOf(pref[i])===0;})[0]; if(m){voice=m;break;} }
+    if(!voice) voice = en.filter(function(v){return /en[-_]US/i.test(v.lang);})[0] || en[0] || null;
+  }
+  if(window.speechSynthesis){ loadVoice(); try{ speechSynthesis.onvoiceschanged = loadVoice; }catch(e){} }
+  function unlockAudio(){ if(audioReady || !window.speechSynthesis) return; try{ var u=new SpeechSynthesisUtterance(""); u.volume=0; speechSynthesis.speak(u); audioReady=true; }catch(e){} }
+  document.addEventListener("touchstart", unlockAudio, {once:true});
+  document.addEventListener("click", unlockAudio, {once:true});
+  function speak(text){ if(!text || !window.speechSynthesis) return; try{ speechSynthesis.cancel(); var u=new SpeechSynthesisUtterance(text); u.lang="en-US"; u.rate=0.92; if(voice) u.voice=voice; speechSynthesis.speak(u); }catch(e){} }
+  var speakerSVG = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="M19 5a9 9 0 0 1 0 14"/><path d="M15.5 8.5a4 4 0 0 1 0 7"/></svg>';
+
+  function esc(s){ return (s==null?"":""+s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+  function shuffle(a){ a=a.slice(); for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
+  function doneCount(){ return ITEMS.filter(function(it){ return state.done[it.id]; }).length; }
+  function byId(id){ for(var i=0;i<ITEMS.length;i++) if(ITEMS[i].id===id) return ITEMS[i]; return null; }
+
+  /* ---------- the map (inline SVG, drawn by hand) ---------- */
+  function mapSVG(){
+    var s = '<svg class="map" viewBox="0 0 400 310" role="img" aria-label="Mapa de Orlando de Leyne con ocho lugares">';
+    s += '<defs><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#eef3f7"/><stop offset="1" stop-color="#f3efe3"/></linearGradient>'+
+         '<radialGradient id="sunG" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#e2b04a"/><stop offset="1" stop-color="#e2b04a" stop-opacity="0"/></radialGradient></defs>';
+    s += '<rect x="0" y="0" width="400" height="310" fill="url(#sky)"/>';
+    /* land + grass */
+    s += '<rect x="0" y="0" width="400" height="310" fill="#f3efe3"/>';
+    s += '<path d="M0 60 C 60 30, 120 40, 190 30 S 320 20, 400 40 L400 0 L0 0 Z" fill="#dfe6ec"/>';
+    s += '<ellipse cx="70" cy="95" rx="62" ry="40" fill="#d3dfb8"/><ellipse cx="300" cy="190" rx="70" ry="42" fill="#d3dfb8" opacity=".7"/>';
+    /* roads */
+    s += '<path d="M40 250 L120 200 L200 150 L260 110 L330 70" fill="none" stroke="#e0d6c5" stroke-width="10" stroke-linecap="round"/>';
+    s += '<path d="M40 250 L120 200 L200 150 L260 110 L330 70" fill="none" stroke="#fffdf9" stroke-width="1.5" stroke-dasharray="6 7" stroke-linecap="round"/>';
+    s += '<path d="M120 200 L200 240 L290 250 L360 235" fill="none" stroke="#e0d6c5" stroke-width="10" stroke-linecap="round"/>';
+    s += '<path d="M120 200 L200 240 L290 250 L360 235" fill="none" stroke="#fffdf9" stroke-width="1.5" stroke-dasharray="6 7" stroke-linecap="round"/>';
+    s += '<path d="M200 150 L250 200 L290 250" fill="none" stroke="#e0d6c5" stroke-width="8" stroke-linecap="round"/>';
+    /* beach strip (east) */
+    s += '<path d="M352 0 L400 0 L400 310 L368 310 C 356 240, 350 180, 366 120 C 374 80, 356 40, 352 0 Z" fill="#9cc4d8"/>';
+    s += '<path d="M352 0 L372 0 C 376 40, 392 80, 384 120 C 370 180, 376 240, 388 300 L368 300 C 356 240, 350 180, 366 120 C 374 80, 356 40, 352 0 Z" fill="#f0dfae"/>';
+    s += '<path d="M382 60 q6 -4 12 0 M380 150 q6 -4 12 0 M384 240 q6 -4 12 0" fill="none" stroke="#5e93ad" stroke-width="1.6" stroke-linecap="round"/>';
+    /* sun (day) */
+    s += '<circle cx="330" cy="30" r="26" fill="url(#sunG)" opacity=".9"/><circle cx="330" cy="30" r="9" fill="#e2b04a"/>';
+    /* the lake */
+    s += '<path d="M120 160 C 95 150, 88 118, 118 108 C 150 98, 195 110, 200 132 C 205 154, 180 176, 150 172 C 138 170, 132 166, 120 160 Z" fill="#9cc4d8" stroke="#5e93ad" stroke-width="1.5"/>';
+    s += '<path d="M135 140 q8 -5 16 0 M158 152 q8 -5 16 0 M150 122 q8 -5 16 0" fill="none" stroke="#fffdf9" stroke-width="1.6" stroke-linecap="round" opacity=".9"/>';
+    s += '<rect x="176" y="128" width="20" height="5" rx="1.5" fill="#c9a58a"/><rect x="178" y="133" width="2.5" height="5" fill="#8e3b22"/><rect x="190" y="133" width="2.5" height="5" fill="#8e3b22"/>';
+    s += '<ellipse cx="128" cy="135" rx="5" ry="3.5" fill="#fffdf9" stroke="#2c2722" stroke-width="1"/><circle cx="132" cy="131" r="2.2" fill="#fffdf9" stroke="#2c2722" stroke-width="1"/><path d="M134 131 l2.5 .8 l-2.5 .8" fill="#e2b04a"/>';
+    /* downtown skyline */
+    s += '<g><rect x="228" y="52" width="14" height="42" fill="#d9c8b6" stroke="#2c2722" stroke-width="1"/><rect x="244" y="36" width="16" height="58" fill="#e6d6c2" stroke="#2c2722" stroke-width="1"/><rect x="262" y="60" width="12" height="34" fill="#d9c8b6" stroke="#2c2722" stroke-width="1"/><rect x="276" y="46" width="14" height="48" fill="#e6d6c2" stroke="#2c2722" stroke-width="1"/>';
+    s += '<g fill="#f4e4d9">'+ windows(230,56,3,6,4,7) + windows(247,40,3,9,4,7) + windows(264,64,2,5,4,7) + windows(278,50,3,7,4,7) +'</g>';
+    s += '<path d="M252 30 l0 -10 M249 22 l3 -3 l3 3" fill="none" stroke="#2c2722" stroke-width="1"/></g>';
+    /* the club (warehouse store) */
+    s += '<g><rect x="286" y="150" width="60" height="36" rx="2" fill="#e6d6c2" stroke="#2c2722" stroke-width="1"/><rect x="286" y="150" width="60" height="7" fill="#bf5a36"/><rect x="306" y="168" width="20" height="18" fill="#9cc4d8" stroke="#2c2722" stroke-width="1"/>';
+    s += '<text x="316" y="164" text-anchor="middle" font-family="Nunito,sans-serif" font-weight="800" font-size="7.5" fill="#2c2722">CLUB</text>';
+    s += '<path d="M290 196 h52 M296 190 v12 M310 190 v12 M324 190 v12 M338 190 v12" stroke="#e0d6c5" stroke-width="1.6"/></g>';
+    /* airport */
+    s += '<g><rect x="290" y="262" width="80" height="12" rx="2" fill="#d9d2c6" stroke="#2c2722" stroke-width="1"/><path d="M296 268 h68" stroke="#fffdf9" stroke-width="1.5" stroke-dasharray="5 5"/>';
+    s += '<path d="M318 246 l10 4 l14 -8 l4 3 l-12 10 l2 8 l-3 1 l-4 -6 l-6 3 l-1 3 l-2 -1 l0 -5 l-4 -3 Z" fill="#fffdf9" stroke="#2c2722" stroke-width="1"/></g>';
+    /* the house + palm */
+    s += '<g><path d="M40 232 l20 -18 l20 18 Z" fill="#c9a58a" stroke="#2c2722" stroke-width="1"/><rect x="46" y="232" width="28" height="22" fill="#fffdf9" stroke="#2c2722" stroke-width="1"/><rect x="56" y="240" width="8" height="14" fill="#bf5a36"/><rect x="48" y="236" width="6" height="6" fill="#9cc4d8"/>';
+    s += '<path d="M84 254 c0 -14, 2 -22, 6 -30" fill="none" stroke="#8e3b22" stroke-width="2.2" stroke-linecap="round"/><path d="M90 224 c-8 -2, -14 2, -18 8 M90 224 c8 -2, 14 2, 18 8 M90 224 c-2 -8, 2 -14, 6 -18 M90 224 c-8 -8, -14 -8, -20 -4" fill="none" stroke="#6f8f5f" stroke-width="2.4" stroke-linecap="round"/></g>';
+    /* park */
+    s += '<g>'+ tree(46,80,10) + tree(70,66,12) + tree(96,84,9) + '<path d="M36 100 q34 -10 68 4" fill="none" stroke="#e0d6c5" stroke-width="5" stroke-linecap="round"/><rect x="56" y="96" width="14" height="3" fill="#8e3b22"/><rect x="57" y="99" width="2" height="4" fill="#8e3b22"/><rect x="67" y="99" width="2" height="4" fill="#8e3b22"/></g>';
+    /* mall */
+    s += '<g><rect x="172" y="222" width="64" height="30" rx="3" fill="#e6d6c2" stroke="#2c2722" stroke-width="1"/><path d="M172 230 h64" stroke="#2c2722" stroke-width="1"/><path d="M172 222 h64 l-4 8 h-56 Z" fill="#bf5a36"/><rect x="180" y="236" width="10" height="12" fill="#9cc4d8"/><rect x="199" y="236" width="10" height="16" fill="#8e3b22"/><rect x="218" y="236" width="10" height="12" fill="#9cc4d8"/>';
+    s += '<path d="M206 214 v-6 a4 4 0 0 1 8 0 v6" fill="none" stroke="#2c2722" stroke-width="1.2"/><rect x="202" y="212" width="16" height="12" rx="1.5" fill="#e2b04a" stroke="#2c2722" stroke-width="1"/></g>';
+    /* beach umbrella */
+    s += '<g><path d="M372 190 v20" stroke="#2c2722" stroke-width="1.4"/><path d="M358 192 a14 9 0 0 1 28 0 Z" fill="#bf5a36" stroke="#2c2722" stroke-width="1"/><path d="M365 192 a7 9 0 0 1 14 0" fill="#fffdf9"/></g>';
+    /* night overlay + lights */
+    s += '<rect class="night" x="0" y="0" width="400" height="310"/>';
+    s += '<g class="lights"><circle cx="235" cy="60" r="1.6"/><circle cx="251" cy="46" r="1.6"/><circle cx="283" cy="56" r="1.6"/><circle cx="267" cy="70" r="1.6"/><circle cx="252" cy="70" r="1.6"/><circle cx="60" cy="240" r="2"/><circle cx="316" cy="177" r="2"/><circle cx="185" cy="242" r="1.8"/><circle cx="223" cy="242" r="1.8"/><circle cx="330" cy="250" r="1.6"/><circle cx="352" cy="250" r="1.6"/><circle cx="186" cy="131" r="1.6"/>'+
+         '<ellipse cx="155" cy="150" rx="26" ry="8" fill="#ffd97a" opacity=".22"/><g fill="#fffdf9"><circle cx="30" cy="18" r="1.2"/><circle cx="90" cy="12" r="1"/><circle cx="150" cy="22" r="1.3"/><circle cx="200" cy="10" r="1"/><circle cx="260" cy="16" r="1.1"/><circle cx="60" cy="40" r=".9"/><circle cx="180" cy="42" r="1"/><circle cx="300" cy="8" r="1"/></g><circle cx="330" cy="30" r="8" fill="#fffdf9"/><circle cx="334" cy="27" r="7" fill="#1d2a44" opacity=".96"/></g>';
+    /* pins (badges + labels), drawn last so they sit above the night layer */
+    var P = { lago:[128,178,"El lago"], parque:[70,120,"El parque"], club:[316,206,"El Club"], downtown:[258,106,"Downtown"], mall:[204,266,"El mall"], casa:[60,270,"Mi casa"], playa:[376,222,"La playa"], aeropuerto:[330,290,"Aeropuerto"] };
+    ITEMS.forEach(function(it){
+      var p = P[it.id]; var cls = "pin" + (state.done[it.id] ? " done" : "") + (current && current.id===it.id ? " active" : "");
+      s += '<g class="'+cls+'" data-id="'+it.id+'" role="button" tabindex="0" aria-label="'+esc(it.place)+'">';
+      s += '<circle cx="'+p[0]+'" cy="'+(p[1]-8)+'" r="24" fill="#000" fill-opacity="0"/>';
+      s += '<circle cx="'+p[0]+'" cy="'+(p[1]-14)+'" r="13" fill="#fffdf9" opacity=".92"/>';
+      s += '<circle class="badge" cx="'+p[0]+'" cy="'+(p[1]-14)+'" r="11"/>';
+      s += '<text class="num" x="'+p[0]+'" y="'+(p[1]-10)+'" text-anchor="middle">'+it.n+'</text>';
+      s += '<path class="tick" d="M'+(p[0]-5)+' '+(p[1]-14)+' l3.5 3.5 l7 -7"/>';
+      s += '<rect x="'+(p[0]-28)+'" y="'+(p[1]+2)+'" width="56" height="13" rx="6" fill="#fffdf9" opacity=".92"/>';
+      s += '<text class="lbl" x="'+p[0]+'" y="'+(p[1]+11.5)+'" text-anchor="middle">'+esc(p[2])+'</text>';
+      s += '</g>';
+    });
+    s += '</svg>';
+    return s;
+  }
+  function windows(x,y,cols,rows,w,h){ var o=""; for(var r=0;r<rows;r++) for(var c=0;c<cols;c++) o+='<rect x="'+(x+c*4)+'" y="'+(y+r*5)+'" width="2.2" height="3" />'; return o; }
+  function tree(x,y,r){ return '<rect x="'+(x-1.5)+'" y="'+(y+r-2)+'" width="3" height="10" fill="#8e3b22"/><circle cx="'+x+'" cy="'+y+'" r="'+r+'" fill="#6f8f5f"/><circle cx="'+(x-4)+'" cy="'+(y+3)+'" r="'+(r*.7)+'" fill="#7f9c6c"/>'; }
+
+  /* ---------- small scenes for the question card ---------- */
+  function sceneSVG(id){
+    var b = '<svg viewBox="0 0 320 130" role="img" aria-hidden="true">';
+    var sky = '<rect x="0" y="0" width="320" height="130" fill="#eef3f7"/>';
+    var ground = '<rect x="0" y="96" width="320" height="34" fill="#d3dfb8"/>';
+    var S = {
+      lago: sky+ground+'<path d="M40 100 C 60 70, 260 70, 280 100 Z" fill="#9cc4d8" stroke="#5e93ad" stroke-width="1.5"/><circle cx="262" cy="36" r="14" fill="#e2b04a"/><path d="M90 88 q10 -6 20 0 M150 84 q10 -6 20 0 M210 90 q10 -6 20 0" fill="none" stroke="#fffdf9" stroke-width="2" stroke-linecap="round"/><ellipse cx="120" cy="82" rx="9" ry="6" fill="#fffdf9" stroke="#2c2722" stroke-width="1.2"/><circle cx="127" cy="75" r="4" fill="#fffdf9" stroke="#2c2722" stroke-width="1.2"/><path d="M131 75 l4 1.5 l-4 1.5" fill="#e2b04a"/>'+ tree(300,60,16),
+      parque: sky+ground+ tree(60,60,22) + tree(120,50,26) + tree(250,58,22) +'<path d="M0 108 q160 -20 320 0" fill="none" stroke="#e0d6c5" stroke-width="10" stroke-linecap="round"/><rect x="160" y="84" width="40" height="8" rx="2" fill="#8e3b22"/><rect x="163" y="92" width="4" height="12" fill="#8e3b22"/><rect x="193" y="92" width="4" height="12" fill="#8e3b22"/><circle cx="280" cy="30" r="12" fill="#e2b04a"/>',
+      club: sky+ground+'<rect x="60" y="40" width="200" height="58" fill="#e6d6c2" stroke="#2c2722" stroke-width="1.5"/><rect x="60" y="40" width="200" height="14" fill="#bf5a36"/><text x="160" y="51" text-anchor="middle" font-family="Nunito,sans-serif" font-weight="800" font-size="10" fill="#fffdf9">CLUB</text><rect x="130" y="66" width="60" height="32" fill="#9cc4d8" stroke="#2c2722" stroke-width="1.5"/><path d="M160 66 v32" stroke="#2c2722" stroke-width="1.2"/><rect x="230" y="70" width="18" height="14" rx="2" fill="#e2b04a" stroke="#2c2722" stroke-width="1.2"/><circle cx="90" cy="112" r="6" fill="#2c2722"/><circle cx="118" cy="112" r="6" fill="#2c2722"/><rect x="82" y="96" width="44" height="14" rx="4" fill="#bf5a36" stroke="#2c2722" stroke-width="1.2"/>',
+      downtown: '<rect x="0" y="0" width="320" height="130" fill="#1d2a44"/><rect x="0" y="100" width="320" height="30" fill="#2c2722"/><g fill="#e6d6c2" stroke="#2c2722" stroke-width="1.2"><rect x="40" y="50" width="34" height="52"/><rect x="82" y="22" width="44" height="80"/><rect x="134" y="60" width="30" height="42"/><rect x="172" y="34" width="40" height="68"/><rect x="220" y="56" width="34" height="46"/><rect x="262" y="40" width="30" height="62"/></g><g fill="#ffd97a">'+ windows(46,56,3,7,5,7)+ windows(88,28,4,11,5,7)+ windows(140,66,2,5,5,7)+ windows(178,40,3,9,5,7)+ windows(226,62,3,6,5,7)+ windows(268,46,2,8,5,7) +'</g><circle cx="280" cy="18" r="9" fill="#fffdf9"/><circle cx="284" cy="15" r="8" fill="#1d2a44"/>',
+      mall: sky+ground+'<rect x="50" y="46" width="220" height="52" rx="3" fill="#e6d6c2" stroke="#2c2722" stroke-width="1.5"/><path d="M50 46 h220 l-8 14 h-204 Z" fill="#bf5a36"/><rect x="80" y="70" width="30" height="28" fill="#9cc4d8"/><rect x="140" y="70" width="40" height="28" fill="#8e3b22"/><rect x="210" y="70" width="30" height="28" fill="#9cc4d8"/><path d="M150 40 v-8 a10 10 0 0 1 20 0 v8" fill="none" stroke="#2c2722" stroke-width="1.5"/><rect x="144" y="36" width="32" height="22" rx="2" fill="#e2b04a" stroke="#2c2722" stroke-width="1.2"/>',
+      casa: sky+ground+'<path d="M90 70 l50 -40 l50 40 Z" fill="#c9a58a" stroke="#2c2722" stroke-width="1.5"/><rect x="104" y="70" width="72" height="42" fill="#fffdf9" stroke="#2c2722" stroke-width="1.5"/><rect x="132" y="84" width="16" height="28" fill="#bf5a36"/><rect x="110" y="78" width="14" height="14" fill="#9cc4d8" stroke="#2c2722" stroke-width="1"/><circle cx="212" cy="112" r="7" fill="#2c2722"/><circle cx="256" cy="112" r="7" fill="#2c2722"/><path d="M200 106 l8 -16 h44 l12 16 Z" fill="#9cc4d8" stroke="#2c2722" stroke-width="1.5"/><rect x="198" y="104" width="72" height="8" rx="2" fill="#5e93ad"/><path d="M40 112 c0 -24, 4 -38, 12 -52" fill="none" stroke="#8e3b22" stroke-width="4" stroke-linecap="round"/><path d="M52 60 c-14 -4, -24 2, -32 14 M52 60 c14 -4, 24 2, 32 14 M52 60 c-2 -14, 4 -24, 12 -30 M52 60 c-16 -14, -26 -12, -34 -4" fill="none" stroke="#6f8f5f" stroke-width="4" stroke-linecap="round"/>',
+      playa: '<rect x="0" y="0" width="320" height="130" fill="#eef3f7"/><rect x="0" y="60" width="320" height="40" fill="#9cc4d8"/><rect x="0" y="100" width="320" height="30" fill="#f0dfae"/><path d="M30 76 q12 -7 24 0 M110 84 q12 -7 24 0 M200 74 q12 -7 24 0 M270 86 q12 -7 24 0" fill="none" stroke="#fffdf9" stroke-width="2" stroke-linecap="round"/><circle cx="270" cy="28" r="14" fill="#e2b04a"/><path d="M96 124 v-30" stroke="#2c2722" stroke-width="2"/><path d="M66 96 a30 18 0 0 1 60 0 Z" fill="#bf5a36" stroke="#2c2722" stroke-width="1.5"/><path d="M81 96 a15 18 0 0 1 30 0" fill="#fffdf9"/><circle cx="200" cy="118" r="7" fill="#2c2722"/><circle cx="240" cy="118" r="7" fill="#2c2722"/><path d="M190 112 l8 -14 h40 l10 14 Z" fill="#e2b04a" stroke="#2c2722" stroke-width="1.5"/><rect x="188" y="110" width="64" height="8" rx="2" fill="#bf5a36"/>',
+      aeropuerto: '<rect x="0" y="0" width="320" height="130" fill="#1d2a44"/><rect x="0" y="96" width="320" height="34" fill="#3b3a44"/><path d="M0 113 h320" stroke="#fffdf9" stroke-width="2" stroke-dasharray="12 10"/><g fill="#ffd97a"><circle cx="20" cy="104" r="2"/><circle cx="70" cy="104" r="2"/><circle cx="120" cy="104" r="2"/><circle cx="170" cy="104" r="2"/><circle cx="220" cy="104" r="2"/><circle cx="270" cy="104" r="2"/></g><path d="M130 62 l30 10 l40 -24 l10 8 l-34 30 l6 22 l-8 2 l-12 -18 l-16 8 l-2 8 l-6 -2 l0 -14 l-12 -8 Z" fill="#fffdf9" stroke="#2c2722" stroke-width="1.5"/><circle cx="286" cy="24" r="9" fill="#fffdf9"/><circle cx="290" cy="21" r="8" fill="#1d2a44"/>'
+    };
+    return b + S[id] + '</svg>';
+  }
+
+  /* ---------- views ---------- */
+  function renderHome(){
+    current = null; locked = false;
+    var n = doneCount();
+    document.documentElement.style.setProperty("--n", (n/ITEMS.length).toFixed(3));
+    var allDone = n === ITEMS.length;
+    app.innerHTML =
+      '<h1>Mi <span class="nm">Orlando</span></h1>'+
+      '<div class="sub">Ocho lugares de tu semana. En cada uno falta una palabrita: <b>at, in, on, to</b>, un pronombre, o el <b>it</b> que se te escapa.</div>'+
+      '<div class="meta"><span>'+(allDone ? 'Ciudad completa' : 'Toca un número en el mapa')+'</span><span class="pill">'+n+' / '+ITEMS.length+'</span></div>'+
+      '<div class="mapcard">'+mapSVG()+'</div>'+
+      '<div class="maphint">'+(allDone ? 'Orlando de noche. Ahora arma las frases completas.' : 'El mapa se hace de noche cuando completas los ocho.')+'</div>'+
+      (allDone ? '<button class="btn btn-primary" id="r2" type="button">Ronda 2: arma las ocho frases</button>' : '')+
+      (n>0 && !allDone ? '<div class="row2"><button class="btn btn-ghost" id="reset" type="button">Empezar de nuevo</button></div>' : '')+
+      '<a class="homeback" href="../?name=Leyne">‹ Tu página</a>'+
+      '<div class="credit">ARCHES · Mi Orlando · v2026-09-23</div>';
+    bindPins();
+    var r2 = document.getElementById("r2"); if(r2) r2.onclick = function(){ unlockAudio(); startRound2(); };
+    var rs = document.getElementById("reset"); if(rs) rs.onclick = function(){ state = {done:{}, misses:{}, r2:{}, best:state.best}; save(); renderHome(); };
+  }
+  function bindPins(){
+    var pins = app.querySelectorAll(".pin");
+    for(var i=0;i<pins.length;i++){
+      (function(p){
+        var go = function(e){ e.preventDefault(); unlockAudio(); openItem(p.getAttribute("data-id")); };
+        p.addEventListener("click", go);
+        p.addEventListener("keydown", function(e){ if(e.key==="Enter"||e.key===" ") go(e); });
+      })(pins[i]);
+    }
+  }
+  function openItem(id){
+    renderHome();
+    current = byId(id); locked = false;
+    var act = app.querySelector('.pin[data-id="'+id+'"]'); if(act) act.classList.add("active");
+    var old = document.getElementById("q"); if(old) old.remove();
+    var card = document.createElement("div"); card.className = "card reveal"; card.id = "q";
+    var opts = shuffle(current.opts);
+    card.innerHTML =
+      '<div class="kicker">'+esc(current.n+'. '+current.place+' · '+current.time)+'</div>'+
+      '<div class="scene">'+sceneSVG(current.id)+'</div>'+
+      '<div class="sent">'+esc(current.before)+'<span class="gap" id="gap">&nbsp;</span>'+esc(current.after)+'</div>'+
+      '<div class="es">'+esc(current.es)+'</div>'+
+      '<div class="opts" id="opts">'+opts.map(function(o){ return '<button class="opt" type="button" data-v="'+esc(o)+'">'+esc(o)+'</button>'; }).join('')+'</div>'+
+      '<div id="fb"></div>';
+    var mapcard = app.querySelector(".mapcard");
+    mapcard.parentNode.insertBefore(card, mapcard.nextSibling.nextSibling);
+    var btns = card.querySelectorAll(".opt");
+    for(var i=0;i<btns.length;i++){ btns[i].onclick = function(){ answer(this.getAttribute("data-v"), this); }; }
+    setTimeout(function(){ card.scrollIntoView({behavior:"smooth", block:"start"}); }, 60);
+  }
+  function answer(v, btn){
+    if(locked) return; locked = true;
+    var it = current, ok = v === it.answer;
+    var btns = document.querySelectorAll("#opts .opt");
+    for(var i=0;i<btns.length;i++){ btns[i].setAttribute("disabled","disabled"); if(btns[i].getAttribute("data-v")===it.answer) btns[i].classList.add("ok"); }
+    if(!ok) btn.classList.add("no");
+    document.getElementById("gap").textContent = it.answer === "(nada)" ? "" : it.answer;
+    if(it.answer === "(nada)") document.getElementById("gap").style.display = "none";
+    if(!ok) state.misses[it.id] = (state.misses[it.id]||0) + 1;
+    state.done[it.id] = true; save();
+    var fb = document.getElementById("fb");
+    fb.innerHTML =
+      '<div class="fb '+(ok?'ok':'no')+'">'+(ok ? '<b>Eso.</b> ' : '<b>Casi.</b> Es <b>'+esc(it.answer)+'</b>. ')+it.why+'</div>'+
+      '<button class="speaker" id="say" type="button">'+speakerSVG+' Escucha la frase</button>'+
+      '<button class="btn btn-primary" id="next" type="button">'+(doneCount()===ITEMS.length ? 'Ver la ciudad de noche' : 'Volver al mapa')+'</button>';
+    speak(it.full);
+    document.getElementById("say").onclick = function(){ speak(it.full); };
+    document.getElementById("next").onclick = function(){ renderHome(); window.scrollTo({top:0, behavior:"smooth"}); };
+    var pin = app.querySelector('.pin[data-id="'+it.id+'"]'); if(pin) pin.classList.add("done");
+    document.documentElement.style.setProperty("--n", (doneCount()/ITEMS.length).toFixed(3));
+  }
+
+  /* ---------- round 2: build the full sentence ---------- */
+  var r2q = [], r2i = 0, r2right = 0;
+  function startRound2(){ r2q = shuffle(ITEMS); r2i = 0; r2right = 0; renderR2(); }
+  function tokens(full){ return full.replace(/[.,]/g,"").split(" "); }
+  function renderR2(){
+    if(r2i >= r2q.length) return renderDone();
+    var it = r2q[r2i]; var words = tokens(it.full); var tiles = shuffle(words.map(function(w,i){ return {w:w,i:i}; }));
+    var built = [];
+    app.innerHTML =
+      '<div class="meta"><span>Ronda 2 · arma la frase</span><span class="pill">'+(r2i+1)+' / '+r2q.length+'</span></div>'+
+      '<div class="card reveal"><div class="kicker">'+esc(it.place+' · '+it.time)+'</div>'+
+      '<div class="scene">'+sceneSVG(it.id)+'</div>'+
+      '<div class="es" style="margin-top:12px">'+esc(it.es)+'</div>'+
+      '<div class="built" id="built">&nbsp;</div>'+
+      '<div class="tiles" id="tiles">'+tiles.map(function(t){ return '<button class="tile" type="button" data-i="'+t.i+'">'+esc(t.w)+'</button>'; }).join('')+'</div>'+
+      '<div class="row2"><button class="btn btn-ghost" id="undo" type="button">Borrar última</button></div>'+
+      '<div id="fb"></div></div>';
+    var builtEl = document.getElementById("built");
+    function paint(){ builtEl.innerHTML = built.length ? esc(built.map(function(b){return b.w;}).join(" ")) : "&nbsp;"; }
+    var ts = document.querySelectorAll("#tiles .tile");
+    for(var k=0;k<ts.length;k++){ ts[k].onclick = function(){
+      var i = +this.getAttribute("data-i"); if(this.classList.contains("used")) return;
+      this.classList.add("used"); built.push({w:words[i], i:i, el:this}); paint();
+      if(built.length === words.length) checkR2(it, built, builtEl);
+    }; }
+    document.getElementById("undo").onclick = function(){ var b = built.pop(); if(b){ b.el.classList.remove("used"); paint(); } };
+  }
+  function checkR2(it, built, builtEl){
+    var mine = built.map(function(b){return b.w;}).join(" "), target = tokens(it.full).join(" ");
+    var ok = mine === target; if(ok) r2right++;
+    builtEl.className = "built " + (ok ? "ok" : "no"); builtEl.textContent = it.full;
+    var fb = document.getElementById("fb");
+    fb.innerHTML = '<div class="fb '+(ok?'ok':'no')+'">'+(ok ? '<b>Perfecto.</b> Así se dice.' : '<b>Orden:</b> '+esc(it.full))+'</div>'+
+      '<button class="speaker" id="say" type="button">'+speakerSVG+' Escucha</button>'+
+      '<button class="btn btn-primary" id="next" type="button">Siguiente</button>';
+    speak(it.full);
+    document.getElementById("say").onclick = function(){ speak(it.full); };
+    document.getElementById("next").onclick = function(){ r2i++; renderR2(); window.scrollTo({top:0}); };
+    var tiles = document.querySelectorAll("#tiles .tile"); for(var i=0;i<tiles.length;i++) tiles[i].classList.add("used");
+  }
+  function renderDone(){
+    var missed = Object.keys(state.misses).length;
+    var score = Math.round(((ITEMS.length - missed) + r2right) / (ITEMS.length*2) * 100);
+    if(state.best===null || score > state.best) state.best = score; save();
+    app.innerHTML =
+      '<div class="card reveal"><div class="done"><h2>Orlando, completo</h2>'+
+      '<div class="score">'+score+'%</div>'+
+      '<p>'+(missed===0 ? 'Ni una palabrita perdida en el mapa.' : 'Fallaste '+missed+' en el mapa: repítelo mañana y verás.')+' Ronda 2: '+r2right+' de '+ITEMS.length+' frases en orden.'+(state.best>score ? ' Tu mejor: '+state.best+'%.' : '')+'</p>'+
+      '<button class="btn btn-primary" id="again" type="button">Repetir todo</button>'+
+      '<div class="row2"><button class="btn btn-ghost" id="r2again" type="button">Solo ronda 2</button></div>'+
+      '</div></div>'+
+      '<a class="homeback" href="../?name=Leyne">‹ Tu página</a>'+
+      '<div class="credit">ARCHES · Mi Orlando · v2026-09-23</div>';
+    document.getElementById("again").onclick = function(){ state = {done:{}, misses:{}, r2:{}, best:state.best}; save(); renderHome(); window.scrollTo({top:0}); };
+    document.getElementById("r2again").onclick = function(){ startRound2(); window.scrollTo({top:0}); };
+  }
+
+  renderHome();
+})();
+</script>
+</body>
+</html>
