@@ -119,13 +119,6 @@
       "date": "14 de julio de 2026"
     },
     {
-      "wrong": "It was on Netflix.",
-      "right": "It was on Netflix.",
-      "hint": "Esta oración es correcta: la serie ya no está disponible en Netflix, así que el pasado 'was' es la opción adecuada.",
-      "alts": [],
-      "date": "17 de julio de 2026"
-    },
-    {
       "wrong": "We was talking",
       "right": "We were talking",
       "hint": "En español el verbo 'ser/estar' no cambia tanto según el sujeto en el pasado ('éramos', 'estábamos'), pero en inglés 'was' solo va con I/he/she/it. Con we/you/they siempre se usa 'were'.",
@@ -205,16 +198,9 @@
       "right": "complaint",
       "hint": "'Denuncia' tiene varios equivalentes en inglés según el contexto: 'complaint' es la queja o denuncia formal general, 'report' se usa cuando se reporta algo a una autoridad (policía, empresa), y 'formal complaint' enfatiza el carácter oficial. No es un error de alumno sino una consulta de vocabulario.",
       "alts": [
-        "report",
-        "formal complaint"
+        "formal complaint",
+        "report"
       ],
-      "date": "4 de agosto de 2026"
-    },
-    {
-      "wrong": "denuncia",
-      "right": "formal complaint",
-      "hint": "'Denuncia' en español cubre tanto quejas formales como reportes a autoridades. En inglés se distingue: 'formal complaint' es una queja oficial, mientras que 'report' se usa cuando se notifica a la policía u otra autoridad.",
-      "alts": [],
       "date": "4 de agosto de 2026"
     },
     {
