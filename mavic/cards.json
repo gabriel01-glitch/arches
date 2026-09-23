@@ -99,10 +99,14 @@
       "date": "15 de julio de 2026"
     },
     {
+      "type": "pron",
+      "word": "us",
+      "say": "ÔS",
+      "heard": "",
       "wrong": "us",
       "right": "us",
-      "hint": "La palabra 'us' se pronuncia /ʌs/ (como la 'a' en 'mama' pero mas corta y central), no como la 'u' del español. Es un error de pronunciacion, no de escritura.",
       "alts": [],
+      "hint": "Una sola sílaba corta. La vocal es la 'ô' del inglés (como en gôn), no la u del español.",
       "date": "15 de julio de 2026"
     },
     {
@@ -115,10 +119,14 @@
       "date": "15 de julio de 2026"
     },
     {
+      "type": "pron",
+      "word": "delayed",
+      "say": "di-LEID",
+      "heard": "",
       "wrong": "delayed",
       "right": "delayed",
-      "hint": "La pronunciacion correcta es /dɪˈleɪd/: la 'e' de la primera silaba suena como la 'i' en 'did', y el acento cae en la segunda silaba. En español tendemos a pronunciar todas las letras tal como se ven, pero en inglés la ortografia y el sonido no siempre coinciden.",
       "alts": [],
+      "hint": "La sílaba fuerte es la segunda: LEID. La primera suena como 'di', corta. La -ed final suena /d/, no 'ed'.",
       "date": "15 de julio de 2026"
     },
     {
@@ -211,10 +219,14 @@
       "date": "20 de julio de 2026"
     },
     {
+      "type": "pron",
+      "word": "since",
+      "say": "SINS",
+      "heard": "",
       "wrong": "since",
       "right": "since",
-      "hint": "Se pronuncia 'sins' (rima con 'hints'). En español la 'c' antes de 'e' suena como 's' suave, pero aquí el error más común es pronunciarla como 'saince' o 'sinse'. La vocal es una 'i' corta y la 's' final es clara.",
       "alts": [],
+      "hint": "Una sílaba: SINS, rima con hints. No es 'saince' ni 'sin-ce'.",
       "date": "20 de julio de 2026"
     },
     {
