@@ -271,7 +271,7 @@
 <noscript>
   <article class="sheet static">
     <h1>Bajo la casa</h1>
-    <p>Domingo por la noche. Swann Avenue, South Tampa. El calentador ya está cambiado. Job terminado = pasado. La palabrita no se cae.</p>
+    <p>Domingo por la noche. Una casa en South Tampa. El calentador ya está cambiado. Job terminado = pasado. La palabrita no se cae.</p>
     <ol>
       <li>I got the call at nine.</li>
       <li>I shut off the main valve.</li>
@@ -598,7 +598,7 @@
     root.innerHTML =
       '<article class="sheet">'+
         head("")+
-        '<p class="deck">Domingo por la noche. Una casa en Swann Avenue, South Tampa. El calentador ya está cambiado. Tú cuentas el trabajo terminado.</p>'+
+        '<p class="deck">Domingo por la noche. Una casa en South Tampa. El calentador ya está cambiado. Tú cuentas el trabajo terminado.</p>'+
         '<ul class="rules">'+
           '<li>Job terminado = pasado. I turn, I go, I check no cuentan.</li>'+
           '<li>La palabrita no se cae: off, out, in, back.</li>'+
@@ -749,7 +749,7 @@
         scene("done", "La casa en calma. El trabajo está hecho.")+
         '<p class="es">Una toma. Si se cuela I turn, I go o I check, paras y lo dices en pasado.</p>'+
         '<p class="clock" id="clock">1:00</p>'+
-        '<p class="story-line">Sunday night on Swann.</p>'+
+        '<p class="story-line">Sunday night in South Tampa.</p>'+
         lines+
         '<div class="actions">'+
           '<button type="button" class="btn" id="tick">Empezar el minuto</button>'+
@@ -780,7 +780,7 @@
       }, 1000);
     };
     document.getElementById("model").onclick = function(){
-      speak("Sunday night on Swann. "+BEATS.map(function(b){return b.line;}).join(" "));
+      speak("Sunday night in South Tampa. "+BEATS.map(function(b){return b.line;}).join(" "));
     };
     document.getElementById("said").onclick = function(){
       ti = 0; phase = "trap"; render();
