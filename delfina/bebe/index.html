@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Un día con el bebé · Delfina</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#fbf7f0; --surface:#fffdf9; --ink:#2c2722; --muted:#6f665b;
+    --line:#e9e0d3; --terra:#bf5a36; --terra-dark:#8e3b22; --terra-press:#7a311c;
+    --terra-tint:#f4e4d9; --good:#3f695e; --good-tint:#e8f1dd; --bad-tint:#f6e2da;
+    --on-terra:#fffdf9; --credit:#a89c8c;
+    --sky:#eef3f7; --night:#1d2a44; --water:#9cc4d8; --duck:#e2b04a; --grass:#d3dfb8; --wood:#c9a58a; --skin:#f1d3b8; --blanket:#f4e4d9;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0;padding:0}
+  body{background:var(--cream);color:var(--ink);font-family:'Nunito',sans-serif;-webkit-font-smoothing:antialiased;min-height:100vh}
+  ::selection{background:var(--terra-tint);color:var(--ink)}
+  :focus-visible{outline:2px solid var(--terra);outline-offset:3px}
+  .wrap{max-width:540px;margin:0 auto;padding:22px 18px 56px}
+  h1{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:38px;line-height:1.04;margin:0}
+  h1 .nm{color:var(--terra)}
+  .sub{font-size:15px;color:var(--muted);font-weight:700;margin-top:10px;line-height:1.45}
+  .meta{font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--terra-dark);margin-top:16px;display:flex;justify-content:space-between;align-items:center}
+  .pill{background:var(--surface);border:1.5px solid var(--line);border-radius:999px;padding:6px 12px;font-size:12px;letter-spacing:.04em}
+
+  .book{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
+  .panel{background:var(--surface);border:1.5px solid var(--line);border-radius:18px;padding:10px 10px 12px;text-align:left;cursor:pointer;font-family:'Nunito',sans-serif;color:var(--ink);transition:transform .18s ease,border-color .15s ease,box-shadow .2s ease;min-height:44px}
+  .panel:hover{transform:translateY(-3px);border-color:var(--terra);box-shadow:0 8px 18px rgba(44,39,34,.08)}
+  .panel:active{transform:scale(.985)}
+  .panel .art{border-radius:12px;overflow:hidden;border:1px solid var(--line);background:var(--cream)}
+  .panel .art svg{display:block;width:100%;height:auto;filter:grayscale(1) opacity(.62);transition:filter .7s ease}
+  .panel.done .art svg{filter:none}
+  .panel.done{border-color:var(--terra-tint)}
+  .panel .t{display:flex;justify-content:space-between;align-items:center;margin-top:8px;font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--terra-dark)}
+  .panel .t .st{color:var(--credit);letter-spacing:0;text-transform:none;font-size:12px}
+  .panel.done .t .st{color:var(--good)}
+  .panel .cap{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:17px;line-height:1.2;margin-top:6px;min-height:2.4em;color:var(--ink)}
+  .panel:not(.done) .cap{color:var(--credit);font-style:italic;font-weight:600}
+
+  .card{margin-top:14px;background:var(--surface);border:1.5px solid var(--line);border-radius:20px;padding:18px 16px}
+  .reveal{animation:up .4s ease-out both}
+  @keyframes up{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+  .kicker{font-size:12px;text-transform:uppercase;letter-spacing:1.4px;color:var(--terra-dark);font-weight:800;margin-bottom:10px;display:flex;justify-content:space-between}
+  .scene{background:var(--cream);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+  .scene svg{display:block;width:100%;height:auto}
+  .sent{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:30px;line-height:1.15;margin:16px 2px 0}
+  .sent .gap{display:inline-block;min-width:84px;border-bottom:3px solid var(--terra);line-height:.9;text-align:center;color:var(--terra-dark);padding:0 4px}
+  .es{font-size:15px;font-weight:700;color:var(--muted);margin-top:8px;line-height:1.4}
+  .opts{display:flex;flex-direction:column;gap:10px;margin-top:16px}
+  .opt{background:var(--cream);border:1.5px solid var(--line);border-radius:14px;padding:14px 16px;font-size:18px;font-weight:800;color:var(--ink);cursor:pointer;text-align:left;font-family:'Nunito',sans-serif;min-height:50px;transition:transform .08s ease,border-color .12s,background .12s}
+  .opt:active{transform:scale(.98)}
+  .opt.ok{background:var(--good-tint);border-color:var(--good);color:var(--good)}
+  .opt.no{background:var(--bad-tint);border-color:var(--terra);color:var(--terra-dark)}
+  .opt[disabled]{cursor:default}
+  .fb{margin-top:14px;border-radius:14px;padding:14px 16px;font-weight:700;font-size:15px;line-height:1.45}
+  .fb.ok{background:var(--good-tint);color:var(--good)}
+  .fb.no{background:var(--bad-tint);color:var(--terra-dark)}
+  .fb b{font-weight:800}
+  .btn{border:none;border-radius:14px;font-family:'Nunito',sans-serif;font-weight:800;font-size:16px;padding:15px;cursor:pointer;min-height:48px;transition:transform .08s ease,background .15s ease}
+  .btn:active{transform:scale(.98)}
+  .btn-primary{background:var(--terra-dark);color:var(--on-terra);width:100%;margin-top:14px}
+  .btn-primary:hover{background:var(--terra-press)}
+  .btn-ghost{background:var(--cream);color:var(--ink);border:1.5px solid var(--line);flex:1}
+  .row2{display:flex;gap:10px;margin-top:12px}
+  .speaker{display:inline-flex;align-items:center;justify-content:center;gap:9px;background:var(--cream);border:1.5px solid var(--line);border-radius:30px;padding:12px 20px;font-weight:800;font-size:15px;color:var(--ink);cursor:pointer;font-family:'Nunito',sans-serif;margin-top:14px;width:100%;min-height:48px}
+  .speaker:active{border-color:var(--terra)}
+  .pback{background:none;border:none;color:var(--terra-dark);font-weight:800;font-size:15px;cursor:pointer;font-family:'Nunito',sans-serif;padding:8px 0;min-height:44px}
+
+  .tiles{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+  .tile{background:var(--cream);border:1.5px solid var(--line);border-radius:12px;padding:11px 14px;font-size:17px;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif;min-height:46px;transition:transform .08s ease}
+  .tile:active{transform:scale(.96)}
+  .tile.used{opacity:.28;pointer-events:none}
+  .built{min-height:56px;margin-top:14px;background:var(--cream);border:1.5px dashed var(--line);border-radius:14px;padding:12px 14px;font-family:'Cormorant Garamond',serif;font-weight:700;font-size:26px;line-height:1.2}
+  .built.ok{border-style:solid;border-color:var(--good);color:var(--good)}
+  .built.no{border-style:solid;border-color:var(--terra);color:var(--terra-dark)}
+
+  .rule{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px;text-align:left}
+  .rule > div{background:var(--cream);border:1.5px solid var(--line);border-radius:14px;padding:12px}
+  .rule h3{font-family:'Cormorant Garamond',serif;font-size:24px;margin:0 0 4px;color:var(--terra-dark)}
+  .rule p{margin:0;font-size:14px;font-weight:700;line-height:1.45;color:var(--ink)}
+
+  .done{text-align:center;padding:22px 8px 10px}
+  .done h2{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:34px;margin:0 0 6px}
+  .done .score{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:64px;color:var(--terra);line-height:1;margin:12px 0}
+  .done p{color:var(--muted);font-weight:700;font-size:15px;margin:0 0 18px;line-height:1.45}
+  .homeback{display:inline-block;margin-top:18px;font-size:14px;font-weight:800;color:var(--terra-dark);text-decoration:none;min-height:44px;line-height:44px}
+  .credit{text-align:center;color:var(--credit);font-size:11.5px;font-weight:700;margin-top:28px;letter-spacing:.5px}
+
+  @media (prefers-reduced-motion: reduce){
+    *,*::before,*::after{transition:none !important;animation:none !important}
+    .reveal{opacity:1;transform:none}
+    .panel:hover{transform:none}
+  }
+</style>
+</head>
+<body>
+<div class="wrap" id="app"></div>
+<script>
+(function(){
+  "use strict";
+  var KEY = "arches_delfina_bebe_v1";
+
+  /* ---------- content: one day, eight pages ---------- */
+  var ITEMS = [
+    { id:"seis", n:1, time:"6:00 am", before:"The baby ", after:" up at six.", answer:"woke", opts:["woke","waked","wake"],
+      full:"The baby woke up at six.", es:"El bebé se despertó a las seis.",
+      why:"<b>Wake up</b> es irregular: wake, <b>woke</b>, woken. \"Waked\" suena a inglés inventado. Igual que en tu turno: the patient woke up." },
+    { id:"biberon", n:2, time:"6:30 am", before:"He stopped ", after:" when he saw the bottle.", answer:"crying", opts:["crying","to cry","cry"],
+      full:"He stopped crying when he saw the bottle.", es:"Dejó de llorar cuando vio el biberón.",
+      why:"<b>Stop + -ing</b> = dejar de hacer algo. \"Stop to cry\" sería parar (otra cosa) para ponerse a llorar. Tu regla de siempre: stop, keep, enjoy, finish + <b>-ing</b>." },
+    { id:"parque", n:3, time:"12:30 pm", before:"We ", after:" to the park after lunch.", answer:"went", opts:["went","goed","go"],
+      full:"We went to the park after lunch.", es:"Fuimos al parque después de comer.",
+      why:"<b>Go, went, gone.</b> Y con destino lleva <b>to</b>: went to the park, went to work. Sin to solo: went home." },
+    { id:"patos", n:4, time:"1:00 pm", before:"He enjoys ", after:" the ducks.", answer:"watching", opts:["watching","to watch","watch"],
+      full:"He enjoys watching the ducks.", es:"Le encanta mirar los patos.",
+      why:"<b>Enjoy + -ing</b>, siempre. No existe \"enjoy to\". Lo mismo con <b>love</b> y <b>like</b>: I love holding him." },
+    { id:"panalera", n:5, time:"2:00 pm", before:"I forgot ", after:" the diaper bag.", answer:"to bring", opts:["to bring","bringing","bring"],
+      full:"I forgot to bring the diaper bag.", es:"Se me olvidó traer la pañalera.",
+      why:"<b>Forget + to</b> = se te olvidó hacerlo (y no lo hiciste). Forget + -ing es olvidar que ya lo hiciste. Aquí la pañalera se quedó en casa: <b>to bring</b>." },
+    { id:"tina", n:6, time:"5:00 pm", before:"He kept ", after:" in the tub.", answer:"splashing", opts:["splashing","to splash","splash"],
+      full:"He kept splashing in the tub.", es:"Siguió chapoteando en la tina.",
+      why:"<b>Keep + -ing</b> = seguir haciendo algo. Keep going, keep trying, keep splashing. Nunca \"keep to\"." },
+    { id:"dormido", n:7, time:"8:00 pm", before:"He ", after:" asleep while I sang.", answer:"fell", opts:["fell","felt","fall"],
+      full:"He fell asleep while I sang.", es:"Se quedó dormido mientras yo cantaba.",
+      why:"<b>Fall asleep</b> = quedarse dormido: fall, <b>fell</b>, fallen. <b>Felt</b> es de feel (sentir), la trampa de siempre. Y sang: sing, sang, sung." },
+    { id:"noche", n:8, time:"9:00 pm", before:"Grandma decided ", after:" the night.", answer:"to stay", opts:["to stay","staying","stay"],
+      full:"Grandma decided to stay the night.", es:"La abuela decidió quedarse a dormir.",
+      why:"<b>Decide + to.</b> Misma familia: want to, need to, plan to, hope to. Los verbos de intención llevan <b>to</b>." }
+  ];
+
+  /* ---------- state ---------- */
+  var state = load();
+  function load(){ try{ var s = JSON.parse(localStorage.getItem(KEY)); if(s && s.done) return s; }catch(e){} return {done:{}, misses:{}, best:null}; }
+  function save(){ try{ localStorage.setItem(KEY, JSON.stringify(state)); }catch(e){} }
+  var app = document.getElementById("app");
+  var current = null, locked = false;
+
+  /* ---------- audio (iOS-safe voice) ---------- */
+  var voice = null, audioReady = false;
+  function loadVoice(){
+    var vs = window.speechSynthesis ? speechSynthesis.getVoices() : [];
+    var NOV=/albert|bad news|bahh|bells|boing|bubbles|cellos|good news|jester|organ|superstar|trinoids|whisper|wobble|zarvox|junior|kathy|ralph|fred|eloquence|grandma|grandpa|reed|rocko|sandy|shelley|flo/i;
+    var en=vs.filter(function(v){return /^en[-_]/i.test(v.lang)&&!NOV.test(v.name);});
+    var pref=["Samantha","Google US English","Microsoft Aria","Microsoft Jenny","Microsoft Zira","Alex"];
+    voice=null;
+    for(var i=0;i<pref.length;i++){ var m=en.filter(function(v){return v.name.indexOf(pref[i])===0;})[0]; if(m){voice=m;break;} }
+    if(!voice) voice = en.filter(function(v){return /en[-_]US/i.test(v.lang);})[0] || en[0] || null;
+  }
+  if(window.speechSynthesis){ loadVoice(); try{ speechSynthesis.onvoiceschanged = loadVoice; }catch(e){} }
+  function unlockAudio(){ if(audioReady || !window.speechSynthesis) return; try{ var u=new SpeechSynthesisUtterance(""); u.volume=0; speechSynthesis.speak(u); audioReady=true; }catch(e){} }
+  document.addEventListener("touchstart", unlockAudio, {once:true});
+  document.addEventListener("click", unlockAudio, {once:true});
+  function speak(text){ if(!text || !window.speechSynthesis) return; try{ speechSynthesis.cancel(); var u=new SpeechSynthesisUtterance(text); u.lang="en-US"; u.rate=0.92; if(voice) u.voice=voice; speechSynthesis.speak(u); }catch(e){} }
+  var speakerSVG = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="M19 5a9 9 0 0 1 0 14"/><path d="M15.5 8.5a4 4 0 0 1 0 7"/></svg>';
+
+  function esc(s){ return (s==null?"":""+s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+  function shuffle(a){ a=a.slice(); for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
+  function doneCount(){ return ITEMS.filter(function(it){ return state.done[it.id]; }).length; }
+  function byId(id){ for(var i=0;i<ITEMS.length;i++) if(ITEMS[i].id===id) return ITEMS[i]; return null; }
+  function nextUndone(afterId){ var start = 0; for(var i=0;i<ITEMS.length;i++) if(ITEMS[i].id===afterId) start = i+1; for(var k=0;k<ITEMS.length;k++){ var it = ITEMS[(start+k)%ITEMS.length]; if(!state.done[it.id]) return it; } return null; }
+
+  /* ---------- scenes (inline SVG, drawn by hand) ---------- */
+  function baby(x,y,r,awake,extra){
+    var eyes = awake ? '<circle cx="'+(x-r*.32)+'" cy="'+(y-r*.05)+'" r="'+(r*.09)+'" fill="#2c2722"/><circle cx="'+(x+r*.32)+'" cy="'+(y-r*.05)+'" r="'+(r*.09)+'" fill="#2c2722"/>'
+                     : '<path d="M'+(x-r*.45)+' '+(y-r*.02)+' q'+(r*.13)+' '+(r*.14)+' '+(r*.26)+' 0 M'+(x+r*.19)+' '+(y-r*.02)+' q'+(r*.13)+' '+(r*.14)+' '+(r*.26)+' 0" fill="none" stroke="#2c2722" stroke-width="1.4" stroke-linecap="round"/>';
+    var mouth = extra==="cry" ? '<ellipse cx="'+x+'" cy="'+(y+r*.38)+'" rx="'+(r*.16)+'" ry="'+(r*.2)+'" fill="#8e3b22"/>' : '<path d="M'+(x-r*.2)+' '+(y+r*.32)+' q'+(r*.2)+' '+(r*.22)+' '+(r*.4)+' 0" fill="none" stroke="#2c2722" stroke-width="1.4" stroke-linecap="round"/>';
+    var tears = extra==="cry" ? '<path d="M'+(x-r*.55)+' '+(y+r*.1)+' q-3 6 0 9 M'+(x+r*.55)+' '+(y+r*.1)+' q3 6 0 9" fill="none" stroke="#5e93ad" stroke-width="1.6" stroke-linecap="round"/>' : '';
+    return '<circle cx="'+x+'" cy="'+y+'" r="'+r+'" fill="#f1d3b8" stroke="#2c2722" stroke-width="1.4"/>'+
+           '<path d="M'+(x-r*.15)+' '+(y-r*.92)+' q'+(r*.15)+' -'+(r*.35)+' '+(r*.3)+' 0" fill="none" stroke="#2c2722" stroke-width="1.6" stroke-linecap="round"/>'+
+           '<circle cx="'+(x-r*.55)+'" cy="'+(y+r*.22)+'" r="'+(r*.13)+'" fill="#f4e4d9"/><circle cx="'+(x+r*.55)+'" cy="'+(y+r*.22)+'" r="'+(r*.13)+'" fill="#f4e4d9"/>'+ eyes + mouth + tears;
+  }
+  function crib(x,y,w,h,col){
+    var bars = ''; for(var i=1;i<6;i++) bars += '<line x1="'+(x+i*w/6)+'" y1="'+y+'" x2="'+(x+i*w/6)+'" y2="'+(y+h)+'" stroke="#2c2722" stroke-width="1.2"/>';
+    return '<rect x="'+x+'" y="'+(y+h*.55)+'" width="'+w+'" height="'+(h*.45)+'" rx="3" fill="'+col+'" stroke="#2c2722" stroke-width="1.4"/>'+ bars +
+           '<rect x="'+(x-3)+'" y="'+(y-3)+'" width="'+(w+6)+'" height="5" rx="2.5" fill="#c9a58a" stroke="#2c2722" stroke-width="1.2"/>'+
+           '<rect x="'+(x-3)+'" y="'+(y+h*.55-3)+'" width="'+(w+6)+'" height="5" rx="2.5" fill="#c9a58a" stroke="#2c2722" stroke-width="1.2"/>'+
+           '<line x1="'+(x)+'" y1="'+(y+h)+'" x2="'+(x)+'" y2="'+(y+h+10)+'" stroke="#2c2722" stroke-width="2"/><line x1="'+(x+w)+'" y1="'+(y+h)+'" x2="'+(x+w)+'" y2="'+(y+h+10)+'" stroke="#2c2722" stroke-width="2"/>';
+  }
+  function tree(x,y,r){ return '<rect x="'+(x-2)+'" y="'+(y+r-2)+'" width="4" height="14" fill="#8e3b22"/><circle cx="'+x+'" cy="'+y+'" r="'+r+'" fill="#6f8f5f"/><circle cx="'+(x-r*.4)+'" cy="'+(y+r*.3)+'" r="'+(r*.7)+'" fill="#7f9c6c"/>'; }
+  function duck(x,y,s){ return '<ellipse cx="'+x+'" cy="'+y+'" rx="'+(9*s)+'" ry="'+(6*s)+'" fill="#e2b04a" stroke="#2c2722" stroke-width="1.2"/><circle cx="'+(x+7*s)+'" cy="'+(y-6*s)+'" r="'+(4*s)+'" fill="#e2b04a" stroke="#2c2722" stroke-width="1.2"/><path d="M'+(x+11*s)+' '+(y-6*s)+' l'+(5*s)+' '+(1.5*s)+' l-'+(5*s)+' '+(1.5*s)+'" fill="#bf5a36"/><circle cx="'+(x+8*s)+'" cy="'+(y-7*s)+'" r="'+(.9*s)+'" fill="#2c2722"/>'; }
+  function scene(id){
+    var b = '<svg viewBox="0 0 200 150" role="img" aria-hidden="true">';
+    var day = '<rect x="0" y="0" width="200" height="150" fill="#eef3f7"/>';
+    var night = '<rect x="0" y="0" width="200" height="150" fill="#1d2a44"/>';
+    var room = '<rect x="0" y="0" width="200" height="150" fill="#fbf7f0"/><rect x="0" y="112" width="200" height="38" fill="#e6d6c2"/>';
+    var S = {
+      seis: room + '<rect x="128" y="22" width="52" height="44" rx="3" fill="#eef3f7" stroke="#2c2722" stroke-width="1.4"/><line x1="154" y1="22" x2="154" y2="66" stroke="#2c2722" stroke-width="1.2"/><line x1="128" y1="44" x2="180" y2="44" stroke="#2c2722" stroke-width="1.2"/><circle cx="150" cy="58" r="9" fill="#e2b04a"/><rect x="128" y="56" width="52" height="10" fill="#d3dfb8" opacity=".8"/>' + crib(30,58,84,52,"#f4e4d9") + baby(72,80,14,true,'') + '<rect x="40" y="88" width="64" height="12" rx="4" fill="#9cc4d8" stroke="#2c2722" stroke-width="1.2"/>',
+      biberon: room + '<rect x="122" y="30" width="30" height="80" rx="12" fill="#fffdf9" stroke="#2c2722" stroke-width="1.4"/><rect x="126" y="52" width="22" height="54" rx="8" fill="#f4e4d9"/><rect x="129" y="18" width="16" height="14" rx="5" fill="#e2b04a" stroke="#2c2722" stroke-width="1.2"/><path d="M137 10 q4 4 0 8" fill="#f1d3b8" stroke="#2c2722" stroke-width="1.2"/><g stroke="#2c2722" stroke-width="1"><line x1="146" y1="64" x2="150" y2="64"/><line x1="146" y1="76" x2="150" y2="76"/><line x1="146" y1="88" x2="150" y2="88"/></g>' + baby(62,74,26,true,'cry') + '<path d="M44 104 q18 14 36 0 v14 q-18 12 -36 0 Z" fill="#9cc4d8" stroke="#2c2722" stroke-width="1.4"/><circle cx="62" cy="112" r="2.2" fill="#fffdf9"/>',
+      parque: day + '<rect x="0" y="100" width="200" height="50" fill="#d3dfb8"/><path d="M0 122 q100 -14 200 0" fill="none" stroke="#e0d6c5" stroke-width="10" stroke-linecap="round"/>' + tree(34,64,22) + tree(170,54,26) + '<circle cx="118" cy="26" r="12" fill="#e2b04a"/><circle cx="84" cy="122" r="10" fill="#2c2722"/><circle cx="84" cy="122" r="4" fill="#fffdf9"/><circle cx="128" cy="122" r="10" fill="#2c2722"/><circle cx="128" cy="122" r="4" fill="#fffdf9"/><path d="M70 110 l10 -30 h44 l6 30 Z" fill="#bf5a36" stroke="#2c2722" stroke-width="1.4"/><path d="M80 80 a24 22 0 0 1 44 0 Z" fill="#8e3b22" stroke="#2c2722" stroke-width="1.4"/><path d="M124 80 l20 -14" stroke="#2c2722" stroke-width="2" stroke-linecap="round"/>' + baby(102,94,9,true,''),
+      patos: day + '<rect x="0" y="120" width="200" height="30" fill="#d3dfb8"/><path d="M0 120 C 40 70, 160 70, 200 120 Z" fill="#9cc4d8" stroke="#5e93ad" stroke-width="1.4"/><path d="M40 108 q10 -6 20 0 M150 100 q10 -6 20 0" fill="none" stroke="#fffdf9" stroke-width="2" stroke-linecap="round"/><path d="M30 122 v-26 M36 122 v-30 M42 122 v-22" stroke="#6f8f5f" stroke-width="2.4" stroke-linecap="round"/>' + duck(88,98,1) + duck(122,106,.8) + duck(150,96,.7) + '<circle cx="172" cy="26" r="11" fill="#e2b04a"/>',
+      panalera: room + '<rect x="24" y="18" width="46" height="96" rx="3" fill="#c9a58a" stroke="#2c2722" stroke-width="1.4"/><circle cx="62" cy="68" r="2.6" fill="#2c2722"/><rect x="96" y="76" width="70" height="38" rx="8" fill="#9cc4d8" stroke="#2c2722" stroke-width="1.4"/><path d="M114 76 v-10 a17 17 0 0 1 34 0 v10" fill="none" stroke="#2c2722" stroke-width="1.8"/><rect x="118" y="88" width="26" height="14" rx="3" fill="#fffdf9" stroke="#2c2722" stroke-width="1"/><circle cx="150" cy="34" r="16" fill="#fffdf9" stroke="#2c2722" stroke-width="1.4"/><circle cx="136" cy="54" r="4" fill="#fffdf9" stroke="#2c2722" stroke-width="1.2"/><circle cx="128" cy="64" r="2.4" fill="#fffdf9" stroke="#2c2722" stroke-width="1.2"/><text x="150" y="40" text-anchor="middle" font-family="Nunito,sans-serif" font-weight="800" font-size="18" fill="#8e3b22">?</text>',
+      tina: room + '<path d="M22 66 h156 a10 10 0 0 1 10 10 v14 a24 24 0 0 1 -24 24 h-128 a24 24 0 0 1 -24 -24 v-14 a10 10 0 0 1 10 -10 Z" fill="#fffdf9" stroke="#2c2722" stroke-width="1.4"/><rect x="30" y="72" width="140" height="18" rx="4" fill="#9cc4d8"/><path d="M40 80 q8 -5 16 0 M120 80 q8 -5 16 0" fill="none" stroke="#fffdf9" stroke-width="2" stroke-linecap="round"/><path d="M74 58 q-6 -10 -2 -18 M130 56 q6 -12 12 -14 M60 64 q-10 -4 -14 -12" fill="none" stroke="#5e93ad" stroke-width="2" stroke-linecap="round"/><circle cx="72" cy="46" r="2.6" fill="#9cc4d8"/><circle cx="146" cy="40" r="2.2" fill="#9cc4d8"/><circle cx="44" cy="50" r="2" fill="#9cc4d8"/>' + baby(100,64,15,true,'') + duck(140,80,.8) + '<path d="M30 114 v14 M170 114 v14" stroke="#2c2722" stroke-width="2"/><rect x="150" y="16" width="6" height="28" fill="#c9bdac" stroke="#2c2722" stroke-width="1"/><path d="M147 44 h12 l-6 8 Z" fill="#c9bdac" stroke="#2c2722" stroke-width="1"/>',
+      dormido: night + '<rect x="0" y="112" width="200" height="38" fill="#2c2722" opacity=".55"/><circle cx="160" cy="30" r="14" fill="#fffdf9"/><circle cx="166" cy="25" r="12" fill="#1d2a44"/><g fill="#fffdf9"><circle cx="30" cy="20" r="1.4"/><circle cx="70" cy="34" r="1.1"/><circle cx="110" cy="16" r="1.3"/><circle cx="190" cy="60" r="1"/><circle cx="50" cy="52" r="1"/></g>' + crib(34,60,84,50,"#5e93ad") + baby(76,82,14,false,'') + '<rect x="44" y="90" width="64" height="12" rx="4" fill="#f4e4d9" stroke="#2c2722" stroke-width="1.2"/><g fill="#ffd97a" font-family="serif" font-size="16" font-weight="700"><text x="130" y="72">♪</text><text x="146" y="58">♪</text><text x="160" y="80">♫</text></g>',
+      noche: night + '<rect x="0" y="112" width="200" height="38" fill="#2c2722" opacity=".55"/><circle cx="36" cy="28" r="12" fill="#fffdf9"/><circle cx="41" cy="24" r="10" fill="#1d2a44"/><g fill="#fffdf9"><circle cx="80" cy="18" r="1.2"/><circle cx="120" cy="30" r="1"/><circle cx="170" cy="14" r="1.3"/></g><rect x="120" y="44" width="56" height="70" rx="3" fill="#c9a58a" stroke="#2c2722" stroke-width="1.4"/><rect x="128" y="52" width="40" height="30" fill="#ffd97a" opacity=".9"/><rect x="128" y="88" width="40" height="26" fill="#8e3b22" opacity=".5"/><rect x="24" y="86" width="60" height="6" rx="2" fill="#c9a58a" stroke="#2c2722" stroke-width="1.2"/><path d="M38 84 v-24 a6 6 0 0 1 12 0 v24" fill="#fffdf9" stroke="#2c2722" stroke-width="1.4"/><path d="M50 66 a6 6 0 0 1 0 12" fill="none" stroke="#2c2722" stroke-width="1.4"/><path d="M40 50 q-3 -6 0 -12 M46 48 q3 -6 0 -12" fill="none" stroke="#c9bdac" stroke-width="1.4" stroke-linecap="round"/><rect x="66" y="60" width="4" height="26" fill="#2c2722"/><path d="M56 60 h24 l-4 -14 h-16 Z" fill="#e2b04a" stroke="#2c2722" stroke-width="1.2"/>'
+    };
+    return b + S[id] + '</svg>';
+  }
+
+  /* ---------- views ---------- */
+  function renderBook(){
+    current = null; locked = false;
+    var n = doneCount(), allDone = n === ITEMS.length;
+    app.innerHTML =
+      '<h1>Un día con <span class="nm">el bebé</span></h1>'+
+      '<div class="sub">Ocho páginas de tu día de abuela. Cada una tiene un hueco: <b>-ing</b>, <b>to</b> o el pasado irregular. Las páginas se pintan cuando aciertas.</div>'+
+      '<div class="meta"><span>'+(allDone ? 'Libro completo' : 'Toca una página')+'</span><span class="pill">'+n+' / '+ITEMS.length+'</span></div>'+
+      '<div class="book">'+ITEMS.map(function(it){
+        return '<button class="panel'+(state.done[it.id]?' done':'')+'" type="button" data-id="'+it.id+'" aria-label="Página '+it.n+', '+esc(it.time)+'">'+
+          '<div class="art">'+scene(it.id)+'</div>'+
+          '<div class="t"><span>'+esc(it.time)+'</span><span class="st">'+(state.done[it.id] ? 'lista' : it.n)+'</span></div>'+
+          '<div class="cap">'+(state.done[it.id] ? esc(it.full) : 'Toca para leer')+'</div></button>';
+      }).join('')+'</div>'+
+      (allDone ? '<button class="btn btn-primary" id="r2" type="button">Ronda 2: cuéntalo tú</button>' : '')+
+      (n>0 && !allDone ? '<div class="row2"><button class="btn btn-ghost" id="reset" type="button">Empezar de nuevo</button></div>' : '')+
+      '<a class="homeback" href="../?name=Delfina">‹ Tu página</a>'+
+      '<div class="credit">ARCHES · Un día con el bebé · v2026-09-23</div>';
+    var ps = app.querySelectorAll(".panel");
+    for(var i=0;i<ps.length;i++){ ps[i].onclick = function(){ unlockAudio(); openPage(this.getAttribute("data-id")); }; }
+    var r2 = document.getElementById("r2"); if(r2) r2.onclick = function(){ unlockAudio(); startRound2(); };
+    var rs = document.getElementById("reset"); if(rs) rs.onclick = function(){ state = {done:{}, misses:{}, best:state.best}; save(); renderBook(); };
+  }
+  function openPage(id){
+    current = byId(id); locked = false;
+    var it = current, opts = shuffle(it.opts);
+    app.innerHTML =
+      '<button class="pback" id="back" type="button">‹ El libro</button>'+
+      '<div class="card reveal"><div class="kicker"><span>Página '+it.n+' · '+esc(it.time)+'</span><span>'+doneCount()+' / '+ITEMS.length+'</span></div>'+
+      '<div class="scene">'+scene(it.id)+'</div>'+
+      '<div class="sent">'+esc(it.before)+'<span class="gap" id="gap">&nbsp;</span>'+esc(it.after)+'</div>'+
+      '<div class="es">'+esc(it.es)+'</div>'+
+      '<div class="opts" id="opts">'+opts.map(function(o){ return '<button class="opt" type="button" data-v="'+esc(o)+'">'+esc(o)+'</button>'; }).join('')+'</div>'+
+      '<div id="fb"></div></div>';
+    document.getElementById("back").onclick = function(){ renderBook(); window.scrollTo({top:0}); };
+    var btns = app.querySelectorAll(".opt");
+    for(var i=0;i<btns.length;i++){ btns[i].onclick = function(){ answer(this.getAttribute("data-v"), this); }; }
+    window.scrollTo({top:0});
+  }
+  function answer(v, btn){
+    if(locked) return; locked = true;
+    var it = current, ok = v === it.answer;
+    var btns = document.querySelectorAll("#opts .opt");
+    for(var i=0;i<btns.length;i++){ btns[i].setAttribute("disabled","disabled"); if(btns[i].getAttribute("data-v")===it.answer) btns[i].classList.add("ok"); }
+    if(!ok) btn.classList.add("no");
+    document.getElementById("gap").textContent = it.answer;
+    if(!ok) state.misses[it.id] = (state.misses[it.id]||0) + 1;
+    state.done[it.id] = true; save();
+    var nxt = nextUndone(it.id);
+    var fb = document.getElementById("fb");
+    fb.innerHTML =
+      '<div class="fb '+(ok?'ok':'no')+'">'+(ok ? '<b>Eso.</b> ' : '<b>Casi.</b> Es <b>'+esc(it.answer)+'</b>. ')+it.why+'</div>'+
+      '<button class="speaker" id="say" type="button">'+speakerSVG+' Escucha la frase</button>'+
+      '<button class="btn btn-primary" id="next" type="button">'+(nxt ? 'Siguiente página' : 'Ver el libro completo')+'</button>'+
+      (nxt ? '<div class="row2"><button class="btn btn-ghost" id="tobook" type="button">Volver al libro</button></div>' : '');
+    speak(it.full);
+    document.getElementById("say").onclick = function(){ speak(it.full); };
+    document.getElementById("next").onclick = function(){ if(nxt) openPage(nxt.id); else { renderBook(); window.scrollTo({top:0}); } };
+    var tb = document.getElementById("tobook"); if(tb) tb.onclick = function(){ renderBook(); window.scrollTo({top:0}); };
+  }
+
+  /* ---------- round 2: tell it yourself ---------- */
+  var r2q = [], r2i = 0, r2right = 0;
+  function startRound2(){ r2q = shuffle(ITEMS); r2i = 0; r2right = 0; renderR2(); }
+  function tokens(full){ return full.replace(/[.,]/g,"").split(" "); }
+  function renderR2(){
+    if(r2i >= r2q.length) return renderDone();
+    var it = r2q[r2i]; var words = tokens(it.full); var tiles = shuffle(words.map(function(w,i){ return {w:w,i:i}; }));
+    var built = [];
+    app.innerHTML =
+      '<div class="meta"><span>Ronda 2 · cuéntalo tú</span><span class="pill">'+(r2i+1)+' / '+r2q.length+'</span></div>'+
+      '<div class="card reveal"><div class="kicker"><span>Página '+it.n+' · '+esc(it.time)+'</span></div>'+
+      '<div class="scene">'+scene(it.id)+'</div>'+
+      '<div class="es" style="margin-top:12px">'+esc(it.es)+'</div>'+
+      '<div class="built" id="built">&nbsp;</div>'+
+      '<div class="tiles" id="tiles">'+tiles.map(function(t){ return '<button class="tile" type="button" data-i="'+t.i+'">'+esc(t.w)+'</button>'; }).join('')+'</div>'+
+      '<div class="row2"><button class="btn btn-ghost" id="undo" type="button">Borrar última</button></div>'+
+      '<div id="fb"></div></div>';
+    var builtEl = document.getElementById("built");
+    function paint(){ builtEl.innerHTML = built.length ? esc(built.map(function(b){return b.w;}).join(" ")) : "&nbsp;"; }
+    var ts = document.querySelectorAll("#tiles .tile");
+    for(var k=0;k<ts.length;k++){ ts[k].onclick = function(){
+      var i = +this.getAttribute("data-i"); if(this.classList.contains("used")) return;
+      this.classList.add("used"); built.push({w:words[i], i:i, el:this}); paint();
+      if(built.length === words.length) checkR2(it, built, builtEl);
+    }; }
+    document.getElementById("undo").onclick = function(){ var b = built.pop(); if(b){ b.el.classList.remove("used"); paint(); } };
+    window.scrollTo({top:0});
+  }
+  function checkR2(it, built, builtEl){
+    var mine = built.map(function(b){return b.w;}).join(" "), target = tokens(it.full).join(" ");
+    var ok = mine === target; if(ok) r2right++;
+    builtEl.className = "built " + (ok ? "ok" : "no"); builtEl.textContent = it.full;
+    var fb = document.getElementById("fb");
+    fb.innerHTML = '<div class="fb '+(ok?'ok':'no')+'">'+(ok ? '<b>Perfecto.</b> Así se cuenta.' : '<b>Orden:</b> '+esc(it.full))+'</div>'+
+      '<button class="speaker" id="say" type="button">'+speakerSVG+' Escucha</button>'+
+      '<button class="btn btn-primary" id="next" type="button">Siguiente</button>';
+    speak(it.full);
+    document.getElementById("say").onclick = function(){ speak(it.full); };
+    document.getElementById("next").onclick = function(){ r2i++; renderR2(); };
+    var tiles = document.querySelectorAll("#tiles .tile"); for(var i=0;i<tiles.length;i++) tiles[i].classList.add("used");
+  }
+  function renderDone(){
+    var missed = Object.keys(state.misses).length;
+    var score = Math.round(((ITEMS.length - missed) + r2right) / (ITEMS.length*2) * 100);
+    if(state.best===null || score > state.best) state.best = score; save();
+    app.innerHTML =
+      '<div class="card reveal"><div class="done"><h2>Fin del cuento</h2>'+
+      '<div class="score">'+score+'%</div>'+
+      '<p>'+(missed===0 ? 'Ocho páginas sin fallar.' : 'Fallaste '+missed+' en el libro: mañana otra vez y se te queda.')+' Ronda 2: '+r2right+' de '+ITEMS.length+' frases contadas en orden.'+(state.best>score ? ' Tu mejor: '+state.best+'%.' : '')+'</p>'+
+      '<div class="rule"><div><h3>+ -ing</h3><p>stop, keep, enjoy, finish, love, like</p></div><div><h3>+ to</h3><p>decide, want, need, plan, forget, hope</p></div></div>'+
+      '<button class="btn btn-primary" id="again" type="button">Leer el libro otra vez</button>'+
+      '<div class="row2"><button class="btn btn-ghost" id="r2again" type="button">Solo ronda 2</button></div>'+
+      '</div></div>'+
+      '<a class="homeback" href="../?name=Delfina">‹ Tu página</a>'+
+      '<div class="credit">ARCHES · Un día con el bebé · v2026-09-23</div>';
+    document.getElementById("again").onclick = function(){ state = {done:{}, misses:{}, best:state.best}; save(); renderBook(); window.scrollTo({top:0}); };
+    document.getElementById("r2again").onclick = function(){ startRound2(); };
+  }
+
+  renderBook();
+})();
+</script>
+</body>
+</html>
