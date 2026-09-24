@@ -271,7 +271,7 @@
 <noscript>
   <article class="sheet static">
     <h1>Bajo la casa</h1>
-    <p>Domingo por la noche. Una casa en South Tampa. El calentador ya está cambiado. Job terminado = pasado. La palabrita no se cae.</p>
+    <p>Domingo por la noche, una casa en South Tampa. Ya cambiaste el calentador. Ahora cuéntalo en inglés: el trabajo terminó, así que cada verbo va en pasado, y cada phrasal verb lleva su partícula (off, out, in, back).</p>
     <ol>
       <li>I got the call at nine.</li>
       <li>I shut off the main valve.</li>
@@ -282,7 +282,7 @@
       <li>I put back the panel and went home.</li>
     </ol>
     <p>I shut off the main, turned off the breaker, dug out the pan, took out the old heater, and put in a new one.</p>
-    <h2>Las que se rompen</h2>
+    <h2>Cuatro frases con error y su versión correcta</h2>
     <ul>
       <li>Yesterday I take out the valve. → Yesterday I took out the valve.</li>
       <li>I putted in a new faucet. → I put in a new faucet.</li>
@@ -300,12 +300,12 @@
     {
       look:"call", lookDone:"call-done",
       see:"Teléfono en la ventana. Agua todavía bajo la casa.",
-      es:"Te llamaron a las nueve. El trabajo ya terminó.",
+      es:"Paso 1. Te llamaron a las nueve. Completa la frase con el verbo en pasado.",
       before:"I", mid:"the call at nine.",
       verb:{
         choices:[
-          {v:"get", why:"Ya terminó. Pasado: got."},
-          {v:"goed", why:"get → got. Goed no existe."},
+          {v:"get", why:"El trabajo ya terminó: el verbo va en pasado. Get → got."},
+          {v:"goed", why:"Goed no existe. El pasado de get es got."},
           {v:"got", why:""}
         ],
         answer:"got"
@@ -315,20 +315,20 @@
     {
       look:"valve", lookDone:"dry",
       see:"El agua corre. La válvula todavía abierta.",
-      es:"Primero el agua. Cierra el paso principal.",
+      es:"Paso 2. Primero cierras el agua en la válvula principal. Verbo en pasado + partícula.",
       before:"I", mid:"the main valve.",
       verb:{
         choices:[
-          {v:"shutted", why:"shut no cambia. shut, shut, shut."},
+          {v:"shutted", why:"Shut es irregular y no cambia: hoy shut, ayer shut. Shutted no existe."},
           {v:"shut", why:""},
-          {v:"shutting", why:"No es ahora. Ya lo hiciste: shut."}
+          {v:"shutting", why:"-ing es para algo que pasa ahora mismo. Esto ya pasó: shut."}
         ],
         answer:"shut"
       },
       particle:{
         choices:[
-          {v:"", show:"sin palabrita", why:"Falta off. I shut off the main valve."},
-          {v:"out", why:"out es sacar. El agua se apaga: off."},
+          {v:"", show:"sin partícula", why:"Falta la partícula. Shut off = cerrar el paso del agua. Sin off, la frase queda incompleta."},
+          {v:"out", why:"Out es sacar algo. Para cerrar el agua o apagar algo se usa off: shut off."},
           {v:"off", why:""}
         ],
         answer:"off"
@@ -338,21 +338,21 @@
     {
       look:"power", lookDone:"power-off",
       see:"El breaker sigue encendido, ámbar.",
-      es:"La corriente, antes de meterte bajo la casa.",
+      es:"Paso 3. Apagas la corriente en el breaker antes de meterte bajo la casa.",
       before:"I", mid:"the breaker.",
       verb:{
         choices:[
           {v:"turned", why:""},
-          {v:"turn", why:"Ayer no es turn. turned."},
-          {v:"turned offed", why:"turned ya es el pasado. off no lleva -ed."}
+          {v:"turn", why:"Fue ayer, así que va en pasado: turned."},
+          {v:"turned offed", why:"La partícula nunca lleva -ed. El pasado ya está en turned: turned off."}
         ],
         answer:"turned"
       },
       particle:{
         choices:[
-          {v:"out", why:"out es sacar. El breaker: off."},
+          {v:"out", why:"Out es sacar algo. Apagar la corriente es off: turned off."},
           {v:"off", why:""},
-          {v:"", show:"sin palabrita", why:"Sin off solo giraste algo. turned off."}
+          {v:"", show:"sin partícula", why:"Sin off, turned solo significa que giraste algo. Apagar es turned off."}
         ],
         answer:"off"
       },
@@ -361,21 +361,21 @@
     {
       look:"pan", lookDone:"pan-gone",
       see:"La bandeja oxidada, abajo del calentador.",
-      es:"La bandeja oxidada, abajo del calentador. Sácala.",
+      es:"Paso 4. Sacas la bandeja oxidada que está debajo del calentador.",
       before:"I", mid:"the rusted pan.",
       verb:{
         choices:[
-          {v:"dig", why:"El job ya terminó. dig → dug."},
-          {v:"digged", why:"dig → dug. No digged."},
+          {v:"dig", why:"El trabajo ya terminó: dig → dug."},
+          {v:"digged", why:"Digged no existe. El pasado de dig es dug."},
           {v:"dug", why:""}
         ],
         answer:"dug"
       },
       particle:{
         choices:[
-          {v:"off", why:"off apaga. Sacar la bandeja es out."},
+          {v:"off", why:"Off es apagar. Sacar algo hacia afuera es out: dug out."},
           {v:"out", why:""},
-          {v:"", show:"sin palabrita", why:"dug out. Sin out, no la sacaste."}
+          {v:"", show:"sin partícula", why:"Falta out. Dug out = sacar cavando. Sin out, no queda claro que la sacaste."}
         ],
         answer:"out"
       },
@@ -384,20 +384,20 @@
     {
       look:"lift", lookDone:"lift-gone",
       see:"El calentador viejo, a medio salir.",
-      es:"El calentador viejo, para afuera.",
+      es:"Paso 5. Sacas el calentador viejo.",
       before:"I", mid:"the old heater.",
       verb:{
         choices:[
-          {v:"taked", why:"take → took. No taked."},
+          {v:"taked", why:"Taked no existe. El pasado de take es took."},
           {v:"took", why:""},
-          {v:"take", why:"Historia cerrada. took, no take."}
+          {v:"take", why:"Estás contando algo que ya pasó: took, no take."}
         ],
         answer:"took"
       },
       particle:{
         choices:[
-          {v:"", show:"sin palabrita", why:"took out. Sin out, no salió."},
-          {v:"off", why:"off apaga. Sacar es out."},
+          {v:"", show:"sin partícula", why:"Falta out. Took out = sacar. Sin out, took solo significa que tomaste algo."},
+          {v:"off", why:"Off es apagar. Sacar es out: took out."},
           {v:"out", why:""}
         ],
         answer:"out"
@@ -407,20 +407,20 @@
     {
       look:"seat", lookDone:"seat-done",
       see:"El calentador nuevo, todavía en el aire.",
-      es:"El calentador nuevo, adentro.",
+      es:"Paso 6. Instalas el calentador nuevo.",
       before:"I", mid:"the new heater.",
       verb:{
         choices:[
-          {v:"putting", why:"No es ahora. El job ya terminó. I put."},
-          {v:"putted", why:"put no cambia. I put. Nunca putted."},
+          {v:"putting", why:"-ing es para ahora mismo. Esto ya pasó: I put."},
+          {v:"putted", why:"Put es irregular y no cambia: hoy put, ayer put. Putted no existe."},
           {v:"put", why:""}
         ],
         answer:"put"
       },
       particle:{
         choices:[
-          {v:"back", why:"back es devolver. Instalar es in."},
-          {v:"", show:"sin palabrita", why:"put in. Sin in, no lo instalaste."},
+          {v:"back", why:"Back es volver a poner algo en su lugar. Instalar algo nuevo es in: put in."},
+          {v:"", show:"sin partícula", why:"Falta in. Put in = instalar. Sin in, put solo significa que pusiste algo."},
           {v:"in", why:""}
         ],
         answer:"in"
@@ -430,27 +430,27 @@
     {
       look:"panel", lookDone:"shut",
       see:"El panel abierto. La casa todavía despierta.",
-      es:"El panel vuelve a su sitio. Y te vas a la casa.",
+      es:"Paso 7. Vuelves a poner el panel y te vas a tu casa. Dos verbos, los dos en pasado.",
       before:"I", mid:"the panel and", tailAfter:"home.",
       verb:{
         choices:[
-          {v:"putted", why:"put no cambia. I put."},
+          {v:"putted", why:"Put es irregular y no cambia: hoy put, ayer put. Putted no existe."},
           {v:"put", why:""},
-          {v:"putting", why:"Ya te fuiste. No es putting."}
+          {v:"putting", why:"-ing es para ahora mismo. Esto ya pasó: I put."}
         ],
         answer:"put"
       },
       particle:{
         choices:[
           {v:"back", why:""},
-          {v:"in", why:"in es instalar. El panel vuelve: back."},
-          {v:"", show:"sin palabrita", why:"put back the panel. Sin back, no volvió."}
+          {v:"in", why:"In es instalar algo nuevo. El panel vuelve a su lugar: put back."},
+          {v:"", show:"sin partícula", why:"Falta back. Put back = volver a poner en su lugar: put back the panel."}
         ],
         answer:"back"
       },
       tail:{
         choices:[
-          {v:"go", why:"go → went. La cadena no vuelve al presente."},
+          {v:"go", why:"Los dos verbos van en pasado: put back... and went home. Go → went."},
           {v:"goed", why:"go → went. Goed no existe."},
           {v:"went", why:""}
         ],
@@ -462,39 +462,39 @@
 
   var TRAPS = [
     {
-      es:"La de siempre: el job de ayer, contado en presente.",
+      es:"El error más común: contar el trabajo de ayer en presente. Elige la frase correcta.",
       broken:"Yesterday I take out the valve.",
       choices:[
         {t:"Yesterday I took out the valve.", ok:true},
-        {t:"Yesterday I taked out the valve.", why:"take → took. No taked."},
-        {t:"Yesterday I take outed the valve.", why:"out no lleva -ed. Y el verbo es took."}
+        {t:"Yesterday I taked out the valve.", why:"Taked no existe. El pasado de take es took."},
+        {t:"Yesterday I take outed the valve.", why:"La partícula out nunca lleva -ed. Y el verbo es took."}
       ]
     },
     {
-      es:"El grifo nuevo. Arregla la frase de abajo.",
+      es:"Instalaste un grifo nuevo. Elige la frase correcta.",
       broken:"I putted in a new faucet.",
       choices:[
         {t:"I put in a new faucet.", ok:true},
-        {t:"I putted a new faucet.", why:"Sigue putted, y además se cayó in."},
-        {t:"I put ined a new faucet.", why:"in no lleva -ed. I put in."}
+        {t:"I putted a new faucet.", why:"Putted no existe, y además falta la partícula in."},
+        {t:"I put ined a new faucet.", why:"La partícula in nunca lleva -ed: I put in."}
       ]
     },
     {
-      es:"Así cierras el agua en la obra. La de abajo no sella.",
+      es:"Cerrar el agua se dice shut off. Elige la frase correcta.",
       broken:"I shut the water.",
       choices:[
         {t:"I shut off the water.", ok:true},
-        {t:"I close the water.", why:"No es close. Shut off."},
-        {t:"I shut offed the water.", why:"off no lleva -ed. shut off."}
+        {t:"I close the water.", why:"Para el agua no se usa close. Se dice shut off."},
+        {t:"I shut offed the water.", why:"La partícula off nunca lleva -ed: shut off."}
       ]
     },
     {
-      es:"La cadena. Un verbo en pasado y el otro se vuelve presente.",
+      es:"Dos verbos seguidos: los dos van en pasado. Elige la frase correcta.",
       broken:"Then I check and I go home.",
       choices:[
         {t:"Then I checked and I went home.", ok:true},
-        {t:"Then I checked and I go home.", why:"checked está bien. go también tiene que ser went."},
-        {t:"Then I check and I went home.", why:"went está bien. check también: checked."}
+        {t:"Then I checked and I go home.", why:"Checked está bien, pero go también tiene que ir en pasado: went."},
+        {t:"Then I check and I went home.", why:"Went está bien, pero check también tiene que ir en pasado: checked."}
       ]
     }
   ];
@@ -528,10 +528,12 @@
     u.lang = "en-US";
     u.rate = 0.92;
     var voices = window.speechSynthesis.getVoices();
+    var NOV = /albert|bad news|bahh|bells|boing|bubbles|cellos|good news|jester|organ|superstar|trinoids|whisper|wobble|zarvox|junior|kathy|ralph|fred|eloquence|grandma|grandpa|reed|rocko|sandy|shelley|flo/i;
+    var en = voices.filter(function(v){ return /^en[-_]/i.test(v.lang) && !NOV.test(v.name); });
+    var pref = ["Samantha","Google US English","Microsoft Aria","Microsoft Jenny","Microsoft Zira","Alex"];
     var voice = null;
-    for(var i=0;i<voices.length;i++){
-      if(/en[-_]US/i.test(voices[i].lang)){ voice = voices[i]; break; }
-    }
+    for(var p=0;p<pref.length;p++){ var m = en.filter(function(v){ return v.name.indexOf(pref[p])===0; })[0]; if(m){ voice = m; break; } }
+    if(!voice) voice = en.filter(function(v){ return /en[-_]US/i.test(v.lang); })[0] || en[0] || null;
     if(voice) u.voice = voice;
     window.speechSynthesis.speak(u);
   }
@@ -573,10 +575,10 @@
   }
 
   function stampRow(kind, group){
-    var html = '<p class="lab">'+(kind==="verb"?"Verbo":kind==="particle"?"Palabrita":"Y después")+'</p><div class="stamps" data-row="'+kind+'">';
+    var html = '<p class="lab">'+(kind==="verb"?"Verbo":kind==="particle"?"Partícula":"Y después...")+'</p><div class="stamps" data-row="'+kind+'">';
     group.choices.forEach(function(c){
       var label = c.show || c.v;
-      var slotText = c.v === "" ? "—" : c.v;
+      var slotText = c.v === "" ? "( )" : c.v;
       var pressed = pick[kind] === c.v ? "true" : "false";
       var on = pick[kind] === c.v ? " on" : "";
       html += '<button type="button" class="stamp'+on+'" data-kind="'+kind+'" data-val="'+esc(c.v)+'" data-slot="'+esc(slotText)+'" aria-pressed="'+pressed+'">'+esc(label)+'</button>';
@@ -598,17 +600,17 @@
     root.innerHTML =
       '<article class="sheet">'+
         head("")+
-        '<p class="deck">Domingo por la noche. Una casa en South Tampa. El calentador ya está cambiado. Tú cuentas el trabajo terminado.</p>'+
+        '<p class="deck">Domingo por la noche, una casa en South Tampa. Ya cambiaste el calentador. Ahora cuéntalo en inglés, paso por paso.</p>'+
         '<ul class="rules">'+
-          '<li>Job terminado = pasado. I turn, I go, I check no cuentan.</li>'+
-          '<li>La palabrita no se cae: off, out, in, back.</li>'+
+          '<li><b>Regla 1.</b> El trabajo ya terminó, así que cada verbo va en pasado: turn → turned, go → went, check → checked.</li>'+
+          '<li><b>Regla 2.</b> Los phrasal verbs llevan una partícula que no se puede omitir: shut <b>off</b>, took <b>out</b>, put <b>in</b>, put <b>back</b>. La partícula nunca lleva -ed.</li>'+
         '</ul>'+
         '<div class="say"><div class="lab">Dilo conmigo <button type="button" class="ghost" id="hear">Oír</button></div>'+
-          '<p>The job is finished. Past. Keep the little word.</p></div>'+
-        '<button type="button" class="btn" id="go">Entrar bajo la casa</button>'+
+          '<p>The job is done, so every verb is in the past. And the small word stays: off, out, in, back.</p></div>'+
+        '<button type="button" class="btn" id="go">Empezar: bajo la casa</button>'+
       '</article>';
     document.getElementById("hear").onclick = function(){
-      speak("The job is finished. Past. Keep the little word.");
+      speak("The job is done, so every verb is in the past. And the small word stays: off, out, in, back.");
     };
     document.getElementById("go").onclick = function(){
       bi = 0; pick = {}; sealed = false; phase = "beat"; render();
@@ -617,7 +619,7 @@
 
   function face(val, chosen){
     if(!chosen) return "___";
-    if(val === "") return "—";
+    if(val === "") return "( )";
     return val;
   }
   function sentence(b){
@@ -653,9 +655,9 @@
         '<p class="coach" id="coach" aria-live="polite"></p>'+
         '<p class="locked" id="locked" hidden></p>'+
         '<div class="dock">'+
-          '<button type="button" class="btn" id="seal"'+(ready(b)?"":" disabled")+'">Sellar este paso</button>'+
+          '<button type="button" class="btn" id="seal"'+(ready(b)?"":" disabled")+'">Confirmar este paso</button>'+
           '<button type="button" class="btn quiet" id="hear" hidden>Oír la frase</button>'+
-          '<button type="button" class="btn" id="next" hidden>'+(bi===BEATS.length-1?"Leer el job en voz alta":"Siguiente paso")+'</button>'+
+          '<button type="button" class="btn" id="next" hidden>'+(bi===BEATS.length-1?"Contar el trabajo en voz alta":"Siguiente paso")+'</button>'+
         '</div>'+
       '</article>';
     var rows = document.getElementById("rows");
@@ -671,7 +673,7 @@
         el.setAttribute("aria-pressed", on ? "true" : "false");
       });
       var hole = document.getElementById("slot-"+kind);
-      hole.textContent = btn.getAttribute("data-slot") || "—";
+      hole.textContent = btn.getAttribute("data-slot") || "( )";
       hole.classList.add("on");
       var coach = document.getElementById("coach");
       coach.textContent = "";
@@ -693,7 +695,7 @@
     sealed = true;
     document.getElementById("rows").hidden = true;
     var coach = document.getElementById("coach");
-    coach.textContent = "Sellado.";
+    coach.textContent = "Correcto.";
     coach.className = "coach ok";
     var locked = document.getElementById("locked");
     locked.hidden = false;
@@ -706,9 +708,9 @@
 
   function whyFor(group, val){
     for(var i=0;i<group.choices.length;i++){
-      if(group.choices[i].v === val) return group.choices[i].why || "Otra vez.";
+      if(group.choices[i].v === val) return group.choices[i].why || "Casi. Prueba otra opción.";
     }
-    return "Otra vez.";
+    return "Casi. Prueba otra opción.";
   }
 
   function trySeal(root, b){
@@ -747,14 +749,14 @@
       '<article class="sheet drill">'+
         head("60 segundos")+
         scene("done", "La casa en calma. El trabajo está hecho.")+
-        '<p class="es">Una toma. Si se cuela I turn, I go o I check, paras y lo dices en pasado.</p>'+
+        '<p class="es">Cuenta el trabajo completo en un minuto, en voz alta. Si se te escapa un verbo en presente (I turn, I go, I check), para y repítelo en pasado.</p>'+
         '<p class="clock" id="clock">1:00</p>'+
         '<p class="story-line">Sunday night in South Tampa.</p>'+
         lines+
         '<div class="actions">'+
           '<button type="button" class="btn" id="tick">Empezar el minuto</button>'+
           '<button type="button" class="btn quiet" id="model">Oír el modelo</button>'+
-          '<button type="button" class="btn quiet" id="said">Ya lo dije</button>'+
+          '<button type="button" class="btn quiet" id="said">Ya lo conté</button>'+
         '</div>'+
       '</article>';
     document.getElementById("tick").onclick = function(){
@@ -794,12 +796,12 @@
     }).join("");
     root.innerHTML =
       '<article class="sheet drill">'+
-        head("Fuga "+(ti+1)+" de "+TRAPS.length)+
+        head("Frase con error "+(ti+1)+" de "+TRAPS.length)+
         '<p class="es">'+esc(trap.es)+'</p>'+
         '<p class="broken">'+esc(trap.broken)+'</p>'+
         '<div id="choices">'+buttons+'</div>'+
         '<p class="coach" id="coach" aria-live="polite"></p>'+
-        '<div class="dock"><button type="button" class="btn" id="next" hidden>'+(ti===TRAPS.length-1?"La frase de salida":"Siguiente fuga")+'</button></div>'+
+        '<div class="dock"><button type="button" class="btn" id="next" hidden>'+(ti===TRAPS.length-1?"La frase final":"Siguiente error")+'</button></div>'+
       '</article>';
     document.getElementById("choices").onclick = function(e){
       var btn = e.target.closest(".choice");
@@ -814,7 +816,7 @@
       }
       document.querySelectorAll(".choice").forEach(function(el){ el.disabled = true; });
       btn.classList.add("good");
-      coach.textContent = "Esa sella.";
+      coach.textContent = "Correcto.";
       coach.className = "coach ok";
       document.getElementById("next").hidden = false;
       speak(c.t);
@@ -830,13 +832,13 @@
     root.innerHTML =
       '<article class="sheet">'+
         head("")+
-        '<p class="deck">Dos veces. Despacio, luego a velocidad de obra.</p>'+
-        '<p class="lab">La de esta noche</p>'+
+        '<p class="deck">Léela dos veces en voz alta: despacio, y luego rápido, como en la obra.</p>'+
+        '<p class="lab">La frase de esta noche (el calentador)</p>'+
         '<p class="killer">'+esc(KILLER)+'</p>'+
-        '<button type="button" class="btn" id="h1">Oír la de esta noche</button>'+
-        '<p class="lab">La de la semana pasada</p>'+
+        '<button type="button" class="btn" id="h1">Oír la frase de esta noche</button>'+
+        '<p class="lab">La frase de la semana pasada (la válvula)</p>'+
         '<p class="killer">'+esc(OLD)+'</p>'+
-        '<button type="button" class="btn quiet" id="h2">Oír la de la semana pasada</button>'+
+        '<button type="button" class="btn quiet" id="h2">Oír la frase de la semana pasada</button>'+
         '<button type="button" class="btn quiet" id="again">Otra vez desde el principio</button>'+
       '</article>';
     document.getElementById("h1").onclick = function(){ speak(KILLER); };
