@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#101216">
+<title>Export Board · Andrés</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --night:#101216;
+    --night-2:#0a0c10;
+    --board:#181b20;
+    --board-2:#1f232a;
+    --cell:#272c34;
+    --seam:#0b0d10;
+    --line-d:#2d323b;
+    --amber:#f4b740;
+    --amber-press:#d99b1f;
+    --green:#63d492;
+    --red:#ff806f;
+    --ice:#9ad8ff;
+    --dim:#a3aab5;
+    --text-d:#eef0f3;
+    --paper:#f6f1e7;
+    --paper-2:#ece5d7;
+    --ink:#1c1a16;
+    --muted:#57524a;
+    --line:#d8cfbd;
+    --green-d:#1d6b3e;
+    --green-s:#dcefe2;
+    --red-d:#a3321f;
+    --red-s:#f7e0db;
+    --amber-d:#7a5205;
+    --amber-s:#f8e9c4;
+    --white:#fffdf8;
+    --scrim:rgba(6,7,9,.62);
+    --ease-out:cubic-bezier(.23,1,.32,1);
+    --ease-io:cubic-bezier(.65,0,.35,1);
+    --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    --sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0}
+  body{
+    background:var(--night);color:var(--text-d);
+    font-family:var(--sans);font-size:16px;line-height:1.5;
+    -webkit-font-smoothing:antialiased;min-height:100vh;
+  }
+  body.locked{overflow:hidden}
+  ::selection{background:var(--amber);color:var(--ink)}
+  :focus-visible{outline:3px solid var(--amber);outline-offset:3px;border-radius:6px}
+  button{font-family:inherit;font-size:inherit;color:inherit}
+  .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+  .wrap{max-width:640px;margin:0 auto;padding:0 16px 128px}
+
+  /* ---------- header ---------- */
+  .top{padding:14px 0 6px}
+  .back{
+    display:inline-flex;align-items:center;min-height:44px;padding:0 4px;
+    color:var(--dim);text-decoration:none;font-weight:600;font-size:15px;
+  }
+  .back:hover{color:var(--text-d)}
+  .eyebrow{
+    font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--amber);margin:10px 0 10px;
+  }
+  h1{margin:0}
+  .title-flaps{display:flex;flex-wrap:wrap;gap:3px;perspective:400px}
+  .title-flaps .word{display:flex;gap:3px;margin-right:10px}
+  .flap{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:17px;height:24px;border-radius:3px;
+    background:linear-gradient(180deg,var(--cell) 0 49%,var(--seam) 49% 51%,var(--cell) 51% 100%);
+    font-family:var(--mono);font-weight:600;font-size:14px;line-height:1;
+    color:var(--amber);text-transform:uppercase;
+    backface-visibility:hidden;will-change:transform;
+  }
+  .title-flaps .flap{width:clamp(21px,6.4vw,30px);height:clamp(30px,8.8vw,40px);font-size:clamp(17px,5vw,24px);border-radius:4px}
+  .lede{margin:16px 0 0;font-size:17px;line-height:1.5;color:var(--text-d);max-width:34em}
+  .lede b{color:var(--red);font-family:var(--mono);font-weight:600;letter-spacing:.04em}
+  body.night{background:var(--night-2)}
+  body.night .lede b,body.night .eyebrow,body.night .steps .n,body.night .title-flaps .flap{color:var(--ice)}
+  .steps{list-style:none;margin:14px 0 0;padding:0;display:grid;gap:6px}
+  .steps li{display:flex;gap:10px;align-items:baseline;color:var(--dim);font-size:15px}
+  .steps .n{font-family:var(--mono);font-weight:600;color:var(--amber);min-width:18px}
+
+  .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin:18px 0 0;border-top:1px solid var(--line-d);border-bottom:1px solid var(--line-d)}
+  .kpi{padding:10px 0 10px;text-align:left}
+  .kpi + .kpi{padding-left:12px;border-left:1px solid var(--line-d)}
+  .kpi .k{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+  .kpi .v{font-family:var(--mono);font-size:22px;font-weight:600;color:var(--text-d);margin-top:2px}
+
+  /* ---------- truck lane ---------- */
+  .lane{position:relative;height:74px;margin:14px 0 4px;overflow:hidden}
+  .lane .road{
+    position:absolute;left:0;right:0;bottom:6px;height:12px;border-radius:3px;background:var(--board-2);
+  }
+  .lane .road::after{
+    content:"";position:absolute;left:8px;right:8px;top:5px;height:2px;
+    background:repeating-linear-gradient(90deg,var(--dim) 0 12px,transparent 12px 24px);opacity:.45;
+  }
+  .lane .end{
+    position:absolute;right:0;top:0;font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--dim);
+  }
+  .truck{
+    position:absolute;left:0;bottom:12px;width:96px;height:46px;
+    transform:translateX(0);transition:transform .8s var(--ease-io);will-change:transform;
+  }
+  .truck svg{width:96px;height:46px;overflow:visible;display:block}
+  .truck .beam{opacity:0;transition:opacity .6s ease-out}
+  body.night .truck .beam{opacity:.32}
+  .truck .trailer{fill:var(--paper)}
+  .truck .cab{fill:var(--amber)}
+  .truck .glass{fill:var(--board)}
+  .truck .wheel{fill:var(--seam);stroke:var(--dim);stroke-width:1.5}
+  .truck .label{font-family:var(--mono);font-weight:600;font-size:9px;letter-spacing:.14em;fill:var(--ink)}
+  .truck .light{fill:var(--amber)}
+  body.night .truck .light{fill:#fff6d6}
+
+  /* ---------- paper cards ---------- */
+  .paper{
+    background:var(--paper);color:var(--ink);border-radius:16px;
+    padding:20px 18px;margin-top:22px;box-shadow:0 1px 0 rgba(255,255,255,.04),0 18px 40px rgba(0,0,0,.35);
+  }
+  .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--amber-d);font-weight:600}
+  .paper h2{font-size:24px;line-height:1.2;margin:6px 0 8px;font-weight:700;letter-spacing:-.01em}
+  .paper p{margin:0 0 10px;color:var(--ink)}
+  .paper .muted{color:var(--muted)}
+  .chip{
+    display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+    padding:3px 8px;border-radius:999px;background:var(--amber-s);color:var(--amber-d);font-weight:600;vertical-align:middle;
+  }
+  .chip.common{background:var(--paper-2);color:var(--muted)}
+
+  .trio{list-style:none;margin:14px 0 0;padding:0;display:grid;grid-template-columns:1fr;border-top:1px solid var(--line)}
+  .trio li{display:grid;grid-template-columns:40px 1fr;gap:4px 12px;padding:14px 0;border-bottom:1px solid var(--line)}
+  .trio .num{
+    grid-row:1 / span 3;width:34px;height:34px;border-radius:50%;background:var(--ink);color:var(--paper);
+    display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-weight:600;font-size:15px;margin-top:2px;
+  }
+  .trio .when{display:flex;align-items:center;gap:8px;font-size:14px;color:var(--muted);font-weight:500}
+  .trio .when svg{width:22px;height:22px;flex:none;stroke:var(--ink);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+  .trio .verb{font-family:var(--mono);font-weight:600;font-size:22px;letter-spacing:.02em;color:var(--ink)}
+  .trio .ex{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;font-size:15px;color:var(--ink)}
+  @media (min-width:600px){
+    .trio{grid-template-columns:repeat(3,1fr);border-top:0;border-bottom:1px solid var(--line)}
+    .trio li{grid-template-columns:1fr;border-bottom:0;padding:14px 14px 16px;border-top:1px solid var(--line)}
+    .trio li + li{border-left:1px solid var(--line)}
+    .trio li:first-child{padding-left:0}
+    .trio .num{grid-row:auto}
+  }
+  .trick{
+    margin-top:14px;padding:12px 14px;border-radius:10px;background:var(--ink);color:var(--paper);font-size:15px;line-height:1.5;
+  }
+  .trick b{color:var(--amber)}
+  .trick code{font-family:var(--mono);font-size:14px;color:var(--white)}
+
+  /* ---------- buttons ---------- */
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    min-height:48px;padding:12px 18px;border-radius:12px;border:0;cursor:pointer;
+    font-weight:700;font-size:16px;transition:transform .16s var(--ease-out),background-color .16s ease-out;
+  }
+  .btn:active{transform:scale(.97)}
+  .btn.primary{background:var(--amber);color:var(--ink)}
+  .btn.primary:hover{background:var(--amber-press)}
+  .btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
+  .btn.ghost:hover{background:var(--paper-2)}
+  .btn[disabled]{opacity:.45;cursor:not-allowed}
+  .play{
+    display:inline-flex;align-items:center;gap:6px;min-height:36px;padding:4px 12px;border-radius:999px;
+    border:1.5px solid var(--line);background:var(--white);color:var(--ink);font-size:14px;font-weight:600;cursor:pointer;
+    transition:transform .16s var(--ease-out),background-color .16s ease-out;
+  }
+  .play:hover{background:var(--paper-2)}
+  .play:active{transform:scale(.96)}
+  .play svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+  /* ---------- board ---------- */
+  .board{
+    margin-top:22px;background:var(--board);border:1px solid var(--line-d);border-radius:16px;overflow:hidden;
+    box-shadow:0 18px 40px rgba(0,0,0,.35);
+  }
+  .board-head{
+    display:flex;justify-content:space-between;align-items:center;gap:10px;padding:14px 16px;
+    background:var(--board-2);border-bottom:1px solid var(--line-d);
+  }
+  .board-head .t{font-family:var(--mono);font-weight:600;font-size:12px;letter-spacing:.12em;color:var(--text-d);white-space:nowrap}
+  .board-head .shift{font-family:var(--mono);font-size:12px;letter-spacing:.12em;color:var(--amber);white-space:nowrap}
+  body.night .board-head .shift{color:var(--ice)}
+  .region{
+    display:flex;justify-content:space-between;align-items:center;padding:12px 16px 6px;
+    font-family:var(--mono);font-size:12px;letter-spacing:.16em;color:var(--dim);text-transform:uppercase;
+  }
+  .row{
+    display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;
+    min-height:60px;padding:8px 16px;background:transparent;border:0;border-top:1px solid var(--seam);
+    text-align:left;cursor:pointer;transition:background-color .16s ease-out;
+  }
+  .row:hover{background:var(--board-2)}
+  .row .dest{display:flex;flex-direction:column;min-width:0}
+  .row .code{font-family:var(--mono);font-size:12px;letter-spacing:.08em;color:var(--dim);white-space:nowrap}
+  .row .city{font-family:var(--mono);font-weight:600;font-size:16px;letter-spacing:.06em;color:var(--text-d);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .flaps{display:flex;gap:2px;flex:none;perspective:300px}
+  .row .flap{width:16px;height:24px;font-size:13px}
+  .row.s-hold .flap{color:var(--red)}
+  .row.s-recheck .flap{color:var(--amber)}
+  .row.s-done .flap{color:var(--green)}
+  body.night .row.s-hold .flap{color:var(--ice)}
+  .row.s-done{cursor:pointer}
+  .row.s-done .city{color:var(--dim)}
+
+  .done-banner{display:none;padding:16px;border-bottom:1px solid var(--line-d);background:var(--board-2)}
+  .done-banner.show{display:block}
+  .done-banner h3{margin:0 0 4px;font-size:19px;color:var(--text-d)}
+  .done-banner p{margin:0 0 12px;color:var(--dim);font-size:15px}
+  .done-banner .row-btns{display:flex;flex-wrap:wrap;gap:10px}
+  .done-banner .btn.ghost{color:var(--text-d);border-color:var(--line-d)}
+  .done-banner .btn.ghost:hover{background:var(--cell)}
+
+  /* ---------- manifest ---------- */
+  .manifest ol{list-style:none;margin:12px 0 0;padding:0;border-top:1px solid var(--line)}
+  .manifest li{padding:12px 0;border-bottom:1px solid var(--line);display:grid;grid-template-columns:1fr auto;gap:2px 12px;align-items:center}
+  .manifest .mc{font-family:var(--mono);font-size:12px;letter-spacing:.08em;color:var(--muted)}
+  .manifest .en{font-weight:600;font-size:16px;color:var(--ink)}
+  .manifest .es{font-size:14px;color:var(--muted)}
+  .manifest li.pend .en{color:var(--muted);font-weight:500;font-style:italic}
+  .manifest li .play{grid-row:1 / span 3;grid-column:2}
+
+  footer{margin-top:28px;text-align:center;color:var(--dim);font-size:13px;font-family:var(--mono);letter-spacing:.06em}
+  footer .reset{
+    background:none;border:0;color:var(--dim);text-decoration:underline;cursor:pointer;min-height:44px;padding:0 8px;font-family:var(--mono);font-size:13px;
+  }
+
+  /* ---------- sticky dock bar ---------- */
+  .dockbar{
+    position:fixed;left:0;right:0;bottom:0;z-index:30;
+    background:rgba(16,18,22,.94);border-top:1px solid var(--line-d);
+    padding:10px 16px calc(10px + env(safe-area-inset-bottom));
+  }
+  @supports (backdrop-filter:blur(8px)){ .dockbar{background:rgba(16,18,22,.82);backdrop-filter:blur(10px)} }
+  .dockbar .in{max-width:640px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px}
+  .dockbar .count{font-family:var(--mono);font-size:14px;color:var(--dim);letter-spacing:.04em}
+  .dockbar .count b{color:var(--text-d);font-weight:600}
+
+  /* ---------- sheet ---------- */
+  .scrim{position:fixed;inset:0;background:var(--scrim);opacity:0;pointer-events:none;transition:opacity .22s ease-in;z-index:40}
+  .scrim.open{opacity:1;pointer-events:auto;transition:opacity .3s var(--ease-out)}
+  .sheet{
+    position:fixed;left:0;right:0;bottom:0;z-index:41;max-height:92vh;overflow:auto;overscroll-behavior:contain;
+    background:var(--paper);color:var(--ink);border-radius:18px 18px 0 0;
+    padding:10px 18px calc(22px + env(safe-area-inset-bottom));
+    transform:translateY(104%);visibility:hidden;
+    transition:transform .22s ease-in,visibility 0s linear .22s;
+  }
+  .sheet.open{transform:translateY(0);visibility:visible;transition:transform .36s var(--ease-out),visibility 0s}
+  @media (min-width:700px){
+    .sheet{
+      left:50%;right:auto;bottom:auto;top:50%;width:min(580px,92vw);max-height:88vh;border-radius:18px;
+      transform:translate(-50%,-46%);opacity:0;
+      transition:transform .2s ease-in,opacity .2s ease-in,visibility 0s linear .2s;
+    }
+    .sheet.open{transform:translate(-50%,-50%);opacity:1;transition:transform .34s var(--ease-out),opacity .34s var(--ease-out),visibility 0s}
+  }
+  .grab{width:44px;height:5px;border-radius:3px;background:var(--line);margin:0 auto 10px}
+  @media (min-width:700px){ .grab{display:none} }
+  .doc-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;padding-bottom:12px;border-bottom:2px dashed var(--line)}
+  .doc-code{font-family:var(--mono);font-size:13px;letter-spacing:.1em;color:var(--muted)}
+  .doc-top h2{margin:2px 0 0;font-size:22px;line-height:1.2;outline:none}
+  .xbtn{
+    flex:none;min-height:44px;min-width:44px;padding:0 12px;border-radius:10px;border:1.5px solid var(--line);
+    background:transparent;cursor:pointer;font-weight:600;font-size:14px;color:var(--ink);
+  }
+  .xbtn:hover{background:var(--paper-2)}
+  .errbox{position:relative;margin-top:14px;padding:12px 14px;border-radius:10px;background:var(--white);border:1.5px solid var(--line)}
+  .errbox .k{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--red-d);font-weight:600;margin-bottom:4px}
+  .errbox.es .k{color:var(--amber-d)}
+  .errbox .wrong{margin:0;font-size:18px;line-height:1.4;font-weight:500;padding-right:4px}
+  .errbox .wrong mark{background:var(--red-s);color:var(--red-d);padding:0 3px;border-radius:3px}
+  .stamp{
+    position:absolute;right:10px;top:-14px;padding:3px 10px;border:2.5px solid currentColor;border-radius:6px;
+    font-family:var(--mono);font-weight:600;font-size:14px;letter-spacing:.14em;background:var(--paper);
+    transform:rotate(-6deg);opacity:0;pointer-events:none;
+  }
+  .stamp.on{opacity:1;animation:stamp .32s var(--ease-out)}
+  .stamp.good{color:var(--green-d)}
+  .stamp.bad{color:var(--red-d)}
+  @keyframes stamp{from{opacity:0;transform:rotate(-6deg) scale(1.5)}to{opacity:1;transform:rotate(-6deg) scale(1)}}
+  .tagline{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:12px}
+  .ask{margin:16px 0 10px;font-weight:600;font-size:16px;color:var(--ink);display:block}
+  .gapline{font-size:21px;line-height:1.4;font-weight:600;margin:0 0 14px}
+  .blank{
+    display:inline-block;min-width:88px;border-bottom:3px solid var(--amber-d);text-align:center;color:var(--amber-d);padding:0 6px;line-height:1.1;
+  }
+  .blank.filled{border-color:var(--green-d);color:var(--green-d)}
+  .opts{display:grid;gap:10px}
+  .opt{
+    width:100%;min-height:52px;padding:12px 14px;border-radius:12px;border:1.5px solid var(--line);
+    background:var(--white);color:var(--ink);text-align:left;font-size:17px;font-weight:500;cursor:pointer;
+    transition:transform .16s var(--ease-out),border-color .16s ease-out,background-color .16s ease-out;
+  }
+  .opt:hover{border-color:var(--ink)}
+  .opt:active{transform:scale(.98)}
+  .opt.word{font-family:var(--mono);font-weight:600;font-size:18px;text-align:center}
+  .opts.words{grid-template-columns:repeat(3,1fr)}
+  .opt.right{background:var(--green-s);border-color:var(--green-d);color:var(--green-d)}
+  .opt.wrongpick{background:var(--red-s);border-color:var(--red-d);color:var(--red-d);text-decoration:line-through}
+  .opt[disabled]{cursor:default}
+  .opt[disabled]:active{transform:none}
+
+  .built{
+    min-height:58px;padding:8px;border-radius:12px;border:2px dashed var(--line);background:var(--white);
+    display:flex;flex-wrap:wrap;gap:8px;align-content:flex-start;
+  }
+  .built:empty::before{content:"Toca las palabras en orden";color:var(--muted);font-size:15px;padding:8px 6px}
+  .bank{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .tile{
+    min-height:44px;padding:8px 12px;border-radius:10px;border:1.5px solid var(--line);background:var(--white);
+    font-size:17px;font-weight:500;color:var(--ink);cursor:pointer;
+    transition:transform .16s var(--ease-out),background-color .16s ease-out;
+  }
+  .tile:active{transform:scale(.95)}
+  .built .tile{background:var(--amber-s);border-color:var(--amber-d)}
+  .tile.used{visibility:hidden}
+
+  textarea.ans{
+    width:100%;min-height:84px;padding:12px 14px;border-radius:12px;border:1.5px solid var(--line);
+    background:var(--white);color:var(--ink);font-family:var(--sans);font-size:18px;line-height:1.4;resize:vertical;
+  }
+  textarea.ans:focus{outline:3px solid var(--amber);outline-offset:1px;border-color:var(--ink)}
+
+  .acts{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+  .acts .btn{flex:1 1 auto}
+  .fb{margin-top:14px}
+  .fb-box{padding:14px;border-radius:12px;border:1.5px solid}
+  .fb-box.good{background:var(--green-s);border-color:var(--green-d)}
+  .fb-box.bad{background:var(--red-s);border-color:var(--red-d)}
+  .fb-h{display:flex;align-items:center;gap:8px;font-weight:700;font-size:16px;margin-bottom:6px}
+  .fb-box.good .fb-h{color:var(--green-d)}
+  .fb-box.bad .fb-h{color:var(--red-d)}
+  .fb-h svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;flex:none}
+  .fb .right{font-size:18px;font-weight:600;margin:0 0 8px;color:var(--ink)}
+  .fb .note{font-size:15px;margin:0 0 8px;color:var(--ink)}
+  .fb .you{font-size:14px;margin:0 0 8px;color:var(--muted)}
+  .fb .bonus{margin-top:10px;padding-top:10px;border-top:1px solid rgba(28,26,22,.15);display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;font-size:15px}
+  .fb .bonus b{font-family:var(--mono)}
+
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation:none !important;transition:none !important;scroll-behavior:auto !important}
+  }
+</style>
+</head>
+<body>
+<div class="wrap" id="main">
+  <header class="top">
+    <a class="back" href="../">‹ Andrés</a>
+    <div class="eyebrow" id="eyebrow">ARCHES · Turno de exportación</div>
+    <h1><span class="sr">Export Board</span></h1>
+    <div class="title-flaps" id="titleFlaps" aria-hidden="true"></div>
+    <p class="lede" id="lede"></p>
+    <ol class="steps">
+      <li><span class="n">1</span><span>Toca un envío en <b style="font-family:var(--mono);color:inherit">HOLD</b>.</span></li>
+      <li><span class="n">2</span><span id="step2">Corrige la frase del papeleo.</span></li>
+      <li><span class="n">3</span><span>El envío sale. Si fallas, regresa más tarde.</span></li>
+    </ol>
+    <div class="kpis" role="group" aria-label="Tu turno">
+      <div class="kpi"><div class="k">Salieron</div><div class="v" id="kOut">0/12</div></div>
+      <div class="kpi"><div class="k">A tiempo</div><div class="v" id="kOn">·</div></div>
+      <div class="kpi"><div class="k">Racha</div><div class="v" id="kStreak">0</div></div>
+    </div>
+    <div class="lane" id="lane" aria-hidden="true">
+      <div class="road"></div>
+      <div class="end" id="laneEnd">DELIVERED</div>
+      <div class="truck" id="truck">
+        <svg viewBox="0 0 96 46">
+          <polygon class="beam" points="93,32 150,18 150,46" fill="#fff6d6"/>
+          <rect class="trailer" x="1" y="4" width="60" height="30" rx="3"/>
+          <text class="label" x="31" y="23" text-anchor="middle">EXPORT</text>
+          <path class="cab" d="M64 12h16c3 0 5 1.5 6.5 4l5 8c.7 1.2 1 2.5 1 4V34H64z"/>
+          <path class="glass" d="M69 16h10c1.6 0 2.8.7 3.6 2l3 5H69z"/>
+          <rect class="light" x="89" y="28" width="4" height="3" rx="1"/>
+          <circle class="wheel" cx="16" cy="37" r="5.5"/>
+          <circle class="wheel" cx="31" cy="37" r="5.5"/>
+          <circle class="wheel" cx="78" cy="37" r="5.5"/>
+        </svg>
+      </div>
+    </div>
+  </header>
+
+  <section class="paper brief" aria-labelledby="briefH">
+    <div class="kicker">Antes de cargar · Briefing</div>
+    <h2 id="briefH">“Cumplir” no existe en inglés</h2>
+    <p class="muted">Tres de tus tarjetas de clase son esta palabra. En inglés se divide en tres verbos. Primero pregunta: ¿qué estás cumpliendo?</p>
+    <ul class="trio">
+      <li>
+        <span class="num">1</span>
+        <span class="when"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/><path d="M9 15.5l2 2 4-4"/></svg>Una fecha o un presupuesto</span>
+        <span class="verb">MEET</span>
+        <span class="ex">meet the deadline <button class="play" data-say="meet the deadline. meet the budget." aria-label="Escuchar meet"><svg viewBox="0 0 24 24"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="M15.5 8.5a4 4 0 0 1 0 7"/></svg>Escuchar</button></span>
+      </li>
+      <li>
+        <span class="num">2</span>
+        <span class="when"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8.4-7 10-4-1.6-7-5.5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg>Reglas, normas, aduana</span>
+        <span class="verb">COMPLY WITH</span>
+        <span class="ex">comply with the rules <button class="play" data-say="comply with the rules. comply with customs regulations." aria-label="Escuchar comply with"><svg viewBox="0 0 24 24"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="M15.5 8.5a4 4 0 0 1 0 7"/></svg>Escuchar</button></span>
+      </li>
+      <li>
+        <span class="num">3</span>
+        <span class="when"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7.5 12 3l9 4.5-9 4.5z"/><path d="M3 7.5v9L12 21l9-4.5v-9"/><path d="M12 12v9"/></svg>Pedidos, órdenes</span>
+        <span class="verb">FULFILL</span>
+        <span class="ex">fulfill an order <button class="play" data-say="fulfill an order. fulfill all the orders." aria-label="Escuchar fulfill"><svg viewBox="0 0 24 24"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="M15.5 8.5a4 4 0 0 1 0 7"/></svg>Escuchar</button></span>
+      </li>
+    </ul>
+    <div class="trick"><b>Truco:</b> ¿fecha o dinero? <code>meet</code>. ¿Reglas? <code>comply with</code>. ¿Pedidos? <code>fulfill</code>.</div>
+  </section>
+
+  <section class="board" id="board" aria-labelledby="boardH">
+    <div class="board-head">
+      <span class="t" id="boardH">SALIDAS · DEPARTURES</span>
+      <span class="shift" id="shiftLabel">TURNO DE DÍA</span>
+    </div>
+    <div class="done-banner" id="doneBanner" aria-live="polite"></div>
+    <div id="rows"></div>
+  </section>
+
+  <section class="paper manifest" aria-labelledby="manH">
+    <div class="kicker">Manifiesto</div>
+    <h2 id="manH">Tus frases limpias</h2>
+    <p class="muted">Cada frase aparece aquí cuando su envío sale. Es tu hoja de repaso: escúchalas antes de la junta.</p>
+    <ol id="manList"></ol>
+  </section>
+
+  <footer>
+    <div>Export Board · ARCHES · v<span id="ver"></span></div>
+    <button class="reset" id="resetBtn" type="button">Reiniciar progreso</button>
+  </footer>
+</div>
+
+<div class="dockbar" id="dockbar">
+  <div class="in">
+    <span class="count" id="dockCount"><b>0</b>/12 salieron</span>
+    <button class="btn primary" id="dockBtn" type="button">Empezar</button>
+  </div>
+</div>
+
+<div class="scrim" id="scrim"></div>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle" aria-hidden="true">
+  <div class="grab"></div>
+  <div id="sheetBody"></div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var VERSION = "2026-09-24";
+  var KEY = "arches_andres_export_v1";
+  var mem = {};
+  function sget(k, d){ try{ var v = localStorage.getItem(k); return v ? JSON.parse(v) : d; }catch(e){ return (k in mem) ? mem[k] : d; } }
+  function sset(k, v){ mem[k] = v; try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
+
+  var qs = new URLSearchParams(location.search);
+  var NAME = (qs.get("name") || "Andrés").replace(/[<>&"]/g, "").trim().slice(0, 30) || "Andrés";
+  var reduced = !!(window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches);
+  function $(id){ return document.getElementById(id); }
+  function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); }
+  function shuffle(a){ a = a.slice(); for(var i = a.length - 1; i > 0; i--){ var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+
+  // ---------- content: 10 from Andrés's class cards, 2 common meeting errors ----------
+  var REGIONS = [
+    { id:"ca",  name:"Canadá" },
+    { id:"cam", name:"Centroamérica" },
+    { id:"sam", name:"Sudamérica" }
+  ];
+  var ITEMS = [
+    { id:"ca101", code:"CA-101", city:"TORONTO", region:"ca", cargo:"Deadline", mine:true,
+      wrong:"We need to <mark>cumplir</mark> the deadline.",
+      right:"We need to meet the deadline.",
+      es:"Tenemos que cumplir con la fecha límite.",
+      note:"Una fecha límite o un presupuesto: meet. Cumplir con el plazo = meet the deadline.",
+      r1:{ kind:"gap", ask:"¿Qué verbo va con deadline?", prompt:"We need to ___ the deadline.", options:["meet","comply","fulfill"], answer:"meet" },
+      ok:[/^(we|i) (need to|have to|must|have got to|got to) meet (the|our|this|that|a) deadline$/],
+      nudge:{ re:/^(we|i) (need to|have to|must) (make|hit) (the|our|this|that) deadline$/, msg:"Make the deadline también se dice. En la oficina, la más profesional es meet the deadline." },
+      ban:/cumpl|comply|fulfil|reach|\bmeets\b/, must:/\bmeet\b/,
+      canon:["We need to meet the deadline.","We have to meet the deadline."] },
+
+    { id:"ca102", code:"CA-102", city:"MONTREAL", region:"ca", cargo:"Customs", mine:true,
+      wrong:"We need to <mark>cumplir with</mark> the customs rules.",
+      right:"We need to comply with the customs rules.",
+      es:"Tenemos que cumplir con las reglas de aduana.",
+      note:"Reglas, normas, leyes: comply with. Siempre con with.",
+      r1:{ kind:"tiles", ask:"Arma la frase correcta.", tiles:["We","need","to","comply","with","the","customs","rules"], extra:["cumplir","meet"] },
+      ok:[/^(we|i) (need to|have to|must|have got to|got to) comply with (the )?customs (rules|regulations|laws)$/, /^(we|i) (need to|have to|must) comply with (the )?(rules|regulations) (of|from) customs$/],
+      ban:/cumpl|\bmeet\b|fulfil|\bcompl(ied|ies|ying)\b/, must:/\bcomply w\w*\b/,
+      canon:["We need to comply with the customs rules.","We have to comply with the customs rules."] },
+
+    { id:"ca103", code:"CA-103", city:"VANCOUVER", region:"ca", cargo:"Orders", mine:true,
+      wrong:"We need to <mark>cumplir</mark> all the orders before Friday.",
+      right:"We need to fulfill all the orders before Friday.",
+      es:"Tenemos que cumplir con todos los pedidos antes del viernes.",
+      note:"Pedidos: fulfill. En logística se dice order fulfillment. Se escribe con una l en ful y dos al final.",
+      r1:{ kind:"gap", ask:"¿Qué verbo va con orders?", prompt:"We need to ___ all the orders before Friday.", options:["fulfill","meet","comply with"], answer:"fulfill" },
+      ok:[/^(we|i) (need to|have to|must|have got to|got to) fulfill? (all (of )?)?(the |our |every |each )?orders? (before|by) friday$/],
+      nudge:{ re:/^(we|i) (need to|have to|must) (complete|process|ship|finish|deliver) (all (of )?)?(the |our )?orders (before|by) friday$/, msg:"Correcto en inglés. Para cumplir pedidos, el verbo de logística es fulfill: order fulfillment." },
+      ban:/cumpl|\bmeet\b|comply|\bfulfill?(ed|s|ing)\b/, must:/\bful+fil/,
+      canon:["We need to fulfill all the orders before Friday.","We have to fulfill all the orders before Friday."] },
+
+    { id:"ca104", code:"CA-104", city:"CALGARY", region:"ca", cargo:"Delay", mine:true,
+      wrong:"<mark>Why that</mark>, we couldn't finish on time.",
+      right:"Because of that, we couldn't finish on time.",
+      es:"Por eso no pudimos terminar a tiempo.",
+      note:"Por eso = Because of that o That's why. Why es solo para preguntar.",
+      r1:{ kind:"pick", ask:"¿Cuál frase sale del muelle?", options:["Because of that, we couldn't finish on time.","Why that, we couldn't finish on time.","Because that, we couldn't finish on time."], answer:0 },
+      ok:[/^(because of (that|this)|for (that|this) reason|so|and so) we (could not|were not able to|did not) finish (on|in) time$/, /^(that|this) is (why|the reason why|the reason) we (could not|were not able to|did not) finish (on|in) time$/, /^we (could not|were not able to|did not) finish (on|in) time because of (that|this)$/],
+      ban:/\bwhy that\b|^because that\b|^why\b|^for that we\b/, must:/(because of (that|this)|(that|this) is (why|the reason)|for (that|this) reason|^so\b|^and so\b)/,
+      canon:["Because of that, we couldn't finish on time.","That's why we couldn't finish on time."] },
+
+    { id:"gt201", code:"GT-201", city:"GUATEMALA", region:"cam", cargo:"Inventory", mine:true,
+      wrong:"<mark>In</mark> the end of the month, we do inventory.",
+      right:"At the end of the month, we do inventory.",
+      es:"A fin de mes hacemos inventario.",
+      note:"El final de un periodo: at the end of. Es frase fija, siempre con at.",
+      r1:{ kind:"gap", ask:"¿Qué palabra abre la frase?", prompt:"___ the end of the month, we do inventory.", options:["At","In","On"], answer:"At" },
+      ok:[/^at the end of (the|each|every) month (we|i) (do|take|count|run) (the |our |an )?inventory$/, /^(we|i) (do|take|count|run) (the |our |an )?inventory at the end of (the|each|every) month$/],
+      ban:/\b(in|on) the end of\b/, must:/\bat the end of\b/,
+      canon:["At the end of the month, we do inventory.","We do inventory at the end of the month."] },
+
+    { id:"sv202", code:"SV-202", city:"SAN SALVADOR", region:"cam", cargo:"Days off", mine:true,
+      wrong:"When <mark>do you need</mark> days off you need to speak with me.",
+      right:"When you need days off, you need to speak with me.",
+      es:"Cuando necesiten días libres, tienen que hablar conmigo.",
+      note:"Aquí when no pregunta nada: va sin do. When you need..., no When do you need...",
+      r1:{ kind:"tiles", ask:"Arma lo que le dices a tu equipo.", tiles:["When","you","need","days","off,","you","need","to","speak","with","me"], extra:["do"] },
+      ok:[/^(when|if|whenever|every time) you need (days off|a day off|time off|some days off|a few days off|some time off) (you (need to|have to|must|should) )?(speak|talk) (with|to) me( first)?$/, /^(when|if|whenever) you need (days off|a day off|time off|some days off) (please )?(come and |come )?(speak|talk) (with|to) me( first)?$/],
+      ban:/\b(do|does) you need\b/, must:/^(when|if|whenever|every time) you need\b/,
+      canon:["When you need days off, you need to speak with me.","When you need days off, you have to talk to me."] },
+
+    { id:"cr203", code:"CR-203", city:"SAN JOSE", region:"cam", cargo:"Staffing", mine:true,
+      wrong:"<mark>Anyone</mark> wanted to work on Saturday.",
+      right:"Nobody wanted to work on Saturday.",
+      es:"Nadie quería trabajar el sábado.",
+      note:"Nadie = Nobody o No one. Anyone va en preguntas y negativas: Did anyone call?",
+      r1:{ kind:"gap", ask:"Nadie quería trabajar el sábado. ¿Cómo empieza?", prompt:"___ wanted to work on Saturday.", options:["Nobody","Anyone","Nothing"], answer:"Nobody" },
+      ok:[/^(nobody|no one) wanted to work (on |this |that |on the |last )?saturdays?$/],
+      ban:/\b(any|some)(one|body)\b|\bwants? to\b/, must:/^no/,
+      canon:["Nobody wanted to work on Saturday.","No one wanted to work on Saturday."] },
+
+    { id:"pa204", code:"PA-204", city:"PANAMA", region:"cam", cargo:"Training", mine:true,
+      wrong:"I love <mark>to training</mark> new people.",
+      right:"I love training new people.",
+      es:"Me encanta entrenar a gente nueva.",
+      note:"love + -ing (training) o love + to + verbo (to train). La mezcla to training no existe.",
+      r1:{ kind:"pick", ask:"Hablas de tu trabajo. ¿Cuál es correcta?", options:["I love training new people.","I love to training new people.","I love train new people."], answer:0 },
+      ok:[/^i (really |just )?love (training|to train) new (people|staff|employees|workers|hires|team members)$/, /^i (really )?enjoy training new (people|staff|employees|workers|hires|team members)$/],
+      ban:/\bto training\b|\blove train\b|\benjoy to\b|\blove trained\b|\bloved\b/, must:/\b(love|enjoy)\b/,
+      canon:["I love training new people.","I love to train new people."] },
+
+    { id:"co301", code:"CO-301", city:"BOGOTA", region:"sam", cargo:"Small talk", mine:true,
+      wrong:"Have you ever <mark>to travel in</mark> Colombia?",
+      right:"Have you ever been to Colombia?",
+      es:"¿Alguna vez has estado en Colombia?",
+      note:"Have you ever + participio: been, traveled. Viajar a un país = to, no in.",
+      r1:{ kind:"tiles", ask:"Arma la pregunta.", tiles:["Have","you","ever","been","to","Colombia?"], extra:["in","travel"] },
+      alts:["Have you ever traveled to Colombia?"],
+      ok:[/^have you ever (been|traveled|travelled|gone) to colombia$/],
+      ban:/\bto travel\b|\bin colombia\b|^(did|do|are) you\b|\bever travel\b|\bever go\b|\bever be\b|\bever being\b|\bever went\b/, must:/^have you ever\b/,
+      canon:["Have you ever been to Colombia?","Have you ever traveled to Colombia?"] },
+
+    { id:"pe302", code:"PE-302", city:"LIMA", region:"sam", cargo:"Vocabulary", mine:true,
+      wrong:"How <mark>is called</mark> “montacargas” in English?",
+      right:"How do you say “montacargas” in English?",
+      es:"¿Cómo se dice «montacargas» en inglés?",
+      note:"Si no sabes una palabra, no la metas en español: pregunta. How do you say...? Nunca How is called.",
+      r1:{ kind:"pick", ask:"En la junta no sabes cómo se dice montacargas. ¿Qué preguntas?", options:["How do you say “montacargas” in English?","How is called “montacargas” in English?","How say “montacargas” in English?"], answer:0 },
+      bonus:{ es:"montacargas", en:"forklift" },
+      ok:[/^(how do you say|how do you say the word|how would you say|what is the word for|what is the english word for) montacargas( in english)?$/, /^what is montacargas in english$/, /^how is montacargas said in english$/],
+      ban:/\bhow is (it )?called\b|\bhow say\b|\bhow (you|we) say\b/, must:/\b(how do you say|word for|how would you say)\b/,
+      canon:["How do you say montacargas in English?"] },
+
+    { id:"cl303", code:"CL-303", city:"SANTIAGO", region:"sam", cargo:"Schedule", mine:false,
+      wrong:"I <mark>am agree</mark> with the new schedule.",
+      right:"I agree with the new schedule.",
+      es:"Estoy de acuerdo con el nuevo horario.",
+      note:"Agree ya es verbo: I agree. Sin am. En negativo: I don't agree.",
+      r1:{ kind:"pick", ask:"En la junta, tu jefe propone un horario. Respondes:", options:["I agree with the new schedule.","I am agree with the new schedule.","I'm agree with the new schedule."], answer:0 },
+      ok:[/^i (totally |completely |fully |really )?agree (with|to) (the|this) new (schedule|timetable)$/],
+      ban:/\bam agree\b|\bagreed\b|\bagrees\b/, must:/^i (\w+ )?agre+\b/,
+      canon:["I agree with the new schedule."] },
+
+    { id:"ec304", code:"EC-304", city:"QUITO", region:"sam", cargo:"Meeting", mine:false,
+      wrong:"Everybody needs to <mark>assist to</mark> the meeting.",
+      right:"Everybody needs to attend the meeting.",
+      es:"Todos tienen que asistir a la junta.",
+      note:"Asistir a una junta = attend, sin to. Assist = ayudar a alguien.",
+      r1:{ kind:"gap", ask:"Asistir a la junta. ¿Qué verbo?", prompt:"Everybody needs to ___ the meeting.", options:["attend","assist to","assist"], answer:"attend" },
+      ok:[/^(everybody|everyone) (needs to|has to|must|should|is required to) attend (the|this|our) meeting$/, /^(you all|all of you|we all|all of us|all) (need to|have to|must|should) attend (the|this|our) meeting$/],
+      nudge:{ re:/^((everybody|everyone) (needs to|has to|must|should)|(you all|all of you|we all|all of us|all) (need to|have to|must|should)) (go to|be at|come to|join) (the|this|our) meeting$/, msg:"Correcto. En la oficina, asistir a una junta se dice attend the meeting." },
+      ban:/\bassist\b|\battend to\b|\battend(ed|s|ing)\b|\b(everybody|everyone) (have|need) to\b/, must:/\bat+end\b/,
+      canon:["Everybody needs to attend the meeting.","Everyone has to attend the meeting."] }
+  ];
+  var BY = {}; ITEMS.forEach(function(it){ BY[it.id] = it; });
+  var TOTAL = ITEMS.length;
+
+  // ---------- answer checking ----------
+  var CMAP = {"it's":"it is","i'm":"i am","don't":"do not","doesn't":"does not","didn't":"did not","couldn't":"could not",
+    "can't":"cannot","won't":"will not","isn't":"is not","aren't":"are not","wasn't":"was not","weren't":"were not",
+    "haven't":"have not","hasn't":"has not","that's":"that is","what's":"what is","we're":"we are","you're":"you are",
+    "they're":"they are","i've":"i have","we've":"we have","you've":"you have","i'd":"i would","let's":"let us",
+    "there's":"there is","wouldn't":"would not","shouldn't":"should not","how's":"how is","it'd":"it would"};
+  function norm(s){
+    s = String(s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase()
+      .replace(/[‘’´`]/g, "'").replace(/[“”«»"]/g, " ")
+      .replace(/[.,!?¿¡;:()\[\]]/g, " ").replace(/-/g, " ");
+    return s.split(/\s+/).filter(Boolean).map(function(t){
+      if(CMAP[t]) return CMAP[t];
+      return t.replace(/^'+|'+$/g, "");
+    }).filter(Boolean).join(" ");
+  }
+  function lev(a, b){
+    if(a === b) return 0;
+    var m = a.length, n = b.length; if(!m) return n; if(!n) return m;
+    var p = [], c = [], i, j;
+    for(j = 0; j <= n; j++) p[j] = j;
+    for(i = 1; i <= m; i++){
+      c = [i];
+      for(j = 1; j <= n; j++) c[j] = Math.min(p[j] + 1, c[j-1] + 1, p[j-1] + (a[i-1] === b[j-1] ? 0 : 1));
+      p = c;
+    }
+    return p[n];
+  }
+  function judge(it, raw){
+    var n = norm(raw);
+    if(!n) return { v:"empty" };
+    for(var i = 0; i < it.ok.length; i++) if(it.ok[i].test(n)) return { v:"ok" };
+    if(it.nudge && it.nudge.re.test(n)) return { v:"nudge", msg:it.nudge.msg };
+    if(it.ban && it.ban.test(n)) return { v:"bad" };
+    if(it.must && !it.must.test(n)) return { v:"bad" };
+    var best = 1e9;
+    it.canon.forEach(function(cn){ var d = lev(n, norm(cn)); if(d < best) best = d; });
+    var L = n.length, tol = L <= 20 ? 1 : (L <= 35 ? 2 : 3);
+    if(best <= tol) return { v:"close" };
+    return { v:"bad" };
+  }
+  window.__export = { norm:norm, judge:judge, lev:lev, ITEMS:ITEMS };
+
+  // ---------- state ----------
+  function fresh(){ return { v:1, round:1, r1:{}, r2:{}, done1:false, done2:false }; }
+  var st = sget(KEY, null);
+  if(!st || st.v !== 1 || !st.r1 || !st.r2) st = fresh();
+  function save(){ sset(KEY, st); }
+  function map(round){ return (round || st.round) === 2 ? st.r2 : st.r1; }
+  function rec(id, round){ var m = map(round); if(!m[id]) m[id] = { s:"hold", first:null, tries:0 }; return m[id]; }
+  function statusOf(id, round){ var m = map(round); return m[id] ? m[id].s : "hold"; }
+  function countDone(round){ var n = 0; ITEMS.forEach(function(it){ if(statusOf(it.id, round) === "done") n++; }); return n; }
+  function countOnTime(round){ var n = 0, m = map(round); ITEMS.forEach(function(it){ var r = m[it.id]; if(r && r.s === "done" && r.first === true) n++; }); return n; }
+  function everDone(id){ return statusOf(id, 1) === "done" || statusOf(id, 2) === "done"; }
+
+  // streak
+  function dayStr(t){ var d = new Date(t); return d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate(); }
+  function bumpStreak(){
+    var s = sget(KEY + "_streak", { last:null, count:0 });
+    var today = dayStr(Date.now()), yest = dayStr(Date.now() - 86400000);
+    if(s.last === today){}
+    else if(s.last === yest){ s.count += 1; s.last = today; }
+    else { s.count = 1; s.last = today; }
+    sset(KEY + "_streak", s);
+  }
+  function streak(){
+    var s = sget(KEY + "_streak", { last:null, count:0 });
+    var today = dayStr(Date.now()), yest = dayStr(Date.now() - 86400000);
+    return (s.last === today || s.last === yest) ? s.count : 0;
+  }
+
+  // ---------- audio (iOS-safe voice picker) ----------
+  var voice = null, audioReady = false;
+  function loadVoice(){
+    var vs = window.speechSynthesis ? speechSynthesis.getVoices() : [];
+    var NOV = /albert|bad news|bahh|bells|boing|bubbles|cellos|good news|jester|organ|superstar|trinoids|whisper|wobble|zarvox|junior|kathy|ralph|fred|eddy|flo|grandma|grandpa|reed|rocko|sandy|shelley/i;
+    var en = vs.filter(function(v){ return /^en[-_]/i.test(v.lang) && !NOV.test(v.name); });
+    var pref = ["Samantha","Google US English","Microsoft Aria","Microsoft Jenny","Microsoft Zira","Alex","Karen","Daniel"];
+    voice = null;
+    for(var i = 0; i < pref.length; i++){ var m = en.filter(function(v){ return v.name.indexOf(pref[i]) === 0; })[0]; if(m){ voice = m; break; } }
+    if(!voice) voice = en.filter(function(v){ return /en[-_]US/i.test(v.lang); })[0] || en[0] || null;
+  }
+  if(window.speechSynthesis){ loadVoice(); speechSynthesis.onvoiceschanged = loadVoice; }
+  function unlockAudio(){
+    if(audioReady || !window.speechSynthesis) return;
+    try{ var u = new SpeechSynthesisUtterance(""); u.volume = 0; speechSynthesis.speak(u); audioReady = true; }catch(e){}
+  }
+  document.addEventListener("touchstart", unlockAudio, { once:true, passive:true });
+  document.addEventListener("click", unlockAudio, { once:true });
+  function speak(text){
+    if(!text || !window.speechSynthesis) return;
+    try{
+      speechSynthesis.cancel();
+      var u = new SpeechSynthesisUtterance(String(text).replace(/[“”«»]/g, ""));
+      u.lang = "en-US"; u.rate = 0.92; if(voice) u.voice = voice;
+      speechSynthesis.speak(u);
+    }catch(e){}
+  }
+  var SPK = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="M15.5 8.5a4 4 0 0 1 0 7"/></svg>';
+  var CHECK = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
+  var CROSS = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>';
+  function playBtn(text, label){ return '<button class="play" type="button" data-say="' + esc(text) + '">' + SPK + (label || "Escuchar") + '</button>'; }
+  document.addEventListener("click", function(e){
+    var b = e.target.closest ? e.target.closest("[data-say]") : null;
+    if(b){ speak(b.getAttribute("data-say")); }
+  });
+
+  // ---------- split-flap cells ----------
+  var CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+  var WIDTH = 8;
+  function makeFlaps(el, text, n){
+    el.innerHTML = "";
+    for(var i = 0; i < n; i++){ var s = document.createElement("span"); s.className = "flap"; s.textContent = (text[i] || " "); el.appendChild(s); }
+  }
+  function flipTo(el, text, animate){
+    var cells = el.children, total = 0;
+    for(var i = 0; i < cells.length; i++){
+      var target = text[i] || " ";
+      if(cells[i].textContent === target) continue;
+      if(!animate || reduced || !cells[i].animate){ cells[i].textContent = target; continue; }
+      flipCell(cells[i], target, i * 32);
+      total = Math.max(total, i * 32 + 420);
+    }
+    return total;
+  }
+  function flipCell(cell, target, delay){
+    setTimeout(function(){
+      var steps = 2 + Math.floor(Math.random() * 2), n = 0;
+      (function step(){
+        var ch = n < steps ? CHARS[Math.floor(Math.random() * CHARS.length)] : target;
+        var a = cell.animate([{ transform:"rotateX(0deg)" }, { transform:"rotateX(-90deg)" }], { duration:55, easing:"ease-in" });
+        a.onfinish = function(){
+          cell.textContent = ch;
+          var b = cell.animate([{ transform:"rotateX(90deg)" }, { transform:"rotateX(0deg)" }], { duration:55, easing:"ease-out" });
+          n++;
+          if(n <= steps) b.onfinish = step;
+        };
+      })();
+    }, delay);
+  }
+  function pad(s){ s = String(s); while(s.length < WIDTH) s += " "; return s.slice(0, WIDTH); }
+  var LABEL = { hold:"HOLD", recheck:"RECHECK", done:"DEPARTED" };
+  var LABEL_ES = { hold:"detenido", recheck:"regresa para revisión", done:"salió" };
+
+  // ---------- header ----------
+  function buildTitle(){
+    var box = $("titleFlaps"); box.innerHTML = "";
+    ["EXPORT","BOARD"].forEach(function(w){
+      var word = document.createElement("span"); word.className = "word";
+      for(var i = 0; i < w.length; i++){ var s = document.createElement("span"); s.className = "flap"; s.textContent = (reduced ? w[i] : " "); s.setAttribute("data-t", w[i]); word.appendChild(s); }
+      box.appendChild(word);
+    });
+    if(!reduced){
+      var all = box.querySelectorAll(".flap");
+      for(var k = 0; k < all.length; k++){
+        if(all[k].animate) flipCell(all[k], all[k].getAttribute("data-t"), 200 + k * 45);
+        else all[k].textContent = all[k].getAttribute("data-t");
+      }
+    }
+  }
+  function renderLede(){
+    var html;
+    if(st.round === 1){
+      html = esc(NAME) + ", hay " + TOTAL + " envíos en <b>HOLD</b>. Cada uno tiene un error en el papeleo: son tus errores de clase. Corrígelo y el envío sale.";
+      if(st.done1) html = esc(NAME) + ", el turno de día está completo. Ahora viene el turno de noche.";
+    } else {
+      html = "Turno de noche, " + esc(NAME) + ". Los mismos " + TOTAL + " envíos, pero ahora solo ves la nota en español. Tú escribes el inglés.";
+      if(st.done2) html = "Turno completo, " + esc(NAME) + ". Los " + TOTAL + " envíos salieron dos veces.";
+    }
+    $("lede").innerHTML = html;
+    $("step2").textContent = st.round === 2 ? "Lee la nota en español y escribe el inglés." : "Corrige la frase del papeleo.";
+  }
+  function renderKpis(){
+    var d = countDone(), on = countOnTime();
+    $("kOut").textContent = d + "/" + TOTAL;
+    $("kOn").textContent = d ? Math.round(on / d * 100) + "%" : "·";
+    var s = streak();
+    $("kStreak").textContent = s + (s === 1 ? " día" : " días");
+    $("dockCount").innerHTML = "<b>" + d + "</b>/" + TOTAL + " salieron";
+    moveTruck();
+  }
+  function moveTruck(){
+    var lane = $("lane"), truck = $("truck");
+    var w = lane.clientWidth - 96;
+    var p = countDone() / TOTAL;
+    truck.style.transform = "translateX(" + Math.max(0, Math.round(w * p)) + "px)";
+  }
+  window.addEventListener("resize", moveTruck);
+
+  // ---------- board ----------
+  var rowEls = {}, shown = {};
+  function buildBoard(){
+    var box = $("rows"); box.innerHTML = "";
+    REGIONS.forEach(function(rg){
+      var h = document.createElement("div"); h.className = "region";
+      h.innerHTML = '<span>' + esc(rg.name) + '</span><span data-rc="' + rg.id + '"></span>';
+      box.appendChild(h);
+      ITEMS.filter(function(it){ return it.region === rg.id; }).forEach(function(it){
+        var b = document.createElement("button");
+        b.type = "button"; b.className = "row"; b.setAttribute("data-id", it.id);
+        b.innerHTML = '<span class="dest"><span class="code">' + esc(it.code) + ' · ' + esc(it.cargo) + '</span><span class="city">' + esc(it.city) + '</span></span>' +
+          '<span class="flaps" aria-hidden="true"></span><span class="sr"></span>';
+        b.addEventListener("click", function(){ openSheet(it.id); });
+        box.appendChild(b);
+        rowEls[it.id] = b;
+        var s = statusOf(it.id);
+        makeFlaps(b.querySelector(".flaps"), pad(LABEL[s]), WIDTH);
+        shown[it.id] = s;
+        paintRow(it.id, s);
+      });
+    });
+    renderRegionCounts();
+  }
+  function paintRow(id, s){
+    var b = rowEls[id], it = BY[id];
+    b.classList.remove("s-hold", "s-recheck", "s-done");
+    b.classList.add("s-" + s);
+    b.querySelector(".sr").textContent = ", " + LABEL_ES[s];
+    b.setAttribute("aria-label", it.code + " " + it.city + ", " + it.cargo + ", " + LABEL_ES[s]);
+  }
+  function renderRegionCounts(){
+    REGIONS.forEach(function(rg){
+      var its = ITEMS.filter(function(it){ return it.region === rg.id; });
+      var d = its.filter(function(it){ return statusOf(it.id) === "done"; }).length;
+      var el = document.querySelector('[data-rc="' + rg.id + '"]');
+      if(el) el.textContent = d + "/" + its.length;
+    });
+  }
+  function refreshBoard(animate){
+    var longest = 0;
+    ITEMS.forEach(function(it){
+      var s = statusOf(it.id);
+      if(shown[it.id] !== s){
+        longest = Math.max(longest, flipTo(rowEls[it.id].querySelector(".flaps"), pad(LABEL[s]), animate));
+        shown[it.id] = s;
+      }
+      paintRow(it.id, s);
+    });
+    renderRegionCounts();
+    return longest;
+  }
+  function renderShift(){
+    document.body.classList.toggle("night", st.round === 2);
+    $("shiftLabel").textContent = st.round === 2 ? "TURNO DE NOCHE" : "TURNO DE DÍA";
+  }
+
+  // ---------- banner + dock ----------
+  function renderBanner(){
+    var el = $("doneBanner");
+    var complete = countDone() === TOTAL;
+    if(!complete){ el.classList.remove("show"); el.innerHTML = ""; return; }
+    var on1 = countOnTime(1), on2 = countOnTime(2);
+    if(st.round === 1){
+      el.innerHTML = '<h3>Turno de día completo</h3><p>A tiempo: ' + on1 + ' de ' + TOTAL + '. Ahora el turno de noche: ves la nota en español y escribes el inglés.</p>' +
+        '<div class="row-btns"><button class="btn primary" type="button" data-act="night">Empezar turno de noche</button></div>';
+    } else {
+      el.innerHTML = '<h3>Turno completo</h3><p>Día: ' + on1 + ' de ' + TOTAL + ' a tiempo. Noche: ' + on2 + ' de ' + TOTAL + ' a tiempo. Repite la noche mañana para que se quede.</p>' +
+        '<div class="row-btns"><button class="btn primary" type="button" data-act="again">Repetir turno de noche</button><button class="btn ghost" type="button" data-act="manifest">Ver manifiesto</button></div>';
+    }
+    el.classList.add("show");
+  }
+  function renderDock(){
+    var btn = $("dockBtn"), d = countDone();
+    if(d === TOTAL){ btn.textContent = st.round === 1 ? "Turno de noche" : "Repetir noche"; }
+    else if(d === 0 && !anyTouched()){ btn.textContent = st.round === 1 ? "Empezar" : "Empezar la noche"; }
+    else { btn.textContent = "Siguiente envío"; }
+  }
+  function anyTouched(){ var m = map(); for(var k in m){ if(m.hasOwnProperty(k) && m[k].tries > 0) return true; } return false; }
+  function renderManifest(){
+    var ol = $("manList"), html = "";
+    ITEMS.forEach(function(it){
+      if(everDone(it.id)){
+        html += '<li><span class="mc">' + esc(it.code) + ' · ' + esc(it.city) + '</span><span class="en">' + esc(it.right) + '</span><span class="es">' + esc(it.es) + '</span>' + playBtn(it.right) + '</li>';
+      } else {
+        html += '<li class="pend"><span class="mc">' + esc(it.code) + ' · ' + esc(it.city) + '</span><span class="en">Pendiente: el envío sigue en el muelle.</span></li>';
+      }
+    });
+    ol.innerHTML = html;
+  }
+  function renderAll(animate){
+    if(countDone(1) === TOTAL) st.done1 = true;
+    if(countDone(2) === TOTAL) st.done2 = true;
+    save();
+    renderShift(); renderLede(); var t = refreshBoard(animate); renderKpis(); renderBanner(); renderDock(); renderManifest();
+    return t;
+  }
+
+  // ---------- queue ----------
+  function nextId(from){
+    var ids = ITEMS.map(function(it){ return it.id; });
+    var start = from ? ids.indexOf(from) + 1 : 0;
+    var rot = ids.slice(start).concat(ids.slice(0, start));
+    var holds = rot.filter(function(id){ return id !== from && statusOf(id) === "hold"; });
+    if(holds.length) return holds[0];
+    var re = rot.filter(function(id){ return id !== from && statusOf(id) === "recheck"; });
+    if(re.length) return re[0];
+    if(from && statusOf(from) !== "done") return from;
+    return null;
+  }
+
+  // ---------- sheet ----------
+  var cur = null, lastFocus = null, answered = false, closing = null;
+  function openSheet(id){
+    var it = BY[id]; if(!it) return;
+    cur = id; answered = false;
+    lastFocus = document.activeElement;
+    var r = rec(id), s = r.s;
+    var tag = it.mine ? '<span class="chip">De tu clase</span>' : '<span class="chip common">Error común</span>';
+    var head = '<div class="doc-top"><div><div class="doc-code">' + esc(it.code) + ' · ' + esc(it.city) + '</div><h2 id="sheetTitle" tabindex="-1">' + esc(it.cargo) + '</h2></div>' +
+      '<button class="xbtn" type="button" data-act="close">Cerrar</button></div>';
+    var box;
+    if(st.round === 1){
+      box = '<div class="errbox" id="errbox"><div class="k">Error en el papeleo</div><p class="wrong">' + it.wrong + '</p><span class="stamp" id="stamp"></span></div>';
+    } else {
+      box = '<div class="errbox es" id="errbox"><div class="k">Nota en español</div><p class="wrong">' + esc(it.es) + '</p><span class="stamp" id="stamp"></span></div>';
+    }
+    var status = s === "done" ? '<span class="chip" style="background:var(--green-s);color:var(--green-d)">Ya salió · repaso</span>' : (s === "recheck" ? '<span class="chip" style="background:var(--amber-s);color:var(--amber-d)">Segunda revisión</span>' : "");
+    var html = head + '<div class="tagline">' + tag + status + '</div>' + box + '<div id="task"></div><div class="fb" id="fb" aria-live="polite"></div><div class="acts" id="acts"></div>';
+    $("sheetBody").innerHTML = html;
+    if(st.round === 1) buildR1(it); else buildR2(it);
+
+    $("sheet").setAttribute("aria-hidden", "false");
+    $("sheet").scrollTop = 0;
+    $("sheet").classList.add("open"); $("scrim").classList.add("open");
+    document.body.classList.add("locked");
+    try{ $("main").inert = true; $("dockbar").inert = true; }catch(e){}
+    setTimeout(function(){
+      var ta = $("ans");
+      if(ta && window.matchMedia && matchMedia("(min-width:700px)").matches) ta.focus();
+      else { var t = $("sheetTitle"); if(t) t.focus({ preventScroll:true }); }
+    }, reduced ? 0 : 60);
+  }
+  function closeSheet(){
+    $("sheet").classList.remove("open"); $("scrim").classList.remove("open");
+    $("sheet").setAttribute("aria-hidden", "true");
+    document.body.classList.remove("locked");
+    try{ $("main").inert = false; $("dockbar").inert = false; }catch(e){}
+    if(window.speechSynthesis){ try{ window.speechSynthesis.cancel(); }catch(e){} }
+    var id = cur; cur = null;
+    return id;
+  }
+  function closeAndShow(thenOpen){
+    var id = closeSheet();
+    var row = id ? rowEls[id] : null;
+    var wait = reduced ? 0 : 240;
+    setTimeout(function(){
+      if(row) row.scrollIntoView({ block:"center", behavior: reduced ? "auto" : "smooth" });
+      var t = renderAll(true);
+      var after = reduced ? 0 : Math.max(650, t + 300);
+      if(countDone() === TOTAL){
+        setTimeout(function(){ $("board").scrollIntoView({ block:"start", behavior: reduced ? "auto" : "smooth" }); var b = $("doneBanner").querySelector("button"); if(b) b.focus({ preventScroll:true }); }, after);
+        return;
+      }
+      if(thenOpen){ setTimeout(function(){ openSheet(thenOpen); }, after); }
+      else if(row){ row.focus({ preventScroll:true }); }
+    }, wait);
+  }
+
+  // Round 1 builders
+  function buildR1(it){
+    var r1 = it.r1, t = $("task"), acts = $("acts");
+    if(r1.kind === "gap"){
+      var parts = r1.prompt.split("___");
+      t.innerHTML = '<p class="ask">' + esc(r1.ask) + '</p><p class="gapline">' + esc(parts[0]) + '<span class="blank" id="blank">?</span>' + esc(parts[1] || "") + '</p>' +
+        '<div class="opts words" id="opts"></div>';
+      var o = $("opts");
+      shuffle(r1.options).forEach(function(op){
+        var b = document.createElement("button"); b.type = "button"; b.className = "opt word"; b.textContent = op;
+        b.addEventListener("click", function(){ pickOption(it, b, op === r1.answer, function(){ var bl = $("blank"); bl.textContent = r1.answer; bl.classList.add("filled"); }); });
+        o.appendChild(b);
+      });
+      if(r1.options.some(function(x){ return x.length > 8; })) o.style.gridTemplateColumns = "1fr";
+    } else if(r1.kind === "pick"){
+      t.innerHTML = '<p class="ask">' + esc(r1.ask) + '</p><div class="opts" id="opts"></div>';
+      var o2 = $("opts");
+      shuffle(r1.options.map(function(x, i){ return { x:x, i:i }; })).forEach(function(op){
+        var b = document.createElement("button"); b.type = "button"; b.className = "opt"; b.textContent = op.x;
+        b.addEventListener("click", function(){ pickOption(it, b, op.i === r1.answer); });
+        o2.appendChild(b);
+      });
+    } else if(r1.kind === "tiles"){
+      t.innerHTML = '<p class="ask">' + esc(r1.ask) + '</p><div class="built" id="built" aria-label="Tu frase" aria-live="polite"></div><div class="bank" id="bank"></div>';
+      var bank = $("bank"), built = $("built");
+      var words = r1.tiles.concat(r1.extra || []);
+      var order = shuffle(words.map(function(w, i){ return i; }));
+      var tries = 0;
+      while(tries++ < 8 && order.slice(0, r1.tiles.length).every(function(v, i){ return v === i; })) order = shuffle(order);
+      order.forEach(function(i){
+        var b = document.createElement("button"); b.type = "button"; b.className = "tile"; b.textContent = words[i]; b.setAttribute("data-i", i);
+        b.addEventListener("click", function(){
+          if(answered || b.classList.contains("used")) return;
+          b.classList.add("used");
+          var c = document.createElement("button"); c.type = "button"; c.className = "tile"; c.textContent = words[i]; c.setAttribute("data-i", i);
+          c.addEventListener("click", function(){ if(answered) return; c.remove(); b.classList.remove("used"); syncTiles(); });
+          built.appendChild(c); syncTiles();
+        });
+        bank.appendChild(b);
+      });
+      acts.innerHTML = '<button class="btn ghost" type="button" data-act="clear">Borrar</button><button class="btn primary" type="button" data-act="checktiles" id="checkBtn" disabled>Revisar</button>';
+    }
+  }
+  function syncTiles(){ var b = $("checkBtn"); if(b) b.disabled = !$("built").children.length; }
+  function pickOption(it, btn, ok, onRight){
+    if(answered) return;
+    var all = $("opts").querySelectorAll(".opt");
+    for(var i = 0; i < all.length; i++){ all[i].disabled = true; }
+    var rightText = it.r1.kind === "gap" ? it.r1.answer : it.r1.options[it.r1.answer];
+    for(var j = 0; j < all.length; j++){ if(all[j].textContent === rightText) all[j].classList.add("right"); }
+    if(!ok) btn.classList.add("wrongpick");
+    if(onRight) onRight();
+    resolve(it, ok ? "ok" : "bad", null);
+  }
+  function checkTiles(it){
+    var got = Array.prototype.map.call($("built").children, function(c){ return c.textContent; }).join(" ");
+    var ok = norm(got) === norm(it.r1.tiles.join(" "));
+    resolve(it, ok ? "ok" : "bad", ok ? null : got);
+  }
+
+  // Round 2 builder
+  function buildR2(it){
+    $("task").innerHTML = '<label class="ask" for="ans">Escríbelo en inglés</label><textarea class="ans" id="ans" rows="2" autocomplete="off" autocapitalize="sentences" spellcheck="false" enterkeyhint="done"></textarea>';
+    $("acts").innerHTML = '<button class="btn ghost" type="button" data-act="reveal">Ver respuesta</button><button class="btn primary" type="button" data-act="check">Revisar</button>';
+    $("ans").addEventListener("keydown", function(e){ if(e.key === "Enter" && !e.shiftKey){ e.preventDefault(); checkTyped(it); } });
+  }
+  function checkTyped(it){
+    if(answered) return;
+    var ta = $("ans"), raw = ta.value;
+    var j = judge(it, raw);
+    if(j.v === "empty"){ $("fb").innerHTML = '<p class="you">Escribe la frase primero.</p>'; ta.focus(); return; }
+    ta.readOnly = true;
+    resolve(it, (j.v === "ok" || j.v === "close" || j.v === "nudge") ? j.v : "bad", raw, j.msg);
+  }
+
+  // shared resolution
+  function resolve(it, verdict, echo, extraMsg){
+    answered = true;
+    var ok = verdict !== "bad" && verdict !== "reveal";
+    var r = rec(it.id);
+    var wasDone = r.s === "done";
+    r.tries += 1;
+    if(!wasDone){
+      if(r.first === null) r.first = ok;
+      r.s = ok ? "done" : "recheck";
+    }
+    if(ok) bumpStreak();
+    save();
+
+    var stamp = $("stamp");
+    stamp.className = "stamp " + (ok ? "good" : "bad");
+    stamp.textContent = ok ? "CLEARED" : "RECHECK";
+    void stamp.offsetWidth; stamp.classList.add("on");
+
+    var h;
+    if(ok){
+      var head = verdict === "close" ? "Casi perfecto. Revisa la ortografía." : (wasDone ? "Correcto. Repaso hecho." : "Cleared. El envío sale.");
+      h = '<div class="fb-box good"><div class="fb-h">' + CHECK + esc(head) + '</div>' +
+        '<p class="right">' + esc(it.right) + ' ' + playBtn(it.right) + '</p>' +
+        (verdict === "close" && echo ? '<p class="you">Tu frase: ' + esc(echo) + '</p>' : '') +
+        (extraMsg ? '<p class="note">' + esc(extraMsg) + '</p>' : '') +
+        '<p class="note">' + esc(it.note) + '</p>' +
+        (it.bonus ? '<div class="bonus"><span>Y la palabra: ' + esc(it.bonus.es) + ' = <b>' + esc(it.bonus.en) + '</b></span>' + playBtn(it.bonus.en) + '</div>' : '') +
+        '</div>';
+    } else {
+      var head2 = verdict === "reveal" ? "Aquí está. Regresa más tarde." : "Todavía no. Este envío regresa más tarde.";
+      h = '<div class="fb-box bad"><div class="fb-h">' + CROSS + esc(head2) + '</div>' +
+        (echo ? '<p class="you">Tu frase: ' + esc(echo) + '</p>' : '') +
+        '<p class="right">' + esc(it.right) + ' ' + playBtn(it.right) + '</p>' +
+        '<p class="note">' + esc(it.note) + '</p></div>';
+    }
+    $("fb").innerHTML = h;
+    setTimeout(function(){ speak(it.right); }, reduced ? 0 : 250);
+
+    var nxt = nextId(it.id);
+    var label = nxt ? "Siguiente envío" : "Ver el tablero";
+    $("acts").innerHTML = '<button class="btn primary" type="button" data-act="next" id="nextBtn">' + label + '</button>';
+    var nb = $("nextBtn"); nb.setAttribute("data-next", nxt || "");
+    setTimeout(function(){
+      var fb = $("fb"); if(fb && fb.scrollIntoView) fb.scrollIntoView({ block:"nearest", behavior: reduced ? "auto" : "smooth" });
+      nb.focus({ preventScroll:true });
+    }, 30);
+  }
+
+  // actions (sheet + banner + dock)
+  document.addEventListener("click", function(e){
+    var a = e.target.closest ? e.target.closest("[data-act]") : null; if(!a) return;
+    var act = a.getAttribute("data-act");
+    var it = cur ? BY[cur] : null;
+    if(act === "close"){ closeAndShow(null); }
+    else if(act === "clear" && it && !answered){
+      $("built").innerHTML = "";
+      var tl = $("bank").querySelectorAll(".tile"); for(var i = 0; i < tl.length; i++) tl[i].classList.remove("used");
+      syncTiles();
+    }
+    else if(act === "checktiles" && it && !answered){ checkTiles(it); }
+    else if(act === "check" && it){ checkTyped(it); }
+    else if(act === "reveal" && it && !answered){ var ta = $("ans"); if(ta) ta.readOnly = true; resolve(it, "reveal", ta && ta.value.trim() ? ta.value : null); }
+    else if(act === "next"){ var n = a.getAttribute("data-next"); closeAndShow(n || null); }
+    else if(act === "night"){ startNight(); }
+    else if(act === "again"){ st.r2 = {}; st.done2 = false; save(); var t = renderAll(true); setTimeout(function(){ openSheet(nextId(null)); }, reduced ? 0 : t + 350); }
+    else if(act === "manifest"){ $("manList").scrollIntoView({ block:"start", behavior: reduced ? "auto" : "smooth" }); }
+  });
+  $("scrim").addEventListener("click", function(){ closeAndShow(null); });
+  document.addEventListener("keydown", function(e){ if(e.key === "Escape" && cur){ closeAndShow(null); } });
+
+  $("dockBtn").addEventListener("click", function(){
+    if(countDone() === TOTAL){
+      if(st.round === 1) startNight();
+      else { st.r2 = {}; st.done2 = false; save(); var t = renderAll(true); setTimeout(function(){ openSheet(nextId(null)); }, reduced ? 0 : t + 350); }
+      return;
+    }
+    openSheet(nextId(null));
+  });
+
+  function startNight(){
+    st.done1 = true; st.round = 2; save();
+    $("board").scrollIntoView({ block:"start", behavior: reduced ? "auto" : "smooth" });
+    var t = renderAll(true);
+    setTimeout(function(){ openSheet(nextId(null)); }, reduced ? 0 : Math.max(900, t + 450));
+  }
+
+  // reset (two taps, no browser dialog)
+  var armed = null;
+  $("resetBtn").addEventListener("click", function(){
+    var b = $("resetBtn");
+    if(!armed){
+      b.textContent = "¿Seguro? Toca otra vez para borrar";
+      armed = setTimeout(function(){ armed = null; b.textContent = "Reiniciar progreso"; }, 3500);
+      return;
+    }
+    clearTimeout(armed); armed = null;
+    st = fresh(); save(); b.textContent = "Reiniciar progreso";
+    renderAll(true);
+    window.scrollTo(0, 0);
+  });
+
+  // ---------- boot ----------
+  $("ver").textContent = VERSION;
+  buildTitle();
+  buildBoard();
+  renderAll(false);
+  requestAnimationFrame(moveTruck);
+})();
+</script>
+</body>
+</html>
