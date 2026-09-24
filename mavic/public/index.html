@@ -1,0 +1,2017 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Private family calendar for the Eichelmann Burk Grandkids.">
+<meta name="theme-color" content="#EDF0EE" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#121019" media="(prefers-color-scheme: dark)">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Los Primos">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="manifest" href="manifest.webmanifest">
+<title>Los Primos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Figtree:wght@400;500;600;700;800&display=swap">
+<style>
+:root{
+  --bg:#EDF0EE; --surface:#FFFFFF; --surface-2:#F4F6F5; --ink:#17151D; --muted:#595865; --line:#D5DAD9;
+  --accent:#C4006A; --accent-ink:#FFFFFF; --accent-soft:#FBE4F0; --accent-text:#B10060;
+  --heat:#F5A200; --heat-max:72%;
+  --maybe:#0B7F8A; --maybe-ink:#FFFFFF;
+  --out:#3B3946; --out-ink:#FFFFFF;
+  --card-paper:#FFFDF6; --card-ink:#17151D; --card-frame:#17151D;
+  --cloth:#FFFFFF;
+  --toast-bg:#17151D; --toast-ink:#F6F4F8; --toast-accent:#FF8CC6;
+  --scrim:rgba(14,12,20,.46);
+  --shadow-sm:0 1px 2px rgba(23,21,29,.07);
+  --shadow:0 2px 6px rgba(23,21,29,.06), 0 12px 32px rgba(23,21,29,.10);
+  --shadow-lg:0 6px 16px rgba(23,21,29,.12), 0 24px 56px rgba(23,21,29,.18);
+  --m1:#E4007C; --m2:#0FA3B1; --m3:#F29F05; --m4:#D7263D; --m5:#2E9E44;
+  --m6:#3D4DB7; --m7:#8E44AD; --m8:#2E86DE; --m9:#E8590C; --m10:#8C5A3C;
+  --display:"Alfa Slab One", Rockwell, "Roboto Slab", Georgia, serif;
+  --text:"Figtree", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --my:var(--accent);
+  --dock-h:84px;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#121019; --surface:#1B1824; --surface-2:#24202F; --ink:#F2EFF6; --muted:#ADA8BC; --line:#332E40;
+    --accent:#FF5AAB; --accent-ink:#2A0014; --accent-soft:#3B1529; --accent-text:#FF7DBB;
+    --heat:#FFB21E; --heat-max:50%;
+    --maybe:#3CC7D3; --maybe-ink:#062A2E;
+    --out:#CFCADB; --out-ink:#17151D;
+    --cloth:#2A2537;
+    --toast-bg:#F2EFF6; --toast-ink:#17151D; --toast-accent:#B10060;
+    --scrim:rgba(0,0,0,.6);
+    --shadow-sm:0 1px 2px rgba(0,0,0,.3);
+    --shadow:0 2px 6px rgba(0,0,0,.28), 0 12px 32px rgba(0,0,0,.34);
+    --shadow-lg:0 6px 16px rgba(0,0,0,.4), 0 24px 56px rgba(0,0,0,.5);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#121019; --surface:#1B1824; --surface-2:#24202F; --ink:#F2EFF6; --muted:#ADA8BC; --line:#332E40;
+  --accent:#FF5AAB; --accent-ink:#2A0014; --accent-soft:#3B1529; --accent-text:#FF7DBB;
+  --heat:#FFB21E; --heat-max:50%;
+  --maybe:#3CC7D3; --maybe-ink:#062A2E;
+  --out:#CFCADB; --out-ink:#17151D;
+  --cloth:#2A2537;
+  --toast-bg:#F2EFF6; --toast-ink:#17151D; --toast-accent:#B10060;
+  --scrim:rgba(0,0,0,.6);
+  --shadow-sm:0 1px 2px rgba(0,0,0,.3);
+  --shadow:0 2px 6px rgba(0,0,0,.28), 0 12px 32px rgba(0,0,0,.34);
+  --shadow-lg:0 6px 16px rgba(0,0,0,.4), 0 24px 56px rgba(0,0,0,.5);
+  color-scheme:dark;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--text);font-size:15px;line-height:1.45;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent}
+body.locked{overflow:hidden}
+body.dragging,body.dragging *{cursor:grabbing!important;user-select:none;-webkit-user-select:none}
+img{max-width:100%}
+button{font:inherit;color:inherit}
+h1,h2,h3{text-wrap:balance;margin:0}
+.ico{flex:none;display:block}
+:focus-visible{outline:2.5px solid var(--accent);outline-offset:2px}
+
+/* ---------- shell ---------- */
+.wrap{max-width:1120px;margin:0 auto;padding-inline:16px;padding-block:10px calc(var(--dock-h) + 40px + env(safe-area-inset-bottom,0px))}
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:6px 14px}
+.wordmark{font-family:var(--display);font-size:26px;line-height:1;letter-spacing:.01em}
+.wordmark b{color:var(--accent);font-weight:400}
+.sub{font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin-top:5px}
+.me-chip{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:4px 14px 4px 5px;border-radius:999px;border:1px solid var(--line);background:var(--surface);cursor:pointer;font-weight:600;font-size:14px;box-shadow:var(--shadow-sm);transition:transform .15s ease-out}
+.me-chip:hover{transform:translateY(-2px)}
+.demo-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;background:var(--accent-soft);border-radius:14px;padding:10px 12px 10px 14px;font-size:13px;margin-bottom:14px}
+.demo-bar strong{color:var(--accent-text)}
+.demo-bar .btn{white-space:nowrap}
+
+.layout{display:grid;gap:26px}
+@media (min-width:920px){.layout{grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);align-items:start}}
+
+/* ---------- calendar ---------- */
+.cal{background:var(--surface);border-radius:22px;padding:12px 10px 12px;box-shadow:var(--shadow)}
+@media (min-width:600px){.cal{padding:16px}}
+.monthbar{display:grid;grid-template-columns:44px 1fr 44px auto;align-items:center;gap:6px;padding:2px 2px 8px}
+.monthbar h1{font-family:var(--display);font-weight:400;font-size:clamp(19px,5.4vw,26px);line-height:1.1;text-align:center;white-space:nowrap;min-width:0;overflow:hidden;text-overflow:ellipsis}
+.monthbar h1 span{font-family:var(--text);font-weight:600;font-size:13px;color:var(--muted);margin-left:3px}
+.icon-btn{width:44px;height:44px;border-radius:14px;border:1px solid var(--line);background:var(--surface);display:grid;place-items:center;cursor:pointer;transition:transform .15s ease-out,background .15s}
+.icon-btn:hover:not(:disabled){transform:translateY(-2px)}
+.icon-btn:disabled{opacity:.35;cursor:default}
+.text-btn{min-height:44px;padding:0 10px;border-radius:14px;border:1px solid var(--line);background:var(--surface);font-weight:700;font-size:13px;cursor:pointer}
+.dow{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px;padding-bottom:6px}
+.dow span{text-align:center;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px;touch-action:pan-y}
+.grid.slide-next{animation:slideNext .26s cubic-bezier(.2,.8,.2,1)}
+.grid.slide-prev{animation:slidePrev .26s cubic-bezier(.2,.8,.2,1)}
+@keyframes slideNext{from{transform:translateX(14px);opacity:.5}to{transform:none;opacity:1}}
+@keyframes slidePrev{from{transform:translateX(-14px);opacity:.5}to{transform:none;opacity:1}}
+.cell{position:relative;min-width:0;min-height:62px;border-radius:11px;border:0;padding:5px 3px 5px 4px;display:flex;flex-direction:column;justify-content:space-between;text-align:left;cursor:pointer;
+  background:color-mix(in oklab, var(--heat) calc(var(--h,0) * var(--heat-max)), var(--surface-2));
+  transition:transform .16s ease-out, box-shadow .16s ease-out}
+.cell.blank{background:transparent;cursor:default}
+@media (min-width:600px){.cell{min-height:84px;padding:7px}}
+@media (min-width:920px){.cell{min-height:92px}}
+.cell:hover:not(.blank):not(.past){transform:translateY(-2px);box-shadow:var(--shadow-sm)}
+.cell .num{font-weight:700;font-size:13px;line-height:1;font-variant-numeric:tabular-nums;align-self:flex-start;padding:3px 4px;border-radius:999px}
+.cell.today .num{background:var(--accent);color:var(--accent-ink)}
+.cell.past{opacity:.42;cursor:default}
+.cell.mine{box-shadow:inset 0 0 0 2px var(--my)}
+.cell.full{box-shadow:inset 0 0 0 2.5px var(--accent)}
+.cell.drop-target{transform:scale(1.08);box-shadow:0 0 0 3px var(--accent),var(--shadow);z-index:3}
+.cell.pop{animation:pop .42s cubic-bezier(.2,.9,.3,1.3)}
+@keyframes pop{0%{transform:scale(.92)}60%{transform:scale(1.07)}100%{transform:none}}
+.cell .icons{position:absolute;top:5px;right:4px;display:flex;gap:1px}
+.i-cake{color:var(--m9)} .i-pin{color:var(--accent-text)} .i-star{color:var(--heat)}
+.cell.full .i-star,.cell .i-star{filter:drop-shadow(0 0 1px rgba(0,0,0,.25))}
+.faces{display:flex;align-items:center;min-height:18px;padding-left:2px;min-width:0;overflow:hidden}
+.faces .av{margin-left:-6px;box-shadow:0 0 0 1.5px var(--surface)}
+.faces .av:first-child{margin-left:0}
+.more{font-size:10px;letter-spacing:-.02em;font-weight:800;margin-left:3px;font-variant-numeric:tabular-nums}
+.legend{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;font-size:12px;color:var(--muted);padding:12px 4px 2px}
+.legend span{display:inline-flex;align-items:center;gap:5px}
+.heatbar{width:64px;height:8px;border-radius:99px;background:linear-gradient(90deg,var(--surface-2),color-mix(in oklab,var(--heat) var(--heat-max),var(--surface-2)));border:1px solid var(--line)}
+
+/* ---------- avatars ---------- */
+.av{--s:32px;width:var(--s);height:var(--s);border-radius:50%;background:var(--mc);display:inline-grid;place-items:center;overflow:hidden;flex:none;font-size:calc(var(--s) * .56);line-height:1}
+.av img{width:100%;height:100%;object-fit:cover;display:block;transform:scale(var(--z,1.35)) translate(calc(50% - var(--fx,50%)), calc(50% - var(--fy,40%)))}
+.av.maybe{opacity:.6;outline:1.5px dashed var(--mc);outline-offset:1px}
+
+/* ---------- side panels ---------- */
+.side{display:grid;gap:26px}
+.panel h2{font-family:var(--display);font-weight:400;font-size:19px;margin-bottom:10px}
+.list{display:grid;gap:8px}
+.row-item{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:8px 12px 8px 8px;cursor:pointer;transition:transform .15s ease-out,box-shadow .15s ease-out}
+.row-item:hover{transform:translateY(-2px);box-shadow:var(--shadow-sm)}
+.dblock{width:50px;height:50px;border-radius:12px;display:grid;place-items:center;align-content:center;flex:none;background:color-mix(in oklab, var(--heat) calc(var(--h,0) * var(--heat-max)), var(--surface-2))}
+.dblock .dw{font-size:10.5px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);line-height:1}
+.dblock .dn{font-family:var(--display);font-size:21px;line-height:1.1}
+.ri-main{display:grid;gap:4px;min-width:0;flex:1}
+.ri-title{font-weight:700;font-size:14.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ri-meta{font-size:13px;color:var(--muted);display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.empty{color:var(--muted);font-size:14px;margin:0;padding:12px 14px;border:1px dashed var(--line);border-radius:14px}
+.feed{list-style:none;margin:0;padding:0;display:grid}
+.feed li{display:flex;align-items:center;gap:10px;padding:8px 2px;border-bottom:1px solid var(--line);font-size:14px}
+.feed li:last-child{border-bottom:0}
+.feed .when{margin-left:auto;color:var(--muted);font-size:12px;white-space:nowrap;padding-left:8px}
+.feed .what{min-width:0}
+.badge{display:inline-flex;align-items:center;gap:4px;font-size:11.5px;font-weight:800;letter-spacing:.02em;padding:2px 8px;border-radius:999px;background:var(--accent-soft);color:var(--accent-text)}
+.badge.soft{background:var(--surface-2);color:var(--muted)}
+
+/* ---------- dock ---------- */
+.dock{position:fixed;left:0;right:0;bottom:0;z-index:30;display:flex;align-items:center;gap:12px;padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));
+  background:color-mix(in oklab,var(--surface) 90%,transparent);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-top:1px solid var(--line)}
+@media (min-width:700px){.dock{left:50%;right:auto;translate:-50% 0;bottom:16px;width:min(560px,calc(100% - 32px));border:1px solid var(--line);border-radius:999px;padding:8px 18px 8px 8px;box-shadow:var(--shadow-lg)}}
+.drag-me{width:60px;height:60px;border-radius:50%;flex:none;touch-action:none;cursor:grab;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;
+  box-shadow:0 0 0 3px var(--surface),0 0 0 5.5px var(--my),var(--shadow);animation:bob 6s ease-in-out infinite}
+.drag-me .av{--s:60px}
+.drag-me.lifted{opacity:.3;animation:none}
+.drag-me.empty{display:grid;place-items:center;background:var(--surface-2);color:var(--muted);box-shadow:0 0 0 2px var(--line);animation:none;cursor:pointer}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+.dock-text{flex:1;min-width:0;display:grid;gap:1px}
+.dock-text strong{font-size:15px;line-height:1.2}
+.dock-text span{font-size:12.5px;color:var(--muted);line-height:1.3}
+.switch{display:grid;justify-items:center;gap:4px;font-size:11px;font-weight:700;color:var(--muted);cursor:pointer;text-align:center;min-width:56px}
+.switch input{position:absolute;opacity:0;pointer-events:none}
+.track{width:44px;height:26px;border-radius:99px;background:var(--line);position:relative;transition:background .18s ease-out}
+.track::after{content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:var(--surface);box-shadow:var(--shadow-sm);transition:transform .18s ease-out}
+.switch input:checked + .track{background:var(--accent)}
+.switch input:checked + .track::after{transform:translateX(18px)}
+.switch input:focus-visible + .track{outline:2.5px solid var(--accent);outline-offset:2px}
+.ghost{position:fixed;left:0;top:0;z-index:90;pointer-events:none;border-radius:50%;box-shadow:var(--shadow-lg),0 0 0 3px var(--surface),0 0 0 5.5px var(--my);will-change:transform}
+.ghost .av{--s:64px}
+
+/* ---------- toast ---------- */
+.toast{position:fixed;left:50%;translate:-50% 0;bottom:calc(var(--dock-h) + 18px + env(safe-area-inset-bottom,0px));z-index:85;width:max-content;max-width:min(520px,calc(100% - 32px));
+  display:flex;align-items:center;gap:14px;background:var(--toast-bg);color:var(--toast-ink);border-radius:14px;padding:11px 14px;font-size:14px;font-weight:500;box-shadow:var(--shadow-lg)}
+@media (min-width:700px){.toast{bottom:calc(var(--dock-h) + 32px)}}
+.toast.show{animation:toastIn .24s ease-out}
+@keyframes toastIn{from{transform:translateY(10px);opacity:0}to{transform:none;opacity:1}}
+.toast-btn{border:0;background:none;color:var(--toast-accent);font-weight:800;cursor:pointer;padding:6px 2px;min-height:36px}
+
+/* ---------- sheet ---------- */
+.scrim{position:fixed;inset:0;background:var(--scrim);z-index:40;animation:fade .2s ease-out}
+@keyframes fade{from{opacity:0}}
+.sheet{position:fixed;left:0;right:0;bottom:0;z-index:45;max-height:90vh;max-height:90dvh;overflow:auto;overscroll-behavior:contain;background:var(--surface);border-radius:24px 24px 0 0;
+  padding:6px 16px calc(22px + env(safe-area-inset-bottom,0px));box-shadow:var(--shadow-lg)}
+@media (min-width:700px){.sheet{left:50%;right:auto;translate:-50% 0;bottom:auto;top:6vh;width:min(560px,calc(100% - 32px));border-radius:24px;padding:10px 22px 24px;max-height:88vh}}
+.sheet.in{animation:sheetIn .3s cubic-bezier(.2,.8,.2,1)}
+@keyframes sheetIn{from{transform:translateY(40px);opacity:.4}to{transform:none;opacity:1}}
+.grab{width:42px;height:4px;border-radius:99px;background:var(--line);margin:4px auto 10px}
+@media (min-width:700px){.grab{display:none}}
+.sheet-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:10px}
+.eyebrow{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.sheet-head h2{font-family:var(--display);font-weight:400;font-size:28px;line-height:1.1;margin-top:2px}
+.stack{display:grid;gap:16px}
+.bday{display:flex;align-items:center;gap:8px;font-weight:700;color:var(--ink);background:color-mix(in oklab,var(--m9) 14%,var(--surface));border-radius:12px;padding:8px 12px;font-size:14px}
+.bday .ico{color:var(--m9)}
+
+.table{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px 4px;justify-items:center;align-items:center}
+.seat{width:44px;height:44px;border-radius:50%;border:2px dashed var(--line);display:grid;place-items:center;color:var(--muted);font-size:11px;font-weight:700}
+.seat.filled{border:0}
+.seat .av{--s:44px}
+.cloth{grid-column:1/-1;width:100%;min-height:70px;border-radius:18px;background:color-mix(in oklab, var(--heat) calc(var(--h,0) * 30%), var(--cloth));border:1px solid var(--line);
+  display:grid;place-items:center;align-content:center;gap:4px;padding:12px 14px;text-align:center;box-shadow:inset 0 -3px 0 rgba(0,0,0,.04)}
+.cloth .ct{font-family:var(--display);font-size:19px;line-height:1.15}
+.cloth .cs{font-size:13px;color:var(--muted)}
+.headcount{display:flex;align-items:baseline;justify-content:center;gap:10px;flex-wrap:wrap;font-size:14px;color:var(--muted)}
+.headcount strong{font-size:17px;color:var(--ink)}
+
+.status{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.st{min-height:50px;border-radius:14px;border:1.5px solid var(--line);background:var(--surface);font-weight:800;font-size:15px;cursor:pointer;transition:transform .15s ease-out,background .15s}
+.st:active{transform:translateY(1px)}
+.st:disabled{opacity:.4;cursor:default}
+.st[aria-pressed="true"][data-st="in"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.st[aria-pressed="true"][data-st="maybe"]{background:var(--maybe);border-color:var(--maybe);color:var(--maybe-ink)}
+.st[aria-pressed="true"][data-st="out"]{background:var(--out);border-color:var(--out);color:var(--out-ink)}
+.note{font-size:13px;color:var(--muted);margin:0;text-align:center}
+
+.plan{background:var(--surface-2);border-radius:16px;padding:14px;display:grid;gap:6px}
+.plan-title{font-weight:800;font-size:18px;line-height:1.25}
+.plan-meta{color:var(--muted);font-size:14px}
+.plan-note{margin:0;font-size:14px;white-space:pre-wrap}
+.plan-by{font-size:12px;color:var(--muted)}
+.row{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.btn{min-height:44px;padding:0 16px;border-radius:13px;border:1px solid var(--line);background:var(--surface);font-weight:700;font-size:14.5px;display:inline-flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;text-decoration:none;color:var(--ink);transition:transform .15s ease-out}
+.btn:hover{transform:translateY(-2px)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.wide{width:100%}
+.btn.quiet{border-color:transparent;background:transparent;color:var(--muted)}
+.who{display:grid;gap:12px}
+.who h3{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{display:inline-flex;align-items:center;gap:7px;padding:3px 11px 3px 3px;border-radius:999px;background:var(--surface-2);font-size:13.5px;font-weight:600}
+.chip .av{--s:26px}
+.chip.dim{opacity:.6}
+
+.field{display:grid;gap:5px}
+.field label{font-size:13px;font-weight:700}
+.field .opt{font-weight:500;color:var(--muted)}
+.input{min-height:46px;padding:10px 12px;border-radius:12px;border:1px solid var(--line);background:var(--surface-2);color:var(--ink);font:inherit;font-size:16px;width:100%}
+textarea.input{min-height:80px;resize:vertical}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.err{color:var(--accent-text);font-weight:700;font-size:14px;margin:0}
+
+/* ---------- screens: picker + gate ---------- */
+.screen{position:fixed;inset:0;z-index:70;background:var(--bg);overflow:auto;padding:calc(22px + env(safe-area-inset-top,0px)) 16px calc(40px + env(safe-area-inset-bottom,0px))}
+.screen-in{max-width:1000px;margin:0 auto}
+.screen h1{font-family:var(--display);font-weight:400;font-size:clamp(32px,8vw,52px);line-height:1.02;margin:6px 0 8px}
+.lede{color:var(--muted);font-size:15.5px;margin:0 0 22px;max-width:52ch}
+.deck{display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:20px 14px}
+@media (min-width:900px){.deck{grid-template-columns:repeat(5,minmax(0,1fr))}}
+.lwrap{display:grid;gap:8px;justify-items:center;align-content:start;text-align:center;min-width:0}
+.lcard{width:100%;min-width:0;aspect-ratio:5/7;border:0;padding:7px;border-radius:10px;background:var(--card-paper);box-shadow:var(--shadow);cursor:pointer;display:grid;
+  transition:transform .2s ease-out,box-shadow .2s ease-out;animation:deal .46s cubic-bezier(.2,.8,.2,1) backwards;animation-delay:calc(var(--i,0) * 70ms)}
+.lcard:hover{transform:translateY(-5px) rotate(-1deg);box-shadow:var(--shadow-lg)}
+.lcard.is-me{box-shadow:0 0 0 3px var(--accent),var(--shadow-lg)}
+@keyframes deal{from{transform:translateY(22px) rotate(-5deg)}to{transform:none}}
+.lframe{border:2.5px solid var(--card-frame);border-radius:4px;display:grid;grid-template-rows:1fr auto;overflow:hidden;position:relative;min-height:0}
+.lart{position:relative;display:grid;place-items:center;font-size:clamp(46px,14vw,70px);line-height:1;min-height:0;overflow:hidden;
+  background:repeating-conic-gradient(from 0deg at 50% 62%, var(--mc) 0deg 9deg, color-mix(in oklab,var(--mc) 72%,#fff) 9deg 18deg)}
+.lart img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.lnum{position:absolute;top:5px;left:5px;z-index:1;font-family:var(--display);font-size:17px;line-height:1.2;color:var(--card-ink);background:var(--card-paper);padding:0 6px;border-radius:3px;border:2px solid var(--card-frame)}
+.ltitle{font-family:var(--display);font-size:13px;letter-spacing:.03em;text-transform:uppercase;color:var(--card-ink);background:var(--card-paper);border-top:2.5px solid var(--card-frame);padding:6px 4px 5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lname{font-weight:800;font-size:15.5px;line-height:1.2}
+.lline{font-size:12.5px;color:var(--muted);line-height:1.3;max-width:22ch}
+.gate{max-width:400px;margin:10vh auto 0;display:grid;gap:14px}
+.gate .card{background:var(--surface);border-radius:22px;padding:22px;box-shadow:var(--shadow);display:grid;gap:14px}
+.gate .wordmark{font-size:34px}
+.profile-card{display:flex;gap:16px;align-items:center}
+.profile-card .lcard{width:118px;flex:none;animation:none;cursor:default}
+.profile-card .lcard:hover{transform:none}
+.profile-card .ltitle{font-size:10.5px}
+.profile-card .lnum{font-size:13px}
+.profile-card .lart{font-size:44px}
+.hint{font-size:13px;color:var(--muted);margin:0}
+.linkbox{font-size:13px}
+
+.confetti{position:fixed;left:0;right:0;bottom:calc(var(--dock-h) + env(safe-area-inset-bottom,0px));height:0;pointer-events:none;z-index:95}
+.confetti i{position:absolute;bottom:0;width:8px;height:12px;border-radius:2px}
+
+
+/* ---------- v2: review round ---------- */
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.cell .icons{top:4px;right:3px;gap:2px}
+.ib{display:inline-grid;place-items:center;width:17px;height:17px;border-radius:50%;background:var(--surface);box-shadow:var(--shadow-sm)}
+.i-pin{color:var(--muted)} .i-star{color:var(--accent)} .i-cake{color:var(--m9)}
+.faces{flex-wrap:wrap;gap:1px 0}
+.cell.has-mark .faces{padding-right:15px}
+.cnt{font-size:10.5px;font-weight:800;line-height:1.15;font-variant-numeric:tabular-nums;white-space:nowrap}
+.faces .cnt + .cnt,.faces .av + .cnt{margin-left:4px}
+.cnt.q{color:var(--muted)}
+.legend .cnt{font-size:12px;color:var(--ink)}
+.mymark{position:absolute;right:3px;bottom:4px;width:15px;height:15px;border-radius:50%;display:grid;place-items:center;font-size:10.5px;font-weight:900;line-height:1;box-shadow:0 0 0 1.5px var(--surface)}
+.mymark.static{position:static;display:inline-grid}
+.mymark.in,.sb.in{background:var(--accent);color:var(--accent-ink)}
+.mymark.maybe,.sb.maybe{background:var(--maybe);color:var(--maybe-ink)}
+.mymark.out,.sb.out{background:var(--out);color:var(--out-ink)}
+.mymark .ico,.sb .ico{stroke-width:3.4}
+.hintbar,.modebar{display:flex;align-items:center;gap:10px;border-radius:13px;padding:9px 10px 9px 12px;font-size:13.5px;line-height:1.35;margin:0 2px 10px}
+.hintbar{background:color-mix(in oklab,var(--heat) 22%,var(--surface));color:var(--ink)}
+.hintbar .ico{color:var(--ink);flex:none}
+.modebar{background:var(--accent-soft);color:var(--ink);justify-content:space-between}
+.btn.small{min-height:38px;padding:0 14px;font-size:13.5px;border-radius:11px}
+.multi{min-height:44px;flex:none;border-radius:999px;border:1.5px solid var(--line);background:var(--surface);font-weight:800;font-size:12.5px;padding:0 13px;cursor:pointer;white-space:nowrap;transition:transform .15s ease-out}
+.multi:active{transform:translateY(1px)}
+.multi[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.toast .tmsg{min-width:0}
+.tstat{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:800;opacity:.85;white-space:nowrap}
+.tstat.ok{opacity:1}
+.toast.bad{background:var(--out);color:var(--out-ink)}
+.lbl{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.answer{display:grid}
+.st{font-size:13.5px;padding:0 4px;white-space:nowrap;letter-spacing:-.01em}
+.table{gap:10px 4px}
+.seat-wrap{display:grid;justify-items:center;gap:4px;min-width:0;width:100%}
+.seat{position:relative;width:46px;height:46px;border:0}
+.seat.none{border:2px dashed var(--line)}
+.seat .av{--s:46px}
+.seat.out .av{filter:grayscale(1);opacity:.45}
+.sb{position:absolute;right:-3px;bottom:-3px;width:19px;height:19px;border-radius:50%;display:grid;place-items:center;font-size:12px;font-weight:900;line-height:1;box-shadow:0 0 0 2px var(--surface)}
+.seat-name{font-size:11px;font-weight:700;color:var(--muted);max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.seat-wrap.in .seat-name,.seat-wrap.maybe .seat-name{color:var(--ink)}
+.seatlegend{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 14px;font-size:12px;color:var(--muted);margin-top:-4px}
+.seatlegend > span{display:inline-flex;align-items:center;gap:5px}
+.seatlegend .sb{position:static;width:16px;height:16px;font-size:10.5px;box-shadow:none}
+.seatlegend .ring{width:14px;height:14px;border-radius:50%;border:2px dashed var(--line)}
+.badge.warn{background:color-mix(in oklab,var(--heat) 26%,var(--surface));color:var(--ink)}
+.cal-add{display:grid;gap:4px;margin-top:8px;padding-top:12px;border-top:1px solid var(--line)}
+.cal-add .lbl{margin-bottom:0}
+.row.center{justify-content:center}
+.lot{position:fixed;inset:0;z-index:92;display:grid;place-items:center;background:var(--scrim);padding:16px;animation:fade .2s ease-out}
+.lot-box{background:var(--surface);border-radius:24px;padding:18px 18px 22px;width:min(420px,100%);text-align:center;box-shadow:var(--shadow-lg);display:grid;gap:10px;overflow:hidden}
+.lot-box h2{font-family:var(--display);font-weight:400;font-size:46px;line-height:1;color:var(--accent-text)}
+.lot-box p{margin:0;color:var(--muted);font-size:15px}
+.fan{position:relative;height:150px;margin-top:6px}
+.mini{position:absolute;left:50%;bottom:0;width:58px;aspect-ratio:5/7;margin-left:-29px;background:var(--card-paper);border-radius:6px;padding:3px;box-shadow:var(--shadow);
+  transform-origin:50% 190%;transform:rotate(var(--r));animation:fanIn .55s cubic-bezier(.2,.8,.2,1) backwards;animation-delay:calc(var(--i) * 55ms)}
+.mini-in{position:relative;display:grid;place-items:center;height:100%;border:2px solid var(--card-frame);border-radius:3px;overflow:hidden;background:var(--mc);font-size:24px}
+.mini-in img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+@keyframes fanIn{from{transform:rotate(0deg) translateY(40px);opacity:0}}
+@media (prefers-reduced-motion: reduce){.mini{animation:none!important}}
+
+.cnt small{font-size:8.5px;font-weight:800}
+@media (max-width:599px){.mymark{width:13px;height:13px;font-size:9.5px;right:2px;bottom:3px}.cell.has-mark .faces{padding-right:13px}}
+.who-panel{display:grid;gap:22px;align-items:start;max-width:760px;margin:8px auto 0}
+@media (min-width:700px){.who-panel{grid-template-columns:240px 1fr;align-items:center}}
+.who-card{width:min(220px,62vw);margin:0 auto}
+.who-card .lcard{animation:none;cursor:default}
+.who-card .lcard:hover{transform:none}
+.who-body{display:grid;gap:10px}
+.who-body h2{font-family:var(--display);font-weight:400;font-size:clamp(28px,7vw,40px);line-height:1.05}
+.who-body .lede{margin:0}
+.who-form{display:grid;gap:10px;margin-top:4px}
+.grito{font-family:var(--display);font-size:19px;line-height:1.3;color:var(--accent-text);margin:0;text-wrap:balance}
+.grito.small{font-size:14px;margin:6px 0 4px;text-align:left}
+.bday-banner{display:flex;align-items:center;gap:12px;background:color-mix(in oklab,var(--m9) 16%,var(--surface));border:1px solid color-mix(in oklab,var(--m9) 40%,var(--line));border-radius:16px;padding:10px 14px;margin-bottom:14px;font-size:14.5px;line-height:1.35}
+.bday-banner > .ico{color:var(--m9);flex:none}
+.bb-faces{display:flex;flex:none}
+.bb-faces .av + .av{margin-left:-8px}
+.bb-faces .av{box-shadow:0 0 0 2px var(--surface)}
+.badge.cake{background:color-mix(in oklab,var(--m9) 18%,var(--surface));color:var(--ink)}
+.badge.cake .ico{color:var(--m9)}
+.grid.painting{touch-action:none}
+.cell.painted{box-shadow:inset 0 0 0 2.5px var(--accent);transform:scale(.95)}
+body.dragging .dock,body.dragging .toast{pointer-events:none}
+.share-row .btn{flex:1 1 auto}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+</style>
+<noscript><style>.lcard{animation:none}</style><p style="padding:16px">Los Primos needs JavaScript turned on.</p></noscript>
+
+<div class="wrap" id="app">
+  <header class="top">
+    <div>
+      <div class="wordmark">Los Primos<b>.</b></div>
+      <div class="sub" id="groupName">Eichelmann Burk Grandkids</div>
+    </div>
+    <button type="button" class="me-chip" id="meBtn">Pick your card</button>
+  </header>
+
+  <div class="bday-banner" id="bdayBanner" role="status" hidden></div>
+
+  <div class="demo-bar" id="demoBar" hidden>
+    <span><strong>Preview.</strong> Sample marks, saved only on this device. Goes live for everyone once it's on Netlify.</span>
+    <button type="button" class="btn quiet" id="clearDemo">Clear sample</button>
+  </div>
+
+  <div class="layout">
+    <section class="cal" aria-label="Calendar">
+      <div class="monthbar">
+        <button type="button" class="icon-btn" id="prev" aria-label="Previous month"></button>
+        <h1 id="monthTitle">September <span>2026</span></h1>
+        <button type="button" class="icon-btn" id="next" aria-label="Next month"></button>
+        <button type="button" class="text-btn" id="todayBtn">Today</button>
+      </div>
+      <div class="hintbar" id="firstHint" hidden><span>Tap a date, then choose <b>I'm in</b>, <b>Maybe</b> or <b>Can't make it</b>. Or drag your card onto a date.</span></div>
+      <div class="modebar" id="modeBar" hidden><span><b>Marking several dates.</b> Tap or slide across dates to add yourself. Tap again to clear.</span><button type="button" class="btn small primary" id="modeDone">Done</button></div>
+      <div class="dow" id="dow" aria-hidden="true"></div>
+      <div class="grid" id="grid"></div>
+      <div class="legend" id="legend"></div>
+    </section>
+
+    <aside class="side">
+      <section class="panel">
+        <h2 id="bestTitle">Best dates</h2>
+        <div class="list" id="best"></div>
+      </section>
+      <section class="panel">
+        <h2>Coming up</h2>
+        <div class="list" id="plans"></div>
+      </section>
+      <section class="panel">
+        <h2>What's new</h2>
+        <ol class="feed" id="feed"></ol>
+      </section>
+    </aside>
+  </div>
+</div>
+
+<div class="dock" id="dock">
+  <div class="drag-me empty" id="dragMe" role="button" tabindex="0" aria-label="Your card. Drag it onto a day you can make it."></div>
+  <div class="dock-text">
+    <strong id="dockTitle">Drag me to say I'm in</strong>
+    <span id="dockSub">or tap a date for more choices</span>
+  </div>
+  <button type="button" class="multi" id="multiBtn" aria-pressed="false">Mark several</button>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+<div class="scrim" id="scrim" hidden></div>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-label="Details" hidden>
+  <div class="grab" aria-hidden="true"></div>
+  <div id="sheetBody"></div>
+</div>
+<div class="ghost" id="ghost" hidden></div>
+<div class="lot" id="lot" hidden></div>
+
+<div class="screen" id="picker" hidden>
+  <div class="screen-in">
+    <div class="sub" id="pickerGroup">Eichelmann Burk Grandkids</div>
+    <div id="pickIntro">
+      <h1>¿Quién eres?</h1>
+      <p class="lede">Find a day for all 10 primos. Choose your card, then mark when you're free. This phone remembers you.</p>
+    </div>
+    <div class="deck" id="deck"></div>
+    <div id="who" hidden></div>
+    <p style="margin-top:22px"><button type="button" class="btn" id="pickerClose" hidden>Back to the calendar</button></p>
+  </div>
+</div>
+
+<div class="screen" id="gate" hidden>
+  <form class="gate" id="gateForm" autocomplete="off" novalidate>
+    <div class="card">
+      <div>
+        <div class="wordmark">Los Primos<b>.</b></div>
+        <div class="sub">Eichelmann Burk Grandkids</div>
+      </div>
+      <p class="hint" id="gateMsg">This calendar is just for the family. Enter the family code to open it.</p>
+      <div class="field" id="gateField">
+        <label for="gateCode">Family code</label>
+        <input class="input" id="gateCode" name="code" autocapitalize="none" autocorrect="off" spellcheck="false" required>
+      </div>
+      <p class="err" id="gateErr" hidden></p>
+      <button type="submit" class="btn primary wide" id="gateBtn">Open the calendar</button>
+      <p class="hint">No code? Ask Gabriel, or open the link pinned in the WhatsApp group.</p>
+    </div>
+  </form>
+</div>
+
+<script>
+(() => {
+'use strict';
+
+/* =====================================================================
+   EDIT HERE: the family. Order = seat order at the table and card number.
+   - id: short, lowercase, no spaces. Avatar file = public/avatars/<id>.webp (or .png)
+   - color: 1 to 10, picks the card color (see --m1..--m10 in the CSS)
+   - face: [x%, y%, zoom] where the face sits in the avatar image, for the small circles
+   - card: the Loteria-style card title
+   - emoji: shown until the real avatar image exists
+   - line: short personality line under the card (optional)
+   - cheer: what the app says when they join a day
+   - grito: their Lotería caller's rhyme, shown when they pick their card
+   - birthday: "MM-DD" (optional; everyone can also set it in the app)
+   ===================================================================== */
+const FAMILY = {
+  group: 'Eichelmann Burk Grandkids',
+  firstMonth: '2026-01',
+  lastMonth: '2026-12', // the calendar also always shows at least 12 months ahead, so it never runs out
+  weekStart: 0, // 0 = Sunday, 1 = Monday
+  // Where the family lives. A date only counts as "past" once it is over in all of these.
+  zones: ['America/Cancun', 'America/Chicago', 'America/New_York', 'Australia/Sydney'],
+  members: [
+    // Saucedo siblings
+    { id: 'gabriel',  name: 'Gabriel',  color: 5,  face: [50, 33, 1.5],  card: 'El Kakapo',     emoji: '🦜', line: 'Rare bird. Built this calendar.',     cheer: 'The kakapo waddles in.', grito: 'No sabe volar, pero sabe llegar.' },
+    { id: 'mariana',  name: 'Mariana',  color: 7,  face: [50, 31, 2.2],  card: 'La Roquera',    emoji: '🎸', line: 'Grunge forever, rocking from Australia', cheer: 'Smells like primo spirit.', grito: 'Del otro lado del mundo trae el rock más profundo.' },
+    { id: 'david',    name: 'David',    color: 9,  face: [50, 29, 2.0],  card: 'El Maestro',    emoji: '🥋', line: 'Kung fu master',                      cheer: 'The master has entered the dojo.', grito: 'Un golpe de kung fu, y la fiesta la pones tú.' },
+    // Quique, Patty, Adriana
+    { id: 'quique',   name: 'Quique',   color: 1,  face: [49, 45, 2.0],  card: 'El Loco',       emoji: '🤪', line: 'The craziest of us all',              cheer: 'Chaos confirmed.', grito: 'Pollo de hule y maraca, el loco nunca se aplaca.' },
+    { id: 'patty',    name: 'Patty',    color: 8,  face: [48, 42, 2.0],  card: 'La Arcoíris',   emoji: '🌈', line: 'Peace & love. Rain & shine.',         cheer: 'Peace, love, and a saved seat.', grito: 'Llueva o truene, la paz siempre la tiene.' },
+    { id: 'adriana',  name: 'Adriana',  color: 10, face: [48, 30, 1.9], card: 'La Guardiana',  emoji: '🐟', line: 'Texas wildlife guardian',             cheer: 'Everything is under control now.', grito: 'Cuida al pez y al venado, y deja todo ordenado.' },
+    // Eichelmann brothers
+    { id: 'oscar',    name: 'Oscar',    color: 2,  face: [49, 30, 2.0],  card: 'El Arquitecto', emoji: '📐', line: 'a.k.a. Coquito. Monty Python and Jaws fan', cheer: "We're gonna need a bigger table.", grito: 'Traza el plano, choca el coco, y del tiburón se ríe un poco.' },
+    { id: 'kristian', name: 'Kristian', color: 6,  face: [49, 31, 1.9],  card: 'El Estoico',    emoji: '📖', line: 'Dermatologist, stoic, reads Hesse',  cheer: 'Calmly accepts.', grito: 'Cuida tu piel y tu alma, lo dice con toda calma.' },
+    // Nacho, Ricky
+    { id: 'nacho',    name: 'Nacho',    color: 3,  face: [48, 36, 1.9],  card: 'El Corazón',    emoji: '🍯', line: 'Quiet, hard-working, the best of us', cheer: 'Quietly in, as always.', grito: 'Callado y trabajador, de los primos el mejor.' },
+    { id: 'ricky',    name: 'Ricky',    color: 4,  face: [49, 28, 1.9],  card: 'El Macho',      emoji: '💪', line: 'Macho man, metalhead',                cheer: 'Oooh yeah! Rock on.', grito: 'Lentes oscuros y cinturón, ¡oh sí, el campeón!' },
+  ],
+};
+/* ===================================================================== */
+
+const API = '/api/cal';
+const POLL_MS = 20000;
+const IDLE_MS = 10 * 60 * 1000;
+const MEMBERS = FAMILY.members.map((m, i) => ({ ...m, n: i + 1, color: `var(--m${m.color || (i % 10) + 1})` }));
+const BY_ID = Object.fromEntries(MEMBERS.map(m => [m.id, m]));
+const N = MEMBERS.length;
+const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+const DOW = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const ALLOW_DEMO = /*DEMO*/false; // true only in the preview build; the live site never shows sample data
+const idx = s => { const [y, m] = s.split('-').map(Number); return y * 12 + (m - 1); };
+const NOW_IDX = (() => { const t = new Date(); return t.getFullYear() * 12 + t.getMonth(); })();
+const FROM = idx(FAMILY.firstMonth), TO = Math.max(idx(FAMILY.lastMonth), NOW_IDX + 12);
+
+/* ---------- tiny helpers ---------- */
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const pad = n => String(n).padStart(2, '0');
+const keyOf = (y, m, d) => `${y}-${pad(m + 1)}-${pad(d)}`;
+const dateOf = k => { const [y, m, d] = k.split('-').map(Number); return new Date(y, m - 1, d); };
+const todayKey = () => { const t = new Date(); return keyOf(t.getFullYear(), t.getMonth(), t.getDate()); };
+const dateIn = tz => { try { return new Intl.DateTimeFormat('en-CA', { timeZone: tz, year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date()); } catch (e) { return todayKey(); } };
+// The earliest "today" anywhere the family lives: before this, a date is over for everyone.
+const cutoffKey = () => [todayKey(), ...FAMILY.zones.map(dateIn)].sort()[0];
+const fmtDay = (k, o = { weekday: 'short', month: 'short', day: 'numeric' }) => dateOf(k).toLocaleDateString('en-US', o);
+const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+const clone = o => JSON.parse(JSON.stringify(o));
+const buzz = () => { try { navigator.vibrate && navigator.vibrate(12); } catch (e) {} };
+const store = {
+  get(k) { try { return localStorage.getItem('primos:' + k); } catch (e) { return null; } },
+  set(k, v) { try { v == null ? localStorage.removeItem('primos:' + k) : localStorage.setItem('primos:' + k, v); } catch (e) {} },
+};
+
+const ICONS = {
+  chevL: '<path d="M15 18l-6-6 6-6"/>',
+  chevR: '<path d="M9 18l6-6-6-6"/>',
+  x: '<path d="M18 6L6 18M6 6l12 12"/>',
+  pin: '<path d="M12 21s-6.5-5.6-6.5-10.5a6.5 6.5 0 1 1 13 0C18.5 15.4 12 21 12 21z"/><circle cx="12" cy="10.5" r="2.3"/>',
+  cake: '<path d="M4 21h16v-7.5A2.5 2.5 0 0 0 17.5 11h-11A2.5 2.5 0 0 0 4 13.5V21z"/><path d="M4 16c1.6 1.2 3.4 1.2 5 0s3.4-1.2 5 0 3.4 1.2 6 0"/><path d="M12 11V7.5"/><path d="M12 3.5c1 1.1 1 2 0 3-1-1-1-1.9 0-3z"/>',
+  star: '<path fill="currentColor" stroke="none" d="M12 2.8l2.8 5.8 6.3.9-4.6 4.4 1.1 6.3L12 17.2l-5.6 3 1.1-6.3L2.9 9.5l6.3-.9z"/>',
+  plus: '<path d="M12 5v14M5 12h14"/>',
+  cal: '<rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/>',
+  link: '<path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/>',
+  lock: '<rect x="5" y="11" width="14" height="10" rx="2.5"/><path d="M8.5 11V8a3.5 3.5 0 0 1 7 0v3"/>',
+  edit: '<path d="M4 20h4L19 9l-4-4L4 16v4z"/><path d="M13.5 6.5l4 4"/>',
+  user: '<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>',
+  check: '<path d="M5 12.5l4.5 4.5L19 7.5"/>',
+  slash: '<path d="M7 17L17 7"/>',
+  share: '<path d="M12 3v12"/><path d="M7.5 7.5L12 3l4.5 4.5"/><path d="M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"/>',
+  hand: '<path d="M7 11V6.5a1.5 1.5 0 0 1 3 0V11m0-1V4.5a1.5 1.5 0 0 1 3 0V10m0 0V5.5a1.5 1.5 0 0 1 3 0V12m0-3.5a1.5 1.5 0 0 1 3 0V15a6 6 0 0 1-6 6h-1.5a6 6 0 0 1-4.7-2.3L4.3 15.4a1.6 1.6 0 0 1 2.4-2.1L8.5 15"/>',
+};
+const svg = (name, size = 20, cls = '') =>
+  `<svg class="ico ${cls}" viewBox="0 0 24 24" width="${size}" height="${size}" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[name]}</svg>`;
+
+/* ---------- state ---------- */
+const emptyDoc = () => ({ v: 1, rev: 0, marks: {}, plans: {}, profiles: {}, log: [] });
+const S = {
+  me: store.get('me'),
+  code: store.get('code'),
+  mode: 'loading', // loading | live | demo | locked
+  doc: emptyDoc(),
+  vi: FROM,
+  quick: false, // 'Mark several' mode, off at the start of every visit
+  confirmed: null, // last document the server accepted
+  pending: 0,
+  lastAct: Date.now(),
+  sheet: null, // { kind: 'day', key } | { kind: 'profile' }
+  editing: false,
+  swipedAt: 0,
+};
+if (S.me && !BY_ID[S.me]) S.me = null;
+
+/* ---------- shared rules (keep in sync with netlify/functions/cal.mjs) ---------- */
+const ID_RE = /^[a-z0-9-]{1,24}$/;
+const DAY_RE = /^\d{4}-\d{2}-\d{2}$/;
+const MMDD_RE = /^(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/;
+const TZ_RE = /^[A-Za-z]+(?:\/[A-Za-z0-9_+-]+){1,2}$/;
+const validMMDD = s => { if (!MMDD_RE.test(s)) return false; const [m, d] = s.split('-').map(Number); return new Date(2000, m - 1, d).getMonth() === m - 1; };
+const clip = (v, n) => String(v ?? '').trim().slice(0, n);
+function addLog(doc, entry) {
+  const now = Date.now();
+  const last = doc.log[0];
+  if (entry.kind === 'mark' && last && last.kind === 'mark' && last.who === entry.who && last.date === entry.date && now - last.t < 90000) doc.log[0] = { ...entry, t: now };
+  else doc.log.unshift({ ...entry, t: now });
+  doc.log.length = Math.min(doc.log.length, 100);
+}
+function applyOp(doc, op) {
+  const who = op.who;
+  if (!ID_RE.test(String(who)) || !BY_ID[who]) return 'bad-member';
+  switch (op.op) {
+    case 'mark': {
+      if (!DAY_RE.test(String(op.date))) return 'bad-date';
+      const status = op.status ?? null;
+      if (status !== null && !['in', 'maybe', 'out'].includes(status)) return 'bad-status';
+      const day = doc.marks[op.date] || {};
+      if (status === null) delete day[who]; else day[who] = status;
+      if (Object.keys(day).length) doc.marks[op.date] = day; else delete doc.marks[op.date];
+      addLog(doc, { who, kind: 'mark', date: op.date, status: status || 'clear' });
+      return null;
+    }
+    case 'marks': {
+      const entries = Object.entries(op.set || {});
+      if (!entries.length || entries.length > 62) return 'bad-set';
+      for (const [date, status] of entries) {
+        if (!DAY_RE.test(date)) return 'bad-date';
+        if (status !== null && !['in', 'maybe', 'out'].includes(status)) return 'bad-status';
+      }
+      for (const [date, status] of entries) {
+        const day = doc.marks[date] || {};
+        if (status === null) delete day[who]; else day[who] = status;
+        if (Object.keys(day).length) doc.marks[date] = day; else delete doc.marks[date];
+      }
+      const dates = entries.map(e => e[0]).sort();
+      addLog(doc, { who, kind: 'marks', date: dates[0], to: dates[dates.length - 1], count: dates.length, status: entries[0][1] || 'clear' });
+      return null;
+    }
+    case 'plan': {
+      if (!DAY_RE.test(String(op.date))) return 'bad-date';
+      if ('base' in op && (op.base ?? null) !== ((doc.plans[op.date] && doc.plans[op.date].updatedAt) ?? null)) return 'conflict';
+      if (op.plan === null) {
+        const old = doc.plans[op.date];
+        if (!old) return null;
+        if (old.locked) return 'locked';
+        delete doc.plans[op.date];
+        addLog(doc, { who, kind: 'unplan', date: op.date, title: old.title });
+        return null;
+      }
+      const title = clip(op.plan && op.plan.title, 60);
+      if (!title) return 'missing-title';
+      const prev = doc.plans[op.date];
+      const time = clip(op.plan.time, 30);
+      const tz = clip(op.plan.tz, 40);
+      const safeTz = TZ_RE.test(tz) ? tz : '';
+      const place = clip(op.plan.place, 60);
+      const material = !!prev && (prev.title !== title || (prev.time || '') !== time || (prev.tz || '') !== (time ? safeTz : '') || (prev.place || '') !== place);
+      const keepLock = !!(prev && prev.locked) && !material;
+      doc.plans[op.date] = {
+        title, time, tz: time ? safeTz : '', place, note: clip(op.plan.note, 240),
+        by: (prev && prev.by) || who, locked: keepLock, lockedBy: keepLock ? prev.lockedBy : null,
+        changed: !!((prev && prev.locked && material) || (prev && prev.changed && !keepLock)), updatedAt: Date.now(),
+      };
+      addLog(doc, { who, kind: prev ? 'replan' : 'plan', date: op.date, title });
+      return null;
+    }
+    case 'lock': {
+      if (!DAY_RE.test(String(op.date))) return 'bad-date';
+      const plan = doc.plans[op.date];
+      if (!plan) return 'no-plan';
+      plan.locked = !!op.locked;
+      plan.lockedBy = plan.locked ? who : null;
+      plan.changed = false;
+      addLog(doc, { who, kind: plan.locked ? 'lock' : 'unlock', date: op.date, title: plan.title });
+      return null;
+    }
+    case 'profile': {
+      const b = op.birthday ? String(op.birthday) : '';
+      if (b && !validMMDD(b)) return 'bad-birthday';
+      const p = doc.profiles[who] || {};
+      if (b) p.birthday = b; else delete p.birthday;
+      if (Object.keys(p).length) doc.profiles[who] = p; else delete doc.profiles[who];
+      addLog(doc, { who, kind: 'bday', date: '', status: b ? 'set' : 'clear' });
+      return null;
+    }
+    default: return 'bad-op';
+  }
+}
+
+/* ---------- data helpers ---------- */
+const marksOn = k => S.doc.marks[k] || {};
+function tally(k) {
+  const mk = marksOn(k);
+  const t = { in: [], maybe: [], out: [], none: [] };
+  for (const m of MEMBERS) (t[mk[m.id]] || t.none).push(m);
+  t.score = t.in.length + t.maybe.length * 0.5;
+  return t;
+}
+const bdayOf = m => (S.doc.profiles[m.id] && S.doc.profiles[m.id].birthday) || m.birthday || '';
+const isLeap = y => (y % 4 === 0 && y % 100 !== 0) || y % 400 === 0;
+const birthdaysOn = k => {
+  const md = k.slice(5), leapFix = md === '02-28' && !isLeap(+k.slice(0, 4));
+  return MEMBERS.filter(m => { const b = bdayOf(m); return b === md || (leapFix && b === '02-29'); });
+};
+const nameOf = id => (id === S.me ? 'You' : (BY_ID[id] ? BY_ID[id].name : 'Someone'));
+const nameLower = id => (id === S.me ? 'you' : nameOf(id));
+const joinNames = arr => arr.length < 2 ? arr.join('') : arr.slice(0, -1).join(', ') + ' and ' + arr[arr.length - 1];
+
+/* ---------- time zones ---------- */
+const TZS = [
+  ['America/Cancun', 'Cancún'], ['America/Mexico_City', 'Mexico City'], ['America/Monterrey', 'Monterrey'],
+  ['America/Chicago', 'Texas (Central)'], ['America/New_York', 'Florida (Eastern)'], ['America/Denver', 'Mountain (US)'],
+  ['America/Los_Angeles', 'Pacific (US)'], ['Australia/Sydney', 'Sydney'], ['Australia/Melbourne', 'Melbourne'],
+  ['Australia/Brisbane', 'Brisbane'], ['Australia/Adelaide', 'Adelaide'], ['Australia/Perth', 'Perth'],
+];
+const TZ_LABEL = Object.fromEntries(TZS);
+const MY_TZ = (() => { try { return Intl.DateTimeFormat().resolvedOptions().timeZone || ''; } catch (e) { return ''; } })();
+const HHMM = /^([01]\d|2[0-3]):[0-5]\d$/;
+const tzName = tz => TZ_LABEL[tz] || String(tz).split('/').pop().replace(/_/g, ' ');
+function fmtClock(hhmm) {
+  const [h, m] = hhmm.split(':').map(Number);
+  return `${h % 12 || 12}${m ? ':' + pad(m) : ''} ${h < 12 ? 'am' : 'pm'}`;
+}
+function tzOffsetMin(tz, ms) {
+  const parts = new Intl.DateTimeFormat('en-US', { timeZone: tz, hourCycle: 'h23', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' }).formatToParts(new Date(ms));
+  const p = Object.fromEntries(parts.map(x => [x.type, x.value]));
+  return (Date.UTC(+p.year, +p.month - 1, +p.day, +p.hour % 24, +p.minute, +p.second) - ms) / 60000;
+}
+function planUtc(k, p) {
+  if (!p || !HHMM.test(p.time || '') || !p.tz) return null;
+  try {
+    const [y, mo, d] = k.split('-').map(Number), [h, mi] = p.time.split(':').map(Number);
+    const guess = Date.UTC(y, mo - 1, d, h, mi);
+    let utc = guess - tzOffsetMin(p.tz, guess) * 60000;
+    utc = guess - tzOffsetMin(p.tz, utc) * 60000;
+    return utc;
+  } catch (e) { return null; }
+}
+const shortTime = p => (p && p.time ? (HHMM.test(p.time) ? fmtClock(p.time) : p.time) : '');
+// The plan's own time, without "(… your time)", for things sent to cousins in other zones.
+const ownTime = (k, p) => planTimeText(k, p).replace(/ \(.*\)$/, '');
+function planTimeText(k, p) {
+  if (!p || !p.time) return '';
+  if (!HHMM.test(p.time) || !p.tz) return shortTime(p);
+  let s = `${fmtClock(p.time)} ${tzName(p.tz)} time`;
+  const u = planUtc(k, p);
+  if (u != null && MY_TZ && MY_TZ !== p.tz) {
+    try {
+      if (tzOffsetMin(MY_TZ, u) !== tzOffsetMin(p.tz, u)) {
+        const local = new Date(u).toLocaleString('en-US', { weekday: 'short', hour: 'numeric', minute: '2-digit' })
+          .replace(':00', '').replace(' AM', ' am').replace(' PM', ' pm');
+        s += ` (${local} your time)`;
+      }
+    } catch (e) {}
+  }
+  return s;
+}
+
+function avatar(m, size = 32, cls = '') {
+  const f = m.face || [50, 40, 1.35];
+  const inner = m.hasImg
+    ? `<img src="${esc(m.img)}" alt="" width="${size}" height="${size}" decoding="async" style="--fx:${f[0]}%;--fy:${f[1]}%;--z:${f[2]}">`
+    : `<span aria-hidden="true">${m.emoji}</span>`;
+  return `<span class="av ${cls}" style="--mc:${m.color};--s:${size}px" title="${esc(m.name)}">${inner}</span>`;
+}
+function card(m, i = 0, isMe = false, tag = 'button') {
+  const art = m.hasImg ? `<img src="${esc(m.img)}" alt="">` : `<span aria-hidden="true">${m.emoji}</span>`;
+  const attrs = tag === 'button' ? `type="button" data-pick="${m.id}" aria-label="I am ${esc(m.name)}"` : 'aria-hidden="true"';
+  return `<${tag} class="lcard${isMe ? ' is-me' : ''}" ${attrs} style="--mc:${m.color};--i:${i}">
+    <span class="lframe"><span class="lnum">${m.n}</span><span class="lart">${art}</span><span class="ltitle">${esc(m.card)}</span></span>
+  </${tag}>`;
+}
+
+function probeImages() {
+  return Promise.all(MEMBERS.map(m => new Promise(res => {
+    const tries = m.img ? [m.img] : [`avatars/${m.id}.webp`, `avatars/${m.id}.png`];
+    let settled = false;
+    const done = src => { if (settled) return; settled = true; m.hasImg = !!src; if (src) m.img = src; res(); };
+    const attempt = i => {
+      if (i >= tries.length) return done(null);
+      const im = new Image();
+      im.onload = () => (im.naturalWidth > 0 ? done(tries[i]) : attempt(i + 1));
+      im.onerror = () => attempt(i + 1);
+      im.src = tries[i];
+    };
+    setTimeout(() => done(null), 6000);
+    attempt(0);
+  })));
+}
+
+/* ---------- network ---------- */
+async function api(method, body) {
+  let r;
+  try {
+    r = await fetch(API, {
+      method, cache: 'no-store',
+      headers: { 'content-type': 'application/json', 'x-family-code': S.code || '' },
+      body: body ? JSON.stringify(body) : undefined,
+    });
+  } catch (e) { throw { offline: true }; }
+  let data = null;
+  if ((r.headers.get('content-type') || '').includes('application/json')) { try { data = await r.json(); } catch (e) {} }
+  if (r.status === 401) throw { auth: true, data };
+  if (r.status === 503 && data && data.error === 'setup') throw { setup: true };
+  if (!data) throw { offline: true, status: r.status };
+  if (!r.ok) throw { server: true, status: r.status, data };
+  return data;
+}
+
+// Applies the change on screen right away, then confirms with the server.
+// o.msg shows a toast with "Saving…" that turns into "Saved" (o.done replaces the text, o.action adds a button).
+// If the server refuses or the connection drops, the screen goes back to the last saved state and offers Retry.
+// Take a server copy only if it is at least as new as the newest one seen. A slow poll that
+// started before a save can never roll the screen back.
+function accept(doc) {
+  if (!doc || typeof doc.rev !== 'number') return false;
+  if (S.confirmed && doc.rev < S.confirmed.rev) return false;
+  S.confirmed = doc;
+  return true;
+}
+function showConfirmed() { if (S.confirmed) { S.doc = clone(S.confirmed); renderAll(); } }
+
+// Applies the change on screen right away, then confirms with the server.
+// o.msg shows a toast with "Saving…" that turns into "Saved" (o.done replaces the text, o.action adds a button).
+// If the server refuses or the connection drops, the screen goes back to the last saved state.
+function send(op, o = {}) {
+  const err = applyOp(S.doc, op);
+  if (err) { toast(err === 'locked' ? 'Reopen the plan before removing it.' : err === 'conflict' ? 'Someone changed this plan a moment ago. Take a look and try again.' : 'That did not work. Try again.'); return false; }
+  const id = o.msg ? toast(o.msg, null, 'saving') : 0;
+  const saved = () => {
+    if (o.msg && id === toastId) toast(o.done || o.msg, o.action || null, 'saved', true);
+    if (o.onSaved) o.onSaved();
+  };
+  if (S.mode === 'demo') { S.doc.rev++; saveDemo(); renderAll(); saved(); return true; }
+  renderAll();
+  S.pending++;
+  api('POST', op)
+    .then(doc => {
+      S.pending--;
+      accept(doc);
+      if (S.pending === 0) showConfirmed();
+      saved();
+    })
+    .catch(e => {
+      S.pending = Math.max(0, S.pending - 1);
+      if (e.auth) return lockOut();
+      if (S.pending === 0) showConfirmed();
+      const code = e.data && e.data.error;
+      if (code === 'conflict') { toast('Someone changed this plan while you were editing. Take a look and try again.'); refresh(true); return; }
+      if (code === 'locked') { toast('That plan is confirmed. Reopen it before removing it.'); refresh(true); return; }
+      toast('Not saved. Check your connection.', { label: 'Retry', fn: () => send(op, o) }, 'failed');
+    });
+  return true;
+}
+
+async function refresh(force) {
+  if (S.mode !== 'live' || (S.pending && !force)) return;
+  try {
+    const doc = await api('GET');
+    const before = S.confirmed && S.confirmed.rev;
+    if (!accept(doc) || S.pending) return;
+    if (force || doc.rev !== before || doc.rev !== S.doc.rev) showConfirmed();
+  } catch (e) { if (e.auth) lockOut(); }
+}
+
+/* ---------- demo mode ---------- */
+function seedDemo() {
+  const doc = emptyDoc();
+  const t = new Date(); t.setHours(12, 0, 0, 0);
+  const shift = n => { const d = new Date(t); d.setDate(d.getDate() + n); return keyOf(d.getFullYear(), d.getMonth(), d.getDate()); };
+  const toSat = (6 - t.getDay() + 7) % 7 || 7;
+  const sat1 = shift(toSat), fri1 = shift(toSat - 1), sun1 = shift(toSat + 1), sat2 = shift(toSat + 7), sat3 = shift(toSat + 14);
+  const put = (k, ids, st) => ids.forEach(id => BY_ID[id] && applyOp(doc, { op: 'mark', who: id, date: k, status: st }));
+  put(fri1, ['david', 'mariana', 'ricky'], 'in'); put(fri1, ['patty', 'nacho'], 'maybe');
+  put(sat1, MEMBERS.map(m => m.id).filter(id => id !== 'gabriel'), 'in');
+  put(sun1, ['quique', 'adriana'], 'in');
+  put(sat2, ['oscar', 'kristian', 'patty', 'quique', 'adriana'], 'in'); put(sat2, ['david', 'nacho'], 'maybe'); put(sat2, ['ricky'], 'out');
+  put(sat3, ['mariana', 'oscar'], 'in');
+  applyOp(doc, { op: 'plan', who: 'oscar', date: sat1, plan: { title: 'Carne asada (sample)', time: '18:00', tz: 'America/Cancun', place: 'To be decided', note: 'Sample plan to show how plans work.' } });
+  applyOp(doc, { op: 'plan', who: 'patty', date: sat2, plan: { title: 'Beach day (sample)', time: '10:00', tz: 'America/Cancun', place: '', note: '' } });
+  applyOp(doc, { op: 'lock', who: 'patty', date: sat2, locked: true });
+  doc.log.forEach((e, i) => { e.t = Date.now() - (i + 1) * 23 * 60000; });
+  doc.rev = 1;
+  return doc;
+}
+function loadDemo() {
+  try { const raw = store.get('demo'); if (raw) { const d = JSON.parse(raw); if (d && d.marks) return d; } } catch (e) {}
+  return seedDemo();
+}
+const saveDemo = () => store.set('demo', JSON.stringify(S.doc));
+
+/* ---------- rendering ---------- */
+function renderAll() {
+  renderMe();
+  renderGrid();
+  renderBest();
+  renderPlans();
+  renderFeed();
+  renderDock();
+  renderHints();
+  renderBirthdayBanner();
+  if (S.sheet && S.sheet.kind === 'day' && !S.editing) renderDaySheet(S.sheet.key, true);
+  $('#demoBar').hidden = S.mode !== 'demo';
+}
+
+// First-visit guidance stays until you have answered at least one date.
+function renderHints() {
+  const answered = !!S.me && Object.values(S.doc.marks).some(d => d[S.me]);
+  $('#firstHint').hidden = !S.me || answered || S.quick;
+  $('#modeBar').hidden = !S.quick;
+  $('#grid').classList.toggle('painting', S.quick);
+}
+
+// Next time each birthday comes around, as a YYYY-MM-DD key (Feb 29 lands on Feb 28 in normal years).
+function nextBirthday(md, fromKey) {
+  const y = +fromKey.slice(0, 4);
+  for (const yy of [y, y + 1]) {
+    const mmdd = md === '02-29' && !isLeap(yy) ? '02-28' : md;
+    const k = `${yy}-${mmdd}`;
+    if (k >= fromKey) return k;
+  }
+  return null;
+}
+function renderBirthdayBanner() {
+  const tk = todayKey();
+  const today = birthdaysOn(tk);
+  const el = $('#bdayBanner');
+  if (!today.length) { el.hidden = true; return; }
+  const mine = today.find(m => m.id === S.me);
+  const others = today.filter(m => m.id !== S.me);
+  el.innerHTML = `${svg('cake', 22)}<span class="bb-faces">${today.map(m => avatar(m, 34)).join('')}</span><span class="bb-text">${mine
+    ? `<b>¡Feliz cumpleaños, ${esc(mine.name)}!</b> The primos are celebrating you today.`
+    : `<b>Today is ${esc(joinNames(others.map(m => m.name + "'s")))} birthday.</b> ¡Feliz cumpleaños!`}</span>`;
+  el.hidden = false;
+  if (mine && store.get('bdayParty') !== tk) { store.set('bdayParty', tk); setTimeout(confetti, 400); }
+}
+
+function renderMe() {
+  const me = BY_ID[S.me];
+  document.documentElement.style.setProperty('--my', me ? me.color : 'var(--accent)');
+  $('#meBtn').innerHTML = me ? `${avatar(me, 34)}<span>${esc(me.name)}</span>` : `${svg('user', 18)}<span>Pick your card</span>`;
+  $('#meBtn').setAttribute('aria-label', me ? `You are ${me.name}. Open your profile` : 'Pick your card');
+}
+
+const MARK_ICON = s => (s === 'in' ? svg('check', 10) : s === 'maybe' ? '?' : svg('slash', 10));
+const MARK_WORD = { in: 'in', maybe: 'maybe', out: "can't make it" };
+
+function renderGrid(dir) {
+  const y = Math.floor(S.vi / 12), m = S.vi % 12;
+  $('#monthTitle').innerHTML = `${MONTHS[m]} <span>${y}</span>`;
+  $('#prev').disabled = S.vi <= FROM;
+  $('#next').disabled = S.vi >= TO;
+  const grid = $('#grid');
+  const lead = (new Date(y, m, 1).getDay() - FAMILY.weekStart + 7) % 7;
+  const days = new Date(y, m + 1, 0).getDate();
+  const tk = todayKey(), ck = cutoffKey();
+  const cellW = ((grid.clientWidth || 340) - 24) / 7;
+  const avail = cellW - (cellW < 60 ? 7 : 14);
+  let html = '';
+  for (let i = 0; i < lead; i++) html += '<span class="cell blank" aria-hidden="true"></span>';
+  for (let d = 1; d <= days; d++) {
+    const k = keyOf(y, m, d);
+    const t = tally(k);
+    const plan = S.doc.plans[k];
+    const bd = birthdaysOn(k);
+    const mine = S.me ? marksOn(k)[S.me] || null : null;
+    // Faces only while they fit; otherwise a plain count. Maybes are counted, never mixed into faces.
+    const room = avail - (mine ? 16 : 0);
+    const fit = Math.max(0, Math.min(6, Math.floor((room - 18) / 12) + 1));
+    let bottom = '';
+    if (t.in.length && t.in.length <= fit) bottom = t.in.map(f => avatar(f, 18)).join('');
+    else if (t.in.length) bottom = `<span class="cnt">${t.in.length}<small> in</small></span>`;
+    if (t.maybe.length) bottom += `<span class="cnt q">${t.maybe.length}?</span>`;
+    const cls = ['cell', k < ck && 'past', k === tk && 'today', t.in.length === N && 'full', mine && 'has-mark'].filter(Boolean).join(' ');
+    let icons = '';
+    if (bd.length) icons += `<span class="ib">${svg('cake', 11, 'i-cake')}</span>`;
+    if (plan) icons += `<span class="ib">${plan.locked ? svg('star', 12, 'i-star') : svg('pin', 11, 'i-pin')}</span>`;
+    const label = [fmtDay(k, { weekday: 'long', month: 'long', day: 'numeric' }),
+      t.in.length ? `${t.in.length} in` : 'nobody yet', t.maybe.length ? `${t.maybe.length} maybe` : '',
+      plan ? `plan: ${plan.title}${plan.locked ? ', confirmed' : ', suggested'}` : '', bd.length ? `${joinNames(bd.map(b => b.name))} birthday` : '',
+      mine ? `your answer: ${MARK_WORD[mine]}` : ''].filter(Boolean).join(', ');
+    html += `<button type="button" class="${cls}" data-date="${k}" style="--h:${(t.score / N).toFixed(3)}" aria-label="${esc(label)}">`
+      + `<span class="num">${d}</span>${icons ? `<span class="icons">${icons}</span>` : ''}`
+      + `<span class="faces">${bottom}</span>`
+      + (mine ? `<span class="mymark ${mine}" aria-hidden="true">${MARK_ICON(mine)}</span>` : '')
+      + `</button>`;
+  }
+  grid.innerHTML = html;
+  if (dir && !REDUCED) { grid.classList.remove('slide-next', 'slide-prev'); void grid.offsetWidth; grid.classList.add(dir > 0 ? 'slide-next' : 'slide-prev'); }
+}
+
+function dateBlock(k, t, withMonth) {
+  const top = withMonth ? fmtDay(k, { month: 'short' }) : fmtDay(k, { weekday: 'short' });
+  return `<span class="dblock" style="--h:${(t.score / N).toFixed(3)}"><span class="dw">${top}</span><span class="dn">${dateOf(k).getDate()}</span></span>`;
+}
+function facesRow(t, max = 7) {
+  const f = t.in;
+  return `<span class="faces">${f.slice(0, max).map(x => avatar(x, 22)).join('')}${f.length > max ? `<span class="more">+${f.length - max}</span>` : ''}</span>`;
+}
+
+function renderBest() {
+  const y = Math.floor(S.vi / 12), m = S.vi % 12;
+  $('#bestTitle').textContent = `Best dates in ${MONTHS[m]}`;
+  const tk = cutoffKey();
+  const days = new Date(y, m + 1, 0).getDate();
+  const list = [];
+  for (let d = 1; d <= days; d++) {
+    const k = keyOf(y, m, d);
+    if (k < tk) continue;
+    const t = tally(k);
+    if (t.score > 0) list.push({ k, t });
+  }
+  list.sort((a, b) => b.t.score - a.t.score || (a.k < b.k ? -1 : 1));
+  const monthOver = keyOf(y, m, days) < tk;
+  $('#best').innerHTML = list.length
+    ? list.slice(0, 5).map(({ k, t }) => {
+        const plan = S.doc.plans[k];
+        return `<button type="button" class="row-item" data-open="${k}">${dateBlock(k, t)}
+          <span class="ri-main"><span class="ri-title">${t.in.length === N ? 'Full house' : `${t.in.length} of ${N} in`}${t.maybe.length ? ` · ${t.maybe.length} maybe` : ''}</span>
+          <span class="ri-meta">${facesRow(t)}${plan ? `<span>${esc(plan.title)}</span>` : ''}</span></span></button>`;
+      }).join('')
+    : `<p class="empty">${monthOver ? `${MONTHS[m]} is over. Jump ahead with the arrows.` : `Nobody has answered for ${MONTHS[m]} yet. Tap a date or drag your card onto one.`}</p>`;
+}
+
+const planBadge = p => (p.locked ? `<span class="badge">${svg('star', 11)}Confirmed</span>`
+  : p.changed ? '<span class="badge warn">Changed. Confirm again.</span>' : '<span class="badge soft">Suggested</span>');
+
+function renderPlans() {
+  const tk = cutoffKey();
+  const limit = (() => { const d = new Date(); d.setDate(d.getDate() + 45); return keyOf(d.getFullYear(), d.getMonth(), d.getDate()); })();
+  const items = Object.keys(S.doc.plans).filter(k => k >= tk).map(k => ({ k, kind: 'plan' }));
+  MEMBERS.forEach(m => {
+    const b = bdayOf(m);
+    const k = b && nextBirthday(b, todayKey());
+    if (k && k <= limit) items.push({ k, kind: 'bday', m });
+  });
+  items.sort((a, b) => (a.k < b.k ? -1 : a.k > b.k ? 1 : a.kind === 'bday' ? -1 : 1));
+  $('#plans').innerHTML = items.length
+    ? items.slice(0, 10).map(it => {
+        const t = tally(it.k);
+        if (it.kind === 'bday') {
+          const isToday = it.k === todayKey();
+          return `<button type="button" class="row-item" data-open="${it.k}">${dateBlock(it.k, t, true)}
+            <span class="ri-main"><span class="ri-title">${it.m.id === S.me ? 'Your birthday' : `${esc(it.m.name)}'s birthday`}</span>
+            <span class="ri-meta"><span class="badge cake">${svg('cake', 12)}${isToday ? 'Today' : 'Birthday'}</span><span>${fmtDay(it.k, { weekday: 'short' })}</span></span></span>${avatar(it.m, 34)}</button>`;
+        }
+        const p = S.doc.plans[it.k];
+        return `<button type="button" class="row-item" data-open="${it.k}">${dateBlock(it.k, t, true)}
+          <span class="ri-main"><span class="ri-title">${esc(p.title)}</span>
+          <span class="ri-meta">${planBadge(p)}<span>${fmtDay(it.k, { weekday: 'short' })}${p.time ? ' · ' + esc(shortTime(p)) : ''} · ${t.in.length} in</span></span></span></button>`;
+      }).join('')
+    : '<p class="empty">No plans or birthdays coming up. Open any date and suggest a plan.</p>';
+}
+
+function feedText(e) {
+  const you = e.who === S.me;
+  const nm = nameOf(e.who);
+  if (e.kind === 'bday') return `<b>${nm}</b> ${e.status === 'set' ? (you ? 'added your' : 'added their') + ' birthday' : 'cleared a birthday'}`;
+  const day = fmtDay(e.date);
+  if (e.kind === 'marks') {
+    const span = e.count > 1 ? `${e.count} dates, ${fmtDay(e.date, { month: 'short', day: 'numeric' })} to ${fmtDay(e.to, { month: 'short', day: 'numeric' })}` : day;
+    return e.status === 'clear' ? `<b>${nm}</b> cleared ${span}` : `<b>${nm}</b> ${you ? 'are' : 'is'} ${e.status === 'in' ? 'in' : e.status} for ${span}`;
+  }
+  const title = e.title ? `“${esc(e.title)}”` : '';
+  switch (e.kind) {
+    case 'mark':
+      if (e.status === 'in') return `<b>${nm}</b> ${you ? 'are' : 'is'} in for ${day}`;
+      if (e.status === 'maybe') return `<b>${nm}</b> might make ${day}`;
+      if (e.status === 'out') return `<b>${nm}</b> can't make ${day}`;
+      return `<b>${nm}</b> cleared ${day}`;
+    case 'plan': return `<b>${nm}</b> suggested ${title} for ${day}`;
+    case 'replan': return `<b>${nm}</b> updated ${title} on ${day}`;
+    case 'unplan': return `<b>${nm}</b> removed ${title} from ${day}`;
+    case 'lock': return `<b>${nm}</b> confirmed ${title} for ${day}`;
+    case 'unlock': return `<b>${nm}</b> reopened ${title}`;
+    default: return '';
+  }
+}
+function ago(t) {
+  const s = Math.max(0, (Date.now() - t) / 1000);
+  if (s < 60) return 'just now';
+  if (s < 3600) return `${Math.floor(s / 60)}m ago`;
+  if (s < 86400) return `${Math.floor(s / 3600)}h ago`;
+  return `${Math.floor(s / 86400)}d ago`;
+}
+function renderFeed() {
+  const items = S.doc.log.filter(e => BY_ID[e.who]).slice(0, 8);
+  $('#feed').innerHTML = items.length
+    ? items.map(e => `<li>${avatar(BY_ID[e.who], 26)}<span class="what">${feedText(e)}</span><span class="when">${ago(e.t)}</span></li>`).join('')
+    : '<li class="empty" style="border:1px dashed var(--line)">Nothing yet. The first primo to answer starts the party.</li>';
+}
+
+function renderDock() {
+  const me = BY_ID[S.me];
+  const dm = $('#dragMe');
+  dm.classList.toggle('empty', !me);
+  dm.innerHTML = me ? avatar(me, 60) : svg('user', 26);
+  const mb = $('#multiBtn');
+  mb.setAttribute('aria-pressed', String(S.quick));
+  mb.textContent = S.quick ? 'Done' : 'Mark several';
+  if (!me) { $('#dockTitle').textContent = 'Pick your card first'; $('#dockSub').textContent = 'Tap here to choose who you are'; return; }
+  const y = Math.floor(S.vi / 12), m = S.vi % 12;
+  const prefix = `${y}-${pad(m + 1)}-`;
+  const count = Object.keys(S.doc.marks).filter(k => k.startsWith(prefix) && S.doc.marks[k][S.me] === 'in').length;
+  $('#dockTitle').textContent = S.quick ? 'Marking several dates' : "Drag me to say I'm in";
+  $('#dockSub').textContent = count
+    ? `You're in on ${count} date${count === 1 ? '' : 's'} in ${MONTHS[m]}`
+    : (S.quick ? 'Tap dates to add yourself' : 'or tap a date for more choices');
+}
+
+function renderLegend() {
+  $('#dow').innerHTML = Array.from({ length: 7 }, (_, i) => `<span>${DOW[(i + FAMILY.weekStart) % 7]}</span>`).join('');
+  $('#legend').innerHTML = `<span><i class="heatbar"></i>more primos, warmer</span>`
+    + `<span><b class="cnt">2?</b>maybe</span>`
+    + `<span><span class="ib">${svg('pin', 11, 'i-pin')}</span>suggested plan</span>`
+    + `<span><span class="ib">${svg('star', 12, 'i-star')}</span>confirmed</span>`
+    + `<span><span class="ib">${svg('cake', 11, 'i-cake')}</span>birthday</span>`
+    + `<span><span class="mymark in static">${svg('check', 10)}</span>your answer</span>`;
+  $('#firstHint').insertAdjacentHTML('afterbegin', svg('hand', 22));
+  $('#prev').innerHTML = svg('chevL', 22);
+  $('#next').innerHTML = svg('chevR', 22);
+}
+
+/* ---------- actions ---------- */
+function changeMonth(delta) {
+  const nv = clamp(S.vi + delta, FROM, TO);
+  if (nv === S.vi) return;
+  S.vi = nv;
+  renderGrid(delta);
+  renderBest();
+  renderDock();
+}
+function goTo(k) {
+  const i = idx(k.slice(0, 7));
+  if (i < FROM || i > TO) return;
+  if (i !== S.vi) { const d = i - S.vi; S.vi = i; renderGrid(d); renderBest(); renderDock(); }
+}
+function pulse(k) {
+  if (REDUCED) return;
+  const c = $(`.cell[data-date="${k}"]`);
+  if (c) { c.classList.remove('pop'); void c.offsetWidth; c.classList.add('pop'); }
+}
+
+// Several dates at once (slide across the grid in marking mode): one save, one Undo.
+function paintMarks(keys, status) {
+  const set = {}, undoSet = {};
+  keys.forEach(k => { const prev = marksOn(k)[S.me] ?? null; if (prev !== status) { set[k] = status; undoSet[k] = prev; } });
+  const n = Object.keys(set).length;
+  if (!n) return;
+  const f = k => fmtDay(k, { month: 'short', day: 'numeric' });
+  const msg = status === 'in' ? `You're in for ${n} dates, ${f(keys[0])} to ${f(keys[keys.length - 1])}.` : `Cleared ${n} dates.`;
+  send({ op: 'marks', who: S.me, set }, { msg, action: { label: 'Undo', fn: () => send({ op: 'marks', who: S.me, set: undoSet }, { msg: 'Undone.' }) } });
+  buzz();
+}
+
+function setMark(k, status) {
+  if (!S.me) return showPicker();
+  if (k < cutoffKey()) return toast('That day already happened. Pick today or later.');
+  const prev = marksOn(k)[S.me] ?? null;
+  if (prev === status) {
+    if (status === 'in') toast(`You're already in for ${fmtDay(k)}.`);
+    return;
+  }
+  const before = tally(k).in.length;
+  const day = fmtDay(k);
+  const msg = status === 'in' ? `You're in for ${day}.` : status === 'maybe' ? `Maybe for ${day}.`
+    : status === 'out' ? `Can't make it on ${day}.` : `Cleared your answer for ${day}.`;
+  const undo = { label: 'Undo', fn: () => send({ op: 'mark', who: S.me, date: k, status: prev }, { msg: 'Undone.' }) };
+  const ok = send({ op: 'mark', who: S.me, date: k, status }, {
+    msg,
+    done: status === 'in' ? `${msg} ${BY_ID[S.me].cheer}` : msg,
+    action: undo,
+    onSaved: () => { if (status === 'in' && before < N && tally(k).in.length === N) showLoteria(k); },
+  });
+  if (!ok) return;
+  pulse(k);
+  buzz();
+}
+
+let toastTimer, toastId = 0;
+// state: 'saving' | 'saved' | 'failed' | undefined. quiet = update in place without replaying the entrance.
+function toast(msg, action, state, quiet) {
+  const t = $('#toast');
+  toastId++;
+  const chip = state === 'saving' ? '<span class="tstat">Saving…</span>'
+    : state === 'saved' ? `<span class="tstat ok">${svg('check', 13)}Saved</span>` : '';
+  t.classList.toggle('bad', state === 'failed');
+  t.innerHTML = `<span class="tmsg">${esc(msg)}</span>${chip}${action ? `<button type="button" class="toast-btn">${esc(action.label)}</button>` : ''}`;
+  if (action) t.querySelector('button').onclick = () => { t.hidden = true; action.fn(); };
+  t.hidden = false;
+  if (!quiet) { t.classList.remove('show'); void t.offsetWidth; t.classList.add('show'); }
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => { t.hidden = true; }, state === 'saving' ? 20000 : state === 'failed' ? 9000 : action ? 5500 : 3400);
+  return toastId;
+}
+
+function confetti() {
+  if (REDUCED) return;
+  const box = document.createElement('div');
+  box.className = 'confetti';
+  document.body.appendChild(box);
+  const cs = getComputedStyle(document.documentElement);
+  const colors = Array.from({ length: 10 }, (_, i) => cs.getPropertyValue(`--m${i + 1}`).trim());
+  const W = innerWidth, H = innerHeight;
+  for (let i = 0; i < 44; i++) {
+    const p = document.createElement('i');
+    p.style.background = colors[i % colors.length];
+    p.style.left = `${46 + Math.random() * 8}%`;
+    box.appendChild(p);
+    const dx = (Math.random() * 2 - 1) * W * 0.46, dy = -H * (0.35 + Math.random() * 0.4), r = Math.random() * 900 - 450;
+    p.animate([
+      { transform: 'translate(0,0) rotate(0deg)', opacity: 1 },
+      { transform: `translate(${dx}px,${dy}px) rotate(${r}deg)`, opacity: 1, offset: 0.55 },
+      { transform: `translate(${dx * 1.15}px,${dy * 0.15}px) rotate(${r * 1.5}deg)`, opacity: 0 },
+    ], { duration: 1500 + Math.random() * 700, easing: 'cubic-bezier(.2,.7,.3,1)', fill: 'forwards' });
+  }
+  setTimeout(() => box.remove(), 2400);
+}
+function celebrate(msg, action) { confetti(); toast(msg, action); buzz(); }
+
+/* ---------- sheets ---------- */
+function openSheet(html, info) {
+  S.sheet = info;
+  S.editing = false;
+  const sh = $('#sheet');
+  $('#sheetBody').innerHTML = html;
+  S.lastFocus = document.activeElement;
+  sh.hidden = false;
+  $('#scrim').hidden = false;
+  sh.scrollTop = 0;
+  sh.classList.remove('in'); void sh.offsetWidth; sh.classList.add('in');
+  document.body.classList.add('locked');
+  setTimeout(() => { const f = sh.querySelector('[data-autofocus]') || sh.querySelector('[data-act="close"]'); f && f.focus({ preventScroll: true }); }, 40);
+}
+function closeSheet() {
+  if ($('#sheet').hidden) return;
+  $('#sheet').hidden = true;
+  $('#scrim').hidden = true;
+  S.sheet = null;
+  S.editing = false;
+  document.body.classList.remove('locked');
+  if (S.lastFocus && document.contains(S.lastFocus)) S.lastFocus.focus({ preventScroll: true });
+}
+const closeBtn = () => `<button type="button" class="icon-btn" data-act="close" aria-label="Close">${svg('x', 20)}</button>`;
+
+function openDay(k) {
+  goTo(k);
+  openSheet(daySheetHTML(k), { kind: 'day', key: k });
+}
+function renderDaySheet(k, keepScroll) {
+  const sh = $('#sheet');
+  const top = sh.scrollTop;
+  $('#sheetBody').innerHTML = daySheetHTML(k);
+  if (keepScroll) sh.scrollTop = top;
+}
+
+function daySheetHTML(k) {
+  const t = tally(k);
+  const mk = marksOn(k);
+  const plan = S.doc.plans[k];
+  const bd = birthdaysOn(k);
+  const past = k < cutoffKey();
+  const mine = S.me ? mk[S.me] || null : null;
+  const full = t.in.length === N;
+  const seat = m => {
+    const s = mk[m.id] || 'none';
+    const word = s === 'none' ? 'no answer yet' : MARK_WORD[s];
+    return `<span class="seat-wrap ${s}"><span class="seat ${s}" aria-hidden="true">${s === 'none' ? '' : avatar(m, 44)}${s === 'none' ? '' : `<span class="sb ${s}">${MARK_ICON(s)}</span>`}</span>`
+      + `<span class="seat-name">${m.id === S.me ? 'You' : esc(m.name)}</span><span class="sr">${esc(m.name)}: ${word}</span></span>`;
+  };
+  const half = Math.ceil(N / 2);
+  const rest = [t.maybe.length && `${t.maybe.length} maybe`, t.out.length && `${t.out.length} can't`, t.none.length && `${t.none.length} no answer`].filter(Boolean).join(' · ');
+  const st = (key, label) => `<button type="button" class="st" data-act="st" data-st="${key}" aria-pressed="${mine === key}" ${past || !S.me ? 'disabled' : ''}>${label}</button>`;
+
+  let planHTML;
+  if (S.editing) planHTML = planForm(k, plan);
+  else if (plan) {
+    const pt = planTimeText(k, plan);
+    const timed = planUtc(k, plan) != null;
+    planHTML = `<div class="plan">
+      <div>${planBadge(plan)}</div>
+      <div class="plan-title">${esc(plan.title)}</div>
+      ${pt || plan.place ? `<div class="plan-meta">${[pt, plan.place].filter(Boolean).map(esc).join(' · ')}</div>` : ''}
+      ${plan.note ? `<p class="plan-note">${esc(plan.note)}</p>` : ''}
+      <div class="plan-by">Suggested by ${esc(nameLower(plan.by))}${plan.locked && plan.lockedBy ? ` · confirmed by ${esc(nameLower(plan.lockedBy))}` : ''}</div>
+      ${past ? '' : `<div class="row">
+        <button type="button" class="btn ${plan.locked ? '' : 'primary'}" data-act="lock">${svg(plan.locked ? 'lock' : 'star', 18)}${plan.locked ? 'Reopen plan' : 'Confirm plan'}</button>
+        <button type="button" class="btn" data-act="edit">${svg('edit', 18)}Edit</button>
+      </div>
+      ${plan.locked ? '' : '<p class="hint">Confirming sets the plan for everyone. Each cousin still answers for themselves.</p>'}`}
+      ${plan.locked ? `<div class="cal-add"><div class="lbl">${timed ? 'Add to your calendar' : 'Add an all-day reminder'}</div>
+        <div class="row"><a class="btn" href="${gcalLink(k, plan)}" target="_blank" rel="noopener">${svg('cal', 18)}Google</a>${S.mode === 'demo' ? '' : `<button type="button" class="btn" data-act="ics">${svg('cal', 18)}Apple / Outlook</button>`}</div>
+        <p class="hint">Calendar copies don't update if the plan changes later.</p></div>` : ''}
+    </div>`;
+  } else {
+    planHTML = past ? '' : `<button type="button" class="btn wide" data-act="edit">${svg('plus', 18)}Suggest a plan for this day</button>`;
+  }
+
+  return `<div class="sheet-head">
+      <div><div class="eyebrow">${fmtDay(k, { weekday: 'long' })}</div><h2>${fmtDay(k, { month: 'long', day: 'numeric' })}</h2></div>
+      ${closeBtn()}
+    </div>
+    <div class="stack">
+      ${bd.length ? `<div class="bday">${svg('cake', 18)}${esc(joinNames(bd.map(b => b.name + "'s")))} birthday</div>` : ''}
+      <div class="answer">
+        <div class="lbl">Your answer</div>
+        ${S.me ? `<div class="status" role="group" aria-label="Your answer">${st('in', "I'm in")}${st('maybe', 'Maybe')}${st('out', "Can't make it")}</div>` : `<button type="button" class="btn primary wide" data-act="pick">Pick your card to answer</button>`}
+        ${past ? '<p class="note">This day has passed.</p>' : ''}
+      </div>
+      <div class="table" style="--h:${(t.score / N).toFixed(3)}">
+        ${MEMBERS.slice(0, half).map(seat).join('')}
+        <div class="cloth"><div class="ct">${full ? '¡Lotería!' : `${t.in.length} of ${N} at the table`}</div><div class="cs">${full ? `All ${N} primos are in` : rest || 'Be the first to answer'}</div></div>
+        ${MEMBERS.slice(half).map(seat).join('')}
+      </div>
+      <div class="seatlegend" aria-hidden="true"><span><span class="sb in">${MARK_ICON('in')}</span>in</span><span><span class="sb maybe">?</span>maybe</span><span><span class="sb out">${MARK_ICON('out')}</span>can't</span><span><span class="ring"></span>no answer yet</span></div>
+      ${planHTML}
+      ${past ? '' : `<div class="row share-row">
+        <button type="button" class="btn" data-act="share">${svg('share', 18)}Share this day</button>
+        ${t.none.length ? `<button type="button" class="btn" data-act="remind">${svg('link', 18)}Copy reminder (${t.none.length})</button>` : ''}
+      </div><textarea class="input linkbox" id="remindBox" rows="3" readonly hidden></textarea>`}
+    </div>`;
+}
+
+function planForm(k, plan) {
+  const p = plan || {};
+  const time = HHMM.test(p.time || '') ? p.time : '';
+  const tzSel = p.tz || MY_TZ || 'America/Cancun';
+  const opts = TZS.some(z => z[0] === tzSel) ? TZS : [[tzSel, tzName(tzSel)], ...TZS];
+  return `<form class="plan" id="planForm" data-date="${k}">
+    <div class="field"><label for="pTitle">What's the plan?</label><input class="input" id="pTitle" maxlength="60" required value="${esc(p.title)}" placeholder="Carne asada at Oscar's" data-autofocus></div>
+    <div class="two">
+      <div class="field"><label for="pTime">Time <span class="opt">(optional)</span></label><input class="input" id="pTime" type="time" value="${time}"></div>
+      <div class="field"><label for="pTz">Time zone</label><select class="input" id="pTz">${opts.map(([v, l]) => `<option value="${esc(v)}" ${v === tzSel ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></div>
+    </div>
+    <div class="field"><label for="pPlace">Where <span class="opt">(optional)</span></label><input class="input" id="pPlace" maxlength="60" value="${esc(p.place)}" placeholder="Cancún"></div>
+    <div class="field"><label for="pNote">Note <span class="opt">(optional)</span></label><textarea class="input" id="pNote" maxlength="240" placeholder="Bring something to share">${esc(p.note)}</textarea></div>
+    ${p.locked ? '<p class="hint">Changing what, when or where un-confirms the plan so everyone can re-check. To remove it, reopen it first.</p>' : ''}
+    <div class="row">
+      <button type="submit" class="btn primary">${plan ? 'Save changes' : 'Suggest this plan'}</button>
+      <button type="button" class="btn" data-act="cancel">Cancel</button>
+      ${plan && !plan.locked ? '<button type="button" class="btn quiet" data-act="unplan">Remove plan</button>' : ''}
+    </div>
+  </form>`;
+}
+
+const icsStamp = ms => new Date(ms).toISOString().replace(/[-:]/g, '').replace(/\.\d+Z$/, 'Z');
+function calRange(k, p) {
+  const u = planUtc(k, p);
+  if (u != null) return { timed: true, start: icsStamp(u), end: icsStamp(u + 3 * 3600e3) };
+  const n = new Date(dateOf(k)); n.setDate(n.getDate() + 1);
+  return { timed: false, start: k.replace(/-/g, ''), end: keyOf(n.getFullYear(), n.getMonth(), n.getDate()).replace(/-/g, '') };
+}
+const calDetails = (k, p) => [planTimeText(k, p) && `Time: ${planTimeText(k, p)}`, p.note, 'From the Los Primos calendar'].filter(Boolean).join('\n');
+function gcalLink(k, p) {
+  const r = calRange(k, p);
+  const q = new URLSearchParams({ action: 'TEMPLATE', text: p.title, dates: `${r.start}/${r.end}`, details: calDetails(k, p), location: p.place || '' });
+  return 'https://calendar.google.com/calendar/render?' + q.toString();
+}
+function downloadICS(k) {
+  const p = S.doc.plans[k];
+  if (!p) return;
+  const e = s => String(s || '').replace(/\\/g, '\\\\').replace(/([;,])/g, '\\$1').replace(/\n/g, '\\n');
+  const r = calRange(k, p);
+  const lines = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Los Primos//Family Calendar//EN', 'BEGIN:VEVENT',
+    `UID:${k}-los-primos`, `DTSTAMP:${icsStamp(Date.now())}`,
+    r.timed ? `DTSTART:${r.start}` : `DTSTART;VALUE=DATE:${r.start}`,
+    r.timed ? `DTEND:${r.end}` : `DTEND;VALUE=DATE:${r.end}`,
+    `SUMMARY:${e(p.title)}`, p.place ? `LOCATION:${e(p.place)}` : '',
+    `DESCRIPTION:${e(calDetails(k, p))}`,
+    'END:VEVENT', 'END:VCALENDAR'].filter(Boolean);
+  saveBlob(new Blob([lines.join('\r\n')], { type: 'text/calendar' }), `los-primos-${k}.ics`);
+}
+function saveBlob(blob, name) {
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = name;
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 5000);
+}
+
+/* ---------- share card (a Lotería card for the day, made on the phone) ---------- */
+const loadImg = src => new Promise(res => { const i = new Image(); i.onload = () => res(i); i.onerror = () => res(null); i.src = src; });
+function fitFont(g, text, maxW, size, family, min = 28, weight = '') {
+  const f = n => `${weight} ${n}px ${family}`.trim();
+  while (size > min) { g.font = f(size); if (g.measureText(text).width <= maxW) break; size -= 2; }
+  g.font = f(size);
+  return size;
+}
+function reminderText(k) {
+  const plan = S.doc.plans[k], t = tally(k);
+  const when = fmtDay(k, { weekday: 'short', month: 'short', day: 'numeric' });
+  const head = plan ? `${plan.title}, ${when}${plan.time ? ', ' + ownTime(k, plan) : ''}.` : `Who can make ${when}?`;
+  return `${head} Still need an answer from ${joinNames(t.none.map(m => m.name))}. Answer here: ${location.origin}${location.pathname}#day=${k}`;
+}
+async function makeShareCard(k) {
+  const plan = S.doc.plans[k], t = tally(k), full = t.in.length === N;
+  try { await Promise.all([document.fonts.load('80px "Alfa Slab One"'), document.fonts.load('700 40px Figtree')]); } catch (e) {}
+  const W = 1080, H = 1350, P = 44, INK = '#17151D', PAPER = '#FFFDF6';
+  const DISPLAY = '"Alfa Slab One", Rockwell, Georgia, serif', TEXT = 'Figtree, system-ui, sans-serif';
+  const cs = getComputedStyle(document.documentElement);
+  const colorOf = m => cs.getPropertyValue(`--m${m.color.match(/\d+/)[0]}`).trim() || '#C4006A';
+  const c = document.createElement('canvas'); c.width = W; c.height = H;
+  const g = c.getContext('2d');
+  g.fillStyle = PAPER; g.fillRect(0, 0, W, H);
+  const ax = P + 14, ay = P + 14, aw = W - 2 * ax, stripH = 250, ah = H - ay - P - 14 - stripH;
+  // sunburst art window
+  g.save(); g.beginPath(); g.rect(ax, ay, aw, ah); g.clip();
+  g.fillStyle = full ? '#E4007C' : '#F29F05'; g.fillRect(ax, ay, aw, ah);
+  g.fillStyle = full ? '#F25CA8' : '#F7C65A';
+  const cx = W / 2, cy = ay + ah * 0.58;
+  for (let a = 0; a < 360; a += 18) {
+    const r1 = a * Math.PI / 180, r2 = (a + 9) * Math.PI / 180;
+    g.beginPath(); g.moveTo(cx, cy); g.lineTo(cx + 2400 * Math.cos(r1), cy + 2400 * Math.sin(r1)); g.lineTo(cx + 2400 * Math.cos(r2), cy + 2400 * Math.sin(r2)); g.closePath(); g.fill();
+  }
+  g.restore();
+  // frames
+  g.lineWidth = 12; g.strokeStyle = INK;
+  g.strokeRect(ax, ay, aw, ah + stripH);
+  g.beginPath(); g.moveTo(ax, ay + ah); g.lineTo(ax + aw, ay + ah); g.stroke();
+  // number box = day of month
+  const dnum = String(dateOf(k).getDate());
+  g.fillStyle = PAPER; g.fillRect(ax + 24, ay + 24, 120, 104); g.strokeRect(ax + 24, ay + 24, 120, 104);
+  g.fillStyle = INK; g.textAlign = 'center'; g.textBaseline = 'middle';
+  fitFont(g, dnum, 96, 76, DISPLAY); g.fillText(dnum, ax + 84, ay + 80);
+  // date pill
+  const when = fmtDay(k, { weekday: 'long', month: 'long', day: 'numeric' }).toUpperCase();
+  fitFont(g, when, aw - 260, 44, DISPLAY, 26);
+  const ww = g.measureText(when).width + 56;
+  g.fillStyle = PAPER; g.beginPath(); if (g.roundRect) g.roundRect(W / 2 - ww / 2 + 60, ay + 44, ww, 70, 35); else g.rect(W / 2 - ww / 2 + 60, ay + 44, ww, 70); g.fill(); g.lineWidth = 6; g.stroke();
+  g.fillStyle = INK; g.fillText(when, W / 2 + 60, ay + 81);
+  // faces: who's in (or everyone, faded, if nobody yet)
+  const people = t.in.length ? t.in : MEMBERS;
+  const d = people.length > 5 ? 150 : 190, gap = 26, perRow = Math.min(5, people.length);
+  const rows = Math.ceil(people.length / perRow);
+  const blockH = rows * (d + 56) - 10;
+  let y0 = ay + 150 + Math.max(0, (ah - 170 - blockH) / 2);
+  const imgs = await Promise.all(people.map(m => (m.hasImg ? loadImg(m.img) : Promise.resolve(null))));
+  people.forEach((m, i) => {
+    const row = Math.floor(i / perRow), inRow = Math.min(perRow, people.length - row * perRow);
+    const col = i % perRow, rowW = inRow * d + (inRow - 1) * gap;
+    const x = W / 2 - rowW / 2 + col * (d + gap), y = y0 + row * (d + 56);
+    g.save();
+    if (!t.in.length) g.globalAlpha = 0.45;
+    g.beginPath(); g.arc(x + d / 2, y + d / 2, d / 2 + 7, 0, Math.PI * 2); g.fillStyle = PAPER; g.fill();
+    g.beginPath(); g.arc(x + d / 2, y + d / 2, d / 2, 0, Math.PI * 2); g.clip();
+    const im = imgs[i];
+    if (im) {
+      const f = m.face || [50, 40, 1.35], sw = im.naturalWidth / f[2], sh = im.naturalHeight / f[2];
+      const sx = Math.max(0, Math.min(im.naturalWidth - sw, im.naturalWidth * f[0] / 100 - sw / 2));
+      const sy = Math.max(0, Math.min(im.naturalHeight - sh, im.naturalHeight * f[1] / 100 - sh / 2));
+      g.drawImage(im, sx, sy, sw, sh, x, y, d, d);
+    } else {
+      g.fillStyle = colorOf(m); g.fillRect(x, y, d, d);
+      g.font = `${d * 0.5}px system-ui`; g.fillStyle = INK; g.fillText(m.emoji, x + d / 2, y + d / 2 + 4);
+    }
+    g.restore();
+    g.fillStyle = INK; g.font = `700 30px ${TEXT}`; g.textAlign = 'center';
+    g.save(); g.lineWidth = 8; g.strokeStyle = PAPER; g.strokeText(m.name, x + d / 2, y + d + 30); g.restore();
+    g.fillText(m.name, x + d / 2, y + d + 30);
+  });
+  // title strip
+  const title = plan ? plan.title.toUpperCase() : full ? '¡LOTERÍA!' : 'WHO CAN MAKE IT?';
+  g.fillStyle = INK; g.textAlign = 'center';
+  fitFont(g, title, aw - 80, 76, DISPLAY, 34);
+  g.fillText(title, W / 2, ay + ah + 92);
+  const status = plan ? (plan.locked ? 'Confirmed' : 'Suggested plan') : full ? `All ${N} primos are in` : 'Answer in Los Primos';
+  const line = [status, plan && ownTime(k, plan), plan && plan.place, t.in.length ? `${t.in.length} of ${N} in` : "Who's in?"].filter(Boolean).join('  ·  ');
+  fitFont(g, line, aw - 80, 34, TEXT, 20, '600');
+  g.fillStyle = '#595865'; g.fillText(line, W / 2, ay + ah + 170);
+  g.font = `800 22px ${TEXT}`; g.fillStyle = INK; g.fillText('LOS PRIMOS · ' + FAMILY.group.toUpperCase(), W / 2, H - P - 40);
+  return new Promise((res, rej) => c.toBlob(b => (b ? res(b) : rej(new Error('blob'))), 'image/png'));
+}
+async function shareDay(k) {
+  const plan = S.doc.plans[k], t = tally(k);
+  let blob;
+  try { blob = await makeShareCard(k); } catch (e) { return toast('Could not make the card on this device.'); }
+  const link = `${location.origin}${location.pathname}#day=${k}`;
+  const text = `${plan ? plan.title + ', ' : ''}${fmtDay(k, { weekday: 'long', month: 'long', day: 'numeric' })}${plan && plan.time ? ', ' + ownTime(k, plan) : ''}. ${t.in.length ? `${t.in.length} of ${N} primos are in.` : 'Who can make it?'} Answer here: ${link}`;
+  const file = new File([blob], `los-primos-${k}.png`, { type: 'image/png' });
+  try {
+    if (navigator.canShare && navigator.canShare({ files: [file] })) { await navigator.share({ files: [file], text }); return; }
+  } catch (e) { if (e && e.name === 'AbortError') return; }
+  saveBlob(blob, file.name);
+  try { await navigator.clipboard.writeText(text); toast('Card saved. The message is copied too, paste it in WhatsApp.'); }
+  catch (e) { toast('Card saved. Share it in the family WhatsApp.'); }
+}
+
+/* ---------- ¡Lotería! moment (10 of 10) ---------- */
+function showLoteria(k) {
+  const el = $('#lot');
+  const fan = MEMBERS.map((m, i) => {
+    const art = m.hasImg ? `<img src="${esc(m.img)}" alt="">` : `<span>${m.emoji}</span>`;
+    return `<span class="mini" style="--mc:${m.color};--r:${-45 + i * 10}deg;--i:${i}"><span class="mini-in">${art}</span></span>`;
+  }).join('');
+  el.innerHTML = `<div class="lot-box" role="dialog" aria-modal="true" aria-labelledby="lotT">
+    <div class="fan" aria-hidden="true">${fan}</div>
+    <h2 id="lotT">¡Lotería!</h2>
+    <p>All ${N} primos are in for ${fmtDay(k, { weekday: 'long', month: 'long', day: 'numeric' })}.</p>
+    <div class="row center"><button type="button" class="btn primary" data-lot="share">${svg('share', 18)}Share this date</button><button type="button" class="btn" data-lot="close">Close</button></div>
+  </div>`;
+  el.hidden = false;
+  S.lotKey = k;
+  confetti();
+  buzz();
+  setTimeout(() => { const b = el.querySelector('[data-lot="share"]'); b && b.focus({ preventScroll: true }); }, 60);
+}
+
+// Days for a birthday month (February has 29 so leap-day birthdays can be saved).
+function dayOptions(mm, sel) {
+  const n = mm ? new Date(2000, +mm, 0).getDate() : 31;
+  return '<option value="">Day</option>' + Array.from({ length: n }, (_, i) => `<option value="${pad(i + 1)}" ${sel === pad(i + 1) ? 'selected' : ''}>${i + 1}</option>`).join('');
+}
+function openProfile() {
+  const me = BY_ID[S.me];
+  if (!me) return showPicker();
+  const b = bdayOf(me);
+  const [bm, bdd] = b ? b.split('-') : ['', ''];
+  const invite = S.mode === 'live' ? `${location.origin}${location.pathname}${S.code ? '#code=' + encodeURIComponent(S.code) : ''}` : '';
+  openSheet(`<div class="sheet-head"><div><div class="eyebrow">Your card</div><h2>${esc(me.name)}</h2></div>${closeBtn()}</div>
+    <div class="stack">
+      <div class="profile-card">${card(me, 0, false, 'div')}<div><div class="lname">${esc(me.card)}</div>${me.grito ? `<p class="grito small">«${esc(me.grito)}»</p>` : ''}${me.line ? `<div class="lline" style="text-align:left">${esc(me.line)}</div>` : ''}
+        <p style="margin-top:12px"><button type="button" class="btn" data-act="switch">${svg('user', 18)}Not you? Switch</button></p></div></div>
+      <form class="plan" id="bdayForm">
+        <div class="field"><label for="bdM">Your birthday</label>
+          <div class="two">
+            <select class="input" id="bdM" aria-label="Month"><option value="">Month</option>${MONTHS.map((mn, i) => `<option value="${pad(i + 1)}" ${bm === pad(i + 1) ? 'selected' : ''}>${mn}</option>`).join('')}</select>
+            <select class="input" id="bdD" aria-label="Day">${dayOptions(bm, bdd)}</select>
+          </div></div>
+        <p class="hint">Everyone sees a cake on your day. No year needed.</p>
+        <div class="row"><button type="submit" class="btn primary">Save birthday</button></div>
+      </form>
+      ${invite ? `<div class="plan"><div class="plan-title" style="font-size:16px">Invite a primo</div>
+        <p class="hint">This link opens the calendar straight away. Share it only in the family group.</p>
+        <div class="row"><button type="button" class="btn" data-act="copy">${svg('link', 18)}Copy invite link</button></div>
+        <input class="input linkbox" id="inviteBox" value="${esc(invite)}" readonly hidden></div>` : ''}
+      <p class="hint">Tip: open your browser menu and tap <b>Add to Home Screen</b>. Los Primos then opens like an app.</p>
+      ${S.mode === 'demo' ? '<button type="button" class="btn wide" data-act="cleardemo">Clear sample data</button>' : ''}
+      ${S.mode === 'live' ? '<button type="button" class="btn quiet wide" data-act="forget">Forget this device</button>' : ''}
+    </div>`, { kind: 'profile' });
+}
+
+/* ---------- picker + gate ---------- */
+function showPicker() {
+  closeSheet();
+  $('#deck').innerHTML = MEMBERS.map((m, i) => `<div class="lwrap">${card(m, i, m.id === S.me)}<div class="lname">${esc(m.name)}</div>${m.line ? `<div class="lline">${esc(m.line)}</div>` : ''}</div>`).join('');
+  $('#deck').hidden = false;
+  $('#pickIntro').hidden = false;
+  $('#who').hidden = true;
+  $('#pickerClose').hidden = !S.me;
+  $('#picker').hidden = false;
+  $('#picker').scrollTop = 0;
+  document.body.classList.add('locked');
+}
+function hidePicker() { $('#picker').hidden = true; document.body.classList.remove('locked'); }
+
+// Step 2 after tapping a card. First time: add your birthday (saved for the whole family).
+// Birthday already on file: type it to confirm it's you. A friendly check, not a lock.
+function showWho(id) {
+  const m = BY_ID[id];
+  const known = bdayOf(m);
+  $('#deck').hidden = true;
+  $('#pickIntro').hidden = true;
+  $('#pickerClose').hidden = true;
+  const who = $('#who');
+  who.dataset.id = id;
+  who.innerHTML = `<div class="who-panel">
+    <div class="who-card">${card(m, 0, false, 'div')}</div>
+    <div class="who-body">
+      ${m.grito ? `<p class="grito">«${esc(m.grito)}»</p>` : ''}
+      <h2>${known ? `Welcome back, ${esc(m.name)}` : `¡Hola, ${esc(m.name)}!`}</h2>
+      <p class="lede">${known ? 'Confirm your birthday to continue.' : 'Add your birthday and the whole family gets a cake on your day. No year needed.'}</p>
+      <form id="whoForm" class="who-form" novalidate>
+        <div class="two">
+          <select class="input" id="whoM" aria-label="Birthday month"><option value="">Month</option>${MONTHS.map((mn, i) => `<option value="${pad(i + 1)}">${mn}</option>`).join('')}</select>
+          <select class="input" id="whoD" aria-label="Birthday day">${dayOptions('', '')}</select>
+        </div>
+        <p class="err" id="whoErr" hidden></p>
+        <button type="submit" class="btn primary wide">That's me</button>
+        ${known ? '' : '<button type="button" class="btn quiet wide" data-who="skip">Skip for now</button>'}
+        <button type="button" class="btn quiet wide" data-who="back">Pick another card</button>
+      </form>
+    </div>
+  </div>`;
+  who.hidden = false;
+  $('#picker').scrollTop = 0;
+  setTimeout(() => $('#whoM').focus({ preventScroll: true }), 60);
+}
+function becomeMe(id, bday) {
+  const first = !S.me;
+  S.me = id;
+  store.set('me', id);
+  hidePicker();
+  renderAll();
+  const m = BY_ID[id];
+  if (bday) send({ op: 'profile', who: id, birthday: bday }, { msg: `Welcome, ${m.name}! Birthday saved: ${MONTHS[+bday.slice(0, 2) - 1]} ${+bday.slice(3)}.` });
+  else toast(first ? `Hi ${m.name}! Tap a date to answer, or drag your card onto one.` : `Switched to ${m.name}.`);
+  openPendingDay();
+}
+function submitWho() {
+  const id = $('#who').dataset.id, m = BY_ID[id];
+  const mm = $('#whoM').value, dd = $('#whoD').value;
+  const err = t => { const e = $('#whoErr'); e.textContent = t; e.hidden = false; };
+  if (!mm || !dd) return err('Pick the month and the day.');
+  const b = `${mm}-${dd}`;
+  const known = bdayOf(m);
+  if (known) {
+    if (b !== known) return err(`That's not the birthday on ${m.name}'s card. Try again, or pick your own card.`);
+    return becomeMe(id, null);
+  }
+  becomeMe(id, b);
+}
+
+function showGate(mode, err) {
+  S.gateMode = mode;
+  $('#gate').hidden = false;
+  $('#gateMsg').textContent = mode === 'setup' ? 'Almost live. In Netlify, add an environment variable named FAMILY_CODE, then redeploy the site.'
+    : mode === 'retry' ? "Couldn't load the family calendar. Check your connection and try again."
+    : 'This calendar is just for the family. Enter the family code to open it.';
+  $('#gateField').hidden = mode !== 'code';
+  $('#gateBtn').textContent = mode === 'code' ? 'Open the calendar' : 'Try again';
+  $('#gateErr').hidden = !err;
+  $('#gateErr').textContent = err || '';
+  if (mode === 'code') setTimeout(() => $('#gateCode').focus(), 50);
+}
+function lockOut() {
+  S.mode = 'locked';
+  S.code = null;
+  store.set('code', null);
+  closeSheet();
+  showGate('code', 'The family code changed. Enter the new one.');
+}
+
+/* ---------- drag and drop (mouse + touch) ---------- */
+function initDrag() {
+  const src = $('#dragMe'), ghost = $('#ghost');
+  let st = null;
+  const setTarget = cell => {
+    if (st.target === cell) return;
+    if (st.target) st.target.classList.remove('drop-target');
+    st.target = cell;
+    if (cell) { cell.classList.add('drop-target'); buzz(); }
+  };
+  const place = (x, y) => { ghost.style.transform = `translate(${x - 32}px, ${y - 32}px) rotate(-6deg) scale(1.08)`; };
+  const track = (x, y) => {
+    const gy = y - (st.touch ? 46 : 0);
+    st.gx = x; st.gy = gy;
+    place(x, gy);
+    const hit = document.elementFromPoint(x, gy);
+    const cell = hit && hit.closest ? hit.closest('.cell[data-date]') : null;
+    setTarget(cell);
+    const nav = hit && hit.closest ? hit.closest('#prev, #next') : null;
+    if (nav !== st.nav) { st.nav = nav; st.navSince = performance.now(); }
+  };
+  const hideGhost = () => { ghost.hidden = true; src.classList.remove('lifted'); document.body.classList.remove('dragging'); };
+
+  src.addEventListener('pointerdown', e => {
+    if (!S.me) return;
+    if (e.pointerType === 'mouse' && e.button !== 0) return;
+    e.preventDefault();
+    st = { id: e.pointerId, x0: e.clientX, y0: e.clientY, drag: false, touch: e.pointerType !== 'mouse', target: null, nav: null, navSince: 0, timer: 0 };
+    try { src.setPointerCapture(e.pointerId); } catch (err) {}
+  });
+  src.addEventListener('pointermove', e => {
+    if (!st || e.pointerId !== st.id) return;
+    if (!st.drag) {
+      if (Math.hypot(e.clientX - st.x0, e.clientY - st.y0) < 6) return;
+      st.drag = true;
+      ghost.innerHTML = avatar(BY_ID[S.me], 64);
+      ghost.hidden = false;
+      src.classList.add('lifted');
+      document.body.classList.add('dragging');
+      st.timer = setInterval(() => {
+        if (st && st.nav && !st.nav.disabled && performance.now() - st.navSince > 650) {
+          changeMonth(st.nav.id === 'prev' ? -1 : 1);
+          st.navSince = performance.now();
+          st.target = null;
+        }
+      }, 100);
+    }
+    e.preventDefault();
+    track(e.clientX, e.clientY);
+  });
+  const end = (e, cancelled) => {
+    if (!st || e.pointerId !== st.id) return;
+    const s = st; st = null;
+    clearInterval(s.timer);
+    try { src.releasePointerCapture(e.pointerId); } catch (err) {}
+    if (!s.drag) { if (!cancelled) nudge(); return; }
+    const cell = s.target;
+    if (cell) cell.classList.remove('drop-target');
+    const k = cell && cell.dataset.date;
+    if (k && !cancelled && k >= cutoffKey()) {
+      const r = cell.getBoundingClientRect();
+      const finish = () => { hideGhost(); setMark(k, 'in'); };
+      if (REDUCED) return finish();
+      ghost.animate([
+        { transform: ghost.style.transform, opacity: 1 },
+        { transform: `translate(${r.left + r.width / 2 - 32}px, ${r.top + r.height / 2 - 32}px) scale(.35)`, opacity: 0.2 },
+      ], { duration: 170, easing: 'ease-in' }).onfinish = finish;
+      return;
+    }
+    if (k && k < cutoffKey()) toast('That day already happened. Pick today or later.');
+    const r = src.getBoundingClientRect();
+    if (REDUCED) return hideGhost();
+    ghost.animate([
+      { transform: ghost.style.transform },
+      { transform: `translate(${r.left + r.width / 2 - 32}px, ${r.top + r.height / 2 - 32}px) rotate(0deg) scale(.95)` },
+    ], { duration: 220, easing: 'ease-in-out' }).onfinish = hideGhost;
+  };
+  src.addEventListener('pointerup', e => end(e, false));
+  src.addEventListener('pointercancel', e => end(e, true));
+  src.addEventListener('contextmenu', e => e.preventDefault());
+  src.addEventListener('click', () => { if (!S.me) showPicker(); });
+  src.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); S.me ? toast('Tab to a day and press Enter to open it, then choose I\'m in.') : showPicker(); }
+  });
+  function nudge() {
+    if (!REDUCED) src.animate([{ transform: 'rotate(0)' }, { transform: 'rotate(-10deg)' }, { transform: 'rotate(8deg)' }, { transform: 'rotate(0)' }], { duration: 420, easing: 'ease-in-out' });
+    toast(S.quick ? 'Tap any day to add yourself.' : 'Hold and drag me onto a day you can make it.');
+  }
+}
+
+/* ---------- events ---------- */
+function initEvents() {
+  const grid = $('#grid');
+  grid.addEventListener('click', e => {
+    if (Date.now() - S.swipedAt < 400) return;
+    const c = e.target.closest('.cell[data-date]');
+    if (!c) return;
+    const k = c.dataset.date;
+    if (S.quick && S.me) {
+      if (k < cutoffKey()) return toast('That day already happened. Pick today or later.');
+      setMark(k, marksOn(k)[S.me] === 'in' ? null : 'in');
+    } else openDay(k);
+  });
+  // Tap vs. scroll vs. month swipe vs. painting several dates (marking mode).
+  let sw = null, paint = null;
+  const clearPaint = () => $$('.cell.painted').forEach(c => c.classList.remove('painted'));
+  const cellAt = (x, y) => { const el = document.elementFromPoint(x, y); return el && el.closest ? el.closest('.cell[data-date]') : null; };
+  grid.addEventListener('pointerdown', e => {
+    sw = { x: e.clientX, y: e.clientY, t: Date.now(), moved: false, touch: e.pointerType !== 'mouse' };
+    if (!(S.quick && S.me) || (e.pointerType === 'mouse' && e.button !== 0)) return;
+    const c = e.target.closest('.cell[data-date]');
+    if (!c || c.dataset.date < cutoffKey()) return;
+    const k = c.dataset.date;
+    paint = { status: marksOn(k)[S.me] === 'in' ? null : 'in', keys: new Set([k]), id: e.pointerId };
+    c.classList.add('painted');
+    try { grid.setPointerCapture(e.pointerId); } catch (err) {}
+  });
+  grid.addEventListener('pointermove', e => {
+    if (sw && Math.hypot(e.clientX - sw.x, e.clientY - sw.y) > 10) sw.moved = true;
+    if (!paint || e.pointerId !== paint.id) return;
+    const c = cellAt(e.clientX, e.clientY);
+    if (c && c.dataset.date >= cutoffKey() && !paint.keys.has(c.dataset.date)) { paint.keys.add(c.dataset.date); c.classList.add('painted'); buzz(); }
+  });
+  grid.addEventListener('pointerup', e => {
+    if (paint && e.pointerId === paint.id) {
+      const p = paint; paint = null; sw = null;
+      S.swipedAt = Date.now();
+      clearPaint();
+      if (p.keys.size === 1) setMark([...p.keys][0], p.status);
+      else paintMarks([...p.keys].sort(), p.status);
+      return;
+    }
+    if (!sw) return;
+    const dx = e.clientX - sw.x, dy = e.clientY - sw.y;
+    if (sw.touch && Math.abs(dx) > 60 && Math.abs(dy) < 50 && Date.now() - sw.t < 700) { changeMonth(dx < 0 ? 1 : -1); S.swipedAt = Date.now(); }
+    else if (sw.moved) S.swipedAt = Date.now(); // a scroll is never a tap
+    sw = null;
+  });
+  grid.addEventListener('pointercancel', () => { sw = null; if (paint) { paint = null; clearPaint(); } });
+
+  $('#prev').addEventListener('click', () => changeMonth(-1));
+  $('#next').addEventListener('click', () => changeMonth(1));
+  $('#todayBtn').addEventListener('click', () => { const tk = todayKey(); const i = clamp(idx(tk.slice(0, 7)), FROM, TO); changeMonth(i - S.vi); pulse(tk); });
+  $('#meBtn').addEventListener('click', () => (S.me ? openProfile() : showPicker()));
+  const setQuick = on => { S.quick = on; renderDock(); renderHints(); };
+  $('#multiBtn').addEventListener('click', () => { if (!S.me) return showPicker(); setQuick(!S.quick); });
+  $('#modeDone').addEventListener('click', () => setQuick(false));
+  store.set('quick', null); // old setting from v1, no longer used
+  $('#lot').addEventListener('click', e => {
+    const b = e.target.closest('[data-lot]');
+    if (e.target === $('#lot') || (b && b.dataset.lot === 'close')) { $('#lot').hidden = true; return; }
+    if (b && b.dataset.lot === 'share') shareDay(S.lotKey);
+  });
+  $('#clearDemo').addEventListener('click', clearDemo);
+  $('#scrim').addEventListener('click', closeSheet);
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') { if (!$('#lot').hidden) $('#lot').hidden = true; else if (!$('#sheet').hidden) closeSheet(); else if (!$('#picker').hidden && S.me) hidePicker(); return; }
+    const typing = /^(INPUT|TEXTAREA|SELECT)$/.test((document.activeElement || {}).tagName);
+    if (!typing && $('#sheet').hidden && $('#picker').hidden && $('#gate').hidden) {
+      if (e.key === 'ArrowLeft') changeMonth(-1);
+      if (e.key === 'ArrowRight') changeMonth(1);
+    }
+  });
+  document.addEventListener('click', e => {
+    const o = e.target.closest('[data-open]');
+    if (o) openDay(o.dataset.open);
+  });
+
+  $('#deck').addEventListener('click', e => {
+    const b = e.target.closest('[data-pick]');
+    if (!b) return;
+    if (b.dataset.pick === S.me) return hidePicker();
+    showWho(b.dataset.pick);
+  });
+  $('#who').addEventListener('click', e => {
+    const a = e.target.closest('[data-who]');
+    if (!a) return;
+    if (a.dataset.who === 'skip') becomeMe($('#who').dataset.id, null);
+    if (a.dataset.who === 'back') showPicker();
+  });
+  $('#who').addEventListener('change', e => {
+    if (e.target.id === 'whoM') $('#whoD').innerHTML = dayOptions(e.target.value, $('#whoD').value);
+    $('#whoErr').hidden = true;
+  });
+  $('#who').addEventListener('submit', e => { e.preventDefault(); submitWho(); });
+  $('#pickerClose').addEventListener('click', hidePicker);
+
+  $('#sheetBody').addEventListener('click', e => {
+    const a = e.target.closest('[data-act]');
+    if (!a) return;
+    const k = S.sheet && S.sheet.key;
+    switch (a.dataset.act) {
+      case 'close': closeSheet(); break;
+      case 'pick': showPicker(); break;
+      case 'st': {
+        const want = a.dataset.st;
+        setMark(k, marksOn(k)[S.me] === want ? null : want);
+        break;
+      }
+      case 'edit': S.editing = true; S.editBase = (S.doc.plans[k] && S.doc.plans[k].updatedAt) ?? null; renderDaySheet(k, true); setTimeout(() => { const f = $('#pTitle'); f && f.focus(); }, 30); break;
+      case 'cancel': S.editing = false; renderDaySheet(k, true); break;
+      case 'unplan': {
+        const old = S.doc.plans[k];
+        S.editing = false;
+        if (old) send({ op: 'plan', who: S.me, date: k, plan: null, base: S.editBase }, {
+          msg: 'Plan removed.',
+          action: { label: 'Undo', fn: () => send({ op: 'plan', who: S.me, date: k, base: null, plan: { title: old.title, time: old.time, tz: old.tz, place: old.place, note: old.note } }, { msg: 'Plan is back.' }) },
+        });
+        renderDaySheet(k, true);
+        break;
+      }
+      case 'remind': {
+        const text = reminderText(k);
+        const box = $('#remindBox');
+        const fallback = () => { box.hidden = false; box.value = text; box.select(); toast('Copy the reminder from the box.'); };
+        try { navigator.clipboard.writeText(text).then(() => toast('Reminder copied. Paste it in the family WhatsApp.'), fallback); } catch (err) { fallback(); }
+        break;
+      }
+      case 'share': shareDay(k); break;
+      case 'lock': {
+        const p = S.doc.plans[k];
+        if (!p || !S.me) break;
+        const locking = !p.locked;
+        send({ op: 'lock', who: S.me, date: k, locked: locking }, {
+          msg: locking ? `It's on! ${p.title} is confirmed for ${fmtDay(k)}.` : 'Plan reopened. It is back to suggested.',
+          onSaved: () => { if (locking) { confetti(); buzz(); } },
+        });
+        break;
+      }
+      case 'ics': downloadICS(k); break;
+      case 'switch': showPicker(); break;
+      case 'copy': {
+        const box = $('#inviteBox');
+        const done = () => toast('Invite link copied. Paste it in the family WhatsApp.');
+        const fallback = () => { box.hidden = false; box.select(); toast('Copy the link from the box.'); };
+        try { navigator.clipboard.writeText(box.value).then(done, fallback); } catch (err) { fallback(); }
+        break;
+      }
+      case 'cleardemo': clearDemo(); closeSheet(); break;
+      case 'forget':
+        store.set('me', null); store.set('code', null);
+        try { history.replaceState(null, '', location.pathname + location.search); } catch (err) {}
+        location.reload();
+        break;
+    }
+  });
+  $('#sheetBody').addEventListener('change', e => {
+    if (e.target.id === 'bdM') $('#bdD').innerHTML = dayOptions(e.target.value, $('#bdD').value);
+  });
+  $('#sheetBody').addEventListener('submit', e => {
+    e.preventDefault();
+    if (e.target.id === 'planForm') {
+      const k = e.target.dataset.date;
+      if (!S.me) return showPicker();
+      const prev = S.doc.plans[k];
+      const time = $('#pTime').value;
+      const op = { op: 'plan', who: S.me, date: k, base: S.editBase ?? null, plan: { title: $('#pTitle').value, time, tz: time ? $('#pTz').value : '', place: $('#pPlace').value, note: $('#pNote').value } };
+      const probe = { v: 1, rev: 0, marks: {}, plans: prev ? { [k]: clone(prev) } : {}, profiles: {}, log: [] };
+      const perr = applyOp(probe, op);
+      if (perr === 'conflict') { S.editing = false; renderDaySheet(k, true); return toast('Someone changed this plan while you were editing. Take a look and try again.'); }
+      if (perr) return toast('Give the plan a name first.');
+      const unconfirmed = prev && prev.locked && !probe.plans[k].locked;
+      const msg = !prev ? 'Plan suggested. Now the primos can answer.' : unconfirmed ? 'Plan changed. Confirm it again when it works for everyone.' : 'Plan updated.';
+      if (send(op, { msg })) { S.editing = false; renderDaySheet(k, true); }
+    }
+    if (e.target.id === 'bdayForm') {
+      const m = $('#bdM').value, d = $('#bdD').value;
+      if ((m && !d) || (!m && d)) return toast('Pick both a month and a day.');
+      if (send({ op: 'profile', who: S.me, birthday: m && d ? `${m}-${d}` : '' }, { msg: m && d ? `Birthday: ${MONTHS[+m - 1]} ${+d}.` : 'Birthday cleared.' })) closeSheet();
+    }
+  });
+
+  $('#gateForm').addEventListener('submit', async e => {
+    e.preventDefault();
+    if (S.gateMode === 'code') { S.code = $('#gateCode').value.trim(); if (!S.code) return; }
+    $('#gateBtn').disabled = true;
+    try {
+      const doc = await api('GET');
+      store.set('code', S.code);
+      $('#gate').hidden = true;
+      S.mode = 'live';
+      S.doc = clone(doc);
+      S.confirmed = doc;
+      keepCodeInUrl();
+      start();
+    } catch (err) {
+      if (err.auth) showGate('code', S.code ? 'That code did not work. Check it and try again.' : '');
+      else if (err.setup) showGate('setup');
+      else showGate('retry', 'Still no connection. Try again in a moment.');
+    } finally { $('#gateBtn').disabled = false; }
+  });
+
+  ['pointerdown', 'keydown', 'scroll'].forEach(ev => addEventListener(ev, () => {
+    const wasIdle = Date.now() - S.lastAct > IDLE_MS;
+    S.lastAct = Date.now();
+    if (wasIdle) refresh();
+  }, { passive: true }));
+  document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') refresh(); });
+  addEventListener('hashchange', () => { readHashCode(); if (S.mode === 'live' || S.mode === 'demo') openPendingDay(); });
+  setInterval(() => { if (document.visibilityState === 'visible' && Date.now() - S.lastAct < IDLE_MS) refresh(); }, POLL_MS);
+  let rt;
+  addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => renderGrid(), 150); });
+}
+
+function clearDemo() {
+  S.doc = emptyDoc();
+  saveDemo();
+  renderAll();
+  toast('Sample data cleared. Everything you add stays on this device.');
+}
+
+/* ---------- boot ---------- */
+function readHashCode() {
+  const dm = location.hash.match(/day=(\d{4}-\d{2}-\d{2})/);
+  if (dm) S.pendingDay = dm[1];
+  const m = location.hash.match(/code=([^&]+)/);
+  if (!m) return;
+  S.code = decodeURIComponent(m[1]).trim();
+  store.set('code', S.code);
+}
+// Keep the code in the address bar once it works, so "Add to Home Screen" opens straight in.
+function keepCodeInUrl() {
+  if (!S.code) return;
+  try { history.replaceState(null, '', location.pathname + location.search + '#code=' + encodeURIComponent(S.code)); } catch (e) {}
+}
+
+let started = false;
+function start() {
+  if (!started) {
+    started = true;
+    const t = new Date();
+    S.vi = clamp(t.getFullYear() * 12 + t.getMonth(), FROM, TO);
+  }
+  renderAll();
+  if (!S.me) showPicker();
+  else openPendingDay();
+}
+// A shared link like #day=2026-10-10 opens that day once you are in.
+function openPendingDay() {
+  const k = S.pendingDay;
+  if (!k || !S.me) return;
+  S.pendingDay = null;
+  if (S.code) keepCodeInUrl();
+  else { try { history.replaceState(null, '', location.pathname + location.search); } catch (e) {} }
+  const i = idx(k.slice(0, 7));
+  if (i >= FROM && i <= TO) openDay(k);
+}
+
+async function boot() {
+  $('#groupName').textContent = FAMILY.group;
+  $('#pickerGroup').textContent = FAMILY.group;
+  renderLegend();
+  initEvents();
+  initDrag();
+  readHashCode();
+  probeImages().then(() => { if (started) { renderAll(); if (!$('#picker').hidden) showPicker(); } });
+  try {
+    S.confirmed = await api('GET');
+    S.doc = clone(S.confirmed);
+    S.mode = 'live';
+    keepCodeInUrl();
+  } catch (e) {
+    S.mode = 'locked';
+    if (e.auth) return showGate('code', S.code ? 'That code did not work. Check it and try again.' : '');
+    if (e.setup) return showGate('setup');
+    if (e.server) return showGate('retry', 'The calendar server had a problem. Try again in a minute.');
+    if (!ALLOW_DEMO) return showGate('retry');
+    S.mode = 'demo';
+    S.doc = loadDemo();
+  }
+  start();
+}
+
+boot();
+})();
+</script>
+</html>
