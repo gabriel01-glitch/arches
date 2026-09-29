@@ -1,6 +1,6 @@
 {
   "student": "Ruben",
-  "updated": "18 de agosto de 2026",
+  "updated": "29 de septiembre de 2026",
   "cards": [
     {
       "wrong": "I have 25 years.",
@@ -98,6 +98,16 @@
         "I ride my bike to work."
       ],
       "date": "18 de agosto de 2026"
+    },
+    {
+      "wrong": "I go to the beach every Fridays.",
+      "right": "I go to the beach every Friday.",
+      "hint": "Con 'every' el dia va en singular: 'every Friday'. Si quieres usar plural, cambia a 'on Fridays' (sin 'every'). En espanol decimos 'todos los viernes' con plural, pero en ingles 'every' ya implica repeticion y el dia queda en singular.",
+      "alts": [
+        "I go to the beach on Fridays.",
+        "I go to the beach every week on Friday."
+      ],
+      "date": "29 de septiembre de 2026"
     }
   ]
 }
