@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>La Oferta · Ruben</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#fbf7f0; --surface:#fffdf9; --ink:#2c2722; --muted:#6f665b;
+    --line:#e9e0d3; --terra:#bf5a36; --terra-dark:#8e3b22; --terra-press:#7a311c;
+    --terra-tint:#f4e4d9; --good:#3f695e; --good-tint:#e8f1dd; --bad-tint:#f6e2da;
+    --on-terra:#fffdf9; --credit:#a89c8c;
+    --room:#27302d; --room-2:#33403b; --skin1:#e9c3a1; --skin2:#c98f67; --skin3:#f2d6bd; --hair:#3a2c24; --shirt1:#5f7f96; --shirt2:#8a6b95; --shirt3:#56705a;
+    --l0:#e9e0d3; --l1:#e8b89f; --l2:#d88b5f; --l3:#3f695e; --gold:#c9962f;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0;padding:0}
+  body{background:var(--cream);color:var(--ink);font-family:'Nunito',sans-serif;-webkit-font-smoothing:antialiased;min-height:100vh}
+  :focus-visible{outline:2px solid var(--terra);outline-offset:3px}
+  .wrap{max-width:560px;margin:0 auto;padding:16px 16px 56px}
+  .back{display:inline-block;font-size:14px;font-weight:800;color:var(--terra-dark);text-decoration:none;padding:10px 0}
+  h1{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:40px;line-height:1.02;margin:2px 0 0}
+  h1 .nm{color:var(--terra)}
+  .sub{font-size:15px;color:var(--muted);font-weight:700;margin-top:8px;line-height:1.45}
+  .meta{font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--terra-dark);margin-top:14px;display:flex;justify-content:space-between;align-items:center;gap:8px}
+  .pill{background:var(--surface);border:1.5px solid var(--line);border-radius:999px;padding:6px 12px;font-size:12px;letter-spacing:.04em}
+
+  /* panel */
+  .panel{margin-top:12px;background:var(--room);border-radius:18px;padding:10px 10px 12px;border:1px solid #1d2422}
+  .tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+  .tile{background:var(--room-2);border-radius:12px;overflow:hidden;position:relative;border:2px solid transparent;transition:border-color .3s ease}
+  .tile.talk{border-color:var(--gold)}
+  .tile svg{display:block;width:100%;height:auto}
+  .tile .np{position:absolute;left:6px;bottom:5px;font-size:10px;font-weight:800;color:#f3efe8;background:rgba(0,0,0,.45);padding:2px 6px;border-radius:6px;letter-spacing:.02em}
+  .mouth{transition:d .5s ease}
+  .conf{display:flex;align-items:center;gap:10px;margin-top:10px;color:#dfe8e3;font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase}
+  .bar{flex:1;height:8px;border-radius:6px;background:rgba(255,255,255,.12);overflow:hidden}
+  .bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--l2),var(--gold));transition:width .7s ease-out}
+
+  .card{margin-top:14px;background:var(--surface);border:1.5px solid var(--line);border-radius:20px;padding:18px 16px}
+  .reveal{animation:up .4s ease-out both}
+  @keyframes up{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+  .kicker{font-size:12px;text-transform:uppercase;letter-spacing:1.3px;color:var(--terra-dark);font-weight:800;display:flex;justify-content:space-between;align-items:center;gap:8px}
+  .lvl{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:4px 10px;font-size:11px;letter-spacing:.08em;background:var(--terra-tint);color:var(--terra-dark)}
+  .lvl.l3{background:var(--good-tint);color:var(--good)}
+  .qbox{margin-top:10px;background:var(--cream);border:1px solid var(--line);border-radius:4px 16px 16px 16px;padding:12px 14px;display:flex;gap:10px;align-items:flex-start}
+  .qbox .who{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--terra-dark)}
+  .qbox .en{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:25px;line-height:1.15;margin-top:2px}
+  .qbox .es{font-size:13px;font-weight:700;color:var(--muted);margin-top:4px}
+  .src{font-size:11px;font-weight:700;color:var(--credit);margin-top:6px}
+  .ibtn{flex:none;width:44px;height:44px;border-radius:50%;border:1.5px solid var(--line);background:var(--surface);color:var(--terra-dark);display:flex;align-items:center;justify-content:center;cursor:pointer}
+  .steps{display:flex;gap:6px;margin-top:14px}
+  .steps i{flex:1;height:5px;border-radius:4px;background:var(--line)}
+  .steps i.on{background:var(--terra)} .steps i.ok{background:var(--good)}
+  .cue{font-size:16px;font-weight:700;margin-top:14px;line-height:1.4}
+  .cue small{display:block;font-size:12px;color:var(--muted);font-weight:800;letter-spacing:.08em;text-transform:uppercase;margin-bottom:2px}
+  .opts{display:flex;flex-direction:column;gap:10px;margin-top:12px}
+  .opt{background:var(--cream);border:1.5px solid var(--line);border-radius:14px;padding:13px 15px;font-size:17px;font-weight:700;color:var(--ink);cursor:pointer;text-align:left;font-family:'Nunito',sans-serif;line-height:1.35;min-height:48px}
+  .opt.bad{background:var(--bad-tint);border-color:var(--terra);color:var(--terra-dark);text-decoration:line-through;animation:shake .35s ease-in-out}
+  .opt.good{background:var(--good-tint);border-color:var(--good);color:var(--good)}
+  @keyframes shake{0%,100%{transform:none}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+  .why{margin-top:12px;background:var(--terra-tint);border-radius:12px;padding:11px 13px;font-size:14px;font-weight:700;line-height:1.45}
+  .why b{color:var(--terra-dark)}
+  .target{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:29px;line-height:1.22;margin-top:14px;cursor:pointer;word-spacing:2px}
+  .target .w{display:inline-block;border-radius:4px;transition:color .3s ease}
+  .target .w.hit{color:var(--good)}
+  .target .w.miss{color:var(--terra-dark);text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:5px}
+  .target .w.hint{color:var(--muted);letter-spacing:.06em}
+  .target.solo{color:var(--credit);font-style:italic;font-size:22px}
+  .peek{font-size:12px;font-weight:800;color:var(--muted);margin-top:4px}
+  .say-row{display:flex;align-items:center;gap:14px;margin-top:16px}
+  .mic{flex:none;width:80px;height:80px;border-radius:50%;border:none;background:var(--terra);color:var(--on-terra);display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 6px 16px rgba(191,90,54,.3);transition:transform .15s ease,background .15s ease}
+  .mic:active{transform:scale(.96)}
+  .mic.on{background:var(--terra-press);animation:pulse 1.2s ease-in-out infinite}
+  @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(191,90,54,.45)}50%{box-shadow:0 0 0 14px rgba(191,90,54,0)}}
+  .say-help{font-size:14px;font-weight:700;color:var(--muted);line-height:1.4}
+  .say-help b{color:var(--ink)}
+  .heard{margin-top:12px;font-size:14px;font-weight:700;color:var(--muted);line-height:1.4;min-height:1.4em}
+  .heard i{color:var(--ink);font-style:normal}
+  .verdict{margin-top:8px;font-weight:800;font-size:15px;line-height:1.4}
+  .verdict.ok{color:var(--good)} .verdict.no{color:var(--terra-dark)}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+  .chip{border:1.5px solid var(--terra);background:var(--surface);color:var(--terra-dark);border-radius:999px;padding:8px 12px;font-weight:800;font-size:14px;cursor:pointer;min-height:40px}
+  .chip small{font-weight:700;color:var(--muted);margin-left:6px}
+  .row{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+  .btn{flex:1;min-width:130px;min-height:48px;border-radius:14px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);font-family:'Nunito',sans-serif;font-weight:800;font-size:15px;cursor:pointer;padding:10px 14px;text-align:center;text-decoration:none;display:inline-flex;align-items:center;justify-content:center}
+  .btn:active{transform:scale(.97)}
+  .btn.main{background:var(--terra);border-color:var(--terra);color:var(--on-terra)}
+  .btn.go{background:var(--good);border-color:var(--good);color:var(--on-terra)}
+  .grid{display:grid;grid-template-columns:repeat(13,1fr);gap:5px;margin-top:10px}
+  .grid i{height:26px;border-radius:6px;background:var(--l0);position:relative}
+  .grid i.l1{background:var(--l1)} .grid i.l2{background:var(--l2)} .grid i.l3{background:var(--l3)}
+  .legend{display:flex;gap:12px;flex-wrap:wrap;font-size:12px;font-weight:800;color:var(--muted);margin-top:8px}
+  .legend span:before{content:"";display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;vertical-align:-1px;background:var(--c)}
+  .stage{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:26px;line-height:1.1;margin-top:4px}
+  .note{font-size:14px;font-weight:700;color:var(--muted);line-height:1.45;margin-top:8px}
+  .warn{margin-top:12px;background:var(--bad-tint);border-radius:12px;padding:11px 13px;font-size:14px;font-weight:700;line-height:1.45}
+  .levelup{text-align:center;padding:10px 0}
+  .levelup .big{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:34px;line-height:1.05}
+  .letter{background:#fffefb;border:1px solid var(--line);border-radius:6px;padding:18px 18px 22px;box-shadow:0 10px 24px rgba(44,39,34,.12);font-family:'Cormorant Garamond',serif;font-size:19px;line-height:1.45;margin-top:14px;transform:rotate(-1deg)}
+  .letter h3{font-size:14px;letter-spacing:.2em;text-transform:uppercase;font-family:'Nunito',sans-serif;color:var(--terra-dark);margin:0 0 10px}
+  .foot{margin-top:26px;text-align:center;font-size:12px;color:var(--credit);font-weight:700;line-height:1.6}
+  .foot a{color:var(--credit)}
+  details.how{margin-top:14px;font-size:14px;font-weight:700;color:var(--muted);line-height:1.5}
+  details.how summary{cursor:pointer;color:var(--terra-dark);font-weight:800}
+  @media (prefers-reduced-motion:reduce){ *,*:before,*:after{animation:none!important;transition:none!important} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="../?name=Ruben">&larr; Ruben</a>
+  <h1>La Oferta, <span class="nm" id="nm">Ruben</span></h1>
+  <div class="sub">Una entrevista de verdad en un hospital. Preguntas reales. No pasas a la siguiente frase hasta que la dices bien.</div>
+  <div class="meta"><span id="stageTag">Entrevista 1</span><span class="pill" id="streak">Racha: 0 días</span></div>
+  <div id="panel"></div>
+  <div id="stage" aria-live="polite"></div>
+  <div class="foot">ARCHES · Teacher Gabriel · v2026-09-29</div>
+</div>
+<script>
+(function(){
+"use strict";
+var KEY="arches_ruben_oferta_v1";
+var PEOPLE=[
+  {name:"Ms. Carter", role:"Recursos Humanos", pitch:1.1, skin:"--skin3", shirt:"--shirt2", hair:"long"},
+  {name:"Mr. Lee", role:"Jefe de Biomédica", pitch:0.85, skin:"--skin1", shirt:"--shirt1", hair:"short"},
+  {name:"Dr. Patel", role:"Director", pitch:0.95, skin:"--skin2", shirt:"--shirt3", hair:"bald"}
+];
+/* Questions: real questions reported in hospital BMET interviews (Glassdoor) and BMET interview guides.
+   Each line may carry a trap: Ruben's own logged error (or a common Spanish-speaker error). */
+var Q=[
+ {id:"about",who:0,src:"La primera pregunta en casi todas las entrevistas",q:"Please tell me about yourself.",qes:"Háblame de ti.",
+  lines:[
+   {en:"I am an electrical engineer from Cuba.",es:"Soy ingeniero eléctrico de Cuba.",trap:{wrong:"I am electrical engineer from Cuba.",why:"Profesión = <b>a / an</b>: I am <b>an</b> engineer. Tu error: \"She is nurse\"."},forbid:["am electrical"]},
+   {en:"I repair medical equipment at a private clinic.",es:"Reparo equipo médico en una clínica privada.",trap:{wrong:"I repair medical equipment at private clinical.",why:"<b>a private clinic</b>. Clinical es un adjetivo. Tu error de siempre."},forbid:["clinical"]}
+  ]},
+ {id:"field",who:0,src:"Cedars-Sinai Medical Center (Glassdoor)",q:"What is your experience in the field?",qes:"¿Cuál es tu experiencia en el campo?",
+  lines:[
+   {en:"I have many years of experience.",es:"Tengo muchos años de experiencia.",trap:{wrong:"I am many years of experience.",why:"Experiencia = <b>have</b>: I have many years of experience. Edad = <b>be</b>: I am 53. Tu error: \"I have 25 years\"."},forbid:["am many"]},
+   {en:"I work with medical equipment every day.",es:"Trabajo con equipo médico todos los días.",trap:{wrong:"I work with medical equipments every day.",why:"<b>equipment</b> nunca lleva -s en inglés."},forbid:["equipments"]}
+  ]},
+ {id:"comfortable",who:1,src:"Sodexo (Glassdoor)",q:"What equipment do you feel comfortable with?",qes:"¿Con qué equipos te sientes cómodo?",
+  lines:[
+   {en:"I am comfortable with patient monitors and defibrillators.",es:"Me siento cómodo con monitores de pacientes y desfibriladores.",trap:{wrong:"I have comfortable with patient monitors and defibrillators.",why:"Estados = <b>be</b>: I <b>am</b> comfortable. Tu error: \"I have hungry\"."},forbid:["have comfortable"]},
+   {en:"If I don't know a machine, I learn it fast.",es:"Si no conozco una máquina, la aprendo rápido.",trap:null}
+  ]},
+ {id:"safety",who:1,src:"Sodexo (Glassdoor)",q:"Do you know how to test for electrical safety?",qes:"¿Sabes hacer la prueba de seguridad eléctrica?",
+  lines:[
+   {en:"Yes. I use a safety analyzer to test the leakage current.",es:"Sí. Uso un analizador de seguridad para medir la corriente de fuga.",trap:null},
+   {en:"If it fails, the machine doesn't go to the patient.",es:"Si falla, la máquina no va al paciente.",trap:{wrong:"If it fails, the machine no go to the patient.",why:"The machine = it: <b>doesn't</b> + verbo. Tu error: \"The machine no work\"."},forbid:["no go","do not go"]}
+  ]},
+ {id:"troubleshoot",who:1,src:"Guías de entrevista BMET (ResumeCat)",q:"How do you troubleshoot a piece of equipment?",qes:"¿Cómo diagnosticas una falla en un equipo?",
+  lines:[
+   {en:"First, I check the power and the cables.",es:"Primero reviso la corriente y los cables.",trap:null},
+   {en:"Then I test the parts, one by one.",es:"Después pruebo las piezas, una por una.",trap:null}
+  ]},
+ {id:"pm",who:1,src:"Guías de entrevista BMET (ResumeCat)",q:"What preventive maintenance tasks do you perform?",qes:"¿Qué tareas de mantenimiento preventivo haces?",
+  lines:[
+   {en:"I clean it, I test it, and I replace old parts.",es:"Lo limpio, lo pruebo y cambio las piezas viejas.",trap:null},
+   {en:"I do it on a schedule, before there is a problem.",es:"Lo hago según un calendario, antes de que haya un problema.",trap:null}
+  ]},
+ {id:"prioritize",who:2,src:"Preguntas de entrevista BMET (JobInterviewQuestions)",q:"Tell me how you organize and prioritize your work.",qes:"Dime cómo organizas y priorizas tu trabajo.",
+  lines:[
+   {en:"Patient safety comes first.",es:"La seguridad del paciente va primero.",trap:{wrong:"Patient safety come first.",why:"Patient safety = it: <b>comes</b>, con -s. Tu error: \"He work at a private clinic\"."},forbid:["safety come"]},
+   {en:"Then urgent repairs, and then preventive maintenance.",es:"Luego las reparaciones urgentes, y luego el mantenimiento preventivo.",trap:null}
+  ]},
+ {id:"team",who:0,src:"TRIMEDX (Glassdoor)",q:"Do you prefer working solo or in groups, and why?",qes:"¿Prefieres trabajar solo o en grupo, y por qué?",
+  lines:[
+   {en:"I like both.",es:"Me gustan las dos cosas.",trap:null},
+   {en:"I work well alone, but a team solves problems faster.",es:"Trabajo bien solo, pero un equipo resuelve problemas más rápido.",trap:{wrong:"I work well alone, but a team solves problems more faster.",why:"<b>faster</b> ya es \"más rápido\". Nunca \"more faster\". Tu error exacto."},forbid:["more faster"]}
+  ]},
+ {id:"initiative",who:2,src:"CommonSpirit Health (Glassdoor)",q:"Give me an example of a time you took initiative.",qes:"Dame un ejemplo de una vez que tomaste la iniciativa.",
+  lines:[
+   {en:"One night, a patient monitor stopped working.",es:"Una noche, un monitor de paciente dejó de funcionar.",trap:null},
+   {en:"I couldn't find the manual, but I fixed it.",es:"No pude encontrar el manual, pero lo arreglé.",trap:{wrong:"I can't find the manual, but I fixed it.",why:"Pasado: <b>couldn't</b>. Tu error: \"Yesterday I can't fix it\"."},forbid:["can not find"]}
+  ]},
+ {id:"nurse",who:2,src:"Preguntas de entrevista BMET (JobInterviewQuestions)",q:"How do you explain a problem to a nurse?",qes:"¿Cómo le explicas un problema a una enfermera?",
+  lines:[
+   {en:"I speak slowly and I use simple words.",es:"Hablo despacio y uso palabras sencillas.",trap:null},
+   {en:"I tell the nurse when the machine will be ready.",es:"Le digo a la enfermera cuándo va a estar lista la máquina.",trap:{wrong:"I explain the nurse when the machine will be ready.",why:"<b>tell</b> + persona. \"Explain\" necesita <b>to</b>: explain <b>to</b> the nurse. Error típico del español."},forbid:["explain the nurse"]}
+  ]},
+ {id:"future",who:0,src:"ChristianaCare (Glassdoor)",q:"Where do you see yourself five years from now?",qes:"¿Dónde te ves dentro de cinco años?",
+  lines:[
+   {en:"I see myself here, with more advanced equipment.",es:"Me veo aquí, con equipo más avanzado.",trap:null},
+   {en:"And my English will be much better!",es:"¡Y mi inglés va a estar mucho mejor!",trap:{wrong:"And my English will be more better!",why:"<b>better</b> ya es \"mejor\". Para más fuerza: <b>much</b> better. Como tu \"more faster\"."},forbid:["more better"]}
+  ]},
+ {id:"availability",who:0,src:"Pregunta de filtro en casi todas las entrevistas",q:"What is your availability?",qes:"¿Cuál es tu disponibilidad?",
+  lines:[
+   {en:"Now I work on weekdays, from seven to five.",es:"Ahora trabajo entre semana, de siete a cinco.",trap:{wrong:"Now I work the weekdays, from seven to five.",why:"Días = <b>on</b>: on weekdays, on Saturdays. Tu error: \"I work the Saturday\"."},forbid:["work the weekdays"]},
+   {en:"For this job, I am flexible.",es:"Para este trabajo, soy flexible.",trap:null}
+  ]},
+ {id:"ask",who:2,src:"La última pregunta de toda entrevista",q:"Do you have any questions for us?",qes:"¿Tienes alguna pregunta para nosotros?",
+  lines:[
+   {en:"Yes. What equipment does your team work with?",es:"Sí. ¿Con qué equipos trabaja su equipo?",trap:{wrong:"Yes. What equipment your team works with?",why:"Pregunta = <b>does</b> antes del sujeto: What equipment <b>does</b> your team work with?"},forbid:["equipment your team"]},
+   {en:"And how do you train new technicians?",es:"¿Y cómo capacitan a los técnicos nuevos?",trap:null}
+  ]}
+];
+var LEX={};
+var STOP={a:1,an:1,the:1,and:1,to:1,of:1,"in":1,on:1,at:1,is:1,it:1,my:1,we:1,"for":1,with:1,but:1,so:1,then:1,yes:1,i:1,am:1,"if":1,by:1,one:1,now:1,do:1,does:1,not:1,will:1,be:1,there:1};
+var LVL=["Nuevo","Eco","Pistas","Solo"], LVLD=["","Lees y repites","Solo las primeras letras","De memoria"];
+var INT=[0,1,3,7,14];
+
+/* ---------- state ---------- */
+function today(){ var d=new Date(); return d.getFullYear()+"-"+("0"+(d.getMonth()+1)).slice(-2)+"-"+("0"+d.getDate()).slice(-2); }
+function addDays(s,n){ var d=new Date(s+"T12:00:00"); d.setDate(d.getDate()+n); return d.toISOString().slice(0,10); }
+var ST={q:{},streak:0,last:"",sessions:0,offerSeen:false};
+try{ var raw=localStorage.getItem(KEY); if(raw) ST=Object.assign(ST,JSON.parse(raw)); }catch(e){}
+Q.forEach(function(x){ if(!ST.q[x.id]) ST.q[x.id]={lvl:0,due:"",reps:0}; });
+function save(){ try{ localStorage.setItem(KEY,JSON.stringify(ST)); }catch(e){} }
+try{ var qn=new URLSearchParams(location.search).get("name"); if(qn && /^[\p{L} .'-]{1,24}$/u.test(qn)) document.getElementById("nm").textContent=qn; }catch(e){}
+
+/* ---------- audio ---------- */
+var voice=null, audioReady=false;
+function loadVoice(){
+  var vs=window.speechSynthesis?speechSynthesis.getVoices():[];
+  var NOV=/albert|bad news|bahh|bells|boing|bubbles|cellos|good news|jester|organ|superstar|trinoids|whisper|wobble|zarvox|junior|kathy|ralph|fred|eloquence|grandma|grandpa|reed|rocko|sandy|shelley|flo/i;
+  var en=vs.filter(function(v){return /^en[-_]/i.test(v.lang)&&!NOV.test(v.name);});
+  var pref=["Samantha","Google US English","Microsoft Aria","Microsoft Jenny","Microsoft Zira","Alex"];
+  voice=null;
+  for(var i=0;i<pref.length;i++){ var m=en.filter(function(v){return v.name.indexOf(pref[i])===0;})[0]; if(m){voice=m;break;} }
+  if(!voice) voice=en.filter(function(v){return /en[-_]US/i.test(v.lang);})[0]||en[0]||null;
+}
+if(window.speechSynthesis){ loadVoice(); try{ speechSynthesis.onvoiceschanged=loadVoice; }catch(e){} }
+function unlockAudio(){ if(audioReady||!window.speechSynthesis) return; try{ var u=new SpeechSynthesisUtterance(""); u.volume=0; speechSynthesis.speak(u); audioReady=true; }catch(e){} }
+document.addEventListener("touchstart",unlockAudio,{once:true});
+document.addEventListener("click",unlockAudio,{once:true});
+function speak(t,rate,pitch,onend){ if(!t||!window.speechSynthesis){ if(onend) onend(); return; } try{ speechSynthesis.cancel(); var u=new SpeechSynthesisUtterance(t); u.lang="en-US"; u.rate=rate||0.9; u.pitch=pitch||1; if(voice) u.voice=voice; if(onend){ u.onend=onend; u.onerror=onend; } speechSynthesis.speak(u); }catch(e){ if(onend) onend(); } }
+var ac=null;
+function tone(f,t0,d,v,type){ try{ if(!ac) ac=new (window.AudioContext||window.webkitAudioContext)(); if(ac.state==="suspended") ac.resume(); var o=ac.createOscillator(),g=ac.createGain(); o.type=type||"sine"; o.frequency.value=f; g.gain.setValueAtTime(0.0001,ac.currentTime+t0); g.gain.exponentialRampToValueAtTime(v||0.06,ac.currentTime+t0+0.02); g.gain.exponentialRampToValueAtTime(0.0001,ac.currentTime+t0+d); o.connect(g); g.connect(ac.destination); o.start(ac.currentTime+t0); o.stop(ac.currentTime+t0+d+0.05); }catch(e){} }
+function ding(){ tone(740,0,0.12); tone(988,0.12,0.2); }
+function fanfare(){ tone(523,0,0.15); tone(659,0.15,0.15); tone(784,0.3,0.15); tone(1047,0.45,0.35); }
+function buzz(){ tone(200,0,0.16,0.04,"triangle"); }
+
+/* ---------- matching ---------- */
+var CONTR={"doesn't":"does not","don't":"do not","didn't":"did not","couldn't":"could not","can't":"can not","cannot":"can not","isn't":"is not","it's":"it is","i'm":"i am","i'll":"i will","won't":"will not","what's":"what is","there's":"there is"};
+var NUM={"0":"zero","1":"one","2":"two","3":"three","4":"four","5":"five","6":"six","7":"seven","8":"eight","9":"nine","10":"ten","53":"fifty three"};
+var SAME={two:"to",too:"to",four:"for",there:"their","they're":"their",won:"one"};
+function norm(s){
+  s=(s||"").toLowerCase().replace(/[‘’]/g,"'").replace(/-/g," ").replace(/[^a-z0-9' ]+/g," ");
+  var out=[]; s.split(/\s+/).forEach(function(w){ w=w.replace(/^'+|'+$/g,""); if(!w) return; var r=CONTR[w]||NUM[w]||w; r.split(" ").forEach(function(x){ out.push(x); }); });
+  return out;
+}
+function key(t){ return SAME[t]||t; }
+function hasPhrase(toks,p){ var q=norm(p).map(key), k=toks.map(key); for(var i=0;i+q.length<=k.length;i++){ var ok=true; for(var j=0;j<q.length;j++) if(k[i+j]!==q[j]){ok=false;break;} if(ok) return true; } return false; }
+function grade(target, forbid, heardList){
+  var tgt=norm(target), best=null;
+  heardList.forEach(function(h){
+    var toks=norm(h), bag={}; toks.forEach(function(t){ var k=key(t); bag[k]=(bag[k]||0)+1; });
+    var hits=tgt.map(function(t){ var k=key(t); if(bag[k]){bag[k]--;return true;} if(k.length>5){ var alt=/s$/.test(k)?k.slice(0,-1):k+'s'; if(bag[alt]){bag[alt]--;return true;} } return false; });
+    var content=0,contentHit=0,stop=0,stopHit=0;
+    tgt.forEach(function(t,i){ if(STOP[t]){stop++; if(hits[i]) stopHit++;} else {content++; if(hits[i]) contentHit++;} });
+    var bad=(forbid||[]).filter(function(f){ return hasPhrase(toks,f); });
+    var pass = contentHit===content && (stop===0 || stopHit/stop>=0.6) && !bad.length;
+    var score=(contentHit*2+stopHit)/(content*2+stop||1);
+    var r={text:h,hits:hits,pass:pass,bad:bad,score:score};
+    if(!best||(r.pass&&!best.pass)||(r.pass===best.pass&&r.score>best.score)) best=r;
+  });
+  return best;
+}
+
+/* ---------- speech recognition ---------- */
+var SR=window.SpeechRecognition||window.webkitSpeechRecognition||null, micBlocked=false, recBusy=false, rec=null;
+function canListen(){ return !!SR && !micBlocked; }
+function listen(onPartial,onDone){
+  var finals=[], interim="", done=false;
+  try{ rec=new SR(); }catch(e){ micBlocked=true; return false; }
+  rec.lang="en-US"; rec.interimResults=true; rec.maxAlternatives=4; rec.continuous=false;
+  rec.onresult=function(ev){ interim=""; for(var i=ev.resultIndex;i<ev.results.length;i++){ var r=ev.results[i]; if(r.isFinal){ var a=[]; for(var j=0;j<r.length;j++) a.push(r[j].transcript); finals.push(a);} else interim+=r[0].transcript; } onPartial(finals.map(function(f){return f[0];}).join(" ")+" "+interim); };
+  rec.onerror=function(ev){ if(ev&&/not-allowed|service-not-allowed|audio-capture/.test(ev.error)) micBlocked=true; };
+  rec.onend=function(){ if(done) return; done=true; recBusy=false; var heard=[]; if(finals.length===1) heard=finals[0]; else if(finals.length>1) heard=[finals.map(function(f){return f[0];}).join(" ")]; else if(interim) heard=[interim]; onDone(heard); };
+  try{ if(window.speechSynthesis) speechSynthesis.cancel(); rec.start(); recBusy=true; }catch(e){ recBusy=false; return false; }
+  return true;
+}
+
+/* ---------- helpers ---------- */
+function esc(s){ return (s==null?"":""+s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
+function shuffle(a){ a=a.slice(); for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
+function byId(id){ return Q.filter(function(x){return x.id===id;})[0]; }
+function totalLvl(){ return Q.reduce(function(s,x){ return s+ST.q[x.id].lvl; },0); }
+function conf(){ return totalLvl()/(Q.length*3); }
+function mastered(){ return Q.filter(function(x){return ST.q[x.id].lvl>=3;}).length; }
+function stageName(){ var c=conf(); if(mastered()===Q.length) return "La oferta"; if(c<0.34) return "Entrevista 1 · Recursos Humanos"; if(c<0.67) return "Entrevista 2 · Jefe de Biomédica"; return "Entrevista 3 · El Director"; }
+var ICON={
+ speaker:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="M19 5a9 9 0 0 1 0 14"/><path d="M15.5 8.5a4 4 0 0 1 0 7"/></svg>',
+ mic:'<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0 0 14 0"/><path d="M12 17v4"/></svg>'
+};
+
+/* ---------- panel ---------- */
+var talking=-1;
+function face(p,i,mood){
+  var mouth = mood>0.66 ? "M38 66 Q50 76 62 66" : mood>0.33 ? "M39 67 Q50 71 61 67" : "M40 68 Q50 67 60 68";
+  var hair = p.hair==="long" ? '<path d="M28 44 Q30 20 50 20 Q70 20 72 44 L74 74 Q66 60 66 44 Q50 36 34 44 Q34 60 26 74Z" fill="var(--hair)"/>' : p.hair==="short" ? '<path d="M31 42 Q32 22 50 22 Q68 22 69 42 Q60 32 50 33 Q40 32 31 42Z" fill="var(--hair)"/>' : '<path d="M31 46 Q30 40 33 38 M69 46 Q70 40 67 38" stroke="var(--hair)" stroke-width="4" fill="none"/>';
+  var glasses = i===2 ? '<g fill="none" stroke="#2a2a2a" stroke-width="1.6"><circle cx="42" cy="52" r="6"/><circle cx="58" cy="52" r="6"/><path d="M48 52h4"/></g>' : '';
+  return '<svg viewBox="0 0 100 100" aria-hidden="true"><rect width="100" height="100" fill="var(--room-2)"/><rect x="0" y="0" width="100" height="100" fill="url(#g'+i+')" opacity=".35"/>'+
+    '<path d="M18 100 Q20 80 50 80 Q80 80 82 100Z" fill="var('+p.shirt+')"/><rect x="44" y="70" width="12" height="12" fill="var('+p.skin+')"/>'+
+    '<ellipse cx="50" cy="52" rx="19" ry="22" fill="var('+p.skin+')"/>'+hair+
+    '<circle cx="42" cy="52" r="2.2" fill="#2a2a2a"/><circle cx="58" cy="52" r="2.2" fill="#2a2a2a"/>'+glasses+
+    '<path class="mouth" d="'+mouth+'" stroke="#7a3b2a" stroke-width="2.4" fill="none" stroke-linecap="round"/>'+
+    '<defs><linearGradient id="g'+i+'" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#000"/></linearGradient></defs></svg>';
+}
+function drawPanel(){
+  var c=conf();
+  document.getElementById("panel").innerHTML='<div class="panel"><div class="tiles">'+PEOPLE.map(function(p,i){ return '<div class="tile'+(talking===i?' talk':'')+'">'+face(p,i,c)+'<span class="np">'+esc(p.name)+'</span></div>'; }).join("")+'</div>'+
+    '<div class="conf"><span>Confianza del panel</span><div class="bar"><i style="width:'+Math.round(c*100)+'%"></i></div><span>'+Math.round(c*100)+'%</span></div></div>';
+  document.getElementById("stageTag").textContent=stageName().split(" · ")[0];
+  document.getElementById("streak").textContent="Racha: "+(ST.streak||0)+(ST.streak===1?" día":" días");
+}
+
+/* ---------- session ---------- */
+var S=null, SE=document.getElementById("stage");
+function pickSession(){
+  var t=today(), seen=Q.filter(function(x){return ST.q[x.id].lvl>0;}), fresh=Q.filter(function(x){return ST.q[x.id].lvl===0;});
+  var due=seen.filter(function(x){ return !ST.q[x.id].due || ST.q[x.id].due<=t; }).sort(function(a,b){ return ST.q[a.id].lvl-ST.q[b.id].lvl; });
+  var nNew = seen.length===0 ? 3 : (due.length>=4 ? 1 : 2);
+  var pick=fresh.slice(0,nNew).concat(due).slice(0,5);
+  if(pick.length<5){ var rest=seen.filter(function(x){return pick.indexOf(x)<0;}).sort(function(a,b){return ST.q[a.id].lvl-ST.q[b.id].lvl;}); pick=pick.concat(rest).slice(0,5); }
+  if(pick.length<5){ pick=pick.concat(fresh.filter(function(x){return pick.indexOf(x)<0;})).slice(0,5); }
+  return pick.map(function(x){return x.id;});
+}
+function home(){
+  talking=-1; drawPanel();
+  var m=mastered(), t=today(), dueN=Q.filter(function(x){ var s=ST.q[x.id]; return s.lvl>0 && (!s.due||s.due<=t); }).length;
+  var offer = m===Q.length;
+  SE.innerHTML='<div class="card reveal"><div class="kicker"><span>Tu proceso</span><span>'+m+' / '+Q.length+' dominadas</span></div>'+
+    '<div class="stage">'+esc(stageName())+'</div>'+
+    '<div class="grid">'+Q.map(function(x){ return '<i class="l'+ST.q[x.id].lvl+'" title="'+esc(x.q)+'"></i>'; }).join("")+'</div>'+
+    '<div class="legend"><span style="--c:var(--l0)">Nueva</span><span style="--c:var(--l1)">Eco</span><span style="--c:var(--l2)">Pistas</span><span style="--c:var(--l3)">Solo</span></div>'+
+    '<div class="note">'+(ST.sessions? (dueN? 'Hoy te toca repasar '+dueN+(dueN===1?' pregunta':' preguntas')+'. Cada sesión: 5 preguntas, unos 8 minutos.' : 'Todo al día. Una sesión más te acerca a la oferta.') : 'Tres entrevistadores. Trece preguntas reales de hospitales en Estados Unidos. Cada sesión: 5 preguntas, unos 8 minutos.')+'</div>'+
+    (canListen()?'':'<div class="warn">Este ejercicio necesita el micrófono para revisar tu pronunciación. Ábrelo en <b>Safari</b> (iPhone) o <b>Chrome</b> (Android o computadora), no dentro de WhatsApp.</div>')+
+    '<div class="row"><button class="btn main" id="go">'+(ST.sessions?'Entrar a la entrevista':'Empezar la entrevista')+'</button></div>'+
+    (offer?'<div class="row"><button class="btn go" id="seeOffer">Ver tu carta de oferta</button></div>':'')+
+    '<details class="how"><summary>Cómo funciona</summary>Cada pregunta tiene 3 niveles. <b>Eco</b>: lees y repites. <b>Pistas</b>: solo ves las primeras letras. <b>Solo</b>: de memoria. Si lo dices limpio, subes. Si te cuesta mucho, bajas uno (así se aprende, no es castigo). Las preguntas regresan en 1, 3, 7 y 14 días para que no se olviden. El micrófono revisa cada palabra: no pasas hasta que la frase sale bien. Si una palabra falla, tócala para oírla despacio.</details></div>';
+  document.getElementById("go").onclick=function(){ unlockAudio(); startSession(); };
+  var so=document.getElementById("seeOffer"); if(so) so.onclick=offerScreen;
+}
+function startSession(){
+  S={ids:pickSession(), i:0, results:[]};
+  nextQuestion();
+}
+function nextQuestion(){
+  if(S.i>=S.ids.length) return endSession();
+  var x=byId(S.ids[S.i]), st=ST.q[x.id];
+  var lvl=Math.max(1,st.lvl);
+  S.cur={x:x, lvl:lvl, line:0, maxTries:0, peeked:false, chunked:false};
+  talking=x.who; drawPanel();
+  renderQuestion();
+  var p=PEOPLE[x.who];
+  setTimeout(function(){ speak(x.q,0.9,p.pitch,function(){ talking=-1; var t=document.querySelector(".tile.talk"); if(t) t.classList.remove("talk"); }); },350);
+}
+function renderQuestion(){
+  var c=S.cur, x=c.x, p=PEOPLE[x.who];
+  SE.innerHTML='<div class="card reveal">'+
+    '<div class="kicker"><span>Pregunta '+(S.i+1)+' de '+S.ids.length+'</span><span class="lvl'+(c.lvl===3?' l3':'')+'">Nivel '+c.lvl+' · '+LVL[c.lvl]+'</span></div>'+
+    '<div class="qbox"><div style="flex:1"><div class="who">'+esc(p.name)+' · '+esc(p.role)+'</div><div class="en">'+esc(x.q)+'</div><div class="es">'+esc(x.qes)+'</div><div class="src">Pregunta real: '+esc(x.src)+'</div></div><button class="ibtn" id="qsay" aria-label="Oír la pregunta">'+ICON.speaker+'</button></div>'+
+    '<div class="steps">'+x.lines.map(function(_,i){ return '<i class="'+(i<c.line?'ok':i===c.line?'on':'')+'"></i>'; }).join("")+'</div>'+
+    '<div id="lineBox"></div></div>';
+  document.getElementById("qsay").onclick=function(){ speak(x.q,0.9,p.pitch); };
+  renderLine();
+}
+function renderLine(){
+  var c=S.cur, L=c.x.lines[c.line], box=document.getElementById("lineBox");
+  c.tries=0; c.parts=null;
+  var steps=document.querySelectorAll(".steps i"); Array.prototype.forEach.call(steps,function(s,i){ s.className=i<c.line?'ok':i===c.line?'on':''; });
+  if(L.trap && c.lvl<3){
+    var opts=shuffle([L.en,L.trap.wrong]);
+    box.innerHTML='<div class="cue"><small>Primero: ¿cuál dirías?</small>'+esc(L.es)+'</div><div class="opts">'+opts.map(function(o){ return '<button class="opt" data-o="'+esc(o)+'">'+esc(o)+'</button>'; }).join("")+'</div><div id="whyBox"></div>';
+    Array.prototype.forEach.call(box.querySelectorAll(".opt"),function(b){
+      b.onclick=function(){
+        if(b.getAttribute("data-o")===L.en){ b.classList.add("good"); ding(); document.getElementById("whyBox").innerHTML='<div class="why reveal">'+L.trap.why+'</div>'; setTimeout(function(){ sayStage(L,box); },900); Array.prototype.forEach.call(box.querySelectorAll(".opt"),function(o){o.disabled=true;}); }
+        else { b.classList.add("bad"); b.disabled=true; buzz(); c.trapMiss=true; document.getElementById("whyBox").innerHTML='<div class="why reveal">'+L.trap.why+'</div>'; }
+      };
+    });
+  } else sayStage(L,box);
+}
+function hintText(s){ return s.split(/\s+/).map(function(w){ var m=w.match(/^([^A-Za-z]*)([A-Za-z])([A-Za-z'’]*)([^A-Za-z]*)$/); if(!m) return w; return m[1]+m[2]+m[3].replace(/[A-Za-z]/g,"_")+m[4]; }).join(" "); }
+function targetHTML(text,hits,mode){
+  var words=text.split(/\s+/), hi=0;
+  return words.map(function(w){
+    var n=norm(w).length, seg=hits?hits.slice(hi,hi+n):null, cls="";
+    if(seg && seg.length){ cls=seg.every(Boolean)?" hit":" miss"; }
+    hi+=n;
+    var shown = (mode===2 && !seg) ? hintText(w) : w;
+    return '<span class="w'+cls+(mode===2&&!seg?' hint':'')+'" data-w="'+esc(w.replace(/[^A-Za-z'’]/g,"").toLowerCase())+'">'+esc(shown)+'</span>';
+  }).join(" ");
+}
+function sayStage(L,box){
+  var c=S.cur;
+  var segs = c.parts || [L.en];
+  var segText = segs[c.partIdx||0]; c.segText=segText;
+  var mode=c.lvl;
+  var tgtHTML = mode===3 ? '<div class="target solo" id="tgt">'+esc(L.es)+'</div><div class="peek">Dilo en inglés, de memoria. Toca aquí si necesitas pista.</div>' :
+                '<div class="target" id="tgt">'+targetHTML(segText,null,mode)+'</div>'+(mode===2?'<div class="peek">Toca la frase si necesitas verla completa.</div>':'');
+  box.innerHTML=(mode<3?'<div class="cue"><small>'+(c.parts?'Por partes: '+((c.partIdx||0)+1)+' de '+segs.length:'Ahora dilo')+'</small>'+esc(L.es)+'</div>':'<div class="cue"><small>'+(c.parts?'Por partes: '+((c.partIdx||0)+1)+' de '+segs.length:'De memoria')+'</small></div>')+tgtHTML+
+    '<div class="say-row"><button class="mic" id="mic" aria-label="Micrófono">'+ICON.mic+'</button><div class="say-help"><b>Toca el micrófono</b> y dilo. Pasas cuando cada palabra sale clara.</div></div>'+
+    '<div class="heard" id="heard"></div><div id="verdict"></div><div id="chips"></div>'+
+    '<div class="row"><button class="btn" id="model">Oír el modelo</button><button class="btn" id="slow">Más despacio</button></div>';
+  var tgt=document.getElementById("tgt"), mic=document.getElementById("mic"), heardEl=document.getElementById("heard"), vEl=document.getElementById("verdict"), chipsEl=document.getElementById("chips");
+  var revealT=null;
+  function reveal(){ c.peeked=true; tgt.classList.remove("solo"); tgt.innerHTML=targetHTML(segText,null,mode===3?2:1); clearTimeout(revealT); if(mode===3){ revealT=setTimeout(function(){ tgt.innerHTML=targetHTML(segText,null,2); },4000);} else if(mode===2){ revealT=setTimeout(function(){ tgt.innerHTML=targetHTML(segText,null,2); },3000);} }
+  if(mode>=2) tgt.onclick=reveal;
+  document.getElementById("model").onclick=function(){ if(mode>=2) c.peeked=true; speak(segText,0.85,1); };
+  document.getElementById("slow").onclick=function(){ if(mode>=2) c.peeked=true; speak(segText,0.62,1); };
+  if(mode===1) setTimeout(function(){ speak(segText,0.85,1); },300);
+  if(!canListen()){
+    mic.innerHTML=ICON.mic;
+    box.querySelector(".say-help").innerHTML='<b>Sin micrófono aquí.</b> Dilo en voz alta dos veces y toca el botón. (Para que el ejercicio te revise, ábrelo en Safari o Chrome.)';
+    mic.onclick=function(){ reveal(); passed(true); };
+    return;
+  }
+  mic.onclick=function(){
+    if(recBusy){ try{rec.stop();}catch(e){} return; }
+    mic.classList.add("on"); heardEl.innerHTML="Escuchando...";
+    var ok=listen(function(t){ heardEl.innerHTML='Te oigo: <i>'+esc(t.trim())+'</i>'; }, function(list){
+      mic.classList.remove("on");
+      if(!list.length){ if(micBlocked){ sayStage(L,box); return; } heardEl.innerHTML="No te oí. Acércate al teléfono y habla un poco más fuerte."; return; }
+      c.tries++; c.maxTries=Math.max(c.maxTries,c.tries);
+      var g=grade(segText,L.forbid,list);
+      heardEl.innerHTML='Te oí: <i>'+esc(g.text)+'</i>';
+      tgt.classList.remove("solo"); tgt.innerHTML=targetHTML(segText,g.hits,1);
+      if(g.pass){ passed(false); return; }
+      buzz();
+      var missed=[]; var words=segText.split(/\s+/), hi=0;
+      words.forEach(function(w){ var n=norm(w).length; var seg=g.hits.slice(hi,hi+n); hi+=n; var clean=w.replace(/[^A-Za-z'’]/g,""); if(seg.length && !seg.every(Boolean) && missed.indexOf(clean.toLowerCase())<0) missed.push(clean.toLowerCase()); });
+      var msg = g.bad.length ? 'Se coló el error: <b>'+esc(g.bad[0])+'</b>. Otra vez, con la forma correcta.' : 'Casi. Las palabras subrayadas no se oyeron claras. Tócalas, escúchalas y vuelve a intentar.';
+      vEl.innerHTML='<div class="verdict no reveal">'+msg+'</div>';
+      chipsEl.innerHTML='<div class="chips">'+missed.slice(0,6).map(function(w){ return '<button class="chip" data-w="'+esc(w)+'">'+esc(w)+(LEX[w]?'<small>'+esc(LEX[w])+'</small>':'')+'</button>'; }).join("")+'</div>';
+      Array.prototype.forEach.call(chipsEl.querySelectorAll(".chip"),function(ch){ ch.onclick=function(){ speak(ch.getAttribute("data-w"),0.6,1); }; });
+      if(c.tries>=5 && !c.parts){
+        var parts=splitSentence(L.en);
+        if(parts.length>1){ vEl.innerHTML+='<div class="why reveal">Vamos por partes. Primero la mitad, después la otra mitad. Igual tienes que decirlas bien.</div>'; c.parts=parts; c.partIdx=0; c.chunked=true; setTimeout(function(){ sayStage(L,box); },1800); }
+      }
+    });
+    if(!ok){ mic.classList.remove("on"); sayStage(L,box); }
+  };
+  function passed(noMic){
+    ding();
+    vEl.innerHTML='<div class="verdict ok reveal">'+(noMic?'Bien.':pickPraise())+'</div>'; chipsEl.innerHTML="";
+    mic.disabled=true;
+    setTimeout(function(){
+      if(c.parts && c.partIdx<c.parts.length-1){ c.partIdx++; c.tries=0; sayStage(L,box); return; }
+      c.parts=null; c.partIdx=0;
+      c.line++;
+      if(c.line>=c.x.lines.length) finishQuestion(); else renderLine();
+    },1100);
+  }
+}
+var PRAISE=["Clarísimo.","Perfecto. El panel te entendió.","Eso suena a técnico con experiencia.","Muy bien dicho.","Así se contesta."];
+function pickPraise(){ return PRAISE[Math.floor(Math.random()*PRAISE.length)]; }
+function splitSentence(s){
+  var m=s.match(/^(.+?[,.?!])\s+(.+)$/); if(m) return [m[1],m[2]];
+  var w=s.split(/\s+/), mid=w.length/2, best=-1, BR={from:1,at:1,"with":1,to:1,"for":1,and:1,but:1,when:1,before:1,every:1,one:1};
+  for(var i=2;i<w.length-1;i++){ if(BR[w[i].toLowerCase()] && (best<0||Math.abs(i-mid)<Math.abs(best-mid))) best=i; }
+  var h=best>0?best:Math.ceil(mid); return [w.slice(0,h).join(" "), w.slice(h).join(" ")];
+}
+function finishQuestion(){
+  var c=S.cur, st=ST.q[c.x.id], before=st.lvl, t=today();
+  var clean = c.maxTries<=2 && !c.peeked && !c.chunked && !c.trapMiss;
+  var hard = c.maxTries>=5 || c.chunked;
+  if(before===0) st.lvl = clean ? 2 : 1;
+  else if(clean) st.lvl=Math.min(3,st.lvl+1);
+  else if(hard) st.lvl=Math.max(1,st.lvl-1);
+  if(st.lvl>=3 && clean && before>=3) st.reps=(st.reps||0)+1; else if(st.lvl<before) st.reps=0;
+  var gap = st.lvl<3 ? (st.lvl===1?0:1) : INT[Math.min(4,1+(st.reps||0))];
+  st.due=addDays(t,gap);
+  S.results.push({id:c.x.id,from:before,to:st.lvl});
+  save();
+  var up=st.lvl>before, down=st.lvl<before;
+  if(up) fanfare();
+  drawPanel();
+  var box=document.getElementById("lineBox");
+  var steps=document.querySelectorAll(".steps i"); Array.prototype.forEach.call(steps,function(s){ s.className='ok'; });
+  box.innerHTML='<div class="levelup reveal"><div class="big">'+(up? (before===0?'Nivel '+st.lvl+' · '+LVL[st.lvl]:'Subes a '+LVL[st.lvl]) : down? 'Volvemos a '+LVL[st.lvl] : 'Te quedas en '+LVL[st.lvl])+'</div>'+
+    '<div class="note">'+(up? (st.lvl===3?'La próxima vez, de memoria. Así la dices en la entrevista de verdad.':LVLD[st.lvl]+' la próxima vez.') : down? 'Le costó hoy. Con más ayuda se queda mejor. Es parte del método.' : 'Sale bien. Una vuelta más y subes.')+'</div>'+
+    '<div class="row"><button class="btn main" id="nextQ">'+(S.i+1<S.ids.length?'Siguiente pregunta':'Terminar la sesión')+'</button></div></div>';
+  document.getElementById("nextQ").onclick=function(){ S.i++; nextQuestion(); };
+}
+function endSession(){
+  var t=today();
+  if(ST.last!==t){ ST.streak = (ST.last===addDays(t,-1)) ? (ST.streak||0)+1 : 1; ST.last=t; }
+  ST.sessions=(ST.sessions||0)+1; save();
+  talking=-1; drawPanel();
+  var ups=S.results.filter(function(r){return r.to>r.from;}).length;
+  if(mastered()===Q.length && !ST.offerSeen){ ST.offerSeen=true; save(); return offerScreen(); }
+  SE.innerHTML='<div class="card reveal"><div class="kicker"><span>Sesión terminada</span><span>'+mastered()+' / '+Q.length+' dominadas</span></div>'+
+    '<div class="stage">'+(ups?ups+(ups===1?' pregunta subió de nivel':' preguntas subieron de nivel'):'Sesión completa')+'</div>'+
+    '<div class="note">Mr. Lee toma notas. Dr. Patel sonríe un poco más. '+(mastered()<Q.length?'Cuando domines las '+Q.length+', te llega la carta de oferta.':'')+'</div>'+
+    '<div class="grid">'+Q.map(function(x){ return '<i class="l'+ST.q[x.id].lvl+'"></i>'; }).join("")+'</div>'+
+    '<div class="row"><button class="btn main" id="again">Otra sesión</button><a class="btn" href="../?name=Ruben">Volver</a></div></div>';
+  speak("Thank you, Ruben. We'll be in touch.",0.9,PEOPLE[2].pitch);
+  document.getElementById("again").onclick=startSession;
+}
+function offerScreen(){
+  fanfare(); drawPanel();
+  SE.innerHTML='<div class="card reveal"><div class="kicker"><span>Correo nuevo</span><span>Recursos Humanos</span></div>'+
+    '<div class="letter"><h3>Offer Letter</h3>Dear Ruben,<br><br>Thank you for your excellent interview. We are happy to offer you the position of <b>Biomedical Equipment Technician</b>.<br><br>Welcome to the team.<br><br><i>Ms. Carter, Mr. Lee and Dr. Patel</i></div>'+
+    '<div class="note">Dominaste las '+Q.length+' preguntas, de memoria. Ya no es práctica: así contestas en la entrevista de verdad. Sigue haciendo una sesión de repaso cada pocos días.</div>'+
+    '<div class="row"><button class="btn main" id="home">Volver al inicio</button></div></div>';
+  speak("Dear Ruben. We are happy to offer you the position. Welcome to the team.",0.88,1.1);
+  document.getElementById("home").onclick=home;
+}
+window.__oferta={Q:Q,grade:grade,norm:norm,get S(){return S;},get ST(){return ST;},home:home};
+home();
+})();
+</script>
+</body>
+</html>
