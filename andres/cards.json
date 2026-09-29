@@ -1,6 +1,6 @@
 {
   "student": "Andres",
-  "updated": "6 de agosto de 2026",
+  "updated": "29 de septiembre de 2026",
   "cards": [
     {
       "wrong": "I go to the bank to pay the rent.",
@@ -107,6 +107,37 @@
         "Whenever you need days off, you need to speak with me."
       ],
       "date": "6 de agosto de 2026"
+    },
+    {
+      "wrong": "I arrived to work.",
+      "right": "I arrived at work.",
+      "hint": "En espanol decimos 'llegue A el trabajo', por eso se cuela 'to'. En ingles, arrive va con 'at' para lugares especificos (arrive at work, arrive at the airport) y con 'in' para ciudades o paises (arrive in Miami). Con 'get' si usas 'to': got to work.",
+      "alts": [
+        "I got to work.",
+        "I arrived at the office."
+      ],
+      "date": "29 de septiembre de 2026"
+    },
+    {
+      "wrong": "A car hits another car's.",
+      "right": "A car hits another car.",
+      "hint": "El 's marca posesión (de quién es algo), pero aquí 'another car' es lo que recibe el golpe, o sea el objeto directo. En español no cambia la palabra 'otro carro' cuando es objeto, y en inglés tampoco: no lleva 's.",
+      "alts": [
+        "One car hits another.",
+        "A car hits another one."
+      ],
+      "date": "29 de septiembre de 2026"
+    },
+    {
+      "wrong": "A car hit another cars.",
+      "right": "A car hit several other cars.",
+      "hint": "Another significa 'un otro' y solo va con singular (another car). Para varios carros usa other + plural (other cars), y agrega several, many o a lot of para dar la idea de cantidad.",
+      "alts": [
+        "A car hit a lot of other cars.",
+        "A car hit many other cars.",
+        "A car hit multiple other cars."
+      ],
+      "date": "29 de septiembre de 2026"
     }
   ]
 }
