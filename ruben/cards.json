@@ -108,6 +108,16 @@
         "I go to the beach every week on Friday."
       ],
       "date": "29 de septiembre de 2026"
+    },
+    {
+      "wrong": "I will went to the beach.",
+      "right": "I will go to the beach.",
+      "hint": "Despues de 'will' siempre va el verbo en forma base (infinitivo sin 'to'). 'Went' es pasado y no puede combinarse con 'will', que es futuro. En español podemos mezclar tiempos con mas libertad, pero en ingles 'will' exige el verbo base.",
+      "alts": [
+        "I am going to go to the beach.",
+        "I'm going to the beach."
+      ],
+      "date": "29 de septiembre de 2026"
     }
   ]
 }
