@@ -108,7 +108,9 @@
         "I go to the beach every week on Friday."
       ],
       "date": "29 de septiembre de 2026"
-    },
+    }
+  ],
+  "removed": [
     {
       "wrong": "I will went to the beach.",
       "right": "I will go to the beach.",
@@ -117,7 +119,8 @@
         "I am going to go to the beach.",
         "I'm going to the beach."
       ],
-      "date": "29 de septiembre de 2026"
+      "date": "29 de septiembre de 2026",
+      "removedOn": "2026-09-29"
     }
   ]
 }
