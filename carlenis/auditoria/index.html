@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>La Auditoría · Carlenis</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#fbf7f0; --surface:#fffdf9; --ink:#2c2722; --muted:#6f665b;
+    --line:#e9e0d3; --terra:#bf5a36; --terra-dark:#8e3b22; --terra-press:#7a311c;
+    --terra-tint:#f4e4d9; --good:#3f695e; --good-tint:#e8f1dd; --bad-tint:#f6e2da;
+    --on-terra:#fffdf9; --credit:#a89c8c;
+    --ledger:#f7faf4; --rule:#d7e5d2; --margin:#e3a39a; --ink-blue:#2d4a6b; --stamp:#b3372b; --stamp-ok:#2f6b52;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0;padding:0}
+  body{background:var(--cream);color:var(--ink);font-family:'Nunito',sans-serif;-webkit-font-smoothing:antialiased;min-height:100vh}
+  :focus-visible{outline:2px solid var(--terra);outline-offset:3px}
+  .wrap{max-width:560px;margin:0 auto;padding:16px 16px 56px}
+  .back{display:inline-block;font-size:14px;font-weight:800;color:var(--terra-dark);text-decoration:none;padding:10px 0}
+  h1{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:40px;line-height:1.02;margin:2px 0 0}
+  h1 .nm{color:var(--terra)}
+  .sub{font-size:15px;color:var(--muted);font-weight:700;margin-top:8px;line-height:1.45}
+  .num{font-variant-numeric:tabular-nums;font-feature-settings:"tnum"}
+
+  .ledger{margin-top:14px;background:var(--ledger);border:1.5px solid var(--rule);border-radius:14px;overflow:hidden;position:relative}
+  .ledger .hd{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:#eaf2e5;border-bottom:1.5px solid var(--rule);font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-blue)}
+  .ledger table{width:100%;border-collapse:collapse;font-size:14px}
+  .ledger td{padding:8px 14px;border-bottom:1px solid var(--rule)}
+  .ledger td:last-child{text-align:right;font-weight:800;color:var(--ink-blue)}
+  .ledger tr:last-child td{border-bottom:none}
+  .ledger .big td:last-child{font-size:22px;color:var(--stamp)}
+  .ledger.done .big td:last-child{color:var(--stamp-ok)}
+  .stamp{position:absolute;left:46%;top:62px;border:3px solid var(--stamp-ok);color:var(--stamp-ok);border-radius:8px;padding:4px 10px;font-weight:800;letter-spacing:.14em;font-size:13px;transform:rotate(-10deg) scale(1);opacity:0;pointer-events:none;background:rgba(247,250,244,.85)}
+  .stamp.show{animation:stampIn .45s ease-out forwards}
+  @keyframes stampIn{0%{opacity:0;transform:rotate(-10deg) scale(1.8)}100%{opacity:1;transform:rotate(-10deg) scale(1)}}
+
+  .card{margin-top:14px;background:var(--surface);border:1.5px solid var(--line);border-radius:20px;padding:18px 16px}
+  .reveal{animation:up .4s ease-out both}
+  @keyframes up{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+  .kicker{font-size:12px;text-transform:uppercase;letter-spacing:1.3px;color:var(--terra-dark);font-weight:800;display:flex;justify-content:space-between;align-items:center;gap:8px}
+  .doc{margin-top:12px;background:#fff;border:1px solid var(--line);border-radius:10px;box-shadow:0 6px 18px rgba(44,39,34,.06);overflow:hidden}
+  .doc .dh{padding:10px 14px;border-bottom:1px solid var(--line);font-size:13px;line-height:1.5;color:var(--muted);font-weight:700}
+  .doc .dh b{color:var(--ink)}
+  .doc .db{padding:12px 14px 16px;font-size:17px;line-height:1.9;font-weight:600}
+  .doc.chat .db{background:#efeae2}
+  .bubble{background:#fff;border-radius:4px 12px 12px 12px;padding:8px 12px;margin:6px 0;display:block;box-shadow:0 1px 1px rgba(0,0,0,.06)}
+  .t{cursor:pointer;border-radius:4px;padding:1px 1px;transition:background .15s ease}
+  .t:hover{background:#f3eee6}
+  .t.nope{background:var(--bad-tint);animation:shake .35s ease-in-out}
+  .t.err.fixed{background:var(--good-tint);color:var(--good);font-weight:800;cursor:default}
+  .t.err.open{background:#fbe7b8;outline:2px solid #e2b04a}
+  @keyframes shake{0%,100%{transform:none}25%{transform:translateX(-3px)}75%{transform:translateX(3px)}}
+  .hint{font-size:14px;font-weight:700;color:var(--muted);margin-top:10px;line-height:1.45}
+  .fix{margin-top:12px;border:1.5px solid #e2b04a;background:#fffaf0;border-radius:14px;padding:12px 14px}
+  .fix .q{font-size:14px;font-weight:800;color:var(--ink)}
+  .opts{display:flex;flex-direction:column;gap:8px;margin-top:10px}
+  .opt{background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;font-size:16px;font-weight:700;color:var(--ink);cursor:pointer;text-align:left;font-family:'Nunito',sans-serif;min-height:46px}
+  .opt.bad{background:var(--bad-tint);border-color:var(--terra);color:var(--terra-dark);text-decoration:line-through}
+  .opt.good{background:var(--good-tint);border-color:var(--good);color:var(--good)}
+  .why{margin-top:10px;background:var(--terra-tint);border-radius:12px;padding:10px 12px;font-size:14px;font-weight:700;line-height:1.45}
+  .why b{color:var(--terra-dark)}
+  .row{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+  .btn{flex:1;min-width:130px;min-height:48px;border-radius:14px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);font-family:'Nunito',sans-serif;font-weight:800;font-size:15px;cursor:pointer;padding:10px 14px;text-align:center;text-decoration:none;display:inline-flex;align-items:center;justify-content:center}
+  .btn:active{transform:scale(.97)}
+  .btn.main{background:var(--terra);border-color:var(--terra);color:var(--on-terra)}
+  .btn.go{background:var(--good);border-color:var(--good);color:var(--on-terra)}
+  .ibtn{flex:none;width:44px;height:44px;border-radius:50%;border:1.5px solid var(--line);background:var(--surface);color:var(--terra-dark);display:inline-flex;align-items:center;justify-content:center;cursor:pointer}
+  .partner{display:flex;gap:12px;align-items:flex-start;margin-top:12px}
+  .av{width:46px;height:46px;border-radius:50%;background:var(--ink-blue);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-weight:700;font-size:22px;flex:none}
+  .pq{background:var(--cream);border:1px solid var(--line);border-radius:4px 14px 14px 14px;padding:10px 12px;font-family:'Cormorant Garamond',serif;font-weight:700;font-size:22px;line-height:1.2;flex:1}
+  .cue{font-size:16px;font-weight:700;margin-top:12px;line-height:1.45}
+  .cue small{display:block;font-size:12px;color:var(--muted);font-weight:800;letter-spacing:.08em;text-transform:uppercase;margin-bottom:2px}
+  .target{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:26px;line-height:1.22;margin-top:12px}
+  .target.hid{color:transparent;text-shadow:0 0 12px rgba(44,39,34,.35);user-select:none}
+  .w.hit{color:var(--good)} .w.miss{color:var(--terra-dark);text-decoration:underline;text-underline-offset:4px}
+  .say-row{display:flex;align-items:center;gap:14px;margin-top:14px}
+  .mic{flex:none;width:76px;height:76px;border-radius:50%;border:none;background:var(--terra);color:var(--on-terra);display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 6px 16px rgba(191,90,54,.3)}
+  .mic.on{background:var(--terra-press);animation:pulse 1.2s ease-in-out infinite}
+  @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(191,90,54,.45)}50%{box-shadow:0 0 0 14px rgba(191,90,54,0)}}
+  .say-help{font-size:14px;font-weight:700;color:var(--muted);line-height:1.4}
+  .say-help b{color:var(--ink)}
+  .heard{margin-top:10px;font-size:14px;font-weight:700;color:var(--muted);min-height:1.4em}
+  .heard i{font-style:normal;color:var(--ink)}
+  .verdict{margin-top:6px;font-weight:800;font-size:15px}
+  .verdict.ok{color:var(--good)} .verdict.no{color:var(--terra-dark)}
+  .opinion{margin:10px auto 0;text-align:center}
+  .opinion .seal{display:inline-block;border:4px double var(--stamp-ok);color:var(--stamp-ok);border-radius:12px;padding:12px 18px;transform:rotate(-4deg);font-weight:800;letter-spacing:.14em;text-transform:uppercase}
+  .opinion .seal.q{border-color:var(--stamp);color:var(--stamp)}
+  .opinion .seal small{display:block;letter-spacing:.04em;text-transform:none;font-size:13px;margin-top:4px}
+  .h2{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:30px;line-height:1.05;text-align:center;margin-top:14px}
+  .note{font-size:14px;font-weight:700;color:var(--muted);line-height:1.5;margin-top:8px}
+  .rules{display:flex;flex-direction:column;gap:10px;margin-top:14px}
+  .rule{border-left:4px solid var(--terra);background:var(--cream);border-radius:0 12px 12px 0;padding:10px 12px}
+  .rule h3{margin:0;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--terra-dark)}
+  .rule p{margin:4px 0 0;font-size:15px;font-weight:700;line-height:1.45}
+  .rule b{color:var(--terra-dark)}
+  .foot{margin-top:26px;text-align:center;font-size:12px;color:var(--credit);font-weight:700}
+  @media (prefers-reduced-motion:reduce){ *,*:before,*:after{animation:none!important;transition:none!important} .stamp.show{opacity:1} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="../?name=Carlenis">&larr; Carlenis</a>
+  <h1>La Auditoría, <span class="nm" id="nm">Carlenis</span></h1>
+  <div class="sub">Eres la auditora. Tres documentos de un cliente, doce discrepancias escondidas. Encuéntralas, corrígelas y reporta al socio en voz alta.</div>
+  <div id="ledger"></div>
+  <div id="stage" aria-live="polite"></div>
+  <div class="foot">ARCHES · Teacher Gabriel · v2026-09-29</div>
+</div>
+<script>
+(function(){
+"use strict";
+var KEY="arches_carlenis_auditoria_v1";
+/* Documents. [[text|id]] marks a discrepancy. Every other word is tappable too (false positive). */
+var DOCS=[
+ {id:"email", kind:"mail", title:"Correo del cliente",
+  head:'<b>From:</b> Dana Walker, Walker Remodeling LLC<br><b>Subject:</b> Documents for the audit',
+  body:"Hi Carlenis, Thank you for your help this month. Please send me a [[resume|resume]] of the month before Friday. I know [[there are too many information|info]] in the reports, sorry! Also, we need to [[ensemble|ensemble]] the new shelves in the office, so the files are a little messy. [[It is necessary to me|necessary]] to see the final numbers soon. Best, Dana",
+  report:{who:"Mr. Brooks", q:"So, what does the client need?", cue:"Dile que la clienta mandó demasiada información, así que vas a preparar un resumen.", en:"The client sent too much information, so I will prepare a summary.", forbid:["too many information","a resume"]}},
+ {id:"notes", kind:"notes", title:"Notas de la junta",
+  head:'<b>Meeting notes</b> · Walker Remodeling · written by the junior assistant',
+  body:"1. The bank [[sent a solicitation|solicitation]] for more documents. 2. Dana asked: [[How could do it the new software|howcould]]? Nobody knew. 3. The main office [[was build|build]] in 1990, so the building value is low. 4. The manager [[told that|told]] the deadline is Friday. 5. All receipts are in the blue folder.",
+  report:{who:"Mr. Brooks", q:"Anything important from the meeting?", cue:"Dile que el banco mandó una solicitud, y que el gerente dijo que la fecha límite es el viernes.", en:"The bank sent a request, and the manager said the deadline is Friday.", forbid:["solicitation","told that"]}},
+ {id:"chat", kind:"chat", title:"WhatsApp del jefe",
+  head:'<b>WhatsApp</b> · Office group · 7:42 AM',
+  body:"{{Manager: Good morning team. [[Actually|actually]] we are working on the Walker audit.}}{{Manager: Please [[assist to|assist]] the meeting on Monday at 9.}}{{Assistant: [[I am agree|agree]] with the new policy!}}{{Manager: Great. And the new assistant needs to be more [[ordered|ordered]] with the files.}}",
+  report:{who:"Mr. Brooks", q:"And what do you think about the new policy?", cue:"Dile que estás de acuerdo, y que todos necesitan ser más organizados.", en:"I agree. We all need to be more organized.", forbid:["am agree","ordered"]}}
+];
+var ERR={
+ resume:{fix:"summary",opts:["summary","resume","curriculum"],why:"<b>Resume</b> en inglés es el currículum. Resumen = <b>summary</b>. Tu frase: \"a resume of the day\"."},
+ info:{fix:"there is too much information",opts:["there is too much information","there are too much informations","there is too many information"],why:"<b>Information</b> no se cuenta: nunca lleva -s, va con <b>is</b> y <b>much</b>. Tu frase exacta."},
+ ensemble:{fix:"assemble",opts:["assemble","ensamble","assembly"],why:"Armar = <b>assemble</b>. <b>Ensemble</b> es un grupo musical. Lo dijiste dos veces en julio."},
+ necessary:{fix:"It is necessary for me",opts:["It is necessary for me","It is necessary that me","It is necessary of me"],why:"<b>necessary for</b> + persona + to. Tu frase: \"necessary to him to assume\" = <b>for him</b>."},
+ solicitation:{fix:"sent a request",opts:["sent a request","sent an application of","sent a petition to"],why:"Solicitud = <b>request</b>. <b>Solicitation</b> en inglés suena a pedir dinero o ventas. Tu frase de julio."},
+ howcould:{fix:"How could the new software do it",opts:["How could the new software do it","How could the new software does it","How the new software could do it"],why:"Pregunta: <b>could + sujeto + verbo</b>. Tu frase: \"How could do it AI?\" = How could <b>AI do</b> it?"},
+ build:{fix:"was built",opts:["was built","was builded","was building"],why:"Pasiva = was + participio. build, built, <b>built</b>. Tu frase de la casa."},
+ told:{fix:"said that",opts:["said that","told to us that","said me that"],why:"<b>said</b> (that...) sin persona. <b>told</b> + persona: told <b>us</b> that. Tu frase: \"He told that he would come\"."},
+ actually:{fix:"Currently",opts:["Currently","Actually","In actuality"],why:"Actualmente = <b>currently</b>. <b>Actually</b> = en realidad. El falso amigo más famoso."},
+ assist:{fix:"attend",opts:["attend","assist","assist in"],why:"Asistir a una junta = <b>attend</b> (sin to). <b>Assist</b> = ayudar."},
+ agree:{fix:"I agree",opts:["I agree","I'm agreed","I was agree"],why:"<b>agree</b> es verbo, no adjetivo: I agree. Nunca \"am agree\". Tu \"I was agree\" = <b>I agreed</b>."},
+ ordered:{fix:"organized",opts:["organized","ordenated","ordinated"],why:"Ordenada = <b>organized</b>. \"Ordered\" = pedido u ordenado por alguien. Tu \"más ordenada\"."}
+};
+var AMOUNTS={resume:1240,info:980,ensemble:1575,necessary:640,solicitation:2310,howcould:890,build:1480,told:720,actually:1105,assist:860,agree:430,ordered:250};
+var START=Object.keys(AMOUNTS).reduce(function(s,k){return s+AMOUNTS[k];},0);
+
+var ST={best:null, plays:0};
+try{ var raw=localStorage.getItem(KEY); if(raw) ST=Object.assign(ST,JSON.parse(raw)); }catch(e){}
+function save(){ try{ localStorage.setItem(KEY,JSON.stringify(ST)); }catch(e){} }
+try{ var qn=new URLSearchParams(location.search).get("name"); if(qn&&/^[\p{L} .'-]{1,24}$/u.test(qn)) document.getElementById("nm").textContent=qn; }catch(e){}
+
+/* audio */
+var voice=null;
+function loadVoice(){ var vs=window.speechSynthesis?speechSynthesis.getVoices():[]; var NOV=/albert|bad news|bahh|bells|boing|bubbles|cellos|good news|jester|organ|superstar|trinoids|whisper|wobble|zarvox|junior|kathy|ralph|fred|eloquence|grandma|grandpa|reed|rocko|sandy|shelley|flo/i; var en=vs.filter(function(v){return /^en[-_]/i.test(v.lang)&&!NOV.test(v.name);}); var pref=["Samantha","Google US English","Microsoft Aria","Microsoft Jenny","Microsoft Zira","Alex"]; voice=null; for(var i=0;i<pref.length;i++){ var m=en.filter(function(v){return v.name.indexOf(pref[i])===0;})[0]; if(m){voice=m;break;} } if(!voice) voice=en.filter(function(v){return /en[-_]US/i.test(v.lang);})[0]||en[0]||null; }
+if(window.speechSynthesis){ loadVoice(); try{ speechSynthesis.onvoiceschanged=loadVoice; }catch(e){} }
+var audioReady=false; function unlockAudio(){ if(audioReady||!window.speechSynthesis) return; try{ var u=new SpeechSynthesisUtterance(""); u.volume=0; speechSynthesis.speak(u); audioReady=true; }catch(e){} }
+document.addEventListener("touchstart",unlockAudio,{once:true}); document.addEventListener("click",unlockAudio,{once:true});
+function speak(t,rate,pitch){ if(!t||!window.speechSynthesis) return; try{ speechSynthesis.cancel(); var u=new SpeechSynthesisUtterance(t); u.lang="en-US"; u.rate=rate||0.92; u.pitch=pitch||1; if(voice) u.voice=voice; speechSynthesis.speak(u); }catch(e){} }
+var ac=null; function tone(f,t0,d,v,type){ try{ if(!ac) ac=new (window.AudioContext||window.webkitAudioContext)(); if(ac.state==="suspended") ac.resume(); var o=ac.createOscillator(),g=ac.createGain(); o.type=type||"sine"; o.frequency.value=f; g.gain.setValueAtTime(0.0001,ac.currentTime+t0); g.gain.exponentialRampToValueAtTime(v||0.06,ac.currentTime+t0+0.02); g.gain.exponentialRampToValueAtTime(0.0001,ac.currentTime+t0+d); o.connect(g); g.connect(ac.destination); o.start(ac.currentTime+t0); o.stop(ac.currentTime+t0+d+0.05); }catch(e){} }
+function kaching(){ tone(1318,0,0.08,0.05,"triangle"); tone(1760,0.08,0.22,0.05,"triangle"); }
+function buzz(){ tone(190,0,0.15,0.04,"triangle"); }
+function thump(){ tone(110,0,0.18,0.08,"sine"); }
+
+/* matching */
+var CONTR={"doesn't":"does not","don't":"do not","didn't":"did not","can't":"can not","isn't":"is not","it's":"it is","i'm":"i am","i'll":"i will","won't":"will not","we're":"we are"};
+function norm(s){ s=(s||"").toLowerCase().replace(/[‘’]/g,"'").replace(/-/g," ").replace(/[^a-z0-9' ]+/g," "); var out=[]; s.split(/\s+/).forEach(function(w){ w=w.replace(/^'+|'+$/g,""); if(!w) return; (CONTR[w]||w).split(" ").forEach(function(x){out.push(x);}); }); return out; }
+var STOP={a:1,an:1,the:1,and:1,to:1,of:1,"in":1,on:1,at:1,is:1,it:1,we:1,"for":1,so:1,i:1,all:1,will:1};
+function hasPhrase(t,p){ var q=norm(p); for(var i=0;i+q.length<=t.length;i++){ var ok=true; for(var j=0;j<q.length;j++) if(t[i+j]!==q[j]){ok=false;break;} if(ok) return true; } return false; }
+function grade(target,forbid,list){ var tgt=norm(target),best=null; list.forEach(function(h){ var toks=norm(h),bag={}; toks.forEach(function(t){bag[t]=(bag[t]||0)+1;}); var hits=tgt.map(function(t){ if(bag[t]){bag[t]--;return true;} return false; }); var c=0,ch=0; tgt.forEach(function(t,i){ if(!STOP[t]){c++; if(hits[i]) ch++;} }); var bad=(forbid||[]).filter(function(f){return hasPhrase(toks,f);}); var r={text:h,hits:hits,pass:ch>=Math.ceil(c*0.85)&&!bad.length,bad:bad,score:ch/c}; if(!best||(r.pass&&!best.pass)||(r.pass===best.pass&&r.score>best.score)) best=r; }); return best; }
+var SR=window.SpeechRecognition||window.webkitSpeechRecognition||null, micBlocked=false, recBusy=false, rec=null;
+function canListen(){ return !!SR&&!micBlocked; }
+function listen(onPartial,onDone){ var finals=[],interim="",done=false; try{ rec=new SR(); }catch(e){ micBlocked=true; return false; } rec.lang="en-US"; rec.interimResults=true; rec.maxAlternatives=4; rec.continuous=false;
+  rec.onresult=function(ev){ interim=""; for(var i=ev.resultIndex;i<ev.results.length;i++){ var r=ev.results[i]; if(r.isFinal){ var a=[]; for(var j=0;j<r.length;j++) a.push(r[j].transcript); finals.push(a);} else interim+=r[0].transcript; } onPartial(finals.map(function(f){return f[0];}).join(" ")+" "+interim); };
+  rec.onerror=function(ev){ if(ev&&/not-allowed|service-not-allowed|audio-capture/.test(ev.error)) micBlocked=true; };
+  rec.onend=function(){ if(done) return; done=true; recBusy=false; var h=[]; if(finals.length===1) h=finals[0]; else if(finals.length>1) h=[finals.map(function(f){return f[0];}).join(" ")]; else if(interim) h=[interim]; onDone(h); };
+  try{ if(window.speechSynthesis) speechSynthesis.cancel(); rec.start(); recBusy=true; }catch(e){ recBusy=false; return false; } return true; }
+
+function esc(s){ return (s==null?"":""+s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
+function shuffle(a){ a=a.slice(); for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
+function money(n){ return "$"+n.toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2}); }
+var ICON={mic:'<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0 0 14 0"/><path d="M12 17v4"/></svg>',
+ speaker:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="M19 5a9 9 0 0 1 0 14"/><path d="M15.5 8.5a4 4 0 0 1 0 7"/></svg>'};
+
+/* state */
+var G=null;
+function newGame(){ G={doc:0, fixed:{}, fp:0, firstTry:{}, spoken:0, unrec:START, shown:START, open:null}; }
+var RM=window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches;
+function drawLedger(animate){
+  var found=Object.keys(G?G.fixed:{}).length, done=G&&found===12;
+  var el=document.getElementById("ledger");
+  el.innerHTML='<div class="ledger'+(done?' done':'')+'"><div class="hd"><span>Walker Remodeling LLC · Audit FY2026</span><span>Auditor: C.</span></div>'+
+   '<table><tr><td>Discrepancias conciliadas</td><td class="num">'+found+' / 12</td></tr>'+
+   '<tr><td>Falsos positivos</td><td class="num">'+(G?G.fp:0)+'</td></tr>'+
+   '<tr class="big"><td>Sin conciliar</td><td class="num" id="unrec">'+money(G?G.shown:START)+'</td></tr></table>'+
+   '<div class="stamp'+(done?' show':'')+'" id="stamp">RECONCILED</div></div>';
+  if(animate && G && G.shown!==G.unrec){
+    var from=G.shown, to=G.unrec, t0=null, dur=RM?1:700, cell=document.getElementById("unrec");
+    G.shown=to;
+    (function step(ts){ if(!t0) t0=ts; var p=Math.min(1,(ts-t0)/dur); var v=from+(to-from)*(1-Math.pow(1-p,3)); cell.textContent=money(Math.round(v*100)/100); if(p<1) requestAnimationFrame(step); })(performance.now());
+  } else if(G) G.shown=G.unrec;
+}
+
+var SE=document.getElementById("stage");
+function intro(){
+  G=null; drawLedger(false);
+  SE.innerHTML='<div class="card reveal"><div class="kicker"><span>Tu encargo</span><span>3 documentos</span></div>'+
+   '<p class="cue" style="margin-top:10px">Walker Remodeling te mandó sus papeles. Hay <b>12 errores de inglés</b> escondidos: falsos amigos, gramática, orden de palabras. Muchos son <b>tus propios errores</b> de clase.</p>'+
+   '<p class="note">Toca la palabra o frase que está mal. Si tocas algo correcto, cuenta como falso positivo. Al final de cada documento, reportas al socio en voz alta.</p>'+
+   (ST.plays?'<p class="note">Tu mejor auditoría: '+ST.best.found+' de 12 al primer intento, '+ST.best.fp+' falsos positivos.</p>':'')+
+   '<div class="row"><button class="btn main" id="go">Abrir el primer documento</button></div></div>';
+  document.getElementById("go").onclick=function(){ unlockAudio(); newGame(); drawLedger(false); renderDoc(); };
+}
+function tokenize(body){
+  var html="", re=/\[\[([^|\]]+)\|([^\]]+)\]\]/g;
+  function plain(s){ return s.split(/(\s+)/).map(function(w){ if(/^\s+$/.test(w)||!w) return w; return '<span class="t" data-ok="1">'+esc(w)+'</span>'; }).join(""); }
+  function seg(s){ var out="",last=0,m; re.lastIndex=0; while((m=re.exec(s))){ out+=plain(s.slice(last,m.index)); out+='<span class="t err" data-id="'+m[2]+'" data-orig="'+esc(m[1])+'">'+esc(m[1])+'</span>'; last=re.lastIndex; } return out+plain(s.slice(last)); }
+  if(body.indexOf("{{")>=0){ var parts=body.match(/\{\{(.*?)\}\}/g)||[]; parts.forEach(function(p){ var inner=p.slice(2,-2), i=inner.indexOf(": "); html+='<span class="bubble"><b>'+esc(inner.slice(0,i))+':</b> '+seg(inner.slice(i+2))+'</span>'; }); return html; }
+  return seg(body);
+}
+function docErrIds(d){ var ids=[],re=/\[\[[^|\]]+\|([^\]]+)\]\]/g,m; while((m=re.exec(d.body))) ids.push(m[1]); return ids; }
+function renderDoc(){
+  var d=DOCS[G.doc], ids=docErrIds(d);
+  SE.innerHTML='<div class="card reveal"><div class="kicker"><span>Documento '+(G.doc+1)+' de 3 · '+esc(d.title)+'</span><span id="left">'+ids.length+' por encontrar</span></div>'+
+   '<div class="doc '+(d.kind==="chat"?"chat":"")+'"><div class="dh">'+d.head+'</div><div class="db" id="db">'+tokenize(d.body)+'</div></div>'+
+   '<div class="hint" id="hint">Lee con ojo de auditora. Toca lo que no suena a inglés de oficina.</div><div id="fixBox"></div></div>';
+  // restore fixed
+  Array.prototype.forEach.call(SE.querySelectorAll(".t.err"),function(s){ var id=s.getAttribute("data-id"); if(G.fixed[id]){ s.classList.add("fixed"); s.textContent=ERR[id].fix; } });
+  SE.querySelector("#db").addEventListener("click",function(ev){
+    var t=ev.target.closest(".t"); if(!t) return;
+    if(t.classList.contains("err")){ if(t.classList.contains("fixed")) return; openFix(t); return; }
+    G.fp++; buzz(); t.classList.remove("nope"); void t.offsetWidth; t.classList.add("nope");
+    document.getElementById("hint").innerHTML='<b>'+esc(t.textContent)+'</b> está bien. Falso positivo. Sigue buscando.';
+    drawLedger(false);
+  });
+  updateLeft();
+}
+function updateLeft(){ var ids=docErrIds(DOCS[G.doc]), n=ids.filter(function(i){return !G.fixed[i];}).length; var el=document.getElementById("left"); if(el) el.textContent=n?n+" por encontrar":"Documento limpio"; return n; }
+function openFix(span){
+  var id=span.getAttribute("data-id"), e=ERR[id], box=document.getElementById("fixBox");
+  Array.prototype.forEach.call(SE.querySelectorAll(".t.open"),function(s){s.classList.remove("open");}); span.classList.add("open");
+  var tried=false;
+  box.innerHTML='<div class="fix reveal"><div class="q">Discrepancia: "'+esc(span.getAttribute("data-orig"))+'". ¿Cómo queda correcto?</div><div class="opts">'+shuffle(e.opts).map(function(o){ return '<button class="opt" data-o="'+esc(o)+'">'+esc(o)+'</button>'; }).join("")+'</div><div id="why"></div></div>';
+  box.scrollIntoView({block:"nearest",behavior:RM?"auto":"smooth"});
+  Array.prototype.forEach.call(box.querySelectorAll(".opt"),function(b){
+    b.onclick=function(){
+      if(b.getAttribute("data-o")===e.fix){
+        b.classList.add("good"); if(!tried) G.firstTry[id]=1;
+        G.fixed[id]=1; G.unrec=Math.max(0,G.unrec-AMOUNTS[id]); kaching();
+        span.classList.remove("open"); span.classList.add("fixed"); span.textContent=e.fix;
+        document.getElementById("why").innerHTML='<div class="why reveal">'+e.why+'</div>';
+        Array.prototype.forEach.call(box.querySelectorAll(".opt"),function(o){ o.disabled=true; });
+        drawLedger(true);
+        var n=updateLeft();
+        if(n===0){ setTimeout(function(){ box.innerHTML+='<div class="row"><button class="btn main" id="rep">Reportar al socio</button></div>'; document.getElementById("rep").onclick=reportStage; if(Object.keys(G.fixed).length===12){ thump(); } },500); }
+        else document.getElementById("hint").innerHTML='Conciliado. Quedan '+n+'.';
+      } else { tried=true; b.classList.add("bad"); b.disabled=true; buzz(); document.getElementById("why").innerHTML='<div class="why reveal">'+e.why+'</div>'; }
+    };
+  });
+}
+function reportStage(){
+  var d=DOCS[G.doc], r=d.report;
+  SE.innerHTML='<div class="card reveal"><div class="kicker"><span>Reporte al socio</span><span>Documento '+(G.doc+1)+' de 3</span></div>'+
+   '<div class="partner"><div class="av">B</div><div class="pq">'+esc(r.q)+'</div><button class="ibtn" id="pq" aria-label="Oír">'+ICON.speaker+'</button></div>'+
+   '<div class="cue"><small>Contéstale en inglés, en voz alta</small>'+esc(r.cue)+'</div>'+
+   '<div class="target hid" id="tgt">'+esc(r.en)+'</div>'+
+   '<div class="say-row"><button class="mic" id="mic" aria-label="Micrófono">'+ICON.mic+'</button><div class="say-help" id="help"><b>Toca el micrófono</b> y contesta. Sin ver la frase: tú ya sabes cómo.</div></div>'+
+   '<div class="heard" id="heard"></div><div id="verdict"></div>'+
+   '<div class="row"><button class="btn" id="peek">Ver la frase</button><button class="btn" id="model">Oír el modelo</button><button class="btn main" id="next" style="display:none">Siguiente</button></div></div>';
+  setTimeout(function(){ speak(r.q,0.92,0.9); },300);
+  document.getElementById("pq").onclick=function(){ speak(r.q,0.92,0.9); };
+  var tgt=document.getElementById("tgt"), tries=0, nextBtn=document.getElementById("next");
+  document.getElementById("peek").onclick=function(){ tgt.classList.remove("hid"); };
+  document.getElementById("model").onclick=function(){ tgt.classList.remove("hid"); speak(r.en,0.88,1); };
+  nextBtn.onclick=advance;
+  function done(ok){ if(ok) G.spoken++; kaching(); document.getElementById("mic").disabled=true; nextBtn.style.display=""; nextBtn.focus(); }
+  if(!canListen()){ document.getElementById("help").innerHTML='<b>Dilo en voz alta</b> y toca el micrófono cuando termines. (Para que te revise, ábrelo en Safari o Chrome.)'; document.getElementById("mic").onclick=function(){ tgt.classList.remove("hid"); document.getElementById("verdict").innerHTML='<div class="verdict ok">Anotado.</div>'; done(true); }; return; }
+  document.getElementById("mic").onclick=function(){
+    var mic=this; if(recBusy){ try{rec.stop();}catch(e){} return; }
+    mic.classList.add("on"); document.getElementById("heard").innerHTML="Escuchando...";
+    var ok=listen(function(t){ document.getElementById("heard").innerHTML='Te oigo: <i>'+esc(t.trim())+'</i>'; },function(list){
+      mic.classList.remove("on");
+      if(!list.length){ document.getElementById("heard").innerHTML= micBlocked?"El micrófono no está disponible. Toca Siguiente cuando lo digas.":"No te oí. Intenta otra vez."; if(micBlocked){ nextBtn.style.display=""; } return; }
+      tries++; var g=grade(r.en,r.forbid,list);
+      document.getElementById("heard").innerHTML='Te oí: <i>'+esc(g.text)+'</i>';
+      tgt.classList.remove("hid");
+      var words=r.en.split(/\s+/),hi=0; tgt.innerHTML=words.map(function(w){ var n=norm(w).length, s=g.hits.slice(hi,hi+n); hi+=n; return '<span class="w '+(s.length&&s.every(Boolean)?'hit':'miss')+'">'+esc(w)+'</span>'; }).join(" ");
+      if(g.pass){ document.getElementById("verdict").innerHTML='<div class="verdict ok reveal">"Excellent. That is exactly what I needed."</div>'; speak("Excellent. That is exactly what I needed.",0.92,0.9); done(true); }
+      else { buzz(); document.getElementById("verdict").innerHTML='<div class="verdict no reveal">'+(g.bad.length?'Se coló: <b>'+esc(g.bad[0])+'</b>. Otra vez.':'Casi. Las palabras subrayadas no se oyeron. Otra vez.')+'</div>'; if(tries>=3){ nextBtn.style.display=""; nextBtn.textContent="Seguir"; } }
+    });
+    if(!ok){ mic.classList.remove("on"); }
+  };
+}
+function advance(){ G.doc++; if(G.doc<DOCS.length){ renderDoc(); window.scrollTo({top:0,behavior:RM?"auto":"smooth"}); } else opinion(); }
+function opinion(){
+  var ft=Object.keys(G.firstTry).length, clean=G.fp<=2;
+  ST.plays=(ST.plays||0)+1; if(!ST.best||ft>ST.best.found||(ft===ST.best.found&&G.fp<ST.best.fp)) ST.best={found:ft,fp:G.fp}; save();
+  drawLedger(false);
+  var missed=Object.keys(ERR).filter(function(k){return !G.firstTry[k];});
+  SE.innerHTML='<div class="card reveal"><div class="kicker"><span>Opinión de auditoría</span><span>'+(ST.plays)+(ST.plays===1?' auditoría':' auditorías')+'</span></div>'+
+   '<div class="opinion"><div class="seal'+(clean?'':' q')+'">'+(clean?'Unqualified opinion':'Qualified opinion')+'<small>'+(clean?'Estados limpios. Firma la socia.':'Limpios, con salvedades: '+G.fp+' falsos positivos.')+'</small></div></div>'+
+   '<div class="h2">'+ft+' de 12 al primer intento</div>'+
+   '<p class="note" style="text-align:center">Reportes en voz alta: '+G.spoken+' de 3. '+(clean?'Una auditora que no inventa errores vale oro.':'La próxima: menos toques al azar, más ojo.')+'</p>'+
+   '<div class="rules">'+
+    '<div class="rule"><h3>Falsos amigos de oficina</h3><p>resumen = <b>summary</b> · solicitud = <b>request</b> · armar = <b>assemble</b> · actualmente = <b>currently</b> · asistir = <b>attend</b> · ordenada = <b>organized</b></p></div>'+
+    '<div class="rule"><h3>Gramática que delata</h3><p><b>much information</b> (sin -s) · necessary <b>for me</b> · I <b>agree</b> · was <b>built</b> · he <b>said</b> that / told <b>us</b> that</p></div>'+
+    '<div class="rule"><h3>Preguntas</h3><p>How could <b>AI do</b> it? · How could <b>the software do</b> it?</p></div>'+
+   '</div>'+
+   (missed.length?'<div class="why" style="margin-top:14px"><b>Repasa:</b> '+missed.map(function(k){return esc(ERR[k].fix);}).join(" · ")+'</div>':'')+
+   '<div class="row"><button class="btn main" id="again">Otra auditoría</button><a class="btn" href="../?name=Carlenis">Volver</a></div></div>';
+  speak(clean?"Unqualified opinion. Clean books, Carlenis.":"Qualified opinion. Good work, with a few exceptions.",0.9,0.9);
+  document.getElementById("again").onclick=intro;
+}
+window.__aud={DOCS:DOCS,ERR:ERR,grade:grade,get G(){return G;}};
+intro();
+})();
+</script>
+</body>
+</html>
