@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Tu Medida</title>
+<script>
+/* This address moved. Every visit goes to the same path on the new site and carries
+   this browser's saved progress (localStorage) in the #hash. The hash never reaches
+   any server; the new site imports it once and removes it. */
+(function () {
+  var NEW_SITE = "https://atumedida-clases.pages.dev";
+  var OLD_BASE = "/arches";
+  var MAX_VALUE = 262144, MAX_TOTAL = 1500000;
+
+  function toB64url(str) {
+    var bin = "";
+    if (window.TextEncoder) {
+      var bytes = new TextEncoder().encode(str);
+      for (var i = 0; i < bytes.length; i += 8192) {
+        bin += String.fromCharCode.apply(null, bytes.subarray(i, i + 8192));
+      }
+    } else {
+      bin = unescape(encodeURIComponent(str));
+    }
+    return btoa(bin).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+  }
+
+  var path = location.pathname;
+  if (path.indexOf(OLD_BASE) === 0) path = path.slice(OLD_BASE.length);
+  if (path.charAt(0) !== "/") path = "/" + path;
+  if (path === "/404.html") path = "/";
+  var target = NEW_SITE + path + location.search;
+  var hash = location.hash ? location.hash.slice(1) : "";
+
+  var payload = "";
+  try {
+    var ls = window.localStorage, keys = [], data = {}, total = 0, n = 0;
+    for (var i = 0; i < ls.length; i++) keys.push(ls.key(i));
+    keys.sort(function (a, b) { return (ls.getItem(a) || "").length - (ls.getItem(b) || "").length; });
+    for (var j = 0; j < keys.length; j++) {
+      var v = ls.getItem(keys[j]);
+      if (v === null || v.length > MAX_VALUE || total + v.length > MAX_TOTAL) continue;
+      data[keys[j]] = v; total += v.length; n++;
+    }
+    if (n) payload = toB64url(JSON.stringify(data));
+  } catch (e) {}
+
+  var frag = payload ? "atm=" + payload + (hash ? "&atmh=" + encodeURIComponent(hash) : "") : hash;
+  var dest = target + (frag ? "#" + frag : "");
+  document.documentElement.setAttribute("data-dest", dest);
+  location.replace(dest);
+})();
+</script>
+<style>
+  body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:#fbf7f0;color:#2c2722;font-family:'Nunito',system-ui,sans-serif;text-align:center;padding:24px;box-sizing:border-box;}
+  h1{font-family:'Cormorant Garamond',Georgia,serif;font-size:34px;margin:0 0 10px;}
+  p{color:#9a8f83;font-size:16px;margin:0 0 22px;line-height:1.45;}
+  a{display:inline-block;background:#bf5a36;color:#fff;text-decoration:none;font-weight:700;padding:14px 22px;border-radius:14px;}
+</style>
+</head>
+<body>
+  <main>
+    <h1>A Tu Medida</h1>
+    <p>Tu práctica tiene una nueva dirección.<br>Te llevamos en un momento.</p>
+    <a id="go" href="https://atumedida-clases.pages.dev/">Abrir mi práctica</a>
+  </main>
+  <script>
+    (function () {
+      var d = document.documentElement.getAttribute("data-dest");
+      if (d) document.getElementById("go").href = d;
+    })();
+  </script>
+</body>
+</html>
